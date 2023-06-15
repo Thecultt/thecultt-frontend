@@ -1,16 +1,17 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
-import rn from "random-number";
 
 import "moment/locale/ru";
+
+import {Header, Reglog, Footer} from "./components";
+
+import {Home, Catalog, Product} from "./pages/";
 
 const App = () => {
     const dispatch = useDispatch();
 
     const {pathname} = useLocation();
-
-    const isRedirectUser = localStorage.getItem("accessToken");
 
     React.useEffect(() => {
         let cords: any = ["scrollX", "scrollY"];
@@ -26,15 +27,23 @@ const App = () => {
     }, [pathname]);
 
     return (
-        <>
+        <div className="wrapper">
+            <Header />
+
+            <Reglog />
+
             <React.Suspense fallback={<></>}>
                 <Routes>
-                    <Route path="/" element={<></>} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/catalog" element={<Catalog />} />
+                    <Route path="/product" element={<Product />} />
 
                     <Route path="*" element={<></>} />
                 </Routes>
             </React.Suspense>
-        </>
+
+            <Footer />
+        </div>
     );
 };
 

@@ -13,7 +13,7 @@
 Клонируйте репозиторий.
 
 ```
-git clone 
+git clone https://github.com/Thecultt/thecultt-frontend.git
 ```
 
 Переход в рабочий каталог.

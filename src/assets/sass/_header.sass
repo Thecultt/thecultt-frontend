@@ -1,0 +1,163 @@
+// header
+.header
+	margin: 35px 0
+
+	&-wrapper-block
+		display: flex
+		justify-content: space-between
+		align-items: center
+
+	&-block
+		display: flex
+		align-items: center
+
+		&-logo
+			margin-right: 40px
+
+			&__image
+				width: 150px
+
+		&-search
+			width: 470px
+
+		&-btn
+			margin-right: 30px
+
+			&__btn
+				box-shadow: none
+
+				&:first-child
+					margin-right: 15px
+
+		&__language
+			cursor: pointer
+			border: none
+
+			background-color: transparent
+
+			will-change: transform
+
+			margin-right: 30px
+
+			+transition
+
+			&:hover
+				+transformHover
+
+			&:active
+				+transformClick
+
+		&-user
+			&-icon-user:hover &-menu
+				opacity: 1
+				z-index: 100
+
+				visibility: visible
+
+			&-icon
+				display: flex
+				align-items: center
+
+				&__icon
+					display: block
+
+					cursor: pointer
+					border: none
+
+					will-change: transform
+
+					margin-right: 15px
+
+					background-color: transparent
+
+					+transition
+
+					&:last-child
+						margin-right: 0
+
+					&:hover
+						+transformHover
+
+					&:active
+						+transformClick
+
+				&-user
+					position: relative
+
+					&__icon
+						display: block
+
+						cursor: pointer
+						border: none
+
+						will-change: transform
+
+						background-color: transparent
+
+						+transition
+
+						&:last-child
+							margin-right: 0
+
+						&:hover
+							+transformHover
+
+						&:active
+							+transformClick
+
+			&-menu
+				display: inline-block
+
+				position: absolute
+
+				will-change: top
+
+				top: 60px
+				right: 0
+
+				opacity: 0
+				z-index: -100
+
+				visibility: hidden
+
+				background-color: #F7F4F0
+				box-shadow: 0px 0px 288px rgba(0, 0, 0, 0.04), 0px 0px 168.667px rgba(0, 0, 0, 0.0303704), 0px 0px 91.7333px rgba(0, 0, 0, 0.0242963), 0px 0px 46.8px rgba(0, 0, 0, 0.02), 0px 0px 23.4667px rgba(0, 0, 0, 0.0157037), 0px 0px 11.3333px rgba(0, 0, 0, 0.00962963)
+				border-radius: 6px
+
+				transition: .6s ease
+
+				&-block
+					padding: 20px 25px 15px 25px
+
+					&:first-child
+						border-bottom: 1px solid $borderGray
+
+					&__link
+						display: block
+
+						margin-bottom: 7px
+						padding-bottom: 7px
+
+						border-bottom: 1px solid $borderGray
+
+						+transition
+
+						&:hover
+							color: $mainColor
+
+						&:last-child
+							border: none
+
+							margin-bottom: 0
+							padding-bottom: 0
+
+	&-menu
+		margin-top: 35px
+
+		&__link
+			margin-right: 30px
+
+			+transition
+
+			&:hover
+				color: $mainColor
