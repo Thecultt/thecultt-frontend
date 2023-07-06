@@ -1,0 +1,187 @@
+// about
+.about
+	margin: 50px 0
+
+	&-main
+		display: flex
+
+		background-color: $lightBackgroundColor
+		overflow: hidden
+
+		+borderRadius
+
+		&-text
+			width: 45%
+
+			padding: 75px 40px
+
+		&-image
+			width: 55%
+
+			+backgroundSetting
+
+	&-cultt
+		margin-top: 60px
+
+		display: flex
+
+		&-text
+			width: 50%
+
+			margin-left: 35px
+
+			padding: 100px 0
+
+			&__title
+				position: relative
+
+				margin-bottom: 25px
+
+				&__quotes
+					position: absolute
+					z-index: -1
+
+					&.left
+						left: -25px
+						top: -25px
+
+					&.right
+						right: 60px
+						bottom: -20px
+
+		&-image
+			width: 50%
+
+			+backgroundSetting
+			+borderRadius
+
+	&-quote
+		margin-top: 60px
+
+		background-color: $lightBackgroundColor
+		padding: 50px 75px
+
+		+borderRadius
+
+		&-title
+			position: relative
+			width: 75%
+
+			&__title
+				position: relative
+
+				font-size: 22px
+
+				margin-bottom: 25px
+				z-index: 2
+
+
+			&__quotes
+				position: absolute
+				z-index: 1
+
+				&.left
+					left: -25px
+					top: -20px
+
+				&.right
+					right: 120px
+					bottom: -20px
+
+	&-media
+		margin-top: 60px
+
+		text-align: center
+
+		&__title
+			font-size: 36px
+
+			margin-bottom: 25px
+
+			+ManropeRegular
+
+		&-logos
+			margin: 0 auto
+
+			width: 680px
+
+			display: flex
+			justify-content: space-between
+			flex-wrap: wrap
+
+			&-item
+				display: flex
+				justify-content: center
+				align-items: center
+
+				width: 31%
+				height: 120px
+
+				background-color: $white
+				border: .5px dashed $gray
+
+				margin-bottom: 25px
+
+				+borderRadius
+
+				&__image
+					width: 130px
+
+					+disabledImage
+
+	&-team
+		margin-top: 60px
+
+		padding: 50px 35px
+
+		background-color: $lightBackgroundColor
+
+		text-align: center
+
+		+borderRadius
+
+		&__title
+			font-size: 36px
+
+			margin-bottom: 15px
+
+			+ManropeRegular
+
+		&__description
+			margin: 0 auto
+			width: 70%
+
+		&-members
+			margin-top: 40px
+
+			display: flex
+			justify-content: space-between
+
+			&-item
+				display: flex
+				flex-direction: column
+				justify-content: flex-end
+
+				width: calc( 25% - 12px )
+				height: 470px
+
+				text-align: left
+				color: $white
+
+				padding: 45px 20px
+
+				+borderRadius
+				+backgroundSetting
+
+				&__name
+					font-size: 26px
+
+					border-bottom: 1px solid $white
+
+					padding-bottom: 10px
+					margin-bottom: 10px
+
+					+ManropeMedium
+
+				&__status
+					font-size: 18px

@@ -1,0 +1,134 @@
+// cabinet waiting list
+.cabinet-waiting-list
+	&-form
+		width: 600px
+
+		text-align: center
+
+		&__title
+			margin-bottom: 10px
+			+ManropeMedium
+
+		&__description
+			margin: 0 auto 25px auto
+
+			width: 75%
+
+			font-size: 15px
+			+ManropeMedium
+
+		&-content
+			display: flex
+			flex-wrap: wrap
+			justify-content: space-between
+			
+			&-select
+				margin-bottom: 15px
+
+			&__btn
+				margin: 25px auto 0 auto
+				width: 75%
+
+	&-success
+		display: flex
+		flex-direction: column
+		align-items: center
+
+		text-align: center
+
+		width: 420px
+
+		&__icon
+			margin-bottom: 15px
+
+		&__title
+			margin-bottom: 15px
+			+ManropeMedium
+
+		&__description
+			margin: 0 auto 25px auto
+
+			font-size: 14px
+
+		&__btn
+			width: 75%
+
+	&-items-wrapper
+		margin-top: 15px
+
+	&-item-wrapper
+		background-color: $lightBackgroundColor
+		padding: 10px
+
+		+borderRadius
+
+		margin-bottom: 15px
+
+		&:last-child
+			margin-bottom: 0
+
+	&-item
+		position: relative
+		border: 0.3px solid $gray
+
+		padding: 18px
+
+		+borderRadius
+		
+		&__remove
+			position: absolute
+
+			cursor: pointer
+
+			top: 18px
+			right: 18px
+
+			font-size: 16px
+			background-color: transparent
+			border: none
+			text-decoration: underline
+
+			+ManropeMedium
+			+transition
+
+			&:hover
+				color: $mainColor
+
+		&-title
+			display: flex
+			align-items: center
+
+			&__title
+				font-size: 22px
+				+ManropeSemiBold
+
+			&__subtitle
+				color: $mainColor
+				font-size: 17px
+
+				margin-left: 10px
+
+				+ManropeSemiBold
+
+		&-info
+			margin-top: 15px
+
+			&-item
+				display: flex
+				align-items: center
+
+				margin-bottom: 15px
+
+				&:last-child
+					margin-bottom: 0
+
+				&__title
+					color: $gray
+					width: 145px
+
+					+ManropeMedium
+
+				&__value
+					margin-left: 50px
+
+					+ManropeMedium

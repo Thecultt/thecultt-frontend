@@ -1,0 +1,194 @@
+// cabinet history orders
+.cabinet-history-orders
+	&-item-wrapper
+		background-color: $lightBackgroundColor
+		padding: 10px
+
+		+borderRadius
+
+		margin-bottom: 15px
+
+		&:last-child
+			margin-bottom: 0
+
+	&-item
+		position: relative
+		border: 0.3px solid $gray
+
+		cursor: pointer
+
+		padding: 18px
+
+		+borderRadius
+
+		&-topinfo
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			&-block
+				display: flex
+				align-items: center
+
+				&__title
+					font-size: 17px
+
+					+ManropeSemiBold
+
+				&__date, &__sum
+					margin-left: 25px
+					font-size: 17px
+
+				&__date
+					+ManropeMedium
+
+				&__sum
+					+ManropeRegular
+
+				&__status
+					display: inline-flex
+					align-items: center
+					user-select: none
+
+					font-size: 17px
+
+					&.success
+						color: $mainColor
+
+					& > svg
+						margin-left: 5px
+
+				&-icon
+					display: inline-flex
+					align-items: center
+
+					margin-left: 10px
+
+					+transition
+
+					&.rotate
+						transform: rotate(180deg)
+
+		&-info
+			&-blocks-wrapper
+				display: flex
+				flex-wrap: wrap
+
+			&-block
+				margin-top: 20px
+				margin-right: 80px
+
+				&__title
+					font-size: 22px
+
+					margin-bottom: 10px
+
+					+ManropeSemiBold
+
+				&__subtitle
+					display: flex
+					align-items: center
+
+					margin-bottom: 10px
+
+					+ManropeMedium
+
+					&:last-child
+						margin-bottom: 0
+
+					& > span
+						color: $gray
+						margin-right: 7px
+
+					& > .payment
+						display: flex
+						align-items: center
+						color: $mainColor
+
+						+ManropeMedium
+
+						& > svg
+							margin-left: 5px
+
+			&-goods-wrapper
+				display: flex
+				align-items: center
+
+				margin-top: 20px
+
+			&-good
+				width: 380px
+				display: flex
+
+				padding: 10px
+				border: 0.3px dashed $gray
+
+				margin-right: 15px
+
+				+borderRadius
+
+				&:last-child
+					margin-left: 0
+
+				&-image
+					width: 120px
+
+					border-radius: 6px
+
+					+backgroundSetting
+
+				&-text
+					padding: 5px 0
+					margin-left: 15px
+
+					&__brand
+						font-size: 14px
+
+					&__model
+						font-size: 18px
+
+					&__option
+						font-size: 14px
+
+						display: flex
+						align-items: center
+
+						+ManropeMedium
+
+						& > span
+							color: $gray
+							margin-right: 7px
+
+					&-state
+						display: flex
+						align-items: center
+
+						margin: 5px 0
+
+						&__subtitle
+							font-size: 14px
+							padding-right: 5px
+							margin-right: 5px
+
+							border-right: 1px solid #D9D9D9
+
+						&__title
+							display: flex
+							align-items: center
+
+							font-size: 14px
+
+							color: $mainColor
+
+							+ManropeMedium
+
+							& > svg
+								cursor: pointer
+
+								width: 14px
+								margin-right: 5px
+
+					&__price
+						font-size: 18px
+
+						+ManropeMedium

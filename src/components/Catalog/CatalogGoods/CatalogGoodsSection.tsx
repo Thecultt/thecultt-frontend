@@ -1,6 +1,6 @@
 import React from "react";
 
-import {CatalogGoodsBlock} from "../../";
+import {GoodsBlock} from "../../";
 
 const CatalogGoodsSection: React.FC = () => {
     return (
@@ -12,11 +12,21 @@ const CatalogGoodsSection: React.FC = () => {
                     </h4>
 
                     <div className="catalog-goods-section-goods">
-                        <CatalogGoodsBlock />
-                        <CatalogGoodsBlock outStock />
-                        <CatalogGoodsBlock />
-                        <CatalogGoodsBlock />
-                        <CatalogGoodsBlock />
+                        <div className="catalog-goods-block">
+                            <GoodsBlock />
+                        </div>
+                        <div className="catalog-goods-block">
+                            <GoodsBlock />
+                        </div>
+                        <div className="catalog-goods-block">
+                            <GoodsBlock />
+                        </div>
+                        <div className="catalog-goods-block">
+                            <GoodsBlock />
+                        </div>
+                        <div className="catalog-goods-block">
+                            <GoodsBlock />
+                        </div>
                     </div>
                 </div>
             </div>

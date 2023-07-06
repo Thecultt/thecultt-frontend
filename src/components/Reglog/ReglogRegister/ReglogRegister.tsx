@@ -46,6 +46,7 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             name: nameValue,
             surname: surnameValue,
             password: passwordValue,
+			
         });
     }, []);
 
@@ -117,7 +118,7 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
                 <div className="reglog-content-form-checkbox">
                     <Field
-                        component={RenderCheckbox}
+						component={RenderCheckbox}
                         name="promoCheckbox"
                         label="Согласен (-а) на получение рекламной рассылки и обработки своих персональных данных"
                     />

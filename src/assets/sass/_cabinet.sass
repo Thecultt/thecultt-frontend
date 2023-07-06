@@ -1,0 +1,44 @@
+// cabinet
+.cabinet
+	margin: 40px 0
+
+	&-wrapper
+		display: flex
+		justify-content: space-between
+		align-items: flex-start
+
+	&-menu
+		width: 250px
+		margin-right: 110px
+
+		&__title
+			font-size: 17px
+			padding: 10px
+
+			margin-bottom: 10px
+
+		&-items
+			&__item
+				display: block
+
+				padding: 10px
+				font-size: 16px
+				border-radius: 6px
+
+				margin-bottom: 5px
+
+				+transition
+
+				&.active
+					background-color: $lightBackgroundColor
+
+	&__title
+		font-size: 26px
+		margin-bottom: 25px
+
+		+ManropeRegular
+
+	&-content
+		width: 100%
+
+		+open

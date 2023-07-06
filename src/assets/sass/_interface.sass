@@ -4,34 +4,54 @@
 
 	box-sizing: border-box
 
+	+ManropeMedium
+
+html, body
+  overflow-y: hidden
+  height: 100%
+
 body
 	font-size: 16px
 	background-color: $backgroundColor
-	+GilroyMedium
+	color: $black
 
 // wrapper
 .wrapper
+	width: 100%
+	height: 100vh
+
+	overflow-y: scroll
 
 // container
 .container
 	margin: 0 auto
 
 	width: 95%
-	max-width: 1350px
+	max-width: 1280px
 
 // text
 p
 	line-height: 1.7em
+	+ManropeRegular
+
+.description
+	font-size: 18px
 
 // title
 h1, h2, h3, h4, h5, h6
-	+GilroyMedium
+	line-height: 1.3em
+	+ManropeSemiBold
+
+.title
+	font-size: 36px
+
+	&.mb
+		margin-bottom: 15px
 
 // link
 a
 	text-decoration: none
 	color: $black
-	+GilroyMedium
 
 // input
 input:-webkit-autofill,
@@ -60,11 +80,9 @@ input[type=number]
 		outline: none
 		padding: 15px 10px
 		font-size: 16px
-		border-radius: 6px
-		border: 1px solid $black
+		border-radius: 9px
+		border: 0.3px solid $black
 		background-color: transparent
-
-		+Inter
 
 		&:focus ~ label,
 		&:valid ~ label
@@ -90,7 +108,6 @@ input[type=number]
 		color: #D9D9D9
 
 		+transition
-		+Inter
 
 		& > svg
 			margin-right: 15px
@@ -111,16 +128,18 @@ input[type=number]
 	cursor: text
 	width: 100%
 
+	&.border > &__field
+		border: .5px solid $gray
+
 	&__field
 		width: 100%
 		outline: none
 		padding: 12px 20px
 		font-size: 16px
-		border-radius: 12px
 		border: none
 		background-color: $lightBackgroundColor
 
-		+Inter
+		+borderRadius
 
 		&:focus ~ label,
 		&:valid ~ label
@@ -145,11 +164,52 @@ input[type=number]
 		font-size: 16px
 		color: $gray
 
-		+transition
-		+Inter
-
 		& > svg
 			margin-right: 10px
+
+// textarea
+.textarea
+	position: relative
+	cursor: text
+	width: 100%
+
+	&__field
+		resize: none
+		width: 100%
+		height: 120px
+		outline: none
+		padding: 15px 10px
+		font-size: 16px
+		border-radius: 9px
+		border: 0.3px solid $black
+		background-color: transparent
+
+		&:focus ~ label,
+		&:valid ~ label
+			opacity: 0
+			z-index: -1
+
+	&__label
+		cursor: text
+
+		top: 15px
+		left: 15px
+
+		user-select: none
+
+		z-index: 0
+
+		display: flex
+		align-items: center
+
+		position: absolute
+		font-size: 16px
+		color: #D9D9D9
+
+		+transition
+
+		& > svg
+			margin-right: 15px
 
 // btn
 .btn
@@ -161,14 +221,14 @@ input[type=number]
 	background-color: $mainColor
 	border-radius: 6px
 	color: $white
-	padding: 20px 18px
+	padding: 14px 40px
 	font-size: 16px
 
 	will-change: transform
 
 	+transition
-	+GilroyMedium
 	+boxShadow
+	+ManropeMedium
 
 	&:hover
 		+transformHover
@@ -180,6 +240,9 @@ input[type=number]
 		padding: 14px 18px
 		font-size: 14px
 
+	& > svg
+		margin-left: 10px
+
 .btn-light
 	cursor: pointer
 	display: inline-flex
@@ -189,13 +252,13 @@ input[type=number]
 	background-color: $lightBackgroundColor
 	border-radius: 6px
 	color: $black
-	padding: 20px 18px
+	padding: 14px 60px
 	font-size: 16px
 
 	will-change: transform
 
 	+transition
-	+GilroyMedium
+	+ManropeMedium
 
 	&:hover
 		+transformHover
@@ -221,7 +284,7 @@ input[type=number]
 	will-change: transform
 
 	+transition
-	+GilroyMedium
+	+ManropeMedium
 
 	&.small
 		padding: 14px 18px
@@ -258,7 +321,7 @@ input[type=number]
 
 		&__text
 			color: $black
-			line-height: 2em
+			line-height: 1.7em
 
 			& > a
 				margin-left: 3px
@@ -284,8 +347,8 @@ input[type=number]
 		border: 1px solid $gray
 		border-radius: 50%
 		background-repeat: no-repeat
-		background-position: center center
-		background-size: 12px 10px
+		background-position: 5.3px 6.5px
+		background-size: 10px 9px
 		margin-right: 10px
 
 		+transition
@@ -294,3 +357,144 @@ input[type=number]
 		background-image: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.83203 3.49935L5.33203 6.99935L11.1654 1.16602' stroke='%23F1EDE8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A")
 
 		background-color: $mainColor
+
+// select
+.select
+	width: 100%
+
+	position: relative
+
+	display: flex
+	justify-content: space-between
+	align-items: center
+
+	cursor: pointer
+	font-size: 16px
+	padding: 14px
+	border-radius: 9px
+	border: 0.3px solid $gray
+
+	background-color: $lightBackgroundColor
+
+	&__label
+		+ManropeMedium
+
+	&-list
+		top: calc( 100% + 5px )
+		left: 0
+
+		opacity: 0
+		pointer-events: none
+		transform: scale3d(.98, .98, .98)
+
+		z-index: 2
+
+		position: absolute
+		width: 100%
+		background-color: $lightBackgroundColor
+		border-radius: 9px
+		border: 0.3px solid $gray
+		padding: 14px
+		text-align: left
+
+		will-change: transform
+
+		+transition
+
+		&.active
+			opacity: 1
+			transform: scale3d(1, 1, 1)
+			pointer-events: auto
+
+		&__item
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			user-select: none
+
+			font-size: 16px
+
+			margin-bottom: 15px
+
+			+transition
+
+			& > svg
+				opacity: 0
+				+transition
+
+			&.active
+				color: $mainColor
+				+ManropeMedium
+
+				& > svg
+					opacity: 1
+
+			&:last-child
+				margin-bottom: 0
+
+// popup
+.popup
+	position: fixed
+
+	top: 0
+	left: 0
+
+	z-index: 200
+
+	width: 100%
+	height: 100%
+
+	display: flex
+	justify-content: center
+	align-items: flex-start
+
+	opacity: 0
+	pointer-events: none
+
+	background-color: $blackTransparent
+
+	overflow: auto
+
+	will-change: transform
+
+	+transition
+
+	&.active
+		opacity: 1
+		pointer-events: auto
+
+	&-content
+		position: relative
+
+		background-color: $lightBackgroundColor
+		padding: 60px
+
+		margin: 75px 0
+
+		width: auto
+
+		transform: scale3d(.98, .98, .98)
+
+		will-change: transform
+
+		+transition
+
+		+borderRadius
+
+		&.active
+			transform: scale3d(1, 1, 1)
+
+		&.close
+			opacity: 0
+			transform: scale3d(.98, .98, .98)
+			pointer-events: none
+
+		&-close
+			cursor: pointer
+			position: absolute
+
+			top: 20px
+			right: 20px
+
+			padding: 10px

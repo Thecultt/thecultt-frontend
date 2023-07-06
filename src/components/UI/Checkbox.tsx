@@ -13,7 +13,7 @@ const Checkbox: React.FC<CheckboxProps> = ({label}) => {
             <input
                 id={id}
                 type="checkbox"
-                className="checkbox"
+				className="checkbox"
                 // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 //     onChange && onChange(e.target.checked)
                 // }

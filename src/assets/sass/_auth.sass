@@ -1,0 +1,88 @@
+// auth
+.auth
+	margin: 50px 0
+
+	&-main
+		display: flex
+
+		background-color: $lightBackgroundColor
+		overflow: hidden
+
+		+borderRadius
+
+		&-text
+			width: 45%
+
+			padding: 110px 40px
+
+		&-image
+			width: 55%
+
+			+backgroundSetting
+
+	&-service
+		margin-top: 60px
+
+		&-text-wrap
+			display: flex
+
+		&-text
+			width: 50%
+
+			margin-left: 35px
+
+			padding: 100px 0
+
+			&__title
+				position: relative
+				z-index: 2
+
+				&__quotes
+					position: absolute
+					z-index: 1
+
+					&.left
+						left: -25px
+						top: -20px
+
+					&.right
+						right: 60px
+						bottom: -20px
+
+			&__description
+				font-size: 17px
+				margin-bottom: 25px
+
+		&-block-wrapper
+			margin-top: -75px
+
+			padding: 0 40px
+
+			display: flex
+			justify-content: space-between
+
+		&-block
+			display: flex
+			align-items: flex-start
+
+			padding: 15px
+
+			width: calc( 50% - 7.5px )
+			border: 0.3px solid $gray
+			background-color: $lightBackgroundColor
+
+			+borderRadius
+
+			& > svg
+				width: 24px
+				min-width: 24px
+
+			&__description
+				margin-left: 15px
+				font-size: 16px
+
+		&-image
+			width: 50%
+
+			+backgroundSetting
+			+borderRadius

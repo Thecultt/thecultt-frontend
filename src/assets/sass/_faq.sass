@@ -1,0 +1,58 @@
+// faq
+.faq
+	&-bread-crumbs
+		display: flex
+		align-items: center
+
+		margin-bottom: 20px
+
+		&__item
+			line-height: 1.1em
+
+			cursor: pointer
+			+transition
+
+			&:hover
+				color: $mainColor
+
+			&:last-child
+				border-bottom: 1px solid $gray
+
+				&:hover
+					color: $black
+
+		& > svg
+			margin: 0 12px
+
+	&-text
+		margin-top: 50px
+		width: 80%
+
+		&__title
+			font-size: 26px
+			margin-bottom: 25px
+
+		&-block
+			margin-bottom: 40px
+
+			&:last-child
+				margin-bottom: 0
+
+			&__title
+				font-size: 22px
+				margin-bottom: 15px
+
+			&-description
+				font-size: 18px
+
+				& > p
+					+ManropeMedium
+
+				& > ul
+					margin-top: 15px
+					margin-left: 35px
+					margin-bottom: 15px
+
+					& > li
+						margin-bottom: 10px
+						+ManropeMedium

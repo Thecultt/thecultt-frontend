@@ -1,0 +1,156 @@
+.visit
+	margin: 50px 0
+
+	&-back__btn
+		display: none
+		font-size: 17px
+		margin-bottom: 25px
+		text-decoration: none
+		color: $black
+		transition: .4s
+		will-change: transform
+
+		&:hover
+			color: $black
+			transform: scale(0.99)
+
+		&:active
+			transform: scale(0.98)
+
+		& > svg
+			margin-right: 12px
+
+	&-main
+		display: flex
+		justify-content: space-between
+
+		background-color: $lightBackgroundColor
+
+		overflow: hidden
+
+		+borderRadius
+
+		&-image
+			width: 50%
+
+			+backgroundSetting
+
+		&-text
+			width: 50%
+			padding: 60px 25px 60px 50px
+
+			&__title
+				font-size: 26px
+				margin-bottom: 15px
+
+			&__subtitle
+				font-size: 22px
+
+				margin-bottom: 10px
+
+				+ManropeSemiBold
+
+			&__description
+				font-size: 18px
+				margin-bottom: 25px
+
+	&-service
+		margin-top: 25px
+
+		&-block
+			width: 100%
+			padding: 40px 45px
+			background-color: $lightBackgroundColor
+
+			margin-bottom: 25px
+
+			+borderRadius
+
+			&:last-child
+				margin-bottom: 0
+
+			&__title
+				font-size: 22px
+				margin-bottom: 20px
+
+				+ManropeSemiBold
+
+			&__subtitle
+				font-size: 18px
+				margin-bottom: 12px
+
+				& a
+					color: $mainColor
+					text-decoration: underline
+
+				& > ul
+					margin: 0
+					padding-left: 25px
+					list-style: none
+
+				& > ul > li
+					position: relative
+					margin-bottom: 10px
+
+					&::before
+						content: ""
+						position: absolute
+
+						display: block
+
+						width: 4px
+						height: 4px
+
+						top: 50%
+						transform: translateY(-50%)
+
+						left: -15px
+						
+						background-color: $black
+
+						border-radius: 100%
+
+			&__description
+				font-size: 14px
+				margin-bottom: 12px
+				color: $gray
+
+				& > a
+					color: $gray
+
+				&:last-child
+					margin-bottom: 0
+
+	&-office
+		margin-top: 25px
+
+		&-block
+			text-align: center
+			width: 100%
+			padding: 40px 30px
+			background-color: #F6F5EF
+			border-radius: 12px
+			margin-right: 15px
+
+			&:last-child
+				margin-left: 0
+
+			&__title
+				line-height: 120%
+				font-size: 28px
+				font-weight: 700
+				margin-bottom: 20px
+				font-family: 'Gilroy SemiBold'
+
+			&__subtitle
+				margin: 0 auto 25px auto
+				width: 610px
+
+				line-height: 180%
+				font-size: 16px
+
+				& > span
+					font-weight: 700
+
+			&__btn
+				width: 280px

@@ -1,24 +1,39 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import {HeaderUser} from "../";
+import {HeaderCart, HeaderUser} from "../";
 
 import Logo from "../../assets/images/logo.svg";
+import LogoFaq from "../../assets/images/logo-faq.svg";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    isFaq?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({isFaq}) => {
     return (
         <header className="header">
             <div className="container">
                 <div className="header-wrapper">
                     <div className="header-wrapper-block">
                         <div className="header-block">
-                            <Link to="/" className="header-block-logo">
-                                <img
-                                    src={Logo}
-                                    alt="THECULTT"
-                                    className="header-block-logo__image"
-                                />
-                            </Link>
+                            {isFaq ? (
+                                <Link to="/faq" className="header-block-logo">
+                                    <img
+                                        src={LogoFaq}
+                                        alt="THECULTT FAQ"
+                                        className="header-block-logo__image faq"
+                                    />
+                                </Link>
+                            ) : (
+                                <Link to="/" className="header-block-logo">
+                                    <img
+                                        src={Logo}
+                                        alt="THECULTT"
+                                        className="header-block-logo__image"
+                                    />
+                                </Link>
+                            )}
 
                             <div className="header-block-search">
                                 <div className="input-light">
@@ -61,20 +76,22 @@ const Header: React.FC = () => {
                             </div>
                         </div>
                         <div className="header-block">
-                            <div className="header-block-btn">
-                                <Link
-                                    to="/"
-                                    className="btn small header-block-btn__btn"
-                                >
-                                    Продать
-                                </Link>
-                                <Link
-                                    to="/"
-                                    className="btn-regular small header-block-btn__btn"
-                                >
-                                    Обменять
-                                </Link>
-                            </div>
+                            {isFaq ? null : (
+                                <div className="header-block-btn">
+                                    <Link
+                                        to="/"
+                                        className="btn small header-block-btn__btn"
+                                    >
+                                        Продать
+                                    </Link>
+                                    <Link
+                                        to="/"
+                                        className="btn-regular small header-block-btn__btn"
+                                    >
+                                        Обменять
+                                    </Link>
+                                </div>
+                            )}
                             {/* <button className="header-block__language">
                                 <svg
                                     width="22"
@@ -101,30 +118,34 @@ const Header: React.FC = () => {
                             </button> */}
 
                             <HeaderUser />
+
+                            <HeaderCart />
                         </div>
                     </div>
 
-                    <nav className="header-menu">
-                        <Link to="/" className="header-menu__link">
-                            Новинки
-                        </Link>
+                    {isFaq ? null : (
+                        <nav className="header-menu">
+                            <Link to="/" className="header-menu__link">
+                                Новинки
+                            </Link>
 
-                        <Link to="/" className="header-menu__link">
-                            Сумки
-                        </Link>
+                            <Link to="/" className="header-menu__link">
+                                Сумки
+                            </Link>
 
-                        <Link to="/" className="header-menu__link">
-                            Аксессуары
-                        </Link>
+                            <Link to="/" className="header-menu__link">
+                                Аксессуары
+                            </Link>
 
-                        <Link to="/" className="header-menu__link">
-                            Бренды
-                        </Link>
+                            <Link to="/" className="header-menu__link">
+                                Бренды
+                            </Link>
 
-                        <Link to="/" className="header-menu__link">
-                            Подлинность
-                        </Link>
-                    </nav>
+                            <Link to="/" className="header-menu__link">
+                                Подлинность
+                            </Link>
+                        </nav>
+                    )}
                 </div>
             </div>
         </header>

@@ -1,22 +1,19 @@
 import React from "react";
 
-import {CatalogGoodsBlock, CatalogGoodsPagination} from "../../";
+import {GoodsBlock, CatalogGoodsPagination} from "../../";
 
 const CatalogGoods: React.FC = () => {
     return (
         <div className="catalog-goods-wrapper">
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock outStock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
-            <CatalogGoodsBlock />
+            <GoodsBlock style={{width: "24%"}} />
+            <GoodsBlock style={{width: "24%"}} />
+            <GoodsBlock style={{width: "24%"}} />
+            <GoodsBlock style={{width: "24%"}} />
+            <GoodsBlock style={{width: "24%"}} />
+            <GoodsBlock style={{width: "24%"}} />
+            <GoodsBlock style={{width: "24%"}} />
+            <GoodsBlock style={{width: "24%"}} />
+            <GoodsBlock style={{width: "24%"}} />
 
             <CatalogGoodsPagination />
         </div>

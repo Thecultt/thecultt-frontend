@@ -6,7 +6,20 @@ import "moment/locale/ru";
 
 import {Header, Reglog, Footer} from "./components";
 
-import {Home, Catalog, Product} from "./pages/";
+import {
+    Home,
+    Catalog,
+    Product,
+    About,
+    Auth,
+    Contact,
+    Faq,
+	Brands,
+	CabinetHistoryOrders,
+    CabinetFavorites,
+    CabinetWaitingList,
+    Visit,
+} from "./pages/";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -28,15 +41,44 @@ const App = () => {
 
     return (
         <div className="wrapper">
-            <Header />
+            <Header isFaq={pathname.indexOf("/faq") !== -1 ? true : false} />
 
             <Reglog />
 
             <React.Suspense fallback={<></>}>
                 <Routes>
                     <Route path="/" element={<Home />} />
+
                     <Route path="/catalog" element={<Catalog />} />
+
                     <Route path="/product" element={<Product />} />
+
+                    <Route path="/about" element={<About />} />
+
+                    <Route path="/auth" element={<Auth />} />
+
+                    <Route path="/contact" element={<Contact />} />
+
+                    <Route path="/faq" element={<Faq />} />
+
+                    <Route path="/brands" element={<Brands />} />
+
+                    <Route path="/visit" element={<Visit />} />
+
+                    <Route
+                        path="/cabinet/history"
+                        element={<CabinetHistoryOrders />}
+                    />
+
+                    <Route
+                        path="/cabinet/favorites"
+                        element={<CabinetFavorites />}
+                    />
+
+                    <Route
+                        path="/cabinet/waiting"
+                        element={<CabinetWaitingList />}
+                    />
 
                     <Route path="*" element={<></>} />
                 </Routes>

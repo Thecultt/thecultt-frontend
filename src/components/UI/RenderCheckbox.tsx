@@ -15,7 +15,8 @@ const RenderCheckbox: React.FC<CheckboxProps> = ({label, input}) => {
                 {...input}
                 id={id}
                 type="checkbox"
-                className="checkbox"
+				className="checkbox"
+				defaultChecked={true}
                 // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 //     onChange && onChange(e.target.checked)
                 // }

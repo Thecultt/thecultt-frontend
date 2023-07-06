@@ -16,6 +16,7 @@ const CatalogFiltersPrice: React.FC = () => {
                             ₽
                         </span>
                         <input
+                            name="min"
                             type="number"
                             className="catalog-filters-block-content-price-input-field__input"
                             placeholder="0"
@@ -33,6 +34,7 @@ const CatalogFiltersPrice: React.FC = () => {
                             ₽
                         </span>
                         <input
+                            name="max"
                             type="number"
                             className="catalog-filters-block-content-price-input-field__input"
                             placeholder="3 000 000"

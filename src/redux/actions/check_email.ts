@@ -2,11 +2,8 @@ import axios from "axios";
 import { Dispatch } from "react";
 
 import { CheckEmailActionTypes, CheckEmailActions } from '../types/ICheckEmail'
-import { ReglogStateTypesNotLogin, ReglogActions } from '../types/IReglog'
 
-import { setReglogType } from '../actions/reglog'
-
-export const sendCheckEmail = (email: string) => (dispatch: Dispatch<CheckEmailActions | ReglogActions>) => {
+export const sendCheckEmail = (email: string) => (dispatch: Dispatch<CheckEmailActions>) => {
 	dispatch({
 		type: CheckEmailActionTypes.SET_CHECK_EMAIL_EMAIL,
 		payload: email
