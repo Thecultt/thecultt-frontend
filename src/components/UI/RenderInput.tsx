@@ -27,13 +27,9 @@ const RenderInput: React.FC<RenderInput> = ({
                 type={isVisible ? "text" : type}
                 className="input__field"
                 id={input.name}
-                required
-            />
-
-            <label className="input__label" htmlFor={input.name}>
-                {label}
-            </label>
-
+                placeholder={label}
+			/>
+			
             {type === "password" ? (
                 <div className="input-password" onClick={toggleVisible}>
                     {isVisible ? (

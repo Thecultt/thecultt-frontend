@@ -3,16 +3,17 @@ import React from "react";
 interface InputProps {
     name: string;
     label: string;
+    bgWhite?: boolean;
 }
 
-const Textarea: React.FC<InputProps> = ({name, label}) => {
+const Textarea: React.FC<InputProps> = ({name, label, bgWhite}) => {
     return (
-        <div className="textarea">
-            <textarea className="textarea__field" id={name} required />
-
-            <label className="textarea__label" htmlFor={name}>
-                {label}
-            </label>
+        <div className={`textarea ${bgWhite ? "bgWhite" : ""}`}>
+            <textarea
+                className="textarea__field"
+                id={name}
+                placeholder={label}
+            />
         </div>
     );
 };

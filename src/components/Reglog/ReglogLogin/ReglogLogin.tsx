@@ -3,6 +3,7 @@ import React from "react";
 import {Field, reduxForm, InjectedFormProps} from "redux-form";
 
 import {RenderInput} from "../../";
+import {Link} from "react-router-dom";
 
 const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -31,6 +32,10 @@ const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 <button className="btn reglog-content-form-btn__btn">
                     Продолжить
                 </button>
+
+                <Link to="" className="reglog-content-form-btn__link">
+                    Забыли пароль?
+                </Link>
             </div>
 
             <p className="reglog-content-form__subtitle">

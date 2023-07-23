@@ -47,7 +47,7 @@ const About: React.FC = () => {
                             }}
                         ></div>
                         <div className="about-cultt-text">
-                            <h3 className="title about-cultt-text__title">
+                            <h3 className="about-cultt-text__title">
                                 <svg
                                     width="50"
                                     height="50"
@@ -61,8 +61,8 @@ const About: React.FC = () => {
                                         fill="#E6DFD6"
                                     />
                                 </svg>
-                                Мы дарим вторую жизнь культовым вещам и создаём
-                                культуру нового потребления
+                                Мы дарим вторую жизнь культовым вещам и
+                                формируем культуру нового потребления
                                 <svg
                                     width="50"
                                     height="50"

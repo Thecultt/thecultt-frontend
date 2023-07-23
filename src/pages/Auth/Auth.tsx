@@ -10,8 +10,8 @@ const Auth: React.FC = () => {
                 <div className="auth-wrapper">
                     <div className="auth-main">
                         <div className="auth-main-text">
-                            <h2 className="title mb auth-main-text__title">
-                                Гарантия подленности
+                            <h2 className="auth-main-text__title">
+                                Гарантия подлинности
                             </h2>
                             <p className="description auth-main-text__description">
                                 Сегодня в мире люксовых брендов масса подделок,

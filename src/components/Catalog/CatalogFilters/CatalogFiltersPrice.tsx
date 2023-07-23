@@ -26,7 +26,7 @@ const CatalogFiltersPrice: React.FC = () => {
 
                 <div className="catalog-filters-block-content-price-input">
                     <span className="catalog-filters-block-content-price-input__subtitle">
-                        Мах. цена
+                        Макс. цена
                     </span>
 
                     <div className="catalog-filters-block-content-price-input-field">

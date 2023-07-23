@@ -104,11 +104,6 @@ const Visit: React.FC = () => {
                                     </li>
 
                                     <li>
-                                        Возьмите с собой паспорт для оформления
-                                        сделки.
-                                    </li>
-
-                                    <li>
                                         Наши эксперты оценят лоты, проведут
                                         аутентификацию и согласуют с вами
                                         условия.
@@ -127,7 +122,7 @@ const Visit: React.FC = () => {
                                 заработать на своих аксессуарах, и оставьте их
                                 для продажи через наш сервис.
                             </p> */}
-                            <p className="visit-service-block__description">
+                            {/* <p className="visit-service-block__description">
                                 Услуга доступна для передачи на продажу
                                 аксессуаров, соответсвующих нашему бренд-листу{" "}
                                 <a href="https://thecultt.com/prodat">
@@ -137,7 +132,7 @@ const Visit: React.FC = () => {
                             <p className="visit-service-block__description">
                                 **Для оформления сделки понадобятся паспортные
                                 данные
-                            </p>
+                            </p> */}
                         </div>
                     </div>
 

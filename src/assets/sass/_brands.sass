@@ -3,14 +3,54 @@
 	margin: 50px 0
 
 	&-wrapper
-		width: 700px
 		margin: 0 auto
 
 	&-search
-		width: 420px
-		margin: 50px auto
+		&-alphabet
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			width: 800px
+			margin: 0 auto 40px auto
+
+			background-color: $lightBackgroundColor
+
+			+borderRadius
+
+			&__btn
+				padding-left: 7.5px
+				padding-right: 7.5px
+				padding-top: 15px
+				padding-bottom: 15px
+
+				cursor: pointer
+
+				font-size: 20px
+
+				border: none
+				background-color: transparent
+
+				+ManropeMedium
+				+transition
+
+				&:first-child
+					padding-left: 15px
+
+				&:last-child
+					padding-right: 15px
+
+				&:hover
+					color: $gray
+
+		&-input
+			width: 420px
+			margin: 0 auto 40px auto
 
 	&-list
+		width: 700px
+		margin: 0 auto
+
 		&-block
 			display: flex
 			justify-content: space-between
@@ -20,11 +60,15 @@
 			&__title
 				font-size: 26px
 
+				+ManropeRegular
+
 			&-col
 				&__item
 					display: flex
 					flex-direction: column
 					align-items: flex-start
-					text-decoration: underline
 
 					margin-bottom: 15px
+
+					&:hover
+						text-decoration: underline

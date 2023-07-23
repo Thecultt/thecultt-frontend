@@ -4,16 +4,18 @@ interface InputProps {
     type: string;
     name: string;
     label: string;
+    bgWhite?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({type, name, label}) => {
+const Input: React.FC<InputProps> = ({type, name, label, bgWhite}) => {
     return (
-        <div className="input">
-            <input type={type} className="input__field" id={name} required />
-
-            <label className="input__label" htmlFor={name}>
-                {label}
-            </label>
+        <div className={`input ${bgWhite ? "bgWhite" : ""}`}>
+            <input
+                type={type}
+                className="input__field"
+                id={name}
+                placeholder={label}
+            />
         </div>
     );
 };

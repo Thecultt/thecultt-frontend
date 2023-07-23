@@ -8,29 +8,28 @@
 		align-items: flex-start
 
 	&-menu
+		top: 145px
+		position: sticky
+
 		width: 250px
 		margin-right: 110px
 
-		&__title
-			font-size: 17px
+		&__item
+			display: block
+
 			padding: 10px
+			font-size: 16px
+			border-radius: 6px
 
-			margin-bottom: 10px
+			margin-bottom: 5px
 
-		&-items
-			&__item
-				display: block
+			+transition
 
-				padding: 10px
-				font-size: 16px
-				border-radius: 6px
+			&:hover
+				color: $mainColor
 
-				margin-bottom: 5px
-
-				+transition
-
-				&.active
-					background-color: $lightBackgroundColor
+			&.active
+				background-color: $lightBackgroundColor
 
 	&__title
 		font-size: 26px

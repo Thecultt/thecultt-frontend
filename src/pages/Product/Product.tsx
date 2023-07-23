@@ -3,7 +3,7 @@ import React from "react";
 import {
     ProductCover,
     ProductInfo,
-    CatalogGoodsSection,
+    CatalogProductsSection,
     SellAndSale,
 } from "../../components/";
 
@@ -50,7 +50,7 @@ const Product: React.FC = () => {
                 </div>
 			</section>
 			
-			<CatalogGoodsSection />
+			<CatalogProductsSection />
 
 			<SellAndSale />
         </>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CabinetWaitingListItem: React.FC = () => {
     return (
@@ -11,7 +12,7 @@ const CabinetWaitingListItem: React.FC = () => {
                     <h3 className="cabinet-waiting-list-item-title__title">
                         Подписка №2323
                     </h3>
-                    <span className="cabinet-waiting-list-item-title__subtitle">Доступно товаров на сайте 2шт.</span>
+                    <Link to="/" className="cabinet-waiting-list-item-title__subtitle">Доступно товаров на сайте 2шт.</Link>
                 </div>
                 <div className="cabinet-waiting-list-item-info">
                     <div className="cabinet-waiting-list-item-info-item">

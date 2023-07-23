@@ -8,15 +8,19 @@
 		background-color: $lightBackgroundColor
 		overflow: hidden
 
-		+borderRadius
+		border-radius: 24px
 
 		&-text
-			width: 45%
+			width: 50%
 
 			padding: 75px 40px
 
+			&__title
+				font-size: 26px
+				margin-bottom: 15px
+
 		&-image
-			width: 55%
+			width: 50%
 
 			+backgroundSetting
 
@@ -52,8 +56,9 @@
 		&-image
 			width: 50%
 
+			border-radius: 24px
+
 			+backgroundSetting
-			+borderRadius
 
 	&-quote
 		margin-top: 60px
@@ -75,7 +80,6 @@
 				margin-bottom: 25px
 				z-index: 2
 
-
 			&__quotes
 				position: absolute
 				z-index: 1
@@ -85,7 +89,7 @@
 					top: -20px
 
 				&.right
-					right: 120px
+					right: 15px
 					bottom: -20px
 
 	&-media
@@ -138,14 +142,12 @@
 
 		text-align: center
 
-		+borderRadius
+		border-radius: 24px
 
 		&__title
-			font-size: 36px
+			font-size: 26px
 
 			margin-bottom: 15px
-
-			+ManropeRegular
 
 		&__description
 			margin: 0 auto

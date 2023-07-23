@@ -1,7 +1,13 @@
 import React from "react";
 import AnimateHeight from "react-animate-height";
 
-const CabinetHistoryOrdersItem: React.FC = () => {
+interface CabinetHistoryOrdersItemProps {
+    status: string;
+}
+
+const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
+    status,
+}) => {
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
     const toggleOpen = () => {
@@ -17,11 +23,11 @@ const CabinetHistoryOrdersItem: React.FC = () => {
                 <div className="cabinet-history-orders-item-topinfo">
                     <div className="cabinet-history-orders-item-topinfo-block">
                         <h3 className="cabinet-history-orders-item-topinfo-block__title">
-                            Заказ: # 2305/329
+                            Заказ: #2305/329
                         </h3>
 
                         <p className="cabinet-history-orders-item-topinfo-block__date">
-                            от 03.01
+                            от 03.01.21
                         </p>
 
                         <p className="cabinet-history-orders-item-topinfo-block__sum">
@@ -29,35 +35,74 @@ const CabinetHistoryOrdersItem: React.FC = () => {
                         </p>
                     </div>
                     <div className="cabinet-history-orders-item-topinfo-block">
-                        <p className="cabinet-history-orders-item-topinfo-block__status success">
-                            Заказ отправлен СДЭК
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 18 18"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <g id="Icons" clipPath="url(#clip0_4074_34170)">
-                                    <path
-                                        id="Vector"
-                                        d="M9 5.8V9M9 12.2H9.008M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
-                                        stroke="#202020"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_4074_34170">
-                                        <rect
-                                            width="18"
-                                            height="18"
-                                            fill="white"
+                        {status === "success" ? (
+                            <p className="cabinet-history-orders-item-topinfo-block__status success">
+                                Заказ отправлен СДЭК
+                                <svg
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 18 18"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g
+                                        id="Icons"
+                                        clipPath="url(#clip0_4074_34170)"
+                                    >
+                                        <path
+                                            id="Vector"
+                                            d="M9 5.8V9M9 12.2H9.008M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
+                                            stroke="#202020"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
                                         />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </p>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_4074_34170">
+                                            <rect
+                                                width="18"
+                                                height="18"
+                                                fill="white"
+                                            />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </p>
+                        ) : (
+                            <p className="cabinet-history-orders-item-topinfo-block__status error">
+                                Возврат
+                                <svg
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 18 18"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g
+                                        id="Icons"
+                                        clipPath="url(#clip0_4074_34170)"
+                                    >
+                                        <path
+                                            id="Vector"
+                                            d="M9 5.8V9M9 12.2H9.008M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z"
+                                            stroke="#202020"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_4074_34170">
+                                            <rect
+                                                width="18"
+                                                height="18"
+                                                fill="white"
+                                            />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </p>
+                        )}
+
                         <div
                             className={`cabinet-history-orders-item-topinfo-block-icon ${
                                 isOpen ? "rotate" : ""
@@ -153,7 +198,7 @@ const CabinetHistoryOrdersItem: React.FC = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="cabinet-history-orders-item-info-goods-wrapper">
+                        <div className="cabinet-history-orders-item-info-product-wrapper">
                             <div className="cabinet-history-orders-item-info-good">
                                 <div
                                     className="cabinet-history-orders-item-info-good-image"

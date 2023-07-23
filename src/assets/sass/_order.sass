@@ -1,0 +1,216 @@
+// order
+.order
+	margin-bottom: 75px
+
+	&-wrapper
+		display: flex
+		flex-direction: column
+		align-items: center
+
+	&-content
+		width: 500px
+
+		background-color: #F7F4F0
+
+		padding: 35px 40px
+
+		border-radius: 24px
+
+		&-info
+			position: relative
+
+			display: flex
+			flex-direction: column
+			align-items: center
+			text-align: center
+
+			border-bottom: 0.3px solid $gray
+
+			padding-bottom: 25px
+			margin-bottom: 25px
+
+			&-circle
+				width: 50px
+				height: 50px
+
+				position: absolute
+
+				bottom: -25px
+
+				border-radius: 50%
+				background-color: $backgroundColor
+
+				&.left
+					left: -65px
+
+				&.right
+					right: -65px
+
+			&-icon
+				margin-bottom: 25px
+
+			&__title
+				font-size: 22px
+				margin-bottom: 12px
+
+			&__subtitle
+				width: 75%
+				font-size: 17px
+
+				margin-bottom: 10px
+
+				+ManropeSemiBold
+
+			&__description
+				font-size: 14px
+				margin-bottom: 25px
+
+			&-btn
+				width: 100%
+				display: flex
+				justify-content: space-between
+				align-items: center
+
+				&__btn
+					width: 49%
+
+			&__repeatbtn
+				width: 65%
+
+		&-product-wrapper
+
+		&-good
+			width: 100%
+			display: flex
+
+			padding: 10px
+			border: 0.3px dashed $gray
+
+			margin-bottom: 10px
+
+			+borderRadius
+
+			&:last-child
+				margin-bottom: 0
+
+			&-image
+				width: 120px
+
+				border-radius: 6px
+
+				+backgroundSetting
+
+			&-text
+				padding: 20px 0
+				margin-left: 15px
+
+				&__brand
+					font-size: 14px
+
+				&__model
+					font-size: 18px
+
+				&__option
+					font-size: 14px
+
+					display: flex
+					align-items: center
+
+					+ManropeMedium
+
+					& > span
+						color: $gray
+						margin-right: 7px
+
+				&-state
+					display: flex
+					align-items: center
+
+					margin: 5px 0
+
+					&__subtitle
+						font-size: 14px
+						padding-right: 5px
+						margin-right: 5px
+
+						border-right: 1px solid #D9D9D9
+
+					&__title
+						display: flex
+						align-items: center
+
+						font-size: 14px
+
+						color: $mainColor
+
+						+ManropeMedium
+
+						& > svg
+							cursor: pointer
+
+							width: 14px
+							margin-right: 5px
+
+				&__price
+					font-size: 18px
+
+					+ManropeMedium
+
+	&-recipient
+		margin-top: 2px
+		width: 500px
+
+		position: relative
+
+		background-color: #F7F4F0
+
+		padding: 45px 40px 0 45px
+
+		border-radius: 24px
+
+		&-block
+			margin-bottom: 30px
+
+			&:last-child
+				margin-bottom: 0
+
+			&__title
+				font-size: 20px
+				margin-bottom: 15px
+
+			&__subtitle
+				display: flex
+				align-items: center
+
+				font-size: 16px
+				margin-bottom: 10px
+
+				+ManropeMedium
+
+				&:last-child
+					margin-bottom: 0
+
+				& > span
+					display: inline-block
+					width: 150px
+					color: $gray
+					margin-right: 35px
+
+				& > .payment
+					display: flex
+					align-items: center
+					color: $mainColor
+
+					+ManropeMedium
+
+					& > svg
+						margin-left: 5px
+
+				& > .payment-error
+					color: $red
+
+		&-svg
+			width: 100%
+			bottom: -50px
+			left: 0
+			position: absolute

@@ -1,9 +1,50 @@
 import React from "react";
 
 const BrandsSearch: React.FC = () => {
+    const alphabet: string[] = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "N",
+        "M",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+        "0-9",
+    ];
+
     return (
         <div className="brands-search">
-            <div className="input-light border">
+            <div className="brands-search-alphabet">
+                {alphabet.map((letter, index) => (
+                    <button
+                        className="brands-search-alphabet__btn"
+                        key={`brands-search-alphabet__btn-${index}`}
+                    >
+                        {letter}
+                    </button>
+                ))}
+            </div>
+
+            <div className="brands-search-input input-light border">
                 <input
                     type="text"
                     className="input-light__field"

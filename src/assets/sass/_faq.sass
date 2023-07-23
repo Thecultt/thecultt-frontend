@@ -1,12 +1,16 @@
 // faq
 .faq
+	margin-bottom: 50px
+
 	&-bread-crumbs
 		display: flex
 		align-items: center
 
-		margin-bottom: 20px
+		margin-bottom: 25px
 
 		&__item
+			color: $gray
+
 			line-height: 1.1em
 
 			cursor: pointer
@@ -17,6 +21,7 @@
 
 			&:last-child
 				border-bottom: 1px solid $gray
+				color: $black
 
 				&:hover
 					color: $black
@@ -24,8 +29,26 @@
 		& > svg
 			margin: 0 12px
 
+	&-title-white-wrapper
+		background-color: $lightBackgroundColor
+		padding: 30px 0
+
+	&-title-white
+		&__title
+			font-size: 26px
+			margin-bottom: 10px
+
+		&__description
+			font-size: 15px
+
+	&-text-block-white-wrapper
+		background-color: $lightBackgroundColor
+		padding: 15px
+
+		+borderRadius
+
 	&-text
-		margin-top: 50px
+		margin-top: 25px
 		width: 80%
 
 		&__title
@@ -42,17 +65,55 @@
 				font-size: 22px
 				margin-bottom: 15px
 
+				display: flex
+				align-items: center
+
+				& > svg
+					margin-right: 10px
+
 			&-description
 				font-size: 18px
 
+				& a
+					text-decoration: underline
+					color: $mainColor
+
 				& > p
-					+ManropeMedium
+					margin-bottom: 10px
+					+ManropeRegular
+
+				& > p.white
+					background-color: $lightBackgroundColor
+					padding: 10px 15px
+					font-size: 14px
+
+					+borderRadius
 
 				& > ul
 					margin-top: 15px
 					margin-left: 35px
 					margin-bottom: 15px
 
+					list-style: none
+
 					& > li
+						position: relative
+
 						margin-bottom: 10px
-						+ManropeMedium
+						+ManropeRegular
+
+						&::before
+							content: ""
+							position: absolute
+
+							display: block
+
+							width: 4px
+							height: 4px
+
+							top: 12px
+							left: -15px
+
+							background-color: $black
+
+							border-radius: 100%

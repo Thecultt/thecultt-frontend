@@ -1,6 +1,6 @@
 import React from "react";
 
-import {CatalogBanner, CatalogFiltersTop, CatalogFilters, CatalogGoods} from "../../components/";
+import {CatalogBanner, CatalogFiltersTop, CatalogFilters, CatalogProducts} from "../../components/";
 
 const Catalog: React.FC = () => {
     return (
@@ -8,13 +8,13 @@ const Catalog: React.FC = () => {
             <div className="container">
                 <div className="catalog-wrapper">
                     <CatalogBanner />
-					<CatalogFiltersTop />
-					
-					<div className="catalog-blocks-and-filters-wrapper">
-						<CatalogFilters />
+                    <CatalogFiltersTop />
 
-						<CatalogGoods />
-					</div>
+                    <div className="catalog-blocks-and-filters-wrapper">
+                        <CatalogFilters />
+
+                        <CatalogProducts />
+                    </div>
                 </div>
             </div>
         </section>

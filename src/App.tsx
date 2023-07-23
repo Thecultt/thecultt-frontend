@@ -4,7 +4,7 @@ import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 
 import "moment/locale/ru";
 
-import {Header, Reglog, Footer} from "./components";
+import {MenuMedia, Header, Reglog, Footer} from "./components";
 
 import {
     Home,
@@ -13,12 +13,15 @@ import {
     About,
     Auth,
     Contact,
-    Faq,
-	Brands,
-	CabinetHistoryOrders,
+    FaqDelivery,
+    FaqReturn,
+    Brands,
+    CabinetHistoryOrders,
     CabinetFavorites,
     CabinetWaitingList,
+    CabinetSetting,
     Visit,
+    Order,
 } from "./pages/";
 
 const App = () => {
@@ -40,8 +43,10 @@ const App = () => {
     }, [pathname]);
 
     return (
-        <div className="wrapper">
-            <Header isFaq={pathname.indexOf("/faq") !== -1 ? true : false} />
+        <div className="wrapper" id="wrapper">
+            <MenuMedia />
+
+            <Header />
 
             <Reglog />
 
@@ -59,7 +64,8 @@ const App = () => {
 
                     <Route path="/contact" element={<Contact />} />
 
-                    <Route path="/faq" element={<Faq />} />
+                    <Route path="/faq-delivery" element={<FaqDelivery />} />
+                    <Route path="/faq-return" element={<FaqReturn />} />
 
                     <Route path="/brands" element={<Brands />} />
 
@@ -78,6 +84,20 @@ const App = () => {
                     <Route
                         path="/cabinet/waiting"
                         element={<CabinetWaitingList />}
+                    />
+
+                    <Route
+                        path="/cabinet/setting"
+                        element={<CabinetSetting />}
+                    />
+
+                    <Route
+                        path="/order/success"
+                        element={<Order status="success" />}
+                    />
+                    <Route
+                        path="/order/error"
+                        element={<Order status="error" />}
                     />
 
                     <Route path="*" element={<></>} />

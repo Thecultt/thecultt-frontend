@@ -7,12 +7,12 @@ const CabinetHistoryOrders: React.FC = () => {
         <section className="cabinet">
             <div className="container">
                 <div className="cabinet-wrapper">
-                    <CabinetMenu title="История Заказов" />
+                    <CabinetMenu />
 
                     <div className="cabinet-content cabinet-history-orders">
-                        <CabinetHistoryOrdersItem />
-                        <CabinetHistoryOrdersItem />
-                        <CabinetHistoryOrdersItem />
+                        <CabinetHistoryOrdersItem status="success" />
+                        <CabinetHistoryOrdersItem status="error" />
+                        <CabinetHistoryOrdersItem status="success" />
                     </div>
                 </div>
             </div>

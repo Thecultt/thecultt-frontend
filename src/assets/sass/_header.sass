@@ -37,10 +37,36 @@
 			margin-right: 30px
 
 			&__btn
-				box-shadow: none
+				cursor: pointer
+				display: inline-flex
+				align-items: center
+				justify-content: center
+				border: none
+				background-color: $mainColor
+				border-radius: 6px
+				color: $white
+				padding: 4px 18px
+				line-height: 31px
+				font-size: 16px
+
+				will-change: transform
+
+				+transition
+				+ManropeRegular
+
+				&:hover
+					+transformHover
+
+				&:active
+					+transformClick
 
 				&:first-child
 					margin-right: 15px
+
+				&.regular
+					background-color: transparent
+					border: 1px solid $mainColor
+					color: $mainColor
 
 		&__language
 			cursor: pointer
@@ -283,3 +309,43 @@
 
 			&:hover
 				color: $mainColor
+
+// header-media
+.header-media
+	display: none
+
+	top: 0
+	position: sticky
+
+	z-index: 10
+
+	background-color: $backgroundColor
+
+	padding: 20px 0
+	margin-bottom: 30px
+
+	box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.15)
+
+	&-wrapper
+		width: 100%
+		position: relative
+
+		display: flex
+		justify-content: center
+		align-items: center
+
+	&-menu
+		position: absolute
+		left: 15px
+
+	&-logo
+		&__image
+			width: 120px
+
+@media screen and ( max-width: 500px )
+	.header
+		display: none
+
+	.header-media
+		display: block
+		margin-bottom: 15px

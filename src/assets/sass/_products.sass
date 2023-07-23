@@ -1,5 +1,5 @@
-// goods
-.goods
+// product
+.product
 	&-block
 		position: relative
 
@@ -14,8 +14,6 @@
 		text-align: center
 
 		overflow: hidden
-
-		margin-bottom: 25px
 
 		+borderRadius
 
@@ -125,12 +123,16 @@
 
 			&__model
 				font-size: 16px
-				margin-bottom: 10px
+				margin-bottom: 5px
+
+				+ManropeMedium
 
 			&-state
 				display: flex
 				align-items: center
-				margin-bottom: 10px
+				margin-bottom: 5px
+
+				+ManropeRegular
 
 				&__subtitle
 					font-size: 14px
@@ -202,6 +204,8 @@
 
 					font-size: 14px
 
+					+ManropeRegular
+
 					& > svg
 						cursor: pointer
 						width: 15px
@@ -210,6 +214,8 @@
 			&__price
 				font-size: 17px
 				margin-bottom: 5px
+
+				+ManropeRegular
 
 			&__outstock
 				margin-top: 25px
@@ -232,3 +238,23 @@
 				opacity: 1
 				left: 10px
 				bottom: -50px
+
+@media screen and ( max-width: 500px )
+	// product
+	.product
+		&-block
+			&-cover
+				height: 230px
+
+			&:hover &-cover
+				height: 230px
+
+			&:hover &-cover-arrow
+				opacity: 1
+
+			&-cover-arrow
+				opacity: 1
+
+			&-text
+				&__btn
+					display: none

@@ -28,7 +28,7 @@ const SellAndSale: React.FC = () => {
                             Rebag specialists inspect and certify every item
                             before listing on our site. That way you can trust
                             you're always receiving the most incredible luxury
-                            goods.
+                            product.
                         </p>
                         <Link to="/" className="btn sell-and-sale-text__btn">
                             Начать продавать

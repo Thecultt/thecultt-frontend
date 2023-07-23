@@ -6,18 +6,25 @@ export { default as Input } from "./UI/Input";
 export { default as Popup } from "./UI/Popup";
 export { default as Select } from "./UI/Select";
 export { default as Textarea } from "./UI/Textarea";
+export { default as RadioSelect } from "./UI/RadioSelect";
 
-// Goods
-export { default as GoodsBlock } from "./Goods/GoodsBlock";
+// MenuMedia
+export { default as MenuMedia } from "./MenuMedia/MenuMedia";
+
+// ProductBlock
+export { default as ProductBlock } from "./ProductBlock/ProductBlock";
 
 // Header
 export { default as Header } from "./Header/Header";
 // HeaderUser
 export { default as HeaderUser } from "./Header/HeaderUser/HeaderUser";
 export { default as HeaderUserMenu } from "./Header/HeaderUser/HeaderUserMenu";
+// HeaderCart
 export { default as HeaderCart } from "./Header/HeaderCart/HeaderCart";
 export { default as HeaderCartModal } from "./Header/HeaderCart/HeaderCartModal";
 export { default as HeaderCartModalItem } from "./Header/HeaderCart/HeaderCartModalItem";
+// HeaderMedia
+export { default as HeaderMedia } from "./Header/HeaderMedia/HeaderMedia";
 
 // Reglog
 export { default as Reglog } from "./Reglog/Reglog";
@@ -33,8 +40,11 @@ export { default as ReglogWelcome } from "./Reglog/ReglogWelcome/ReglogWelcome";
 // Catalog
 // CatalogBanner
 export { default as CatalogBanner } from "./Catalog/CatalogBanner/CatalogBanner";
+// CatalogBannerMedia
+export { default as CatalogBannerMedia } from "./Catalog/CatalogBannerMedia/CatalogBannerMedia";
+// CatalogFiltersTop
+export { default as CatalogFiltersTop } from "./Catalog/CatalogFiltersTop/CatalogFiltersTop";
 // CatalogFilters
-export { default as CatalogFiltersTop } from "./Catalog/CatalogFilters/CatalogFiltersTop";
 export { default as CatalogFilters } from "./Catalog/CatalogFilters/CatalogFilters";
 export { default as CatalogFiltersBlockWrapper } from "./Catalog/CatalogFilters/CatalogFiltersBlockWrapper";
 export { default as CatalogFiltersPrice } from "./Catalog/CatalogFilters/CatalogFiltersPrice";
@@ -46,10 +56,10 @@ export { default as CatalogFiltersModels } from "./Catalog/CatalogFilters/Catalo
 export { default as CatalogFiltersColors } from "./Catalog/CatalogFilters/CatalogFiltersColors";
 export { default as CatalogFiltersSex } from "./Catalog/CatalogFilters/CatalogFiltersSex";
 export { default as CatalogFiltersAvailability } from "./Catalog/CatalogFilters/CatalogFiltersAvailability";
-// CatalogGoods
-export { default as CatalogGoods } from "./Catalog/CatalogGoods/CatalogGoods";
-export { default as CatalogGoodsPagination } from "./Catalog/CatalogGoods/CatalogGoodsPagination";
-export { default as CatalogGoodsSection } from "./Catalog/CatalogGoods/CatalogGoodsSection";
+// CatalogProducts
+export { default as CatalogProducts } from "./Catalog/CatalogProducts/CatalogProducts";
+export { default as CatalogProductsPagination } from "./Catalog/CatalogProducts/CatalogProductsPagination";
+export { default as CatalogProductsSection } from "./Catalog/CatalogProducts/CatalogProductsSection";
 
 // Product
 export { default as ProductCover } from "./Product/ProductCover";
@@ -86,6 +96,18 @@ export { default as CabinetWaitingListSuccess } from "./CabinetWaitingList/Cabin
 
 // CabinetHistoryOrders
 export { default as CabinetHistoryOrdersItem } from "./CabinetHistoryOrders/CabinetHistoryOrdersItem";
+
+// CabinetSetting
+export { default as CabinetSettingInfoBlock } from "./CabinetSetting/CabinetSettingInfoBlock";
+export { default as CabinetSettingContactBlock } from "./CabinetSetting/CabinetSettingContactBlock";
+export { default as CabinetSettingBrandBlock } from "./CabinetSetting/CabinetSettingBrandBlock";
+// CabinetSettingPasswordRecovery
+export { default as CabinetSettingPasswordRecovery } from "./CabinetSetting/CabinetSettingPasswordRecovery/CabinetSettingPasswordRecovery";
+export { default as CabinetSettingPasswordRecoveryForm } from "./CabinetSetting/CabinetSettingPasswordRecovery/CabinetSettingPasswordRecoveryForm";
+// CabinetSettingAddressBlock
+export { default as CabinetSettingAddressBlock } from "./CabinetSetting/CabinetSettingAddressBlock/CabinetSettingAddressBlock";
+// CabinetSettingPaymentBlock
+export { default as CabinetSettingPaymentBlock } from "./CabinetSetting/CabinetSettingPaymentBlock/CabinetSettingPaymentBlock";
 
 // Footer
 export { default as Footer } from "./Footer/Footer";

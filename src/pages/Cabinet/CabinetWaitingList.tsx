@@ -31,7 +31,7 @@ const CabinetWaitingList: React.FC = () => {
         <section className="cabinet">
             <div className="container">
                 <div className="cabinet-wrapper">
-                    <CabinetMenu title="Лист ожидания" />
+                    <CabinetMenu />
 
                     <div className="cabinet-content cabinet-waiting-list">
                         <Popup
@@ -54,30 +54,19 @@ const CabinetWaitingList: React.FC = () => {
                         >
                             Подать новую заявку
                             <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 18 18"
+                                width="22"
+                                height="22"
+                                viewBox="0 0 22 22"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
-                                <g id="Icons" clipPath="url(#clip0_3532_48512)">
-                                    <path
-                                        id="Vector"
-                                        d="M9 1V17M1 9H17"
-                                        stroke="#FFFFFF"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_3532_48512">
-                                        <rect
-                                            width="18"
-                                            height="18"
-                                            fill="white"
-                                        />
-                                    </clipPath>
-                                </defs>
+                                <path
+                                    d="M11 3V19M3 11H19"
+                                    stroke="white"
+                                    strokeWidth="1.2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
                             </svg>
                         </button>
 

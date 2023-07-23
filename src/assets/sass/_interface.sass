@@ -75,6 +75,10 @@ input[type=number]
 	cursor: text
 	width: 100%
 
+	&.bgWhite &__field
+		background-color: $lightBackgroundColor
+		border: 0.3px solid $gray
+
 	&__field
 		width: 100%
 		outline: none
@@ -88,29 +92,6 @@ input[type=number]
 		&:valid ~ label
 			opacity: 0
 			z-index: -1
-
-	&__label
-		cursor: text
-
-		top: 50%
-		transform: translateY(-50%)
-		left: 15px
-
-		user-select: none
-
-		z-index: 0
-
-		display: flex
-		align-items: center
-
-		position: absolute
-		font-size: 16px
-		color: #D9D9D9
-
-		+transition
-
-		& > svg
-			margin-right: 15px
 
 	&-password
 		cursor: pointer
@@ -141,6 +122,8 @@ input[type=number]
 
 		+borderRadius
 
+		+ManropeRegular
+
 		&:focus ~ label,
 		&:valid ~ label
 			opacity: 0
@@ -164,6 +147,8 @@ input[type=number]
 		font-size: 16px
 		color: $gray
 
+		+ManropeRegular
+
 		& > svg
 			margin-right: 10px
 
@@ -172,6 +157,10 @@ input[type=number]
 	position: relative
 	cursor: text
 	width: 100%
+
+	&.bgWhite &__field
+		background-color: $lightBackgroundColor
+		border: 0.3px solid $gray
 
 	&__field
 		resize: none
@@ -189,29 +178,10 @@ input[type=number]
 			opacity: 0
 			z-index: -1
 
-	&__label
-		cursor: text
-
-		top: 15px
-		left: 15px
-
-		user-select: none
-
-		z-index: 0
-
-		display: flex
-		align-items: center
-
-		position: absolute
-		font-size: 16px
-		color: #D9D9D9
-
-		+transition
-
-		& > svg
-			margin-right: 15px
-
 // btn
+button
+	color: $black
+
 .btn
 	cursor: pointer
 	display: inline-flex
@@ -219,26 +189,23 @@ input[type=number]
 	justify-content: center
 	border: none
 	background-color: $mainColor
-	border-radius: 6px
+	border: 1px solid $mainColor
+	border-radius: 9px
 	color: $white
-	padding: 14px 40px
+	padding: 15px 25px
 	font-size: 16px
 
 	will-change: transform
 
 	+transition
 	+boxShadow
-	+ManropeMedium
+	+ManropeRegular
 
 	&:hover
 		+transformHover
 
 	&:active
 		+transformClick
-
-	&.small
-		padding: 14px 18px
-		font-size: 14px
 
 	& > svg
 		margin-left: 10px
@@ -250,15 +217,15 @@ input[type=number]
 	justify-content: center
 	border: .5px solid $gray
 	background-color: $lightBackgroundColor
-	border-radius: 6px
+	border-radius: 9px
 	color: $black
-	padding: 14px 60px
+	padding: 15px 25px
 	font-size: 16px
 
 	will-change: transform
 
 	+transition
-	+ManropeMedium
+	+ManropeRegular
 
 	&:hover
 		+transformHover
@@ -276,19 +243,15 @@ input[type=number]
 	justify-content: center
 	border: 1px solid $mainColor
 	background-color: transparent
-	border-radius: 6px
+	border-radius: 9px
 	color: $mainColor
-	padding: 18px
+	padding: 15px 25px
 	font-size: 16px
 
 	will-change: transform
 
 	+transition
-	+ManropeMedium
-
-	&.small
-		padding: 14px 18px
-		font-size: 14px
+	+ManropeRegular
 
 	&.black
 		color: $black
@@ -299,6 +262,33 @@ input[type=number]
 
 	&:active
 		+transformClick
+
+.btn-black
+	cursor: pointer
+	display: inline-flex
+	align-items: center
+	justify-content: center
+	border: none
+	background-color: $black
+	border-radius: 9px
+	color: $white
+	padding: 15px 25px
+	font-size: 16px
+
+	will-change: transform
+
+	+transition
+	+boxShadow
+	+ManropeRegular
+
+	&:hover
+		+transformHover
+
+	&:active
+		+transformClick
+
+	& > svg
+		margin-left: 10px
 
 // checkbox 
 .checkbox-wrapper
@@ -319,8 +309,12 @@ input[type=number]
 		user-select: none
 		+transition
 
+		&.small &__text
+			font-size: 12px
+
 		&__text
 			color: $black
+			font-size: 14px
 			line-height: 1.7em
 
 			& > a
@@ -357,6 +351,69 @@ input[type=number]
 		background-image: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.83203 3.49935L5.33203 6.99935L11.1654 1.16602' stroke='%23F1EDE8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A")
 
 		background-color: $mainColor
+
+// radio 
+.radio-wrapper
+	display: flex
+	align-items: center
+
+	position: relative
+
+.radio
+	position: absolute
+	z-index: -1
+	opacity: 0
+
+	&__label
+		cursor: pointer
+		display: inline-flex
+		align-items: center
+		user-select: none
+		+transition
+
+		&.small &__text
+			font-size: 12px
+
+		&__text
+			color: $black
+			font-size: 14px
+			line-height: 1.7em
+
+			& > a
+				margin-left: 3px
+				color: $mainColor
+
+			& > svg
+				width: 20px
+				margin-left: 10px
+
+				&:first-child
+					margin-left: 5px
+
+				&:last-child
+					margin-right: 10px
+
+	&__label::before
+		content: ''
+		display: inline-block
+
+		min-width: 21px
+		height: 21px
+
+		border: 1px solid $gray
+		border-radius: 50%
+		background-repeat: no-repeat
+		background-position: 5.3px 6.5px
+		background-size: 10px 9px
+		margin-right: 10px
+
+		+transition
+
+	&:checked+label::before
+		background-image: url("data:image/svg+xml,%3Csvg width='13' height='9' viewBox='0 0 13 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.83203 3.49935L5.33203 6.99935L11.1654 1.16602' stroke='%23F1EDE8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A")
+
+		background-color: $mainColor
+		border: 1px solid $mainColor
 
 // select
 .select
