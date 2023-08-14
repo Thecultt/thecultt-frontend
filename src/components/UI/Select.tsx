@@ -28,8 +28,8 @@ const Select: React.FC<SelectProps> = ({label, items}) => {
     };
 
     const toggleCurrentItem = (item: string) => {
-		setCurrentItem(item);
-		
+        setCurrentItem(item);
+
         setTimeout(() => {
             setState(false);
         }, 300);
@@ -38,7 +38,7 @@ const Select: React.FC<SelectProps> = ({label, items}) => {
     return (
         <div className="select" ref={SelectRef} onClick={() => setState(true)}>
             <p className="select__label">
-                {currentItem !== "" ? currentItem : label}
+                {currentItem !== "" ? currentItem : <span>{label}</span>}
             </p>
 
             <svg

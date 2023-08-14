@@ -62,7 +62,7 @@ const Faq: React.FC = () => {
                                         после покупки.
                                     </li>
                                 </ul>
-                                <p className="white">
+                                <p>
                                     Важно! товар, оплаченный после услуги
                                     примерки, вернуть в течение 3-х дневного
                                     срока после его получения нельзя. По
@@ -154,21 +154,6 @@ const Faq: React.FC = () => {
                         <div className="faq-text-block-white-wrapper">
                             <div className="faq-text-block">
                                 <h4 className="faq-text-block__title">
-                                    <svg
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M12.3607 5L14.6351 9.60778L19.7213 10.3512L16.041 13.9359L16.9096 19L12.3607 16.6078L7.81178 19L8.68034 13.9359L5 10.3512L10.0862 9.60778L12.3607 5Z"
-                                            stroke="#838383"
-                                            strokeWidth="1.2"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
                                     Общий порядок возврата товара
                                 </h4>
                                 <div className="faq-text-block-description">
@@ -276,7 +261,7 @@ const Faq: React.FC = () => {
                                         </b>
                                     </p>
 
-                                    <button className="btn-regular" style={{marginTop: "15px"}}>
+                                    <button style={{marginTop: "15px"}}>
                                         Заявление на возврат
                                     </button>
                                 </div>

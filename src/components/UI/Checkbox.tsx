@@ -1,23 +1,23 @@
 import React from "react";
-import {v4} from "uuid";
 
 interface CheckboxProps {
+    id?: string;
     label: string;
+    onChange?: () => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({label}) => {
-    const id = v4();
-
+const Checkbox: React.FC<CheckboxProps> = ({id, label, onChange}) => {
     return (
         <div className="checkbox-wrapper">
             <input
                 id={id}
                 type="checkbox"
-				className="checkbox"
+                className="checkbox"
                 // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 //     onChange && onChange(e.target.checked)
                 // }
                 // checked={checked}
+                onChange={onChange}
             />
 
             <label htmlFor={id} className={`checkbox__label`}>

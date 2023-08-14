@@ -1,11 +1,35 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {NumericFormat} from "react-number-format";
+
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
+
+import {changeCheckCartItem, removeCartItem} from "../../../redux/actions/cart";
 
 import {HeaderCartModalItem} from "../../";
 
-const HeaderCartModal: React.FC = () => {
+interface HeaderCartModalProps {
+    state: boolean;
+    setState: () => void;
+}
+
+const HeaderCartModal: React.FC<HeaderCartModalProps> = ({state, setState}) => {
+    const dispatch = useDispatch();
+
+    const {items, totalCount, totalPrice} = useTypedSelector(({cart}) => cart);
+
+    const changeCheck = (article: string, status: boolean) => {
+        dispatch(changeCheckCartItem(article, status));
+    };
+
+    const removeItem = (article: string) => {
+        dispatch(removeCartItem(article));
+    };
+
     return (
-        <div className="header-block-cart-modal">
-            {/* <div className="header-block-cart-modal-close">
+        <div className={`header-block-cart-modal ${state ? "active" : ""}`}>
+            <div className="header-block-cart-modal-close" onClick={setState}>
                 <svg
                     width="24"
                     height="25"
@@ -17,31 +41,79 @@ const HeaderCartModal: React.FC = () => {
                         id="Vector"
                         d="M20 4.5L4 20.5M4 4.5L20 20.5"
                         stroke="#202020"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                     />
                 </svg>
-            </div> */}
+            </div>
+
             <p className="header-block-cart-modal__title">Корзина:</p>
-            <div className="header-block-cart-modal-items-wrapper">
-                <HeaderCartModalItem />
-                <HeaderCartModalItem />
-            </div>
-            <div className="header-block-cart-modal-btn">
-                <div className="header-block-cart-modal-btn-title">
-                    <p className="header-block-cart-modal-btn-title__description">
-                        Товары - 2шт
-                    </p>
 
-                    <p className="header-block-cart-modal-btn-title__sum">
-                        80 000 ₽
+            {Object.keys(items).length ? (
+                <>
+                    <div className="header-block-cart-modal-items-wrapper">
+                        {Object.keys(items).map((key, index) => (
+                            <HeaderCartModalItem
+                                {...items[key]}
+                                key={`header-block-cart-modal-item-${index}`}
+                                changeCheck={() =>
+                                    changeCheck(key, !items[key].checked)
+                                }
+                                removeItem={() => removeItem(key)}
+                            />
+                        ))}
+                    </div>
+
+                    <div className="header-block-cart-modal-btn">
+                        <div className="header-block-cart-modal-btn-title">
+                            <p className="header-block-cart-modal-btn-title__description">
+                                Товары - {totalCount} шт.
+                            </p>
+
+                            <p className="header-block-cart-modal-btn-title__sum">
+                                <NumericFormat
+                                    value={totalPrice}
+                                    displayType={"text"}
+                                    thousandSeparator={" "}
+                                    renderText={(formattedValue: string) => (
+                                        <>
+                                            {parseInt(
+                                                formattedValue
+                                                    .split(" ")
+                                                    .join("")
+                                            ) >= 10000
+                                                ? formattedValue
+                                                : parseInt(
+                                                      formattedValue
+                                                          .split(" ")
+                                                          .join("")
+                                                  )}
+                                        </>
+                                    )}
+                                />{" "}
+                                ₽
+                            </p>
+                        </div>
+
+                        <Link
+                            to="/order"
+                            className="btn header-block-cart-modal-btn__btn"
+                            onClick={setState}
+                        >
+                            Перейти к заказу
+                        </Link>
+                    </div>
+                </>
+            ) : (
+                <div className="header-block-cart-modal-null">
+                    <p className="header-block-cart-modal-null__title">
+                        Ваша корзина пока пуста
                     </p>
+                    <button className="btn disabled header-block-cart-modal-null__btn">
+                        Перейти к заказу
+                    </button>
                 </div>
-
-                <button className="btn header-block-cart-modal-btn__btn">
-                    Перейти к заказу
-                </button>
-            </div>
+            )}
         </div>
     );
 };

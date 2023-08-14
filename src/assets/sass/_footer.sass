@@ -1,7 +1,84 @@
 // footer
 .footer
 	margin-top: auto
-	
+
 	width: 100%
+	padding: 25px 0
 
 	background-color: $lightBackgroundColor
+
+	+open
+
+	&-logo
+		display: block
+		margin-bottom: 15px
+
+	&-block
+		display: flex
+		justify-content: space-between
+
+		&-menu
+			display: flex
+
+			&-block
+				margin-right: 60px
+
+				&:last-child
+					margin-right: 0
+
+				&__title
+					font-size: 17px
+					margin-bottom: 15px
+
+				&__link
+					display: block
+					font-size: 14px
+					margin-bottom: 15px
+
+					+transition
+
+					&:hover
+						color: $mainColor
+
+		&-telegram
+			width: 340px
+
+			&__title
+				font-size: 17px
+				margin-bottom: 12px
+
+			&__subtitle
+				font-size: 14px
+				margin-bottom: 20px
+
+			&__btn
+				width: 100%
+
+				background-color: #5CA1E0
+				border: 1px solid #5CA1E0
+
+				& > svg
+					margin-right: 10px
+
+		&-bottom
+			margin-top: 30px
+			padding-top: 15px
+
+			border-top: 1px solid #D9D9D9
+
+			&__copyright
+				color: $gray
+				font-size: 14px
+
+			&-link
+				&__link
+					color: $gray
+					font-size: 14px
+
+					+transition
+
+					&:hover
+						color: $black
+
+					&:first-child
+						margin-right: 20px

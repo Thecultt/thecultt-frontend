@@ -1,0 +1,368 @@
+// sell
+.sell
+	margin-bottom: 25px
+
+	+open
+
+	&-wrapper
+		display: flex
+		align-items: flex-start
+
+	&-steps
+		top: 130px
+		position: sticky
+
+		width: 230px
+		min-width: 230px
+
+		&-item
+			display: flex
+			align-items: center
+
+			margin-bottom: 20px
+
+			+transition
+
+			&:last-child &-circle::before
+				display: none
+
+			&.success &__title
+				color: $mainColor
+
+			&.success &-circle
+				border: none
+
+			&.active &__title
+				color: $black
+
+			&.active &-circle
+				border: 1px solid $black
+
+			&-circle
+				position: relative
+
+				width: 20px
+				height: 20px
+
+				border-radius: 50%
+
+				border: 1px solid $gray
+
+				+transition
+
+				&::before
+					content: ""
+					position: absolute
+
+					height: 25px
+					width: 1px
+
+					bottom: -25px
+					left: 50%
+					transform: translateX(calc( -50% + 1px ))
+
+					border-left: 1px dashed $gray
+
+			&__title
+				margin-left: 10px
+
+				font-size: 15px
+				color: $gray
+
+				+transition
+
+	&-block
+		width: 640px
+
+		+open
+
+		&__back
+			cursor: pointer
+
+			display: inline-flex
+			align-items: center
+
+			background-color: transparent
+			border: none
+			font-size: 16px
+
+			margin-bottom: 20px
+
+			&:hover > svg
+				transform: rotate(15deg)
+
+			& > svg
+				margin-right: 5px
+
+				+transition
+
+		&__title
+			font-size: 17px
+			margin-bottom: 10px
+
+		&__subtitle
+			font-size: 14px
+			margin-bottom: 15px
+
+		&__btn
+			margin-top: 25px
+
+		&-select
+			margin-bottom: 18px
+
+			&:last-child
+				margin-bottom: 0
+
+			&__title
+				display: flex
+				align-items: center
+
+				font-size: 16px
+				margin-bottom: 10px
+
+				& > svg
+					cursor: pointer
+					margin-left: 5px
+
+		&-input-wrapper
+			display: flex
+			justify-content: space-between
+			flex-wrap: wrap
+
+		&-input
+			margin-bottom: 15px
+
+		&-cooperation-wrapper
+			width: 100%
+			display: flex
+			justify-content: space-between
+
+			margin-left: 50px
+
+		&-cooperation
+			margin-bottom: 200px
+
+			&-type-block-wrapper
+				display: flex
+
+			&-type-block
+				cursor: pointer
+
+				width: 305px
+
+				padding: 30px
+				background-color: $lightBackgroundColor
+
+				margin-right: 15px
+
+				+borderRadius
+				+transition
+
+				&:last-child
+					margin-left: 0
+
+				&.active
+					border: 0.6px solid $mainColor
+					+boxShadow
+
+				&__title
+					font-size: 17px
+					margin-bottom: 3px
+
+				&__description
+					font-size: 14px
+
+			&-concierge-service
+				display: flex
+				flex-direction: column
+				justify-content: flex-end
+
+				padding: 30px 15px
+
+				width: 290px
+				height: 400px
+
+				color: $lightBackgroundColor
+
+				+backgroundSetting
+				+borderRadius
+
+				&__title
+					font-size: 17px
+					margin-bottom: 5px
+
+				&__subtitle
+					font-size: 14px
+					margin-bottom: 15px
+
+				&__link
+					display: inline-block
+					color: $lightBackgroundColor
+					text-decoration: underline
+					font-size: 16px
+
+		&-info
+			margin-left: 110px
+
+		&-images
+			margin-left: 110px
+
+			&-block
+				min-width: 50%
+
+				cursor: pointer
+
+				display: flex
+				height: 430px
+
+				margin-bottom: 15px
+
+				&:last-child
+					margin-bottom: 0
+
+				&-text
+					margin-right: 15px
+
+					text-align: center
+
+					background-color: $lightBackgroundColor
+
+					will-change: transform
+
+					+borderRadius
+					+transition
+
+					&:hover
+						+transformHover
+
+					&:active
+						+transformClick
+
+					&-icon
+						margin-top: 170px
+
+					&__title
+						margin-top: 25px
+						color: $mainColor
+
+						user-select: none
+
+					&__description
+						margin-top: 110px
+						font-size: 18px
+						color: $gray
+
+						user-select: none
+
+				&-cover
+					width: 50%
+
+					display: flex
+					flex-direction: column
+					justify-content: flex-end
+
+					padding: 20px 40px
+
+					text-align: center
+
+					color: $lightBackgroundColor
+
+					+borderRadius
+					+backgroundSetting
+
+					&__title
+						font-size: 22px
+						margin-bottom: 5px
+
+						+ManropeSemiBold
+
+					&__description
+						font-size: 14px
+
+			&-more
+				display: flex
+				justify-content: space-between
+
+				&-block
+					width: calc( 50% - 7.5px )
+					height: 430px
+
+					text-align: center
+
+					background-color: $lightBackgroundColor
+
+					will-change: transform
+
+					+borderRadius
+					+transition
+
+					&:hover
+						+transformHover
+
+					&:active
+						+transformClick
+
+					&-icon
+						margin-top: 170px
+
+					&__title
+						margin-top: 25px
+						color: $mainColor
+
+						user-select: none
+
+					&__description
+						margin-top: 110px
+						font-size: 18px
+						color: $gray
+
+						user-select: none
+
+		&-contact
+			margin-left: 110px
+
+		&-delivery
+			margin-left: 110px
+
+			&-types
+				display: flex
+				justify-content: space-between
+
+				margin-bottom: 20px
+
+				&-block
+					cursor: pointer
+
+					padding: 20px 15px
+
+					display: flex
+					flex-direction: column
+					justify-content: center
+					align-items: center
+
+					text-align: center
+
+					width: 49%
+					background-color: $lightBackgroundColor
+
+					+borderRadius
+					+transition
+
+					&.active
+						border: 0.6px solid $mainColor
+						+boxShadow
+
+					& > svg
+						margin-bottom: 10px
+
+					&__title
+						font-size: 17px
+						margin-bottom: 3px
+
+					&__subtitle
+						font-size: 14px
+
+			&-form
+				&__title
+					font-size: 17px
+					margin-bottom: 15px

@@ -1,6 +1,9 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
+import {compose} from "redux";
+
+import "react-dots-loader/index.css";
 
 import "moment/locale/ru";
 
@@ -22,7 +25,17 @@ import {
     CabinetSetting,
     Visit,
     Order,
+    Sell,
+    SellInfo,
 } from "./pages/";
+import OrderStatus from "./components/Order/OrderStatus/OrderStatus";
+
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+        cp: any;
+    }
+}
 
 const App = () => {
     const dispatch = useDispatch();
@@ -56,7 +69,7 @@ const App = () => {
 
                     <Route path="/catalog" element={<Catalog />} />
 
-                    <Route path="/product" element={<Product />} />
+                    <Route path="/product/:article" element={<Product />} />
 
                     <Route path="/about" element={<About />} />
 
@@ -91,14 +104,20 @@ const App = () => {
                         element={<CabinetSetting />}
                     />
 
+                    <Route path="/cabinet/sell" element={<Sell />} />
+
+                    <Route path="/order" element={<Order />} />
+
                     <Route
                         path="/order/success"
-                        element={<Order status="success" />}
+                        element={<OrderStatus status="success" />}
                     />
                     <Route
                         path="/order/error"
-                        element={<Order status="error" />}
+                        element={<OrderStatus status="error" />}
                     />
+
+                    <Route path="/sell" element={<SellInfo />} />
 
                     <Route path="*" element={<></>} />
                 </Routes>

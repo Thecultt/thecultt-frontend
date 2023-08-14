@@ -10,9 +10,7 @@ const CabinetFavorites: React.FC = () => {
                     <CabinetMenu />
 
                     <div className="cabinet-content cabinet-favorites">
-                        <h2 className="cabinet__title">Избранное</h2>
-
-                        <div className="cabinet-favorites-blocks-wrapper">
+                        {/* <div className="cabinet-favorites-blocks-wrapper">
                             <ProductBlock
                                 addClass="cabinet-favorites-block"
                                 isFavorite
@@ -25,7 +23,7 @@ const CabinetFavorites: React.FC = () => {
                                 isFavorite
                                 addClass="cabinet-favorites-block"
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

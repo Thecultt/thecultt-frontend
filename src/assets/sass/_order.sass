@@ -2,215 +2,417 @@
 .order
 	margin-bottom: 75px
 
+	+open
+
 	&-wrapper
 		display: flex
-		flex-direction: column
-		align-items: center
+		justify-content: space-between
+		align-items: flex-start
 
-	&-content
-		width: 500px
+	&-form
+		position: sticky
+		top: 130px
 
-		background-color: #F7F4F0
+		width: 65%
 
-		padding: 35px 40px
+		&-block
+			padding: 20px 30px
+			background-color: $lightBackgroundColor
+			border-radius: 16px
 
-		border-radius: 24px
-
-		&-info
-			position: relative
-
-			display: flex
-			flex-direction: column
-			align-items: center
-			text-align: center
-
-			border-bottom: 0.3px solid $gray
-
-			padding-bottom: 25px
-			margin-bottom: 25px
-
-			&-circle
-				width: 50px
-				height: 50px
-
-				position: absolute
-
-				bottom: -25px
-
-				border-radius: 50%
-				background-color: $backgroundColor
-
-				&.left
-					left: -65px
-
-				&.right
-					right: -65px
-
-			&-icon
-				margin-bottom: 25px
-
-			&__title
-				font-size: 22px
-				margin-bottom: 12px
-
-			&__subtitle
-				width: 75%
-				font-size: 17px
-
-				margin-bottom: 10px
-
-				+ManropeSemiBold
-
-			&__description
-				font-size: 14px
-				margin-bottom: 25px
-
-			&-btn
-				width: 100%
-				display: flex
-				justify-content: space-between
-				align-items: center
-
-				&__btn
-					width: 49%
-
-			&__repeatbtn
-				width: 65%
-
-		&-product-wrapper
-
-		&-good
-			width: 100%
-			display: flex
-
-			padding: 10px
-			border: 0.3px dashed $gray
-
-			margin-bottom: 10px
-
-			+borderRadius
+			margin-bottom: 15px
 
 			&:last-child
 				margin-bottom: 0
 
-			&-image
-				width: 120px
+			&__title
+				font-size: 17px
+				margin-bottom: 15px
 
+			&-inputs-wrapper
+				display: flex
+				justify-content: space-between
+				flex-wrap: wrap
+
+			&-input
+				margin-bottom: 15px
+
+				&:nth-last-of-type(1), &:nth-last-of-type(2)
+					margin-bottom: 0
+
+			&-checkbox
+				margin-bottom: 15px
+
+				&__description
+					font-size: 14px
+					margin-top: 10px
+					margin-left: 32px
+
+				&:last-child
+					margin-bottom: 0
+
+	&-products
+		position: sticky
+		top: 130px
+
+		width: 30%
+
+		padding: 30px
+		background-color: $lightBackgroundColor
+		border-radius: 16px
+
+		&__title
+			font-size: 17px
+			margin-bottom: 12px
+
+			+ManropeRegular
+
+		&-check-all
+			cursor: pointer
+			display: flex
+			align-items: center
+
+			margin-bottom: 15px
+
+			&__title
+				margin-left: 10px
+				font-size: 16px
+				user-select: none
+
+				+ManropeMedium
+
+		&-items-wrapper
+			margin-bottom: 20px
+
+		&-item
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			margin-bottom: 15px
+
+			&.disabled &-content
+				opacity: 0.5
+
+			&-content
+				display: flex
+				align-items: center
+
+				will-change: opacity
+
+				+transition
+
+				&-check
+					cursor: pointer
+
+					margin-right: 10px
+
+					height: 18px
+					width: 18px
+
+				&-image
+					border-radius: 6px
+
+					width: 70px
+					height: 100px
+
+					+backgroundSetting
+
+				&-text
+					margin-left: 15px
+
+					&__brand
+						font-size: 14px
+						margin-bottom: 5px
+
+					&__model
+						font-size: 16px
+
+						+ManropeMedium
+
+					&__sum
+						font-size: 17px
+						+ManropeSemiBold
+
+			&-remove
+				cursor: pointer
+
+				&:hover > svg
+					stroke: $red
+
+				& > svg
+					stroke: $black
+
+					+transition
+
+		&-promocode
+			display: flex
+			justify-content: space-between
+
+			margin-bottom: 15px
+
+			&__input
+				width: 60%
+				outline: none
+				padding: 12px 14px
+				font-size: 16px
+				border: .3px dashed $gray
+				background-color: transparent
 				border-radius: 6px
 
-				+backgroundSetting
+				+ManropeRegular
 
-			&-text
-				padding: 20px 0
-				margin-left: 15px
+			&__btn
+				width: 38%
 
-				&__brand
-					font-size: 14px
+				cursor: pointer
+				display: inline-flex
+				align-items: center
+				justify-content: center
+				border: 1px solid #DEDCD8
+				background-color: transparent
+				border-radius: 9px
+				color: $gray
+				padding: 15px 25px
+				font-size: 16px
 
-				&__model
-					font-size: 18px
+		&-total
+			&-item
+				display: flex
+				justify-content: space-between
+				align-items: center
 
-				&__option
-					font-size: 14px
+				margin-bottom: 15px
 
-					display: flex
-					align-items: center
+				&__title
+					font-size: 17px
 
 					+ManropeMedium
 
-					& > span
-						color: $gray
-						margin-right: 7px
+				&__value
+					font-size: 17px
 
-				&-state
+					+ManropeMedium
+
+		&__description
+			text-align: center
+			
+			font-size: 12px
+			color: $gray
+			line-height: 1.4em
+
+			margin-bottom: 15px
+
+		&__btn
+			width: 100%
+
+	&-status
+		&-wrapper
+			display: flex
+			flex-direction: column
+			align-items: center
+
+		&-content
+			width: 500px
+
+			background-color: #F7F4F0
+
+			padding: 35px 40px
+
+			border-radius: 24px
+
+			&-info
+				position: relative
+
+				display: flex
+				flex-direction: column
+				align-items: center
+				text-align: center
+
+				border-bottom: 0.3px solid $gray
+
+				padding-bottom: 25px
+				margin-bottom: 25px
+
+				&-circle
+					width: 50px
+					height: 50px
+
+					position: absolute
+
+					bottom: -25px
+
+					border-radius: 50%
+					background-color: $backgroundColor
+
+					&.left
+						left: -65px
+
+					&.right
+						right: -65px
+
+				&-icon
+					margin-bottom: 25px
+
+				&__title
+					font-size: 22px
+					margin-bottom: 10px
+
+				&__subtitle
+					font-size: 17px
+
+					margin-bottom: 25px
+
+					+ManropeMedium
+
+				&__description
+					font-size: 14px
+					margin-bottom: 25px
+
+				&-btn
+					width: 100%
 					display: flex
+					justify-content: space-between
 					align-items: center
 
-					margin: 5px 0
+					&__btn
+						width: 49%
 
-					&__subtitle
+				&__repeatbtn
+					width: 240px
+
+			&-good
+				width: 100%
+				display: flex
+
+				padding: 10px
+				border: 0.3px dashed $gray
+
+				margin-bottom: 10px
+
+				+borderRadius
+
+				&:last-child
+					margin-bottom: 0
+
+				&-image
+					width: 120px
+
+					border-radius: 6px
+
+					+backgroundSetting
+
+				&-text
+					padding: 20px 0
+					margin-left: 15px
+
+					&__brand
 						font-size: 14px
-						padding-right: 5px
-						margin-right: 5px
 
-						border-right: 1px solid #D9D9D9
+					&__model
+						font-size: 18px
 
-					&__title
+					&__option
+						font-size: 14px
+
 						display: flex
 						align-items: center
 
-						font-size: 14px
+						+ManropeMedium
 
+						& > span
+							color: $gray
+							margin-right: 7px
+
+					&-state
+						display: flex
+						align-items: center
+
+						margin: 5px 0
+
+						&__subtitle
+							font-size: 14px
+							padding-right: 5px
+							margin-right: 5px
+
+							border-right: 1px solid #D9D9D9
+
+						&__title
+							display: flex
+							align-items: center
+
+							font-size: 14px
+
+							color: $mainColor
+
+							+ManropeMedium
+
+							& > svg
+								cursor: pointer
+
+								width: 14px
+								margin-right: 5px
+
+					&__price
+						font-size: 18px
+
+						+ManropeMedium
+
+		&-recipient
+			margin-top: 2px
+			width: 500px
+
+			position: relative
+
+			background-color: #F7F4F0
+
+			padding: 45px 40px 0 45px
+
+			border-radius: 24px
+
+			&-block
+				margin-bottom: 30px
+
+				&:last-child
+					margin-bottom: 0
+
+				&__title
+					font-size: 20px
+					margin-bottom: 15px
+
+				&__subtitle
+					display: flex
+					align-items: center
+
+					font-size: 16px
+					margin-bottom: 10px
+
+					+ManropeMedium
+
+					&:last-child
+						margin-bottom: 0
+
+					& > span
+						display: inline-block
+						width: 150px
+						color: $gray
+						margin-right: 35px
+
+					& > .payment
+						display: flex
+						align-items: center
 						color: $mainColor
 
 						+ManropeMedium
 
 						& > svg
-							cursor: pointer
+							margin-left: 5px
 
-							width: 14px
-							margin-right: 5px
+					& > .payment-error
+						color: $red
 
-				&__price
-					font-size: 18px
-
-					+ManropeMedium
-
-	&-recipient
-		margin-top: 2px
-		width: 500px
-
-		position: relative
-
-		background-color: #F7F4F0
-
-		padding: 45px 40px 0 45px
-
-		border-radius: 24px
-
-		&-block
-			margin-bottom: 30px
-
-			&:last-child
-				margin-bottom: 0
-
-			&__title
-				font-size: 20px
-				margin-bottom: 15px
-
-			&__subtitle
-				display: flex
-				align-items: center
-
-				font-size: 16px
-				margin-bottom: 10px
-
-				+ManropeMedium
-
-				&:last-child
-					margin-bottom: 0
-
-				& > span
-					display: inline-block
-					width: 150px
-					color: $gray
-					margin-right: 35px
-
-				& > .payment
-					display: flex
-					align-items: center
-					color: $mainColor
-
-					+ManropeMedium
-
-					& > svg
-						margin-left: 5px
-
-				& > .payment-error
-					color: $red
-
-		&-svg
-			width: 100%
-			bottom: -50px
-			left: 0
-			position: absolute
+			&-svg
+				width: 100%
+				bottom: -50px
+				left: 0
+				position: absolute

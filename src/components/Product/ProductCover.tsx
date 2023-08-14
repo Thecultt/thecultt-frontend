@@ -8,27 +8,37 @@ const ProductCover: React.FC<ProductCoverProps> = ({images}) => {
     const [currentIndexImage, setCurrentIndexImage] = React.useState<number>(0);
 
     const onClickNext = () => {
-        if (currentIndexImage + 1 < images.length)
+        if (currentIndexImage + 1 < images.length) {
             setCurrentIndexImage(currentIndexImage + 1);
+        } else {
+            setCurrentIndexImage(0);
+        }
     };
 
     const onClickPrev = () => {
-        if (currentIndexImage > 0) setCurrentIndexImage(currentIndexImage - 1);
+        if (currentIndexImage > 0) {
+            setCurrentIndexImage(currentIndexImage - 1);
+        } else {
+            setCurrentIndexImage(currentIndexImage - 1);
+        }
     };
 
     return (
         <div className="product-content-cover">
-            <div className="product-content-cover-list">
-                {images.map((image, index) => (
-                    <div
-                        className={`product-content-cover-list-item ${
-                            currentIndexImage === index ? "active" : ""
-                        }`}
-                        style={{backgroundImage: `url("${image}")`}}
-                        key={`product-content-cover-list-item-${index}`}
-                        onMouseEnter={() => setCurrentIndexImage(index)}
-                    ></div>
-                ))}
+            <div className="product-content-cover-list-wrapper">
+                <div className="product-content-cover-list">
+                    {images.map((image, index) => (
+                        <div
+                            className={`product-content-cover-list-item ${
+                                currentIndexImage === index ? "active" : ""
+                            }`}
+                            style={{backgroundImage: `url("${image}")`}}
+                            key={`product-content-cover-list-item-${index}`}
+                            onMouseEnter={() => setCurrentIndexImage(index)}
+                        ></div>
+                    ))}
+                </div>
+
                 <div className="product-content-cover-list-nav">
                     <svg
                         width="20"

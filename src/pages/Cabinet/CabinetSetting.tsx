@@ -25,8 +25,8 @@ const CabinetSetting: React.FC = () => {
                         <CabinetSettingAddressBlock />
                         <CabinetSettingPaymentBlock />
 
-                        <button className="btn-regular cabinet-setting__logout">
-                            Выйти
+                        <button className="cabinet-setting__logout">
+                            Выйти из профиля
                         </button>
                     </div>
                 </div>

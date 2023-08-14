@@ -2,6 +2,8 @@
 .product
 	margin: 40px 0 60px 0
 
+	+open
+
 	&__back
 		display: flex
 		align-items: center
@@ -27,41 +29,78 @@
 			margin-right: 10px
 
 	&-content
-		margin-top: 40px
+		margin: 40px 0 0 0
 
 		display: flex
 		justify-content: space-between
 		align-items: flex-start
 
 		&-cover
+			top: 120px
+			position: sticky
+
 			display: flex
 			justify-content: space-between
 			align-items: flex-start
 
 			width: calc( 50% - 35px )
-			min-height: 850px
-			height: 850px
+			height: calc( 100vh - 225px )
+
+			&-list-wrapper
+				position: relative
+
+				width: 90px
+				min-width: 90px
+
+				height: calc( 100vh - 225px )
+
+				overflow: hidden
+
+				margin-right: 55px
+
+				&::-webkit-scrollbar
+					display: none
+
+				&::before
+					content: ""
+
+					display: block
+
+					position: absolute
+
+					bottom: -55px
+					left: -15px
+
+					width: 120px
+					height: 50px
+					min-height: 50px
+
+					box-shadow: 0px -40px 15px 0px #F1EDE8
 
 			&-list
-				display: flex
-				flex-direction: column
-				align-items: center
+				height: 100%
+				overflow: scroll
 
-				min-width: 70px
-				margin-right: 20px
+				&::-webkit-scrollbar
+					display: none
 
 				&-item
 					cursor: pointer
 
-					width: 100%
-					height: 95px
+					width: 88px
+
+					min-height: 120px
+					height: 120px
 
 					border-radius: 3px
 
 					margin-bottom: 15px
 
+					border: 1px solid $gray
+
 					+backgroundSetting
 					+transition
+					+borderRadius
 
 					&:last-child
 						margin-bottom: 0
@@ -75,18 +114,23 @@
 						box-shadow: 0px 16px 67px 0px rgba(0, 0, 0, 0.08)
 
 				&-nav
+					position: absolute
+
+					bottom: 0
+					left: 50%
+					transform: translateX(-50%)
+
 					cursor: pointer
 
 			&-main
 				position: relative
 
-				width: 100%
+				width: 490px
 				height: 100%
 
 				border-radius: 6px
 
 				+backgroundSetting
-				+transition
 
 				&-nav
 					display: flex
@@ -114,14 +158,30 @@
 		&-info
 			width: calc( 50% - 35px )
 
+			padding: 25px 70px
+
+			background-color: $lightBackgroundColor
+
+			border-radius: 24px
+
 			&-bread-crumbs
 				display: flex
 				align-items: center
 
 				margin-bottom: 20px
 
+				&-back
+					cursor: pointer
+
+					display: flex
+					align-items: center
+					justify-content: center
+
+					margin-right: 30px
+
 				&__item
 					cursor: pointer
+					color: $gray
 					+transition
 
 					&:hover
@@ -129,6 +189,7 @@
 
 					&:last-child
 						text-decoration: underline
+						color: $black
 
 						&:hover
 							color: $black
@@ -140,33 +201,23 @@
 				margin-bottom: 20px
 
 				&__vendor
-					margin-bottom: 10px
+					font-size: 16px
+					color: $gray
+					margin-bottom: 5px
 
 				&__brand
 					display: inline-block
 					text-decoration: underline
-					margin-bottom: 10px
+					font-size: 18px
+					margin-bottom: 5px
 
 				&__model
-					font-size: 35px
-					margin-bottom: 20px
+					font-size: 26px
+					margin-bottom: 5px
 
-				&-price
-					margin-bottom: 20px
-
-					&__retail
-						display: flex
-						align-items: center
-
-						color: $gray
-
-						margin-bottom: 10px
-
-						& > svg
-							margin-right: 7px
-
-					&__title
-						font-size: 28px
+				&__price
+					margin-bottom: 25px
+					font-size: 28px
 
 				&__description
 					font-size: 16px
@@ -179,10 +230,11 @@
 
 					&__btn
 						&.add
-							width: calc( 60% - 9px )
+							width: calc( 57% - 9px )
+							box-shadow: none
 
 						&.fav
-							width: calc( 40% - 9px )
+							width: calc( 43% - 9px )
 
 			&-exchange
 				cursor: pointer
@@ -191,8 +243,8 @@
 				align-items: center
 				justify-content: space-between
 
-				background-color: $lightBackgroundColor
-				padding: 15px 20px
+				padding: 12px 50px
+				border: 1px solid $gray
 
 				margin-bottom: 20px
 
@@ -234,6 +286,10 @@
 			&-parameters
 				margin-bottom: 30px
 
+				&__title
+					font-size: 17px
+					margin-bottom: 15px
+
 				&__item
 					margin-bottom: 10px
 
@@ -251,8 +307,8 @@
 				align-items: center
 				justify-content: space-between
 
-				background-color: $lightBackgroundColor
-				padding: 15px 20px
+				padding: 12px 50px
+				border: 1px solid $gray
 
 				margin-bottom: 30px
 
@@ -273,15 +329,23 @@
 				&-item
 					cursor: pointer
 
-					display: flex
-					align-items: center
-					justify-content: space-between
-
 					border-bottom: .6px solid #CDCDCD
 
 					padding-bottom: 20px
 					margin-bottom: 20px
 
-					&__title
-						font-weight: 400
-						font-size: 18px
+					&:last-child
+						border-bottom: none
+
+					&-top
+						display: flex
+						align-items: center
+						justify-content: space-between
+
+						&__title
+							font-weight: 400
+							font-size: 18px
+
+					&__description
+						margin-top: 25px
+						font-size: 16px

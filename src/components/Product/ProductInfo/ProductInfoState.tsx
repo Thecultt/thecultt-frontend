@@ -1,6 +1,6 @@
 import React from "react";
 
-import StateImage from "../../../assets/images/state/state.png";
+import StateImage from "../../../assets/images/state/state.svg";
 
 const ProductInfoState: React.FC = () => {
     return (

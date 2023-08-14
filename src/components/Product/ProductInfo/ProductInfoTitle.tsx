@@ -1,78 +1,51 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {NumericFormat} from "react-number-format";
 
-const ProductInfoTitle: React.FC = () => {
+import {ProductPage} from "../../../models/IProduct";
+
+interface ProductInfoTitleProps extends ProductPage {}
+
+const ProductInfoTitle: React.FC<ProductInfoTitleProps> = ({
+    article,
+    manufacturer,
+    name,
+    price,
+    description,
+}) => {
     return (
         <div className="product-content-info-title">
-            <p className="product-content-info-title__vendor">
-                Артикул: 1923001
-            </p>
+            <p className="product-content-info-title__vendor">Артикул: C178</p>
+            <h2 className="product-content-info-title__model">{name}</h2>
             <Link to="/" className="product-content-info-title__brand">
-                Fendy
+                {manufacturer}
             </Link>
-            <h2 className="product-content-info-title__model">
-                Fendy Textile Bag
-            </h2>
-            <div className="product-content-info-title-price">
-                <p className="product-content-info-title-price__retail">
-                    <svg
-                        width="15"
-                        height="15"
-                        viewBox="0 0 15 15"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <g clip-path="url(#clip0_2251_33670)">
-                            <path
-                                d="M7.7513 13.3337C10.973 13.3337 13.5846 10.722 13.5846 7.50032C13.5846 4.27866 10.973 1.66699 7.7513 1.66699C4.52964 1.66699 1.91797 4.27866 1.91797 7.50032C1.91797 10.722 4.52964 13.3337 7.7513 13.3337Z"
-                                stroke="#838383"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M7.75 9.83333V7.5"
-                                stroke="#838383"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M7.75 5.16699H7.75389"
-                                stroke="#838383"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_2251_33670">
-                                <rect
-                                    width="14"
-                                    height="14"
-                                    fill="white"
-                                    transform="translate(0.75 0.5)"
-                                />
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    Цена ретейла: 83 000 ₽
-                </p>
-                <h3 className="product-content-info-title-price__title">
-                    65 000 ₽
-                </h3>
-            </div>
-
-            <p className="product-content-info-title__description">
-                Fendi Textile Bag. Модель выполнена из текстиля, подкладка из
-                текстиля. Одно основное отделение, внутренний карман. Оснащена
-                длинным плечевым ремнем. Украшена логнотипом бренда. Рост модели
-                - 168 см.
-            </p>
-
+            <h3 className="product-content-info-title__price">
+                {" "}
+                <NumericFormat
+                    value={price}
+                    displayType={"text"}
+                    thousandSeparator={" "}
+                    renderText={(formattedValue: string) => (
+                        <>
+                            {parseInt(formattedValue.split(" ").join("")) >=
+                            10000
+                                ? formattedValue
+                                : parseInt(formattedValue.split(" ").join(""))}
+                        </>
+                    )}
+                />{" "}
+                ₽
+            </h3>
+            {/* <p className="product-content-info-title__description">
+                {description}
+            </p> */}
             <div className="product-content-info-title-btn">
                 <button className="btn product-content-info-title-btn__btn add">
                     Добавить в корзину
                 </button>
 
-                <button className="btn-light product-content-info-title-btn__btn fav">
+                <button className="btn-regular product-content-info-title-btn__btn fav">
                     В избранное
                     <svg
                         width="20"

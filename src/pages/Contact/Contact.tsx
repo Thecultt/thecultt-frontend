@@ -216,10 +216,10 @@ const Contact: React.FC = () => {
                             </h3>
                             <p className="contact-block-office__description">
                                 Мы находимся по адресу Трубная 25с3 (3 этаж,
-                                офис THE CULTT) ежедневно с 10:00 до 21:30.{" "}
-                                <br /> Для посещения необходима регистрация!
+                                офис THE CULTT) ежедневно с 11 до 21:30. Для
+                                посещения необходима регистрация!
                             </p>
-                            <button className="btn contact-block-office__btn">
+                            <button className="btn-regular contact-block-office__btn">
                                 Выбрать время
                             </button>
                         </div>

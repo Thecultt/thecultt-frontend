@@ -3,13 +3,17 @@ import { reducer as formReducer } from "redux-form";
 
 import check_email from './check_email'
 import register from './register'
+import products_filters from './products_filters'
 import products from './products'
+import cart from './cart'
 
 export const rootReducer = combineReducers({
 	form: formReducer,
 	check_email,
 	register,
-	products
+	products_filters,
+	products,
+	cart
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

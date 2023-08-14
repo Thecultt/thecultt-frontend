@@ -18,7 +18,7 @@ const CabinetSettingPasswordRecovery: React.FC = () => {
 
             <div className="cabinet-setting-password-recovery">
                 <h4 className="cabinet-setting-password-recovery__title">
-                    Забыли или хотите поменять пороль?
+                    Забыли или хотите поменять пароль?
                 </h4>
 
                 <button

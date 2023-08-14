@@ -12,7 +12,7 @@ const CatalogProductsSection: React.FC = () => {
                     </h4>
 
                     <div className="catalog-product-section-product">
-                        <div className="catalog-product-block">
+                        {/* <div className="catalog-product-block">
                             <ProductBlock />
                         </div>
                         <div className="catalog-product-block">
@@ -26,7 +26,7 @@ const CatalogProductsSection: React.FC = () => {
                         </div>
                         <div className="catalog-product-block">
                             <ProductBlock />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

@@ -32,5 +32,11 @@ export { default as CabinetFavorites } from "./Cabinet/CabinetFavorites";
 export { default as CabinetWaitingList } from "./Cabinet/CabinetWaitingList";
 export { default as CabinetSetting } from "./Cabinet/CabinetSetting";
 
+// Sell
+export { default as Sell } from "./Sell/Sell";
+
+// SellInfo
+export { default as SellInfo } from "./SellInfo/SellInfo";
+
 // Order
 export { default as Order } from "./Order/Order";

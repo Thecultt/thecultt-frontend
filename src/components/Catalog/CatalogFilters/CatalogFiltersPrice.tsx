@@ -1,8 +1,49 @@
 import React from "react";
+import {useDispatch} from "react-redux";
+
+import {setFiltersPriceProduct} from "../../../redux/actions/products";
 
 import {CatalogFiltersBlockWrapper} from "../../";
 
-const CatalogFiltersPrice: React.FC = () => {
+interface CatalogFiltersPriceProps {
+    defaultMin: number;
+    defaultMax: number;
+}
+
+const CatalogFiltersPrice: React.FC<CatalogFiltersPriceProps> = ({
+    defaultMin,
+    defaultMax,
+}) => {
+    const dispatch = useDispatch();
+
+    const [min, setMin] = React.useState<string>("");
+    const [max, setMax] = React.useState<string>("");
+
+    const onChangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/[a-zа-яё]/gi, "");
+
+        setMin(value);
+    };
+
+    const onChangeMax = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/[a-zа-яё]/gi, "");
+
+        if (parseInt(value) <= defaultMax) {
+            setMax(value);
+        } else {
+            setMax(String(defaultMax));
+        }
+    };
+
+    React.useEffect(() => {
+        dispatch(
+            setFiltersPriceProduct({
+                min: parseInt(min) ? parseInt(min) : 0,
+                max: parseInt(max) ? parseInt(max) : 0,
+            })
+        );
+    }, [min, max]);
+
     return (
         <CatalogFiltersBlockWrapper title="Цена">
             <div className="catalog-filters-block-content-price-input-wrapper">
@@ -17,9 +58,11 @@ const CatalogFiltersPrice: React.FC = () => {
                         </span>
                         <input
                             name="min"
-                            type="number"
+                            type="text"
                             className="catalog-filters-block-content-price-input-field__input"
-                            placeholder="0"
+                            placeholder={String(defaultMin)}
+                            onChange={(e) => onChangeMin(e)}
+                            value={min}
                         />
                     </div>
                 </div>
@@ -37,7 +80,9 @@ const CatalogFiltersPrice: React.FC = () => {
                             name="max"
                             type="number"
                             className="catalog-filters-block-content-price-input-field__input"
-                            placeholder="3 000 000"
+                            placeholder={String(defaultMax)}
+                            onChange={(e) => onChangeMax(e)}
+                            value={max}
                         />
                     </div>
                 </div>

@@ -143,13 +143,8 @@ const Visit: React.FC = () => {
                             </h2>
                             <p className="visit-office-block__subtitle">
                                 Мы находимся по адресу Трубная 25с3 (3 этаж,
-                                офис THE CULTT). График работы: с 11 до 19
-                                пн-пт, с 11 до 18 сб-вс.
-                                <br />
-                                <span>
-                                    Для посещения необходима предварительная
-                                    запись!
-                                </span>
+                                офис THE CULTT) Ежедневно с 10:00 до 18:00
+                                пн-пт. Для посещения необходима регистрация!
                             </p>
                             <a
                                 href="https://calendly.com/thecultt/visit"

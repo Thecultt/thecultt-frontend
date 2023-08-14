@@ -64,7 +64,7 @@ const Header: React.FC = () => {
                             <div className="header-block">
                                 <div className="header-block-btn">
                                     <Link
-                                        to="/"
+                                        to="/sell"
                                         className="header-block-btn__btn"
                                     >
                                         Продать
@@ -108,31 +108,31 @@ const Header: React.FC = () => {
                         </div>
 
                         <nav className="header-menu">
-                            <Link to="/" className="header-menu__link">
+                            <Link to="/catalog" className="header-menu__link">
                                 Новинки
                             </Link>
 
-                            <Link to="/" className="header-menu__link">
+                            <Link to="/catalog" className="header-menu__link">
                                 Сумки
                             </Link>
 
-                            <Link to="/" className="header-menu__link">
+                            <Link to="/catalog" className="header-menu__link">
                                 Аксессуары
                             </Link>
 
-                            <Link to="/" className="header-menu__link">
+                            <Link to="/brands" className="header-menu__link">
                                 Бренды
                             </Link>
 
-                            <Link to="/" className="header-menu__link">
+                            <Link to="/auth" className="header-menu__link">
                                 Подлинность
                             </Link>
                         </nav>
                     </div>
                 </div>
-			</header>
-			
-			<HeaderMedia />
+            </header>
+
+            <HeaderMedia />
         </>
     );
 };

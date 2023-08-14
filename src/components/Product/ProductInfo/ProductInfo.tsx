@@ -1,5 +1,7 @@
 import React from "react";
 
+import {ProductPage} from "../../../models/IProduct";
+
 import {
     ProductInfoBreadCrumbs,
     ProductInfoTitle,
@@ -10,22 +12,22 @@ import {
     ProductInfoTabs,
 } from "../../";
 
-const ProductInfo: React.FC = () => {
+interface ProductInfoProps extends ProductPage {}
+
+const ProductInfo: React.FC<ProductInfoProps> = (product) => {
     return (
         <div className="product-content-info">
-			<ProductInfoBreadCrumbs />
-			
-			<ProductInfoTitle />
+            <ProductInfoTitle {...product} article={product.article} />
 
-			<ProductInfoExchange />
+            <ProductInfoExchange />
 
-			<ProductInfoState />
+            <ProductInfoState />
 
-			<ProductInfoParameters />
+            <ProductInfoParameters />
 
-			<ProductInfoAuth />
+            <ProductInfoAuth />
 
-			<ProductInfoTabs />
+            <ProductInfoTabs />
         </div>
     );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import AnimateHeight from "react-animate-height";
 
 interface CatalogFiltersBlockWrapperProps {
     title: string;
@@ -19,6 +18,10 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
     const toggleIsAllVisibleOnClick = () => {
         setIsAllVisible(!isAllVisible);
     };
+
+    React.useEffect(() => {
+        if (disabled) setIsAllVisible(false);
+    }, [disabled]);
 
     return (
         <div
@@ -71,9 +74,9 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
                 )}
             </div>
 
-            <AnimateHeight duration={300} height={isAllVisible ? "auto" : 1}>
+            {isAllVisible ? (
                 <div className="catalog-filters-block-content">{children}</div>
-            </AnimateHeight>
+            ) : null}
         </div>
     );
 };

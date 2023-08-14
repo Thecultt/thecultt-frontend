@@ -1,19 +1,20 @@
 // cabinet setting
 .cabinet-setting
+	+open
+
 	&-block
 		width: 650px
 
-		padding: 20px 30px
+		padding: 15px 30px
 
-		border: .3px solid $gray
+		background-color: $lightBackgroundColor
 
 		margin-bottom: 20px
 
-		+borderRadius
+		border-radius: 16px
 
 		&-title
 			display: flex
-			justify-content: space-between
 			align-items: center
 
 			margin-bottom: 20px
@@ -24,6 +25,7 @@
 				+ManropeSemiBold
 
 			&__edit
+				margin-left: 25px
 				cursor: pointer
 				border: none
 				background-color: transparent
@@ -31,6 +33,19 @@
 				font-size: 16px
 
 				+ManropeMedium
+
+			&-btn
+				+open
+
+				&__btn
+					margin-left: 25px
+					cursor: pointer
+					border: none
+					background-color: transparent
+					color: $mainColor
+					font-size: 16px
+
+					+ManropeMedium
 
 		&-form
 			+open
@@ -69,10 +84,6 @@
 				&:hover
 					color: $gray
 
-			&-btn
-				&__btn
-					margin-right: 25px
-
 	&-password-recovery
 		width: 650px
 
@@ -81,7 +92,6 @@
 
 		padding: 25px 30px
 		background-color: $lightBackgroundColor
-		border: .3px solid $gray
 
 		margin-bottom: 20px
 
@@ -133,9 +143,15 @@
 
 				&__description
 					text-align: center
-					
+
 					margin-top: 30px
 					font-size: 14px
 
 	&__logout
-		width: 140px
+		margin-top: 20px
+
+		cursor: pointer
+		border: none
+		background-color: transparent
+		color: $mainColor
+		font-size: 16px

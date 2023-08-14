@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Select, Input, Textarea} from "../../";
+import {Input} from "../../";
 
 const CabinetSettingPaymentBlock: React.FC = () => {
     const [state, setState] = React.useState<boolean>(false);
@@ -15,6 +15,17 @@ const CabinetSettingPaymentBlock: React.FC = () => {
                 <h3 className="cabinet-setting-block-title__title">
                     Реквизит для выплат
                 </h3>
+
+                {state ? (
+                    <div className="cabinet-setting-block-title-btn">
+                        <button className="cabinet-setting-block-title-btn__btn">
+                            Сохранить
+                        </button>
+                        <button className="cabinet-setting-block-title-btn__btn">
+                            Отменить
+                        </button>
+                    </div>
+                ) : null}
             </div>
 
             {state ? (
@@ -69,14 +80,6 @@ const CabinetSettingPaymentBlock: React.FC = () => {
                                 bgWhite
                             />
                         </div>
-                    </div>
-                    <div className="cabinet-setting-block-form-btn">
-                        <button className="btn cabinet-setting-block-form-btn__btn">
-                            Сохранить
-                        </button>
-                        <button className="btn-regular black cabinet-setting-block-form-btn__btn">
-                            Отменить
-                        </button>
                     </div>
                 </div>
             ) : (

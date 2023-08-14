@@ -12,7 +12,7 @@ const MenuMedia: React.FC = () => {
         if (wrapper) {
             setPrevScrollpos(wrapper.scrollTop);
 
-            wrapper.onscroll = function () {
+            window.onscroll = function () {
                 setCurrentScrollPos(wrapper.scrollTop);
 
                 if (prevScrollpos > currentScrollPos && currentScrollPos > 0) {

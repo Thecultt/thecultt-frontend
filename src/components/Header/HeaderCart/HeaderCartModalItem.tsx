@@ -1,46 +1,118 @@
 import React from "react";
+import {NumericFormat} from "react-number-format";
 
-const HeaderCartModalItem: React.FC = () => {
+import {CartItem} from "../../../models/ICartItem";
+
+interface HeaderCartModalItemProps extends CartItem {
+    hiddenCheck?: boolean;
+
+    changeCheck?: () => void;
+    removeItem: () => void;
+}
+
+const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
+    hiddenCheck,
+    checked,
+    image,
+    manufacturer,
+    name,
+    price,
+    changeCheck,
+    removeItem,
+}) => {
     return (
-        <div className="header-block-cart-modal-item">
+        <div
+            className={`header-block-cart-modal-item ${
+                checked ? "" : "disabled"
+            }`}
+        >
             <div className="header-block-cart-modal-item-content">
-                <div className="header-block-cart-modal-item-content-stock">
-                    <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                {hiddenCheck ? null : (
+                    <div
+                        className="header-block-cart-modal-item-content-check"
+                        onClick={changeCheck}
                     >
-                        <rect width="18" height="17.97" rx="4" fill="#285141" />
-                        <path
-                            d="M5.5 8.54688L8.125 11.1719L12.5 6.79688"
-                            stroke="#F1EDE8"
-                            strokeLinecap="round"
-                        />
-                    </svg>
-                </div>
+                        {checked ? (
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 18 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect
+                                    width="18"
+                                    height="17.97"
+                                    rx="4"
+                                    fill="#285141"
+                                />
+                                <path
+                                    d="M5.5 8.54688L8.125 11.1719L12.5 6.79688"
+                                    stroke="#F1EDE8"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                        ) : (
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 18 18"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect
+                                    x="0.25"
+                                    y="0.265625"
+                                    width="17.5"
+                                    height="17.47"
+                                    rx="3.75"
+                                    stroke="#838383"
+                                    strokeWidth="0.5"
+                                />
+                            </svg>
+                        )}
+                    </div>
+                )}
+
                 <div
                     className="header-block-cart-modal-item-content-image"
                     style={{
-                        backgroundImage:
-                            "url('https://thecultt.com/assets/cache_image/products/5703/3a62c0f2389228fdfb0474c35d4d2cb98a24df52_1000x1330_254.jpg')",
+                        backgroundImage: `url('${image}')`,
                     }}
                 ></div>
                 <div className="header-block-cart-modal-item-content-text">
                     <p className="header-block-cart-modal-item-content-text__brand">
-                        Gucci
+                        {manufacturer}
                     </p>
                     <p className="header-block-cart-modal-item-content-text__model">
-                        ACNE STUDIOS SCARF
+                        {name}
                     </p>
                     <p className="header-block-cart-modal-item-content-text__sum">
-                        32 000 ₽
+                        <NumericFormat
+                            value={price}
+                            displayType={"text"}
+                            thousandSeparator={" "}
+                            renderText={(formattedValue: string) => (
+                                <>
+                                    {parseInt(
+                                        formattedValue.split(" ").join("")
+                                    ) >= 10000
+                                        ? formattedValue
+                                        : parseInt(
+                                              formattedValue.split(" ").join("")
+                                          )}
+                                </>
+                            )}
+                        />{" "}
+                        ₽
                     </p>
                 </div>
             </div>
 
-            <div className="header-block-cart-modal-item-remove">
+            <div
+                className="header-block-cart-modal-item-remove"
+                onClick={removeItem}
+            >
                 <svg
                     width="20"
                     height="20"

@@ -1,22 +1,56 @@
 import React from "react";
+import {NumericFormat} from "react-number-format";
+import {Link} from "react-router-dom";
 
-import ProductImage from "../../assets/images/goods.jpg";
+import {Product} from "../../models/IProduct";
 
-interface ProductBlockProps {
+interface ProductBlockProps extends Product {
     addClass?: string;
-    outStock?: boolean;
     isFavorite?: boolean;
+    addCart: () => void;
+    isCart: boolean;
 }
 
 const ProductBlock: React.FC<ProductBlockProps> = ({
+    article,
+    images,
+    manufacturer,
+    name,
+    availability,
+    condition,
+    price,
     addClass,
-    outStock,
     isFavorite,
+    addCart,
+    isCart,
 }) => {
+    const totalImageLength = 5;
+
+    const [currentIndexImage, setCurrentIndexImage] = React.useState<number>(0);
+
+    const onClickPrevImage = () => {
+        if (currentIndexImage - 1 >= 0) {
+            setCurrentIndexImage(currentIndexImage - 1);
+        } else {
+            setCurrentIndexImage(totalImageLength - 1);
+        }
+    };
+
+    const onClickNextImage = () => {
+        if (currentIndexImage + 1 < totalImageLength) {
+            setCurrentIndexImage(currentIndexImage + 1);
+        } else {
+            setCurrentIndexImage(0);
+        }
+    };
+
     return (
         <div className={`product-block ${addClass ? addClass : ""}`}>
             <div className="product-block-cover">
-                <div className="product-block-cover-arrow prev">
+                <div
+                    className="product-block-cover-arrow prev"
+                    onClick={onClickPrevImage}
+                >
                     <svg
                         width="9"
                         height="16"
@@ -33,7 +67,10 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                     </svg>
                 </div>
 
-                <div className="product-block-cover-arrow next">
+                <div
+                    className="product-block-cover-arrow next"
+                    onClick={onClickNextImage}
+                >
                     <svg
                         width="9"
                         height="16"
@@ -84,59 +121,35 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                     </span>
                 </div>
                 <div className="product-block-cover-dots">
-                    <div className="product-block-cover-dots-item"></div>
-                    <div className="product-block-cover-dots-item active"></div>
-                    <div className="product-block-cover-dots-item"></div>
-                    <div className="product-block-cover-dots-item"></div>
+                    {Array(totalImageLength)
+                        .fill(0)
+                        .map((_, index) => (
+                            <div
+                                className={`product-block-cover-dots-item ${
+                                    currentIndexImage === index ? "active" : ""
+                                }`}
+                                key={`product-block-cover-dots-item-${index}`}
+                                onClick={() => setCurrentIndexImage(index)}
+                            ></div>
+                        ))}
                 </div>
-                <div
+                <Link
+                    to={`/product/${article}`}
                     className="product-block-cover-image"
-                    style={{backgroundImage: `url("${ProductImage}")`}}
-                ></div>
+                    style={{
+                        backgroundImage: `url("${images[currentIndexImage]}")`,
+                    }}
+                ></Link>
             </div>
 
             <div className="product-block-text">
-                <p className="product-block-text__brand">Gucci</p>
+                <Link to={`/product/${article}`}>
+                    <p className="product-block-text__brand">{manufacturer}</p>
 
-                <h3 className="product-block-text__model">MINI BUCKET BAG</h3>
+                    <h3 className="product-block-text__model">{name}</h3>
+                </Link>
 
-                {outStock ? (
-                    <>
-                        <span className="product-block-text__outstock">
-                            Нет в наличии
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                    stroke="#202020"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                                <path
-                                    d="M12 8V12"
-                                    stroke="#202020"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                                <path
-                                    d="M12 16H12.01"
-                                    stroke="#202020"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </span>
-
-                        <button className="btn-regular small black product-block-text__btn">
-                            Лист ожидания
-                        </button>
-                    </>
-                ) : (
+                {availability ? (
                     <>
                         <div className="product-block-text-state">
                             <span className="product-block-text-state__subtitle">
@@ -164,11 +177,11 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                                         strokeLinejoin="round"
                                     />
                                 </svg>
-                                Отличное
+                                {condition}
                             </span>
                         </div>
 
-                        <div className="product-block-text-priceretail">
+                        {/* <div className="product-block-text-priceretail">
                             <p className="product-block-text-priceretail__message">
                                 <span>Цена ретейла</span>: аксессуар не был в
                                 носке, фирменные бирки сохранены или
@@ -208,12 +221,77 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                                     />
                                 </svg>
                             </span>
-                        </div>
+                        </div> */}
 
-                        <h3 className="product-block-text__price">142 000 ₽</h3>
+                        <h3 className="product-block-text__price">
+                            <NumericFormat
+                                value={price}
+                                displayType={"text"}
+                                thousandSeparator={" "}
+                                renderText={(formattedValue: string) => (
+                                    <>
+                                        {parseInt(
+                                            formattedValue.split(" ").join("")
+                                        ) >= 10000
+                                            ? formattedValue
+                                            : parseInt(
+                                                  formattedValue
+                                                      .split(" ")
+                                                      .join("")
+                                              )}
+                                    </>
+                                )}
+                            />{" "}
+                            ₽
+                        </h3>
 
-                        <button className="btn small product-block-text__btn">
-                            Добавить в корзину
+                        {isCart ? (
+                            <button className="btn-regular small product-block-text__btn disabled">
+                                В корзине
+                            </button>
+                        ) : (
+                            <button
+                                className="btn small product-block-text__btn"
+                                onClick={addCart}
+                            >
+                                Добавить в корзину
+                            </button>
+                        )}
+                    </>
+                ) : (
+                    <>
+                        <span className="product-block-text__outstock">
+                            Нет в наличии
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                    stroke="#202020"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                                <path
+                                    d="M12 8V12"
+                                    stroke="#202020"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                                <path
+                                    d="M12 16H12.01"
+                                    stroke="#202020"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        </span>
+
+                        <button className="btn-regular small black product-block-text__btn">
+                            Лист ожидания
                         </button>
                     </>
                 )}
