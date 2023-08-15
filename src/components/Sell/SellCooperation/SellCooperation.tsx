@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-import SellBlockCooperationConciergeServiceImage from "../../../assets/images/sell/sell-block-cooperation-concierge-service.jpg";
+import SellBlockCooperationConciergeImage from "../../../assets/images/sell/sell-block-cooperation-concierge-service.jpg";
 
 interface SellCooperationProps {
     next: any;
@@ -47,7 +47,7 @@ const SellCooperation: React.FC<SellCooperationProps> = ({next}) => {
             <div
                 className="sell-block-cooperation-concierge-service"
                 style={{
-                    backgroundImage: `url("${SellBlockCooperationConciergeServiceImage}")`,
+                    backgroundImage: `url("${SellBlockCooperationConciergeImage}")`,
                 }}
             >
                 <h3 className="sell-block-cooperation-concierge-service__title">

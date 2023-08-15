@@ -115,11 +115,24 @@
 				&:last-child
 					margin-right: 0
 
-				&:hover
-					+transformHover
-
 				&:active
 					+transformClick
+
+				& > svg
+					& > rect
+						fill: #F7F4F0
+						+transition
+
+					& > path
+						stroke: #202020
+						+transition
+
+				&:hover > svg
+					& > rect
+						fill: #285141
+
+					& > path
+						stroke: #F7F4F0
 
 			&-menu
 				display: inline-block
@@ -128,8 +141,10 @@
 
 				will-change: top
 
+				width: 210px
+
 				top: 65px
-				right: 0
+				right: 15px
 
 				opacity: 0
 				z-index: -100
@@ -149,14 +164,23 @@
 						border-bottom: 1px solid $borderGray
 
 					&__link
-						display: block
+						display: flex
+						justify-content: space-between
+						align-items: center
 
-						margin-bottom: 7px
-						padding-bottom: 7px
+						margin-bottom: 12px
+						padding-bottom: 12px
 
 						border-bottom: 1px solid $borderGray
 
 						+transition
+
+						& path
+							+transition
+
+						&:hover path
+							fill: $mainColor
+							stroke: $mainColor
 
 						&:hover
 							color: $mainColor
@@ -166,6 +190,13 @@
 
 							margin-bottom: 0
 							padding-bottom: 0
+
+						&.active
+							color: $mainColor
+
+						&.active path
+							fill: $mainColor
+							stroke: $mainColor
 
 	&-menu
 		margin-top: 12px

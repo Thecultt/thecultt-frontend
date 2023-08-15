@@ -38,5 +38,8 @@ export { default as Sell } from "./Sell/Sell";
 // SellInfo
 export { default as SellInfo } from "./SellInfo/SellInfo";
 
+// Concierge
+export { default as Concierge } from "./Concierge/Concierge";
+
 // Order
 export { default as Order } from "./Order/Order";
