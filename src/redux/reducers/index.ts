@@ -6,6 +6,7 @@ import register from './register'
 import products_filters from './products_filters'
 import products from './products'
 import cart from './cart'
+import order from './order'
 
 export const rootReducer = combineReducers({
 	form: formReducer,
@@ -13,7 +14,8 @@ export const rootReducer = combineReducers({
 	register,
 	products_filters,
 	products,
-	cart
+	cart,
+	order
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -17,6 +17,8 @@ export { default as ProductBlock } from "./ProductBlock/ProductBlock";
 
 // Header
 export { default as Header } from "./Header/Header";
+// HeaderHoverMenu
+export { default as HeaderHoverMenu } from "./Header/HeaderHoverMenu/HeaderHoverMenu";
 // HeaderUser
 export { default as HeaderUser } from "./Header/HeaderUser/HeaderUser";
 export { default as HeaderUserMenu } from "./Header/HeaderUser/HeaderUserMenu";
@@ -123,6 +125,9 @@ export { default as OrderFormPayments } from "./Order/OrderForm/OrderFormPayment
 // OrderProducts
 export { default as OrderProducts } from "./Order/OrderProducts/OrderProducts";
 export { default as OrderProductsItem } from "./Order/OrderProducts/OrderProductsItem";
+export { default as OrderProductsPromocode } from "./Order/OrderProducts/OrderProductsPromocode";
+// OrderStatus
+export { default as OrderStatus } from "./Order/OrderStatus/OrderStatus";
 
 // Sell
 export { default as SellSteps } from "./Sell/SellSteps";

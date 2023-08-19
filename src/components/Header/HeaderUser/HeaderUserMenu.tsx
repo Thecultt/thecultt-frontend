@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const HeaderUserMenu: React.FC = () => {
 	return (
@@ -7,7 +7,7 @@ const HeaderUserMenu: React.FC = () => {
 			<div className="header-block-user-menu-block">
 				{localStorage.getItem("accessToken") ? <>
 					<NavLink
-						to=""
+						to="/none"
 						className={({ isActive }) =>
 							`header-block-user-menu-block__link ${isActive ? "active" : ""}`
 						}
@@ -50,24 +50,33 @@ const HeaderUserMenu: React.FC = () => {
 							<path id="Vector" d="M7 1.29297L8.854 5.04897L13 5.65497L10 8.57697L10.708 12.705L7 10.755L3.292 12.705L4 8.57697L1 5.65497L5.146 5.04897L7 1.29297Z" stroke="#838383" fill="#F7F4F0" strokeLinecap="round" strokeLinejoin="round" />
 						</svg>
 					</NavLink>
-				</> : <>
 					<NavLink
+						to="/cabinet/setting"
+						className={({ isActive }) =>
+							`header-block-user-menu-block__link ${isActive ? "active" : ""}`
+						}
+					>
+						Мой аккаунт
+					</NavLink>
+				</> : <>
+					<Link
 						to="#reglog"
 						className="header-block-user-menu-block__link"
 					>
 						Войти
-					</NavLink>
-					<NavLink
+					</Link>
+					<Link
 						to="#reglog"
 						className="header-block-user-menu-block__link"
 					>
 						Зарегистрироваться
-					</NavLink>
+					</Link>
 				</>}
 			</div>
 
 			<div className="header-block-user-menu-block">
-				<NavLink to="/"
+				<NavLink
+					to="/none"
 					className={({ isActive }) =>
 						`header-block-user-menu-block__link ${isActive ? "active" : ""}`
 					}>

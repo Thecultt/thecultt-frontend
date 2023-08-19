@@ -1,0 +1,74 @@
+.header-hover-menu
+	padding: 25px 60px
+
+	position: absolute
+	background-color: $backgroundColor
+
+	width: 100%
+
+	margin-top: 10px
+
+	left: 0
+	top: calc( 100% - 5px )
+
+	will-change: top
+
+	box-shadow: 0px 10px 20px 0px rgba(40, 81, 65, 0.15)
+
+	border-radius: 16px
+
+	display: flex
+	justify-content: space-between
+
+	opacity: 1
+
+	opacity: 0
+	visibility: hidden
+
+	+transition
+
+	&.active
+		top: 100%
+		opacity: 1
+		visibility: visible
+
+	&-list-wrapper
+		display: flex
+
+	&-list
+		margin-right: 80px
+
+		&:last-child
+			margin-right: 0
+
+		&__title
+			font-size: 22px
+			margin-bottom: 15px
+
+		&-coll-wrapper
+			display: flex
+			flex-wrap: wrap
+
+		&-coll
+			&__item
+				display: block
+
+				font-size: 16px
+
+				margin-right: 50px
+				margin-bottom: 15px
+
+				+transition
+
+				&:hover
+					color: $mainColor
+
+				&.last
+					text-decoration: underline
+
+	&-image
+		width: 450px
+
+		border-radius: 12px
+
+		+backgroundSetting

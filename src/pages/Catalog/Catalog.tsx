@@ -1,9 +1,8 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-import {fetchProductsFilters} from "../../redux/actions/products_filters";
 import {
     fetchFirstProducts,
     fetchProductsFiltersCatalog,
@@ -29,8 +28,7 @@ const Catalog: React.FC = () => {
     );
 
     React.useEffect(() => {
-        if (!isLoadedProducts && !isLoadedFilters) {
-            dispatch(fetchProductsFilters() as any);
+        if (!isLoadedProducts) {
             dispatch(fetchFirstProducts() as any);
         }
     }, []);

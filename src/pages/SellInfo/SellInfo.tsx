@@ -43,7 +43,6 @@ const SellInfo: React.FC = () => {
 						></div>
 					</div>
 
-
 					<div className="sell-info-cooperation">
 						<h2 className="sell-info__title sell-info-cooperation__title">
 							Варианты сотрудничества
@@ -114,7 +113,7 @@ const SellInfo: React.FC = () => {
 								</p>
 
 								<Link
-									to=""
+									to="/concierge"
 									className="sell-info-cooperation-types-block__link"
 								>
 									Подробнее

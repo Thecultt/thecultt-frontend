@@ -7,7 +7,9 @@ import "react-dots-loader/index.css";
 
 import "moment/locale/ru";
 
-import { MenuMedia, Header, Reglog, Footer } from "./components";
+import { useTypedSelector } from "./hooks/useTypedSelector";
+
+import { MenuMedia, Header, Reglog, Footer, OrderStatus } from "./components";
 
 import {
 	Home,
@@ -29,7 +31,8 @@ import {
 	SellInfo,
 	Concierge,
 } from "./pages/";
-import OrderStatus from "./components/Order/OrderStatus/OrderStatus";
+
+import { fetchProductsFilters } from "./redux/actions/products_filters";
 
 declare global {
 	interface Window {
@@ -41,6 +44,10 @@ declare global {
 const App = () => {
 	const dispatch = useDispatch();
 
+	const isLoadedFilters = useTypedSelector(
+		({ products_filters }) => products_filters.isLoaded
+	);
+
 	const { pathname } = useLocation();
 
 	React.useEffect(() => {
@@ -50,6 +57,10 @@ const App = () => {
 			cords.forEach((cord: any) => (localStorage[cord] = window[cord]))
 		);
 		window.scroll(...cords.map((cord: any) => localStorage[cord]));
+
+		if (!isLoadedFilters) {
+			dispatch(fetchProductsFilters() as any);
+		}
 	}, []);
 
 	React.useEffect(() => {
