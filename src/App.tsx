@@ -9,7 +9,7 @@ import "moment/locale/ru";
 
 import { useTypedSelector } from "./hooks/useTypedSelector";
 
-import { MenuMedia, Header, Reglog, Footer, OrderStatus } from "./components";
+import { MenuMedia, Header, Reglog, Footer, OrderStatus, WaitingListCreate } from "./components";
 
 import {
 	Home,
@@ -33,6 +33,9 @@ import {
 } from "./pages/";
 
 import { fetchProductsFilters } from "./redux/actions/products_filters";
+import { fetchFirstProducts } from "./redux/actions/products";
+import { fetchFavorites } from "./redux/actions/favorites";
+import { fetchUser } from "./redux/actions/user";
 
 declare global {
 	interface Window {
@@ -48,7 +51,13 @@ const App = () => {
 		({ products_filters }) => products_filters.isLoaded
 	);
 
+	const isLoadedProducts = useTypedSelector(
+		({ products }) => products.isLoaded
+	);
+
 	const { pathname } = useLocation();
+
+	const isLogin = localStorage.getItem("accessToken")
 
 	React.useEffect(() => {
 		let cords: any = ["scrollX", "scrollY"];
@@ -60,6 +69,15 @@ const App = () => {
 
 		if (!isLoadedFilters) {
 			dispatch(fetchProductsFilters() as any);
+		}
+
+		if (!isLoadedProducts) {
+			dispatch(fetchFirstProducts() as any);
+		}
+
+		if (isLogin) {
+			dispatch(fetchFavorites() as any)
+			// dispatch(fetchUser() as any)
 		}
 	}, []);
 
@@ -74,6 +92,8 @@ const App = () => {
 			<Header />
 
 			<Reglog />
+
+			<WaitingListCreate />
 
 			<React.Suspense fallback={<></>}>
 				<Routes>
@@ -98,25 +118,28 @@ const App = () => {
 
 					<Route
 						path="/cabinet/history"
-						element={<CabinetHistoryOrders />}
+						element={isLogin ? <CabinetHistoryOrders /> : <Navigate to="/#reglog" />}
 					/>
 
 					<Route
 						path="/cabinet/favorites"
-						element={<CabinetFavorites />}
+						element={isLogin ? <CabinetFavorites /> : <Navigate to="/#reglog" />}
 					/>
 
 					<Route
 						path="/cabinet/waiting"
-						element={<CabinetWaitingList />}
+						element={isLogin ? <CabinetWaitingList /> : <Navigate to="/#reglog" />}
 					/>
 
 					<Route
 						path="/cabinet/setting"
-						element={<CabinetSetting />}
+						element={isLogin ? <CabinetSetting /> : <Navigate to="/#reglog" />}
 					/>
 
-					<Route path="/cabinet/sell" element={<Sell />} />
+					<Route
+						path="/cabinet/sell"
+						element={isLogin ? <Sell /> : <Navigate to="/#reglog" />}
+					/>
 
 					<Route path="/order" element={<Order />} />
 
@@ -133,12 +156,12 @@ const App = () => {
 
 					<Route path="/concierge" element={<Concierge />} />
 
-					<Route path="*" element={<></>} />
+					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
 			</React.Suspense>
 
 			<Footer />
-		</div>
+		</div >
 	);
 };
 

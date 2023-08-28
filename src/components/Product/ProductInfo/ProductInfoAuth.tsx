@@ -7,7 +7,7 @@ const ProductInfoAuth: React.FC = () => {
                 <h4 className="product-content-info-auth-text__title">
                     Гарантия подлинности
                 </h4>
-                <p className="product-content-info-auth-text__subtitle">
+                <p className="product-content-info-auth-text__link">
                     Подробнее о проверке подлинности
                 </p>
             </div>

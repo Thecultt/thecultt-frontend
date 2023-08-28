@@ -44,7 +44,7 @@
 			align-items: flex-start
 
 			width: calc( 50% - 35px )
-			height: calc( 100vh - 225px )
+			height: 640px
 
 			&-list-wrapper
 				position: relative
@@ -52,7 +52,7 @@
 				width: 90px
 				min-width: 90px
 
-				height: calc( 100vh - 225px )
+				height: 100%
 
 				overflow: hidden
 
@@ -96,7 +96,7 @@
 
 					margin-bottom: 15px
 
-					border: 1px solid $gray
+					border: 1px solid transparent
 
 					+backgroundSetting
 					+transition
@@ -106,12 +106,7 @@
 						margin-bottom: 0
 
 					&.active
-						box-shadow: 0px 0.29629629850387573px 2.6365740299224854px 0px rgba(0, 0, 0, 0.0193)
-						box-shadow: 0px 1.3037036657333374px 5.459259033203125px 0px rgba(0, 0, 0, 0.0314)
-						box-shadow: 0px 3.200000047683716px 10.887499809265137px 0px rgba(0, 0, 0, 0.04)
-						box-shadow: 0px 6.162962913513184px 21.340740203857422px 0px rgba(0, 0, 0, 0.0486)
-						box-shadow: 0px 10.370369911193848px 39.238426208496094px 0px rgba(0, 0, 0, 0.0607)
-						box-shadow: 0px 16px 67px 0px rgba(0, 0, 0, 0.08)
+						border: 1px solid $gray
 
 				&-nav
 					position: absolute
@@ -128,7 +123,7 @@
 				width: 490px
 				height: 100%
 
-				border-radius: 6px
+				border-radius: 16px
 
 				+backgroundSetting
 
@@ -138,8 +133,8 @@
 
 					position: absolute
 
-					right: 35px
-					bottom: 22px
+					right: 10px
+					bottom: 10px
 
 					&-item
 						cursor: pointer
@@ -153,7 +148,7 @@
 							+transformClick
 
 						&.prev
-							margin-right: 15px
+							margin-right: 12px
 
 		&-info
 			width: calc( 50% - 35px )
@@ -231,7 +226,6 @@
 					&__btn
 						&.add
 							width: calc( 57% - 9px )
-							box-shadow: none
 
 						&.fav
 							width: calc( 43% - 9px )
@@ -243,8 +237,8 @@
 				align-items: center
 				justify-content: space-between
 
-				padding: 12px 50px
-				border: 1px solid $gray
+				padding: 12px 20px
+				border: 0.6px solid $gray
 
 				margin-bottom: 20px
 
@@ -262,7 +256,6 @@
 							margin-left: 8px
 
 					&__subtitle
-						text-decoration: underline
 						font-size: 14px
 
 			&-state
@@ -307,8 +300,8 @@
 				align-items: center
 				justify-content: space-between
 
-				padding: 12px 50px
-				border: 1px solid $gray
+				padding: 12px 20px
+				border: 0.6px solid $gray
 
 				margin-bottom: 30px
 
@@ -321,9 +314,10 @@
 
 						margin-bottom: 10px
 
-					&__subtitle
+					&__link
+						color: $mainColor
 						text-decoration: underline
-						font-size: 14px
+						font-size: 16px
 
 			&-tabs
 				&-item

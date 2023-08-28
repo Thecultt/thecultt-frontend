@@ -1,11 +1,29 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-const HeaderUserMenu: React.FC = () => {
+interface HeaderUserMenuInterface {
+	state: boolean
+}
+
+const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
+	const onClickLogout = () => {
+		localStorage.removeItem("accessToken")
+
+		window.location.reload()
+	}
+
 	return (
-		<div className="header-block-user-menu">
+		<div className={`header-block-user-menu ${state ? "active" : ""}`}>
 			<div className="header-block-user-menu-block">
 				{localStorage.getItem("accessToken") ? <>
+					<NavLink
+						to="/cabinet/history"
+						className={({ isActive }) =>
+							`header-block-user-menu-block__link ${isActive ? "active" : ""}`
+						}
+					>
+						История Заказов
+					</NavLink>
 					<NavLink
 						to="/none"
 						className={({ isActive }) =>
@@ -13,14 +31,6 @@ const HeaderUserMenu: React.FC = () => {
 						}
 					>
 						Мои продажи
-					</NavLink>
-					<NavLink
-						to="/cabinet/history"
-						className={({ isActive }) =>
-							`header-block-user-menu-block__link ${isActive ? "active" : ""}`
-						}
-					>
-						Мои заказы
 					</NavLink>
 					<NavLink
 						to="/cabinet/favorites"
@@ -39,24 +49,12 @@ const HeaderUserMenu: React.FC = () => {
 						Лист ожидания
 					</NavLink>
 					<NavLink
-						to="/cabinet/sell"
-						className={({ isActive }) =>
-							`header-block-user-menu-block__link ${isActive ? "active" : ""}`
-						}
-					>
-						Продать
-
-						<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path id="Vector" d="M7 1.29297L8.854 5.04897L13 5.65497L10 8.57697L10.708 12.705L7 10.755L3.292 12.705L4 8.57697L1 5.65497L5.146 5.04897L7 1.29297Z" stroke="#838383" fill="#F7F4F0" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
-					</NavLink>
-					<NavLink
 						to="/cabinet/setting"
 						className={({ isActive }) =>
 							`header-block-user-menu-block__link ${isActive ? "active" : ""}`
 						}
 					>
-						Мой аккаунт
+						Профиль
 					</NavLink>
 				</> : <>
 					<Link
@@ -80,14 +78,14 @@ const HeaderUserMenu: React.FC = () => {
 					className={({ isActive }) =>
 						`header-block-user-menu-block__link ${isActive ? "active" : ""}`
 					}>
-					Помощь
+					Центр помощи
 				</NavLink>
-				<NavLink to="/about"
-					className={({ isActive }) =>
-						`header-block-user-menu-block__link ${isActive ? "active" : ""}`
-					}>
-					О нас
-				</NavLink>
+
+				{localStorage.getItem("accessToken") ? <>
+					<span className="header-block-user-menu-block__link" onClick={onClickLogout}>
+						Выйти
+					</span>
+				</> : null}
 			</div>
 		</div>
 	);

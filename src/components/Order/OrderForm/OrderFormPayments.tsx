@@ -23,7 +23,7 @@ const OrderFormPayments: React.FC = () => {
 
     return (
         <div className="order-form-block order-form-block-payments">
-            <h3 className="order-form-block__title">Варианты доставки</h3>
+            <h3 className="order-form-block__title">Варианты оплаты</h3>
 
             <div className="order-form-block-checkboxs-wrapper">
                 {paymentItems.map((item, index) => (

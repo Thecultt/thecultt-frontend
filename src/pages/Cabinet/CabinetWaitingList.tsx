@@ -1,86 +1,61 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import {
-    Popup,
-    CabinetMenu,
-    CabinetWaitingListForm,
-    CabinetWaitingListSuccess,
-    CabinetWaitingListItem,
+	CabinetMenu,
+	CabinetWaitingListItem,
 } from "../../components/";
 
+import { fetchWaitingList } from '../../redux/actions/waiting'
+
+import { useTypedSelector } from '../../hooks/useTypedSelector'
+
 const CabinetWaitingList: React.FC = () => {
-    const [stateAdd, setStateAdd] = React.useState<boolean>(false);
-    const [isSend, setIsSend] = React.useState<boolean>(false);
-    const [isChange, setIsChange] = React.useState<boolean>(false);
+	const dispatch = useDispatch()
 
-    const onSend = () => {
-        setIsChange(true);
+	const { items } = useTypedSelector(({ waiting }) => waiting)
 
-        setTimeout(() => {
-            setIsSend(true);
-            setIsChange(false);
-        }, 190);
-    };
+	React.useEffect(() => {
+		dispatch(fetchWaitingList() as any)
+	}, [])
 
-    const addWaitItem = () => {
-        setIsSend(false);
-        setStateAdd(true);
-    };
+	return (
+		<section className="cabinet">
+			<div className="container">
+				<div className="cabinet-wrapper">
+					<CabinetMenu />
 
-    return (
-        <section className="cabinet">
-            <div className="container">
-                <div className="cabinet-wrapper">
-                    <CabinetMenu />
+					<div className="cabinet-content cabinet-waiting-list">
+						<Link to="#create_waiting" className="btn cabinet-waiting-list__add">
+							Подать новую заявку
+							<svg
+								width="22"
+								height="22"
+								viewBox="0 0 22 22"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M11 3V19M3 11H19"
+									stroke="white"
+									strokeWidth="1.2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								/>
+							</svg>
+						</Link>
 
-                    <div className="cabinet-content cabinet-waiting-list">
-                        <Popup
-                            state={stateAdd}
-                            setState={() => setStateAdd(false)}
-                            stateContent={!isChange}
-                        >
-                            {isSend ? (
-                                <CabinetWaitingListSuccess
-                                    setState={() => setStateAdd(false)}
-                                />
-                            ) : (
-                                <CabinetWaitingListForm onSend={onSend} />
-                            )}
-                        </Popup>
-
-                        <button
-                            className="btn cabinet-waiting-list__add"
-                            onClick={addWaitItem}
-                        >
-                            Подать новую заявку
-                            <svg
-                                width="22"
-                                height="22"
-                                viewBox="0 0 22 22"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M11 3V19M3 11H19"
-                                    stroke="white"
-                                    strokeWidth="1.2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </button>
-
-                        <div className="cabinet-waiting-list-items-wrapper">
-                            <CabinetWaitingListItem />
-                            <CabinetWaitingListItem />
-                            <CabinetWaitingListItem />
-                            <CabinetWaitingListItem />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+						<div className="cabinet-waiting-list-items-wrapper">
+							{items.map((item, index) => (
+								<CabinetWaitingListItem {...item} index={index} key={`cabinet-waiting-list-items-${index}`} />
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
 };
 
 export default CabinetWaitingList;

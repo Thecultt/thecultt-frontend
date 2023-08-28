@@ -1,5 +1,6 @@
 // UI
 export { default as RenderInput } from "./UI/RenderInput";
+export { default as RenderSelect } from "./UI/RenderSelect";
 export { default as RenderCheckbox } from "./UI/RenderCheckbox";
 export { default as Checkbox } from "./UI/Checkbox";
 export { default as Input } from "./UI/Input";
@@ -40,6 +41,23 @@ export { default as ReglogLogin } from "./Reglog/ReglogLogin/ReglogLogin";
 export { default as ReglogRegister } from "./Reglog/ReglogRegister/ReglogRegister";
 // ReglogWelcome
 export { default as ReglogWelcome } from "./Reglog/ReglogWelcome/ReglogWelcome";
+
+// Home
+// HomeMainBanner
+export { default as HomeMainBanner } from "./Home/HomeMainBanner/HomeMainBanner";
+// HomeCategories
+export { default as HomeCategories } from "./Home/HomeCategories/HomeCategories";
+export { default as HomeCategoriesItem } from "./Home/HomeCategories/HomeCategoriesItem";
+// HomeVisit
+export { default as HomeVisit } from "./Home/HomeVisit/HomeVisit";
+// HomeSell
+export { default as HomeSell } from "./Home/HomeSell/HomeSell";
+// HomeSellPartners
+export { default as HomeSellPartners } from "./Home/HomeSellPartners/HomeSellPartners";
+// HomeAbout
+export { default as HomeAbout } from "./Home/HomeAbout/HomeAbout";
+// HomeWaiting
+export { default as HomeWaiting } from "./Home/HomeWaiting/HomeWaiting";
 
 // Catalog
 // CatalogBanner
@@ -91,13 +109,16 @@ export { default as BrandsSearch } from "./Brands/BrandsSearch";
 export { default as BrandsList } from "./Brands/BrandsList/BrandsList";
 export { default as BrandsListBlock } from "./Brands/BrandsList/BrandsListBlock";
 
+// WaitingListCreate
+export { default as WaitingListCreate } from "./WaitingListCreate/WaitingListCreate";
+export { default as WaitingListCreateForm } from "./WaitingListCreate/WaitingListCreateForm";
+export { default as WaitingListCreateSuccess } from "./WaitingListCreate/WaitingListCreateSuccess";
+
 // Cabinet
 export { default as CabinetMenu } from "./Cabinet/CabinetMenu";
 
 // CabinetWaitingList
 export { default as CabinetWaitingListItem } from "./CabinetWaitingList/CabinetWaitingListItem";
-export { default as CabinetWaitingListForm } from "./CabinetWaitingList/CabinetWaitingListForm";
-export { default as CabinetWaitingListSuccess } from "./CabinetWaitingList/CabinetWaitingListSuccess";
 
 // CabinetHistoryOrders
 export { default as CabinetHistoryOrdersItem } from "./CabinetHistoryOrders/CabinetHistoryOrdersItem";

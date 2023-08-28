@@ -8,6 +8,7 @@ export interface Product {
 	manufacturer: string,
 	availability: number,
 	images: string[]
+	num_of_favorites: number
 }
 
 export interface ProductPage {

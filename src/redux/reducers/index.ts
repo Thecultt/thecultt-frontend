@@ -7,6 +7,8 @@ import products_filters from './products_filters'
 import products from './products'
 import cart from './cart'
 import order from './order'
+import favorites from './favorites'
+import waiting from './waiting'
 
 export const rootReducer = combineReducers({
 	form: formReducer,
@@ -15,7 +17,9 @@ export const rootReducer = combineReducers({
 	products_filters,
 	products,
 	cart,
-	order
+	order,
+	favorites,
+	waiting
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

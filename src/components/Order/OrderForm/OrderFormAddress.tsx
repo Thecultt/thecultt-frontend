@@ -5,7 +5,7 @@ import {Input, Textarea} from "../../";
 const OrderFormAddress: React.FC = () => {
     return (
         <div className="order-form-block">
-            <h3 className="order-form-block__title">Адресс</h3>
+            <h3 className="order-form-block__title">Адрес</h3>
 
             <div className="order-form-block-inputs-wrapper">
                 <div

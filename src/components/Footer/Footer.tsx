@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
 						<nav className="footer-block-menu">
 							<div className="footer-block-menu-block">
 								<h5 className="footer-block-menu-block__title">
-									Клиентам
+									Покупателям
 								</h5>
 								<Link
 									to={"/auth"}
@@ -109,6 +109,7 @@ const Footer: React.FC = () => {
 								<a
 									href="https://resalereport2023.ru"
 									className="footer-block-menu-block__link"
+									target="_blank"
 								>
 									Resale report 2023
 								</a>
@@ -118,6 +119,12 @@ const Footer: React.FC = () => {
 								<h5 className="footer-block-menu-block__title">
 									Связь с нами
 								</h5>
+								<Link
+									to={""}
+									className="footer-block-menu-block__link"
+								>
+									Центр помощи
+								</Link>
 								<Link
 									to={""}
 									className="footer-block-menu-block__link"

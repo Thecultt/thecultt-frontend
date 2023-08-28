@@ -42,7 +42,7 @@ const CabinetMenu: React.FC = () => {
                     `cabinet-menu__item ${isActive && "active"}`
                 }
             >
-                Мой аккаунт
+                Профиль
             </NavLink>
         </div>
     );

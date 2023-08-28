@@ -477,17 +477,45 @@
 						background-color: $white
 
 		&-section
+			margin: 50px 0
+
 			&__title
 				font-weight: 400
 				font-size: 22px
 				margin-bottom: 25px
 
-			&-product
-				display: flex
-				justify-content: space-between
+			&-slider-wrapper
+				position: relative
 
-				& > .catalog-product-block
-					width: calc( 20% - 18px )
+			&-slider
+				&-arrow
+					cursor: pointer
+
+					position: absolute
+					z-index: 1
+
+					top: 145px
+
+					background-color: transparent
+					border: none
+
+					+transition
+
+					&:hover
+						transform: scale3d(1.02, 1.02, 1.02)
+
+					&:active
+						transform: scale3d(0.95, 0.95, 0.95)
+
+					&.prev
+						left: -15px
+
+					&.next
+						right: -15px
+
+				& .catalog-product-block
+					width: calc( 100% - 10px )
+					margin-bottom: 0
 
 @media screen and ( max-width: 500px )
 	.catalog
