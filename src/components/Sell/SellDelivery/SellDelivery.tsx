@@ -1,60 +1,137 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { reduxForm, InjectedFormProps, Field } from "redux-form";
 
-import {SellBackBtn, SellDeliveryTypes, Input, Select, Textarea} from "../../";
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 
-interface SellDeliveryProps {
-    next: any;
-    prev?: any;
-}
+import { CabinetSellStepKeys } from "../../../redux/types/ICabinetSell";
 
-const SellDelivery: React.FC<SellDeliveryProps> = ({next, prev}) => {
-    return (
-        <div className="sell-block sell-block-delivery">
-            <SellBackBtn prev={prev} />
+import { setCabinetSellCurrentStep } from "../../../redux/actions/cabinet_sell";
 
-            <h3 className="sell-block__title">Cпособ отправки товара</h3>
-            <p className="sell-block__subtitle">
-                Выберите город, из которого товар будет отправлен к нам в офис.
-            </p>
+import { fetchOrderAddressCitys, fetchOrderAddressStreet } from '../../../redux/actions/order'
 
-            <div className="sell-block-select">
-                <Select label="Город" items={["Москва"]} />
-            </div>
+import { SellBackBtn, SellDeliveryTypes, Input, RenderInputHints, RenderInput, RenderTextarea } from "../../";
 
-            <SellDeliveryTypes />
+import validate from './validate'
 
-            <div className="sell-block-delivery-form">
-                <h5 className="sell-block-delivery-form__title">Адресс</h5>
+const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
+	handleSubmit,
+	invalid,
+	submitting,
+	initialize,
+}) => {
+	const dispatch = useDispatch()
 
-                <div className="sell-block-input-wrapper">
-                    <div className="sell-block-input" style={{width: "100%"}}>
-                        <Input
-                            label="Улица"
-                            name="street"
-                            type="text"
-                            bgWhite
-                        />
-                    </div>
+	const [currentCity, setCurrentCity] = React.useState<{ title: string, value: string }>({ title: "", value: "" })
+	const [currentTypeDelivery, setCurrentTypeDelivery] = React.useState<string>("Курьер")
 
-                    <div className="sell-block-input" style={{width: "49%"}}>
-                        <Input label="Дом" name="dom" type="text" bgWhite />
-                    </div>
+	const { globalCitys, globalStreets } = useTypedSelector(({ order }) => order)
 
-                    <div className="sell-block-input" style={{width: "49%"}}>
-                        <Input label="Кв" name="kv" type="text" bgWhite />
-                    </div>
+	const onChangeCitys = (query: string) => {
+		dispatch(fetchOrderAddressCitys(query, "Россия") as any)
+	}
 
-                    <div className="sell-block-input" style={{width: "100%"}}>
-                        <Textarea label="Комментарий" name="comm" bgWhite />
-                    </div>
-                </div>
-            </div>
+	const onChangeStreets = (query: string) => {
+		dispatch(fetchOrderAddressStreet(query, currentCity.value) as any)
+	}
 
-            <button className="btn sell-block__btn" onClick={next}>
-                Продолжить
-            </button>
-        </div>
-    );
+	React.useEffect(() => {
+		if (currentCity.title.toLocaleLowerCase().indexOf("москва") !== -1) {
+			setCurrentTypeDelivery("Курьер")
+		} else {
+			setCurrentTypeDelivery("CDEK")
+		}
+	}, [currentCity])
+
+	React.useEffect(() => {
+		localStorage.setItem("sell-info-global-type-delivery", currentTypeDelivery)
+	}, [currentTypeDelivery])
+
+	return (
+		<form onSubmit={handleSubmit} className="sell-block sell-block-delivery">
+			<SellBackBtn onClick={() => dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.CONTACT))} />
+
+			<h3 className="sell-block__title">Cпособ отправки товара</h3>
+			<p className="sell-block__subtitle">
+				Выберите город, из которого товар будет отправлен к нам в офис.
+			</p>
+
+			<div className="sell-block-select">
+				<Field
+					component={RenderInputHints}
+					type="text"
+					label="Город"
+					name="city"
+					hints={globalCitys}
+					bgWhite
+					onChangeCustom={onChangeCitys}
+					onSaveValue={(item: { title: string, value: string }) => setCurrentCity(item)}
+				/>
+			</div>
+
+			{currentCity.title !== "" ?
+				<>
+					<SellDeliveryTypes
+						currentCity={currentCity.title}
+						currentTypeDelivery={currentTypeDelivery}
+						setCurrentTypeDelivery={(value: string) => setCurrentTypeDelivery(value)}
+					/>
+
+					{currentTypeDelivery === "Лично в офис" ? (
+						<div className="sell-block-delivery-message">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+								<path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+							</svg>
+
+							<p className="sell-block-delivery-message__text">Для посещения офиса THE CULTT необходима предварительная регистрация поcле отправки заявки. </p>
+
+						</div>
+					) : (
+						<div className="sell-block-delivery-form">
+							<h5 className="sell-block-delivery-form__title">Адресс</h5>
+
+							<div className="sell-block-input-wrapper">
+								<div className="sell-block-input" style={{ width: "100%" }}>
+									<Field
+										component={RenderInputHints}
+										type="text"
+										label="Улица"
+										name="street"
+										hints={globalStreets}
+										onChangeCustom={onChangeStreets}
+										bgWhite
+									/>
+								</div>
+
+								<div className="sell-block-input" style={{ width: "49%" }}>
+									<Field component={RenderInput} name="dom" label="Дом" bgWhite />
+								</div>
+
+								<div className="sell-block-input" style={{ width: "49%" }}>
+									<Field component={RenderInput} name="flat" label="Квартира" bgWhite />
+								</div>
+
+								<div className="sell-block-input" style={{ width: "100%" }}>
+									<Field component={RenderTextarea} name="comm" label="Комментарий" bgWhite />
+								</div>
+							</div>
+						</div>)}
+				</> : null
+			}
+
+			<button
+				className={`btn ${invalid || submitting ? "disabled" : ""} sell-block__btn`}
+				disabled={invalid || submitting}
+			>
+				Продолжить
+			</button>
+		</form>
+	);
 };
 
-export default SellDelivery;
+
+export default reduxForm<{}, {}>({
+	form: "sell-delivery-form",
+	validate,
+})(SellDelivery);

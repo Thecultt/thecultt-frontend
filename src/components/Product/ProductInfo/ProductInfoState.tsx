@@ -39,6 +39,9 @@ const ProductInfoState: React.FC = () => {
                 alt=""
                 className="product-content-info-state__image"
             />
+            <p className="product-content-info-state__info">
+                <span>Следы жизни:</span> Следы носки на текстиле.
+            </p>
         </div>
     );
 };

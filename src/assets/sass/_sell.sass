@@ -74,8 +74,6 @@
 	&-block
 		width: 640px
 
-		+open
-
 		&__back
 			cursor: pointer
 
@@ -103,6 +101,9 @@
 		&__subtitle
 			font-size: 14px
 			margin-bottom: 15px
+
+			& > a
+				text-decoration: underline
 
 		&__btn
 			margin-top: 25px
@@ -153,7 +154,11 @@
 				padding: 30px
 				background-color: $lightBackgroundColor
 
+				border: 0.6px solid transparent
+
 				margin-right: 15px
+
+				text-align: left
 
 				+borderRadius
 				+transition
@@ -167,7 +172,7 @@
 
 				&__title
 					font-size: 17px
-					margin-bottom: 3px
+					margin-bottom: 5px
 
 				&__description
 					font-size: 14px
@@ -207,12 +212,19 @@
 		&-images
 			margin-left: 110px
 
+			&-block-wrapper
+				display: flex
+				flex-wrap: wrap
+				justify-content: space-between
+
 			&-block
-				min-width: 50%
+				width: 100%
 
 				cursor: pointer
 
-				display: flex
+				display: inline-flex
+				justify-content: space-between
+
 				height: 430px
 
 				margin-bottom: 15px
@@ -220,17 +232,41 @@
 				&:last-child
 					margin-bottom: 0
 
+				&.disabled
+					opacity: 0.5
+					pointer-events: none
+					user-select: none
+
+				&.disabled &-text
+					background-color: transparent
+					border: 1px solid $gray
+
 				&-text
-					margin-right: 15px
+					width: calc(50% - 7.5px)
 
 					text-align: center
 
+					overflow: hidden
+
 					background-color: $lightBackgroundColor
+					border: 1px solid $lightBackgroundColor
 
 					will-change: transform
 
+					transition: transform .3s
+
 					+borderRadius
-					+transition
+					+backgroundSetting
+
+					&.fill &__title
+						color: $white
+
+					&.fill &__description
+						color: $white
+
+					&.fill &-icon
+						& path, rect
+							stroke: $white
 
 					&:hover
 						+transformHover
@@ -238,8 +274,23 @@
 					&:active
 						+transformClick
 
+					&-plaecholder
+						z-index: -1
+
+						position: absolute
+						top: 0
+						left: 0
+
+						width: 100%
+						height: 100%
+
+						background-color: $blackTransparent
+
 					&-icon
 						margin-top: 170px
+
+						& path, rect
+							stroke: $gray
 
 					&__title
 						margin-top: 25px
@@ -255,7 +306,7 @@
 						user-select: none
 
 				&-cover
-					width: 50%
+					width: calc(50% - 7.5px)
 
 					display: flex
 					flex-direction: column
@@ -283,40 +334,40 @@
 				display: flex
 				justify-content: space-between
 
-				&-block
-					width: calc( 50% - 7.5px )
-					height: 430px
+				// &-block
+				// 	width: calc( 50% - 7.5px )
+				// 	height: 430px
 
-					text-align: center
+				// 	text-align: center
 
-					background-color: $lightBackgroundColor
+				// 	background-color: $lightBackgroundColor
 
-					will-change: transform
+				// 	will-change: transform
 
-					+borderRadius
-					+transition
+				// 	+borderRadius
+				// 	+transition
 
-					&:hover
-						+transformHover
+				// 	&:hover
+				// 		+transformHover
 
-					&:active
-						+transformClick
+				// 	&:active
+				// 		+transformClick
 
-					&-icon
-						margin-top: 170px
+				// 	&-icon
+				// 		margin-top: 170px
 
-					&__title
-						margin-top: 25px
-						color: $mainColor
+				// 	&__title
+				// 		margin-top: 25px
+				// 		color: $mainColor
 
-						user-select: none
+				// 		user-select: none
 
-					&__description
-						margin-top: 110px
-						font-size: 18px
-						color: $gray
+				// 	&__description
+				// 		margin-top: 110px
+				// 		font-size: 18px
+				// 		color: $gray
 
-						user-select: none
+				// 		user-select: none
 
 		&-contact
 			margin-left: 110px
@@ -344,9 +395,17 @@
 
 					width: 49%
 					background-color: $lightBackgroundColor
+					border: 0.6px solid $lightBackgroundColor
+
+					transition: border .3s
 
 					+borderRadius
-					+transition
+
+					&.full
+						width: 100%
+
+					&.full &__subtitle
+						width: 75%
 
 					&.active
 						border: 0.6px solid $mainColor
@@ -362,7 +421,41 @@
 					&__subtitle
 						font-size: 14px
 
+			&-message
+				display: flex
+				align-items: center
+
+				background-color: $lightBackgroundColor
+				border: 0.6px solid $mainColor
+
+				padding: 12px
+
+				border-radius: 12px
+
+				& > svg
+					margin-right: 5px
+
+				&__text
+					font-size: 11px
+					color: $mainColor
+
 			&-form
 				&__title
 					font-size: 17px
 					margin-bottom: 15px
+
+	&-success
+		width: 420px
+		text-align: center
+
+		&__title
+			font-size: 22px
+
+			margin-bottom: 15px
+
+		&__description
+			font-size: 14px
+			margin-bottom: 30px
+
+		&__link
+			width: 100%

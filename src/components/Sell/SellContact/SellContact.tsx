@@ -1,61 +1,92 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { reduxForm, InjectedFormProps, Field } from "redux-form";
 
-import {SellBackBtn, Input} from "../../";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-interface SellContactProps {
-    next: any;
-    prev?: any;
-}
+import { CabinetSellTypes, CabinetSellStepKeys } from "../../../redux/types/ICabinetSell";
 
-const SellContact: React.FC<SellContactProps> = ({next, prev}) => {
-    return (
-        <div className="sell-block sell-block-contact">
-            <SellBackBtn prev={prev} />
+import { setCabinetSellCurrentStep } from "../../../redux/actions/cabinet_sell";
 
-            <h3 className="sell-block__title">Контактные данные</h3>
-            <p className="sell-block__subtitle">
-                Заполните контактные данные в соответствие с паспортными,
-                укажите актуальные номер телефона и почту для связи.
-            </p>
+import { SellBackBtn, RenderInput } from "../../";
 
-            <div className="sell-block-input-wrapper">
-                <div className="sell-block-input" style={{width: "49%"}}>
-                    <Input label="Ваше имя" name="name" type="text" bgWhite />
-                </div>
+import validate from './validate'
 
-                <div className="sell-block-input" style={{width: "49%"}}>
-                    <Input
-                        label="Ваша фамилия"
-                        name="surname"
-                        type="text"
-                        bgWhite
-                    />
-                </div>
+const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
+	handleSubmit,
+	invalid,
+	submitting,
+	initialize,
+}) => {
+	const dispatch = useDispatch()
 
-                <div className="sell-block-input" style={{width: "100%"}}>
-                    <Input
-                        label="Ваша почта"
-                        name="email"
-                        type="text"
-                        bgWhite
-                    />
-                </div>
+	const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
-                <div className="sell-block-input" style={{width: "100%"}}>
-                    <Input
-                        label="Ваш номер телефона"
-                        name="phone"
-                        type="text"
-                        bgWhite
-                    />
-                </div>
-            </div>
+	React.useEffect(() => {
+		const data: any = localStorage.getItem("sell-contact-form")
 
-            <button className="btn sell-block__btn" onClick={next}>
-                Продолжить
-            </button>
-        </div>
-    );
+		initialize(JSON.parse(data))
+	}, [])
+
+	return (
+		<form onSubmit={handleSubmit} className="sell-block sell-block-contact">
+			<SellBackBtn onClick={() => dispatch(setCabinetSellCurrentStep(currentType === CabinetSellTypes.EXCHANGE ? CabinetSellStepKeys.PRODUCT : CabinetSellStepKeys.IMAGES))} />
+
+			<h3 className="sell-block__title">Контактные данные</h3>
+			<p className="sell-block__subtitle">
+				Заполните контактные данные в соответствие с паспортными,
+				укажите актуальные номер телефона и почту для связи.
+			</p>
+
+			<div className="sell-block-input-wrapper">
+				<div className="sell-block-input" style={{ width: "49%" }}>
+					<Field
+						component={RenderInput}
+						label="Ваше имя"
+						name="name"
+						bgWhite
+					/>
+				</div>
+
+				<div className="sell-block-input" style={{ width: "49%" }}>
+					<Field
+						component={RenderInput}
+						label="Ваша фамилия"
+						name="surname"
+						bgWhite
+					/>
+				</div>
+
+				<div className="sell-block-input" style={{ width: "100%" }}>
+					<Field
+						component={RenderInput}
+						label="Ваша почта"
+						name="email"
+						bgWhite
+					/>
+				</div>
+
+				<div className="sell-block-input" style={{ width: "100%" }}>
+					<Field
+						component={RenderInput}
+						label="Ваш номер телефона"
+						name="phone"
+						bgWhite
+					/>
+				</div>
+			</div>
+
+			<button
+				className={`btn ${invalid || submitting ? "disabled" : ""} sell-block__btn`}
+				disabled={invalid || submitting}
+			>
+				Продолжить
+			</button>
+		</form>
+	);
 };
 
-export default SellContact;
+export default reduxForm<{}, {}>({
+	form: "sell-contact-form",
+	validate,
+})(SellContact);

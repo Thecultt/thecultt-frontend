@@ -104,11 +104,11 @@ export const fetchProductsFiltersCatalog = (
 	conditions.map((condition) => params.append("conditions", condition))
 
 	categories.map((categories) => params.append("category", categories))
-	types.map((type) => params.append("subcategory", type))
+	types.map((type) => params.append("subcategories", type))
 	brands.map((brand) => params.append("manufacturer", brand))
-	models.map((model) => params.append("name", model))
+	models.map((model) => params.append("model_names", model))
 	colors.map((color) => params.append("color", color))
-	sex.map((sex) => params.append("gender", sex))
+	sex.map((sex) => params.append("genders", sex))
 	availability.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
 
 	params.append("sort_by", sort)

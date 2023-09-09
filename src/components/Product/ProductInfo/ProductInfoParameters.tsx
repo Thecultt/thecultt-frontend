@@ -1,26 +1,25 @@
 import React from "react";
 
-const ProductInfoParameters: React.FC = () => {
-    return (
-        <div className="product-content-info-parameters">
-            <h4 className="product-content-info-parameters__title">
-                Информация о товаре
-            </h4>
+import { ProductPage } from "../../../models/IProduct"
 
-            <p className="product-content-info-parameters__item">
-                <span>Пол:</span> Мужской
-            </p>
-            <p className="product-content-info-parameters__item">
-                <span>Цвет:</span> Белый
-            </p>
-            <p className="product-content-info-parameters__item">
-                <span>Размер:</span> 6 x 20 x 24 (высота, длинна, ширина)
-            </p>
-            <p className="product-content-info-parameters__item">
-                <span>Следы жизни::</span> Следы носки на текстиле.
-            </p>
-        </div>
-    );
+const ProductInfoParameters: React.FC<ProductPage> = ({ gender, color, height, length, width }) => {
+	return (
+		<div className="product-content-info-parameters">
+			<h4 className="product-content-info-parameters__title">
+				Информация о товаре
+			</h4>
+
+			<p className="product-content-info-parameters__item">
+				<span>Пол:</span> {gender}
+			</p>
+			<p className="product-content-info-parameters__item">
+				<span>Цвет:</span> {color}
+			</p>
+			<p className="product-content-info-parameters__item">
+				<span>Размер:</span> {parseInt(height)} x {parseInt(length)} x {parseInt(width)} (высота, длинна, ширина)
+			</p>
+		</div>
+	);
 };
 
 export default ProductInfoParameters;

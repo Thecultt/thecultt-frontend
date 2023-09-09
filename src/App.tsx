@@ -18,8 +18,11 @@ import {
 	About,
 	Auth,
 	Contact,
+	Faq,
 	FaqDelivery,
 	FaqReturn,
+	FaqPublicOfferte,
+	FaqUserAgreement,
 	Brands,
 	CabinetHistoryOrders,
 	CabinetFavorites,
@@ -30,6 +33,7 @@ import {
 	Sell,
 	SellInfo,
 	Concierge,
+	Exchange,
 } from "./pages/";
 
 import { fetchProductsFilters } from "./redux/actions/products_filters";
@@ -77,7 +81,7 @@ const App = () => {
 
 		if (isLogin) {
 			dispatch(fetchFavorites() as any)
-			// dispatch(fetchUser() as any)
+			dispatch(fetchUser() as any)
 		}
 	}, []);
 
@@ -109,8 +113,12 @@ const App = () => {
 
 					<Route path="/contact" element={<Contact />} />
 
-					<Route path="/faq-delivery" element={<FaqDelivery />} />
-					<Route path="/faq-return" element={<FaqReturn />} />
+					<Route path="/help" element={<Navigate to="/help/all" />} />
+					<Route path="/help/:block" element={<Faq />} />
+					<Route path="/help-delivery" element={<FaqDelivery />} />
+					<Route path="/help-return" element={<FaqReturn />} />
+					<Route path="/help/public-offerte" element={<FaqPublicOfferte />} />
+					<Route path="/help/user-agreement" element={<FaqUserAgreement />} />
 
 					<Route path="/brands" element={<Brands />} />
 
@@ -138,7 +146,7 @@ const App = () => {
 
 					<Route
 						path="/cabinet/sell"
-						element={isLogin ? <Sell /> : <Navigate to="/#reglog" />}
+						element={<Sell />}
 					/>
 
 					<Route path="/order" element={<Order />} />
@@ -155,6 +163,8 @@ const App = () => {
 					<Route path="/sell" element={<SellInfo />} />
 
 					<Route path="/concierge" element={<Concierge />} />
+
+					<Route path="/exchange" element={<Exchange />} />
 
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>

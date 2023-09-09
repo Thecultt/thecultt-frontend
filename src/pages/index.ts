@@ -17,8 +17,13 @@ export { default as Auth } from "./Auth/Auth";
 export { default as Contact } from "./Contact/Contact";
 
 // Faq
+export { default as Faq } from "./Faq/Faq";
 export { default as FaqDelivery } from "./Faq/FaqDelivery";
 export { default as FaqReturn } from "./Faq/FaqReturn";
+// FaqPublicOfferte
+export { default as FaqPublicOfferte } from "./Faq/FaqPublicOfferte/FaqPublicOfferte";
+// FaqUserAgreement
+export { default as FaqUserAgreement } from "./Faq/FaqUserAgreement/FaqUserAgreement";
 
 // Brands
 export { default as Brands } from "./Brands/Brands";
@@ -40,6 +45,9 @@ export { default as SellInfo } from "./SellInfo/SellInfo";
 
 // Concierge
 export { default as Concierge } from "./Concierge/Concierge";
+
+// Exchange
+export { default as Exchange } from "./Exchange/Exchange";
 
 // Order
 export { default as Order } from "./Order/Order";

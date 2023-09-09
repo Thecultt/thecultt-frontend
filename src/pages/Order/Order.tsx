@@ -3,11 +3,15 @@ import React from "react";
 import {OrderForm, OrderProducts} from "../../components/";
 
 const Order: React.FC = () => {
+	const onSubmit = (data: any) => {
+		console.log(data)
+	}
+
     return (
         <section className="order">
             <div className="container">
                 <div className="order-wrapper">
-                    <OrderForm />
+                    <OrderForm onSubmit={onSubmit} />
 
                     <OrderProducts />
                 </div>

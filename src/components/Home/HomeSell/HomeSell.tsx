@@ -5,7 +5,7 @@ import HomeSellImage from '../../../assets/images/home/home-sell.jpg'
 
 const HomeSell: React.FC = () => {
 	return (
-		<div className="home-sell">
+		<div className="home-sell hover-scale">
 			<div
 				className="home-sell-image"
 				style={{

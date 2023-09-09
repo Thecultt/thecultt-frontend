@@ -8,7 +8,28 @@ const initialState: OrderState = {
 		isError: false,
 
 		saleSum: 0
-	}
+	},
+
+	globalCountrys: [],
+	globalCitys: [],
+	globalStreets: [],
+
+	address: {
+		country: {
+			title: "",
+			value: ""
+		},
+		city: {
+			title: "",
+			value: ""
+		},
+		street: {
+			title: "",
+			value: ""
+		},
+	},
+
+	isValid: false
 }
 
 const order = (state = initialState, action: OrderStateActions) => {
@@ -51,6 +72,65 @@ const order = (state = initialState, action: OrderStateActions) => {
 			},
 		}
 	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_GLOBAL_COUNTRYS) {
+		return {
+			...state,
+			globalCountrys: action.payload
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_GLOBAL_CITYS) {
+		return {
+			...state,
+			globalCitys: action.payload
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_GLOBAL_STREETS) {
+		return {
+			...state,
+			globalStreets: action.payload
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_ADDRESS_COUNTRY) {
+		return {
+			...state,
+			address: {
+				...state.address,
+				country: action.payload
+			}
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_ADDRESS_CITY) {
+		return {
+			...state,
+			address: {
+				...state.address,
+				city: action.payload
+			}
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_ADDRESS_STREET) {
+		return {
+			...state,
+			address: {
+				...state.address,
+				street: action.payload
+			}
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_IS_VALID) {
+		return {
+			...state,
+			isValid: action.payload
+		}
+	}
+
 
 	return state
 }

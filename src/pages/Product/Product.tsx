@@ -2,12 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { CartItem } from "../../models/ICartItem";
-
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 import { fetchProductByArticle } from "../../redux/actions/products";
-import { addCartItem, setCartIsVisibleMessage } from "../../redux/actions/cart";
 
 import {
 	ProductInfoBreadCrumbs,
@@ -31,16 +28,6 @@ const Product: React.FC = () => {
 		dispatch(fetchProductByArticle(article ? article : "") as any);
 	}, [article]);
 
-	const addCart = (item: CartItem) => {
-		dispatch(setCartIsVisibleMessage(true));
-
-		dispatch(addCartItem(item));
-
-		setTimeout(() => {
-			dispatch(setCartIsVisibleMessage(false));
-		}, 5000);
-	};
-
 	return (
 		<>
 			{itemByArticleIsLoaded ? (
@@ -48,7 +35,11 @@ const Product: React.FC = () => {
 					<section className="product">
 						<div className="container">
 							<div className="product-wrapper">
-								<ProductInfoBreadCrumbs />
+								<ProductInfoBreadCrumbs
+									category={itemByArticle.category}
+									brand={itemByArticle.manufacturer}
+									model={itemByArticle.name}
+								/>
 
 								<div className="product-content">
 									<ProductCover {...itemByArticle} />
@@ -56,10 +47,10 @@ const Product: React.FC = () => {
 									<ProductInfo {...itemByArticle} />
 								</div>
 							</div>
+
+							<CatalogProductsSection title="Может быть интересно" />
 						</div>
 					</section>
-
-					<CatalogProductsSection title="Может быть интересно" />
 
 					<SellAndSale />
 				</>

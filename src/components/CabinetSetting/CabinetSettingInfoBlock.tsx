@@ -49,14 +49,14 @@ const CabinetSettingInfoBlock: React.FC = () => {
 					</div>
 				</div>
 
-				<div className="cabinet-setting-block-form-radio-wrapper">
+				{/* <div className="cabinet-setting-block-form-radio-wrapper">
 					<div className="cabinet-setting-block-form-radio">
 						<RadioSelect label="Женский" name="sex" />
 					</div>
 					<div className="cabinet-setting-block-form-radio">
 						<RadioSelect label="Мужской" name="sex" />
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

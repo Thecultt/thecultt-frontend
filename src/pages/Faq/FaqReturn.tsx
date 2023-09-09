@@ -7,7 +7,7 @@ const Faq: React.FC = () => {
         <section className="faq">
             <div className="faq-bread-crumbs-wrapper">
                 <div className="container">
-                    <FaqBreadCrumbs />
+                    <FaqBreadCrumbs title="Возврат" />
                 </div>
             </div>
 

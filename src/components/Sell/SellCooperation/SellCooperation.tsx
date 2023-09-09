@@ -1,71 +1,95 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+
+import { CabinetSellTypes, CabinetSellStepKeys } from "../../../redux/types/ICabinetSell";
+
+import { setCabinetSellCurrentType, setCabinetSellCurrentStep } from "../../../redux/actions/cabinet_sell";
 
 import SellBlockCooperationConciergeImage from "../../../assets/images/sell/sell-block-cooperation-concierge-service.jpg";
 
-interface SellCooperationProps {
-    next: any;
-}
+const SellCooperation: React.FC = () => {
+	const dispatch = useDispatch()
 
-const SellCooperation: React.FC<SellCooperationProps> = ({next}) => {
-    return (
-        <div className="sell-block-cooperation-wrapper">
-            <div className="sell-block sell-block-cooperation">
-                <h3 className="sell-block__title">Вариант сотрудничества</h3>
-                <p className="sell-block__subtitle">
-                    Выберите вариант сотрудничества, который вам интересен.
-                </p>
+	const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
-                <div className="sell-block-cooperation-type-block-wrapper">
-                    <div className="sell-block-cooperation-type-block active">
-                        <h4 className="sell-block-cooperation-type-block__title">
-                            Продажа
-                        </h4>
-                        <p className="sell-block-cooperation-type-block__description">
-                            Вы получаете выплату за аксессуар сразу после
-                            согласования условий и проверки на подлинность или
-                            после продажи товара за комиссию.
-                        </p>
-                    </div>
+	const types = [
+		{
+			title: "Продажа",
+			description: `Вы получаете выплату за аксессуар сразу после
+			согласования условий и проверки на подлинность или
+			после продажи товара за комиссию.`,
+			type: CabinetSellTypes.SELL
+		},
 
-                    <div className="sell-block-cooperation-type-block">
-                        <h4 className="sell-block-cooperation-type-block__title">
-                            Обмен
-                        </h4>
-                        <p className="sell-block-cooperation-type-block__description">
-                            Мы оценим ваш лот и предложим депозит в размере его
-                            стоимости на покупку нового лота на нашем сайте.
-                        </p>
-                    </div>
-                </div>
+		{
+			title: "Обмен",
+			description: `Мы оценим ваш лот и предложим депозит в размере его
+			стоимости на покупку нового лота на нашем сайте.`,
+			type: CabinetSellTypes.EXCHANGE
+		}
+	]
 
-                <button className="btn sell-block__btn" onClick={next}>
-                    Продолжить
-                </button>
-            </div>
+	return (
+		<div className="sell-block-cooperation-wrapper">
+			<div className="sell-block sell-block-cooperation">
+				<h3 className="sell-block__title">Вариант сотрудничества</h3>
+				<p className="sell-block__subtitle">
+					Выберите вариант сотрудничества, который вам интересен.
+				</p>
 
-            <div
-                className="sell-block-cooperation-concierge-service"
-                style={{
-                    backgroundImage: `url("${SellBlockCooperationConciergeImage}")`,
-                }}
-            >
-                <h3 className="sell-block-cooperation-concierge-service__title">
-                    Консьерж-сервис
-                </h3>
-                <p className="sell-block-cooperation-concierge-service__subtitle">
-                    Премиальная услуга для продажи более 10 товаров
-                </p>
+				<div className="sell-block-cooperation-type-block-wrapper">
+					{types.map((type, index) => (
+						<button
+							className={`sell-block-cooperation-type-block ${type.type === currentType ? "active" : ""}`}
+							key={`sell-block-cooperation-type-block-${index}`}
+							onClick={() => dispatch(setCabinetSellCurrentType(type.type))}
+						>
+							<h4 className="sell-block-cooperation-type-block__title">
+								{type.title}
+							</h4>
+							<p className="sell-block-cooperation-type-block__description">
+								{type.description}
+							</p>
+						</button>
+					))}
+				</div>
 
-                <Link
-                    to="/"
-                    className="sell-block-cooperation-concierge-service__link"
-                >
-                    Подробнее
-                </Link>
-            </div>
-        </div>
-    );
+				<button className="btn sell-block__btn" onClick={() => {
+					if (localStorage.getItem("accessToken")) {
+						dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.INFO))
+					} else {
+						window.location.hash = "reglog"
+					}
+				}}>
+					Продолжить
+				</button>
+			</div>
+
+			<div
+				className="sell-block-cooperation-concierge-service"
+				style={{
+					backgroundImage: `url("${SellBlockCooperationConciergeImage}")`,
+				}}
+			>
+				<h3 className="sell-block-cooperation-concierge-service__title">
+					Консьерж-сервис
+				</h3>
+				<p className="sell-block-cooperation-concierge-service__subtitle">
+					Премиальная услуга для продажи более 10 товаров
+				</p>
+
+				<Link
+					to="/concierge"
+					className="sell-block-cooperation-concierge-service__link"
+				>
+					Подробнее
+				</Link>
+			</div>
+		</div>
+	);
 };
 
 export default SellCooperation;

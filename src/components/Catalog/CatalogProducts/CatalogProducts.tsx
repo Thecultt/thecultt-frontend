@@ -31,7 +31,7 @@ const CatalogProducts: React.FC = () => {
 			dispatch(setCartIsVisibleMessage(false));
 		}, 5000);
 	};
-
+	
 	const addFavorite = (id: number) => {
 		dispatch(sendSaveFavorite(id) as any)
 	}

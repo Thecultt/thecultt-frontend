@@ -31,7 +31,7 @@ const Concierge: React.FC = () => {
 								</div>
 
 								<p className="concierge-main-text-form__description">
-									Нажимая на кнопку, вы принимаете условия <Link to="">пользовательского соглашения</Link> и <Link to="">публичной оферты</Link>.
+									Нажимая на кнопку, вы принимаете условия <Link to="/help/user-agreement">пользовательского соглашения</Link> и <Link to="/help/public-offerte">публичной оферты</Link>.
 								</p>
 
 
@@ -190,7 +190,7 @@ const Concierge: React.FC = () => {
 									Экономия <br /> времени
 								</h3>
 								<p className="concierge-services-block__subtitle">
-									Выделите один час на встречу с представителем <br /> THE CULTT, и вам останется только получить выплаты на карту.
+									Мы берем на себя весь процесс продажи. Выделите один час на встречу с представителем THE CULTT, и вам останется только получить выплаты на карту.
 								</p>
 							</div>
 
@@ -207,7 +207,7 @@ const Concierge: React.FC = () => {
 									Премиум <br /> Сервис
 								</h3>
 								<p className="concierge-services-block__subtitle">
-									Мы предоставим вам персонального менеджера, который будет сопровождать вас на всех этапах. Вы сможете отслеживать статусы продаж всех лотов в личном кабинете.
+									Мы предоставим вам персонального менеджера, который будет сопровождать вас на всех этапах.
 								</p>
 							</div>
 
@@ -246,7 +246,7 @@ const Concierge: React.FC = () => {
 							</div>
 
 							<p className="concierge-form-content__description">
-								Нажимая на кнопку, вы принимаете условия <Link to="">пользовательского соглашения</Link> и <Link to="">публичной оферты</Link>.
+								Нажимая на кнопку, вы принимаете условия <Link to="/help/user-agreement">пользовательского соглашения</Link> и <Link to="/help/public-offerte">публичной оферты</Link>.
 							</p>
 
 							<button className="btn concierge-form-content__btn">

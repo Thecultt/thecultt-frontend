@@ -13,8 +13,14 @@ const initialState: ProductsState = {
 		condition: "",
 		manufacturer: "",
 		availability: 0,
+		category: "",
 		images: [],
-		description: ""
+		description: "",
+		gender: "",
+		color: "",
+		height: "",
+		length: "",
+		width: ""
 	},
 	itemByArticleIsLoaded: false,
 

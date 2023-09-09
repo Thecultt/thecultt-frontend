@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { NumericFormat } from "react-number-format";
+import { formValueSelector } from "redux-form";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import { changeCheckCartItem, removeCartItem } from "../../../redux/actions/cart";
+import { sendCreateOrder } from "../../../redux/actions/order";
 
 import { OrderProductsItem, OrderProductsPromocode } from "../../";
 
@@ -13,7 +16,7 @@ const OrderProducts: React.FC = () => {
 
 	const { items, totalCount, totalPrice } = useTypedSelector(({ cart }) => cart);
 
-	const { promocode } = useTypedSelector(({ order }) => order)
+	const { promocode, isValid } = useTypedSelector(({ order }) => order)
 
 	const changeCheck = (article: string, status: boolean) => {
 		dispatch(changeCheckCartItem(article, status));
@@ -57,6 +60,60 @@ const OrderProducts: React.FC = () => {
 		});
 	};
 
+	const selector = formValueSelector("order-form");
+
+	const { emailValue, nameValue, phoneValue, countryValue, cityValue, deliveryValue, streetValue, houseValue, flatValue, commentValue } =
+		useTypedSelector((state) => {
+			const { email, name, phone, country, city, delivery, street, house, flat, comment } = selector(
+				state,
+				"email",
+				"name",
+				"phone",
+				"country",
+				"city",
+				"delivery",
+				"street",
+				"house",
+				"flat",
+				"comment"
+			);
+			return {
+				emailValue: email,
+				nameValue: name,
+				phoneValue: phone,
+
+				countryValue: country,
+				cityValue: city,
+
+				deliveryValue: delivery,
+
+				streetValue: street,
+				houseValue: house,
+				flatValue: flat,
+				commentValue: comment
+			};
+		});
+
+	const onClickSendCreateOrder = () => {
+		dispatch(sendCreateOrder({
+			mail: emailValue,
+			name: nameValue,
+			phone: phoneValue,
+
+			country: countryValue,
+			city: cityValue,
+			street: streetValue,
+			home: houseValue,
+			room: flatValue,
+			comment: commentValue,
+
+			products: [],
+
+			delivery_type: 1,
+			paymnet_type: 1
+		}, pay) as any)
+	}
+
 	const pay = () => {
 		var widget = new window.cp.CloudPayments();
 
@@ -68,14 +125,6 @@ const OrderProducts: React.FC = () => {
 				description: "Оплата товаров TheCultt", //назначение
 				amount: totalPrice, //сумма
 				currency: "RUB", //валюта
-				accountId: "user@example.com", //идентификатор плательщика (необязательно)
-				invoiceId: "1234567", //номер заказа  (необязательно)
-				email: "user@example.com", //email плательщика (необязательно)
-				skin: "mini", //дизайн виджета (необязательно)
-				autoClose: 3, //время в секундах до авто-закрытия виджета (необязательный)
-				data: {
-					myProp: "myProp value",
-				},
 				configuration: {
 					common: {
 						successRedirectUrl: "/order/success", // адреса для перенаправления
@@ -97,11 +146,10 @@ const OrderProducts: React.FC = () => {
 			},
 			{
 				onSuccess: function (options: any) {
-					console.log(options);
+					window.location.href = "/order/success"
 				},
 				onFail: function (reason: any, options: any) {
-					// fail
-					//действие при неуспешной оплате
+					window.location.href = "/order/error"
 				},
 				onComplete: function (paymentResult: any, options: any) {
 					//Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
@@ -266,14 +314,13 @@ const OrderProducts: React.FC = () => {
 				</div>
 
 				<p className="order-products__description">
-					Нажимая на кнопку, вы принимаете условия пользовательского
-					соглашения и публичной оферты.
+					Нажимая на кнопку, вы принимаете условия <Link to="/help/user-agreement">пользовательского соглашения</Link> и <Link to="/help/public-offerte">публичной оферты</Link>.
 				</p>
 
 				<button
-					className={`btn ${isCheckNull() ? "" : "disabled"
+					className={`btn ${isCheckNull() && isValid ? "" : "disabled"
 						} order-products__btn`}
-					onClick={pay}
+					onClick={onClickSendCreateOrder}
 				>
 					Перейти к оплате
 				</button>

@@ -20,6 +20,12 @@ export interface ProductPage {
 	condition: string,
 	manufacturer: string,
 	availability: number,
+	category: string,
 	images: string[]
 	description: string
+	gender: string
+	color: string
+	length: string
+	width: string
+	height: string
 }

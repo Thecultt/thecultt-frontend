@@ -2,7 +2,7 @@ import React from "react";
 
 interface PopupProps {
 	state: boolean;
-	setState: () => void;
+	setState?: () => void;
 
 	stateContent?: boolean;
 	setStateContent?: () => void;
@@ -40,7 +40,7 @@ const Popup: React.FC<PopupProps> = ({
 
 	const togglePopup = (e: any) => {
 		if (PopupRef.current && !PopupRef.current.contains(e.target)) {
-			setState();
+			if (setState) setState();
 		}
 	};
 
@@ -48,12 +48,12 @@ const Popup: React.FC<PopupProps> = ({
 		<div className={`popup ${state ? "active" : ""}`}>
 			<div
 				className={`popup-content ${state
-						? stateContent !== undefined
-							? stateContent
-								? "active"
-								: "close"
-							: "active"
-						: ""
+					? stateContent !== undefined
+						? stateContent
+							? "active"
+							: "close"
+						: "active"
+					: ""
 					}`}
 				ref={PopupRef}
 			>

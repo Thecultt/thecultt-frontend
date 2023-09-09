@@ -44,7 +44,9 @@
 			align-items: flex-start
 
 			width: calc( 50% - 35px )
-			height: 640px
+
+			height: calc( 100vh - 220px )
+			max-height: 640px
 
 			&-list-wrapper
 				position: relative
@@ -218,13 +220,25 @@
 					font-size: 16px
 					margin-bottom: 20px
 
+				&__notavailable
+					display: inline-block
+
+					font-size: 16px
+					color: $white
+					background-color: $black
+					border-radius: 6px
+
+					padding: 8px 16px
+
+					margin-bottom: 25px
+
 				&-btn
 					display: flex
 					align-items: center
 					justify-content: space-between
 
 					&__btn
-						&.add
+						&.add, &.subscribe
 							width: calc( 57% - 9px )
 
 						&.fav
@@ -274,7 +288,15 @@
 
 				&__image
 					width: 300px
-					+disabledImage
+					margin-bottom: 15px
+
+				&__info
+					& > span
+						color: $gray
+						margin-right: 5px
+
+					&:last-child
+						margin-bottom: 0
 
 			&-parameters
 				margin-bottom: 30px

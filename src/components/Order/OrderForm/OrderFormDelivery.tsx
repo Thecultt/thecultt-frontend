@@ -1,9 +1,22 @@
 import React from "react";
+import { Field } from "redux-form";
 
-import { RadioSelect } from "../../";
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
+
+import { RenderRadioSelect } from "../../";
 
 const OrderFormDelivery: React.FC = () => {
-	const deliveryItems: { title: string; description: string }[] = [
+	const { address: { country, city } } = useTypedSelector(({ order }) => order)
+
+	const [currentCountry_lowerCase, setCurrentCountry_lowerCase] = React.useState<string>("")
+	const [currentCity_lowerCase, setCurrentCity_lowerCase] = React.useState<string>("")
+
+	React.useEffect(() => {
+		setCurrentCountry_lowerCase(country.title.toLocaleLowerCase())
+		setCurrentCity_lowerCase(city.title.toLocaleLowerCase())
+	}, [country, city])
+
+	const deliveryItemsRussiaMoscow: { title: string; description: string }[] = [
 		{
 			title: "Примерка",
 			description:
@@ -18,17 +31,28 @@ const OrderFormDelivery: React.FC = () => {
 			title: "Самовывоз",
 			description:
 				"Самовывоз из офиса осуществляется бесплатно по адресу- Трубная 25 строение 3, с понедельника по пятницу с 11 до 18. Оплаченный заказ может храниться 3 рабочих дня.",
-		},
+		}
+	];
+
+	const deliveryItemsRussia: { title: string; description: string }[] = [
 		{
 			title: "Бесплатная доставка по России",
 			description:
 				"Мы бесплатно доставим оплаченный вами заказ с помощью курьерской службы СДЭК, срок доставки от 2 дней в зависимости от региона. Примерка недоступна.",
-		},
+		}
+	];
+
+	const deliveryItemsSng: { title: string; description: string }[] = [
 		{
 			title: "Доставка по странам СНГ",
 			description:
 				"Доставка осуществляется службой EMS. Стоимость доставки — 2.000₽. Страны: Азербайджан, Армения, Беларусь, Казахстан, Кырзызстан, Молдова, Таджикистан, Туркменистан, Узбекистан, Грузия. Важно: размер таможенных пошлин определяется законодательством той страны, в которую осуществляется доставка.",
-		},
+		}
+	];
+
+	const sngCountrys = ["азербайджан", "армения", "беларусь", "казахстан", "кырзызстан", "молдова", "таджикистан", "туркмения", "туркменистан", "узбекистан", "грузия"]
+
+	const deliveryItemsGlobal: { title: string; description: string }[] = [
 		{
 			title: "Международная доставка",
 			description:
@@ -36,29 +60,72 @@ const OrderFormDelivery: React.FC = () => {
 		},
 	];
 
-	const [currentIndex, setCurrentIndex] = React.useState<number | null>(null);
-
 	return (
 		<div className="order-form-block order-form-block-delivery">
 			<h3 className="order-form-block__title">Варианты доставки</h3>
 
 			<div className="order-form-block-checkboxs-wrapper">
-				{deliveryItems.map((item, index) => (
+				{currentCountry_lowerCase === "россия" && currentCity_lowerCase.indexOf("москва") !== -1 ? deliveryItemsRussiaMoscow.map((item, index) => (
 					<div
 						className="order-form-block-checkbox"
-						key={`order-form-block-checkbox-${index}`}
-						onClick={() => setCurrentIndex(index)}
+						key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
 					>
-						<RadioSelect label={item.title} name="delivery" />
+						<Field
+							component={RenderRadioSelect}
+							label={item.title}
+							description={item.description}
+							type="radio"
+							name="delivery"
+							value={item.title}
+						/>
+					</div>
+				)) : null}
 
-						{currentIndex === index ? (
-							<p
-								className="order-form-block-checkbox__description"
-								dangerouslySetInnerHTML={{
-									__html: item.description,
-								}}
-							></p>
-						) : null}
+				{currentCountry_lowerCase === "россия" && currentCity_lowerCase.indexOf("москва") == -1 ? deliveryItemsRussia.map((item, index) => (
+					<div
+						className="order-form-block-checkbox"
+						key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
+					>
+						<Field
+							component={RenderRadioSelect}
+							label={item.title}
+							description={item.description}
+							type="radio"
+							name="delivery"
+							value={item.title}
+						/>
+					</div>
+				)) : null}
+
+				{sngCountrys.find((country) => country == currentCountry_lowerCase) ? deliveryItemsSng.map((item, index) => (
+					<div
+						className="order-form-block-checkbox"
+						key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
+					>
+						<Field
+							component={RenderRadioSelect}
+							label={item.title}
+							description={item.description}
+							type="radio"
+							name="delivery"
+							value={item.title}
+						/>
+					</div>
+				)) : null}
+
+				{["россия", ...sngCountrys].find((country) => country === currentCountry_lowerCase) ? null : deliveryItemsGlobal.map((item, index) => (
+					<div
+						className="order-form-block-checkbox"
+						key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
+					>
+						<Field
+							component={RenderRadioSelect}
+							label={item.title}
+							description={item.description}
+							type="radio"
+							name="delivery"
+							value={item.title}
+						/>
 					</div>
 				))}
 			</div>

@@ -1,161 +1,222 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-import SellImagesImage1 from "../../../assets/images/sell/sell-images-image-1.jpg";
-import SellImagesImage2 from "../../../assets/images/sell/sell-images-image-2.jpg";
-import SellImagesImage3 from "../../../assets/images/sell/sell-images-image-3.jpg";
-import SellImagesImage4 from "../../../assets/images/sell/sell-images-image-4.jpg";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import {SellBackBtn, SellImagesBlock} from "../../";
+import { CabinetSellTypes, CabinetSellStepKeys } from "../../../redux/types/ICabinetSell";
 
-interface SellImagesProps {
-    next: any;
-    prev?: any;
-}
+import { setCabinetSellCurrentStep } from "../../../redux/actions/cabinet_sell";
 
-const SellImages: React.FC<SellImagesProps> = ({next, prev}) => {
-    const imageBlocks: {
-        image?: string;
-        imageTitle?: string;
-        imageDescription?: string;
-    }[] = [
-        {
-            image: SellImagesImage1,
-            imageTitle: "Лицевая сторона",
-            imageDescription: "Сфотографируйте сумку спереди при дневном свете",
-        },
+import SellImagesImageBag1 from "../../../assets/images/sell/sell-images-image-bag-1.jpg";
+import SellImagesImageBag2 from "../../../assets/images/sell/sell-images-image-bag-2.jpg";
+import SellImagesImageBag3 from "../../../assets/images/sell/sell-images-image-bag-3.jpg";
+import SellImagesImageBag4 from "../../../assets/images/sell/sell-images-image-bag-4.jpg";
 
-        {
-            image: SellImagesImage2,
-            imageTitle: "Внутри",
-            imageDescription: "Сфотографируйте внутреннее пространство сумки",
-        },
+import SellImagesImageShoes1 from "../../../assets/images/sell/sell-images-image-shoes-1.jpg";
+import SellImagesImageShoes2 from "../../../assets/images/sell/sell-images-image-shoes-2.jpg";
+import SellImagesImageShoes3 from "../../../assets/images/sell/sell-images-image-shoes-3.jpg";
+import SellImagesImageShoes4 from "../../../assets/images/sell/sell-images-image-shoes-4.jpg";
 
-        {
-            image: SellImagesImage3,
-            imageTitle: "Нюансы",
-            imageDescription: "Сфотографируйте наиболее ярко выраженные нюансы",
-        },
+import SellImagesImageAccess1 from "../../../assets/images/sell/sell-images-image-access-1.jpg";
+import SellImagesImageAccess2 from "../../../assets/images/sell/sell-images-image-access-2.jpg";
+import SellImagesImageAccess3 from "../../../assets/images/sell/sell-images-image-access-3.jpg";
+import SellImagesImageAccess4 from "../../../assets/images/sell/sell-images-image-access-4.jpg";
 
-        {
-            image: SellImagesImage4,
-            imageTitle: "Размер",
-            imageDescription:
-                "Cфотографируйте сумку на себе, чтобы был понятен размер",
-        },
-    ];
 
-    return (
-        <div className="sell-block sell-block-images">
-            <SellBackBtn prev={prev} />
+import { SellBackBtn, SellImagesBlock } from "../../";
 
-            <h3 className="sell-block__title">Загрузка фотографий</h3>
-            <p className="sell-block__subtitle">
-                Загрузите как можно более четкие фотографии
-            </p>
+const SellImages: React.FC = () => {
+	const dispatch = useDispatch()
 
-            <div className="sell-block-images-block-wrapper">
-                {imageBlocks.map((block, index) => (
-                    <SellImagesBlock
-                        {...block}
-                        number={index + 1}
-                        key={`sell-block-images-block-${index}`}
-                    />
-                ))}
+	const category = localStorage.getItem("sell-info-global-category")
 
-                <div className="sell-block-images-more">
-                    <div className="sell-block-images-more-block">
-                        <div className="sell-block-images-more-block-icon">
-                            <svg
-                                width="38"
-                                height="38"
-                                viewBox="0 0 38 38"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M19.001 7.91406V30.0807"
-                                    stroke="#838383"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                                <path
-                                    d="M7.91504 19H30.0817"
-                                    stroke="#838383"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                                <rect
-                                    x="1"
-                                    y="1"
-                                    width="36"
-                                    height="36"
-                                    rx="18"
-                                    stroke="#838383"
-                                    strokeWidth="2"
-                                />
-                            </svg>
-                        </div>
+	const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
-                        <p className="sell-block-images-more-block__title">
-                            Загрузить фотографию
-                        </p>
-                        <p className="sell-block-images-more-block__description">
-                            Фотография 5
-                        </p>
-                    </div>
+	const [imageBlocksValue, setImageBlocksValue] = React.useState<{ [key: string]: string }>(localStorage.getItem("sell-images-form") ? JSON.parse(localStorage.getItem("sell-images-form") as any) : {})
 
-                    <div className="sell-block-images-more-block">
-                        <div className="sell-block-images-more-block-icon">
-                            <svg
-                                width="38"
-                                height="38"
-                                viewBox="0 0 38 38"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M19.001 7.91406V30.0807"
-                                    stroke="#838383"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                                <path
-                                    d="M7.91504 19H30.0817"
-                                    stroke="#838383"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                                <rect
-                                    x="1"
-                                    y="1"
-                                    width="36"
-                                    height="36"
-                                    rx="18"
-                                    stroke="#838383"
-                                    strokeWidth="2"
-                                />
-                            </svg>
-                        </div>
+	const imageBlocksBag: {
+		image?: string;
+		imageTitle?: string;
+		imageDescription?: string;
+		isMore?: any
+	}[] = [
+			{
+				image: SellImagesImageBag1,
+				imageTitle: "Лицевая сторона",
+				imageDescription: "Сфотографируйте сумку спереди при дневном свете"
+			},
 
-                        <p className="sell-block-images-more-block__title">
-                            Загрузить фотографию
-                        </p>
-                        <p className="sell-block-images-more-block__description">
-                            Фотография 6
-                        </p>
-                    </div>
-                </div>
+			{
+				image: SellImagesImageBag2,
+				imageTitle: "Внутри",
+				imageDescription: "Сфотографируйте внутреннее пространство сумки"
+			},
 
-                <button className="btn sell-block__btn" onClick={next}>
-                    Продолжить
-                </button>
-            </div>
-        </div>
-    );
+			{
+				image: SellImagesImageBag3,
+				imageTitle: "Нюансы",
+				imageDescription: "Сфотографируйте наиболее ярко выраженные нюансы"
+			},
+
+			{
+				image: SellImagesImageBag4,
+				imageTitle: "Размер",
+				imageDescription:
+					"Cфотографируйте сумку на себе, чтобы был понятен размер"
+			},
+			{
+				isMore: true
+			},
+			{
+				isMore: true
+			}
+		]
+
+	const imageBlocksShoes: {
+		image?: string;
+		imageTitle?: string;
+		imageDescription?: string;
+		isMore?: any
+	}[] = [
+			{
+				image: SellImagesImageShoes1,
+				imageTitle: "Передняя часть",
+				imageDescription: "Сфотографируйте пару сверху при дневном свете"
+			},
+
+			{
+				image: SellImagesImageShoes2,
+				imageTitle: "Нюансы",
+				imageDescription: "Сфотографируйте внутреннее пространство сумки"
+			},
+
+			{
+				image: SellImagesImageShoes3,
+				imageTitle: "Подошва",
+				imageDescription: "Сфотографируйте подошвы обеих частей сверху"
+			},
+
+			{
+				image: SellImagesImageShoes4,
+				imageTitle: "Комплект",
+				imageDescription:
+					"Сфотографируйте пару рядом с полным комплектом (коробка, пыльник)"
+			},
+			{
+				isMore: true
+			},
+			{
+				isMore: true
+			}
+		]
+
+	const imageBlocksAccess: {
+		image?: string;
+		imageTitle?: string;
+		imageDescription?: string;
+		isMore?: any
+	}[] = [
+			{
+				image: SellImagesImageAccess1,
+				imageTitle: "Передняя часть",
+				imageDescription: "Сфотографируйте пару сверху при дневном свете"
+			},
+
+			{
+				image: SellImagesImageAccess2,
+				imageTitle: "Нюансы",
+				imageDescription: "Сфотографируйте внутреннее пространство сумки"
+			},
+
+			{
+				image: SellImagesImageAccess3,
+				imageTitle: "Подошва",
+				imageDescription: "Сфотографируйте подошвы обеих частей сверху"
+			},
+
+			{
+				image: SellImagesImageAccess4,
+				imageTitle: "Комплект",
+				imageDescription:
+					"Сфотографируйте пару рядом с полным комплектом (коробка, пыльник)"
+			},
+			{
+				isMore: true
+			},
+			{
+				isMore: true
+			}
+		]
+
+	const onChangeCustom = (result: any, index: number) => {
+		setImageBlocksValue({ ...imageBlocksValue, [index]: result })
+	};
+
+	const isValid = () => {
+		if (category === "Сумки") return Object.keys(imageBlocksValue).length >= imageBlocksBag.filter((image) => !image.isMore).length
+		if (category === "Обувь") return Object.keys(imageBlocksValue).length >= imageBlocksShoes.filter((image) => !image.isMore).length
+		if (category === "Аксессуары") return Object.keys(imageBlocksValue).length >= imageBlocksAccess.filter((image) => !image.isMore).length
+	}
+
+	const onSubmit = () => {
+		localStorage.setItem("sell-images-form", JSON.stringify(imageBlocksValue))
+
+		dispatch(setCabinetSellCurrentStep(currentType === CabinetSellTypes.EXCHANGE ? CabinetSellStepKeys.PRODUCT : CabinetSellStepKeys.CONTACT))
+	}
+
+	return (
+		<div className="sell-block sell-block-images">
+			<SellBackBtn onClick={() => dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.INFO))} />
+
+			<h3 className="sell-block__title">Загрузка фотографий</h3>
+			<p className="sell-block__subtitle">
+				Загрузите как можно более четкие фотографии
+			</p>
+
+			<div className="sell-block-images-block-wrapper">
+				{category === "Сумки" ? imageBlocksBag.map((block, index) => (
+					<SellImagesBlock
+						{...block}
+						number={index + 1}
+						key={`sell-block-images-block-${index}`}
+						value={imageBlocksValue[index]}
+						onChangeCustom={(result: any) => onChangeCustom(result, index)}
+						disabled={block.isMore ? isValid() ? false : true : false}
+					/>
+				)) : null}
+
+				{category === "Обувь" ? imageBlocksShoes.map((block, index) => (
+					<SellImagesBlock
+						{...block}
+						number={index + 1}
+						key={`sell-block-images-block-${index}`}
+						value={imageBlocksValue[index]}
+						onChangeCustom={(result: any) => onChangeCustom(result, index)}
+						disabled={block.isMore ? isValid() ? false : true : false}
+					/>
+				)) : null}
+
+				{category === "Аксессуары" ? imageBlocksAccess.map((block, index) => (
+					<SellImagesBlock
+						{...block}
+						number={index + 1}
+						key={`sell-block-images-block-${index}`}
+						value={imageBlocksValue[index]}
+						onChangeCustom={(result: any) => onChangeCustom(result, index)}
+						disabled={block.isMore ? isValid() ? false : true : false}
+					/>
+				)) : null}
+
+				<button
+					className={`btn ${isValid() ? "" : "disabled"} sell-block__btn`}
+					disabled={isValid() ? false : true}
+					onClick={onSubmit}
+				>
+					Продолжить
+				</button>
+			</div>
+		</div>
+	);
 };
 
 export default SellImages;

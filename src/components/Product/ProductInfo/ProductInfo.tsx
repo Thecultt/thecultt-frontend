@@ -1,35 +1,34 @@
 import React from "react";
 
-import {ProductPage} from "../../../models/IProduct";
+import { ProductPage } from "../../../models/IProduct";
 
 import {
-    ProductInfoBreadCrumbs,
-    ProductInfoTitle,
-    ProductInfoExchange,
-    ProductInfoState,
-    ProductInfoParameters,
-    ProductInfoAuth,
-    ProductInfoTabs,
+	ProductInfoTitle,
+	ProductInfoExchange,
+	ProductInfoState,
+	ProductInfoParameters,
+	ProductInfoAuth,
+	ProductInfoTabs,
 } from "../../";
 
-interface ProductInfoProps extends ProductPage {}
+interface ProductInfoProps extends ProductPage { }
 
 const ProductInfo: React.FC<ProductInfoProps> = (product) => {
-    return (
-        <div className="product-content-info">
-            <ProductInfoTitle {...product} article={product.article} />
+	return (
+		<div className="product-content-info">
+			<ProductInfoTitle {...product} article={product.article} />
 
-            <ProductInfoExchange />
+			<ProductInfoExchange />
 
-            <ProductInfoState />
+			<ProductInfoState />
 
-            <ProductInfoParameters />
+			<ProductInfoParameters {...product} />
 
-            <ProductInfoAuth />
+			<ProductInfoAuth />
 
-            <ProductInfoTabs />
-        </div>
-    );
+			<ProductInfoTabs />
+		</div>
+	);
 };
 
 export default ProductInfo;

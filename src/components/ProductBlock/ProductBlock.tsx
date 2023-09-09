@@ -31,82 +31,30 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	isFavorite,
 	num_of_favorites
 }) => {
+	const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart)
+
 	const totalImageLength = 5;
 
 	const [currentIndexImage, setCurrentIndexImage] = React.useState<number>(0);
 
-	const onClickPrevImage = () => {
-		if (currentIndexImage - 1 >= 0) {
-			setCurrentIndexImage(currentIndexImage - 1);
-		} else {
-			setCurrentIndexImage(totalImageLength - 1);
-		}
-	};
-
-	const onClickNextImage = () => {
-		if (currentIndexImage + 1 < totalImageLength) {
-			setCurrentIndexImage(currentIndexImage + 1);
-		} else {
-			setCurrentIndexImage(0);
-		}
-	};
-
 	return (
 		<div className={`product-block ${addClass ? addClass : ""}`}>
 			<div className="product-block-cover">
-				<div className="product-block-cover-hover-col-wrapper">
-					{Array(totalImageLength)
-						.fill(0)
-						.map((_, index) => (
-							<div
-								className="product-block-cover-hover-col"
-								key={`product-block-cover-hover-col-${article}-${index}`}
-								style={{ width: `${100 / totalImageLength}%` }}
-								onMouseOver={() => setCurrentIndexImage(index)}
-							>
-							</div>
-						))}
-				</div>
-
-				{/* <div
-					className="product-block-cover-arrow prev"
-					onClick={onClickPrevImage}
-				>
-					<svg
-						width="9"
-						height="16"
-						viewBox="0 0 9 16"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M8 15L1 8L8 1"
-							stroke="#202020"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
-					</svg>
-				</div>
-
-				<div
-					className="product-block-cover-arrow next"
-					onClick={onClickNextImage}
-				>
-					<svg
-						width="9"
-						height="16"
-						viewBox="0 0 9 16"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M1 15L8 8L1 1"
-							stroke="#202020"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
-					</svg>
-				</div> */}
+				<Link to={`/product/${article}`}>
+					<div className="product-block-cover-hover-col-wrapper">
+						{Array(totalImageLength)
+							.fill(0)
+							.map((_, index) => (
+								<div
+									className="product-block-cover-hover-col"
+									key={`product-block-cover-hover-col-${article}-${index}`}
+									style={{ width: `${100 / totalImageLength}%` }}
+									onMouseOver={() => setCurrentIndexImage(index)}
+								>
+								</div>
+							))}
+					</div>
+				</Link>
 
 				<div
 					className={`product-block-cover-favorite ${isFavorite ? "active" : ""}`}
@@ -154,13 +102,13 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 						))}
 				</div>
 
-				<Link
-					to={`/product/${article}`}
+				<div
 					className="product-block-cover-image"
 					style={{
 						backgroundImage: `url("${images[currentIndexImage]}")`,
 					}}
-				></Link>
+				>
+				</div>
 			</div>
 
 			<div className="product-block-text">
@@ -172,108 +120,71 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
 				{availability ? (
 					<>
-						<div className="product-block-text-state">
-							<span className="product-block-text-state__subtitle">
-								Состояние
-							</span>
+						<Link to={`/product/${article}`}>
+							<div className="product-block-text-state">
+								<span className="product-block-text-state__subtitle">
+									Состояние
+								</span>
 
-							<span className="product-block-text-state__title">
-								<svg
-									viewBox="0 0 11 12"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M5.50781 11C8.26924 11 10.5078 8.76142 10.5078 6C10.5078 3.23858 8.26924 1 5.50781 1C2.74639 1 0.507812 3.23858 0.507812 6C0.507812 8.76142 2.74639 11 5.50781 11Z"
-										stroke="#285141"
-										strokeWidth="0.716034"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
-									<path
-										d="M3.28516 6.00369L4.95182 7.67036L7.7296 4.89258"
-										stroke="#285141"
-										strokeWidth="0.716034"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
-								</svg>
-								{condition}
-							</span>
-						</div>
+								<span className="product-block-text-state__title">
+									<svg
+										viewBox="0 0 11 12"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M5.50781 11C8.26924 11 10.5078 8.76142 10.5078 6C10.5078 3.23858 8.26924 1 5.50781 1C2.74639 1 0.507812 3.23858 0.507812 6C0.507812 8.76142 2.74639 11 5.50781 11Z"
+											stroke="#285141"
+											strokeWidth="0.716034"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										/>
+										<path
+											d="M3.28516 6.00369L4.95182 7.67036L7.7296 4.89258"
+											stroke="#285141"
+											strokeWidth="0.716034"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										/>
+									</svg>
+									{condition}
+								</span>
+							</div>
 
-						{/* <div className="product-block-text-priceretail">
-                            <p className="product-block-text-priceretail__message">
-                                <span>Цена ретейла</span>: аксессуар не был в
-                                носке, фирменные бирки сохранены или
-                                отсутствуют.
-                            </p>
+							<h3 className="product-block-text__price">
+								<NumericFormat
+									value={price}
+									displayType={"text"}
+									thousandSeparator={" "}
+									renderText={(formattedValue: string) => (
+										<>
+											{parseInt(
+												formattedValue.split(" ").join("")
+											) >= 10000
+												? formattedValue
+												: parseInt(
+													formattedValue
+														.split(" ")
+														.join("")
+												)}
+										</>
+									)}
+								/>{" "}
+								₽
+							</h3>
+						</Link>
 
-                            <span className="product-block-text-priceretail__subtitle">
-                                Цена ретейла:
-                            </span>
-
-                            <span className="product-block-text-priceretail__title">
-                                180 000 ₽
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                        stroke="#202020"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M12 8V12"
-                                        stroke="#202020"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M12 16H12.01"
-                                        stroke="#202020"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </span>
-                        </div> */}
-
-						<h3 className="product-block-text__price">
-							<NumericFormat
-								value={price}
-								displayType={"text"}
-								thousandSeparator={" "}
-								renderText={(formattedValue: string) => (
-									<>
-										{parseInt(
-											formattedValue.split(" ").join("")
-										) >= 10000
-											? formattedValue
-											: parseInt(
-												formattedValue
-													.split(" ")
-													.join("")
-											)}
-									</>
-								)}
-							/>{" "}
-							₽
-						</h3>
-
-						{isCart ? (
+						{isCartLocal ? (
 							<button className="product-block-text__btn disabled">
 								В корзине
 							</button>
 						) : (
 							<button
 								className="product-block-text__btn"
-								onClick={addCart}
+								onClick={() => {
+									setIsCartLocal(true)
+									addCart()
+								}}
 							>
 								Добавить в корзину
 							</button>
@@ -283,33 +194,6 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 					<>
 						<span className="product-block-text__outstock">
 							Продано
-
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-									stroke="#202020"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-								<path
-									d="M12 8V12"
-									stroke="#202020"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-								<path
-									d="M12 16H12.01"
-									stroke="#202020"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</svg>
 						</span>
 
 						<button className="product-block-text__btn regular">

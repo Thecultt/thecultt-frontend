@@ -1,62 +1,156 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { setCabinetSellCurrentStep, sendCreateCabinetSell } from "../../redux/actions/cabinet_sell";
+
+import { CabinetSellStepKeys } from '../../redux/types/ICabinetSell'
+
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 
 import {
-    SellSteps,
-    SellCooperation,
-    SellInfo,
-    SellImages,
-    SellContact,
-    SellDelivery,
+	Popup,
+	SellSteps,
+	SellCooperation,
+	SellInfo,
+	SellImages,
+	SellContact,
+	SellDelivery,
+	SellProduct,
 } from "../../components/";
 
 const Sell: React.FC = () => {
-    const [index, setIndex] = React.useState<number>(1);
+	const dispatch = useDispatch()
 
-    React.useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [index]);
+	const { isSend, currentStep, currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
-    return (
-        <section className="sell">
-            <div className="container">
-                <div className="sell-wrapper">
-                    <SellSteps currentIndex={index} />
+	// React.useEffect(() => {
+	// 	window.onbeforeunload = () => true;
 
-                    {index === 1 ? (
-                        <SellCooperation next={() => setIndex(index + 1)} />
-                    ) : null}
+	// 	return () => {
+	// 		window.onbeforeunload = () => undefined;
+	// 	};
+	// }, []);
 
-                    {index === 2 ? (
-                        <SellInfo
-                            next={() => setIndex(index + 1)}
-                            prev={() => setIndex(index - 1)}
-                        />
-                    ) : null}
+	React.useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [currentStep]);
 
-                    {index === 3 ? (
-                        <SellImages
-                            next={() => setIndex(index + 1)}
-                            prev={() => setIndex(index - 1)}
-                        />
-                    ) : null}
+	const onSubmitInfo = (data: any) => {
+		localStorage.setItem("sell-info-global-category", data.category)
+		localStorage.setItem("sell-info-form", JSON.stringify(data))
 
-                    {index === 4 ? (
-                        <SellContact
-                            next={() => setIndex(index + 1)}
-                            prev={() => setIndex(index - 1)}
-                        />
-                    ) : null}
+		dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.IMAGES))
+	}
 
-                    {index === 5 ? (
-                        <SellDelivery
-                            next={() => setIndex(index + 1)}
-                            prev={() => setIndex(index - 1)}
-                        />
-                    ) : null}
-                </div>
-            </div>
-        </section>
-    );
+	const onSubmitContact = (data: any) => {
+		localStorage.setItem("sell-contact-form", JSON.stringify(data))
+
+		dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.DELIVERY))
+	}
+
+	const onSubmitProduct = (data: any) => {
+		localStorage.setItem("sell-product-form", JSON.stringify(data))
+
+		dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.CONTACT))
+	}
+
+	const onSubmitDelivery = (data: any) => {
+		const info = JSON.parse(localStorage.getItem("sell-info-form") as any)
+		const images = JSON.parse(localStorage.getItem("sell-images-form") as any)
+		const contact = JSON.parse(localStorage.getItem("sell-contact-form") as any)
+
+		const delivery = data
+
+		const sell = {
+			type: currentType === "sell" ? "Продажа" : "Обмен",
+
+			category: info.category,
+			vendor: info.brand,
+			model: info.model,
+			size_name: info.size ? info.size : 0,
+			state_name: info.condition,
+			defects: info.deffects,
+			price: info.price,
+
+			images: Object.keys(images).map(key => images[key]),
+
+			email: contact.email,
+			phone: contact.phone,
+			name: contact.name,
+			surname: contact.surname,
+
+			client_city: delivery.city ? delivery.city : "",
+			client_street: delivery.street ? delivery.street : "",
+			client_home: delivery.dom ? delivery.dom : "",
+			client_room: delivery.flat ? delivery.flat : "",
+			client_comment: delivery.comment ? delivery.comment : ""
+		}
+
+		dispatch(sendCreateCabinetSell(sell) as any)
+	}
+
+	return (
+		<section className="sell">
+			<div className="container">
+				<div className="sell-wrapper">
+					<SellSteps />
+
+					{currentStep === CabinetSellStepKeys.COOPERATION ? (
+						<SellCooperation />
+					) : null}
+
+					{currentStep === CabinetSellStepKeys.INFO ? (
+						<SellInfo onSubmit={onSubmitInfo} />
+					) : null}
+
+					{currentStep === CabinetSellStepKeys.IMAGES ? (
+						<SellImages />
+					) : null}
+
+					{currentStep === CabinetSellStepKeys.PRODUCT ? (
+						<SellProduct onSubmit={onSubmitProduct} />
+					) : null}
+
+					{currentStep === CabinetSellStepKeys.CONTACT ? (
+						<SellContact onSubmit={onSubmitContact} />
+					) : null}
+
+					{currentStep === CabinetSellStepKeys.DELIVERY ? (
+						<SellDelivery onSubmit={onSubmitDelivery} />
+					) : null}
+
+					{isSend ? <Popup state={true} setState={() => window.location.reload()}>
+						{localStorage.getItem("sell-info-global-type-delivery") === "Лично в офис" ? (
+							<div className="sell-success">
+								<h3 className="sell-success__title">
+									Выберите время!
+								</h3>
+								<p className="sell-success__description">
+									Вы выбрали способ отправки товара - лично в офис. Для завершения заявки необходимо выбрать дату и время посещения.
+								</p>
+								<Link to="https://calendly.com/thecultt/visit" className="btn sell-success__link">
+									Выбрать дату и время
+								</Link>
+							</div>
+						) : (
+							<div className="sell-success">
+								<h3 className="sell-success__title">
+									Заявка отправлена!
+								</h3>
+								<p className="sell-success__description">
+									Ваша заявка принята в работу, менеджер свяжется с вами для обсуждения деталей. Вы можете  отследить статус  заявки в личном кабинете или на почте.
+								</p>
+								<Link to="/" className="btn sell-success__link">
+									Перейти в личный кабинет
+								</Link>
+							</div>
+						)}
+					</Popup> : null}
+				</div>
+			</div>
+		</section>
+	);
 };
 
 export default Sell;
