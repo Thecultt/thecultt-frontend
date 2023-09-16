@@ -1,19 +1,36 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-import {BrandsSearch, BrandsList} from "../../components/";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+
+import { fetchBrands } from "../../redux/actions/brands";
+
+import { BrandsSearch, BrandsList } from "../../components/";
 
 const Brands: React.FC = () => {
-    return (
-        <section className="brands">
-            <div className="container">
-				<div className="brands-wrapper">
-					<BrandsSearch />
+	const dispatch = useDispatch()
 
-					<BrandsList />
-				</div>
-            </div>
-        </section>
-    );
+	const { isLoaded } = useTypedSelector(({ brands }) => brands)
+
+	React.useEffect(() => {
+		dispatch(fetchBrands() as any)
+	}, [])
+
+	return (
+		<>
+			{isLoaded ? (
+				<section className="brands">
+					<div className="container">
+						<div className="brands-wrapper">
+							<BrandsSearch />
+
+							<BrandsList />
+						</div>
+					</div>
+				</section>
+			) : null}
+		</>
+	);
 };
 
 export default Brands;

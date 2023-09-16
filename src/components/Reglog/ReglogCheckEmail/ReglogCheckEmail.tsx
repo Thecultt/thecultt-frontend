@@ -2,7 +2,9 @@ import React from "react";
 
 import { Field, reduxForm, InjectedFormProps } from "redux-form";
 
-import { RenderInput } from "../../";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+
+import { Loader, RenderInput } from "../../";
 
 import validate from "./validate"
 
@@ -12,6 +14,8 @@ const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	pristine,
 	submitting,
 }) => {
+	const { isSend } = useTypedSelector(({ check_email }) => check_email);
+
 	return (
 		<form
 			className="reglog-content-form reglog-content-form-register"
@@ -35,12 +39,18 @@ const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			</div>
 
 			<div className="reglog-content-form-btn">
-				<button
-					className={`btn ${invalid || submitting || pristine ? "disabled" : ""} reglog-content-form-btn__btn`}
-					disabled={invalid || submitting || pristine}
-				>
-					Продолжить
-				</button>
+				{isSend ? (
+					<button className="btn disabled loader reglog-content-form-btn__btn" disabled>
+						<Loader />
+					</button>
+				) : (
+					<button
+						className={`btn ${invalid || submitting || pristine ? "disabled" : ""} reglog-content-form-btn__btn`}
+						disabled={invalid || submitting || pristine}
+					>
+						Продолжить
+					</button>
+				)}
 			</div>
 
 			<p className="reglog-content-form__subtitle">

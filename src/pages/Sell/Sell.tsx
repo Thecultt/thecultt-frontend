@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { setCabinetSellCurrentStep, sendCreateCabinetSell } from "../../redux/actions/cabinet_sell";
+import { fetchCabinetSellParameters, setCabinetSellCurrentStep, sendCreateCabinetSell } from "../../redux/actions/cabinet_sell";
 
 import { CabinetSellStepKeys } from '../../redux/types/ICabinetSell'
 
@@ -24,13 +24,9 @@ const Sell: React.FC = () => {
 
 	const { isSend, currentStep, currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
-	// React.useEffect(() => {
-	// 	window.onbeforeunload = () => true;
-
-	// 	return () => {
-	// 		window.onbeforeunload = () => undefined;
-	// 	};
-	// }, []);
+	React.useEffect(() => {
+		dispatch(fetchCabinetSellParameters() as any)
+	}, []);
 
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
@@ -59,6 +55,7 @@ const Sell: React.FC = () => {
 		const info = JSON.parse(localStorage.getItem("sell-info-form") as any)
 		const images = JSON.parse(localStorage.getItem("sell-images-form") as any)
 		const contact = JSON.parse(localStorage.getItem("sell-contact-form") as any)
+		const product = JSON.parse(localStorage.getItem("sell-product-form") as any)
 
 		const delivery = data
 
@@ -68,23 +65,27 @@ const Sell: React.FC = () => {
 			category: info.category,
 			vendor: info.brand,
 			model: info.model,
-			size_name: info.size ? info.size : 0,
+			size_name: info.size ? info.size : "",
 			state_name: info.condition,
-			defects: info.deffects,
+			defects: info.defects,
 			price: info.price,
 
 			images: Object.keys(images).map(key => images[key]),
+
+			product_link: product && product.link ? product.link : "",
 
 			email: contact.email,
 			phone: contact.phone,
 			name: contact.name,
 			surname: contact.surname,
+			client_tg: contact.telegram,
 
 			client_city: delivery.city ? delivery.city : "",
 			client_street: delivery.street ? delivery.street : "",
 			client_home: delivery.dom ? delivery.dom : "",
 			client_room: delivery.flat ? delivery.flat : "",
-			client_comment: delivery.comment ? delivery.comment : ""
+			client_comment: delivery.comment ? delivery.comment : "",
+
 		}
 
 		dispatch(sendCreateCabinetSell(sell) as any)
@@ -120,7 +121,7 @@ const Sell: React.FC = () => {
 						<SellDelivery onSubmit={onSubmitDelivery} />
 					) : null}
 
-					{isSend ? <Popup state={true} setState={() => window.location.reload()}>
+					<Popup state={isSend} setState={() => window.location.reload()}>
 						{localStorage.getItem("sell-info-global-type-delivery") === "Лично в офис" ? (
 							<div className="sell-success">
 								<h3 className="sell-success__title">
@@ -146,7 +147,7 @@ const Sell: React.FC = () => {
 								</Link>
 							</div>
 						)}
-					</Popup> : null}
+					</Popup>
 				</div>
 			</div>
 		</section>

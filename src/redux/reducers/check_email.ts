@@ -2,7 +2,7 @@ import { CheckEmailState, CheckEmailActions, CheckEmailActionTypes } from '../ty
 
 const initialState: CheckEmailState = {
 	isSend: false,
-	email: localStorage.getItem("email") ? localStorage.getItem("email") : ""
+	email: sessionStorage.getItem("email") ? sessionStorage.getItem("email") : ""
 }
 
 const check_email = (state = initialState, action: CheckEmailActions) => {

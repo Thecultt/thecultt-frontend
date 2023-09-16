@@ -1,6 +1,5 @@
 import React from "react";
 import { WrappedFieldProps, change } from "redux-form";
-import axios from "axios";
 
 interface RenderInputHintsProps extends WrappedFieldProps {
 	label: string;
@@ -10,8 +9,9 @@ interface RenderInputHintsProps extends WrappedFieldProps {
 	}[]
 	disabled?: boolean
 	bgWhite?: boolean
+	ifFreeField?: boolean
 	onChangeCustom: (query: string) => void
-	onSaveValue: (value: { title: string, value: string }) => void
+	onSaveValue?: (value: { title: string, value: string }) => void
 }
 
 const RenderInputHints: React.FC<RenderInputHintsProps> = ({
@@ -21,6 +21,7 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
 	hints,
 	disabled,
 	bgWhite,
+	ifFreeField,
 	onChangeCustom,
 	onSaveValue
 }) => {
@@ -52,6 +53,8 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
 	}) => {
 		dispatch(change(form, input.name, item.title));
 
+		onChangeCustom(item.title)
+
 		setValue(item)
 
 		setState(false)
@@ -62,8 +65,10 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
 
 		onChangeCustom(e.currentTarget.value)
 
-		if (hints.length === 1 && hints[0] && hints[0].title === e.currentTarget.value) {
-			setValue(e.currentTarget.value)
+		if (ifFreeField) {
+			setValue({ title: e.currentTarget.value, value: e.currentTarget.value })
+		} else if (hints.length === 1 && hints[0] && hints[0].title === e.currentTarget.value) {
+			setValue({ title: e.currentTarget.value, value: e.currentTarget.value })
 		}
 	}
 
@@ -73,9 +78,19 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
 		}
 	}, [value])
 
+	React.useEffect(() => {
+		if (input.value) {
+			setValue({ title: input.value, value: "" })
+		}
+	}, [input.value])
+
 	return (
 		<div className={`input-wrapper ${disabled ? "disabled" : ""}`} ref={SelectRef}>
-			<div className={`input ${touched && error ? "error" : ""} ${bgWhite ? "bgWhite" : ""}`} onClick={() => setState(true)} onBlur={() => dispatch(change(form, input.name, value.title))}>
+			<div
+				className={`input ${!state && touched && error ? "error" : ""} ${bgWhite ? "bgWhite" : ""}`}
+				onClick={() => setState(true)}
+				onBlur={() => dispatch(change(form, input.name, value.title))}
+			>
 				<input
 					{...input}
 					className="input__field"
@@ -86,7 +101,7 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
 				/>
 			</div>
 
-			{hints.length ? <div className={`input-list ${state ? "active" : ""}`}>
+			<div className={`input-list ${hints.length && state ? "active" : ""}`}>
 				<div className="input-list-items-wrapper">
 					{hints.map((item, index) => (
 						<p
@@ -98,9 +113,9 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
 						</p>
 					))}
 				</div>
-			</div> : null}
+			</div>
 
-			{touched && error ?
+			{!state && touched && error ?
 				<span className="input__error">
 					{error}
 				</span>

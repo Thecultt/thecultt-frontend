@@ -31,7 +31,7 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 
 	const toggleCurrentItem = (item: string) => {
 		if (currentItems[item]) {
-			const newItems = currentItems
+			const newItems = { ...currentItems }
 
 			delete newItems[item]
 
@@ -39,10 +39,6 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 		} else {
 			setCurrentItems({ ...currentItems, [item]: item })
 		}
-
-		setTimeout(() => {
-			setState(false);
-		}, 10);
 	};
 
 	React.useEffect(() => {
@@ -61,6 +57,7 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 	}, [Object.keys(currentItems).map(item => item)])
 
 	return (
+
 		<div className={`select ${disabled ? "disabled" : ""}`} ref={SelectRef} onClick={() => setState(true)}>
 			<p className="select__label">
 				{Object.keys(currentItems).length ? Object.keys(currentItems).map((title) => title).join(", ") : <span>{label}</span>}
@@ -90,7 +87,7 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 						<p
 							className={`select-list__item ${currentItems[item] ? "active" : ""
 								}`}
-							key={`select-list__item-${index}`}
+							key={`select-list__item-${item}-${index}`}
 							onClick={() => toggleCurrentItem(item)}
 						>
 							{item}

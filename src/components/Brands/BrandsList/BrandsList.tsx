@@ -1,17 +1,23 @@
 import React from "react";
 
-import {BrandsListBlock} from "../../";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+
+import { BrandsListBlock } from "../../";
 
 const BrandsList: React.FC = () => {
-    return (
-        <div className="brands-list">
-            <BrandsListBlock />
-            <BrandsListBlock />
-            <BrandsListBlock />
-            <BrandsListBlock />
-            <BrandsListBlock />
-        </div>
-    );
+	const { brands, letter, search } = useTypedSelector(({ brands }) => brands)
+
+	return (
+		<div className="brands-list">
+			{letter !== "" && search === "" ? (
+				<BrandsListBlock letter={letter} brands={brands[letter]} />
+			) : (
+				Object.keys(brands).map((key, index) => (
+					<BrandsListBlock letter={key} brands={brands[key]} key={`brands-list-block-${index}`} />
+				))
+			)}
+		</div>
+	);
 };
 
 export default BrandsList;

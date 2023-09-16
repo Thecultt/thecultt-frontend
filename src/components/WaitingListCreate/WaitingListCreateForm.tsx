@@ -15,9 +15,9 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	submitting,
 }) => {
 	React.useEffect(() => {
-		initialize(({
-			email: localStorage.getItem("email")
-		}))
+		// initialize(({
+		// 	email: localStorage.getItem("email")
+		// }))
 	}, [])
 
 	return (

@@ -3,6 +3,7 @@ export interface validateInfoValues {
 	surname: string;
 	email: string;
 	phone: string;
+	telegram: string;
 }
 
 interface validateInfoErrors {
@@ -10,6 +11,7 @@ interface validateInfoErrors {
 	surname?: string;
 	email?: string;
 	phone?: string;
+	telegram?: string;
 }
 
 const validate = (values: validateInfoValues) => {
@@ -52,6 +54,14 @@ const validate = (values: validateInfoValues) => {
 		errors.phone = `Не более ${defaultMax} символов`;
 	} else if (values.phone.length < defaultMin) {
 		errors.phone = `Не менее ${defaultMin} символов`;
+	}
+
+	if (!values.telegram) {
+		errors.telegram = "Поле не может быть пустым";
+	} else if (values.telegram.length > defaultMax) {
+		errors.telegram = `Не более ${defaultMax} символов`;
+	} else if (values.telegram.length < defaultMin) {
+		errors.telegram = `Не менее ${defaultMin} символов`;
 	}
 
 	return errors;

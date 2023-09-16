@@ -68,7 +68,8 @@ const SellCooperation: React.FC = () => {
 				</button>
 			</div>
 
-			<div
+			<Link
+				to="/concierge"
 				className="sell-block-cooperation-concierge-service"
 				style={{
 					backgroundImage: `url("${SellBlockCooperationConciergeImage}")`,
@@ -81,13 +82,12 @@ const SellCooperation: React.FC = () => {
 					Премиальная услуга для продажи более 10 товаров
 				</p>
 
-				<Link
-					to="/concierge"
+				<span
 					className="sell-block-cooperation-concierge-service__link"
 				>
 					Подробнее
-				</Link>
-			</div>
+				</span>
+			</Link>
 		</div>
 	);
 };

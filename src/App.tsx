@@ -34,6 +34,7 @@ import {
 	SellInfo,
 	Concierge,
 	Exchange,
+	CabinetSellsList,
 } from "./pages/";
 
 import { fetchProductsFilters } from "./redux/actions/products_filters";
@@ -142,6 +143,11 @@ const App = () => {
 					<Route
 						path="/cabinet/setting"
 						element={isLogin ? <CabinetSetting /> : <Navigate to="/#reglog" />}
+					/>
+
+					<Route
+						path="/cabinet/sells"
+						element={isLogin ? <CabinetSellsList /> : <Navigate to="/#reglog" />}
 					/>
 
 					<Route

@@ -132,10 +132,15 @@ export { default as CabinetWaitingListItem } from "./CabinetWaitingList/CabinetW
 // CabinetHistoryOrders
 export { default as CabinetHistoryOrdersItem } from "./CabinetHistoryOrders/CabinetHistoryOrdersItem";
 
+// CabinetSellsList
+export { default as CabinetSellsListItem } from "./CabinetSellsList/CabinetSellsListItem";
+
 // CabinetSetting
-export { default as CabinetSettingInfoBlock } from "./CabinetSetting/CabinetSettingInfoBlock";
-export { default as CabinetSettingContactBlock } from "./CabinetSetting/CabinetSettingContactBlock";
 export { default as CabinetSettingBrandBlock } from "./CabinetSetting/CabinetSettingBrandBlock";
+// CabinetSettingInfoBlock
+export { default as CabinetSettingInfoBlock } from "./CabinetSetting/CabinetSettingInfoBlock/CabinetSettingInfoBlock";
+// CabinetSettingContactBlock
+export { default as CabinetSettingContactBlock } from "./CabinetSetting/CabinetSettingContactBlock/CabinetSettingContactBlock";
 // CabinetSettingPasswordRecovery
 export { default as CabinetSettingPasswordRecovery } from "./CabinetSetting/CabinetSettingPasswordRecovery/CabinetSettingPasswordRecovery";
 export { default as CabinetSettingPasswordRecoveryForm } from "./CabinetSetting/CabinetSettingPasswordRecovery/CabinetSettingPasswordRecoveryForm";

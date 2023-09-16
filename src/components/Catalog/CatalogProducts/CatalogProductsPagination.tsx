@@ -1,9 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-// @ts-ignore
-import Loader from "react-dots-loader";
-
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import {
@@ -11,6 +8,8 @@ import {
 	fetchProductsMore,
 	fetchProductsPage,
 } from "../../../redux/actions/products";
+
+import { Loader } from "../../";
 
 const CatalogProductsPagination: React.FC = () => {
 	const dispatch = useDispatch();
@@ -42,8 +41,8 @@ const CatalogProductsPagination: React.FC = () => {
 	return (
 		<div className="catalog-product-pagination">
 			{isFetchMore ? (
-				<button className="btn catalog-product-pagination__btn loader">
-					<Loader size={7} color="#FFFFFF" />
+				<button className="btn loader catalog-product-pagination__btn">
+					<Loader />
 				</button>
 			) : (
 				<button

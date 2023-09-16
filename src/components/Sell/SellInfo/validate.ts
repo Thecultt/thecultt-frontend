@@ -3,7 +3,7 @@ export interface validateInfoValues {
 	brand: string;
 	model: string;
 	condition: string;
-	deffects: string;
+	defects: string;
 	set: string;
 	size: string;
 	price: string;
@@ -15,7 +15,7 @@ interface validateInfoErrors {
 	brand?: string;
 	model?: string;
 	condition?: string;
-	deffects?: string;
+	defects?: string;
 	set?: string;
 	size?: string;
 	price?: string;
@@ -48,8 +48,8 @@ const validate = (values: validateInfoValues) => {
 		errors.condition = "Поле не может быть пустым";
 	}
 
-	if (!values.deffects) {
-		errors.deffects = "Поле не может быть пустым";
+	if (!values.defects) {
+		errors.defects = "Поле не может быть пустым";
 	}
 
 	if (!values.set) {

@@ -74,6 +74,15 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						bgWhite
 					/>
 				</div>
+
+				<div className="sell-block-input" style={{ width: "100%" }}>
+					<Field
+						component={RenderInput}
+						label="Ваш ник в телеграмм"
+						name="telegram"
+						bgWhite
+					/>
+				</div>
 			</div>
 
 			<button

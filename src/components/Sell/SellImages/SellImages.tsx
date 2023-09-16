@@ -153,9 +153,9 @@ const SellImages: React.FC = () => {
 	};
 
 	const isValid = () => {
-		if (category === "Сумки") return Object.keys(imageBlocksValue).length >= imageBlocksBag.filter((image) => !image.isMore).length
+		if (category === "Женские сумки" || category === "Мужские сумки") return Object.keys(imageBlocksValue).length >= imageBlocksBag.filter((image) => !image.isMore).length
 		if (category === "Обувь") return Object.keys(imageBlocksValue).length >= imageBlocksShoes.filter((image) => !image.isMore).length
-		if (category === "Аксессуары") return Object.keys(imageBlocksValue).length >= imageBlocksAccess.filter((image) => !image.isMore).length
+		if (category === "Брендовая бижутерия" || category === "Часы" || category === "Ремни" || category === "Очки" || category === "Платки" || category === "Другой аксессуар") return Object.keys(imageBlocksValue).length >= imageBlocksAccess.filter((image) => !image.isMore).length
 	}
 
 	const onSubmit = () => {
@@ -174,7 +174,18 @@ const SellImages: React.FC = () => {
 			</p>
 
 			<div className="sell-block-images-block-wrapper">
-				{category === "Сумки" ? imageBlocksBag.map((block, index) => (
+				{category === "Женские сумки" || category === "Мужские сумки" ? imageBlocksBag.map((block, index) => (
+					<SellImagesBlock
+						{...block}
+						number={index + 1}
+						key={`sell-block-images-block-${index}`}
+						value={imageBlocksValue[index]}
+						onChangeCustom={(result: any) => onChangeCustom(result, index)}
+						disabled={block.isMore ? isValid() ? false : true : false}
+					/>
+				)) : null}
+
+				{category === "Брендовая бижутерия" || category === "Часы" || category === "Ремни" || category === "Очки" || category === "Платки" || category === "Другой аксессуар" ? imageBlocksShoes.map((block, index) => (
 					<SellImagesBlock
 						{...block}
 						number={index + 1}
@@ -186,17 +197,6 @@ const SellImages: React.FC = () => {
 				)) : null}
 
 				{category === "Обувь" ? imageBlocksShoes.map((block, index) => (
-					<SellImagesBlock
-						{...block}
-						number={index + 1}
-						key={`sell-block-images-block-${index}`}
-						value={imageBlocksValue[index]}
-						onChangeCustom={(result: any) => onChangeCustom(result, index)}
-						disabled={block.isMore ? isValid() ? false : true : false}
-					/>
-				)) : null}
-
-				{category === "Аксессуары" ? imageBlocksAccess.map((block, index) => (
 					<SellImagesBlock
 						{...block}
 						number={index + 1}

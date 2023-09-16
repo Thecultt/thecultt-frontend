@@ -1,45 +1,33 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+
+import { setBrandsLetter, setBrandsSearch } from "../../redux/actions/brands";
 
 const BrandsSearch: React.FC = () => {
-	const alphabet: string[] = [
-		"A",
-		"B",
-		"C",
-		"D",
-		"E",
-		"F",
-		"G",
-		"H",
-		"I",
-		"J",
-		"K",
-		"L",
-		"N",
-		"M",
-		"O",
-		"P",
-		"Q",
-		"R",
-		"S",
-		"T",
-		"U",
-		"V",
-		"W",
-		"X",
-		"Y",
-		"Z",
-		"0-9",
-	];
+	const dispatch = useDispatch()
+
+	const { allBrands, letter } = useTypedSelector(({ brands }) => brands)
+
+	const onClickLetter = (letter: string) => {
+		dispatch(setBrandsLetter(letter))
+	}
+
+	const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(setBrandsSearch(e.target.value.toLocaleLowerCase()))
+	}
 
 	return (
 		<div className="brands-search">
 			<div className="brands-search-alphabet">
-				{alphabet.map((letter, index) => (
+				{Object.keys(allBrands).map((item, index) => (
 					<button
-						className="brands-search-alphabet__btn"
+						className={`brands-search-alphabet__btn ${item === letter ? "active" : ""}`}
 						key={`brands-search-alphabet__btn-${index}`}
+						onClick={() => onClickLetter(item)}
 					>
-						{letter}
+						{item}
 					</button>
 				))}
 			</div>
@@ -73,9 +61,10 @@ const BrandsSearch: React.FC = () => {
 					className="input-light__field"
 					id="name"
 					placeholder="Поиск брендов"
+					onChange={onChangeSearch}
 				/>
 			</div>
-		</div >
+		</div>
 	);
 };
 

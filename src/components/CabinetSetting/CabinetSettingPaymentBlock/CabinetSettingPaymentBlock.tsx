@@ -1,8 +1,21 @@
 import React from "react";
+import {
+	Field,
+	reduxForm,
+	InjectedFormProps,
+} from "redux-form";
 
-import { Input } from "../../";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-const CabinetSettingPaymentBlock: React.FC = () => {
+import { RenderInput } from "../../";
+
+const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
+	handleSubmit,
+	initialize,
+	invalid,
+	pristine,
+	submitting,
+}) => {
 	const [state, setState] = React.useState<boolean>(false);
 
 	const toggleState = () => {
@@ -10,34 +23,34 @@ const CabinetSettingPaymentBlock: React.FC = () => {
 	};
 
 	return (
-		<div className="cabinet-setting-block">
+		<form onSubmit={handleSubmit} className={`cabinet-setting-block ${state ? "active" : ""}`}>
 			<div className="cabinet-setting-block-title">
 				<h3 className="cabinet-setting-block-title__title">
 					Реквизиты для выплат
 				</h3>
 
 				{state ? (
-					<div className="cabinet-setting-block-title-btn">
-						<button className="cabinet-setting-block-title-btn__btn">
+					<>
+						<button type="submit" className={`cabinet-setting-block-title__btn ${invalid || pristine || submitting ? "disabled" : ""}`}>
 							Сохранить
 						</button>
-						<button className="cabinet-setting-block-title-btn__btn">
+						<button type="button" className="cabinet-setting-block-title__btn" onClick={() => setState(false)}>
 							Отменить
 						</button>
-					</div>
+					</>
 				) : null}
 			</div>
 
 			{state ? (
-				<div className="cabinet-setting-block-form">
+				<div className="cabinet-setting-block-form active">
 					<div className="cabinet-setting-block-form-input-wrapper">
 						<div
 							className="cabinet-setting-block-form-input"
 							style={{ width: "49%" }}
 						>
-							<Input
-								type="text"
-								name=""
+							<Field
+								component={RenderInput}
+								name="pasport"
 								label="Серия и номер паспорта"
 								bgWhite
 							/>
@@ -47,23 +60,33 @@ const CabinetSettingPaymentBlock: React.FC = () => {
 							className="cabinet-setting-block-form-input"
 							style={{ width: "49%" }}
 						>
-							<Input type="text" name="" label="ИНН" bgWhite />
+							<Field
+								component={RenderInput}
+								name="inn"
+								label="ИНН"
+								bgWhite
+							/>
 						</div>
 
 						<div
 							className="cabinet-setting-block-form-input"
 							style={{ width: "49%" }}
 						>
-							<Input type="text" name="" label="БИК" bgWhite />
+							<Field
+								component={RenderInput}
+								name="bik"
+								label="БИК"
+								bgWhite
+							/>
 						</div>
 
 						<div
 							className="cabinet-setting-block-form-input"
 							style={{ width: "49%" }}
 						>
-							<Input
-								type="text"
-								name=""
+							<Field
+								component={RenderInput}
+								name="v"
 								label="Владелец счёта"
 								bgWhite
 							/>
@@ -73,9 +96,9 @@ const CabinetSettingPaymentBlock: React.FC = () => {
 							className="cabinet-setting-block-form-input"
 							style={{ width: "100%" }}
 						>
-							<Input
-								type="text"
-								name=""
+							<Field
+								component={RenderInput}
+								name="rs"
 								label="Расчетный счёт"
 								bgWhite
 							/>
@@ -119,8 +142,11 @@ const CabinetSettingPaymentBlock: React.FC = () => {
 					Добавить реквизиты для выплат
 				</button>
 			)}
-		</div>
+		</form>
 	);
 };
 
-export default CabinetSettingPaymentBlock;
+export default reduxForm<{}, {}>({
+	form: "cabinet-setting-payment-form",
+	// validate,
+})(CabinetSettingPaymentBlock);

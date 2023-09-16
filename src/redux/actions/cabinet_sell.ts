@@ -2,6 +2,8 @@ import { Dispatch } from "react";
 
 import $api from '../../http/'
 
+import { CabinetSellOption } from '../../models/ICabinetSellOption'
+
 import { CabinetSellActionTypes, CabinetSellActions, CabinetSellTypes, CabinetSellStepKeys } from "../types/ICabinetSell";
 
 export const setCabinetSellCurrentStep = (step: CabinetSellStepKeys) => ({
@@ -14,11 +16,60 @@ export const setCabinetSellCurrentType = (type: CabinetSellTypes) => ({
 	payload: type
 })
 
-export const sendCreateCabinetSell = (data: any) => async (dispatch: Dispatch<CabinetSellActions>) => {
-	const res = await $api.post(`/create_sell/`, data)
-
+export const sendCreateCabinetSell = (data: any) => (dispatch: Dispatch<CabinetSellActions>) => {
 	dispatch({
-		type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SEND,
+		type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SENDING,
 		payload: true
 	})
+
+	$api.post(`/create_sell/`, data).then(() => {
+		dispatch({
+			type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SEND,
+			payload: true
+		})
+
+		dispatch({
+			type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SENDING,
+			payload: false
+		})
+
+		localStorage.removeItem("sell-info-form")
+		localStorage.removeItem("sell-images-form")
+		localStorage.removeItem("sell-contact-form")
+	})
+}
+
+export const fetchCabinetSellParameters = () => async (dispatch: Dispatch<CabinetSellActions>) => {
+	const { data } = await $api.get<CabinetSellOption[]>(`/sell_options/`)
+
+	const newObj: { [key: string]: CabinetSellOption } = {}
+
+	data.map((item) => {
+		newObj[item.name] = item
+	})
+
+	dispatch({
+		type: CabinetSellActionTypes.SET_CABINET_SELL_PARAMETERS,
+		payload: newObj
+	})
+}
+
+export const fetchCabinetSellsList = () => async (dispatch: Dispatch<CabinetSellActions>) => {
+	const { data } = await $api.get(`/sells/`)
+
+	dispatch({
+		type: CabinetSellActionTypes.SET_CABINET_SELL_SELLS_LIST,
+		payload: data
+	})
+
+	// const newObj: { [key: string]: CabinetSellOption } = {}
+
+	// data.map((item) => {
+	// 	newObj[item.name] = item
+	// })
+
+	// dispatch({
+	// 	type: CabinetSellActionTypes.SET_CABINET_SELL_PARAMETERS,
+	// 	payload: newObj
+	// })
 }

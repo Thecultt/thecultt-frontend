@@ -8,7 +8,7 @@ import { setCabinetSellCurrentStep } from "../../../redux/actions/cabinet_sell";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import { RenderInput, RenderSelect, RenderSelectArray, SellBackBtn } from "../../";
+import { RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from "../../";
 
 import validate from './validate'
 
@@ -21,16 +21,83 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	const dispatch = useDispatch()
 
 	const [currentCategory, setCurrentCategory] = React.useState<string>("")
+	const [currentBrand, setCurrentBrand] = React.useState<string>("")
 
-	const { categories, isLoaded } = useTypedSelector(({ products_filters }) => products_filters)
+	const [brands, setBrands] = React.useState<{ title: string, value: string }[]>([])
+	const [models, setModels] = React.useState<{ title: string, value: string }[]>([])
+
+	const { isLoadedParameters, parameters } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
 	React.useEffect(() => {
-		if (isLoaded) {
-			const data: any = localStorage.getItem("sell-info-form")
+		const data: any = JSON.parse(localStorage.getItem("sell-info-form") as any)
 
-			initialize(JSON.parse(data))
+		if (isLoadedParameters && data) {
+			if (data.category) {
+				setCurrentCategory(data.category)
+			}
+
+			if (data.brand) {
+				setCurrentBrand(data.brand)
+			}
+
+			initialize(data)
 		}
-	}, [isLoaded])
+	}, [isLoadedParameters])
+
+	// React.useEffect(() => {
+	// 	initialize({
+	// 		brand: "",
+	// 		model: "",
+	// 	})
+	// }, [currentCategory])
+
+	// React.useEffect(() => {
+	// 	initialize({
+	// 		brand: currentBrand,
+	// 		model: "",
+	// 	})
+	// }, [currentBrand])
+
+	React.useEffect(() => {
+		if (parameters[currentCategory]) {
+			parameters[currentCategory].brands.map((brand) => {
+				if (brand.name === currentBrand) {
+					setModels(brand.models.map(model => ({ title: model.name, value: model.name })))
+				}
+			})
+
+			setBrands(parameters[currentCategory].brands.map((brand) => ({ title: brand.name, value: brand.name })))
+		}
+	}, [currentCategory])
+
+	const onChangeInputBrand = (value: string) => {
+		const newBrands: { title: string, value: string }[] = []
+
+		parameters[currentCategory].brands.map(brand => {
+			if (brand.name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
+				newBrands.push({ title: brand.name, value: brand.name })
+			}
+		})
+
+		setCurrentBrand(value)
+		setBrands(newBrands)
+	}
+
+	const onChangeInputModel = (value: string) => {
+		const newModels: { title: string, value: string }[] = []
+
+		parameters[currentCategory].brands.map((brand) => {
+			if (brand.name === currentBrand) {
+				brand.models.map(model => {
+					if (model.name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
+						newModels.push({ title: model.name, value: model.name })
+					}
+				})
+			}
+		})
+
+		setModels(newModels)
+	}
 
 	return (
 		<form onSubmit={handleSubmit} className="sell-block sell-block-info">
@@ -48,7 +115,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					component={RenderSelect}
 					name="category"
 					label="Категория товара"
-					items={Object.keys(categories)}
+					items={Object.keys(parameters)}
 					onChangeCutsom={(value: string) => setCurrentCategory(value)}
 				/>
 			</div>
@@ -57,23 +124,36 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				<h4 className="sell-block-select__title">Бренд товара</h4>
 
 				<Field
-					component={RenderSelect}
+					component={RenderInputHints}
 					name="brand"
 					label="Бренд товара"
-					items={categories[currentCategory] ? categories[currentCategory].manufacturer : []}
-					disabled={categories[currentCategory] ? false : true}
+					hints={brands}
+					disabled={parameters[currentCategory] ? false : true}
+					onChangeCustom={(value: string) => onChangeInputBrand(value)}
+					bgWhite
+					ifFreeField
 				/>
 			</div>
 
 			<div className="sell-block-select">
 				<h4 className="sell-block-select__title">Модель товара</h4>
 
-				<Field component={RenderInput} name="model" label="Модель товара" bgWhite />
+				<Field
+					component={RenderInputHints}
+					name="model"
+					label="Модель товара"
+					hints={models}
+					disabled={currentBrand !== "" ? false : true}
+					onChangeCustom={(value: string) => onChangeInputModel(value)}
+					bgWhite
+					ifFreeField
+				/>
 			</div>
 
 			<div className="sell-block-select">
 				<h4 className="sell-block-select__title">
 					Состояние товара
+
 					<svg
 						width="18"
 						height="18"
@@ -98,20 +178,34 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					</svg>
 				</h4>
 
-				<Field component={RenderSelect} name="condition" label="Состояние товара" items={["Новое", "Отличное", "Хорошее", "Винтиаж"]} />
+				<Field
+					component={RenderSelect}
+					name="condition"
+					label="Состояние товара"
+					items={parameters[currentCategory] ? parameters[currentCategory].conditions.map(condition => condition.name) : []}
+					disabled={parameters[currentCategory] ? false : true}
+				/>
 			</div>
 
 			<div className="sell-block-select">
 				<h4 className="sell-block-select__title">Наличие дефектов</h4>
 
-				<Field component={RenderSelectArray} name="deffects" label="Наличие дефектов" items={["Деффект 1", "Деффект 2", "Деффект 3"]} />
+				<Field
+					component={RenderSelectArray}
+					name="defects"
+					label="Наличие дефектов"
+					items={parameters[currentCategory] ? parameters[currentCategory].defects.map(defect => defect.name) : []}
+					disabled={parameters[currentCategory] ? false : true}
+				/>
 			</div>
 
-			{currentCategory === "Обувь" ? <div className="sell-block-select">
-				<h4 className="sell-block-select__title">Размер</h4>
+			{currentCategory === "Обувь" ? (
+				<div className="sell-block-select">
+					<h4 className="sell-block-select__title">Размер</h4>
 
-				<Field component={RenderInput} name="size" label="Размер" bgWhite />
-			</div> : null}
+					<Field component={RenderInput} name="size" label="Размер" bgWhite />
+				</div>
+			) : null}
 
 			<div className="sell-block-select">
 				<h4 className="sell-block-select__title">Комплект</h4>
@@ -205,7 +299,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 			<button
 				className={`btn ${invalid || submitting ? "disabled" : ""} sell-block__btn`}
-				disabled={invalid ||  submitting}
+				disabled={invalid || submitting}
 			>
 				Продолжить
 			</button>

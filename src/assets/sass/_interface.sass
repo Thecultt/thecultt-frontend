@@ -145,7 +145,6 @@ input[type="file"]
 
 		+transition
 		+borderRadius
-		+openPopup
 
 		&.active
 			opacity: 1
@@ -266,6 +265,9 @@ button
 		user-select: none
 		pointer-events: none
 		opacity: 0.5
+
+	&.loader
+		height: 53px
 
 	&:hover
 		background-color: $hoverMainColor

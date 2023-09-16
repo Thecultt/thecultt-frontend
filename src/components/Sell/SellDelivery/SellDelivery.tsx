@@ -10,7 +10,7 @@ import { setCabinetSellCurrentStep } from "../../../redux/actions/cabinet_sell";
 
 import { fetchOrderAddressCitys, fetchOrderAddressStreet } from '../../../redux/actions/order'
 
-import { SellBackBtn, SellDeliveryTypes, Input, RenderInputHints, RenderInput, RenderTextarea } from "../../";
+import { SellBackBtn, SellDeliveryTypes, Loader, RenderInputHints, RenderInput, RenderTextarea } from "../../";
 
 import validate from './validate'
 
@@ -18,7 +18,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	handleSubmit,
 	invalid,
 	submitting,
-	initialize,
+	initialize
 }) => {
 	const dispatch = useDispatch()
 
@@ -26,6 +26,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	const [currentTypeDelivery, setCurrentTypeDelivery] = React.useState<string>("Курьер")
 
 	const { globalCitys, globalStreets } = useTypedSelector(({ order }) => order)
+	const { isSending } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
 	const onChangeCitys = (query: string) => {
 		dispatch(fetchOrderAddressCitys(query, "Россия") as any)
@@ -46,6 +47,16 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	React.useEffect(() => {
 		localStorage.setItem("sell-info-global-type-delivery", currentTypeDelivery)
 	}, [currentTypeDelivery])
+
+	React.useEffect(() => {
+		initialize({
+			city: currentCity.title,
+			street: "",
+			dom: "",
+			flat: "",
+			comm: "",
+		})
+	}, [currentCity])
 
 	return (
 		<form onSubmit={handleSubmit} className="sell-block sell-block-delivery">
@@ -120,12 +131,18 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				</> : null
 			}
 
-			<button
-				className={`btn ${invalid || submitting ? "disabled" : ""} sell-block__btn`}
-				disabled={invalid || submitting}
-			>
-				Продолжить
-			</button>
+			{isSending ?
+				<button className="btn disabled loader sell-block__btn" disabled>
+					<Loader />
+				</button>
+				:
+				<button
+					className={`btn ${invalid || submitting ? "disabled" : ""} sell-block__btn`}
+					disabled={invalid || submitting}
+				>
+					Продолжить
+				</button>
+			}
 		</form>
 	);
 };

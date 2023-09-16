@@ -1,0 +1,106 @@
+// cabinet sells list
+.cabinet-sells-list
+	+open
+
+	&-item-wrapper
+		background-color: $lightBackgroundColor
+		padding: 10px
+
+		+borderRadius
+
+		margin-bottom: 15px
+
+		&:last-child
+			margin-bottom: 0
+
+	&-item
+		position: relative
+		border: 0.3px solid $gray
+
+		cursor: pointer
+
+		padding: 18px
+
+		+borderRadius
+
+		&-topinfo
+			display: flex
+			justify-content: space-between
+			align-items: center
+
+			&-block
+				display: flex
+				align-items: center
+
+				&__title
+					font-size: 17px
+
+					+ManropeSemiBold
+
+				&__date
+					margin-left: 25px
+					font-size: 17px
+
+				&__date
+					+ManropeMedium
+
+				&__status
+					display: inline-flex
+					align-items: center
+					user-select: none
+
+					font-size: 17px
+
+					+ManropeMedium
+
+					&.success
+						color: $mainColor
+
+					&.error
+						color: $red
+
+					& > svg
+						margin-left: 5px
+
+				&-icon
+					display: inline-flex
+					align-items: center
+
+					margin-left: 10px
+
+					+transition
+
+					&.rotate
+						transform: rotate(180deg)
+
+		&-info
+			&-block
+				margin-top: 20px
+
+				&__title
+					font-size: 17px
+
+					margin-bottom: 12px
+
+					+ManropeSemiBold
+
+				&-value
+					&.bb
+						padding-bottom: 12px
+						margin-bottom: 12px
+						border-bottom: 1px solid $gray
+
+					&__value
+						display: flex
+						align-items: center
+
+						margin-bottom: 10px
+
+						+ManropeMedium
+
+						&:last-child
+							margin-bottom: 0
+
+						& > span
+							color: $gray
+							margin-right: 7px

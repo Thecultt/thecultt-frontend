@@ -13,7 +13,7 @@ const CabinetMenu: React.FC = () => {
                 История Заказов
             </NavLink>
             <NavLink
-                to="/cabinet/"
+                to="/cabinet/sells"
                 className={({isActive}) =>
                     `cabinet-menu__item ${isActive && "active"}`
                 }

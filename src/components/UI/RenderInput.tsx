@@ -6,6 +6,7 @@ interface RenderInput extends WrappedFieldProps {
 	label: string;
 	type: string;
 	bgWhite?: boolean;
+	disabled?: boolean;
 }
 
 const RenderInput: React.FC<RenderInput> = ({
@@ -14,6 +15,7 @@ const RenderInput: React.FC<RenderInput> = ({
 	input,
 	meta: { touched, error },
 	bgWhite,
+	disabled,
 }) => {
 	const [isVisible, setIsVisible] = React.useState<boolean>(false);
 
@@ -22,7 +24,7 @@ const RenderInput: React.FC<RenderInput> = ({
 	};
 
 	return (
-		<div className="input-wrapper">
+		<div className={`input-wrapper ${disabled ? "disabled" : ""}`}>
 			<div className={`input ${touched && error ? "error" : ""} ${type === "password" ? "password" : ""} ${bgWhite ? "bgWhite" : ""}`}>
 				<input
 					{...input}
