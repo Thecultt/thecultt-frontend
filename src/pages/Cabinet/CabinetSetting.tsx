@@ -39,10 +39,10 @@ const CabinetSetting: React.FC = () => {
 					{isLoaded ? <div className="cabinet-content cabinet-setting">
 						<CabinetSettingInfoBlock onSubmit={onSubmit} />
 						<CabinetSettingContactBlock onSubmit={onSubmit} />
-						<CabinetSettingPasswordRecovery />
-						<CabinetSettingBrandBlock />
+						{/* <CabinetSettingPasswordRecovery /> */}
+						{/* <CabinetSettingBrandBlock /> */}
 						<CabinetSettingAddressBlock onSubmit={onSubmit} />
-						<CabinetSettingPaymentBlock />
+						<CabinetSettingPaymentBlock onSubmit={onSubmit} />
 
 						<button className="btn-regular cabinet-setting__logout" onClick={onClickLogout}>
 							Выйти из профиля

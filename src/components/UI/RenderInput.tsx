@@ -1,15 +1,6 @@
 import React from "react";
-import { WrappedFieldProps } from "redux-form";
 
-interface RenderInput extends WrappedFieldProps {
-	name: string;
-	label: string;
-	type: string;
-	bgWhite?: boolean;
-	disabled?: boolean;
-}
-
-const RenderInput: React.FC<RenderInput> = ({
+const RenderInput: React.FC<any> = ({
 	label,
 	type,
 	input,

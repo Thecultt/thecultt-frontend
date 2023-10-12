@@ -16,7 +16,7 @@ const CabinetWaitingListItem: React.FC<CabinetWaitingListItemProps> = ({ categor
 				</button>
 				<div className="cabinet-waiting-list-item-title">
 					<h3 className="cabinet-waiting-list-item-title__title">
-						Подписка №{index+1}
+						Подписка №{index + 1}
 					</h3>
 					{num_products ?
 						<Link to="/" className="cabinet-waiting-list-item-title__subtitle">Доступно товаров на сайте {num_products}шт.</Link>

@@ -1,6 +1,6 @@
 import React from "react";
-
 import { Field } from "redux-form";
+import { createTextMask } from "redux-form-input-masks";
 
 import { RenderInput } from "../../";
 
@@ -19,7 +19,16 @@ const OrderFormContact: React.FC = () => {
 				</div>
 
 				<div className="order-form-block-input" style={{ width: "49%" }}>
-					<Field component={RenderInput} type="text" name="phone" label="Телефон" />
+					<Field
+						component={RenderInput}
+						name="phone"
+						label="Телефон"
+						{...createTextMask({
+							pattern: "+7 999 999 99-99",
+							guide: false,
+							stripMask: false,
+						})}
+					/>
 				</div>
 			</div>
 		</div>

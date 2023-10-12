@@ -16,11 +16,26 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	pristine,
 	submitting,
 }) => {
-	const [state, setState] = React.useState<boolean>(false);
+	const { user: { pasport, inn, bik, fullname, rs }, isSending } = useTypedSelector(({ user }) => user)
+
+	const [state, setState] = React.useState<boolean>(pasport !== "" ? true : false);
+	const [isEdit, setIsEdit] = React.useState<boolean>(false)
 
 	const toggleState = () => {
 		setState(!state);
 	};
+
+	React.useEffect(() => {
+		initialize({
+			pasport, inn, bik, fullname, rs
+		})
+	}, [isEdit])
+
+	React.useEffect(() => {
+		if (!isSending) {
+			setIsEdit(false)
+		}
+	}, [isSending])
 
 	return (
 		<form onSubmit={handleSubmit} className={`cabinet-setting-block ${state ? "active" : ""}`}>
@@ -86,7 +101,7 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						>
 							<Field
 								component={RenderInput}
-								name="v"
+								name="fullname"
 								label="Владелец счёта"
 								bgWhite
 							/>

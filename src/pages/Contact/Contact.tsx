@@ -11,7 +11,7 @@ const Contact: React.FC = () => {
                     <div className="contact-block-wrapper">
                         <a
                             href="tel:+7 499 992 80 47"
-                            className="contact-block"
+                            className="contact-block hover-scale"
                         >
                             <div className="contact-block-content">
                                 <div className="contact-block-content-icon">
@@ -62,7 +62,7 @@ const Contact: React.FC = () => {
                         </a>
                         <a
                             href="https://t.me/thecultt_help"
-                            className="contact-block"
+                            className="contact-block hover-scale"
                         >
                             <div className="contact-block-content">
                                 <div className="contact-block-content-icon">
@@ -111,7 +111,7 @@ const Contact: React.FC = () => {
                                 />
                             </svg>
                         </a>
-                        <a href="" className="contact-block">
+                        <a href="https://api.whatsapp.com/send/?phone=79955026591&text&type=phone_number&app_absent=0" className="contact-block hover-scale">
                             <div className="contact-block-content">
                                 <div className="contact-block-content-icon">
                                     <svg
@@ -161,7 +161,7 @@ const Contact: React.FC = () => {
                         </a>
                         <a
                             href="mailto:hey@thecultt.com"
-                            className="contact-block"
+                            className="contact-block hover-scale"
                         >
                             <div className="contact-block-content">
                                 <div className="contact-block-content-icon">
@@ -210,7 +210,7 @@ const Contact: React.FC = () => {
                                 />
                             </svg>
                         </a>
-                        <div className="contact-block-office">
+                        <div className="contact-block-office hover-scale">
                             <h3 className="contact-block-office__title">
                                 Адрес офиса
                             </h3>

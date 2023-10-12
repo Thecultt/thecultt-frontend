@@ -1,5 +1,25 @@
 import { Product, ProductPage } from '../../models/IProduct'
 
+export interface ProductsStateFilters {
+	isParse: boolean,
+
+	price: {
+		min: number
+		max: number
+	}
+
+	conditions: { [key: string]: string }
+	categories: { [key: string]: string }
+	types: { [key: string]: string }
+	brands: { [key: string]: string }
+	models: { [key: string]: string }
+	colors: { [key: string]: string }
+	sex: { [key: string]: string }
+	availability: { [key: string]: string }
+
+	sort: string
+}
+
 export interface ProductsState {
 	items: Product[]
 	isLoaded: boolean
@@ -15,23 +35,7 @@ export interface ProductsState {
 	pageCount: number
 	itemsCount: number
 
-	filters: {
-		price: {
-			min: number
-			max: number
-		}
-
-		conditions: { [key: string]: string }
-		categories: { [key: string]: string }
-		types: { [key: string]: string }
-		brands: { [key: string]: string }
-		models: { [key: string]: string }
-		colors: { [key: string]: string }
-		sex: { [key: string]: string }
-		availability: { [key: string]: string }
-
-		sort: string
-	}
+	filters: ProductsStateFilters
 }
 
 export enum ProductActionTypes {
@@ -47,6 +51,7 @@ export enum ProductActionTypes {
 	SET_PRODUCTS_PAGE_COUNT = "SET_PRODUCTS_PAGE_COUNT",
 	SET_PRODUCTS_ITEMS_COUNT = "SET_PRODUCTS_ITEMS_COUNT",
 
+	SET_PRODUCTS_FILTERS_CATALOG = "SET_PRODUCTS_FILTERS_CATALOG",
 	SET_PRODUCTS_FILTERS_CATALOG_PRICE = "SET_PRODUCTS_FILTERS_CATALOG_PRICE",
 	SET_PRODUCTS_FILTERS_CATALOG_CONDITIONS = "SET_PRODUCTS_FILTERS_CATALOG_CONDITIONS",
 	SET_PRODUCTS_FILTERS_CATALOG_CATEGORIES = "SET_PRODUCTS_FILTERS_CATALOG_CATEGORIES",
@@ -116,6 +121,11 @@ interface setProductsItemsCount {
 }
 
 // filters
+interface setProductsFilters {
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG,
+	payload: ProductsStateFilters
+}
+
 interface setProductsFiltersPrice {
 	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_PRICE,
 	payload: {
@@ -169,4 +179,4 @@ interface setProductsFiltersSort {
 	payload: string
 }
 
-export type ProductTypes = setProductsItems | setProductsItemByArticle | setProductsItemByArticleIsLoaded | setProductsItemsMore | setProductsItemsPage | setProductsIsLoaded | setProductsIsFetchMore | setProductsIsFetchPage | setProductsPageCurrentPage | setProductsPageCount | setProductsItemsCount | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategories | setProductsFiltersTypes | setProductsFiltersBrands | setProductsFiltersModels | setProductsFiltersColors | setProductsFiltersSex | setProductsFiltersAvailability | setProductsFiltersSort
+export type ProductTypes = setProductsItems | setProductsItemByArticle | setProductsItemByArticleIsLoaded | setProductsItemsMore | setProductsItemsPage | setProductsIsLoaded | setProductsIsFetchMore | setProductsIsFetchPage | setProductsPageCurrentPage | setProductsPageCount | setProductsItemsCount | setProductsFilters | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategories | setProductsFiltersTypes | setProductsFiltersBrands | setProductsFiltersModels | setProductsFiltersColors | setProductsFiltersSex | setProductsFiltersAvailability | setProductsFiltersSort

@@ -142,7 +142,7 @@ const Sell: React.FC = () => {
 								<p className="sell-success__description">
 									Ваша заявка принята в работу, менеджер свяжется с вами для обсуждения деталей. Вы можете  отследить статус  заявки в личном кабинете или на почте.
 								</p>
-								<Link to="/" className="btn sell-success__link">
+								<Link to="/cabinet/sells" className="btn sell-success__link">
 									Перейти в личный кабинет
 								</Link>
 							</div>

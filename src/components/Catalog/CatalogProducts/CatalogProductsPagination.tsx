@@ -62,19 +62,6 @@ const CatalogProductsPagination: React.FC = () => {
 					Первая
 				</button>
 
-				{currentPage === 2 ?
-					<>
-						<div
-							className={`catalog-product-pagination-pages-item`}
-							onClick={() => onClickFetchProductsPage(currentPage - 1)}
-						>
-							{currentPage - 1}
-						</div>
-					</>
-					:
-					null
-				}
-
 				{currentPage > 2 ?
 					<>
 						<div
@@ -83,6 +70,7 @@ const CatalogProductsPagination: React.FC = () => {
 						>
 							{currentPage - 2}
 						</div>
+
 						<div
 							className={`catalog-product-pagination-pages-item`}
 							onClick={() => onClickFetchProductsPage(currentPage - 1)}
@@ -91,15 +79,31 @@ const CatalogProductsPagination: React.FC = () => {
 						</div>
 					</>
 					:
-					null
+					<>
+						{currentPage > 1 ? (
+							<div
+								className={`catalog-product-pagination-pages-item`}
+								onClick={() => onClickFetchProductsPage(1)}
+							>
+								{1}
+							</div>
+						) : null}
+
+						{currentPage > 2 ? (
+							<div
+								className={`catalog-product-pagination-pages-item`}
+								onClick={() => onClickFetchProductsPage(2)}
+							>
+								{2}
+							</div>
+						) : null}
+					</>
 				}
 
 				{totalPagesArray
 					.slice(
-						currentPage + 2 < pageCount
-							? currentPage - 1
-							: pageCount - 5,
-						currentPage + 2
+						currentPage - 1,
+						currentPage > 2 ? currentPage + 2 : currentPage + 4
 					)
 					.map((page, index) => (
 						<div

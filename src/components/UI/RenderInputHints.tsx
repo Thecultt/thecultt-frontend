@@ -80,7 +80,7 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
 
 	React.useEffect(() => {
 		if (input.value) {
-			setValue({ title: input.value, value: "" })
+			setValue({ title: input.value, value: input.value })
 		}
 	}, [input.value])
 

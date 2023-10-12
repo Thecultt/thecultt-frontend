@@ -1,54 +1,61 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
-import {setFiltersTypesProduct} from "../../../redux/actions/products";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import {CatalogFiltersBlockWrapper, Checkbox} from "../../";
+import { setFiltersTypesProduct } from "../../../redux/actions/products";
+
+import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
 
 interface CatalogFiltersTypesProps {
-    types: {[key: string]: string[]};
-    disabled?: boolean;
+	types: { [key: string]: string[] };
+	disabled?: boolean;
 }
 
 const CatalogFiltersTypes: React.FC<CatalogFiltersTypesProps> = ({
-    types,
-    disabled,
+	types,
+	disabled,
 }) => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const onChangeSetType = (type: string) => {
-        dispatch(setFiltersTypesProduct(type));
-    };
+	const { filters } = useTypedSelector(({ products }) => products)
 
-    return (
-        <CatalogFiltersBlockWrapper
-            title="Тип"
-            disabled={disabled ? disabled : false}
-        >
-            {Object.keys(types).map((key, index) => (
-                <div
-                    key={`catalog-filters-block-content-types-checkbox-${index}-wrapper`}
-                >
-                    <p className="catalog-filters-block-content-checkbox__subtitle">
-                        {key}
-                    </p>
+	const onChangeSetType = (type: string) => {
+		dispatch(setFiltersTypesProduct(type));
+	};
 
-                    {types[key].map((type, subindex) => (
-                        <div
-                            className="catalog-filters-block-content-checkbox"
-                            key={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
-                        >
-                            <Checkbox
-                                id={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
-                                label={type}
-                                onChange={() => onChangeSetType(type)}
-                            />
-                        </div>
-                    ))}
-                </div>
-            ))}
-        </CatalogFiltersBlockWrapper>
-    );
+	return (
+		<CatalogFiltersBlockWrapper
+			title="Тип"
+			disabled={disabled ? disabled : false}
+		>
+			{Object.keys(types).map((key, index) => (
+				<div
+					key={`catalog-filters-block-content-types-checkbox-${index}-wrapper`}
+				>
+					<p className="catalog-filters-block-content-checkbox__subtitle">
+						{key}
+					</p>
+
+					{types[key].map((type, subindex) => (
+						<div
+							className="catalog-filters-block-content-checkbox"
+							key={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
+						>
+							<Checkbox
+								id={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
+								label={type}
+								onChange={() => onChangeSetType(type)}
+								checked={Object.keys(filters.types).find((filtersType) => (
+									type === filtersType
+								)) ? true : false}
+							/>
+						</div>
+					))}
+				</div>
+			))}
+		</CatalogFiltersBlockWrapper>
+	);
 };
 
 export default CatalogFiltersTypes;

@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { reduxForm, InjectedFormProps, Field } from "redux-form";
+import { createTextMask } from "redux-form-input-masks";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
@@ -21,11 +22,19 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	const dispatch = useDispatch()
 
 	const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
+	const { user: { name, middlename, email, phone } } = useTypedSelector(({ user }) => user)
 
 	React.useEffect(() => {
-		const data: any = localStorage.getItem("sell-contact-form")
+		initialize({
+			name,
+			surname: middlename,
+			email,
+			phone,
+		})
 
-		initialize(JSON.parse(data))
+		// const data: any = localStorage.getItem("sell-contact-form")
+
+		// initialize(JSON.parse(data))
 	}, [])
 
 	return (
@@ -38,50 +47,57 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				укажите актуальные номер телефона и почту для связи.
 			</p>
 
-			<div className="sell-block-input-wrapper">
-				<div className="sell-block-input" style={{ width: "49%" }}>
-					<Field
-						component={RenderInput}
-						label="Ваше имя"
-						name="name"
-						bgWhite
-					/>
-				</div>
+			<div className="sell-block-input-wrapper-wrapper">
+				<div className="sell-block-input-wrapper">
+					<div className="sell-block-input" style={{ width: "49%" }}>
+						<Field
+							component={RenderInput}
+							label="Ваше имя"
+							name="name"
+							bgWhite
+						/>
+					</div>
 
-				<div className="sell-block-input" style={{ width: "49%" }}>
-					<Field
-						component={RenderInput}
-						label="Ваша фамилия"
-						name="surname"
-						bgWhite
-					/>
-				</div>
+					<div className="sell-block-input" style={{ width: "49%" }}>
+						<Field
+							component={RenderInput}
+							label="Ваша фамилия"
+							name="surname"
+							bgWhite
+						/>
+					</div>
 
-				<div className="sell-block-input" style={{ width: "100%" }}>
-					<Field
-						component={RenderInput}
-						label="Ваша почта"
-						name="email"
-						bgWhite
-					/>
-				</div>
+					<div className="sell-block-input" style={{ width: "100%" }}>
+						<Field
+							component={RenderInput}
+							label="Ваша почта"
+							name="email"
+							bgWhite
+						/>
+					</div>
 
-				<div className="sell-block-input" style={{ width: "100%" }}>
-					<Field
-						component={RenderInput}
-						label="Ваш номер телефона"
-						name="phone"
-						bgWhite
-					/>
-				</div>
+					<div className="sell-block-input" style={{ width: "100%" }}>
+						<Field
+							component={RenderInput}
+							label="Ваш номер телефона"
+							name="phone"
+							bgWhite
+							{...createTextMask({
+								pattern: "+7 999 999 99-99",
+								guide: false,
+								stripMask: false,
+							})}
+						/>
+					</div>
 
-				<div className="sell-block-input" style={{ width: "100%" }}>
-					<Field
-						component={RenderInput}
-						label="Ваш ник в телеграмм"
-						name="telegram"
-						bgWhite
-					/>
+					<div className="sell-block-input" style={{ width: "100%" }}>
+						<Field
+							component={RenderInput}
+							label="Ваш ник в телеграмм"
+							name="telegram"
+							bgWhite
+						/>
+					</div>
 				</div>
 			</div>
 

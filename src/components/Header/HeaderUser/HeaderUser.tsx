@@ -24,10 +24,8 @@ const HeaderUser: React.FC = () => {
 		setState(false)
 	}, [pathname])
 
-	const openModarCart = () => {
-		if (!state) {
-			setState(true);
-		}
+	const toggleClickModarUser = () => {
+		setState(!state);
 	};
 
 	const togglePopup = (e: any) => {
@@ -38,35 +36,11 @@ const HeaderUser: React.FC = () => {
 
 	return (
 		<div className="header-block-user" ref={PopupRef}>
-			<button className={`header-block-user__icon ${state ? "active" : ""}`} onClick={openModarCart}>
-				<svg
-					width="38"
-					height="39"
-					viewBox="0 0 38 39"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<rect
-						y="0.984375"
-						width="38"
-						height="37.9979"
-						rx="18.9989"
-						fill="#F7F4F0"
-					/>
-					<path
-						d="M19.0015 18.9844C21.2106 18.9844 23.0015 17.1935 23.0015 14.9844C23.0015 12.7752 21.2106 10.9844 19.0015 10.9844C16.7923 10.9844 15.0015 12.7752 15.0015 14.9844C15.0015 17.1935 16.7923 18.9844 19.0015 18.9844Z"
-						stroke="#202020"
-						strokeWidth="1.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-					<path
-						d="M27 28.9844V26.9844C27 25.9235 26.5786 24.9061 25.8284 24.1559C25.0783 23.4058 24.0609 22.9844 23 22.9844H15C13.9391 22.9844 12.9217 23.4058 12.1716 24.1559C11.4214 24.9061 11 25.9235 11 26.9844V28.9844"
-						stroke="#202020"
-						strokeWidth="1.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
+			<button className={`header-block-user__icon ${state ? "active" : ""}`} onClick={toggleClickModarUser}>
+				<svg width="38" height="38" viewBox="0 0 189 188" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect x="0.487061" y="0.00390625" width="188.026" height="187.885" rx="93.9425" fill="#F7F4F0" />
+					<path d="M94.5047 89.0446C105.358 89.0446 114.156 80.2465 114.156 69.3934C114.156 58.5403 105.358 49.7422 94.5047 49.7422C83.6517 49.7422 74.8535 58.5403 74.8535 69.3934C74.8535 80.2465 83.6517 89.0446 94.5047 89.0446Z" strokeWidth="7.46" strokeLinecap="round" strokeLinejoin="round" />
+					<path d="M133.802 138.153V128.327C133.802 123.115 131.732 118.117 128.047 114.431C124.361 110.746 119.363 108.676 114.151 108.676H74.8487C69.6369 108.676 64.6385 110.746 60.9532 114.431C57.2679 118.117 55.1975 123.115 55.1975 128.327V138.153" strokeWidth="7.46" strokeLinecap="round" strokeLinejoin="round" />
 				</svg>
 			</button>
 

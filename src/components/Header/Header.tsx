@@ -98,6 +98,7 @@ const Header: React.FC = () => {
 									/>
 								</div>
 							</div>
+							
 							<div className="header-block">
 								<div className="header-block-btn">
 									<Link
@@ -152,7 +153,7 @@ const Header: React.FC = () => {
 
 							{Object.keys(categories).map((key, index) => (
 								<Link
-									to="/catalog"
+									to={`/catalog?categories=${key}`}
 									className="header-menu__link"
 									key={`header-menu__link-${index}`}
 									onMouseOver={() => openHoverMenu(categories[key], key)}

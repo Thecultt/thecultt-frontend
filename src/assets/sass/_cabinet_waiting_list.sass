@@ -52,6 +52,14 @@
 			flex-wrap: wrap
 			justify-content: space-between
 
+			+transition
+
+			&.disabled
+				pointer-events: none
+				user-select: none
+
+				opacity: 0.5
+
 			&-input
 				margin-bottom: 15px
 

@@ -47,6 +47,11 @@ export { default as ReglogLogin } from "./Reglog/ReglogLogin/ReglogLogin";
 export { default as ReglogRegister } from "./Reglog/ReglogRegister/ReglogRegister";
 // ReglogWelcome
 export { default as ReglogWelcome } from "./Reglog/ReglogWelcome/ReglogWelcome";
+// ReglogRecoveryPassword
+export { default as ReglogRecoveryPassword } from "./Reglog/ReglogRecoveryPassword/ReglogRecoveryPassword";
+export { default as ReglogRecoveryPasswordSuccess } from "./Reglog/ReglogRecoveryPassword/ReglogRecoveryPasswordSuccess";
+// ReglogRecoveryPasswordConfirmed
+export { default as ReglogRecoveryPasswordConfirmed } from "./Reglog/ReglogRecoveryPasswordConfirmed/ReglogRecoveryPasswordConfirmed";
 
 // Home
 // HomeMainBanner
@@ -110,6 +115,7 @@ export { default as SellAndSale } from "./SellAndSale/SellAndSale";
 export { default as FaqBreadCrumbs } from "./Faq/FaqBreadCrumbs";
 export { default as FaqAll } from "./Faq/FaqAll";
 export { default as FaqBuyers } from "./Faq/FaqBuyers";
+export { default as FaqSellers } from "./Faq/FaqSellers";
 export { default as FaqTabItem } from "./Faq/FaqTabItem";
 
 // Brands
@@ -125,6 +131,7 @@ export { default as WaitingListCreateSuccess } from "./WaitingListCreate/Waiting
 
 // Cabinet
 export { default as CabinetMenu } from "./Cabinet/CabinetMenu";
+export { default as CabinetMenuMedia } from "./Cabinet/CabinetMenuMedia";
 
 // CabinetWaitingList
 export { default as CabinetWaitingListItem } from "./CabinetWaitingList/CabinetWaitingListItem";

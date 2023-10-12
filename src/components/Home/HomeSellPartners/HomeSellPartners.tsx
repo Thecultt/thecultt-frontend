@@ -13,7 +13,7 @@ const HomeSellPartners: React.FC = () => {
 					Оставьте заявку на обмен лота — мы оценим его и предложим депозит, соответствующий стоимости вашей вещи. Его можно будет потратить при покупке любого товара на THE CULTT.
 				</p>
 
-				<Link to="" className='btn home-sell-partners-block__btn'>Подробнее</Link>
+				<Link to="/cabinet/sell?type=exchange" className='btn home-sell-partners-block__btn'>Подробнее</Link>
 			</div>
 
 			<div className="home-sell-partners-block hover-scale">

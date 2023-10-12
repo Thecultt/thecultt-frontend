@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, NavLink } from 'react-router-dom'
 
-import { FaqAll, FaqBuyers } from '../../components/'
+import { FaqAll, FaqBuyers, FaqSellers } from '../../components/'
 
 const Faq: React.FC = () => {
 	const { block } = useParams()
@@ -23,6 +23,10 @@ const Faq: React.FC = () => {
 
 						{block === "buyers" ? (
 							<FaqBuyers />
+						) : null}
+
+						{block === "sellers" ? (
+							<FaqSellers />
 						) : null}
 					</div>
 				</div>

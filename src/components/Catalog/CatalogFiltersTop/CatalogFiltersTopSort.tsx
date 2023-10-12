@@ -1,127 +1,119 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
-import {setFiltersSortProduct} from "../../../redux/actions/products";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+
+import { setFiltersSortProduct } from "../../../redux/actions/products";
 
 const CatalogFiltersTopSort: React.FC = () => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const [state, setState] = React.useState<boolean>(false);
-    const [currentSortIndex, setCurrentSortIndex] = React.useState<number>(0);
+	const { filters } = useTypedSelector(({ products }) => products);
 
-    const ModalRef = React.useRef<HTMLDivElement>(null);
+	const [state, setState] = React.useState<boolean>(false);
+	const [currentSortKey, setCurrentSortKey] = React.useState<string>("");
 
-    React.useEffect(() => {
-        document.addEventListener("mousedown", hiddeModal);
-        document.addEventListener("touchstart", hiddeModal);
+	const ModalRef = React.useRef<HTMLDivElement>(null);
 
-        return () => {
-            document.removeEventListener("mousedown", hiddeModal);
-            document.removeEventListener("touchstart", hiddeModal);
-        };
-    }, [ModalRef]);
+	React.useEffect(() => {
+		setCurrentSortKey(filters.sort)
+	}, [filters.sort])
 
-    const hiddeModal = (e: any) => {
-        if (ModalRef.current && !ModalRef.current.contains(e.target)) {
-            setState(false);
-        }
-    };
+	React.useEffect(() => {
+		document.addEventListener("mousedown", hiddeModal);
+		document.addEventListener("touchstart", hiddeModal);
 
-    const toggleState = () => {
-        setState(!state);
-    };
+		return () => {
+			document.removeEventListener("mousedown", hiddeModal);
+			document.removeEventListener("touchstart", hiddeModal);
+		};
+	}, [ModalRef]);
 
-    const sortItems: {title: string; sortId: string}[] = [
-        {
-            title: "По умолчанию",
-            sortId: "",
-        },
-        {
-            title: "Сначала новые",
-            sortId: "",
-        },
-        {
-            title: "По возрастанию цены",
-            sortId: "price",
-        },
-        {
-            title: "По убыванию цены",
-            sortId: "-price",
-        },
-        {
-            title: "По популярности",
-            sortId: "",
-        },
-    ];
+	const hiddeModal = (e: any) => {
+		if (ModalRef.current && !ModalRef.current.contains(e.target)) {
+			setState(false);
+		}
+	};
 
-    const onClickSetItem = (index: number) => {
-        setCurrentSortIndex(index);
+	const toggleState = () => {
+		setState(!state);
+	};
 
-        dispatch(setFiltersSortProduct(sortItems[index].sortId));
+	const sortItems: { [key: string]: string } = {
+		"default": "По умолчанию",
+		"a": "Сначала новые",
+		"price": "По возрастанию цены",
+		"-price": "По убыванию цены",
+		"f": "По популярности"
+	}
 
-        setTimeout(() => {
-            setState(false);
-        }, 200);
-    };
+	const onClickSetItem = (key: string) => {
+		setCurrentSortKey(key);
 
-    return (
-        <div className="catalog-filters-top-sort">
-            <div
-                className="catalog-filters-top-sort-title"
-                onClick={toggleState}
-            >
-                <p className="catalog-filters-top-sort-title__title">
-                    Сортировать по: {sortItems[currentSortIndex].title}
-                    <svg
-                        width="14"
-                        height="7"
-                        viewBox="0 0 14 7"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            d="M1 0.5L7 6.5L13 0.5"
-                            stroke="#202020"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                </p>
-            </div>
+		dispatch(setFiltersSortProduct(key));
 
-            <div
-                className={`catalog-filters-top-sort-modal ${
-                    state ? "active" : ""
-                }`}
-                ref={ModalRef}
-            >
-                {sortItems.map((item, index) => (
-                    <div
-                        className="checkbox-wrapper catalog-filters-top-sort-modal-item"
-                        key={`catalog-filters-top-sort-modal-item-${index}`}
-                        onClick={() => onClickSetItem(index)}
-                    >
-                        <input
-                            id={`catalog-filters-top-sort-modal-item-${index}`}
-                            type="radio"
-                            className="checkbox"
-                            name="sort"
-                            defaultChecked={index === currentSortIndex}
-                        />
+		setTimeout(() => {
+			setState(false);
+		}, 200);
+	};
 
-                        <label
-                            htmlFor={`catalog-filters-top-sort-modal-item-${index}`}
-                            className={`checkbox__label`}
-                        >
-                            <p className="checkbox__label__text">
-                                {item.title}
-                            </p>
-                        </label>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+	return (
+		<div className="catalog-filters-top-sort">
+			<div
+				className="catalog-filters-top-sort-title"
+				onClick={toggleState}
+			>
+				<p className="catalog-filters-top-sort-title__title">
+					Сортировать по: {sortItems[currentSortKey]}
+					<svg
+						width="14"
+						height="7"
+						viewBox="0 0 14 7"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M1 0.5L7 6.5L13 0.5"
+							stroke="#202020"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</svg>
+				</p>
+			</div>
+
+			<div
+				className={`catalog-filters-top-sort-modal ${state ? "active" : ""
+					}`}
+				ref={ModalRef}
+			>
+				{Object.keys(sortItems).map((key, index) => (
+					<div
+						className="checkbox-wrapper catalog-filters-top-sort-modal-item"
+						key={`catalog-filters-top-sort-modal-item-${index}`}
+						onClick={() => onClickSetItem(key)}
+					>
+						<input
+							id={`catalog-filters-top-sort-modal-item-${index}`}
+							type="radio"
+							className="checkbox"
+							name="sort"
+							defaultChecked={key === currentSortKey}
+						/>
+
+						<label
+							htmlFor={`catalog-filters-top-sort-modal-item-${index}`}
+							className={`checkbox__label`}
+						>
+							<p className="checkbox__label__text">
+								{sortItems[key]}
+							</p>
+						</label>
+					</div>
+				))}
+			</div>
+		</div>
+	);
 };
 
 export default CatalogFiltersTopSort;

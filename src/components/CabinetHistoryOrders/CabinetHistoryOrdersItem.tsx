@@ -1,11 +1,21 @@
 import React from "react";
 import AnimateHeight from "react-animate-height";
 
-interface CabinetHistoryOrdersItemProps {
+import { Order } from '../../models/IOrder'
+
+interface CabinetHistoryOrdersItemProps extends Order {
 	status: string;
 }
 
 const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
+	num,
+	createdon,
+	cost,
+	client_name,
+	client_phone,
+	delivery_address,
+	delivery_type,
+	payment_type,
 	status,
 }) => {
 	const [isOpen, setIsOpen] = React.useState<boolean>(false);
@@ -23,15 +33,15 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 				<div className="cabinet-history-orders-item-topinfo">
 					<div className="cabinet-history-orders-item-topinfo-block">
 						<h3 className="cabinet-history-orders-item-topinfo-block__title">
-							Заказ: #2305/329
+							Заказ: #{num}
 						</h3>
 
 						<p className="cabinet-history-orders-item-topinfo-block__date">
-							от 03.01.21
+							от {createdon}
 						</p>
 
 						<p className="cabinet-history-orders-item-topinfo-block__sum">
-							2 122,313 ₽
+							{cost} ₽
 						</p>
 					</div>
 					<div className="cabinet-history-orders-item-topinfo-block">
@@ -100,11 +110,11 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 									Получатель
 								</h3>
 								<p className="cabinet-history-orders-item-info-block__subtitle">
-									<span>Имя:</span> Максим Андреевич К.
+									<span>Имя:</span> {client_name}
 								</p>
 
 								<p className="cabinet-history-orders-item-info-block__subtitle">
-									<span>Телефон:</span> +7896316621
+									<span>Телефон:</span> {client_phone}
 								</p>
 							</div>
 							<div className="cabinet-history-orders-item-info-block">
@@ -112,24 +122,23 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 									Доставка
 								</h3>
 								<p className="cabinet-history-orders-item-info-block__subtitle">
-									<span>Вариант доставки:</span> Беспалтно по
-									Москве
+									<span>Вариант доставки:</span> {delivery_type}
 								</p>
 
 								<p className="cabinet-history-orders-item-info-block__subtitle">
-									<span>Адрес доставки:</span> М. Сухоревская,
-									12д 2й этаж
+									<span>Адрес доставки:</span> {delivery_address}
 								</p>
 							</div>
 							<div className="cabinet-history-orders-item-info-block">
 								<h3 className="cabinet-history-orders-item-info-block__title">
 									Оплата
 								</h3>
-								<p className="cabinet-history-orders-item-info-block__subtitle">
-									<span>Тип оплаты:</span> Дебетовая карта
-								</p>
 
 								<p className="cabinet-history-orders-item-info-block__subtitle">
+									<span>Тип оплаты:</span> {payment_type}
+								</p>
+
+								{/* <p className="cabinet-history-orders-item-info-block__subtitle">
 									<span>Статус оплаты:</span>{" "}
 									<p className="payment">
 										Оплачено{" "}
@@ -158,10 +167,10 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 											</g>
 										</svg>
 									</p>
-								</p>
+								</p> */}
 							</div>
 						</div>
-						<div className="cabinet-history-orders-item-info-product-wrapper">
+						{/* <div className="cabinet-history-orders-item-info-product-wrapper">
 							<div className="cabinet-history-orders-item-info-good">
 								<div
 									className="cabinet-history-orders-item-info-good-image"
@@ -277,7 +286,7 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 									</p>
 								</div>
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</AnimateHeight>
 			</div>

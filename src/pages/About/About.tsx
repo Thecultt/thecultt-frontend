@@ -20,7 +20,7 @@ const About: React.FC = () => {
         <section className="about">
             <div className="container">
                 <div className="about-wrapper">
-                    <div className="about-main">
+                    <div className="about-main hover-scale">
                         <div className="about-main-text">
                             <h2 className="title mb about-main-text__title">
                                 Кто такие <br /> THE CULTT ?
@@ -88,7 +88,7 @@ const About: React.FC = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="about-quote">
+                    <div className="about-quote hover-scale">
                         <div className="about-quote-title">
                             <svg
                                 width="50"
@@ -148,42 +148,42 @@ const About: React.FC = () => {
                     <div className="about-media">
                         <h3 className="about-media__title">О нас пишут</h3>
                         <div className="about-media-logos">
-                            <a href="" className="about-media-logos-item">
+                            <a href="" className="about-media-logos-item hover-scale">
                                 <img
                                     src={ElleLogo}
                                     alt=""
                                     className="about-media-logos-item__image"
                                 />
                             </a>
-                            <a href="" className="about-media-logos-item">
+                            <a href="" className="about-media-logos-item hover-scale">
                                 <img
                                     src={ForbesLogo}
                                     alt=""
                                     className="about-media-logos-item__image"
                                 />
                             </a>
-                            <a href="" className="about-media-logos-item">
+                            <a href="" className="about-media-logos-item hover-scale">
                                 <img
                                     src={BuroLogo}
                                     alt=""
                                     className="about-media-logos-item__image"
                                 />
                             </a>
-                            <a href="" className="about-media-logos-item">
+                            <a href="" className="about-media-logos-item hover-scale">
                                 <img
                                     src={IncLogo}
                                     alt=""
                                     className="about-media-logos-item__image"
                                 />
                             </a>
-                            <a href="" className="about-media-logos-item">
+                            <a href="" className="about-media-logos-item hover-scale">
                                 <img
                                     src={RbkLogo}
                                     alt=""
                                     className="about-media-logos-item__image"
                                 />
                             </a>
-                            <a href="" className="about-media-logos-item">
+                            <a href="" className="about-media-logos-item hover-scale">
                                 <img
                                     src={BluepintLogo}
                                     alt=""
@@ -205,7 +205,7 @@ const About: React.FC = () => {
 
                         <div className="about-team-members">
                             <div
-                                className="about-team-members-item"
+                                className="about-team-members-item hover-scale"
                                 style={{
                                     backgroundImage: `url("${Anna}")`,
                                 }}
@@ -219,7 +219,7 @@ const About: React.FC = () => {
                             </div>
 
                             <div
-                                className="about-team-members-item"
+                                className="about-team-members-item hover-scale"
                                 style={{
                                     backgroundImage: `url("${Daria}")`,
                                 }}
@@ -233,7 +233,7 @@ const About: React.FC = () => {
                             </div>
 
                             <div
-                                className="about-team-members-item"
+                                className="about-team-members-item hover-scale"
                                 style={{
                                     backgroundImage: `url("${Maria}")`,
                                 }}
@@ -247,7 +247,7 @@ const About: React.FC = () => {
                             </div>
 
                             <div
-                                className="about-team-members-item"
+                                className="about-team-members-item hover-scale"
                                 style={{
                                     backgroundImage: `url("${Tatiana}")`,
                                 }}

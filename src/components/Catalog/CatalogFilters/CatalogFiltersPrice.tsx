@@ -22,7 +22,9 @@ const CatalogFiltersPrice: React.FC<CatalogFiltersPriceProps> = ({
 	const onChangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value.replace(/[a-zа-яё]/gi, "");
 
-		setMin(value);
+		if (parseInt(value) - 1 < defaultMax) {
+			setMin(value);
+		}
 	};
 
 	const onChangeMax = (e: React.ChangeEvent<HTMLInputElement>) => {

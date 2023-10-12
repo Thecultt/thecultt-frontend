@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProductInfoAuth: React.FC = () => {
     return (
-        <div className="product-content-info-auth">
+        <Link to="/auth" className="product-content-info-auth">
             <div className="product-content-info-auth-text">
                 <h4 className="product-content-info-auth-text__title">
                     Гарантия подлинности
@@ -175,7 +176,7 @@ const ProductInfoAuth: React.FC = () => {
                     </defs>
                 </svg>
             </div>
-        </div>
+        </Link>
     );
 };
 

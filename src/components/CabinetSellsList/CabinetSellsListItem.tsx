@@ -1,6 +1,7 @@
 import React from "react";
 import AnimateHeight from "react-animate-height";
 import { NumericFormat } from "react-number-format";
+import moment from "moment";
 
 const CabinetSellsListItem: React.FC<any> = ({
 	id,
@@ -32,7 +33,7 @@ const CabinetSellsListItem: React.FC<any> = ({
 						</h3>
 
 						<p className="cabinet-sells-list-item-topinfo-block__date">
-							от {time}
+							от {moment(time).format("DD.MM.YYYY, hh:ss")}
 						</p>
 					</div>
 					<div className="cabinet-sells-list-item-topinfo-block">
@@ -104,18 +105,30 @@ const CabinetSellsListItem: React.FC<any> = ({
 								Информация о товаре
 							</h4>
 
-							<div className="cabinet-sells-list-item-info-block-value bb">
-								<p className="cabinet-sells-list-item-info-block-value__value">
-									<span>Категория:</span> {category}
-								</p>
+							<div className="cabinet-sells-list-item-info-block-value-wrapper bb">
+								<div className="cabinet-sells-list-item-info-block-value">
+									<p className="cabinet-sells-list-item-info-block-value__value">
+										<span>Категория:</span> {category}
+									</p>
 
-								<p className="cabinet-sells-list-item-info-block-value__value">
-									<span>Бренд:</span> {vendor}
-								</p>
+									<p className="cabinet-sells-list-item-info-block-value__value">
+										<span>Бренд:</span> {vendor}
+									</p>
 
-								<p className="cabinet-sells-list-item-info-block-value__value">
-									<span>Модель:</span> {model}
-								</p>
+									<p className="cabinet-sells-list-item-info-block-value__value">
+										<span>Модель:</span> {model}
+									</p>
+								</div>
+
+								<div className="cabinet-sells-list-item-info-block-value ml">
+									<p className="cabinet-sells-list-item-info-block-value__value">
+										<span>Статус обновлен:</span> 26.06.2023 21:39
+									</p>
+
+									<p className="cabinet-sells-list-item-info-block-value__value">
+										<span>Дата оформления:</span> 26.06.2023 21:39
+									</p>
+								</div>
 							</div>
 
 							<div className="cabinet-sells-list-item-info-block-value">

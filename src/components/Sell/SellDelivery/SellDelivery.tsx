@@ -67,17 +67,19 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				Выберите город, из которого товар будет отправлен к нам в офис.
 			</p>
 
-			<div className="sell-block-select">
-				<Field
-					component={RenderInputHints}
-					type="text"
-					label="Город"
-					name="city"
-					hints={globalCitys}
-					bgWhite
-					onChangeCustom={onChangeCitys}
-					onSaveValue={(item: { title: string, value: string }) => setCurrentCity(item)}
-				/>
+			<div className="sell-block-input-wrapper-wrapper">
+				<div className="sell-block-select">
+					<Field
+						component={RenderInputHints}
+						type="text"
+						label="Город"
+						name="city"
+						hints={globalCitys}
+						bgWhite
+						onChangeCustom={onChangeCitys}
+						onSaveValue={(item: { title: string, value: string }) => setCurrentCity(item)}
+					/>
+				</div>
 			</div>
 
 			{currentCity.title !== "" ?
@@ -100,31 +102,33 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						</div>
 					) : (
 						<div className="sell-block-delivery-form">
-							<h5 className="sell-block-delivery-form__title">Адресс</h5>
+							<h5 className="sell-block-delivery-form__title">Адрес</h5>
 
-							<div className="sell-block-input-wrapper">
-								<div className="sell-block-input" style={{ width: "100%" }}>
-									<Field
-										component={RenderInputHints}
-										type="text"
-										label="Улица"
-										name="street"
-										hints={globalStreets}
-										onChangeCustom={onChangeStreets}
-										bgWhite
-									/>
-								</div>
+							<div className="sell-block-input-wrapper-wrapper">
+								<div className="sell-block-input-wrapper">
+									<div className="sell-block-input" style={{ width: "100%" }}>
+										<Field
+											component={RenderInputHints}
+											type="text"
+											label="Улица"
+											name="street"
+											hints={globalStreets}
+											onChangeCustom={onChangeStreets}
+											bgWhite
+										/>
+									</div>
 
-								<div className="sell-block-input" style={{ width: "49%" }}>
-									<Field component={RenderInput} name="dom" label="Дом" bgWhite />
-								</div>
+									<div className="sell-block-input" style={{ width: "49%" }}>
+										<Field component={RenderInput} name="dom" label="Дом" bgWhite />
+									</div>
 
-								<div className="sell-block-input" style={{ width: "49%" }}>
-									<Field component={RenderInput} name="flat" label="Квартира" bgWhite />
-								</div>
+									<div className="sell-block-input" style={{ width: "49%" }}>
+										<Field component={RenderInput} name="flat" label="Квартира" bgWhite />
+									</div>
 
-								<div className="sell-block-input" style={{ width: "100%" }}>
-									<Field component={RenderTextarea} name="comm" label="Комментарий" bgWhite />
+									<div className="sell-block-input" style={{ width: "100%" }}>
+										<Field component={RenderTextarea} name="comm" label="Комментарий" bgWhite />
+									</div>
 								</div>
 							</div>
 						</div>)}

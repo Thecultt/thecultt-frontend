@@ -1,42 +1,55 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
-import {setFiltersAvailabilityProduct} from "../../../redux/actions/products";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import {CatalogFiltersBlockWrapper, Checkbox} from "../../";
+import { setFiltersAvailabilityProduct } from "../../../redux/actions/products";
+
+import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
 
 const CatalogFiltersAvailability: React.FC = () => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const onChangeSetAvailability = (availability: string) => {
-        dispatch(setFiltersAvailabilityProduct(availability));
-    };
+	const { filters } = useTypedSelector(({ products }) => products)
 
-    return (
-        <CatalogFiltersBlockWrapper title="Наличие">
-            <div className="catalog-filters-block-content-checkbox">
-                <Checkbox
-                    id="catalog-filters-block-content-availability-1-checkbox"
-                    label="Доступно"
-                    onChange={() => onChangeSetAvailability("Доступно")}
-                />
-            </div>
-            <div className="catalog-filters-block-content-checkbox">
-                <Checkbox
-                    id="catalog-filters-block-content-availability-2-checkbox"
-                    label="Нет в продаже"
-                    onChange={() => onChangeSetAvailability("Нет в продаже")}
-                />
-            </div>
-            <div className="catalog-filters-block-content-checkbox">
-                <Checkbox
-                    id="catalog-filters-block-content-availability-3-checkbox"
-                    label="На примерке"
-                    onChange={() => onChangeSetAvailability("На примерке")}
-                />
-            </div>
-        </CatalogFiltersBlockWrapper>
-    );
+	const onChangeSetAvailability = (availability: string) => {
+		dispatch(setFiltersAvailabilityProduct(availability));
+	};
+
+	return (
+		<CatalogFiltersBlockWrapper title="Наличие">
+			<div className="catalog-filters-block-content-checkbox">
+				<Checkbox
+					id="catalog-filters-block-content-availability-1-checkbox"
+					label="Доступно"
+					onChange={() => onChangeSetAvailability("Доступно")}
+					checked={Object.keys(filters.availability).find((filtersAvailability) => (
+						filtersAvailability === "Доступно"
+					)) ? true : false}
+				/>
+			</div>
+			<div className="catalog-filters-block-content-checkbox">
+				<Checkbox
+					id="catalog-filters-block-content-availability-2-checkbox"
+					label="Нет в продаже"
+					onChange={() => onChangeSetAvailability("Нет в продаже")}
+					checked={Object.keys(filters.availability).find((filtersAvailability) => (
+						filtersAvailability === "Нет в продаже"
+					)) ? true : false}
+				/>
+			</div>
+			<div className="catalog-filters-block-content-checkbox">
+				<Checkbox
+					id="catalog-filters-block-content-availability-3-checkbox"
+					label="На примерке"
+					onChange={() => onChangeSetAvailability("На примерке")}
+					checked={Object.keys(filters.availability).find((filtersAvailability) => (
+						filtersAvailability === "На примерке"
+					)) ? true : false}
+				/>
+			</div>
+		</CatalogFiltersBlockWrapper>
+	);
 };
 
 export default CatalogFiltersAvailability;

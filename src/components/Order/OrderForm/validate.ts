@@ -68,10 +68,6 @@ const validate = (values: validateInfoValues) => {
 
 	if (!values.city) {
 		errors.city = "Поле не может быть пустым";
-	} else if (values.city.length > defaultMax) {
-		errors.city = `Не более ${defaultMax} символов`;
-	} else if (values.city.length < defaultMin) {
-		errors.city = `Не менее ${defaultMin} символов`;
 	}
 
 	if (!values.delivery) {
@@ -80,26 +76,14 @@ const validate = (values: validateInfoValues) => {
 
 	if (!values.street) {
 		errors.street = "Поле не может быть пустым";
-	} else if (values.street.length > defaultMax) {
-		errors.street = `Не более ${defaultMax} символов`;
-	} else if (values.street.length < defaultMin) {
-		errors.street = `Не менее ${defaultMin} символов`;
 	}
 
 	if (!values.house) {
 		errors.house = "Поле не может быть пустым";
-	} else if (values.house.length > defaultMax) {
-		errors.house = `Не более ${defaultMax} символов`;
-	} else if (values.house.length < defaultMin) {
-		errors.house = `Не менее ${defaultMin} символов`;
 	}
 
 	if (!values.flat) {
 		errors.flat = "Поле не может быть пустым";
-	} else if (values.flat.length > defaultMax) {
-		errors.flat = `Не более ${defaultMax} символов`;
-	} else if (values.flat.length < defaultMin) {
-		errors.flat = `Не менее ${defaultMin} символов`;
 	}
 
 	if (!values.payment) {

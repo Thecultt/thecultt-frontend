@@ -2,11 +2,12 @@ import React from "react";
 
 interface CheckboxProps {
     id?: string;
-    label: string;
+	label: string;
+	checked?: boolean;
     onChange?: () => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({id, label, onChange}) => {
+const Checkbox: React.FC<CheckboxProps> = ({id, label, checked, onChange,}) => {
     return (
         <div className="checkbox-wrapper">
             <input
@@ -16,7 +17,7 @@ const Checkbox: React.FC<CheckboxProps> = ({id, label, onChange}) => {
                 // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 //     onChange && onChange(e.target.checked)
                 // }
-                // checked={checked}
+                checked={checked}
                 onChange={onChange}
             />
 

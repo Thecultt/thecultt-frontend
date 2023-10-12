@@ -6,7 +6,7 @@ interface SellBackBtnProps {
 
 const SellBackBtn: React.FC<SellBackBtnProps> = ({ onClick }) => {
 	return (
-		<button className="sell-block__back" onClick={onClick}>
+		<button className="sell-block__back" onClick={onClick} type="button">
 			<svg
 				width="24"
 				height="24"

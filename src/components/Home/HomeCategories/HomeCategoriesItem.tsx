@@ -5,7 +5,7 @@ import { CategoriesItem } from "./HomeCategories";
 
 const HomeCategoriesItem: React.FC<CategoriesItem> = ({ image, title }) => {
 	return (
-		<div className="home-categories-item-wrapper hover-scale">
+		<Link to={`/catalog?categories=${title}`} className="home-categories-item-wrapper hover-scale">
 			<div className="home-categories-item" style={{ backgroundImage: `url("${image}")` }}>
 				<h2 className="home-categories-item__title">
 					{title}
@@ -15,7 +15,7 @@ const HomeCategoriesItem: React.FC<CategoriesItem> = ({ image, title }) => {
 					Смотреть
 				</Link>
 			</div>
-		</div>
+		</Link>
 	)
 }
 

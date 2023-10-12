@@ -4,6 +4,7 @@ import {
 	reduxForm,
 	InjectedFormProps,
 } from "redux-form";
+import { createTextMask } from "redux-form-input-masks";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
@@ -20,13 +21,19 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 }) => {
 	const [isEdit, setIsEdit] = React.useState<boolean>(false)
 
-	const { user: { name, middlename, lastname, dr } } = useTypedSelector(({ user }) => user)
+	const { user: { name, middlename, lastname, dr }, isSending } = useTypedSelector(({ user }) => user)
 
 	React.useEffect(() => {
 		initialize({
 			name, middlename, lastname, dr
 		})
 	}, [isEdit])
+
+	React.useEffect(() => {
+		if (!isSending) {
+			setIsEdit(false)
+		}
+	}, [isSending])
 
 	return (
 		<form onSubmit={handleSubmit} className={`cabinet-setting-block ${isEdit ? "active" : ""}`}>
@@ -97,6 +104,11 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							label="Дата рождения"
 							name="dr"
 							bgWhite
+							{...createTextMask({
+								pattern: "99.99.9999",
+								guide: false,
+								stripMask: false,
+							})}
 						/>
 					</div>
 				</div>

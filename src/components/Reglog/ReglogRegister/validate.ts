@@ -1,6 +1,6 @@
 export interface validateValues {
 	name: string
-	surname: string
+	lastname: string
 	email: string
 	password: string
 	policyCheckbox: string;
@@ -9,7 +9,7 @@ export interface validateValues {
 
 interface validateErrors {
 	name?: string
-	surname?: string
+	lastname?: string
 	email?: string
 	password?: string
 	policyCheckbox?: string;
@@ -30,12 +30,12 @@ export const validate = (values: validateValues) => {
 		errors.name = `Не менее ${defaultMin} символов`;
 	}
 
-	if (!values.surname) {
-		errors.surname = "Поле не может быть пустым";
-	} else if (values.surname.length > defaultMax) {
-		errors.surname = `Не более ${defaultMax} символов`;
-	} else if (values.surname.length < defaultMin) {
-		errors.surname = `Не менее ${defaultMin} символов`;
+	if (!values.lastname) {
+		errors.lastname = "Поле не может быть пустым";
+	} else if (values.lastname.length > defaultMax) {
+		errors.lastname = `Не более ${defaultMax} символов`;
+	} else if (values.lastname.length < defaultMin) {
+		errors.lastname = `Не менее ${defaultMin} символов`;
 	}
 
 	if (!values.email) {

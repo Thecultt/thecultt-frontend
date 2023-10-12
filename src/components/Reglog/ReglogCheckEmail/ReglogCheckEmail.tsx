@@ -10,11 +10,19 @@ import validate from "./validate"
 
 const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	handleSubmit,
+	initialize,
 	invalid,
-	pristine,
 	submitting,
 }) => {
-	const { isSend } = useTypedSelector(({ check_email }) => check_email);
+	const { isSend, email } = useTypedSelector(({ check_email }) => check_email);
+
+	React.useEffect(() => {
+		if (email) {
+			initialize({
+				email
+			});
+		}
+	}, []);
 
 	return (
 		<form
@@ -45,8 +53,8 @@ const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					</button>
 				) : (
 					<button
-						className={`btn ${invalid || submitting || pristine ? "disabled" : ""} reglog-content-form-btn__btn`}
-						disabled={invalid || submitting || pristine}
+						className={`btn ${invalid || submitting ? "disabled" : ""} reglog-content-form-btn__btn`}
+						disabled={invalid || submitting}
 					>
 						Продолжить
 					</button>

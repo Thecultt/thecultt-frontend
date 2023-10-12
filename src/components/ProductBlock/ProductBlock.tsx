@@ -32,6 +32,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	num_of_favorites
 }) => {
 	const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart)
+	const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(isFavorite)
 
 	const totalImageLength = 5;
 
@@ -58,9 +59,17 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
 				<div
 					className={`product-block-cover-favorite ${isFavorite ? "active" : ""}`}
-					onClick={isFavorite ? removeFavorite : addFavorite}
+					onClick={() => {
+						if (isFavorite) {
+							removeFavorite()
+						} else {
+							addFavorite()
+						}
+
+						setIsFavoriteLocal(!isFavorite)
+					}}
 				>
-					{isFavorite ? (
+					{isFavoriteLocal ? (
 						<svg
 							width="19"
 							height="16"

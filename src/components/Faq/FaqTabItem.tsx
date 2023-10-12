@@ -22,10 +22,10 @@ const FaqTabItem: React.FC<FaqTabItemProps> = ({ title, description }) => {
 				</div>
 			</div>
 
-			{state ? <p className="faq-main-content-tab__description">
-				{description}
-			</p> : null}
-		</div>
+			{state ? (
+				<p className="faq-main-content-tab__description" dangerouslySetInnerHTML={{ __html: description }}></p>
+			) : null}
+		</div >
 	)
 }
 

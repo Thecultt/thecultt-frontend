@@ -27,20 +27,37 @@
 			+transformClick
 
 		& > svg
-			& > rect
-				fill: #F7F4F0
-				+transition
-
 			& > path
 				stroke: #202020
 				+transition
 
 		&.active > svg
-			& > rect
-				fill: #285141
-
 			& > path
-				stroke: #F7F4F0
+				stroke: #285141
+
+	&__count
+		cursor: pointer
+		
+		display: flex
+		justify-content: center
+		align-items: center
+
+		border-radius: 50%
+
+		position: absolute
+
+		top: -3px
+		right: 10px
+
+		width: 20px
+		height: 20px
+
+		font-size: 12px
+
+		color: $white
+		background-color: $mainColor
+
+		+ManropeRegular
 
 	&-modal
 		display: inline-block

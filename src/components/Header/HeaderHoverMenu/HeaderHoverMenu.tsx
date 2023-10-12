@@ -24,25 +24,25 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategory, manuf
 					<div className="header-hover-menu-list-coll-wrapper">
 						<div className="header-hover-menu-list-coll">
 							{subsubcategory.map((subsubcategory, index) => (
-								<Link to="/catalog" className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${subsubcategory}-${index}`}>
+								<Link to={`/catalog?categories=${title}&types=${subsubcategory}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${subsubcategory}-${index}`}>
 									{subsubcategory}
 								</Link>
 							)).slice(0, 7)}
 
 							{title === "Обувь" ?
-								<Link to="/catalog" className="header-hover-menu-list-coll__item last">
+								<Link to={`/catalog?categories=${title}`} className="header-hover-menu-list-coll__item last">
 									Вся обувь
 								</Link> : null
 							}
 
 							{title === "Сумки" ?
-								<Link to="/catalog" className="header-hover-menu-list-coll__item last">
+								<Link to={`/catalog?categories=${title}`} className="header-hover-menu-list-coll__item last">
 									Все сумки
 								</Link> : null
 							}
 
 							{title === "Аксессуары" ?
-								<Link to="/catalog" className="header-hover-menu-list-coll__item last">
+								<Link to={`/catalog?categories=${title}`} className="header-hover-menu-list-coll__item last">
 									Все аксессуары
 								</Link> : null
 							}
@@ -58,7 +58,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategory, manuf
 					<div className="header-hover-menu-list-coll-wrapper">
 						<div className="header-hover-menu-list-coll">
 							{manufacturer.map((manufacturer, index) => (
-								<Link to="/catalog" className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${manufacturer}-${index}`}>
+								<Link to={`/catalog?categories=${title}&brands=${manufacturer}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${manufacturer}-${index}`}>
 									{manufacturer}
 								</Link>
 							)).slice(0, 8)}
@@ -66,7 +66,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategory, manuf
 
 						<div className="header-hover-menu-list-coll">
 							{manufacturer.map((manufacturer, index) => (
-								<Link to="/catalog" className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${manufacturer}-${index}`}>
+								<Link to={`/catalog?categories=${title}&brands=${manufacturer}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${manufacturer}-${index}`}>
 									{manufacturer}
 								</Link>
 							)).slice(8, 15)}

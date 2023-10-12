@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {
 	Field,
 	reduxForm,
@@ -39,6 +40,12 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				className="reglog-content-form reglog-content-form-register"
 				onSubmit={handleSubmit}
 			>
+				<Link to="#reglog" className="reglog-content-form-back">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M15 18L9 12L15 6" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+					</svg>
+				</Link>
+
 				<h3 className="reglog-content-form__title">
 					Завершить регистрацию
 				</h3>
@@ -63,7 +70,7 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						<Field
 							component={RenderInput}
 							label="Ваша фамилия"
-							name="surname"
+							name="lastname"
 							type="text"
 						/>
 					</div>

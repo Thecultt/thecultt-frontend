@@ -26,7 +26,7 @@ const Visit: React.FC = () => {
 						Вернуться
 					</a>
 
-					<div className="visit-main">
+					<div className="visit-main hover-scale">
 						<div
 							className="visit-main-image"
 							style={{
@@ -61,7 +61,7 @@ const Visit: React.FC = () => {
 					</div>
 
 					<div className="visit-service">
-						<div className="visit-service-block">
+						<div className="visit-service-block hover-scale">
 							<h2 className="visit-service-block__title">
 								Для покупателя
 							</h2>
@@ -76,7 +76,7 @@ const Visit: React.FC = () => {
 							</p>
 						</div>
 
-						<div className="visit-service-block">
+						<div className="visit-service-block hover-scale">
 							<h2 className="visit-service-block__title">
 								Для продавца
 							</h2>
@@ -138,7 +138,7 @@ const Visit: React.FC = () => {
 						</div>
 					</div>
 
-					<div className="visit-office">
+					<div className="visit-office hover-scale">
 						<div className="visit-office-block">
 							<h2 className="visit-office-block__title">
 								Адрес офиса

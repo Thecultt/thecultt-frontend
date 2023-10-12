@@ -29,6 +29,24 @@ const initialState: OrderState = {
 		},
 	},
 
+	idOrder: 0,
+
+	order: {
+		client_name: "",
+		client_phone: "",
+		cost: "",
+		createdon: "",
+		delivery_address: "",
+		delivery_type: "",
+		id: 0,
+		num: "",
+		payment_type: "",
+		products: [],
+		status: "",
+		status_description: "",
+	},
+	isLoadedOrder: false,
+
 	isValid: false
 }
 
@@ -124,13 +142,27 @@ const order = (state = initialState, action: OrderStateActions) => {
 		}
 	}
 
+	if (action.type === OrderStateActionTypes.SET_ORDER_ID_ORDER) {
+		return {
+			...state,
+			idOrder: action.payload
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_ORDER) {
+		return {
+			...state,
+			order: action.payload,
+			isLoadedOrder: true
+		}
+	}
+
 	if (action.type === OrderStateActionTypes.SET_ORDER_IS_VALID) {
 		return {
 			...state,
 			isValid: action.payload
 		}
 	}
-
 
 	return state
 }

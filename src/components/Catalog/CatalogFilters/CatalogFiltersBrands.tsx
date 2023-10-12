@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
-
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+
+import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
 
 import { setFiltersBrandsProduct } from "../../../redux/actions/products";
 
@@ -88,6 +88,9 @@ const CatalogFiltersBrands: React.FC = () => {
 										onChange={() =>
 											onChangeSetBrand(brand)
 										}
+										checked={Object.keys(filters.brands).find((filtersBrand) => (
+											brand === filtersBrand
+										)) ? true : false}
 									/>
 								</div>
 							))
@@ -105,6 +108,9 @@ const CatalogFiltersBrands: React.FC = () => {
 									id={`catalog-filters-block-content-brands-checkbox-${index}`}
 									label={brand}
 									onChange={() => onChangeSetBrand(brand)}
+									checked={Object.keys(filters.brands).find((filtersBrand) => (
+										brand === filtersBrand
+									)) ? true : false}
 								/>
 							</div>
 						) : null

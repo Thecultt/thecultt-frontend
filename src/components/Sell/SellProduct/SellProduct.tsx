@@ -35,13 +35,15 @@ const SellProduct: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				3. Скопируйте ссылку на товар и вставьте в поле для ввода ниже. <br />
 			</p>
 
-			<div className="sell-block-input">
-				<Field
-					component={RenderInput}
-					label="Укажите ссылку на товар, который хотели бы приобрести взамен"
-					name="link"
-					bgWhite
-				/>
+			<div className="sell-block-input-wrapper-wrapper">
+				<div className="sell-block-input">
+					<Field
+						component={RenderInput}
+						label="Укажите ссылку на товар, который хотели бы приобрести взамен"
+						name="link"
+						bgWhite
+					/>
+				</div>
 			</div>
 
 			<button

@@ -51,7 +51,7 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				flatValue: flat,
 			};
 		});
-
+	
 	React.useEffect(() => {
 		if (emailValue && nameValue && phoneValue) {
 			setIndexForm(1)

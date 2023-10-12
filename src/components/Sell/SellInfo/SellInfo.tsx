@@ -16,7 +16,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	handleSubmit,
 	invalid,
 	submitting,
-	initialize,
+	initialize
 }) => {
 	const dispatch = useDispatch()
 
@@ -44,19 +44,30 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 		}
 	}, [isLoadedParameters])
 
-	// React.useEffect(() => {
-	// 	initialize({
-	// 		brand: "",
-	// 		model: "",
-	// 	})
-	// }, [currentCategory])
+	React.useEffect(() => {
+		if (currentCategory !== "") {
+			initialize({
+				category: currentCategory,
+				brand: "",
+				models: "",
+				condition: "",
+				defects: "",
+				size: "",
+				set: "",
+				price: "",
+				isBuyTheCultt: "",
+			})
 
-	// React.useEffect(() => {
-	// 	initialize({
-	// 		brand: currentBrand,
-	// 		model: "",
-	// 	})
-	// }, [currentBrand])
+			setCurrentBrand("")
+
+			// console.log("initialize")
+
+			// initialize({
+			// 	category: currentCategory,
+			// 	isBuyTheCultt: "",
+			// })
+		}
+	}, [currentCategory])
 
 	React.useEffect(() => {
 		if (parameters[currentCategory]) {
@@ -108,193 +119,189 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				Заполните детальную информацию о продаваемом товаре.
 			</p>
 
-			<div className="sell-block-select">
-				<h4 className="sell-block-select__title">Категория товара</h4>
-
-				<Field
-					component={RenderSelect}
-					name="category"
-					label="Категория товара"
-					items={Object.keys(parameters)}
-					onChangeCutsom={(value: string) => setCurrentCategory(value)}
-				/>
-			</div>
-
-			<div className="sell-block-select">
-				<h4 className="sell-block-select__title">Бренд товара</h4>
-
-				<Field
-					component={RenderInputHints}
-					name="brand"
-					label="Бренд товара"
-					hints={brands}
-					disabled={parameters[currentCategory] ? false : true}
-					onChangeCustom={(value: string) => onChangeInputBrand(value)}
-					bgWhite
-					ifFreeField
-				/>
-			</div>
-
-			<div className="sell-block-select">
-				<h4 className="sell-block-select__title">Модель товара</h4>
-
-				<Field
-					component={RenderInputHints}
-					name="model"
-					label="Модель товара"
-					hints={models}
-					disabled={currentBrand !== "" ? false : true}
-					onChangeCustom={(value: string) => onChangeInputModel(value)}
-					bgWhite
-					ifFreeField
-				/>
-			</div>
-
-			<div className="sell-block-select">
-				<h4 className="sell-block-select__title">
-					Состояние товара
-
-					<svg
-						width="18"
-						height="18"
-						viewBox="0 0 18 18"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<g clipPath="url(#clip0_6785_19443)">
-							<path
-								d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-								stroke="#202020"
-								strokeWidth="1.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</g>
-						<defs>
-							<clipPath id="clip0_6785_19443">
-								<rect width="18" height="18" fill="white" />
-							</clipPath>
-						</defs>
-					</svg>
-				</h4>
-
-				<Field
-					component={RenderSelect}
-					name="condition"
-					label="Состояние товара"
-					items={parameters[currentCategory] ? parameters[currentCategory].conditions.map(condition => condition.name) : []}
-					disabled={parameters[currentCategory] ? false : true}
-				/>
-			</div>
-
-			<div className="sell-block-select">
-				<h4 className="sell-block-select__title">Наличие дефектов</h4>
-
-				<Field
-					component={RenderSelectArray}
-					name="defects"
-					label="Наличие дефектов"
-					items={parameters[currentCategory] ? parameters[currentCategory].defects.map(defect => defect.name) : []}
-					disabled={parameters[currentCategory] ? false : true}
-				/>
-			</div>
-
-			{currentCategory === "Обувь" ? (
+			<div className="sell-block-input-wrapper-wrapper">
 				<div className="sell-block-select">
-					<h4 className="sell-block-select__title">Размер</h4>
+					<h4 className="sell-block-select__title">Категория товара</h4>
 
-					<Field component={RenderInput} name="size" label="Размер" bgWhite />
+					<Field
+						component={RenderSelect}
+						name="category"
+						label="Категория товара"
+						items={Object.keys(parameters)}
+						onChangeCutsom={(value: string) => setCurrentCategory(value)}
+					/>
 				</div>
-			) : null}
 
-			<div className="sell-block-select">
-				<h4 className="sell-block-select__title">Комплект</h4>
+				<div className="sell-block-select">
+					<h4 className="sell-block-select__title">Бренд товара</h4>
 
-				<Field
-					component={RenderSelectArray}
-					name="set"
-					label="Комплект"
-					items={[
-						"Карточка",
-						"Пыльник",
-						"Ремень",
-						"Коробка",
-						"Брелок",
-						"Кошелек",
-						"Ключ",
-						"Отсутствует",
-					]}
-				/>
-			</div>
+					<Field
+						component={RenderInputHints}
+						name="brand"
+						label="Бренд товара"
+						hints={brands}
+						disabled={parameters[currentCategory] ? false : true}
+						onChangeCustom={(value: string) => onChangeInputBrand(value)}
+						bgWhite
+						ifFreeField
+					/>
+				</div>
 
-			<div className="sell-block-select">
-				<h4 className="sell-block-select__title">
-					Ожидание по цене
+				{currentCategory === "Мужские сумки" || currentCategory === "Женские сумки" ? (
+					<div className="sell-block-select">
+						<h4 className="sell-block-select__title">Модель товара</h4>
 
-					<svg
-						width="18"
-						height="18"
-						viewBox="0 0 18 18"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<g clipPath="url(#clip0_6785_19443)">
-							<path
-								d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-								stroke="#202020"
-								strokeWidth="1.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</g>
-						<defs>
-							<clipPath id="clip0_6785_19443">
-								<rect width="18" height="18" fill="white" />
-							</clipPath>
-						</defs>
-					</svg>
-				</h4>
+						<Field
+							component={RenderInputHints}
+							name="model"
+							label="Модель товара"
+							hints={models}
+							disabled={currentBrand !== "" ? false : true}
+							onChangeCustom={(value: string) => onChangeInputModel(value)}
+							bgWhite
+							ifFreeField
+						/>
+					</div>
+				) : null}
 
-				<Field
-					component={RenderInput}
-					name="price"
-					label="Ожидание по цене"
-					bgWhite
-				/>
-			</div>
+				<div className="sell-block-select">
+					<h4 className="sell-block-select__title">
+						Состояние товара
 
-			<div className="sell-block-select">
-				<h4 className="sell-block-select__title">
-					Товар приобретен в THE CULTT
-					<svg
-						width="18"
-						height="18"
-						viewBox="0 0 18 18"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<g clipPath="url(#clip0_6785_19443)">
-							<path
-								d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-								stroke="#202020"
-								strokeWidth="1.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</g>
-						<defs>
-							<clipPath id="clip0_6785_19443">
-								<rect width="18" height="18" fill="white" />
-							</clipPath>
-						</defs>
-					</svg>
-				</h4>
+						<svg
+							width="18"
+							height="18"
+							viewBox="0 0 18 18"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<g clipPath="url(#clip0_6785_19443)">
+								<path
+									d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
+									stroke="#202020"
+									strokeWidth="1.5"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								/>
+							</g>
+							<defs>
+								<clipPath id="clip0_6785_19443">
+									<rect width="18" height="18" fill="white" />
+								</clipPath>
+							</defs>
+						</svg>
+					</h4>
 
-				<Field
-					component={RenderSelect}
-					name="isBuyTheCultt"
-					label="Товар приобретен в THE CULTT"
-					items={["Да", "Нет"]} />
+					<Field
+						component={RenderSelect}
+						name="condition"
+						label="Состояние товара"
+						items={parameters[currentCategory] ? parameters[currentCategory].conditions.map(condition => condition.name) : []}
+						disabled={parameters[currentCategory] ? false : true}
+					/>
+				</div>
+
+				{/* <div className="sell-block-select">
+					<h4 className="sell-block-select__title">Наличие дефектов</h4>
+
+					<Field
+						component={RenderSelectArray}
+						name="defects"
+						label="Наличие дефектов"
+						items={parameters[currentCategory] ? ["Нет дефектов", ...parameters[currentCategory].defects.map(defect => defect.name)] : []}
+						disabled={parameters[currentCategory] ? false : true}
+					/>
+				</div>
+
+				{currentCategory === "Обувь" ? (
+					<div className="sell-block-select">
+						<h4 className="sell-block-select__title">Размер</h4>
+
+						<Field component={RenderInput} name="size" label="Размер" bgWhite />
+					</div>
+				) : null}
+
+				<div className="sell-block-select">
+					<h4 className="sell-block-select__title">Комплект</h4>
+
+					<Field
+						component={RenderSelectArray}
+						name="set"
+						label="Комплект"
+						items={parameters[currentCategory] ? parameters[currentCategory].kits.map(kit => kit.name) : []}
+						disabled={parameters[currentCategory] ? false : true}
+					/>
+				</div>
+
+				<div className="sell-block-select">
+					<h4 className="sell-block-select__title">
+						Ожидание по цене
+
+						<svg
+							width="18"
+							height="18"
+							viewBox="0 0 18 18"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<g clipPath="url(#clip0_6785_19443)">
+								<path
+									d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
+									stroke="#202020"
+									strokeWidth="1.5"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								/>
+							</g>
+							<defs>
+								<clipPath id="clip0_6785_19443">
+									<rect width="18" height="18" fill="white" />
+								</clipPath>
+							</defs>
+						</svg>
+					</h4>
+
+					<Field
+						component={RenderInput}
+						name="price"
+						label="Ожидание по цене"
+						bgWhite
+					/>
+				</div>
+
+				<div className="sell-block-select">
+					<h4 className="sell-block-select__title">
+						Товар приобретен в THE CULTT
+						<svg
+							width="18"
+							height="18"
+							viewBox="0 0 18 18"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<g clipPath="url(#clip0_6785_19443)">
+								<path
+									d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
+									stroke="#202020"
+									strokeWidth="1.5"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								/>
+							</g>
+							<defs>
+								<clipPath id="clip0_6785_19443">
+									<rect width="18" height="18" fill="white" />
+								</clipPath>
+							</defs>
+						</svg>
+					</h4>
+
+					<Field
+						component={RenderSelect}
+						name="isBuyTheCultt"
+						label="Товар приобретен в THE CULTT"
+						items={["Да", "Нет"]} />
+				</div> */}
 			</div>
 
 			<button

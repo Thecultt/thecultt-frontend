@@ -78,7 +78,24 @@
 			&__description
 				margin-top: 15px
 
+				width: 75%
+
 				font-size: 14px
+
+				& h4
+					font-size: 18px
+					margin-bottom: 10px
+
+				& a
+					color: $mainColor
+					text-decoration: underline
+
+				& table
+					width: 75%
+
+				& td
+					padding: 15px 0
+					border-bottom: 1px solid $black
 
 // faq
 .faq
@@ -91,6 +108,9 @@
 		align-items: center
 
 		margin-bottom: 25px
+
+		&__back
+			display: none
 
 		&__item
 			color: $gray
@@ -134,6 +154,10 @@
 	&-text
 		margin-top: 25px
 		width: 80%
+
+		& a
+			color: $mainColor
+			text-decoration: underline
 
 		&__title
 			font-size: 26px
@@ -209,3 +233,18 @@
 					background-color: transparent
 					color: $mainColor
 					font-size: 16px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.faq
+		margin-bottom: 25px
+		
+		&-bread-crumbs
+			display: none
+
+			&__back
+				display: block
+
+		&-text
+			width: 100%
+			margin-top: 15px

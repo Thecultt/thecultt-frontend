@@ -94,12 +94,12 @@ const Footer: React.FC = () => {
 								>
 									О компании
 								</Link>
-								<Link
-									to={""}
+								<a
+									href="https://www.notion.so/9a26fcf2ac2049feb782bcd967eed574"
 									className="footer-block-menu-block__link"
 								>
 									Карьера
-								</Link>
+								</a>
 								<Link
 									to={""}
 									className="footer-block-menu-block__link"

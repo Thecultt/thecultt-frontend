@@ -484,11 +484,11 @@ button
 		margin-left: 32px
 
 // select
-.select
+.select-wrapper
 	width: 100%
-
 	position: relative
 
+.select
 	display: flex
 	justify-content: space-between
 	align-items: center
@@ -560,6 +560,8 @@ button
 				border-radius: 100px
 
 		&__item
+			cursor: pointer
+			
 			display: flex
 			justify-content: space-between
 			align-items: center
@@ -658,7 +660,22 @@ button
 .hover-scale
 	will-change: transform
 
-	+transition
+	+transition04s
 
 	&:hover
 		+transformHover
+
+
+/* MEDIA */
+@media screen and (max-width: 600px)
+	// popup
+	.popup
+		&-content
+			width: 95%
+			padding: 25px
+
+			border: 0.6px solid $mainColor
+
+			&-close
+				top: 5px
+				right: 5px

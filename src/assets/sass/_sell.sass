@@ -71,6 +71,51 @@
 
 				+transition
 
+		// media
+		&-item-media
+			position: relative
+
+			width: 36px
+			min-width: 36px
+			height: 36px
+
+			display: flex
+			justify-content: center
+			align-items: center
+
+			background-color: $lightBackgroundColor
+			border-radius: 50%
+
+			margin-right: 30px
+
+			&:last-child
+				margin-right: 0
+
+				&::before
+					display: none
+
+			&.active
+				background-color: $mainColor
+				color: $white
+
+			&::before
+				content: ""
+				position: absolute
+
+				display: block
+
+				width: 25px
+				height: 2px
+
+				right: -28px
+				top: 50%
+				transform: translateY(-50%)
+
+				border-bottom: 1px dashed $gray
+
+			&__title
+				font-size: 14px
+
 	&-block
 		width: 640px
 
@@ -86,13 +131,8 @@
 
 			margin-bottom: 20px
 
-			&:hover > svg
-				transform: rotate(15deg)
-
 			& > svg
 				margin-right: 5px
-
-				+transition
 
 		&__title
 			font-size: 17px
@@ -166,7 +206,7 @@
 				+transition
 
 				&:last-child
-					margin-left: 0
+					margin-right: 0
 
 				&.active
 					border: 0.6px solid $mainColor
@@ -244,7 +284,7 @@
 					border: 1px solid $gray
 
 				&-text
-					width: calc(50% - 7.5px)
+					width: calc(50% - 5px)
 
 					text-align: center
 
@@ -308,7 +348,7 @@
 						user-select: none
 
 				&-cover
-					width: calc(50% - 7.5px)
+					width: calc(50% - 5px)
 
 					display: flex
 					flex-direction: column
@@ -378,6 +418,8 @@
 			margin-left: 110px
 
 			&-types
+				width: 100%
+				
 				display: flex
 				justify-content: space-between
 
@@ -442,6 +484,8 @@
 					color: $mainColor
 
 			&-form
+				width: 100%
+				
 				&__title
 					font-size: 17px
 					margin-bottom: 15px
@@ -461,3 +505,140 @@
 
 		&__link
 			width: 100%
+
+/* MEDIA */
+@media screen and (max-width: 1250px)
+	.sell
+		&-wrapper
+			flex-direction: column
+			align-items: center
+
+		&-steps
+			position: static
+
+			display: flex
+			align-items: center
+			justify-content: center
+
+			margin-bottom: 15px
+
+		&-block
+			display: flex
+			flex-direction: column
+
+			width: 100%
+
+			&__back
+				margin-bottom: 15px
+
+			&__title, &__subtitle
+				text-align: center
+
+			&-input-wrapper-wrapper
+				width: 100%
+
+				padding: 15px
+				border-radius: 12px
+				background-color: $lightBackgroundColor
+
+			&-input
+				width: 100% !important
+
+			&__btn
+				margin-top: 15px
+				width: 100%
+
+			&-cooperation-wrapper
+				flex-direction: column
+
+				margin-left: 0
+
+			&-cooperation
+				margin-bottom: 25px
+
+				&-type-block-wrapper
+					width: 100%
+					flex-direction: column
+
+				&-type-block
+					width: 100%
+					margin-bottom: 10px
+
+					&:last-child
+						margin-bottom: 0
+
+				&-concierge-service
+					width: 100%
+
+			&-info, &-images, &-contact, &-delivery
+				margin-left: 0
+
+			&-delivery
+				&-types
+					margin-top: 20px
+
+@media screen and (max-width: 600px)
+	.sell
+		&-success
+			width: 100%
+
+			&__title
+				font-size: 17px
+
+@media screen and (max-width: 500px)
+	.sell
+		&-block
+			&-images
+				&-block
+					height: 260px
+
+					&-cover
+						padding: 15px 5px
+
+						&__title
+							font-weight: 400
+							font-size: 16px
+
+						&__description
+							font-size: 11px
+
+					&-text
+						display: flex
+						flex-direction: column
+						align-items: center
+
+						&-icon
+							margin-top: 80px
+
+						&__title
+							margin-top: 10px
+
+							width: 100px
+
+							font-size: 15px
+							text-decoration: underline
+
+						&__description
+							margin-top: 40px
+							font-size: 12px
+
+			&-delivery
+				&-types
+					flex-direction: column
+
+					&-block
+						width: 100%
+						margin-bottom: 15px
+
+						&:last-child
+							margin-bottom: 0
+
+@media screen and (max-width: 400px)
+	.sell
+		&-steps
+			&-item-media
+				margin-right: 15px
+
+				&::before
+					width: 15px
+					right: -17px

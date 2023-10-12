@@ -49,7 +49,7 @@ const HomeMainBanner: React.FC = () => {
 								Стань частью культуры нового потребления
 							</p>
 
-							<Link to="" className="home-main-slider-banner-item-text__btn">
+							<Link to="/sell" className="home-main-slider-banner-item-text__btn">
 								Продать
 							</Link>
 						</div>
@@ -67,7 +67,7 @@ const HomeMainBanner: React.FC = () => {
 								Стань частью культуры нового потребления
 							</p>
 
-							<Link to="" className="home-main-slider-banner-item-text__btn">
+							<Link to="/sell" className="home-main-slider-banner-item-text__btn">
 								Продать
 							</Link>
 						</div>

@@ -1,44 +1,51 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
-import {setFiltersModelsProduct} from "../../../redux/actions/products";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import {CatalogFiltersBlockWrapper, Checkbox} from "../../";
+import { setFiltersModelsProduct } from "../../../redux/actions/products";
+
+import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
 
 interface CatalogFiltersModelsProps {
-    models: string[];
-    disabled?: boolean;
+	models: string[];
+	disabled?: boolean;
 }
 
 const CatalogFiltersModels: React.FC<CatalogFiltersModelsProps> = ({
-    models,
-    disabled,
+	models,
+	disabled,
 }) => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const onChangeSetModels = (model: string) => {
-        dispatch(setFiltersModelsProduct(model));
-    };
+	const { filters } = useTypedSelector(({ products }) => products)
 
-    return (
-        <CatalogFiltersBlockWrapper
-            title="Модели"
-            disabled={disabled ? disabled : false}
-        >
-            {models.map((model, index) => (
-                <div
-                    className="catalog-filters-block-content-checkbox"
-                    key={`catalog-filters-block-content-models-checkbox-${index}`}
-                >
-                    <Checkbox
-                        id={`catalog-filters-block-content-models-checkbox-${index}`}
-                        label={model}
-                        onChange={() => onChangeSetModels(model)}
-                    />
-                </div>
-            ))}
-        </CatalogFiltersBlockWrapper>
-    );
+	const onChangeSetModels = (model: string) => {
+		dispatch(setFiltersModelsProduct(model));
+	};
+
+	return (
+		<CatalogFiltersBlockWrapper
+			title="Модели"
+			disabled={disabled ? disabled : false}
+		>
+			{models.map((model, index) => (
+				<div
+					className="catalog-filters-block-content-checkbox"
+					key={`catalog-filters-block-content-models-checkbox-${index}`}
+				>
+					<Checkbox
+						id={`catalog-filters-block-content-models-checkbox-${index}`}
+						label={model}
+						onChange={() => onChangeSetModels(model)}
+						checked={Object.keys(filters.models).find((filtersModel) => (
+							model === filtersModel
+						)) ? true : false}
+					/>
+				</div>
+			))}
+		</CatalogFiltersBlockWrapper>
+	);
 };
 
 export default CatalogFiltersModels;

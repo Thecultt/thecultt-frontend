@@ -28,26 +28,14 @@ const validate = (values: validateInfoValues) => {
 
 	if (!values.street) {
 		errors.street = "Поле не может быть пустым";
-	} else if (values.street.length > defaultMax) {
-		errors.street = `Не более ${defaultMax} символов`;
-	} else if (values.street.length < defaultMin) {
-		errors.street = `Не менее ${defaultMin} символов`;
 	}
 
 	if (!values.dom) {
 		errors.dom = "Поле не может быть пустым";
-	} else if (values.dom.length > defaultMax) {
-		errors.dom = `Не более ${defaultMax} символов`;
-	} else if (values.dom.length < defaultMin) {
-		errors.dom = `Не менее ${defaultMin} символов`;
 	}
 
 	if (!values.flat) {
 		errors.flat = "Поле не может быть пустым";
-	} else if (values.flat.length > defaultMax) {
-		errors.flat = `Не более ${defaultMax} символов`;
-	} else if (values.flat.length < defaultMin) {
-		errors.flat = `Не менее ${defaultMin} символов`;
 	}
 
 	return errors;

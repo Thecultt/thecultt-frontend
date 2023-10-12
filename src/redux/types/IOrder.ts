@@ -1,3 +1,5 @@
+import { Order } from '../../models/IOrder'
+
 export interface OrderState {
 	promocode: {
 		isSend: boolean
@@ -34,7 +36,12 @@ export interface OrderState {
 			title: string,
 			value: string
 		}
-	}
+	},
+
+	idOrder: number,
+
+	order: Order
+	isLoadedOrder: boolean,
 
 	isValid: boolean
 }
@@ -52,6 +59,11 @@ export enum OrderStateActionTypes {
 	SET_ORDER_ADDRESS_COUNTRY = "SET_ORDER_ADDRESS_COUNTRY",
 	SET_ORDER_ADDRESS_CITY = "SET_ORDER_ADDRESS_CITY",
 	SET_ORDER_ADDRESS_STREET = "SET_ORDER_ADDRESS_STREET",
+
+	SET_ORDER_ID_ORDER = "SET_ORDER_ID_ORDER",
+
+	SET_ORDER_ORDER = "SET_ORDER_ORDER",
+	SET_ORDER_IS_LOADED_ORDER = "SET_ORDER_IS_LOADED_ORDER",
 
 	SET_ORDER_IS_VALID = "SET_ORDER_IS_VALID",
 }
@@ -124,9 +136,24 @@ interface setOrderAddressStreet {
 	}
 }
 
+interface setOrderIdOrder {
+	type: OrderStateActionTypes.SET_ORDER_ID_ORDER,
+	payload: number
+}
+
+interface setOrderOrder {
+	type: OrderStateActionTypes.SET_ORDER_ORDER,
+	payload: Order
+}
+
+interface setOrderIsLoadedOrder {
+	type: OrderStateActionTypes.SET_ORDER_IS_LOADED_ORDER,
+	payload: boolean
+}
+
 interface setOrderIsValid {
 	type: OrderStateActionTypes.SET_ORDER_IS_VALID,
 	payload: boolean
 }
 
-export type OrderStateActions = setOrderPromocodeIsSend | setOrderPromocodeIsActive | setOrderPromocodeIsError | setOrderPromocodeSaleSum | setOrderGlobalCountrys | setOrderGlobalCitys | setOrderGlobalStreets | setOrderAddressCountry | setOrderAddressCity | setOrderAddressStreet | setOrderIsValid
+export type OrderStateActions = setOrderPromocodeIsSend | setOrderPromocodeIsActive | setOrderPromocodeIsError | setOrderPromocodeSaleSum | setOrderGlobalCountrys | setOrderGlobalCitys | setOrderGlobalStreets | setOrderAddressCountry | setOrderAddressCity | setOrderAddressStreet | setOrderOrder | setOrderIsLoadedOrder | setOrderIdOrder | setOrderIsValid

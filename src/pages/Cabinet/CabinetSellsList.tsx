@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { useTypedSelector } from '../../hooks/useTypedSelector'
@@ -23,6 +24,17 @@ const CabinetSellsList: React.FC = () => {
 					<CabinetMenu />
 
 					<div className="cabinet-content cabinet-sells-list">
+						<div className="cabinet-sells-list-top">
+							<Link to="/cabinet/sell" className="btn cabinet-sells-list-top__add">
+								Оставить заявку
+
+								<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M11.2487 4.58203V17.4154M4.83203 10.9987H17.6654" stroke="#F7F4F0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+								</svg>
+
+							</Link>
+						</div>
+
 						{sellsList.map((sell, index) => (
 							<CabinetSellsListItem {...sell} key={`cabinet-sells-list-item-${index}`} />
 						))}

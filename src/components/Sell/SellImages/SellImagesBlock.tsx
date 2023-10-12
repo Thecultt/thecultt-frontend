@@ -50,7 +50,7 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
 
 			<div
 				className={`sell-block-images-block-text ${value ? "fill" : ""}`}
-				style={{ width: image ? "calc(50% - 7.5px)" : "100%", backgroundImage: `url("${value}")` }}
+				style={{ width: image ? "calc(50% - 5px)" : "100%", backgroundImage: `url("${value}")` }}
 			>
 				{value ? <div className="sell-block-images-block-text-plaecholder"></div> : null}
 

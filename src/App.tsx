@@ -77,7 +77,7 @@ const App = () => {
 		}
 
 		if (!isLoadedProducts) {
-			dispatch(fetchFirstProducts() as any);
+			// dispatch(fetchFirstProducts() as any);
 		}
 
 		if (isLogin) {
@@ -92,7 +92,7 @@ const App = () => {
 
 	return (
 		<div className="wrapper" id="wrapper">
-			<MenuMedia />
+			{pathname.indexOf("/cabinet/sell") !== -1 ? null : <MenuMedia />}
 
 			<Header />
 
@@ -158,13 +158,13 @@ const App = () => {
 					<Route path="/order" element={<Order />} />
 
 					<Route
-						path="/order/success"
+						path="/order/:id"
 						element={<OrderStatus status="success" />}
 					/>
-					<Route
+					{/* <Route
 						path="/order/error"
 						element={<OrderStatus status="error" />}
-					/>
+					/> */}
 
 					<Route path="/sell" element={<SellInfo />} />
 
@@ -177,7 +177,7 @@ const App = () => {
 			</React.Suspense>
 
 			<Footer />
-		</div >
+		</div>
 	);
 };
 

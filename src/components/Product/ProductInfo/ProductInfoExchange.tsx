@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProductInfoExchange: React.FC = () => {
 	return (
-		<div className="product-content-info-exchange">
+		<Link to="/exchange" className="product-content-info-exchange">
 			<div className="product-content-info-exchange-text">
 				<h4 className="product-content-info-exchange-text__title">
 					Обмен
@@ -42,7 +43,7 @@ const ProductInfoExchange: React.FC = () => {
 					<path id="Icon" d="M1 13L7 7L1 1" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
 				</svg>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

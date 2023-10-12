@@ -13,6 +13,8 @@ import SellBlockCooperationConciergeImage from "../../../assets/images/sell/sell
 const SellCooperation: React.FC = () => {
 	const dispatch = useDispatch()
 
+	const initType = new URLSearchParams(window.location.search).get("type")
+
 	const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
 	const types = [
@@ -31,6 +33,12 @@ const SellCooperation: React.FC = () => {
 			type: CabinetSellTypes.EXCHANGE
 		}
 	]
+
+	React.useEffect(() => {
+		if (initType === "exchange") {
+			dispatch(setCabinetSellCurrentType(CabinetSellTypes.EXCHANGE))
+		}
+	}, [initType])
 
 	return (
 		<div className="sell-block-cooperation-wrapper">

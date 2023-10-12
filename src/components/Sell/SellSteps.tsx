@@ -69,43 +69,54 @@ const SellSteps: React.FC = () => {
 					}
 				})
 			}).map((step, index) => (
-				<div
-					className={`sell-steps-item ${index + 1 === currentIndex
-						? "active"
-						: index + 1 < currentIndex
-							? "success"
-							: ""
-						} `}
-					key={`sell-steps-item-${index}`}
-				>
-					<div className="sell-steps-item-circle">
-						{index + 1 < currentIndex ? (
-							<svg
-								width="20"
-								height="20"
-								viewBox="0 0 20 20"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<rect
+				window.innerWidth > 1250 ? (
+					<div
+						className={`sell-steps-item ${index + 1 === currentIndex
+							? "active"
+							: index + 1 < currentIndex
+								? "success"
+								: ""
+							} `}
+						key={`sell-steps-item-${index}`}
+					>
+						<div className="sell-steps-item-circle">
+							{index + 1 < currentIndex ? (
+								<svg
 									width="20"
 									height="20"
-									rx="10"
-									fill="#285141"
-								/>
-								<path
-									d="M14.7273 7L8.72727 13L6 10.2727"
-									stroke="#F1EDE8"
-									strokeWidth="1.2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</svg>
-						) : null}
-					</div>
+									viewBox="0 0 20 20"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<rect
+										width="20"
+										height="20"
+										rx="10"
+										fill="#285141"
+									/>
+									<path
+										d="M14.7273 7L8.72727 13L6 10.2727"
+										stroke="#F1EDE8"
+										strokeWidth="1.2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+								</svg>
+							) : null}
+						</div>
 
-					<p className="sell-steps-item__title">{index + 1}. {step.title}</p>
-				</div>
+						<p className="sell-steps-item__title">{index + 1}. {step.title}</p>
+					</div>
+				) : (
+					<div
+						className={`sell-steps-item-media ${index + 1 === currentIndex ? "active" : ""}`}
+						key={`sell-steps-item-media-${index}`}
+					>
+						<span className="sell-steps-item-media__title">
+							{index + 1}
+						</span>
+					</div>
+				)
 			))}
 		</div>
 	);

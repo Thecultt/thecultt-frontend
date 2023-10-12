@@ -36,14 +36,6 @@ const validate = (values: validateInfoValues) => {
 		errors.brand = "Поле не может быть пустым";
 	}
 
-	if (!values.model) {
-		errors.model = "Поле не может быть пустым";
-	} else if (values.model.length > defaultMax) {
-		errors.model = `Не более ${defaultMax} символов`;
-	} else if (values.model.length < defaultMin) {
-		errors.model = `Не менее ${defaultMin} символов`;
-	}
-
 	if (!values.condition) {
 		errors.condition = "Поле не может быть пустым";
 	}

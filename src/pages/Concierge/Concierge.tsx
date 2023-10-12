@@ -10,7 +10,7 @@ const Concierge: React.FC = () => {
 		<section className="concierge">
 			<div className="container">
 				<div className='concierge-wrapper'>
-					<div className="concierge-main">
+					<div className="concierge-main hover-scale">
 						<div className="concierge-main-text">
 							<h2 className="concierge-main-text__title">
 								Консьерж-сервис
@@ -177,7 +177,7 @@ const Concierge: React.FC = () => {
 						</h2>
 
 						<div className="concierge-services-blocks-wrapper">
-							<div className="concierge-services-block">
+							<div className="concierge-services-block hover-scale">
 								<div className="concierge-services-block-icon">
 									<svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<g id="Icons">
@@ -194,7 +194,7 @@ const Concierge: React.FC = () => {
 								</p>
 							</div>
 
-							<div className="concierge-services-block">
+							<div className="concierge-services-block hover-scale">
 								<div className="concierge-services-block-icon">
 									<svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<g id="Icons">
@@ -211,7 +211,7 @@ const Concierge: React.FC = () => {
 								</p>
 							</div>
 
-							<div className="concierge-services-block">
+							<div className="concierge-services-block hover-scale">
 								<div className="concierge-services-block-icon">
 									<svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<g id="Icons">
@@ -230,7 +230,7 @@ const Concierge: React.FC = () => {
 						</div>
 					</div>
 
-					<div className="concierge-form">
+					<div className="concierge-form hover-scale">
 						<div className="concierge-form-content">
 							<h2 className="concierge-form-content__title">
 								Закажите консьерж-сервис в один клик

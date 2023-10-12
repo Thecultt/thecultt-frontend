@@ -2,7 +2,8 @@ import { Dispatch } from "redux";
 
 import $api from "../../http";
 
-import { ProductActionTypes, ProductTypes } from "../types/IProducts";
+import { ProductActionTypes, ProductTypes, ProductsStateFilters } from "../types/IProducts";
+
 import { Product, ProductPage } from "../../models/IProduct";
 
 export const fetchFirstProducts = () => async (dispatch: Dispatch<ProductTypes>) => {
@@ -163,6 +164,11 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 export const setCurrentPageProduct = (number: number) => ({
 	type: ProductActionTypes.SET_PRODUCTS_CURRENT_PAGE,
 	payload: number
+})
+
+export const setFiltersCatalog = (filters: ProductsStateFilters) => ({
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG,
+	payload: filters
 })
 
 export const setFiltersPriceProduct = (price: { min: number, max: number }) => ({

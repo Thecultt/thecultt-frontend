@@ -33,6 +33,8 @@ const initialState: ProductsState = {
 	itemsCount: 0,
 
 	filters: {
+		isParse: false,
+
 		price: { min: 0, max: 0 },
 
 		conditions: {},
@@ -114,7 +116,6 @@ const products = (state = initialState, action: ProductTypes) => {
 		}
 	}
 
-
 	if (action.type === ProductActionTypes.SET_PRODUCTS_PAGE_COUNT) {
 		return {
 			...state,
@@ -126,6 +127,14 @@ const products = (state = initialState, action: ProductTypes) => {
 		return {
 			...state,
 			itemsCount: action.payload,
+		}
+	}
+
+	// filters
+	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG) {
+		return {
+			...state,
+			filters: action.payload,
 		}
 	}
 

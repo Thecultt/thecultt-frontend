@@ -7,7 +7,7 @@ import { formValueSelector } from "redux-form";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import { changeCheckCartItem, removeCartItem } from "../../../redux/actions/cart";
-import { sendCreateOrder } from "../../../redux/actions/order";
+import { sendCreateOrder, sendSubmitOrder } from "../../../redux/actions/order";
 
 import { OrderProductsItem, OrderProductsPromocode } from "../../";
 
@@ -16,7 +16,7 @@ const OrderProducts: React.FC = () => {
 
 	const { items, totalCount, totalPrice } = useTypedSelector(({ cart }) => cart);
 
-	const { promocode, isValid } = useTypedSelector(({ order }) => order)
+	const { promocode, idOrder, isValid } = useTypedSelector(({ order }) => order)
 
 	const changeCheck = (article: string, status: boolean) => {
 		dispatch(changeCheckCartItem(article, status));
@@ -90,7 +90,7 @@ const OrderProducts: React.FC = () => {
 				streetValue: street,
 				houseValue: house,
 				flatValue: flat,
-				commentValue: comment
+				commentValue: comment ? comment : ""
 			};
 		});
 
@@ -110,11 +110,12 @@ const OrderProducts: React.FC = () => {
 			products: [],
 
 			delivery_type: 1,
-			paymnet_type: 1
-		}, pay) as any)
-	}
+			payment_type: 6,
 
-	const pay = () => {
+			coupon_id: ""
+		}, (orderId: number) => pay(orderId)) as any)
+	}
+	const pay = (orderId: number) => {
 		var widget = new window.cp.CloudPayments();
 
 		widget.pay(
@@ -125,12 +126,6 @@ const OrderProducts: React.FC = () => {
 				description: "Оплата товаров TheCultt", //назначение
 				amount: totalPrice, //сумма
 				currency: "RUB", //валюта
-				configuration: {
-					common: {
-						successRedirectUrl: "/order/success", // адреса для перенаправления
-						failRedirectUrl: "", // при оплате по Tinkoff Pay
-					},
-				},
 				payer: {
 					firstName: "Тест",
 					lastName: "Тестов",
@@ -145,13 +140,16 @@ const OrderProducts: React.FC = () => {
 				},
 			},
 			{
-				onSuccess: function (options: any) {
-					window.location.href = "/order/success"
-				},
-				onFail: function (reason: any, options: any) {
-					window.location.href = "/order/error"
-				},
-				onComplete: function (paymentResult: any, options: any) {
+				// onSuccess: (options: any) => {
+				// 	console.log(options)
+
+				// 	dispatch(sendSubmitOrder(idOrder) as any)
+				// },
+				// onFail: function (reason: any, options: any) {
+				// 	window.location.href = "/order/error"
+				// },
+				onComplete: (paymentResult: any, options: any) => {
+					if (paymentResult.success) dispatch(sendSubmitOrder(orderId) as any)
 					//Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
 					//например вызов вашей аналитики
 				},

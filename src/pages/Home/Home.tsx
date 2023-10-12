@@ -11,7 +11,7 @@ const Home: React.FC = () => {
 
 					<HomeCategories />
 
-					<CatalogProductsSection title='Новое' />
+					{/* <CatalogProductsSection title='Новое' /> */}
 
 					<HomeVisit />
 

@@ -2,6 +2,12 @@
 .cabinet-sells-list
 	+open
 
+	&-top
+		display: flex
+		justify-content: flex-end
+
+		margin-bottom: 25px
+
 	&-item-wrapper
 		background-color: $lightBackgroundColor
 		padding: 10px
@@ -84,12 +90,19 @@
 
 					+ManropeSemiBold
 
-				&-value
+				&-value-wrapper
+					display: flex
+					align-items: flex-start
+
 					&.bb
 						padding-bottom: 12px
 						margin-bottom: 12px
 						border-bottom: 1px solid $gray
 
+				&-value
+					&.ml
+						margin-left: 70px
+						
 					&__value
 						display: flex
 						align-items: center

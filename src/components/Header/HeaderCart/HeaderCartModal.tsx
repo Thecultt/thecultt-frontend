@@ -97,7 +97,7 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({state, setState}) => {
 
                         <Link
                             to="/order"
-                            className="btn header-block-cart-modal-btn__btn"
+                            className={`btn ${Object.keys(items).filter(key => items[key].checked === true).length ? "" : "disabled"} header-block-cart-modal-btn__btn`}
                             onClick={setState}
                         >
                             Перейти к заказу

@@ -3,7 +3,7 @@ import { Dispatch } from "react";
 
 import { RegisterActions, RegisterActionTypes } from '../types/IRegister'
 
-export const sendRegister = (data: { name: string, surname: string, email: string, password: string }) => {
+export const sendRegister = (data: { name: string, lastname: string, email: string, password: string }) => {
 	return async (dispatch: Dispatch<RegisterActions>) => {
 		dispatch({
 			type: RegisterActionTypes.SET_REGISTER_IS_SEND,

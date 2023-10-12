@@ -57,29 +57,30 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 	}, [Object.keys(currentItems).map(item => item)])
 
 	return (
+		<div className={`select-wrapper`} ref={SelectRef}>
+			<div className={`select ${disabled ? "disabled" : ""}`} onClick={() => setState(!state)}>
+				<p className="select__label">
+					{Object.keys(currentItems).length ? Object.keys(currentItems).map((title) => title).join(", ") : <span>{label}</span>}
+				</p>
 
-		<div className={`select ${disabled ? "disabled" : ""}`} ref={SelectRef} onClick={() => setState(true)}>
-			<p className="select__label">
-				{Object.keys(currentItems).length ? Object.keys(currentItems).map((title) => title).join(", ") : <span>{label}</span>}
-			</p>
-
-			<svg
-				width="19"
-				height="19"
-				viewBox="0 0 19 19"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<g id="Icons">
-					<path
-						id="Vector"
-						d="M3 6L10 13L17 6"
-						stroke="#202020"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-				</g>
-			</svg>
+				<svg
+					width="19"
+					height="19"
+					viewBox="0 0 19 19"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<g id="Icons">
+						<path
+							id="Vector"
+							d="M3 6L10 13L17 6"
+							stroke="#202020"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</g>
+				</svg>
+			</div>
 
 			<div className={`select-list ${state ? "active" : ""}`}>
 				<div className="select-list-items-wrapper">

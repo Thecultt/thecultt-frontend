@@ -1,23 +1,38 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-import {CabinetMenu, CabinetHistoryOrdersItem} from "../../components/";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+
+import { fetchHistoryOrders } from "../../redux/actions/history_orders";
+
+import { CabinetMenu, CabinetHistoryOrdersItem } from "../../components/";
 
 const CabinetHistoryOrders: React.FC = () => {
-    return (
-        <section className="cabinet">
-            <div className="container">
-                <div className="cabinet-wrapper">
-                    <CabinetMenu />
+	const dispatch = useDispatch()
 
-                    <div className="cabinet-content cabinet-history-orders">
-                        <CabinetHistoryOrdersItem status="success" />
-                        <CabinetHistoryOrdersItem status="error" />
-                        <CabinetHistoryOrdersItem status="success" />
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+	const { items, isLoaded } = useTypedSelector(({ history_orders }) => history_orders)
+
+	React.useEffect(() => {
+		dispatch(fetchHistoryOrders() as any)
+	}, [])
+
+	return (
+		<section className="cabinet">
+			<div className="container">
+				<div className="cabinet-wrapper">
+					<CabinetMenu />
+
+					{isLoaded ? (
+						<div className="cabinet-content cabinet-history-orders">
+							{items.map((item, index) => (
+								<CabinetHistoryOrdersItem {...item} key={`cabinet-history-orders-${index}`} status="success" />
+							))}
+						</div>
+					) : null}
+				</div>
+			</div>
+		</section>
+	);
 };
 
 export default CabinetHistoryOrders;

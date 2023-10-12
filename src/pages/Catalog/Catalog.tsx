@@ -27,29 +27,30 @@ const Catalog: React.FC = () => {
 		({ products_filters }) => products_filters.isLoaded
 	);
 
-	React.useEffect(() => {
-		if (!isLoadedProducts) {
-			dispatch(fetchFirstProducts() as any);
-		}
-	}, []);
+	// React.useEffect(() => {
+	// 	if (!isLoadedProducts) {
+	// 		dispatch(fetchFirstProducts() as any);
+	// 	}
+	// }, []);
 
 	React.useEffect(() => {
-		const conditionsArrray = Object.keys(filters.conditions).map(
-			(key) => key
-		);
-		const categoriesArrray = Object.keys(filters.categories).map(
-			(key) => key
-		);
-		const typesArrray = Object.keys(filters.types).map((key) => key);
-		const brandsArrray = Object.keys(filters.brands).map((key) => key);
-		const modelsArrray = Object.keys(filters.models).map((key) => key);
-		const colorsArrray = Object.keys(filters.colors).map((key) => key);
-		const sexArrray = Object.keys(filters.sex).map((key) => key);
-		const availabilityArrray = Object.keys(filters.availability).map(
-			(key) => key
-		);
+		if (filters.isParse) {
+			const conditionsArrray = Object.keys(filters.conditions).map(
+				(key) => key
+			);
+			const categoriesArrray = Object.keys(filters.categories).map(
+				(key) => key
+			);
+			const typesArrray = Object.keys(filters.types).map((key) => key);
+			const brandsArrray = Object.keys(filters.brands).map((key) => key);
+			const modelsArrray = Object.keys(filters.models).map((key) => key);
+			const colorsArrray = Object.keys(filters.colors).map((key) => key);
+			const sexArrray = Object.keys(filters.sex).map((key) => key);
+			const availabilityArrray = Object.keys(filters.availability).map(
+				(key) => key
+			);
 
-		if (isLoadedProducts) {
+			// if (isLoadedProducts) {
 			dispatch(
 				fetchProductsFiltersCatalog(
 					{ min: filters.price.min, max: filters.price.max },
@@ -64,8 +65,10 @@ const Catalog: React.FC = () => {
 					filters.sort
 				) as any
 			);
+			// }
 		}
 	}, [
+		filters.isParse,
 		Object.keys(filters.conditions).length,
 		filters.price.min,
 		filters.price.max,
@@ -81,7 +84,7 @@ const Catalog: React.FC = () => {
 
 	return (
 		<>
-			{isLoadedProducts && isLoadedFilters ? (
+			{isLoadedFilters ? (
 				<section className="catalog">
 					<div className="container">
 						<div className="catalog-wrapper">

@@ -3,6 +3,8 @@ import axios from "axios"
 
 import $api from "../../http"
 
+import {Order} from "../../models/IOrder"
+
 import { OrderStateActionTypes, OrderStateActions } from "../types/IOrder"
 
 export const sendOrderApplyPromocode = (promocode: string) => (dispatch: Dispatch<OrderStateActions>) => {
@@ -181,13 +183,32 @@ export const sendCreateOrder = (
 		products: number[],
 
 		delivery_type: number,
-		paymnet_type: number
+		payment_type: number,
+
+		coupon_id: ""
 	},
-	onComplete: () => void
+	onComplete: (orderId: number) => void
 ) => async (dispatch: Dispatch<OrderStateActions>) => {
 	const res = await $api.post(`create_order/`, data)
 
-	console.log(res)
+	onComplete(res.data.order_id)
+}
 
-	onComplete()
+export const sendSubmitOrder = (
+	order_id: number,
+) => async (dispatch: Dispatch<OrderStateActions>) => {
+	await $api.post(`submit_order/`, { order_id })
+
+	window.location.href = `/order/${order_id}`
+}
+
+export const fetchOrder = (
+	order_id: number,
+) => async (dispatch: Dispatch<OrderStateActions>) => {
+	const {data} = await $api.get<Order>(`order/${order_id}`)
+
+	dispatch({
+		type: OrderStateActionTypes.SET_ORDER_ORDER,
+		payload: data
+	})
 }

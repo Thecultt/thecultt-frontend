@@ -8,7 +8,7 @@ const Auth: React.FC = () => {
         <section className="auth">
             <div className="container">
                 <div className="auth-wrapper">
-                    <div className="auth-main">
+                    <div className="auth-main hover-scale">
                         <div className="auth-main-text">
                             <h2 className="auth-main-text__title">
                                 Гарантия подлинности
@@ -84,7 +84,7 @@ const Auth: React.FC = () => {
                         </div>
 
                         <div className="auth-service-block-wrapper">
-                            <div className="auth-service-block">
+                            <div className="auth-service-block hover-scale">
                                 <svg
                                     width="24"
                                     height="24"
@@ -111,7 +111,7 @@ const Auth: React.FC = () => {
                                 </p>
                             </div>
 
-                            <div className="auth-service-block">
+                            <div className="auth-service-block hover-scale">
                                 <svg
                                     width="24"
                                     height="24"

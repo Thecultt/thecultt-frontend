@@ -16,7 +16,7 @@ const FaqAll: React.FC = () => {
 
 				<div className="faq-main-content-all-col">
 					<Link to="/about" className='faq-main-content-all-col__link'>О нас</Link>
-					<Link to="/" className='faq-main-content-all-col__link'>Карьера</Link>
+					<a href="https://www.notion.so/9a26fcf2ac2049feb782bcd967eed574" className='faq-main-content-all-col__link'>Карьера</a>
 				</div>
 
 				<div className="faq-main-content-all-col">

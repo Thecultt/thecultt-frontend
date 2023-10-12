@@ -4,6 +4,7 @@ import {
 	reduxForm,
 	InjectedFormProps,
 } from "redux-form";
+import { createTextMask } from "redux-form-input-masks";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
@@ -20,13 +21,17 @@ const CabinetSettingContactBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 }) => {
 	const [isEdit, setIsEdit] = React.useState<boolean>(false)
 
-	const { user: { email } } = useTypedSelector(({ user }) => user)
+	const { user, isSending } = useTypedSelector(({ user }) => user)
 
 	React.useEffect(() => {
-		initialize({
-			email
-		})
+		initialize(user)
 	}, [isEdit])
+
+	React.useEffect(() => {
+		if (!isSending) {
+			setIsEdit(false)
+		}
+	}, [isSending])
 
 	return (
 		<form onSubmit={handleSubmit} className={`cabinet-setting-block ${isEdit ? "active" : ""}`}>
@@ -61,6 +66,7 @@ const CabinetSettingContactBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							label="Ваша почта"
 							name="email"
 							bgWhite
+							disabled
 						/>
 					</div>
 
@@ -73,6 +79,11 @@ const CabinetSettingContactBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							name="phone"
 							label="Ваш номер телефона"
 							bgWhite
+							{...createTextMask({
+								pattern: "+7 999 999 99-99",
+								guide: false,
+								stripMask: false,
+							})}
 						/>
 					</div>
 

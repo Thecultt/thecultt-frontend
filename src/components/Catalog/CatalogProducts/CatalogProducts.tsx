@@ -49,7 +49,7 @@ const CatalogProducts: React.FC = () => {
 				{items.map((item, index) => (
 					<ProductBlock
 						addClass="catalog-product-block"
-						key={`catalog-product-block-${index}`}
+						key={`catalog-product-block-${item.article}-${index}`}
 						addCart={() =>
 							addCart({
 								checked: true,

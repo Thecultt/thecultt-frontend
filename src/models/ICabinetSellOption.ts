@@ -8,5 +8,6 @@ export interface CabinetSellOption {
 	brands: CabinetSellOptionBrand[],
 	defects: { name: string }[]
 	conditions: { name: string }[],
+	kits: { name: string }[],
 	sizes: { name: string }[],
 }

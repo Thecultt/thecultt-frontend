@@ -74,7 +74,7 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
 
 			<div className="header-block-user-menu-block">
 				<NavLink
-					to="/none"
+					to="/help/all"
 					className={({ isActive }) =>
 						`header-block-user-menu-block__link ${isActive ? "active" : ""}`
 					}>
