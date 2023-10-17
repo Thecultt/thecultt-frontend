@@ -6,6 +6,8 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import { fetchOrder } from "../../../redux/actions/order";
 
+import { OrderStatusProduct } from "../../../components/";
+
 interface OrderStatusProps {
 	status: string;
 }
@@ -86,57 +88,12 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ status }) => {
 											</Link>
 										</div>
 									</div>
-									{/* <div className="order-status-content-product-wrapper">
-										<div className="order-status-content-good">
-											<div
-												className="order-status-content-good-image"
-												style={{
-													backgroundImage:
-														"url('https://thecultt.com/assets/cache_image/products/5703/3a62c0f2389228fdfb0474c35d4d2cb98a24df52_1000x1330_254.jpg')",
-												}}
-											></div>
-											<div className="order-status-content-good-text">
-												<p className="order-status-content-good-text__brand">
-													Gucci
-												</p>
-												<p className="order-status-content-good-text__model">
-													MINI BUCKET BAG
-												</p>
-												<div className="order-status-content-good-text-state">
-													<span className="order-status-content-good-text-state__subtitle">
-														Состояние
-													</span>
 
-													<span className="order-status-content-good-text-state__title">
-														<svg
-															viewBox="0 0 11 12"
-															fill="none"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																d="M5.50781 11C8.26924 11 10.5078 8.76142 10.5078 6C10.5078 3.23858 8.26924 1 5.50781 1C2.74639 1 0.507812 3.23858 0.507812 6C0.507812 8.76142 2.74639 11 5.50781 11Z"
-																stroke="#285141"
-																strokeWidth="0.716034"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															/>
-															<path
-																d="M3.28516 6.00369L4.95182 7.67036L7.7296 4.89258"
-																stroke="#285141"
-																strokeWidth="0.716034"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															/>
-														</svg>
-														Отличное
-													</span>
-												</div>
-												<p className="order-status-content-good-text__price">
-													12,892 ₽
-												</p>
-											</div>
-										</div>
-									</div> */}
+									<div className="order-status-content-product-wrapper">
+										{order.products.map((product, index) => (
+											<OrderStatusProduct {...product} key={`order-status-content-product-${index}`} />
+										))}
+									</div>
 								</div>
 
 								<div className="order-status-recipient">
@@ -174,7 +131,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ status }) => {
 										<p className="order-status-recipient-block__subtitle">
 											<span>Тип оплаты:</span> {order.payment_type}
 										</p>
-{/* 
+										{/* 
 										<p className="order-status-recipient-block__subtitle">
 											<span>Статус:</span>{" "}
 											<p className="payment">

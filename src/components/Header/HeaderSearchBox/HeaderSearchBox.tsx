@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
@@ -10,6 +10,7 @@ import {
 } from "../../../redux/actions/cart";
 
 import { sendSaveFavorite, sendRemoveFavorite } from "../../../redux/actions/favorites";
+import { setHeaderSearchValue } from "../../../redux/actions/header";
 
 import { CartItem } from "../../../models/ICartItem";
 
@@ -24,6 +25,8 @@ interface HeaderSearchBoxProps {
 
 const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => {
 	const dispatch = useDispatch();
+
+	const { pathname } = useLocation();
 
 	const cartItems = useTypedSelector(({ cart }) => cart.items);
 	const favoritesItems = useTypedSelector(({ favorites }) => favorites.items);
@@ -67,6 +70,10 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 		}
 	};
 
+	React.useEffect(() => {
+		if (search.value !== "") dispatch(setHeaderSearchValue(""))
+	}, [pathname]);
+
 	return (
 		<div className={`header-search-box ${state ? "active" : ""}`} ref={PopupRef}>
 			<div className="header-search-box-history">
@@ -85,7 +92,7 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 						</p>
 					</div>
 				</div>
-
+				{/* 
 				<div className="header-search-box-history-search">
 					<p className="header-search-box-history-search__title">
 						История поиска
@@ -116,20 +123,21 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 							</svg>
 						</p>
 					</div>
-				</div>
+				</div> */}
 			</div>
 
 			<div className={`header-search-box-products ${search.isFetch ? "fetch" : ""}`}>
 				<h3 className="header-search-box-products__title">
-					{search.items.length ? `${checkDeclension(search.items.length, ["Найден", "Найдено", "Найдено"]).text}: ${checkDeclension(search.items.length, ["товар", "товара", "товаров"]).title}` : "Новинки"} <Link to="/catalog" onClick={onClose}>Смотреть все</Link>
+					{search.value !== "" ? `${checkDeclension(search.totalCount, ["Найден", "Найдено", "Найдено"]).text}: ${checkDeclension(search.totalCount, ["товар", "товара", "товаров"]).title}` : "Новинки"} <Link to={`/catalog?search=${search.value}`} onClick={onClose}>Смотреть все</Link>
 				</h3>
 
 				<div className="header-search-box-products-blocks-wrapper">
-					{search.items.length ? search.items.map((item, index) => (
+					{search.value !== "" ? search.items.map((item, index) => (
 						<div className="header-search-box-products-block" key={`header-search-box-products-block-${index}`}>
 							<ProductBlock
 								addCart={() =>
 									addCart({
+										id: item.id,
 										checked: true,
 										article: item.article,
 										manufacturer: item.manufacturer,
@@ -150,6 +158,7 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 							<ProductBlock
 								addCart={() =>
 									addCart({
+										id: item.id,
 										checked: true,
 										article: item.article,
 										manufacturer: item.manufacturer,
@@ -168,7 +177,7 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 					)).splice(0, 4)}
 				</div>
 
-				<Link to="/catalog" className='btn-regular header-search-box-products__more' onClick={onClose}>Больше</Link>
+				{/* <Link to="/catalog" className='btn-regular header-search-box-products__more' onClick={onClose}>Больше</Link> */}
 			</div>
 		</div>
 	)

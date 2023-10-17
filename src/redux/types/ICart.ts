@@ -32,7 +32,7 @@ interface addCartItems {
 interface changeCheckCartItems {
 	type: CartActionTypes.CHANGE_CHECK_CART_ITEMS;
 	payload: {
-		article: string
+		id: string
 		status: boolean
 	};
 }

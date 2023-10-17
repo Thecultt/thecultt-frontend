@@ -7,6 +7,7 @@ import { CatalogFiltersTopSort } from "../../";
 
 const CatalogFiltersTop: React.FC = () => {
 	const { filters, itemsCount } = useTypedSelector(({ products }) => products);
+	const { categories } = useTypedSelector(({ products_filters }) => products_filters);
 
 	return (
 		<div className="catalog-filters-top">
@@ -116,7 +117,13 @@ const CatalogFiltersTop: React.FC = () => {
 
 			<div className="catalog-filters-top-title">
 				<p className="catalog-filters-top-title__title">
-					{Object.keys(filters.categories).length ? Object.keys(filters.categories).map((category, index) => `${category}${Object.keys(filters.categories).length === index+1 ? "" : ", "}`) : "Новинки"}
+					{filters.search !== "" ? (
+						filters.search
+					) : (
+						Object.keys(filters.categories).length && Object.keys(filters.categories).length !== Object.keys(categories).length ? (
+							Object.keys(filters.categories).map((category, index) => `${category}${Object.keys(filters.categories).length === index + 1 ? "" : ", "}`)
+						) : "Новинки"
+					)}
 				</p>
 
 				<p className="catalog-filters-top-title__count">

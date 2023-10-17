@@ -3,7 +3,7 @@ import axios from "axios"
 
 import $api from "../../http"
 
-import {Order} from "../../models/IOrder"
+import { Order } from "../../models/IOrder"
 
 import { OrderStateActionTypes, OrderStateActions } from "../types/IOrder"
 
@@ -69,6 +69,11 @@ export const setOrderPromocodeIsError = (status: boolean) => ({
 export const setOrderPromocodeSaleSum = (sum: number) => ({
 	type: OrderStateActionTypes.SET_ORDER_PROMOCODE_SALE_SUM,
 	payload: sum
+})
+
+export const setOrderCurrentDelivery = (delivery: { title: string, price: number }) => ({
+	type: OrderStateActionTypes.SET_ORDER_CURRENT_DELIVERY,
+	payload: delivery
 })
 
 export const fetchOrderAddressCountrys = (query: string) => async (dispatch: Dispatch<OrderStateActions>) => {
@@ -205,7 +210,7 @@ export const sendSubmitOrder = (
 export const fetchOrder = (
 	order_id: number,
 ) => async (dispatch: Dispatch<OrderStateActions>) => {
-	const {data} = await $api.get<Order>(`order/${order_id}`)
+	const { data } = await $api.get<Order>(`order/${order_id}`)
 
 	dispatch({
 		type: OrderStateActionTypes.SET_ORDER_ORDER,

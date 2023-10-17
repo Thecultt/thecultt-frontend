@@ -25,7 +25,7 @@ const CabinetHistoryOrders: React.FC = () => {
 					{isLoaded ? (
 						<div className="cabinet-content cabinet-history-orders">
 							{items.map((item, index) => (
-								<CabinetHistoryOrdersItem {...item} key={`cabinet-history-orders-${index}`} status="success" />
+								<CabinetHistoryOrdersItem {...item} key={`cabinet-history-orders-${index}`} />
 							))}
 						</div>
 					) : null}

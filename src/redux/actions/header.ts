@@ -12,7 +12,7 @@ export const fetchHeaderSearchItems = (value: string) => async (dispatch: Dispat
 		payload: true
 	})
 
-	const { data: { results } } = await $api.get<{ results: Product[] }>("/search", { params: { search_string: value } })
+	const { data: { total_items, items } } = await $api.get<{ total_items: Number, items: Product[] }>("/catalog", { params: { search: value } })
 
 	dispatch({
 		type: HeaderActionTypes.SET_HEADER_SEARCH_IS_FETCH,
@@ -20,8 +20,13 @@ export const fetchHeaderSearchItems = (value: string) => async (dispatch: Dispat
 	})
 
 	dispatch({
+		type: HeaderActionTypes.SET_HEADER_SEARCH_TOTAL_COUNT,
+		payload: total_items
+	})
+
+	dispatch({
 		type: HeaderActionTypes.SET_HEADER_SEARCH_ITEMS,
-		payload: results.splice(0, 4)
+		payload: items.splice(0, 4)
 	})
 }
 

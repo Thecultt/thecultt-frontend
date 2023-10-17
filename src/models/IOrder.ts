@@ -1,3 +1,13 @@
+export interface OrderProduct {
+	color: string
+	condition: string
+	images: string[]
+	kit: any
+	manufacturer: string
+	model_name: string
+	price: number
+}
+
 export interface Order {
 	client_name: string
 	client_phone: string
@@ -8,7 +18,7 @@ export interface Order {
 	id: number
 	num: string
 	payment_type: string
-	products: any[]
+	products: OrderProduct[]
 	status: string
 	status_description: string
 }

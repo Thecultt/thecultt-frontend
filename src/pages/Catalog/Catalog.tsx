@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 import {
-	fetchFirstProducts,
-	fetchProductsFiltersCatalog,
+	fetchFirstProductsCatalog,
+	fetchProductsCatalog,
 } from "../../redux/actions/products";
 
 import {
@@ -18,68 +18,41 @@ import {
 const Catalog: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const isLoadedProducts = useTypedSelector(
-		({ products }) => products.isLoaded
-	);
-	const { filters } = useTypedSelector(({ products }) => products);
+	const { filters, currentPage, typeFetch } = useTypedSelector(({ products }) => products);
 
 	const isLoadedFilters = useTypedSelector(
 		({ products_filters }) => products_filters.isLoaded
 	);
 
-	// React.useEffect(() => {
-	// 	if (!isLoadedProducts) {
-	// 		dispatch(fetchFirstProducts() as any);
-	// 	}
-	// }, []);
-
 	React.useEffect(() => {
 		if (filters.isParse) {
-			const conditionsArrray = Object.keys(filters.conditions).map(
-				(key) => key
-			);
-			const categoriesArrray = Object.keys(filters.categories).map(
-				(key) => key
-			);
-			const typesArrray = Object.keys(filters.types).map((key) => key);
-			const brandsArrray = Object.keys(filters.brands).map((key) => key);
-			const modelsArrray = Object.keys(filters.models).map((key) => key);
-			const colorsArrray = Object.keys(filters.colors).map((key) => key);
-			const sexArrray = Object.keys(filters.sex).map((key) => key);
-			const availabilityArrray = Object.keys(filters.availability).map(
-				(key) => key
-			);
-
-			// if (isLoadedProducts) {
 			dispatch(
-				fetchProductsFiltersCatalog(
-					{ min: filters.price.min, max: filters.price.max },
-					conditionsArrray,
-					categoriesArrray,
-					typesArrray,
-					brandsArrray,
-					modelsArrray,
-					colorsArrray,
-					sexArrray,
-					availabilityArrray,
-					filters.sort
+				fetchProductsCatalog(
+					filters,
+					currentPage,
+					typeFetch
 				) as any
 			);
-			// }
 		}
 	}, [
 		filters.isParse,
-		Object.keys(filters.conditions).length,
+		filters.search,
 		filters.price.min,
 		filters.price.max,
 		Object.keys(filters.categories).length,
+		filters.categories[Object.keys(filters.categories)[0]],
+		Object.keys(filters.conditions).length,
 		Object.keys(filters.types).length,
+		filters.types[Object.keys(filters.types)[0]],
 		Object.keys(filters.brands).length,
 		Object.keys(filters.models).length,
+		filters.models[Object.keys(filters.models)[0]],
 		Object.keys(filters.colors).length,
 		Object.keys(filters.sex).length,
 		Object.keys(filters.availability).length,
 		filters.sort,
+		currentPage,
+		typeFetch
 	]);
 
 	return (

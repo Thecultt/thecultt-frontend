@@ -17,7 +17,7 @@ const Checkbox: React.FC<CheckboxProps> = ({id, label, checked, onChange,}) => {
                 // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 //     onChange && onChange(e.target.checked)
                 // }
-                checked={checked}
+				checked={checked}
                 onChange={onChange}
             />
 

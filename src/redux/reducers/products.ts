@@ -27,6 +27,8 @@ const initialState: ProductsState = {
 	isFetchMore: false,
 	isFetchPage: false,
 
+	typeFetch: "btn-page",
+
 	currentPage: 1,
 
 	pageCount: 0,
@@ -34,6 +36,8 @@ const initialState: ProductsState = {
 
 	filters: {
 		isParse: false,
+
+		search: "",
 
 		price: { min: 0, max: 0 },
 
@@ -109,6 +113,13 @@ const products = (state = initialState, action: ProductTypes) => {
 		}
 	}
 
+	if (action.type === ProductActionTypes.SET_PRODUCTS_TYPE_FETCH) {
+		return {
+			...state,
+			typeFetch: action.payload,
+		}
+	}
+
 	if (action.type === ProductActionTypes.SET_PRODUCTS_CURRENT_PAGE) {
 		return {
 			...state,
@@ -135,6 +146,16 @@ const products = (state = initialState, action: ProductTypes) => {
 		return {
 			...state,
 			filters: action.payload,
+		}
+	}
+
+	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SEARCH) {
+		return {
+			...state,
+			filters: {
+				...state.filters,
+				search: action.payload
+			},
 		}
 	}
 

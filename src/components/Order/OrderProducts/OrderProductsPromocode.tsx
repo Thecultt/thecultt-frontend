@@ -5,7 +5,11 @@ import { sendOrderApplyPromocode } from "../../../redux/actions/order"
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector"
 
-const OrderProductsPromocode: React.FC = () => {
+interface OrderProductsPromocodeProps {
+	disabled?: boolean;
+}
+
+const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disabled }) => {
 	const dispatch = useDispatch()
 
 	const { promocode: { isActive, isError, isSend } } = useTypedSelector(({ order }) => order)
@@ -19,7 +23,7 @@ const OrderProductsPromocode: React.FC = () => {
 	return (
 		<>
 			{isActive ?
-				<div className="order-products-promocode">
+				<div className={`order-products-promocode ${disabled ? "disabled" : ""}`}>
 					<div className="order-products-promocode-input">
 						<input
 							type="text"
@@ -35,7 +39,7 @@ const OrderProductsPromocode: React.FC = () => {
 					</button>
 				</div>
 				:
-				<div className={`order-products-promocode ${isError ? "error" : ""}`}>
+				<div className={`order-products-promocode ${disabled ? "disabled" : ""} ${isError ? "error" : ""}`}>
 					<div className="order-products-promocode-input">
 						<input
 							type="text"

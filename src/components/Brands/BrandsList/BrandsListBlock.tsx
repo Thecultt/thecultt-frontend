@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface BrandsListBlockProps {
 	letter: string
@@ -12,9 +13,9 @@ const BrandsListBlock: React.FC<BrandsListBlockProps> = ({ letter, brands }) => 
 
 			<div className="brands-list-block-items-wrapper">
 				{brands.map((brand, index) => (
-					<a href="/" className="brands-list-block__item" key={`brands-list-block__item-${index}`}>
+					<Link to={`/catalog?brands=${brand}`} className="brands-list-block__item" key={`brands-list-block__item-${index}`}>
 						{brand}
-					</a>
+					</Link>
 				))}
 			</div>
 		</div>

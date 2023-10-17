@@ -372,7 +372,6 @@
 
 		display: flex
 		flex-wrap: wrap
-		justify-content: space-between
 
 		+transition
 		+open
@@ -382,10 +381,15 @@
 
 	&-product
 		&-block
-			width: 24%
+			width: calc( 100% / 4 - 7.5px )
 			margin-bottom: 25px
 
+			margin-right: 10px
+
 			+open
+
+			&:nth-child(4n+4)
+				margin-right: 0
 
 		&-pagination
 			width: 100%

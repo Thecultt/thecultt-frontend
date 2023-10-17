@@ -15,8 +15,7 @@ const OrderProducts: React.FC = () => {
 	const dispatch = useDispatch();
 
 	const { items, totalCount, totalPrice } = useTypedSelector(({ cart }) => cart);
-
-	const { promocode, idOrder, isValid } = useTypedSelector(({ order }) => order)
+	const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order)
 
 	const changeCheck = (article: string, status: boolean) => {
 		dispatch(changeCheckCartItem(article, status));
@@ -62,9 +61,9 @@ const OrderProducts: React.FC = () => {
 
 	const selector = formValueSelector("order-form");
 
-	const { emailValue, nameValue, phoneValue, countryValue, cityValue, deliveryValue, streetValue, houseValue, flatValue, commentValue } =
+	const { emailValue, nameValue, phoneValue, countryValue, cityValue, deliveryValue, paymentValue, streetValue, houseValue, flatValue, commentValue } =
 		useTypedSelector((state) => {
-			const { email, name, phone, country, city, delivery, street, house, flat, comment } = selector(
+			const { email, name, phone, country, city, delivery, payment, street, house, flat, comment } = selector(
 				state,
 				"email",
 				"name",
@@ -72,6 +71,7 @@ const OrderProducts: React.FC = () => {
 				"country",
 				"city",
 				"delivery",
+				"payment",
 				"street",
 				"house",
 				"flat",
@@ -86,6 +86,7 @@ const OrderProducts: React.FC = () => {
 				cityValue: city,
 
 				deliveryValue: delivery,
+				paymentValue: payment,
 
 				streetValue: street,
 				houseValue: house,
@@ -107,7 +108,7 @@ const OrderProducts: React.FC = () => {
 			room: flatValue,
 			comment: commentValue,
 
-			products: [],
+			products: Object.keys(items).filter((keyCartItem) => items[keyCartItem].checked).map((item) => parseInt(item)),
 
 			delivery_type: 1,
 			payment_type: 6,
@@ -115,6 +116,7 @@ const OrderProducts: React.FC = () => {
 			coupon_id: ""
 		}, (orderId: number) => pay(orderId)) as any)
 	}
+
 	const pay = (orderId: number) => {
 		var widget = new window.cp.CloudPayments();
 
@@ -142,8 +144,6 @@ const OrderProducts: React.FC = () => {
 			{
 				// onSuccess: (options: any) => {
 				// 	console.log(options)
-
-				// 	dispatch(sendSubmitOrder(idOrder) as any)
 				// },
 				// onFail: function (reason: any, options: any) {
 				// 	window.location.href = "/order/error"
@@ -227,12 +227,12 @@ const OrderProducts: React.FC = () => {
 				))}
 			</div>
 
-			<OrderProductsPromocode />
+			<OrderProductsPromocode disabled={paymentValue === "Рассрочка от Тинькофф" || paymentValue === "Кредит"} />
 
 			<div className="order-products-total">
 				<div className="order-products-total-item">
 					<p className="order-products-total-item__title">
-						Товары - {totalCount}шт
+						Товары - {totalCount} шт
 					</p>
 					<p className="order-products-total-item__value">
 						<NumericFormat
@@ -286,13 +286,31 @@ const OrderProducts: React.FC = () => {
 
 				<div className="order-products-total-item">
 					<p className="order-products-total-item__title">Доставка</p>
-					<p className="order-products-total-item__value">0 ₽</p>
+					<p className="order-products-total-item__value">
+						<NumericFormat
+							value={currentDelivery.price}
+							displayType={"text"}
+							thousandSeparator={" "}
+							renderText={(formattedValue: string) => (
+								<>
+									{parseInt(
+										formattedValue.split(" ").join("")
+									) >= 10000
+										? formattedValue
+										: parseInt(
+											formattedValue.split(" ").join("")
+										)}
+								</>
+							)}
+						/>{" "}
+						₽
+					</p>
 				</div>
 				<div className="order-products-total-item">
 					<p className="order-products-total-item__title">Итого:</p>
 					<p className="order-products-total-item__value">
 						<NumericFormat
-							value={totalPrice > 0 ? promocode.isActive ? totalPrice - promocode.saleSum : totalPrice : 0}
+							value={totalPrice > 0 ? promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price : 0}
 							displayType={"text"}
 							thousandSeparator={" "}
 							renderText={(formattedValue: string) => (

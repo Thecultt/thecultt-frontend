@@ -5,6 +5,9 @@ const initialState: HeaderState = {
 		value: "",
 
 		isFetch: false,
+
+		totalCount: 0,
+
 		items: []
 	}
 }
@@ -26,6 +29,16 @@ const header = (state = initialState, action: HeaderActions) => {
 			search: {
 				...state.search,
 				isFetch: action.payload
+			}
+		}
+	}
+
+	if (action.type === HeaderActionTypes.SET_HEADER_SEARCH_TOTAL_COUNT) {
+		return {
+			...state,
+			search: {
+				...state.search,
+				totalCount: action.payload
 			}
 		}
 	}

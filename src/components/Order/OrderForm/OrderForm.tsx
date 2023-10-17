@@ -21,11 +21,13 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	invalid,
 	pristine,
 	submitting,
+	initialize
 }) => {
 	const dispatch = useDispatch()
 
 	const [indexForm, setIndexForm] = React.useState<number>(0)
 
+	const { isLoaded, user } = useTypedSelector(({ user }) => user)
 	const { address: { country, city, street } } = useTypedSelector(({ order }) => order)
 
 	const selector = formValueSelector("order-form");
@@ -77,6 +79,12 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			dispatch(setOrderIsValid(true) as any)
 		}
 	}, [invalid, pristine, submitting])
+
+	React.useEffect(() => {
+		if (isLoaded) {
+			initialize({...user})
+		}
+	}, [isLoaded])
 
 	return (
 		<form className="order-form" onSubmit={handleSubmit}>

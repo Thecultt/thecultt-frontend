@@ -10,7 +10,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import { ProductsStateFilters } from "../../../redux/types/IProducts";
 
-import { setFiltersCatalog } from "../../../redux/actions/products";
+import { setFiltersCatalog, setFiltersCategoriesProduct, setProductsTypeFetch } from "../../../redux/actions/products";
 
 import {
 	CatalogFiltersPrice,
@@ -35,13 +35,15 @@ const CatalogFilters: React.FC = () => {
 	const [types, setTypes] = React.useState<{ [key: string]: string[] }>({});
 	const [models, setModels] = React.useState<string[]>([]);
 
-	const { price, conditions, categories, colors } = useTypedSelector(
+	const { price, conditions, categories, colors, isLoaded } = useTypedSelector(
 		({ products_filters }) => products_filters
 	);
 
 	React.useEffect(() => {
 		const filters: ProductsStateFilters = {
 			isParse: true,
+
+			search: query.get("search") ? query.get("search") as string : "",
 
 			price: {
 				min: query.get("minPrice") ? parseInt(query.get("minPrice") as string) : 0,
@@ -99,6 +101,8 @@ const CatalogFilters: React.FC = () => {
 				setFiltersCatalog({
 					isParse: false,
 
+					search: "",
+
 					price: {
 						min: 0,
 						max: 0
@@ -117,7 +121,7 @@ const CatalogFilters: React.FC = () => {
 				})
 			);
 		};
-	}, []);
+	}, [query]);
 
 	React.useEffect(() => {
 		setTypes({});
@@ -135,10 +139,9 @@ const CatalogFilters: React.FC = () => {
 
 	React.useEffect(() => {
 		if (filters.isParse) {
+			dispatch(setProductsTypeFetch("btn-page"))
+
 			const params: { [key: string]: any } = {
-				minPrice: String(filters.price.min),
-				maxPrice: String(filters.price.max),
-				conditions: Object.keys(filters.conditions),
 				categories: Object.keys(filters.categories),
 				types: Object.keys(filters.types),
 				brands: Object.keys(filters.brands),
@@ -146,7 +149,19 @@ const CatalogFilters: React.FC = () => {
 				colors: Object.keys(filters.colors),
 				sex: Object.keys(filters.sex),
 				availability: Object.keys(filters.availability),
-				sort: filters.sort,
+			}
+
+			if (filters.search !== "") {
+				params["search"] = filters.search
+			}
+
+			if (filters.price.max !== 0) {
+				params["minPrice"] = String(filters.price.min)
+				params["maxPrice"] = String(filters.price.max)
+			}
+
+			if (filters.price.min !== 0 && filters.price.max === 0) {
+				params["minPrice"] = String(filters.price.min)
 			}
 
 			navigate({
@@ -156,6 +171,7 @@ const CatalogFilters: React.FC = () => {
 		}
 	}, [
 		filters.isParse,
+		filters.search,
 		filters.price.min,
 		filters.price.max,
 		Object.keys(filters.conditions).length,
@@ -169,12 +185,20 @@ const CatalogFilters: React.FC = () => {
 		filters.sort,
 	]);
 
+	React.useEffect(() => {
+		if (isLoaded && filters.isParse && !Object.keys(filters.categories).length) {
+			Object.keys(categories).map(category => dispatch(setFiltersCategoriesProduct(category)))
+		}
+	}, [isLoaded, filters.isParse])
+
 	const onClickClearFilters = () => {
 		window.scrollTo(0, 0)
 
 		dispatch(
 			setFiltersCatalog({
 				isParse: true,
+
+				search: "",
 
 				price: {
 					min: 0,

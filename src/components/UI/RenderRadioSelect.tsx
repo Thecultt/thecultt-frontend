@@ -22,7 +22,7 @@ const RenderRadioSelect: React.FC<RenderRadioSelectProps> = ({ input, meta, labe
 				</label>
 			</div>
 
-			{input.checked && description !== "" ? (
+			{input.checked && (description !== "" && description) ? (
 				<p className="radio__description">
 					{description}
 				</p>

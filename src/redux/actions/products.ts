@@ -6,7 +6,7 @@ import { ProductActionTypes, ProductTypes, ProductsStateFilters } from "../types
 
 import { Product, ProductPage } from "../../models/IProduct";
 
-export const fetchFirstProducts = () => async (dispatch: Dispatch<ProductTypes>) => {
+export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
 	const {
 		data: {
 			total_pages,
@@ -31,88 +31,74 @@ export const fetchFirstProducts = () => async (dispatch: Dispatch<ProductTypes>)
 	})
 }
 
-export const fetchProductsMore = (page: number) => async (dispatch: Dispatch<ProductTypes>) => {
-	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_IS_FETCH_MORE,
-		payload: true
-	})
+export const fetchProductsCatalog = (
+	filters: {
+		search: string,
 
-	const {
-		data: {
-			items
+		price: {
+			min: number
+			max: number
 		}
-	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`${process.env.REACT_APP_API_DOMEN}/catalog`, { params: { page } })
 
-	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_ITEMS_MORE,
-		payload: items
-	})
+		conditions: { [key: string]: string }
+		categories: { [key: string]: string }
+		types: { [key: string]: string }
+		brands: { [key: string]: string }
+		models: { [key: string]: string }
+		colors: { [key: string]: string }
+		sex: { [key: string]: string }
+		availability: { [key: string]: string }
 
-	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_IS_FETCH_MORE,
-		payload: false
-	})
-}
-
-export const fetchProductsPage = (page: number) => async (dispatch: Dispatch<ProductTypes>) => {
-	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_IS_FETCH_PAGE,
-		payload: true
-	})
-
-	const {
-		data: {
-			items
-		}
-	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`${process.env.REACT_APP_API_DOMEN}/catalog`, { params: { page } })
-
-
-	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_ITEMS_PAGE,
-		payload: items
-	})
-
-	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_IS_FETCH_PAGE,
-		payload: false
-	})
-}
-
-export const fetchProductsFiltersCatalog = (
-	price: { min: number, max: number },
-	conditions: string[],
-	categories: string[],
-	types: string[],
-	brands: string[],
-	models: string[],
-	colors: string[],
-	sex: string[],
-	availability: string[],
-	sort: string
+		sort: string
+	},
+	page: number,
+	typeFetch: "btn-more" | "btn-page"
 ) => async (dispatch: Dispatch<ProductTypes>) => {
 	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_IS_FETCH_PAGE,
+		type: typeFetch === "btn-more" ? ProductActionTypes.SET_PRODUCTS_IS_FETCH_MORE : ProductActionTypes.SET_PRODUCTS_IS_FETCH_PAGE,
 		payload: true
 	})
 
 	var params = new URLSearchParams();
 
+	const conditionsArrray = Object.keys(filters.conditions).map(
+		(key) => key
+	);
+	const categoriesArrray = Object.keys(filters.categories).map(
+		(key) => key
+	);
+	const typesArrray = Object.keys(filters.types).map((key) => key);
+	const brandsArrray = Object.keys(filters.brands).map((key) => key);
+	const modelsArrray = Object.keys(filters.models).map((key) => key);
+	const colorsArrray = Object.keys(filters.colors).map((key) => key);
+	const sexArrray = Object.keys(filters.sex).map((key) => key);
+	const availabilityArrray = Object.keys(filters.availability).map(
+		(key) => key
+	);
 
-	params.append("price_from", String(price.min))
+	params.append("search", filters.search)
 
-	if (price.max !== 0) { params.append("price_to", String(price.max)) }
+	if (filters.price.max !== 0) {
+		params.append("price_from", String(filters.price.min))
+		params.append("price_to", String(filters.price.max))
+	}
 
-	conditions.map((condition) => params.append("conditions", condition))
+	if (filters.price.min !== 0 && filters.price.max === 0) {
+		params.append("price_from", String(filters.price.min))
+	}
 
-	categories.map((categories) => params.append("category", categories))
-	types.map((type) => params.append("subcategories", type))
-	brands.map((brand) => params.append("manufacturer", brand))
-	models.map((model) => params.append("model_names", model))
-	colors.map((color) => params.append("color", color))
-	sex.map((sex) => params.append("genders", sex))
-	availability.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
+	conditionsArrray.map((condition) => params.append("conditions", condition))
+	categoriesArrray.map((categories) => params.append("category", categories))
+	typesArrray.map((type) => params.append("subcategories", type))
+	brandsArrray.map((brand) => params.append("manufacturer", brand))
+	modelsArrray.map((model) => params.append("model_names", model))
+	colorsArrray.map((color) => params.append("color", color))
+	sexArrray.map((sex) => params.append("genders", sex))
+	availabilityArrray.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
 
-	params.append("sort_by", sort)
+	params.append("sort_by", filters.sort)
+
+	params.append("page", String(page))
 
 	const {
 		data: {
@@ -125,7 +111,6 @@ export const fetchProductsFiltersCatalog = (
 			params: params
 		})
 
-
 	dispatch({
 		type: ProductActionTypes.SET_PRODUCTS_PAGE_COUNT,
 		payload: total_pages
@@ -137,12 +122,12 @@ export const fetchProductsFiltersCatalog = (
 	})
 
 	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_ITEMS,
+		type: typeFetch === "btn-more" ? ProductActionTypes.SET_PRODUCTS_ITEMS_MORE : ProductActionTypes.SET_PRODUCTS_ITEMS_PAGE,
 		payload: items
 	})
 
 	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_IS_FETCH_PAGE,
+		type: typeFetch === "btn-more" ? ProductActionTypes.SET_PRODUCTS_IS_FETCH_MORE : ProductActionTypes.SET_PRODUCTS_IS_FETCH_PAGE,
 		payload: false
 	})
 }
@@ -160,6 +145,11 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 		payload: data
 	})
 }
+
+export const setProductsTypeFetch = (type: "btn-more" | "btn-page") => ({
+	type: ProductActionTypes.SET_PRODUCTS_TYPE_FETCH,
+	payload: type
+})
 
 export const setCurrentPageProduct = (number: number) => ({
 	type: ProductActionTypes.SET_PRODUCTS_CURRENT_PAGE,

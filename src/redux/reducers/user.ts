@@ -8,6 +8,14 @@ const initialState: UserState = {
 
 const user = (state = initialState, action: UserActions) => {
 	if (action.type === UserActionTypes.SET_USER) {
+		if (action.payload.gender === 1) {
+			action.payload.gender = "Женский"
+		}
+
+		if (action.payload.gender === 2) {
+			action.payload.gender = "Мужской"
+		}
+
 		return {
 			...state,
 			isLoaded: true,

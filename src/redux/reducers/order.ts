@@ -10,6 +10,11 @@ const initialState: OrderState = {
 		saleSum: 0
 	},
 
+	currentDelivery: {
+		title: "",
+		price: 0
+	},
+
 	globalCountrys: [],
 	globalCitys: [],
 	globalStreets: [],
@@ -28,8 +33,6 @@ const initialState: OrderState = {
 			value: ""
 		},
 	},
-
-	idOrder: 0,
 
 	order: {
 		client_name: "",
@@ -91,6 +94,13 @@ const order = (state = initialState, action: OrderStateActions) => {
 		}
 	}
 
+	if (action.type === OrderStateActionTypes.SET_ORDER_CURRENT_DELIVERY) {
+		return {
+			...state,
+			currentDelivery: action.payload
+		}
+	}
+
 	if (action.type === OrderStateActionTypes.SET_ORDER_GLOBAL_COUNTRYS) {
 		return {
 			...state,
@@ -139,13 +149,6 @@ const order = (state = initialState, action: OrderStateActions) => {
 				...state.address,
 				street: action.payload
 			}
-		}
-	}
-
-	if (action.type === OrderStateActionTypes.SET_ORDER_ID_ORDER) {
-		return {
-			...state,
-			idOrder: action.payload
 		}
 	}
 

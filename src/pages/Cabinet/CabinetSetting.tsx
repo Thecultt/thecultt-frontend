@@ -21,6 +21,14 @@ const CabinetSetting: React.FC = () => {
 	const { isLoaded } = useTypedSelector(({ user }) => user)
 
 	const onSubmit = (data: any) => {
+		if (data.gender && data.gender === "Женский") {
+			data.gender = 1
+		}
+
+		if (data.gender && data.gender === "Мужской") {
+			data.gender = 2
+		}
+
 		dispatch(sendUpdateUser(data) as any)
 	}
 

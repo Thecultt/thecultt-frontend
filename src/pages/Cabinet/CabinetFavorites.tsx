@@ -59,6 +59,7 @@ const CabinetFavorites: React.FC = () => {
 									key={`cabinet-favorites-block-${index}`}
 									addCart={() =>
 										addCart({
+											id: items[key].id,
 											checked: true,
 											article: items[key].article,
 											manufacturer: items[key].manufacturer,

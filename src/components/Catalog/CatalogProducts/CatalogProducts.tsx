@@ -17,7 +17,7 @@ import { CartItem } from "../../../models/ICartItem";
 const CatalogProducts: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const { isLoaded, items, isFetchMore, isFetchPage, filters } =
+	const { isLoaded, items, itemsCount, isFetchMore, isFetchPage, filters } =
 		useTypedSelector(({ products }) => products);
 	const cartItems = useTypedSelector(({ cart }) => cart.items);
 	const favoritesItems = useTypedSelector(({ favorites }) => favorites.items);
@@ -31,7 +31,7 @@ const CatalogProducts: React.FC = () => {
 			dispatch(setCartIsVisibleMessage(false));
 		}, 5000);
 	};
-	
+
 	const addFavorite = (id: number) => {
 		dispatch(sendSaveFavorite(id) as any)
 	}
@@ -52,6 +52,7 @@ const CatalogProducts: React.FC = () => {
 						key={`catalog-product-block-${item.article}-${index}`}
 						addCart={() =>
 							addCart({
+								id: item.id,
 								checked: true,
 								article: item.article,
 								manufacturer: item.manufacturer,
@@ -69,7 +70,7 @@ const CatalogProducts: React.FC = () => {
 				))}
 			</div>
 
-			<CatalogProductsPagination />
+			{itemsCount > 20 ? <CatalogProductsPagination /> : null}
 		</div>
 	);
 };

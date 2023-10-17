@@ -4,9 +4,8 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import {
+	setProductsTypeFetch,
 	setCurrentPageProduct,
-	fetchProductsMore,
-	fetchProductsPage,
 } from "../../../redux/actions/products";
 
 import { Loader } from "../../";
@@ -24,8 +23,8 @@ const CatalogProductsPagination: React.FC = () => {
 
 	const onClickFetchProductsMore = (page: number) => {
 		if (page >= 1 && page <= pageCount) {
+			dispatch(setProductsTypeFetch("btn-more"))
 			dispatch(setCurrentPageProduct(page));
-			dispatch(fetchProductsMore(page) as any);
 		}
 	};
 
@@ -33,25 +32,26 @@ const CatalogProductsPagination: React.FC = () => {
 		if (page >= 1 && page <= pageCount) {
 			window?.scrollTo(0, 350);
 
+			dispatch(setProductsTypeFetch("btn-page"))
 			dispatch(setCurrentPageProduct(page));
-			dispatch(fetchProductsPage(page) as any);
 		}
 	};
 
 	return (
 		<div className="catalog-product-pagination">
-			{isFetchMore ? (
-				<button className="btn loader catalog-product-pagination__btn">
-					<Loader />
-				</button>
-			) : (
-				<button
-					className="btn catalog-product-pagination__btn"
-					onClick={() => onClickFetchProductsMore(currentPage + 1)}
-				>
-					Показать ещё
-				</button>
-			)}
+			{currentPage !== pageCount ?
+				isFetchMore ? (
+					<button className="btn loader catalog-product-pagination__btn">
+						<Loader />
+					</button>
+				) : (
+					<button
+						className="btn catalog-product-pagination__btn"
+						onClick={() => onClickFetchProductsMore(currentPage + 1)}
+					>
+						Показать ещё
+					</button>
+				) : null}
 
 			<div className="catalog-product-pagination-pages">
 				<button

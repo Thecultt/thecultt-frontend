@@ -5,14 +5,18 @@ export interface HeaderState {
 		value: string,
 
 		isFetch: boolean,
+
+		totalCount: number,
+
 		items: Product[]
 	}
 }
 
 export enum HeaderActionTypes {
 	SET_HEADER_SEARCH_VALUE = "SET_HEADER_SEARCH_VALUE",
-	SET_HEADER_SEARCH_ITEMS = "SET_HEADER_SEARCH_ITEMS",
 	SET_HEADER_SEARCH_IS_FETCH = "SET_HEADER_SEARCH_IS_FETCH",
+	SET_HEADER_SEARCH_TOTAL_COUNT = "SET_HEADER_SEARCH_TOTAL_COUNT",
+	SET_HEADER_SEARCH_ITEMS = "SET_HEADER_SEARCH_ITEMS",
 }
 
 interface setHeaderSearchValue {
@@ -20,14 +24,19 @@ interface setHeaderSearchValue {
 	payload: string;
 }
 
-interface setHeaderSearchItems {
-	type: HeaderActionTypes.SET_HEADER_SEARCH_ITEMS;
-	payload: Product[];
-}
-
 interface setHeaderSearchIsFetch {
 	type: HeaderActionTypes.SET_HEADER_SEARCH_IS_FETCH;
 	payload: boolean;
 }
 
-export type HeaderActions = setHeaderSearchValue | setHeaderSearchItems | setHeaderSearchIsFetch
+interface setHeaderSearchTotalCount {
+	type: HeaderActionTypes.SET_HEADER_SEARCH_TOTAL_COUNT;
+	payload: any;
+}
+
+interface setHeaderSearchItems {
+	type: HeaderActionTypes.SET_HEADER_SEARCH_ITEMS;
+	payload: Product[];
+}
+
+export type HeaderActions = setHeaderSearchValue | setHeaderSearchItems | setHeaderSearchTotalCount | setHeaderSearchIsFetch

@@ -7,14 +7,14 @@ export const addCartItem = (item: CartItem) => ({
 	payload: item
 })
 
-export const changeCheckCartItem = (article: string, status: boolean) => ({
+export const changeCheckCartItem = (id: string, status: boolean) => ({
 	type: CartActionTypes.CHANGE_CHECK_CART_ITEMS,
-	payload: { article, status }
+	payload: { id, status }
 })
 
-export const removeCartItem = (article: string) => ({
+export const removeCartItem = (id: string) => ({
 	type: CartActionTypes.REMOVE_CART_ITEMS,
-	payload: article
+	payload: id
 })
 
 export const setCartIsVisibleMessage = (status: boolean) => ({

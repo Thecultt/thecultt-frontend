@@ -84,6 +84,7 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 							key={`catalog-product-block-${index}`}
 							addCart={() =>
 								addCart({
+									id: item.id,
 									checked: true,
 									article: item.article,
 									manufacturer: item.manufacturer,

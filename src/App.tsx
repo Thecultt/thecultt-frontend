@@ -38,7 +38,7 @@ import {
 } from "./pages/";
 
 import { fetchProductsFilters } from "./redux/actions/products_filters";
-import { fetchFirstProducts } from "./redux/actions/products";
+import { fetchFirstProductsCatalog } from "./redux/actions/products";
 import { fetchFavorites } from "./redux/actions/favorites";
 import { fetchUser } from "./redux/actions/user";
 
@@ -76,8 +76,8 @@ const App = () => {
 			dispatch(fetchProductsFilters() as any);
 		}
 
-		if (!isLoadedProducts) {
-			// dispatch(fetchFirstProducts() as any);
+		if (!isLoadedProducts && pathname !== "/catalog") {
+			dispatch(fetchFirstProductsCatalog() as any);
 		}
 
 		if (isLogin) {

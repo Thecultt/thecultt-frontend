@@ -102,7 +102,7 @@ const Header: React.FC = () => {
 							<div className="header-block">
 								<div className="header-block-btn">
 									<Link
-										to="/sell"
+										to="/cabinet/sell"
 										className="header-block-btn__btn"
 									>
 										Продать

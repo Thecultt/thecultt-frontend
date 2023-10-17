@@ -11,7 +11,7 @@ const OrderFormContact: React.FC = () => {
 
 			<div className="order-form-block-inputs-wrapper">
 				<div className="order-form-block-input" style={{ width: "100%" }}>
-					<Field component={RenderInput} type="text" name="email" label="Почта" />
+					<Field component={RenderInput} type="text" name="email" label="Почта" disabled />
 				</div>
 
 				<div className="order-form-block-input" style={{ width: "49%" }}>

@@ -21,12 +21,10 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 }) => {
 	const [isEdit, setIsEdit] = React.useState<boolean>(false)
 
-	const { user: { name, middlename, lastname, dr }, isSending } = useTypedSelector(({ user }) => user)
+	const { user, isSending } = useTypedSelector(({ user }) => user)
 
 	React.useEffect(() => {
-		initialize({
-			name, middlename, lastname, dr
-		})
+		initialize(user)
 	}, [isEdit])
 
 	React.useEffect(() => {
@@ -115,10 +113,10 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 				<div className="cabinet-setting-block-form-radio-wrapper">
 					<div className="cabinet-setting-block-form-radio">
-						<Field component={RenderRadioSelect} label="Женский" name="gender" />
+						<Field component={RenderRadioSelect} type="radio" label="Женский" name="gender" value={"Женский"} />
 					</div>
 					<div className="cabinet-setting-block-form-radio">
-						<Field component={RenderRadioSelect} label="Мужской" name="gender" />
+						<Field component={RenderRadioSelect} type="radio" label="Мужской" name="gender" value={"Мужской"} />
 					</div>
 				</div>
 			</div>

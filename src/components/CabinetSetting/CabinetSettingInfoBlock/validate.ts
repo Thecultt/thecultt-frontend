@@ -2,12 +2,14 @@ export interface validateValues {
 	name: string
 	middlename: string
 	lastname: string;
+	dr: string
 }
 
 interface validateErrors {
 	name?: string
 	middlename?: string
 	lastname?: string;
+	dr?: string
 }
 
 export const validate = (values: validateValues) => {
@@ -38,6 +40,10 @@ export const validate = (values: validateValues) => {
 		errors.lastname = `Не более ${defaultMax} символов`;
 	} else if (values.lastname.length < defaultMin) {
 		errors.lastname = `Не менее ${defaultMin} символов`;
+	}
+
+	if (!values.dr) {
+		errors.dr = "Поле не может быть пустым"
 	}
 
 	return errors;

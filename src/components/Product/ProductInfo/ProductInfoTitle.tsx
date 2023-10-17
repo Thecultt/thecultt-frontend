@@ -93,6 +93,7 @@ const ProductInfoTitle: React.FC<ProductInfoTitleProps> = ({
 						<button
 							className="btn product-content-info-title-btn__btn add"
 							onClick={() => addCart({
+								id: id,
 								checked: true,
 								article: article,
 								manufacturer: manufacturer,

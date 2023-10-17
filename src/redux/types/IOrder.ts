@@ -10,6 +10,11 @@ export interface OrderState {
 		saleSum: number
 	},
 
+	currentDelivery: {
+		title: string
+		price: number
+	}
+
 	globalCountrys: {
 		title: string,
 		value: string
@@ -38,8 +43,6 @@ export interface OrderState {
 		}
 	},
 
-	idOrder: number,
-
 	order: Order
 	isLoadedOrder: boolean,
 
@@ -51,6 +54,8 @@ export enum OrderStateActionTypes {
 	SET_ORDER_PROMOCODE_IS_ACTIVE = "SET_ORDER_PROMOCODE_IS_ACTIVE",
 	SET_ORDER_PROMOCODE_IS_ERROR = "SET_ORDER_PROMOCODE_IS_ERROR",
 	SET_ORDER_PROMOCODE_SALE_SUM = "SET_ORDER_PROMOCODE_SALE_SUM",
+
+	SET_ORDER_CURRENT_DELIVERY = "SET_ORDER_CURRENT_DELIVERY",
 
 	SET_ORDER_GLOBAL_COUNTRYS = "SET_ORDER_GLOBAL_COUNTRYS",
 	SET_ORDER_GLOBAL_CITYS = "SET_ORDER_GLOBAL_CITYS",
@@ -86,6 +91,14 @@ interface setOrderPromocodeIsError {
 interface setOrderPromocodeSaleSum {
 	type: OrderStateActionTypes.SET_ORDER_PROMOCODE_SALE_SUM,
 	payload: number
+}
+
+interface setOrderCurrentDelivery {
+	type: OrderStateActionTypes.SET_ORDER_CURRENT_DELIVERY,
+	payload: {
+		title: string
+		price: number,
+	}
 }
 
 interface setOrderGlobalCountrys {
@@ -136,11 +149,6 @@ interface setOrderAddressStreet {
 	}
 }
 
-interface setOrderIdOrder {
-	type: OrderStateActionTypes.SET_ORDER_ID_ORDER,
-	payload: number
-}
-
 interface setOrderOrder {
 	type: OrderStateActionTypes.SET_ORDER_ORDER,
 	payload: Order
@@ -156,4 +164,4 @@ interface setOrderIsValid {
 	payload: boolean
 }
 
-export type OrderStateActions = setOrderPromocodeIsSend | setOrderPromocodeIsActive | setOrderPromocodeIsError | setOrderPromocodeSaleSum | setOrderGlobalCountrys | setOrderGlobalCitys | setOrderGlobalStreets | setOrderAddressCountry | setOrderAddressCity | setOrderAddressStreet | setOrderOrder | setOrderIsLoadedOrder | setOrderIdOrder | setOrderIsValid
+export type OrderStateActions = setOrderPromocodeIsSend | setOrderPromocodeIsActive | setOrderPromocodeIsError | setOrderPromocodeSaleSum | setOrderCurrentDelivery | setOrderGlobalCountrys | setOrderGlobalCitys | setOrderGlobalStreets | setOrderAddressCountry | setOrderAddressCity | setOrderAddressStreet | setOrderOrder | setOrderIsLoadedOrder | setOrderIsValid

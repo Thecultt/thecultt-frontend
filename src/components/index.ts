@@ -138,6 +138,7 @@ export { default as CabinetWaitingListItem } from "./CabinetWaitingList/CabinetW
 
 // CabinetHistoryOrders
 export { default as CabinetHistoryOrdersItem } from "./CabinetHistoryOrders/CabinetHistoryOrdersItem";
+export { default as CabinetHistoryOrdersItemProduct } from "./CabinetHistoryOrders/CabinetHistoryOrdersItemProduct";
 
 // CabinetSellsList
 export { default as CabinetSellsListItem } from "./CabinetSellsList/CabinetSellsListItem";
@@ -170,6 +171,7 @@ export { default as OrderProductsItem } from "./Order/OrderProducts/OrderProduct
 export { default as OrderProductsPromocode } from "./Order/OrderProducts/OrderProductsPromocode";
 // OrderStatus
 export { default as OrderStatus } from "./Order/OrderStatus/OrderStatus";
+export { default as OrderStatusProduct } from "./Order/OrderStatus/OrderStatusProduct";
 
 // Sell
 export { default as SellSteps } from "./Sell/SellSteps";

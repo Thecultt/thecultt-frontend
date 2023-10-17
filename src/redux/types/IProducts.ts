@@ -3,6 +3,8 @@ import { Product, ProductPage } from '../../models/IProduct'
 export interface ProductsStateFilters {
 	isParse: boolean,
 
+	search: string,
+
 	price: {
 		min: number
 		max: number
@@ -30,6 +32,8 @@ export interface ProductsState {
 	isFetchMore: boolean
 	isFetchPage: boolean
 
+	typeFetch: "btn-more" | "btn-page"
+
 	currentPage: number
 
 	pageCount: number
@@ -45,13 +49,18 @@ export enum ProductActionTypes {
 	SET_PRODUCTS_ITEMS_MORE = "SET_PRODUCTS_ITEMS_MORE",
 	SET_PRODUCTS_ITEMS_PAGE = "SET_PRODUCTS_ITEMS_PAGE",
 	SET_PRODUCTS_IS_LOADED = "SET_PRODUCTS_IS_LOADED",
+
 	SET_PRODUCTS_IS_FETCH_MORE = "SET_PRODUCTS_IS_FETCH_MORE",
 	SET_PRODUCTS_IS_FETCH_PAGE = "SET_PRODUCTS_IS_FETCH_PAGE",
+
+	SET_PRODUCTS_TYPE_FETCH = "SET_PRODUCTS_TYPE_FETCH",
+
 	SET_PRODUCTS_CURRENT_PAGE = "SET_PRODUCTS_CURRENT_PAGE",
 	SET_PRODUCTS_PAGE_COUNT = "SET_PRODUCTS_PAGE_COUNT",
 	SET_PRODUCTS_ITEMS_COUNT = "SET_PRODUCTS_ITEMS_COUNT",
 
 	SET_PRODUCTS_FILTERS_CATALOG = "SET_PRODUCTS_FILTERS_CATALOG",
+	SET_PRODUCTS_FILTERS_CATALOG_SEARCH = "SET_PRODUCTS_FILTERS_CATALOG_SEARCH",
 	SET_PRODUCTS_FILTERS_CATALOG_PRICE = "SET_PRODUCTS_FILTERS_CATALOG_PRICE",
 	SET_PRODUCTS_FILTERS_CATALOG_CONDITIONS = "SET_PRODUCTS_FILTERS_CATALOG_CONDITIONS",
 	SET_PRODUCTS_FILTERS_CATALOG_CATEGORIES = "SET_PRODUCTS_FILTERS_CATALOG_CATEGORIES",
@@ -104,6 +113,10 @@ interface setProductsIsFetchPage {
 	payload: boolean
 }
 
+interface setProductsTypeFetch {
+	type: ProductActionTypes.SET_PRODUCTS_TYPE_FETCH,
+	payload: "btn-more" | "btn-page"
+}
 
 interface setProductsPageCurrentPage {
 	type: ProductActionTypes.SET_PRODUCTS_CURRENT_PAGE,
@@ -124,6 +137,11 @@ interface setProductsItemsCount {
 interface setProductsFilters {
 	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG,
 	payload: ProductsStateFilters
+}
+
+interface setProductsFiltersSearch {
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SEARCH,
+	payload: string
 }
 
 interface setProductsFiltersPrice {
@@ -179,4 +197,4 @@ interface setProductsFiltersSort {
 	payload: string
 }
 
-export type ProductTypes = setProductsItems | setProductsItemByArticle | setProductsItemByArticleIsLoaded | setProductsItemsMore | setProductsItemsPage | setProductsIsLoaded | setProductsIsFetchMore | setProductsIsFetchPage | setProductsPageCurrentPage | setProductsPageCount | setProductsItemsCount | setProductsFilters | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategories | setProductsFiltersTypes | setProductsFiltersBrands | setProductsFiltersModels | setProductsFiltersColors | setProductsFiltersSex | setProductsFiltersAvailability | setProductsFiltersSort
+export type ProductTypes = setProductsItems | setProductsItemByArticle | setProductsItemByArticleIsLoaded | setProductsItemsMore | setProductsItemsPage | setProductsIsLoaded | setProductsIsFetchMore | setProductsIsFetchPage | setProductsTypeFetch | setProductsPageCurrentPage | setProductsPageCount | setProductsItemsCount | setProductsFilters | setProductsFiltersSearch | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategories | setProductsFiltersTypes | setProductsFiltersBrands | setProductsFiltersModels | setProductsFiltersColors | setProductsFiltersSex | setProductsFiltersAvailability | setProductsFiltersSort

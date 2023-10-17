@@ -201,7 +201,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					/>
 				</div>
 
-				{/* <div className="sell-block-select">
+				<div className="sell-block-select">
 					<h4 className="sell-block-select__title">Наличие дефектов</h4>
 
 					<Field
@@ -301,7 +301,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						name="isBuyTheCultt"
 						label="Товар приобретен в THE CULTT"
 						items={["Да", "Нет"]} />
-				</div> */}
+				</div>
 			</div>
 
 			<button
