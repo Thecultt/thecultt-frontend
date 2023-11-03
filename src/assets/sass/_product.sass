@@ -1,6 +1,6 @@
 // product
 .product
-	margin: 40px 0 60px 0
+	margin: 30px 0 60px 0
 
 	+open
 
@@ -152,10 +152,26 @@
 						&.prev
 							margin-right: 12px
 
+		&-cover-media
+			width: 100%
+			display: none
+
+			&-slider
+				&-image-wrapper
+					width: 100%
+					height: 500px
+
+				&-image
+					height: 100%
+					width: 100%
+
+					+borderRadius
+					+backgroundSetting
+
 		&-info
 			width: calc( 50% - 35px )
 
-			padding: 25px 70px
+			padding: 25px 50px
 
 			background-color: $lightBackgroundColor
 
@@ -223,12 +239,10 @@
 				&__notavailable
 					display: inline-block
 
-					font-size: 16px
-					color: $white
-					background-color: $black
-					border-radius: 6px
+					font-size: 17px
+					color: $gray
 
-					padding: 8px 16px
+					font-weight: 600
 
 					margin-bottom: 25px
 
@@ -259,6 +273,8 @@
 				+borderRadius
 
 				&-text
+					width: 95%
+
 					&__title
 						font-weight: 600
 						color: $mainColor
@@ -286,9 +302,57 @@
 						width: 20px
 						margin-left: 8px
 
-				&__image
-					width: 300px
+				&-bar
+					position: relative
+
+					display: flex
+					justify-content: space-between
+
+					width: 360px
+
 					margin-bottom: 15px
+
+					&::before
+						content: ""
+						position: absolute
+						display: block
+
+						width: 100%
+						height: 1px
+
+						top: 9px
+
+						background-color: #D9D9D9
+
+					&-item
+						display: flex
+						flex-direction: column
+						align-items: center
+
+						z-index: 1
+
+						&.active &-circle
+							opacity: 1
+
+						&.active &__title
+							color: $black
+
+						&-circle
+							opacity: 0
+
+							width: 18px
+							height: 18px
+
+							background-color: $lightBackgroundColor
+							border: 1px solid $mainColor
+
+							border-radius: 50%
+
+							margin-bottom: 3px
+
+						&__title
+							font-size: 14px
+							color: $gray
 
 				&__info
 					& > span
@@ -297,6 +361,16 @@
 
 					&:last-child
 						margin-bottom: 0
+
+			&-description
+				margin-bottom: 30px
+
+				&__title
+					font-size: 17px
+					margin-bottom: 15px
+
+				&__description
+					font-size: 14px
 
 			&-parameters
 				margin-bottom: 30px
@@ -365,3 +439,67 @@
 					&__description
 						margin-top: 25px
 						font-size: 16px
+
+@media screen and ( max-width: 1200px )
+	.product
+		margin: 25px 0
+
+		&-content
+			margin: 25px 0 0 0
+
+			flex-direction: column
+
+			&-cover
+				display: none
+
+			&-cover-media
+				display: block
+
+			&-info
+				margin-top: 15px
+
+				width: 100%
+
+				padding: 15px
+
+				&-bread-crumbs
+					margin-bottom: 5px
+
+					&__item
+						display: none
+
+						&:first-child
+							display: block
+
+					& > svg
+						display: none
+
+				&-title
+					&-btn
+						flex-direction: column
+
+						&__btn.add, &__btn.subscribe
+							margin-bottom: 15px
+
+						&__btn.add, &__btn.fav, &__btn.subscribe
+							width: 100%
+
+				&-auth
+					&-text
+						&__title
+							font-size: 14px
+
+						&__link
+							font-size: 14px
+
+@media screen and ( max-width: 500px )
+	.product
+		&-content
+			&-info
+				&-state
+					&-bar
+						width: 100%
+
+						&-item
+							&__title
+								font-size: 10px

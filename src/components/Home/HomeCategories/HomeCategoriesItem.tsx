@@ -5,8 +5,11 @@ import { CategoriesItem } from "./HomeCategories";
 
 const HomeCategoriesItem: React.FC<CategoriesItem> = ({ image, title }) => {
 	return (
-		<Link to={`/catalog?categories=${title}`} className="home-categories-item-wrapper hover-scale">
-			<div className="home-categories-item" style={{ backgroundImage: `url("${image}")` }}>
+		<Link to={`/catalog?categories=${title}`} className="home-categories-item-wrapper">
+			<div className="home-categories-item">
+				<div className="home-categories-item-image" style={{ backgroundImage: `url("${image}")` }}>
+				</div>
+
 				<h2 className="home-categories-item__title">
 					{title}
 				</h2>

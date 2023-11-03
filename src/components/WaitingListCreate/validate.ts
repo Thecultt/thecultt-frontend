@@ -1,15 +1,19 @@
 export interface validateValues {
 	email: string
 	category: string
+	type: string
 	model: string
 	brand: string
+	size: string
 }
 
 interface validateErrors {
 	email?: string
 	category?: string
+	type?: string
 	model?: string
 	brand?: string
+	size?: string
 }
 
 export const validate = (values: validateValues) => {
@@ -34,12 +38,20 @@ export const validate = (values: validateValues) => {
 		errors.category = "Поле не может быть пустым";
 	}
 
+	if (!values.type) {
+		errors.type = "Поле не может быть пустым";
+	}
+
 	if (!values.model) {
 		errors.model = "Поле не может быть пустым";
 	}
 
 	if (!values.brand) {
 		errors.brand = "Поле не может быть пустым";
+	}
+
+	if (!values.size) {
+		errors.size = "Поле не может быть пустым";
 	}
 
 	return errors;

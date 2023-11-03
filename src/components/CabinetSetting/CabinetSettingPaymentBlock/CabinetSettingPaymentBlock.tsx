@@ -4,6 +4,7 @@ import {
 	reduxForm,
 	InjectedFormProps,
 } from "redux-form";
+import { createTextMask } from "redux-form-input-masks";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
@@ -69,48 +70,29 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						<div className="cabinet-setting-block-form-input-wrapper">
 							<div
 								className="cabinet-setting-block-form-input"
-								style={{ width: "49%" }}
+								style={{ width: "100%" }}
 							>
 								<Field
 									component={RenderInput}
 									name="pasport"
 									label="Серия и номер паспорта"
 									bgWhite
+									{...createTextMask({
+										pattern: "9999 999999",
+										guide: false,
+										stripMask: false,
+									})}
 								/>
 							</div>
 
 							<div
 								className="cabinet-setting-block-form-input"
-								style={{ width: "49%" }}
-							>
-								<Field
-									component={RenderInput}
-									name="inn"
-									label="ИНН"
-									bgWhite
-								/>
-							</div>
-
-							<div
-								className="cabinet-setting-block-form-input"
-								style={{ width: "49%" }}
+								style={{ width: "100%" }}
 							>
 								<Field
 									component={RenderInput}
 									name="bik"
 									label="БИК"
-									bgWhite
-								/>
-							</div>
-
-							<div
-								className="cabinet-setting-block-form-input"
-								style={{ width: "49%" }}
-							>
-								<Field
-									component={RenderInput}
-									name="fullname"
-									label="Владелец счёта"
 									bgWhite
 								/>
 							</div>

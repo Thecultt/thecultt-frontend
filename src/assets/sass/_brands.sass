@@ -1,6 +1,6 @@
 // brands
 .brands
-	margin: 50px 0
+	margin: 30px 0
 
 	+open
 
@@ -84,3 +84,49 @@
 
 				&:hover
 					text-decoration: underline
+
+/* MEDIA */
+@media screen and (max-width: 900px)
+	.brands
+		margin: 25px 0
+
+		&-search
+			&-alphabet
+				width: 100%
+				margin: 0 auto 20px auto
+
+				flex-wrap: wrap
+
+				&__btn
+					padding-left: 5px
+					padding-right: 5px
+
+					padding-top: 7.5px
+					padding-bottom: 7.5px
+
+					&:first-child
+						padding-left: 5px
+
+					&:last-child
+						padding-right: 5px
+
+			&-input
+				width: 100%
+
+		&-list
+			width: 100%
+
+			&-block
+				flex-direction: column
+				margin-bottom: 15px
+
+				&__title
+					margin-right: 0
+					padding: 10px 20px
+					background-color: $lightBackgroundColor
+					font-size: 22px
+					border-radius: 12px
+					margin-bottom: 15px
+
+				&__item
+					width: 50%

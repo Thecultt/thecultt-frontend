@@ -22,6 +22,8 @@ export { default as ProductBlock } from "./ProductBlock/ProductBlock";
 
 // Header
 export { default as Header } from "./Header/Header";
+// HeaderTopMessage
+export { default as HeaderTopMessage } from "./Header/HeaderTopMessage/HeaderTopMessage";
 // HeaderHoverMenu
 export { default as HeaderHoverMenu } from "./Header/HeaderHoverMenu/HeaderHoverMenu";
 // HeaderSearchBox
@@ -36,6 +38,8 @@ export { default as HeaderCartModalAddMessage } from "./Header/HeaderCart/Header
 export { default as HeaderCartModalItem } from "./Header/HeaderCart/HeaderCartModalItem";
 // HeaderMedia
 export { default as HeaderMedia } from "./Header/HeaderMedia/HeaderMedia";
+export { default as HeaderMediaBanner } from "./Header/HeaderMedia/HeaderMediaBanner";
+export { default as HeaderMediaLinkTab } from "./Header/HeaderMedia/HeaderMediaLinkTab";
 
 // Reglog
 export { default as Reglog } from "./Reglog/Reglog";
@@ -78,6 +82,7 @@ export { default as CatalogBannerMedia } from "./Catalog/CatalogBannerMedia/Cata
 // CatalogFiltersTop
 export { default as CatalogFiltersTop } from "./Catalog/CatalogFiltersTop/CatalogFiltersTop";
 export { default as CatalogFiltersTopSort } from "./Catalog/CatalogFiltersTop/CatalogFiltersTopSort";
+export { default as CatalogFiltersTopSortMedia } from "./Catalog/CatalogFiltersTop/CatalogFiltersTopSortMedia";
 // CatalogFilters
 export { default as CatalogFilters } from "./Catalog/CatalogFilters/CatalogFilters";
 export { default as CatalogFiltersBlockWrapper } from "./Catalog/CatalogFilters/CatalogFiltersBlockWrapper";
@@ -90,6 +95,7 @@ export { default as CatalogFiltersModels } from "./Catalog/CatalogFilters/Catalo
 export { default as CatalogFiltersColors } from "./Catalog/CatalogFilters/CatalogFiltersColors";
 export { default as CatalogFiltersSex } from "./Catalog/CatalogFilters/CatalogFiltersSex";
 export { default as CatalogFiltersAvailability } from "./Catalog/CatalogFilters/CatalogFiltersAvailability";
+export { default as CatalogFiltersSize } from "./Catalog/CatalogFilters/CatalogFiltersSize";
 // CatalogProducts
 export { default as CatalogProducts } from "./Catalog/CatalogProducts/CatalogProducts";
 export { default as CatalogProductsPagination } from "./Catalog/CatalogProducts/CatalogProductsPagination";
@@ -103,10 +109,13 @@ export { default as ProductInfoBreadCrumbs } from "./Product/ProductInfo/Product
 export { default as ProductInfoTitle } from "./Product/ProductInfo/ProductInfoTitle";
 export { default as ProductInfoExchange } from "./Product/ProductInfo/ProductInfoExchange";
 export { default as ProductInfoState } from "./Product/ProductInfo/ProductInfoState";
+export { default as ProductInfoDescription } from "./Product/ProductInfo/ProductInfoDescription";
 export { default as ProductInfoParameters } from "./Product/ProductInfo/ProductInfoParameters";
+export { default as ProductInfoParametersSize } from "./Product/ProductInfo/ProductInfoParametersSize";
 export { default as ProductInfoAuth } from "./Product/ProductInfo/ProductInfoAuth";
 // ProductInfoTabs
 export { default as ProductInfoTabs } from "./Product/ProductInfo/ProductInfoTabs/ProductInfoTabs";
+export { default as ProductInfoTabsItem } from "./Product/ProductInfo/ProductInfoTabs/ProductInfoTabsItem";
 
 // SellAndSale
 export { default as SellAndSale } from "./SellAndSale/SellAndSale";
@@ -128,6 +137,10 @@ export { default as BrandsListBlock } from "./Brands/BrandsList/BrandsListBlock"
 export { default as WaitingListCreate } from "./WaitingListCreate/WaitingListCreate";
 export { default as WaitingListCreateForm } from "./WaitingListCreate/WaitingListCreateForm";
 export { default as WaitingListCreateSuccess } from "./WaitingListCreate/WaitingListCreateSuccess";
+
+// WaitingListDelete
+export { default as WaitingListDelete } from "./WaitingListDelete/WaitingListDelete";
+export { default as WaitingListDeleteConfirm } from "./WaitingListDelete/WaitingListDeleteConfirm";
 
 // Cabinet
 export { default as CabinetMenu } from "./Cabinet/CabinetMenu";
@@ -190,6 +203,13 @@ export { default as SellContact } from "./Sell/SellContact/SellContact";
 // SellDelivery
 export { default as SellDelivery } from "./Sell/SellDelivery/SellDelivery";
 export { default as SellDeliveryTypes } from "./Sell/SellDelivery/SellDeliveryTypes";
+
+// Concierge
+export { default as ConciergeFormTop } from "./Concierge/ConciergeFormTop";
+export { default as ConciergeFormBottom } from "./Concierge/ConciergeFormBottom";
+
+// Cart
+export { default as CartItemBlock } from "./Cart/CartItemBlock";
 
 // Footer
 export { default as Footer } from "./Footer/Footer";

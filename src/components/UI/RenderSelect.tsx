@@ -39,10 +39,16 @@ const RenderSelect: React.FC<RenderSelectProps> = ({ label, items, disabled, inp
 	};
 
 	React.useEffect(() => {
-		if (initial) {
+		if (initial && currentItem === "") {
 			setCurrentItem(initial);
 		}
 	}, [initial])
+
+	React.useEffect(() => {
+		if (input.value === "") {
+			setCurrentItem("");
+		}
+	}, [input.value])
 
 	React.useEffect(() => {
 		dispatch(change(form, input.name, currentItem));
@@ -52,7 +58,7 @@ const RenderSelect: React.FC<RenderSelectProps> = ({ label, items, disabled, inp
 
 	return (
 		<div className={`select-wrapper`} ref={SelectRef}>
-			<div className={`select ${disabled ? "disabled" : ""}`} onClick={() => setState(!state)}>
+			<div className={`select ${disabled ? "disabled" : ""} ${state ? "active" : ""}`} onClick={() => setState(!state)}>
 				<p className="select__label">
 					{currentItem !== "" ? currentItem : <span>{label}</span>}
 				</p>

@@ -1,5 +1,7 @@
 // cabinet history orders
 .cabinet-history-orders
+	width: calc(100% - 310px)
+
 	+open
 
 	&-item-wrapper
@@ -46,6 +48,24 @@
 
 				&__sum
 					+ManropeRegular
+
+				&__status__media
+					display: none
+					align-items: center
+					user-select: none
+
+					font-size: 17px
+
+					+ManropeMedium
+
+					&.success
+						color: $mainColor
+
+					&.error
+						color: $red
+
+					& > svg
+						margin-left: 5px
 
 				&__status
 					display: inline-flex
@@ -199,3 +219,33 @@
 						font-size: 18px
 
 						+ManropeMedium
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.cabinet-history-orders
+		margin-top: 15px
+		width: 100%
+
+@media screen and (max-width: 900px)
+	.cabinet-history-orders
+		&-item
+			&-topinfo
+				&-block
+					align-items: flex-start
+					flex-direction: column
+
+					&__date, &__sum
+						margin-top: 10px
+						margin-left: 0
+
+					&__status
+						display: none
+
+					&__status__media
+						margin-top: 10px
+						display: inline-flex
+
+			&-info
+				&-good
+					width: 100%
+					margin-right: 0

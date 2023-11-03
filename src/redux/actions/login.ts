@@ -17,7 +17,7 @@ export const sendLogin = (data: { username: string | null, password: string }, o
 			if (onChangeSuccess) {
 				onChangeSuccess()
 			} else {
-				window.location.hash = ""
+				window.location.reload()
 			}
 
 			dispatch({

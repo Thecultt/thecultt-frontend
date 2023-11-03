@@ -16,9 +16,12 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	handleSubmit,
 	invalid,
 	submitting,
-	initialize
+	initialize,
+	initialized
 }) => {
 	const dispatch = useDispatch()
+
+	const data: any = JSON.parse(localStorage.getItem("sell-info-form") as any)
 
 	const [currentCategory, setCurrentCategory] = React.useState<string>("")
 	const [currentBrand, setCurrentBrand] = React.useState<string>("")
@@ -26,12 +29,10 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	const [brands, setBrands] = React.useState<{ title: string, value: string }[]>([])
 	const [models, setModels] = React.useState<{ title: string, value: string }[]>([])
 
-	const { isLoadedParameters, parameters } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
+	const { parameters } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
 	React.useEffect(() => {
-		const data: any = JSON.parse(localStorage.getItem("sell-info-form") as any)
-
-		if (isLoadedParameters && data) {
+		if (data) {
 			if (data.category) {
 				setCurrentCategory(data.category)
 			}
@@ -42,32 +43,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 			initialize(data)
 		}
-	}, [isLoadedParameters])
-
-	React.useEffect(() => {
-		if (currentCategory !== "") {
-			initialize({
-				category: currentCategory,
-				brand: "",
-				models: "",
-				condition: "",
-				defects: "",
-				size: "",
-				set: "",
-				price: "",
-				isBuyTheCultt: "",
-			})
-
-			setCurrentBrand("")
-
-			// console.log("initialize")
-
-			// initialize({
-			// 	category: currentCategory,
-			// 	isBuyTheCultt: "",
-			// })
-		}
-	}, [currentCategory])
+	}, [])
 
 	React.useEffect(() => {
 		if (parameters[currentCategory]) {
@@ -80,6 +56,32 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			setBrands(parameters[currentCategory].brands.map((brand) => ({ title: brand.name, value: brand.name })))
 		}
 	}, [currentCategory])
+
+	const onChangeCategory = (value: string) => {
+		if (currentCategory === "") {
+			setCurrentCategory(value)
+		} else if (value !== currentCategory) {
+			setCurrentCategory(value)
+
+			initialize({
+				category: value,
+				brand: "",
+				models: "",
+				condition: "",
+				defects: "",
+				size: "",
+				set: "",
+				price: "",
+				isBuyTheCultt: "",
+			})
+
+			localStorage.removeItem("sell-images-form")
+
+			setCurrentBrand("")
+		} else {
+			setCurrentCategory(value)
+		}
+	}
 
 	const onChangeInputBrand = (value: string) => {
 		const newBrands: { title: string, value: string }[] = []
@@ -110,11 +112,18 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 		setModels(newModels)
 	}
 
+	const onClickBack = () => {
+		dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.COOPERATION))
+
+		localStorage.removeItem("sell-images-form")
+	}
+
 	return (
 		<form onSubmit={handleSubmit} className="sell-block sell-block-info">
-			<SellBackBtn onClick={() => dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.COOPERATION))} />
+			<SellBackBtn onClick={onClickBack} />
 
 			<h3 className="sell-block__title">Информация о товаре</h3>
+
 			<p className="sell-block__subtitle">
 				Заполните детальную информацию о продаваемом товаре.
 			</p>
@@ -128,7 +137,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						name="category"
 						label="Категория товара"
 						items={Object.keys(parameters)}
-						onChangeCutsom={(value: string) => setCurrentCategory(value)}
+						onChangeCutsom={onChangeCategory}
 					/>
 				</div>
 
@@ -168,7 +177,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					<h4 className="sell-block-select__title">
 						Состояние товара
 
-						<svg
+						{/* <svg
 							width="18"
 							height="18"
 							viewBox="0 0 18 18"
@@ -189,7 +198,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 									<rect width="18" height="18" fill="white" />
 								</clipPath>
 							</defs>
-						</svg>
+						</svg> */}
 					</h4>
 
 					<Field
@@ -208,7 +217,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						component={RenderSelectArray}
 						name="defects"
 						label="Наличие дефектов"
-						items={parameters[currentCategory] ? ["Нет дефектов", ...parameters[currentCategory].defects.map(defect => defect.name)] : []}
+						items={parameters[currentCategory] ? parameters[currentCategory].defects.map(defect => defect.name) : []}
 						disabled={parameters[currentCategory] ? false : true}
 					/>
 				</div>
@@ -237,7 +246,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					<h4 className="sell-block-select__title">
 						Ожидание по цене
 
-						<svg
+						{/* <svg
 							width="18"
 							height="18"
 							viewBox="0 0 18 18"
@@ -258,7 +267,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 									<rect width="18" height="18" fill="white" />
 								</clipPath>
 							</defs>
-						</svg>
+						</svg> */}
 					</h4>
 
 					<Field
@@ -272,7 +281,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				<div className="sell-block-select">
 					<h4 className="sell-block-select__title">
 						Товар приобретен в THE CULTT
-						<svg
+						{/* <svg
 							width="18"
 							height="18"
 							viewBox="0 0 18 18"
@@ -293,14 +302,15 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 									<rect width="18" height="18" fill="white" />
 								</clipPath>
 							</defs>
-						</svg>
+						</svg> */}
 					</h4>
 
 					<Field
 						component={RenderSelect}
 						name="isBuyTheCultt"
 						label="Товар приобретен в THE CULTT"
-						items={["Да", "Нет"]} />
+						items={["Да", "Нет"]}
+					/>
 				</div>
 			</div>
 

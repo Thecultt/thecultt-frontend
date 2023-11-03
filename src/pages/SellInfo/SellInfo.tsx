@@ -315,7 +315,6 @@ const SellInfo: React.FC = () => {
 						</div>
 					</div>
 
-
 					<div className="sell-info-contact" id="sell-choice">
 						<h2 className="sell-info__title">
 							Выберите удобный для вас способ подачи заявки на продажу

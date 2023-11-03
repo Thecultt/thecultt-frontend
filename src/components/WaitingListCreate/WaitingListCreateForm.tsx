@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Field, reduxForm, InjectedFormProps } from "redux-form";
+import { Field, reduxForm, InjectedFormProps, formValueSelector } from "redux-form";
 
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-import { RenderInput, RenderSelect } from "../../components/";
+import { RenderInput, RenderSelect, RenderInputHints } from "../../components/";
 
 import { validate } from './validate'
 
@@ -14,12 +14,31 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	initialize,
 	invalid,
 	pristine,
-	submitting,
+	submitting
 }) => {
-	const [currentCategory, setCurrentCategory] = React.useState<string>("")
+	const selector = formValueSelector("waiting-list-form");
+
+	const { currentCategory, currentType, currentBrand } =
+		useTypedSelector((state) => {
+			const { category, type, brand } = selector(
+				state,
+				"category",
+				"type",
+				"brand",
+			);
+			return {
+				currentCategory: category,
+				currentType: type,
+				currentBrand: brand,
+			};
+		});
+
+	const [brands, setBrands] = React.useState<{ title: string, value: string }[]>([])
+	const [models, setModels] = React.useState<{ title: string, value: string }[]>([])
 
 	const { isLoaded, user } = useTypedSelector(({ user }) => user)
 	const { categories } = useTypedSelector(({ products_filters }) => products_filters)
+	const isLoadedProductsFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded)
 
 	React.useEffect(() => {
 		if (isLoaded) {
@@ -29,9 +48,93 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 		}
 	}, [isLoaded])
 
+	React.useEffect(() => {
+		if (currentCategory) {
+			initialize(({
+				email: user.email,
+				category: currentCategory,
+				type: "",
+				brand: "",
+				model: "",
+				size: "",
+			}))
+		}
+	}, [currentCategory])
+
+	React.useEffect(() => {
+		if (isLoadedProductsFilters && categories[currentCategory]) {
+			let newBrands: { title: string, value: string }[] = []
+			let newModels: { title: string, value: string }[] = []
+
+			if (categories[currentCategory].subsubcategories[currentType]) {
+				Object.keys(categories[currentCategory].subsubcategories[currentType]).map(brand => {
+					newBrands.push({ title: brand, value: brand })
+				})
+
+				Object.keys(categories[currentCategory].subsubcategories[currentType]).map(type => {
+					categories[currentCategory].subsubcategories[currentType][type].map(brand => {
+						newModels.push({ title: brand, value: brand })
+					})
+				})
+			} else {
+				Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
+					Object.keys(categories[currentCategory].subsubcategories[subsubcategory]).map((brand) => {
+						if (!newBrands.find((findBrand) => brand === findBrand.title)) {
+							newBrands.push({ title: brand, value: brand })
+						}
+					})
+
+					if (categories[currentCategory].subsubcategories[subsubcategory]) {
+						if (categories[currentCategory].subsubcategories[subsubcategory][currentBrand]) {
+							categories[currentCategory].subsubcategories[subsubcategory][currentBrand].map(model => {
+								if (!newModels.find(findModel => model === findModel.title)) {
+									newModels.push({ title: model, value: model })
+								}
+							})
+						}
+					}
+				})
+			}
+
+			setBrands(newBrands)
+			setModels(newModels)
+		}
+	}, [isLoadedProductsFilters, currentCategory, currentType])
+
+	const onChangeInputBrand = (value: string) => {
+		const newBrands: { title: string, value: string }[] = []
+
+		Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
+			Object.keys(categories[currentCategory].subsubcategories[subsubcategory]).map((brand) => {
+				if (brand.toLowerCase().indexOf(value.toLowerCase()) !== -1 && !newBrands.find((findBrand) => brand === findBrand.title)) {
+					newBrands.push({ title: brand, value: brand })
+				}
+			})
+		})
+
+		setBrands(newBrands)
+	}
+
+	const onChangeInputModel = (value: string) => {
+		const newModels: { title: string, value: string }[] = []
+
+		Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
+			if (categories[currentCategory].subsubcategories[subsubcategory][currentBrand]) {
+				categories[currentCategory].subsubcategories[subsubcategory][currentBrand].map(model => {
+					if (model.toLowerCase().indexOf(value.toLowerCase()) !== -1 && !newModels.find((findModel) => model === findModel.title)) {
+						newModels.push({ title: model, value: model })
+					}
+				})
+			}
+		})
+
+		setModels(newModels)
+	}
+
 	return (
 		<form className="cabinet-waiting-list-form" onSubmit={handleSubmit}>
 			<h2 className="cabinet-waiting-list-form__title">Подписаться на товар</h2>
+
 			<p className="cabinet-waiting-list-form__description">
 				Заполните заявку, чтобы узнать о появлении в наличии нужного вам аксессуара.
 			</p>
@@ -78,36 +181,123 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						label="Категория"
 						items={Object.keys(categories)}
 						name="category"
-						onChangeCutsom={(value: string) => setCurrentCategory(value)}
 					/>
 				</div>
 
-				<div
-					className="cabinet-waiting-list-form-content-select"
-					style={{ width: "49%" }}
-				>
-					<Field
-						component={RenderSelect}
-						label="Тип продукта"
-						items={categories[currentCategory] ? categories[currentCategory].subsubcategory : []}
-						name="type"
-						disabled={categories[currentCategory] ? false : true}
-					/>
-				</div>
+				{currentCategory === "Сумки" || !currentCategory ? (
+					<>
+						<div
+							className="cabinet-waiting-list-form-content-select"
+							style={{ width: "49%" }}
+						>
+							<Field
+								component={RenderInputHints}
+								name="brand"
+								label="Бренд"
+								hints={brands}
+								disabled={categories[currentCategory] ? false : true}
+								onChangeCustom={(value: string) => onChangeInputBrand(value)}
+								bgWhite
+								ifFreeField
+							/>
+						</div>
 
-				<div
-					className="cabinet-waiting-list-form-content-select"
-					style={{ width: "49%" }}
-				>
-					<Field
-						component={RenderSelect}
-						label="Бренд"
-						items={categories[currentCategory] ? categories[currentCategory].manufacturer : []}
-						name="brand"
-						disabled={categories[currentCategory] ? false : true}
+						<div
+							className="cabinet-waiting-list-form-content-select"
+							style={{ width: "49%" }}
+						>
+							<Field
+								component={RenderInputHints}
+								name="model"
+								label="Модель"
+								hints={models}
+								disabled={categories[currentCategory] ? false : true}
+								onChangeCustom={(value: string) => onChangeInputModel(value)}
+								bgWhite
+								ifFreeField
+							/>
+						</div>
+					</>
+				) : null}
 
-					/>
-				</div>
+				{currentCategory === "Аксессуары" ? (
+					<>
+						<div
+							className="cabinet-waiting-list-form-content-select"
+							style={{ width: "49%" }}
+						>
+							<Field
+								component={RenderSelect}
+								label="Тип продукта"
+								items={categories[currentCategory] ? Object.keys(categories[currentCategory].subsubcategories) : []}
+								name="type"
+								disabled={categories[currentCategory] ? false : true}
+							/>
+						</div>
+
+						<div
+							className="cabinet-waiting-list-form-content-select"
+							style={{ width: "49%" }}
+						>
+							<Field
+								component={RenderInputHints}
+								name="brand"
+								label="Бренд"
+								hints={brands}
+								disabled={categories[currentCategory] ? false : true}
+								onChangeCustom={(value: string) => onChangeInputBrand(value)}
+								bgWhite
+								ifFreeField
+							/>
+						</div>
+					</>
+				) : null}
+
+				{currentCategory === "Обувь" ? (
+					<>
+						<div
+							className="cabinet-waiting-list-form-content-select"
+							style={{ width: "100%" }}
+						>
+							<Field
+								component={RenderSelect}
+								label="Тип продукта"
+								items={categories[currentCategory] ? Object.keys(categories[currentCategory].subsubcategories) : []}
+								name="type"
+								disabled={categories[currentCategory] ? false : true}
+							/>
+						</div>
+
+						<div
+							className="cabinet-waiting-list-form-content-select"
+							style={{ width: "49%" }}
+						>
+							<Field
+								component={RenderInputHints}
+								name="brand"
+								label="Бренд"
+								hints={brands}
+								disabled={categories[currentCategory] ? false : true}
+								onChangeCustom={(value: string) => onChangeInputBrand(value)}
+								bgWhite
+								ifFreeField
+							/>
+						</div>
+
+						<div
+							className="cabinet-waiting-list-form-content-select"
+							style={{ width: "49%" }}
+						>
+							<Field
+								component={RenderSelect}
+								label="Размер"
+								name="size"
+								items={categories[currentCategory].size}
+								disabled={categories[currentCategory] ? false : true}
+							/>
+						</div>
+					</>
+				) : null}
 
 				<button
 					className={`btn ${invalid || submitting || pristine ? "disabled" : ""} cabinet-waiting-list-form-content__btn`}

@@ -100,12 +100,12 @@ const Footer: React.FC = () => {
 								>
 									Карьера
 								</a>
-								<Link
+								{/* <Link
 									to={""}
 									className="footer-block-menu-block__link"
 								>
 									Устойчивое развитие
-								</Link>
+								</Link> */}
 								<a
 									href="https://resalereport2023.ru"
 									className="footer-block-menu-block__link"

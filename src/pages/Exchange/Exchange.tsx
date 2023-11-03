@@ -129,7 +129,7 @@ const Exchange: React.FC = () => {
 									По этой программе мы принимаем только сумки, купленные на нашей платформе, снова в свою коллекцию. А вам предлагаем альтернативу на специальных условиях.
 								</p>
 
-								{/* <div className="exchange-option-block-option">
+								<div className="exchange-option-block-option">
 									<div className="exchange-option-block-option-block">
 										<h4 className="exchange-option-block-option-block__title">
 											{`<`}1 месяца
@@ -165,13 +165,20 @@ const Exchange: React.FC = () => {
 										На сумки Hermes (Birkin, Kelly, Constance) распространяется фиксированный размер депозита — 85%, если ее состояние не изменилось.
 										</p>
 									</div>
-								</div> */}
+								</div>
 
 								<Link
 									to=""
 									className="btn-regular exchange-option-block__btn"
 								>
 									Подробнее
+								</Link>
+
+								<Link
+									to="/cabinet/sell?type=exchange"
+									className="btn exchange-option-block__btn__media"
+								>
+									Отправить заявку
 								</Link>
 							</div>
 						</div>
@@ -219,7 +226,7 @@ const Exchange: React.FC = () => {
 							На сумки Hermes (Birkin, Kelly, Constance) распространяется фиксированный размер депозита — 85%, если ее состояние не изменилось.
 						</p>
 
-						<Link to="/cabinet/sell" className="btn exchange-thecycle__btn">Отправить заявку</Link>
+						<Link to="/cabinet/sell?type=exchange" className="btn exchange-thecycle__btn">Отправить заявку</Link>
 					</div>
 
 					<div className="exchange-example">

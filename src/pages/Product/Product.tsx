@@ -38,7 +38,7 @@ const Product: React.FC = () => {
 								<ProductInfoBreadCrumbs
 									category={itemByArticle.category}
 									brand={itemByArticle.manufacturer}
-									model={itemByArticle.name}
+									model={itemByArticle.model_name}
 								/>
 
 								<div className="product-content">

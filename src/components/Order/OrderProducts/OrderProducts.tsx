@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { NumericFormat } from "react-number-format";
 import { formValueSelector } from "redux-form";
+import tinkoff from '@tcb-web/create-credit';
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
@@ -110,7 +111,7 @@ const OrderProducts: React.FC = () => {
 
 			products: Object.keys(items).filter((keyCartItem) => items[keyCartItem].checked).map((item) => parseInt(item)),
 
-			delivery_type: 1,
+			delivery_type: currentDelivery.id,
 			payment_type: 6,
 
 			coupon_id: ""
@@ -118,43 +119,56 @@ const OrderProducts: React.FC = () => {
 	}
 
 	const pay = (orderId: number) => {
-		var widget = new window.cp.CloudPayments();
 
-		widget.pay(
-			"auth", // или 'charge'
-			{
-				//options
-				publicId: "pk_e121fab75d40b1ed19854b69df6ff", //id из личного кабинета
-				description: "Оплата товаров TheCultt", //назначение
-				amount: totalPrice, //сумма
-				currency: "RUB", //валюта
-				payer: {
-					firstName: "Тест",
-					lastName: "Тестов",
-					middleName: "Тестович",
-					birth: "1955-02-24",
-					address: "тестовый проезд дом тест",
-					street: "Lenina",
-					city: "MO",
-					country: "RU",
-					phone: "123",
-					postcode: "345",
+		if (paymentValue === "Кредит" || paymentValue === "Рассрочка от Тинькофф") {
+			tinkoff.create({
+				shopId: 'ce5ee097-c3d5-4f8f-89ab-f1c8f61955a7',
+				showcaseId: 'fb8dc801-85dd-4741-b15a-d594d22a4f5b',
+				orderNumber: String(orderId),
+				items: Object.keys(items).filter((keyCartItem) => items[keyCartItem].checked).map((key) => ({ name: items[key].name, price: items[key].price, quantity: 1 })),
+				sum: totalPrice
+			});
+		} else {
+			var widget = new window.cp.CloudPayments();
+
+			widget.pay(
+				"auth", // или 'charge'
+				{
+					//options
+					publicId: "pk_e121fab75d40b1ed19854b69df6ff", //id из личного кабинета
+					description: "Оплата товаров TheCultt", //назначение
+					amount: totalPrice, //сумма
+					currency: "RUB", //валюта
+					payer: {
+						firstName: "Тест",
+						lastName: "Тестов",
+						middleName: "Тестович",
+						birth: "1955-02-24",
+						address: "тестовый проезд дом тест",
+						street: "Lenina",
+						city: "MO",
+						country: "RU",
+						phone: "123",
+						postcode: "345",
+					},
 				},
-			},
-			{
-				// onSuccess: (options: any) => {
-				// 	console.log(options)
-				// },
-				// onFail: function (reason: any, options: any) {
-				// 	window.location.href = "/order/error"
-				// },
-				onComplete: (paymentResult: any, options: any) => {
-					if (paymentResult.success) dispatch(sendSubmitOrder(orderId) as any)
-					//Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
-					//например вызов вашей аналитики
-				},
-			}
-		);
+				{
+					// onSuccess: (options: any) => {
+					// 	console.log(options)
+					// },
+					// onFail: function (reason: any, options: any) {
+					// 	window.location.href = "/order/error"
+					// },
+					onComplete: (paymentResult: any, options: any) => {
+						if (paymentResult.success) dispatch(sendSubmitOrder(orderId) as any)
+						//Вызывается как только виджет получает от api.cloudpayments ответ с результатом транзакции.
+						//например вызов вашей аналитики
+					},
+				}
+			);
+
+		}
+
 	};
 
 	return (

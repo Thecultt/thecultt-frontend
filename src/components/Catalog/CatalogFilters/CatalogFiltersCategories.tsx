@@ -9,16 +9,11 @@ import { ProductsFiltersCategory } from "../../../models/IProductFilters";
 
 import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
 
-interface CatalogFiltersCategoriesProps {
-	categories: { [key: string]: ProductsFiltersCategory };
-}
-
-const CatalogFiltersCategories: React.FC<CatalogFiltersCategoriesProps> = ({
-	categories,
-}) => {
+const CatalogFiltersCategories: React.FC = () => {
 	const dispatch = useDispatch();
 
 	const { filters } = useTypedSelector(({ products }) => products)
+	const { categories } = useTypedSelector(({ products_filters }) => products_filters)
 
 	const onChangeSetCategory = (category: string) => {
 		dispatch(setFiltersCategoriesProduct(category));

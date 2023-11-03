@@ -42,7 +42,7 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 	};
 
 	React.useEffect(() => {
-		if (initial) {
+		if (initial && !Object.keys(currentItems).length) {
 			const newItems: { [key: string]: string } = {}
 			const itemsArray: string[] = initial.split(", ")
 
@@ -53,12 +53,18 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 	}, [initial])
 
 	React.useEffect(() => {
+		if (input.value === "" && Object.keys(currentItems).length) {
+			setCurrentItems({});
+		}
+	}, [input.value])
+
+	React.useEffect(() => {
 		dispatch(change(form, input.name, Object.keys(currentItems).length ? Object.keys(currentItems).map((title) => title).join(", ") : ""));
 	}, [Object.keys(currentItems).map(item => item)])
 
 	return (
 		<div className={`select-wrapper`} ref={SelectRef}>
-			<div className={`select ${disabled ? "disabled" : ""}`} onClick={() => setState(!state)}>
+			<div className={`select ${disabled ? "disabled" : ""} ${state ? "active" : ""}`} onClick={() => setState(!state)}>
 				<p className="select__label">
 					{Object.keys(currentItems).length ? Object.keys(currentItems).map((title) => title).join(", ") : <span>{label}</span>}
 				</p>

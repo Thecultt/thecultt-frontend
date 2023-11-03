@@ -52,3 +52,6 @@ export { default as Exchange } from "./Exchange/Exchange";
 
 // Order
 export { default as Order } from "./Order/Order";
+
+// Cart
+export { default as Cart } from "./Cart/Cart";

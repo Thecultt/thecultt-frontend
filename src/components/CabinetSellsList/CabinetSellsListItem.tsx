@@ -35,6 +35,10 @@ const CabinetSellsListItem: React.FC<any> = ({
 						<p className="cabinet-sells-list-item-topinfo-block__date">
 							от {moment(time).format("DD.MM.YYYY, hh:ss")}
 						</p>
+
+						<p className="cabinet-sells-list-item-topinfo-block__status__media">
+							{status}
+						</p>
 					</div>
 					<div className="cabinet-sells-list-item-topinfo-block">
 						{/* {status === "success" ? (
@@ -115,9 +119,11 @@ const CabinetSellsListItem: React.FC<any> = ({
 										<span>Бренд:</span> {vendor}
 									</p>
 
-									<p className="cabinet-sells-list-item-info-block-value__value">
-										<span>Модель:</span> {model}
-									</p>
+									{model !== "" && model ? (
+										<p className="cabinet-sells-list-item-info-block-value__value">
+											<span>Модель:</span> {model}
+										</p>
+									) : null}
 								</div>
 
 								<div className="cabinet-sells-list-item-info-block-value ml">

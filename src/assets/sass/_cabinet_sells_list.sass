@@ -50,6 +50,24 @@
 				&__date
 					+ManropeMedium
 
+				&__status__media
+					display: none
+					align-items: center
+					user-select: none
+
+					font-size: 17px
+
+					+ManropeMedium
+
+					&.success
+						color: $mainColor
+
+					&.error
+						color: $red
+
+					& > svg
+						margin-left: 5px
+
 				&__status
 					display: inline-flex
 					align-items: center
@@ -102,7 +120,7 @@
 				&-value
 					&.ml
 						margin-left: 70px
-						
+
 					&__value
 						display: flex
 						align-items: center
@@ -117,3 +135,40 @@
 						& > span
 							color: $gray
 							margin-right: 7px
+
+/* MEDIA */
+@media screen and (max-width: 900px)
+	.cabinet-sells-list
+		&-top
+			&__add
+				width: 100%
+
+		&-item
+			&-topinfo
+				&-block
+					flex-direction: column
+					align-items: flex-start
+
+					&__date
+						margin-top: 10px
+						margin-left: 0
+
+					&__status__media
+						margin-top: 10px
+						display: block
+
+					&__status
+						display: none
+
+			&-info
+				&-block
+					&-value-wrapper
+						flex-direction: column
+
+					&-value
+						margin-left: 0 !important
+						margin: 5px 0
+
+						&__value
+							flex-direction: column
+							align-items: flex-start

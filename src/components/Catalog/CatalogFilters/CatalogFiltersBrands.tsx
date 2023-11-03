@@ -19,18 +19,31 @@ const CatalogFiltersBrands: React.FC = () => {
 	const [brands, setBrands] = React.useState<string[]>([]);
 
 	React.useEffect(() => {
-		if (Object.keys(filters.categories).length) {
-			setBrands([]);
+		const newBrands: string[] = []
 
-			Object.keys(filters.categories).map((selectCategory) => {
-				setBrands([
-					...brands,
-					...categories[selectCategory].manufacturer,
-				]);
+		if (Object.keys(filters.categories).length) {
+			Object.keys(filters.categories).map((category) => {
+				Object.keys(categories[category].subsubcategories).map(subsubcategory => {
+					Object.keys(categories[category].subsubcategories[subsubcategory]).map(brand => {
+						if (!newBrands.find((findBrand) => findBrand === brand)) {
+							newBrands.push(brand)
+						}
+					})
+				})
 			});
 		} else {
-			setBrands(categories[Object.keys(categories)[0]].manufacturer);
+			Object.keys(categories).map(category => {
+				Object.keys(categories[category].subsubcategories).map(subsubcategory => {
+					Object.keys(categories[category].subsubcategories[subsubcategory]).map(brand => {
+						if (!newBrands.find((findBrand) => findBrand === brand)) {
+							newBrands.push(brand)
+						}
+					})
+				})
+			})
 		}
+
+		setBrands(newBrands);
 	}, [filters.categories]);
 
 	const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,7 +89,7 @@ const CatalogFiltersBrands: React.FC = () => {
 			{search === "" ? (
 				<>
 					{brands.length
-						? brands
+						? brands.sort((a, b) => a.localeCompare(b))
 							.map((brand, index) => (
 								<div
 									className="catalog-filters-block-content-checkbox"
@@ -98,7 +111,7 @@ const CatalogFiltersBrands: React.FC = () => {
 				</>
 			) : (
 				<>
-					{brands.map((brand, index) =>
+					{brands.sort((a, b) => a.localeCompare(b)).map((brand, index) =>
 						brand.toLowerCase().indexOf(search) !== -1 ? (
 							<div
 								className="catalog-filters-block-content-checkbox"

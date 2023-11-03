@@ -17,11 +17,22 @@ export const fetchWaitingList = () => async (dispatch: Dispatch<WaitingActions>)
 
 export const sendNewWaitingListItem = (item: {
 	category: string
-	model_name: string
 	subcategory: string
-	comment: string
+	brand: string
+	model_name: string
+	size: string
 }) => async (dispatch: Dispatch<any>) => {
-	const res = await $api.post(`${process.env.REACT_APP_API_DOMEN}/waitinglist_request/`, item)
+	await $api.post(`${process.env.REACT_APP_API_DOMEN}/waitinglist_request/`, item)
+
+	dispatch(fetchWaitingList())
 
 	window.location.hash = "create_waiting_success"
+}
+
+export const sendDeleteWaitingListItem = (id: string) => async (dispatch: Dispatch<any>) => {
+	await $api.delete(`${process.env.REACT_APP_API_DOMEN}/delete_waitinglist_request/${id}`)
+
+	dispatch(fetchWaitingList())
+
+	window.location.hash = ""
 }

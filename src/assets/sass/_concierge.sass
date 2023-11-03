@@ -1,7 +1,7 @@
 // concierge
 .concierge
-	margin-bottom: 80px
-	
+	margin: 30px 0 80px 0
+
 	+open
 
 	&__title
@@ -23,6 +23,16 @@
 
 		margin: 0 auto
 
+	&-message
+		text-align: center
+
+		&__title
+			font-size: 21px
+			margin-bottom: 10px
+
+		&__subtitle
+			font-size: 16px
+
 	// &-main
 	&-main
 		display: flex
@@ -37,7 +47,7 @@
 		&-text
 			width: 100%
 
-			padding: 70px 30px 70px 65px
+			padding: 70px 50px 70px 65px
 
 			&__title
 				font-size: 26px
@@ -57,7 +67,7 @@
 				&-input-wrapper
 					display: flex
 					justify-content: space-between
-					align-items: center
+					align-items: flex-start
 
 				&-input
 					width: calc(50% - 4px)
@@ -76,7 +86,7 @@
 					margin-top: 25px
 
 					width: 230px
-					
+
 		&-image
 			min-width: 600px
 			width: 600px
@@ -123,6 +133,43 @@
 			&__description
 				font-size: 14px
 
+	// &-steps-media
+	&-steps-media
+		display: none
+		margin-bottom: 50px
+
+		&__title
+			margin-bottom: 32px
+
+		&-blocks-wrapper
+			display: flex
+			flex-direction: column
+			align-items: center
+
+		&-block
+			width: 310px
+
+			text-align: center
+
+			display: flex
+			flex-direction: column
+			align-items: center
+
+			margin-bottom: 15px
+
+			&:last-child
+				margin-bottom: 0
+
+			&__title
+				font-size: 16px
+				margin-bottom: 5px
+
+			&__description
+				font-size: 12px
+
+			&-arrow
+				margin-top: 15px
+
 	// &-services
 	&-services
 		margin-bottom: 60px
@@ -150,7 +197,6 @@
 
 			&__subtitle
 				font-size: 14px
-				margin-bottom: 40px
 
 	// &-form
 	&-form
@@ -174,7 +220,8 @@
 			&-input-wrapper
 				display: flex
 				justify-content: space-between
-				align-items: center
+				align-items: flex-start
+				text-align: left
 
 			&-input
 				width: calc(50% - 6px)
@@ -193,3 +240,89 @@
 				margin-top: 25px
 
 				width: 230px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.concierge
+		margin-bottom: 50px
+
+		&__title
+			width: 100%
+			font-size: 22px
+
+		&__description
+			font-size: 14px
+
+		&-main
+			flex-direction: column
+			margin-bottom: 50px
+
+			&-text
+				padding: 15px
+				text-align: center
+				order: 2
+
+				&__title
+					font-size: 17px
+
+				&__description
+					font-size: 12px
+					margin-bottom: 15px
+
+				&-form
+					&-input-wrapper
+						flex-direction: column
+
+					&-input
+						width: 100%
+						margin-bottom: 10px
+
+						&:last-child
+							margin-bottom: 0
+
+			&-image
+				order: 1
+
+				width: 100%
+				min-width: 100%
+
+				height: 200px
+
+		&-steps
+			display: none
+
+		&-steps-media
+			display: block
+
+		&-services
+			margin-bottom: 30px
+
+			&-blocks-wrapper
+				flex-direction: column
+
+			&-block
+				width: 100%
+				padding: 15px
+				margin-bottom: 15px
+
+				&__title
+					font-size: 17px
+
+				&__subtitle
+					font-size: 14px
+
+		&-form
+			padding: 15px
+
+			&-content
+				width: 100%
+
+				&-input-wrapper
+					flex-direction: column
+
+				&-input
+					width: 100%
+					margin-bottom: 10px
+
+					&:last-child
+						margin-bottom: 0

@@ -48,7 +48,7 @@ const CabinetWaitingList: React.FC = () => {
 
 						<div className="cabinet-waiting-list-items-wrapper">
 							{items.map((item, index) => (
-								<CabinetWaitingListItem {...item} index={index} key={`cabinet-waiting-list-items-${index}`} />
+								<CabinetWaitingListItem {...item} num={index + 1} key={`cabinet-waiting-list-items-${index}`} />
 							))}
 						</div>
 					</div>

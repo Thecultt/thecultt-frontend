@@ -48,6 +48,7 @@ export const fetchProductsCatalog = (
 		colors: { [key: string]: string }
 		sex: { [key: string]: string }
 		availability: { [key: string]: string }
+		size: { [key: string]: string }
 
 		sort: string
 	},
@@ -75,6 +76,9 @@ export const fetchProductsCatalog = (
 	const availabilityArrray = Object.keys(filters.availability).map(
 		(key) => key
 	);
+	const sizeArrray = Object.keys(filters.size).map(
+		(key) => key
+	);
 
 	params.append("search", filters.search)
 
@@ -95,6 +99,7 @@ export const fetchProductsCatalog = (
 	colorsArrray.map((color) => params.append("color", color))
 	sexArrray.map((sex) => params.append("genders", sex))
 	availabilityArrray.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
+	sizeArrray.map((size) => params.append("size", size))
 
 	params.append("sort_by", filters.sort)
 
@@ -204,6 +209,11 @@ export const setFiltersSexProduct = (sex: string) => ({
 export const setFiltersAvailabilityProduct = (availability: string) => ({
 	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY,
 	payload: availability
+})
+
+export const setFiltersSizeProduct = (size: string) => ({
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SIZE,
+	payload: size
 })
 
 export const setFiltersSortProduct = (sort: string) => ({

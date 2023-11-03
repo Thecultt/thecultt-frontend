@@ -46,18 +46,15 @@ const WaitingListCreateSuccess: React.FC = () => {
 			</h2>
 
 			<p className="cabinet-waiting-list-success__description">
-				Поздравляем вас с вступлением в нашу семью устойчевого развития
-				The Cultt! Ваш аккаунт готов, осталось только подтвердить почту.
-				Сообщение уже ждёт вас на почте, это займёт минуту вашего
-				времени.
+				Когда эта модель появится в наличии, мы уведомим вас на указанную почту
 			</p>
 
-			<Link
-				to="/cabinet/waiting"
+			<a
+				href="/cabinet/waiting"
 				className="btn cabinet-waiting-list-success__btn"
 			>
-				Лист ожидания
-			</Link>
+				Мои подписки
+			</a>
 		</div>
 	);
 };

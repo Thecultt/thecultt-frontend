@@ -53,8 +53,17 @@ const HomeCategories: React.FC = () => {
 		dots: false,
 		infinite: true,
 		speed: 500,
-		slidesToShow: 3,
+		slidesToShow: 5,
 		slidesToScroll: 1,
+
+
+		responsive: [{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 2,
+			}
+		}]
 	};
 
 	const onClickPrev = () => {
@@ -67,6 +76,10 @@ const HomeCategories: React.FC = () => {
 
 	return (
 		<div className="home-categories-wrapper">
+			<h3 className="home-categories__title">
+				Категории
+			</h3>
+
 			<button className="home-categories-arrow prev" onClick={onClickPrev}>
 				<svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<rect y="0.476562" width="40" height="40" rx="20" fill="white" />

@@ -13,6 +13,7 @@ export interface OrderState {
 	currentDelivery: {
 		title: string
 		price: number
+		id: number
 	}
 
 	globalCountrys: {
@@ -98,6 +99,7 @@ interface setOrderCurrentDelivery {
 	payload: {
 		title: string
 		price: number,
+		id: number
 	}
 }
 

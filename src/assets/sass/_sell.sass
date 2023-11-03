@@ -1,6 +1,6 @@
 // sell
 .sell
-	margin-bottom: 25px
+	margin: 30px 0 
 
 	+open
 
@@ -283,6 +283,10 @@
 					background-color: transparent
 					border: 1px solid $gray
 
+				&.loading
+					pointer-events: none
+					user-select: none
+
 				&-text
 					width: calc(50% - 5px)
 
@@ -315,6 +319,24 @@
 
 					&:active
 						+transformClick
+
+					&__loader
+						position: absolute
+
+						top: 15px
+						left: 15px
+
+						width: 25px
+						height: 25px
+
+						z-index: 20
+
+						border: 2px solid $mainColor
+						border-bottom-color: transparent
+						border-radius: 50%
+						display: inline-block
+						box-sizing: border-box
+						animation: rotation 1s linear infinite
 
 					&-plaecholder
 						z-index: -1
@@ -418,12 +440,11 @@
 			margin-left: 110px
 
 			&-types
+				margin: 20px 0
 				width: 100%
-				
+
 				display: flex
 				justify-content: space-between
-
-				margin-bottom: 20px
 
 				&-block
 					cursor: pointer
@@ -485,7 +506,7 @@
 
 			&-form
 				width: 100%
-				
+
 				&__title
 					font-size: 17px
 					margin-bottom: 15px

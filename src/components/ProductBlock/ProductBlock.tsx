@@ -19,9 +19,9 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	article,
 	images,
 	manufacturer,
-	name,
 	availability,
 	condition,
+	model_name,
 	price,
 	addClass,
 	addCart,
@@ -38,24 +38,62 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
 	const [currentIndexImage, setCurrentIndexImage] = React.useState<number>(0);
 
+	React.useEffect(() => {
+		setCurrentIndexImage(0)
+	}, [])
+
+	const onClickPrevImage = () => {
+		if (currentIndexImage - 1 >= 0) {
+			setCurrentIndexImage(currentIndexImage - 1);
+		} else {
+			setCurrentIndexImage(totalImageLength - 1);
+		}
+	};
+
+	const onClickNextImage = () => {
+		if (currentIndexImage + 1 < totalImageLength) {
+			setCurrentIndexImage(currentIndexImage + 1);
+		} else {
+			setCurrentIndexImage(0);
+		}
+	};
+
 	return (
 		<div className={`product-block ${addClass ? addClass : ""}`}>
 			<div className="product-block-cover">
-				<Link to={`/product/${article}`}>
-					<div className="product-block-cover-hover-col-wrapper">
-						{Array(totalImageLength)
-							.fill(0)
-							.map((_, index) => (
-								<div
-									className="product-block-cover-hover-col"
-									key={`product-block-cover-hover-col-${article}-${index}`}
-									style={{ width: `${100 / totalImageLength}%` }}
-									onMouseOver={() => setCurrentIndexImage(index)}
-								>
-								</div>
-							))}
-					</div>
-				</Link>
+				<div className="product-block-cover-arrow prev" onClick={onClickPrevImage}>
+					<svg
+						width="9"
+						height="16"
+						viewBox="0 0 9 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M8 15L1 8L8 1"
+							stroke="#202020"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</svg>
+				</div>
+
+				<div className="product-block-cover-arrow next" onClick={onClickNextImage}>
+					<svg
+						width="9"
+						height="16"
+						viewBox="0 0 9 16"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M1 15L8 8L1 1"
+							stroke="#202020"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</svg>
+				</div>
 
 				<div
 					className={`product-block-cover-favorite ${isFavorite ? "active" : ""}`}
@@ -94,7 +132,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 						</svg>
 					)}
 					<span className="product-block-cover-favorite__count">
-						{num_of_favorites}
+						{isFavoriteLocal ? num_of_favorites + 1 : num_of_favorites}
 					</span>
 				</div>
 
@@ -111,20 +149,22 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 						))}
 				</div>
 
-				<div
-					className="product-block-cover-image"
-					style={{
-						backgroundImage: `url("${images[currentIndexImage]}")`,
-					}}
-				>
-				</div>
+				<Link to={`/product/${article}`}>
+					<div
+						className="product-block-cover-image"
+						style={{
+							backgroundImage: `url("${images[currentIndexImage]}")`,
+						}}
+					>
+					</div>
+				</Link>
 			</div>
 
 			<div className="product-block-text">
 				<Link to={`/product/${article}`}>
 					<p className="product-block-text__brand">{manufacturer}</p>
 
-					<h3 className="product-block-text__model">{name}</h3>
+					<h3 className="product-block-text__model">{model_name}</h3>
 				</Link>
 
 				{availability ? (

@@ -55,7 +55,7 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
 				/>
 			</svg>
 
-			<Link to="/catalog" className="product-content-info-bread-crumbs__item">
+			<Link to={`/catalog?categories=${category}`} className="product-content-info-bread-crumbs__item">
 				{category}
 			</Link>
 
@@ -74,7 +74,7 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
 				/>
 			</svg>
 
-			<Link to="/catalog" className="product-content-info-bread-crumbs__item">
+			<Link to={`/catalog?categories=${category}&brands=${brand}`} className="product-content-info-bread-crumbs__item">
 				{brand}
 			</Link>
 
@@ -93,7 +93,7 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
 				/>
 			</svg>
 
-			<Link to="/catalog" className="product-content-info-bread-crumbs__item">
+			<Link to={`/catalog?categories=${category}&brands=${brand}&models=${model}`} className="product-content-info-bread-crumbs__item">
 				{model}
 			</Link>
 		</div >

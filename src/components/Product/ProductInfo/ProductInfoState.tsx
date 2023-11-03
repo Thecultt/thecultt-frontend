@@ -1,13 +1,19 @@
 import React from "react";
 
-import StateImage from "../../../assets/images/state/state.svg";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-const ProductInfoState: React.FC = () => {
-    return (
-        <div className="product-content-info-state">
-            <h3 className="product-content-info-state__title">
-                Состояние
-                <svg
+import { ProductPage } from "../../../models/IProduct"
+
+const ProductInfoState: React.FC<ProductPage> = ({ condition, nuances }) => {
+	const { conditions } = useTypedSelector(({ products_filters }) => products_filters)
+
+	console.log(nuances)
+
+	return (
+		<div className="product-content-info-state">
+			<h3 className="product-content-info-state__title">
+				Состояние
+				{/* <svg
                     viewBox="0 0 17 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -32,18 +38,27 @@ const ProductInfoState: React.FC = () => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                     />
-                </svg>
-            </h3>
-            <img
-                src={StateImage}
-                alt=""
-                className="product-content-info-state__image"
-            />
-            <p className="product-content-info-state__info">
-                <span>Следы жизни:</span> Следы носки на текстиле.
-            </p>
-        </div>
-    );
+                </svg> */}
+			</h3>
+
+			<div className="product-content-info-state-bar">
+				{conditions.map((conditionItem, index) => (
+					<div className={`product-content-info-state-bar-item ${condition.toLocaleLowerCase() === conditionItem.toLocaleLowerCase() ? "active" : ""}`} key={`product-content-info-state-bar-item-${index}`}>
+						<div className="product-content-info-state-bar-item-circle"></div>
+
+						<p className="product-content-info-state-bar-item__title">
+							{conditionItem}
+						</p>
+					</div>
+				))}
+
+			</div>
+
+			{nuances !== null && nuances !== "" && nuances ? <p className="product-content-info-state__info">
+				<span>Следы жизни:</span> {nuances}
+			</p> : null}
+		</div>
+	);
 };
 
 export default ProductInfoState;

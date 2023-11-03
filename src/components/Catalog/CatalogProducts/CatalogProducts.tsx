@@ -56,7 +56,7 @@ const CatalogProducts: React.FC = () => {
 								checked: true,
 								article: item.article,
 								manufacturer: item.manufacturer,
-								name: item.name,
+								name: item.model_name,
 								image: item.images[0],
 								price: item.price,
 							})

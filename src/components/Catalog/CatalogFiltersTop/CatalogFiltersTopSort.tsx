@@ -11,13 +11,13 @@ const CatalogFiltersTopSort: React.FC = () => {
 	const { filters } = useTypedSelector(({ products }) => products);
 
 	const [state, setState] = React.useState<boolean>(false);
-	const [currentSortKey, setCurrentSortKey] = React.useState<string>("");
+	const [currentSortKey, setCurrentSortKey] = React.useState<string>("default");
 
 	const ModalRef = React.useRef<HTMLDivElement>(null);
 
 	React.useEffect(() => {
-		setCurrentSortKey(filters.sort)
-	}, [filters.sort])
+		if (filters.isParse && filters.sort !== "") setCurrentSortKey(filters.sort)
+	}, [filters.isParse, filters.sort])
 
 	React.useEffect(() => {
 		document.addEventListener("mousedown", hiddeModal);
@@ -44,7 +44,7 @@ const CatalogFiltersTopSort: React.FC = () => {
 		"a": "Сначала новые",
 		"price": "По возрастанию цены",
 		"-price": "По убыванию цены",
-		"f": "По популярности"
+		// "f": "По популярности"
 	}
 
 	const onClickSetItem = (key: string) => {
@@ -64,6 +64,7 @@ const CatalogFiltersTopSort: React.FC = () => {
 				onClick={toggleState}
 			>
 				<p className="catalog-filters-top-sort-title__title">
+
 					Сортировать по: {sortItems[currentSortKey]}
 					<svg
 						width="14"

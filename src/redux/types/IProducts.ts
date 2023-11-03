@@ -18,6 +18,7 @@ export interface ProductsStateFilters {
 	colors: { [key: string]: string }
 	sex: { [key: string]: string }
 	availability: { [key: string]: string }
+	size: { [key: string]: string }
 
 	sort: string
 }
@@ -70,6 +71,7 @@ export enum ProductActionTypes {
 	SET_PRODUCTS_FILTERS_CATALOG_COLORS = "SET_PRODUCTS_FILTERS_CATALOG_COLORS",
 	SET_PRODUCTS_FILTERS_CATALOG_SEX = "SET_PRODUCTS_FILTERS_CATALOG_SEX",
 	SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY = "SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY",
+	SET_PRODUCTS_FILTERS_CATALOG_SIZE = "SET_PRODUCTS_FILTERS_CATALOG_SIZE",
 	SET_PRODUCTS_FILTERS_CATALOG_SORT = "SET_PRODUCTS_FILTERS_CATALOG_SORT",
 }
 
@@ -192,9 +194,15 @@ interface setProductsFiltersAvailability {
 	payload: string
 }
 
+interface setProductsFiltersSize {
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SIZE,
+	payload: string
+}
+
+
 interface setProductsFiltersSort {
 	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT,
 	payload: string
 }
 
-export type ProductTypes = setProductsItems | setProductsItemByArticle | setProductsItemByArticleIsLoaded | setProductsItemsMore | setProductsItemsPage | setProductsIsLoaded | setProductsIsFetchMore | setProductsIsFetchPage | setProductsTypeFetch | setProductsPageCurrentPage | setProductsPageCount | setProductsItemsCount | setProductsFilters | setProductsFiltersSearch | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategories | setProductsFiltersTypes | setProductsFiltersBrands | setProductsFiltersModels | setProductsFiltersColors | setProductsFiltersSex | setProductsFiltersAvailability | setProductsFiltersSort
+export type ProductTypes = setProductsItems | setProductsItemByArticle | setProductsItemByArticleIsLoaded | setProductsItemsMore | setProductsItemsPage | setProductsIsLoaded | setProductsIsFetchMore | setProductsIsFetchPage | setProductsTypeFetch | setProductsPageCurrentPage | setProductsPageCount | setProductsItemsCount | setProductsFilters | setProductsFiltersSearch | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategories | setProductsFiltersTypes | setProductsFiltersBrands | setProductsFiltersModels | setProductsFiltersColors | setProductsFiltersSex | setProductsFiltersAvailability | setProductsFiltersSize | setProductsFiltersSort

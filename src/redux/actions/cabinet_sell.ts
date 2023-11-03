@@ -39,6 +39,12 @@ export const sendCreateCabinetSell = (data: any) => (dispatch: Dispatch<CabinetS
 	})
 }
 
+export const sendCreateCabinetSellImage = async (image: any) => {
+	const { images } = await $api.post<{ images: string[] }>(`/upload_images/`, { images: [image] }).then(({ data }) => data)
+
+	return images[0]
+}
+
 export const fetchCabinetSellParameters = () => async (dispatch: Dispatch<CabinetSellActions>) => {
 	const { data } = await $api.get<CabinetSellOption[]>(`/sell_options/`)
 

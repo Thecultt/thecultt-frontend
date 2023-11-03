@@ -12,7 +12,26 @@ interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
 	onClose: () => void
 }
 
-const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategory, manufacturer, title, isOpenHoverMenu, onOpen, onClose }) => {
+const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategories, title, isOpenHoverMenu, onOpen, onClose }) => {
+	const [brands, setBrands] = React.useState<string[]>([])
+
+	React.useEffect(() => {
+		const newBrands: string[] = []
+
+		Object.keys(subsubcategories).map((subsubcategory) => {
+			if (newBrands.length < 16) {
+				Object.keys(subsubcategories[subsubcategory]).map((brand) => {
+					// console.log(newBrands.find((findBrand) => findBrand !== brand))
+					if (!newBrands.find((findBrand) => findBrand === brand)) {
+						newBrands.push(brand)
+					}
+				})
+			}
+		})
+
+		setBrands(newBrands)
+	}, [title])
+
 	return (
 		<nav className={`header-hover-menu ${isOpenHoverMenu ? "active" : ""}`} onMouseOver={() => onOpen()} onMouseOut={() => onClose()}>
 			<div className="header-hover-menu-list-wrapper">
@@ -23,7 +42,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategory, manuf
 
 					<div className="header-hover-menu-list-coll-wrapper">
 						<div className="header-hover-menu-list-coll">
-							{subsubcategory.map((subsubcategory, index) => (
+							{Object.keys(subsubcategories).map((subsubcategory, index) => (
 								<Link to={`/catalog?categories=${title}&types=${subsubcategory}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${subsubcategory}-${index}`}>
 									{subsubcategory}
 								</Link>
@@ -57,17 +76,17 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategory, manuf
 
 					<div className="header-hover-menu-list-coll-wrapper">
 						<div className="header-hover-menu-list-coll">
-							{manufacturer.map((manufacturer, index) => (
-								<Link to={`/catalog?categories=${title}&brands=${manufacturer}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${manufacturer}-${index}`}>
-									{manufacturer}
+							{brands.map((brand, index) => (
+								<Link to={`/catalog?categories=${title}&brands=${brand}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${brand}-${index}`}>
+									{brand}
 								</Link>
 							)).slice(0, 8)}
 						</div>
 
 						<div className="header-hover-menu-list-coll">
-							{manufacturer.map((manufacturer, index) => (
-								<Link to={`/catalog?categories=${title}&brands=${manufacturer}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${manufacturer}-${index}`}>
-									{manufacturer}
+							{brands.map((brand, index) => (
+								<Link to={`/catalog?categories=${title}&brands=${brand}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${brand}-${index}`}>
+									{brand}
 								</Link>
 							)).slice(8, 15)}
 

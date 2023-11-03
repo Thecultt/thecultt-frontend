@@ -35,6 +35,14 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 		speed: 500,
 		slidesToShow: 6,
 		slidesToScroll: 6,
+
+		responsive: [{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 2,
+			}
+		}]
 	};
 
 	const onClickPrev = () => {
@@ -65,9 +73,9 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 
 	return (
 		<div className="catalog-product-section">
-			<h4 className="catalog-product-section__title">
+			<h3 className="catalog-product-section__title">
 				{title}
-			</h4>
+			</h3>
 
 			<div className="catalog-product-section-slider-wrapper">
 				<button className="catalog-product-section-slider-arrow prev" onClick={onClickPrev}>
@@ -88,7 +96,7 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 									checked: true,
 									article: item.article,
 									manufacturer: item.manufacturer,
-									name: item.name,
+									name: item.model_name,
 									image: item.images[0],
 									price: item.price,
 								})

@@ -11,13 +11,12 @@ import { sendSaveFavorite, sendRemoveFavorite } from "../../../redux/actions/fav
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-interface ProductInfoTitleProps extends ProductPage { }
-
-const ProductInfoTitle: React.FC<ProductInfoTitleProps> = ({
+const ProductInfoTitle: React.FC<ProductPage> = ({
 	id,
 	article,
 	manufacturer,
-	name,
+	category,
+	model_name,
 	price,
 	availability,
 	images
@@ -54,9 +53,9 @@ const ProductInfoTitle: React.FC<ProductInfoTitleProps> = ({
 		<div className="product-content-info-title">
 			<p className="product-content-info-title__vendor">Артикул: {article}</p>
 
-			<h2 className="product-content-info-title__model">{name}</h2>
+			<h2 className="product-content-info-title__model">{model_name}</h2>
 
-			<Link to="/" className="product-content-info-title__brand">
+			<Link to={`/catalog?categories=${category}&brands=${manufacturer}`} className="product-content-info-title__brand">
 				{manufacturer}
 			</Link>
 
@@ -97,7 +96,7 @@ const ProductInfoTitle: React.FC<ProductInfoTitleProps> = ({
 								checked: true,
 								article: article,
 								manufacturer: manufacturer,
-								name: name,
+								name: model_name,
 								image: images[0],
 								price: price,
 							})}

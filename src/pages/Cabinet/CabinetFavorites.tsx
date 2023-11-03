@@ -56,7 +56,7 @@ const CabinetFavorites: React.FC = () => {
 							{Object.keys(items).map((key, index) => (
 								<ProductBlock
 									addClass="cabinet-favorites-block"
-									key={`cabinet-favorites-block-${index}`}
+									key={`cabinet-favorites-block-${items[key].article}-${index}`}
 									addCart={() =>
 										addCart({
 											id: items[key].id,

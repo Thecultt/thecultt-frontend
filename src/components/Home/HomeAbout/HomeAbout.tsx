@@ -1,11 +1,13 @@
 import React from 'react'
 
 import HomeAboutImage from '../../../assets/images/home/home-about.jpg'
+import HomeAboutImageMedia from '../../../assets/images/home/home-about-media.jpg'
+
 import { Link } from 'react-router-dom'
 
 const HomeAbout: React.FC = () => {
 	return (
-		<div className="home-about hover-scale" style={{ backgroundImage: `url("${HomeAboutImage}")` }}>
+		<div className="home-about hover-scale" style={{ backgroundImage: `url("${window.innerWidth > 1200 ? HomeAboutImage : HomeAboutImageMedia}")` }}>
 			<div className="home-about-text">
 				<h2 className="home-about-text__title">
 					Мы THE CULTT — ресейл-платформа культовых вещей.

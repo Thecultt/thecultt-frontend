@@ -1,16 +1,40 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Input } from '../../components';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+
+import { sendConciergeForm, setConciergeIsSend } from '../../redux/actions/concierge';
+
+import { ConciergeFormTop, ConciergeFormBottom, Popup } from '../../components';
 
 import ConciergeMainImage from "../../assets/images/concierge/concierge-main-image.jpg";
 
 const Concierge: React.FC = () => {
+	const dispatch = useDispatch()
+
+	const { isSend } = useTypedSelector(({ concierge }) => concierge)
+
+	const onSubmit = (data: any) => {
+		dispatch(sendConciergeForm(data) as any)
+	}
+
 	return (
 		<section className="concierge">
+			<Popup state={isSend} setState={() => dispatch(setConciergeIsSend(!isSend))}>
+				<div className='concierge-message'>
+					<h4 className='concierge-message__title'>
+						Ваша заявка принята в работу.
+					</h4>
+					<p className='concierge-message__subtitle'>
+						Наш менеджер свяжется с вами в ближайшее время!
+					</p>
+				</div>
+			</Popup>
+
 			<div className="container">
 				<div className='concierge-wrapper'>
-					<div className="concierge-main hover-scale">
+					<div className="concierge-main">
 						<div className="concierge-main-text">
 							<h2 className="concierge-main-text__title">
 								Консьерж-сервис
@@ -20,25 +44,7 @@ const Concierge: React.FC = () => {
 								Закажите консьерж-сервис с выездом на дом для продажи более 10 лотов, соответствующих нашему <Link to="">бренд-листу</Link>.
 							</p>
 
-							<div className="concierge-main-text-form">
-								<div className="concierge-main-text-form-input-wrapper">
-									<div className="concierge-main-text-form-input">
-										<Input label='Ваш телефон' type='text' name='phone' />
-									</div>
-									<div className="concierge-main-text-form-input">
-										<Input label='Ваше имя' type='text' name='name' />
-									</div>
-								</div>
-
-								<p className="concierge-main-text-form__description">
-									Нажимая на кнопку, вы принимаете условия <Link to="/help/user-agreement">пользовательского соглашения</Link> и <Link to="/help/public-offerte">публичной оферты</Link>.
-								</p>
-
-
-								<button className="btn concierge-main-text-form__btn">
-									Отправить заявку
-								</button>
-							</div>
+							<ConciergeFormTop onSubmit={onSubmit} />
 						</div>
 						<div
 							className="concierge-main-image"
@@ -171,6 +177,74 @@ const Concierge: React.FC = () => {
 						</div>
 					</div>
 
+					<div className="concierge-steps-media">
+						<h2 className="concierge__title concierge-steps-media__title">
+							Как это работает?
+						</h2>
+
+						<div className="concierge-steps-media-blocks-wrapper">
+							<div className="concierge-steps-media-block">
+								<div className="concierge-steps-media-block-icon">
+									<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<circle cx="30" cy="30" r="29.5" stroke="#285141" />
+										<path d="M29.301 39V25.69L26.32 27.505V24.942L29.301 23.16H31.644V39H29.301Z" fill="#285141" />
+									</svg>
+								</div>
+
+								<h3 className="concierge-steps-media-block__title">
+									Оставьте одну заявку
+								</h3>
+								<p className="concierge-steps-media-block__description">
+									Вам не придется тратить время на заполнение заявки для каждого лота - это мы берем на себя.
+								</p>
+
+								<div className="concierge-steps-media-block-arrow">
+									<svg width="8" height="33" viewBox="0 0 8 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M3.64645 32.8536C3.84171 33.0488 4.15829 33.0488 4.35355 32.8536L7.53553 29.6716C7.7308 29.4763 7.7308 29.1597 7.53553 28.9645C7.34027 28.7692 7.02369 28.7692 6.82843 28.9645L4 31.7929L1.17157 28.9645C0.976311 28.7692 0.659728 28.7692 0.464466 28.9645C0.269204 29.1597 0.269204 29.4763 0.464466 29.6716L3.64645 32.8536ZM3.5 0.5V2.5H4.5V0.5L3.5 0.5ZM3.5 6.5V10.5H4.5L4.5 6.5H3.5ZM3.5 14.5V18.5H4.5V14.5H3.5ZM3.5 22.5L3.5 26.5H4.5V22.5H3.5ZM3.5 30.5V32.5H4.5V30.5H3.5Z" fill="#838383" />
+									</svg>
+								</div>
+							</div>
+
+							<div className="concierge-steps-media-block">
+								<div className="concierge-steps-media-block-icon">
+									<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<circle cx="30" cy="30" r="29.5" stroke="#285141" />
+										<path d="M25.1 37.989L25.111 35.943L32.008 29.761C32.5653 29.2697 32.943 28.8003 33.141 28.353C33.3463 27.9057 33.449 27.4583 33.449 27.011C33.449 26.4463 33.3243 25.9403 33.075 25.493C32.8257 25.0383 32.481 24.679 32.041 24.415C31.601 24.151 31.095 24.019 30.523 24.019C29.9363 24.019 29.412 24.1583 28.95 24.437C28.4953 24.7083 28.1397 25.0713 27.883 25.526C27.6263 25.9807 27.5017 26.472 27.509 27H25.155C25.155 25.9733 25.386 25.075 25.848 24.305C26.3173 23.5277 26.959 22.9227 27.773 22.49C28.587 22.05 29.5183 21.83 30.567 21.83C31.5643 21.83 32.459 22.0573 33.251 22.512C34.043 22.9593 34.6663 23.5753 35.121 24.36C35.583 25.1447 35.814 26.0393 35.814 27.044C35.814 27.77 35.7187 28.386 35.528 28.892C35.3373 29.398 35.0513 29.8673 34.67 30.3C34.2887 30.7327 33.812 31.202 33.24 31.708L27.916 36.46L27.663 35.8H35.814V37.989H25.1Z" fill="#285141" />
+									</svg>
+								</div>
+
+								<h3 className="concierge-steps-media-block__title">
+									Согласуйте условия
+								</h3>
+								<p className="concierge-steps-media-block__description">
+									Представитель THE CULTT приедет к вам, чтобы согласовать условия продажи аксессуаров и подписать документы.
+								</p>
+
+								<div className="concierge-steps-media-block-arrow">
+									<svg width="8" height="33" viewBox="0 0 8 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M3.64645 32.8536C3.84171 33.0488 4.15829 33.0488 4.35355 32.8536L7.53553 29.6716C7.7308 29.4763 7.7308 29.1597 7.53553 28.9645C7.34027 28.7692 7.02369 28.7692 6.82843 28.9645L4 31.7929L1.17157 28.9645C0.976311 28.7692 0.659728 28.7692 0.464466 28.9645C0.269204 29.1597 0.269204 29.4763 0.464466 29.6716L3.64645 32.8536ZM3.5 0.5V2.5H4.5V0.5L3.5 0.5ZM3.5 6.5V10.5H4.5L4.5 6.5H3.5ZM3.5 14.5V18.5H4.5V14.5H3.5ZM3.5 22.5L3.5 26.5H4.5V22.5H3.5ZM3.5 30.5V32.5H4.5V30.5H3.5Z" fill="#838383" />
+									</svg>
+								</div>
+							</div>
+
+							<div className="concierge-steps-media-block">
+								<div className="concierge-steps-media-block-icon">
+									<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<circle cx="30" cy="30" r="29.5" stroke="#285141" />
+										<path d="M29.973 38.297C29.1883 38.297 28.4513 38.1503 27.762 37.857C27.0727 37.5563 26.475 37.131 25.969 36.581C25.4703 36.031 25.1073 35.382 24.88 34.634L27.102 34.018C27.3147 34.7 27.685 35.2243 28.213 35.591C28.741 35.9503 29.3277 36.1263 29.973 36.119C30.5523 36.1117 31.062 35.976 31.502 35.712C31.942 35.448 32.2867 35.0923 32.536 34.645C32.7853 34.1903 32.91 33.6697 32.91 33.083C32.91 32.203 32.635 31.477 32.085 30.905C31.5423 30.333 30.831 30.047 29.951 30.047C29.7017 30.047 29.445 30.0837 29.181 30.157C28.9243 30.2303 28.6823 30.3257 28.455 30.443L27.377 28.628L32.965 23.689L33.207 24.349H25.507V22.16H35.033V24.349L30.391 28.815L30.369 28.067C31.3663 28.067 32.2317 28.2907 32.965 28.738C33.6983 29.178 34.263 29.7793 34.659 30.542C35.0623 31.2973 35.264 32.1443 35.264 33.083C35.264 34.095 35.0257 34.9933 34.549 35.778C34.0797 36.5627 33.4453 37.1787 32.646 37.626C31.854 38.0733 30.963 38.297 29.973 38.297Z" fill="#285141" />
+									</svg>
+								</div>
+
+								<h3 className="concierge-steps-media-block__title">
+									Получите выплату
+								</h3>
+								<p className="concierge-steps-media-block__description">
+									Вам останется только получать выплаты на карту!
+								</p>
+							</div>
+						</div>
+					</div>
+
 					<div className="concierge-services">
 						<h2 className="concierge__title mb">
 							Преимущества консьерж-сервиса
@@ -190,7 +264,7 @@ const Concierge: React.FC = () => {
 									Экономия <br /> времени
 								</h3>
 								<p className="concierge-services-block__subtitle">
-									Мы берем на себя весь процесс продажи. Выделите один час на встречу с представителем THE CULTT, и вам останется только получить выплаты на карту.
+									Выделите один час на встречу с представителем THE CULTT, и вам останется только получить выплаты на карту.
 								</p>
 							</div>
 
@@ -207,7 +281,7 @@ const Concierge: React.FC = () => {
 									Премиум <br /> Сервис
 								</h3>
 								<p className="concierge-services-block__subtitle">
-									Мы предоставим вам персонального менеджера, который будет сопровождать вас на всех этапах.
+									Мы предоставим вам персонального менеджера, который будет сопровождать вас на всех этапах. Вы сможете отслеживать статусы продаж всех лотов в личном кабинете.
 								</p>
 							</div>
 
@@ -230,30 +304,7 @@ const Concierge: React.FC = () => {
 						</div>
 					</div>
 
-					<div className="concierge-form hover-scale">
-						<div className="concierge-form-content">
-							<h2 className="concierge-form-content__title">
-								Закажите консьерж-сервис в один клик
-							</h2>
-
-							<div className="concierge-form-content-input-wrapper">
-								<div className="concierge-form-content-input">
-									<Input label='Ваш телефон' type='text' name='phone' />
-								</div>
-								<div className="concierge-form-content-input">
-									<Input label='Ваше имя' type='text' name='name' />
-								</div>
-							</div>
-
-							<p className="concierge-form-content__description">
-								Нажимая на кнопку, вы принимаете условия <Link to="/help/user-agreement">пользовательского соглашения</Link> и <Link to="/help/public-offerte">публичной оферты</Link>.
-							</p>
-
-							<button className="btn concierge-form-content__btn">
-								Отправить заявку
-							</button>
-						</div>
-					</div>
+					<ConciergeFormBottom onSubmit={onSubmit} />
 				</div>
 			</div>
 		</section>

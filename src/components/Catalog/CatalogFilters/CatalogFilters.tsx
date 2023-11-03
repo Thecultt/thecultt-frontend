@@ -22,18 +22,16 @@ import {
 	CatalogFiltersColors,
 	CatalogFiltersSex,
 	CatalogFiltersAvailability,
+	CatalogFiltersSize
 } from "../../";
 
-const CatalogFilters: React.FC = () => {
+const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
 	const dispatch = useDispatch()
 
 	const [query] = useSearchParams();
 	const navigate = useNavigate();
 
 	const { filters } = useTypedSelector(({ products }) => products);
-
-	const [types, setTypes] = React.useState<{ [key: string]: string[] }>({});
-	const [models, setModels] = React.useState<string[]>([]);
 
 	const { price, conditions, categories, colors, isLoaded } = useTypedSelector(
 		({ products_filters }) => products_filters
@@ -58,6 +56,7 @@ const CatalogFilters: React.FC = () => {
 			colors: {},
 			sex: {},
 			availability: {},
+			size: {},
 
 			sort: query.get("sort") ? query.get("sort") as string : ""
 		}
@@ -94,6 +93,10 @@ const CatalogFilters: React.FC = () => {
 			filters.availability[availability] = availability;
 		});
 
+		query.getAll("size").map((size) => {
+			filters.size[size] = size;
+		});
+
 		dispatch(setFiltersCatalog(filters));
 
 		return () => {
@@ -116,26 +119,13 @@ const CatalogFilters: React.FC = () => {
 					colors: {},
 					sex: {},
 					availability: {},
+					size: {},
 
 					sort: ""
 				})
 			);
 		};
 	}, [query]);
-
-	React.useEffect(() => {
-		setTypes({});
-		setModels([]);
-
-		Object.keys(filters.categories).map((category) => {
-			setTypes({
-				...types,
-				[category]: categories[category].subsubcategory,
-			});
-			setModels([...models, ...categories[category].model_name]);
-		});
-	}, [Object.keys(filters.categories).length]);
-
 
 	React.useEffect(() => {
 		if (filters.isParse) {
@@ -149,6 +139,8 @@ const CatalogFilters: React.FC = () => {
 				colors: Object.keys(filters.colors),
 				sex: Object.keys(filters.sex),
 				availability: Object.keys(filters.availability),
+				size: Object.keys(filters.size),
+				conditions: Object.keys(filters.conditions),
 			}
 
 			if (filters.search !== "") {
@@ -182,6 +174,8 @@ const CatalogFilters: React.FC = () => {
 		Object.keys(filters.colors).length,
 		Object.keys(filters.sex).length,
 		Object.keys(filters.availability).length,
+		Object.keys(filters.size).length,
+		Object.keys(filters.conditions).length,
 		filters.sort,
 	]);
 
@@ -189,7 +183,7 @@ const CatalogFilters: React.FC = () => {
 		if (isLoaded && filters.isParse && !Object.keys(filters.categories).length) {
 			Object.keys(categories).map(category => dispatch(setFiltersCategoriesProduct(category)))
 		}
-	}, [isLoaded, filters.isParse])
+	}, [isLoaded, filters.isParse, Object.keys(filters.categories).length])
 
 	const onClickClearFilters = () => {
 		window.scrollTo(0, 0)
@@ -213,6 +207,7 @@ const CatalogFilters: React.FC = () => {
 				colors: {},
 				sex: {},
 				availability: {},
+				size: {},
 
 				sort: ""
 			})
@@ -220,25 +215,31 @@ const CatalogFilters: React.FC = () => {
 	}
 
 	return (
-		<div className="catalog-filters">
+		<div className={`catalog-filters ${isOpenFiltersMedia ? "active" : ""}`}>
+			<div className="catalog-filters-close-media" onClick={() => setIsOpenFiltersMedia(false)}>
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M18 6L6 18M6 6L18 18" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+				</svg>
+			</div>
+
 			<CatalogFiltersPrice
 				defaultMin={price.min}
 				defaultMax={price.max}
 			/>
 			<CatalogFiltersConditions conditions={conditions} />
-			<CatalogFiltersCategories categories={categories} />
-			<CatalogFiltersTypes
-				types={types}
-				disabled={Object.keys(types).length === 0 ? true : false}
-			/>
+			<CatalogFiltersCategories />
+			<CatalogFiltersTypes />
 			<CatalogFiltersBrands />
-			<CatalogFiltersModels
-				models={models}
-				disabled={models.length === 0 ? true : false}
-			/>
+			<CatalogFiltersModels />
 			<CatalogFiltersColors colors={colors} />
 			<CatalogFiltersSex />
 			<CatalogFiltersAvailability />
+
+			{Object.keys(filters.categories).map((category) => (
+				filters.categories[category] === "Обувь" ? (
+					<CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} />
+				) : null
+			))}
 
 			<div className="catalog-filters-btn">
 				<button className="catalog-filters-btn__clear" onClick={onClickClearFilters}>

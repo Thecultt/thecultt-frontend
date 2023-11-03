@@ -39,7 +39,7 @@ const HomeMainBanner: React.FC = () => {
 		<div className="home-main-banner-wrapper">
 			<Slider {...settings} className='home-main-slider-banner' ref={SliderRef}>
 				<div className='home-main-slider-banner-item-wrapper'>
-					<div className='home-main-slider-banner-item' style={{ backgroundImage: `url("${HomeMainBannerImage2}")` }}>
+					<div className='home-main-slider-banner-item' style={{ backgroundImage: `url("${HomeMainBannerImage}")` }}>
 						<div className="home-main-slider-banner-item-text">
 							<h2 className="home-main-slider-banner-item-text__title">
 								Продавай, покупай, обменивай <br /> сумки, обувь и аксессуары
@@ -57,7 +57,7 @@ const HomeMainBanner: React.FC = () => {
 				</div>
 
 				<div className='home-main-slider-banner-item-wrapper'>
-					<div className='home-main-slider-banner-item' style={{ backgroundImage: `url("${HomeMainBannerImage}")` }}>
+					<div className='home-main-slider-banner-item' style={{ backgroundImage: `url("${HomeMainBannerImage2}")` }}>
 						<div className="home-main-slider-banner-item-text">
 							<h2 className="home-main-slider-banner-item-text__title">
 								Продавай, покупай, обменивай <br /> сумки, обувь и аксессуары

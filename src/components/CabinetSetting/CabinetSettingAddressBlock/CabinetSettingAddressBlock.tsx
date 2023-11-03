@@ -25,12 +25,30 @@ const CabinetSettingAddressBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 }) => {
 	const dispatch = useDispatch()
 
-	const [state, setState] = React.useState<boolean>(false);
+	const { globalCountrys, globalCitys, globalStreets } = useTypedSelector(({ order }) => order)
+	const { user: { country, city, street, house, flat, comment }, isSending } = useTypedSelector(({ user }) => user)
+
+	const [state, setState] = React.useState<boolean>(country !== "" || country !== null ? true : false);
+	const [isEdit, setIsEdit] = React.useState<boolean>(country === "" || country === null ? true : false)
 
 	const [currentCountry, setCurrentCountry] = React.useState<{ title: string, value: string }>({ title: "", value: "" })
 	const [currentCity, setCurrentCity] = React.useState<{ title: string, value: string }>({ title: "", value: "" })
 
-	const { globalCountrys, globalCitys, globalStreets } = useTypedSelector(({ order }) => order)
+	React.useEffect(() => {
+		initialize({
+			country, city, street, house, flat, comment
+		})
+	}, [isEdit])
+
+	React.useEffect(() => {
+		if (!isSending) {
+			setIsEdit(false)
+		}
+	}, [isSending])
+
+	const toggleState = () => {
+		setState(!state);
+	};
 
 	const onChangeCountrys = (query: string) => {
 		dispatch(fetchOrderAddressCountrys(query) as any)
@@ -44,23 +62,23 @@ const CabinetSettingAddressBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 		dispatch(fetchOrderAddressStreet(query, currentCity.value) as any)
 	}
 
-	React.useEffect(() => {
-		initialize({
-			country: currentCountry.title,
-			city: currentCity.title,
-			street: "",
-			dom: "",
-			flat: "",
-			comm: "",
-		})
-	}, [currentCountry, currentCity])
+	// React.useEffect(() => {
+	// 	initialize({
+	// 		country: currentCountry.title,
+	// 		city: currentCity.title,
+	// 		street: "",
+	// 		dom: "",
+	// 		flat: "",
+	// 		comm: "",
+	// 	})
+	// }, [currentCountry, currentCity])
 
 	return (
 		<form onSubmit={handleSubmit} className={`cabinet-setting-block ${state ? "active" : ""}`}>
 			<div className="cabinet-setting-block-title">
 				<h3 className="cabinet-setting-block-title__title">Адрес</h3>
 
-				{state ? (
+				{/* {state ? (
 					<>
 						<button type="submit" className={`cabinet-setting-block-title__btn ${invalid || pristine || submitting ? "disabled" : ""}`}>
 							Сохранить
@@ -69,11 +87,29 @@ const CabinetSettingAddressBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							Отменить
 						</button>
 					</>
+				) : null} */}
+
+				{state ? (
+					isEdit ? (
+						<>
+							<button type="submit" className={`cabinet-setting-block-title__btn ${invalid || pristine || submitting ? "disabled" : ""}`}>
+								Сохранить
+							</button>
+
+							<button type="button" className="cabinet-setting-block-title__btn" onClick={() => setIsEdit(!isEdit)}>
+								Отменить
+							</button>
+						</>
+					) : (
+						<button type="button" className="cabinet-setting-block-title__btn" onClick={() => setIsEdit(true)}>
+							Изменить
+						</button>
+					)
 				) : null}
 			</div>
 
 			{state ? (
-				<div className="cabinet-setting-block-form active">
+				<div className={`cabinet-setting-block-form ${isEdit ? "active" : ""}`}>
 					<div className="cabinet-setting-block-form-input-wrapper">
 						<div
 							className="cabinet-setting-block-form-input"
@@ -128,7 +164,7 @@ const CabinetSettingAddressBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							className="cabinet-setting-block-form-input"
 							style={{ width: "32%" }}
 						>
-							<Field component={RenderInput} name="dom" label="Дом" bgWhite />
+							<Field component={RenderInput} name="house" label="Дом" bgWhite />
 						</div>
 
 						<div
@@ -182,7 +218,7 @@ const CabinetSettingAddressBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							className="cabinet-setting-block-form-input"
 							style={{ width: "100%" }}
 						>
-							<Field component={RenderTextarea} name="comm" label="Комментарий" bgWhite />
+							<Field component={RenderTextarea} name="comment" label="Комментарий" bgWhite />
 						</div>
 					</div>
 				</div>

@@ -22,10 +22,17 @@ import {
 const Sell: React.FC = () => {
 	const dispatch = useDispatch()
 
-	const { isSend, currentStep, currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
+	const { isLoadedParameters, isSend, currentStep, currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
 	React.useEffect(() => {
 		dispatch(fetchCabinetSellParameters() as any)
+
+		return () => {
+			localStorage.removeItem("sell-info-form")
+			localStorage.removeItem("sell-images-form")
+			localStorage.removeItem("sell-contact-form")
+			localStorage.removeItem("sell-product-form")
+		}
 	}, []);
 
 	React.useEffect(() => {
@@ -97,28 +104,32 @@ const Sell: React.FC = () => {
 				<div className="sell-wrapper">
 					<SellSteps />
 
-					{currentStep === CabinetSellStepKeys.COOPERATION ? (
-						<SellCooperation />
-					) : null}
+					{isLoadedParameters ? (
+						<>
+							{currentStep === CabinetSellStepKeys.COOPERATION ? (
+								<SellCooperation />
+							) : null}
 
-					{currentStep === CabinetSellStepKeys.INFO ? (
-						<SellInfo onSubmit={onSubmitInfo} />
-					) : null}
+							{currentStep === CabinetSellStepKeys.INFO ? (
+								<SellInfo onSubmit={onSubmitInfo} />
+							) : null}
 
-					{currentStep === CabinetSellStepKeys.IMAGES ? (
-						<SellImages />
-					) : null}
+							{currentStep === CabinetSellStepKeys.IMAGES ? (
+								<SellImages />
+							) : null}
 
-					{currentStep === CabinetSellStepKeys.PRODUCT ? (
-						<SellProduct onSubmit={onSubmitProduct} />
-					) : null}
+							{currentStep === CabinetSellStepKeys.PRODUCT ? (
+								<SellProduct onSubmit={onSubmitProduct} />
+							) : null}
 
-					{currentStep === CabinetSellStepKeys.CONTACT ? (
-						<SellContact onSubmit={onSubmitContact} />
-					) : null}
+							{currentStep === CabinetSellStepKeys.CONTACT ? (
+								<SellContact onSubmit={onSubmitContact} />
+							) : null}
 
-					{currentStep === CabinetSellStepKeys.DELIVERY ? (
-						<SellDelivery onSubmit={onSubmitDelivery} />
+							{currentStep === CabinetSellStepKeys.DELIVERY ? (
+								<SellDelivery onSubmit={onSubmitDelivery} />
+							) : null}
+						</>
 					) : null}
 
 					<Popup state={isSend} setState={() => window.location.reload()}>

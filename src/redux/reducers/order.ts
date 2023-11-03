@@ -12,7 +12,8 @@ const initialState: OrderState = {
 
 	currentDelivery: {
 		title: "",
-		price: 0
+		price: 0,
+		id: 0
 	},
 
 	globalCountrys: [],

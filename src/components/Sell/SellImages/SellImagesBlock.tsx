@@ -1,4 +1,5 @@
 import React from "react";
+import imageCompression from 'browser-image-compression'
 
 interface SellImagesBlockProps {
 	number: number;
@@ -21,26 +22,39 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
 	disabled,
 	onChangeCustom
 }) => {
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const [isSending, setIsSending] = React.useState<boolean>(false)
+
+	const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files?.length) {
+			setIsSending(true)
 
 			let file = e.target.files[0]
 
-			let reader = new FileReader();
-			reader.readAsDataURL(file);
+			const reader = new FileReader();
 
-			reader.onload = function () {
-				onChangeCustom(reader.result)
-			};
+			const options = {
+				maxSizeMB: 1,
+				maxWidthOrHeight: 1920,
+				useWebWorker: true,
+			}
+			try {
+				const compressedFile = await imageCompression(file, options);
 
-			reader.onerror = function (error) {
-				console.log('Error: ', error);
-			};
+				reader.onload = async () => {
+					await onChangeCustom(reader.result)
+
+					setIsSending(false)
+				};
+
+				reader.readAsDataURL(compressedFile);
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 
 	return (
-		<label className={`sell-block-images-block ${disabled ? "disabled" : ""}`} style={{ width: image ? "100%" : "calc(50% - 7.5px)" }}>
+		<label className={`sell-block-images-block ${disabled ? "disabled" : ""} ${isSending ? "loading" : ""}`} style={{ width: image ? "100%" : "calc(50% - 7.5px)" }}>
 			<input
 				type="file"
 				className="file"
@@ -53,6 +67,8 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
 				style={{ width: image ? "calc(50% - 5px)" : "100%", backgroundImage: `url("${value}")` }}
 			>
 				{value ? <div className="sell-block-images-block-text-plaecholder"></div> : null}
+
+				{isSending ? <span className="sell-block-images-block-text__loader"></span> : null}
 
 				<div className="sell-block-images-block-text-icon">
 					<svg

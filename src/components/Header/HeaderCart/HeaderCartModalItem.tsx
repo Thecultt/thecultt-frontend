@@ -79,7 +79,8 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
                     style={{
                         backgroundImage: `url('${image}')`,
                     }}
-                ></div>
+				></div>
+				
                 <div className="header-block-cart-modal-item-content-text">
                     <p className="header-block-cart-modal-item-content-text__brand">
                         {manufacturer}

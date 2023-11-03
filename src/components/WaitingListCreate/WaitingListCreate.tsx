@@ -41,10 +41,11 @@ const WaitingListCreate: React.FC = () => {
 
 	const onSubmit = (data: any) => {
 		dispatch(sendNewWaitingListItem({
-			subcategory: data.type,
 			category: data.category,
-			model_name: data.brand,
-			comment: ""
+			subcategory: data.type,
+			brand: data.brand,
+			model_name: data.model,
+			size: data.size
 		}) as any)
 	};
 

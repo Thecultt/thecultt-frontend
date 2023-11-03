@@ -5,7 +5,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import { CabinetSellTypes, CabinetSellStepKeys } from "../../../redux/types/ICabinetSell";
 
-import { setCabinetSellCurrentStep } from "../../../redux/actions/cabinet_sell";
+import { setCabinetSellCurrentStep, sendCreateCabinetSellImage } from "../../../redux/actions/cabinet_sell";
 
 import SellImagesImageBag1 from "../../../assets/images/sell/sell-images-image-bag-1.jpg";
 import SellImagesImageBag2 from "../../../assets/images/sell/sell-images-image-bag-2.jpg";
@@ -118,27 +118,27 @@ const SellImages: React.FC = () => {
 	}[] = [
 			{
 				image: SellImagesImageAccess1,
-				imageTitle: "Передняя часть",
-				imageDescription: "Сфотографируйте пару сверху при дневном свете"
+				imageTitle: "Лицевая сторона",
+				imageDescription: "Сфотографируйте аксессуар сверху при дневном свете"
 			},
 
 			{
 				image: SellImagesImageAccess2,
-				imageTitle: "Нюансы",
-				imageDescription: "Сфотографируйте внутреннее пространство сумки"
+				imageTitle: "Вблизи",
+				imageDescription: "Сфотографируйте аксессуар вблизи, подчеркивая бренд или нюансы"
 			},
 
 			{
 				image: SellImagesImageAccess3,
-				imageTitle: "Подошва",
-				imageDescription: "Сфотографируйте подошвы обеих частей сверху"
+				imageTitle: "Размер",
+				imageDescription: "Сфотографируйте аксессуар на себе, чтобы был понятен размер"
 			},
 
 			{
 				image: SellImagesImageAccess4,
 				imageTitle: "Комплект",
 				imageDescription:
-					"Сфотографируйте пару рядом с полным комплектом (коробка, пыльник)"
+					"Сфотографируйте аксесуар на фоне полного комплекта (коробка/чехол)"
 			},
 			{
 				isMore: true
@@ -148,14 +148,16 @@ const SellImages: React.FC = () => {
 			}
 		]
 
-	const onChangeCustom = (result: any, index: number) => {
-		setImageBlocksValue({ ...imageBlocksValue, [index]: result })
+	const onChangeCustom = async (result: any, index: number) => {
+		const image = await sendCreateCabinetSellImage(result)
+
+		setImageBlocksValue({ ...imageBlocksValue, [index]: image })
 	};
 
 	const isValid = () => {
 		if (category === "Женские сумки" || category === "Мужские сумки") return Object.keys(imageBlocksValue).length >= imageBlocksBag.filter((image) => !image.isMore).length
 		if (category === "Обувь") return Object.keys(imageBlocksValue).length >= imageBlocksShoes.filter((image) => !image.isMore).length
-		if (category === "Брендовая бижутерия" || category === "Часы" || category === "Ремни" || category === "Очки" || category === "Платки" || category === "Другой аксессуар") return Object.keys(imageBlocksValue).length >= imageBlocksAccess.filter((image) => !image.isMore).length
+		if (category === "Бижутерия" || category === "Часы" || category === "Ремни" || category === "Очки" || category === "Платки" || category === "Головные уборы" || category === "Другой аксессуар") return Object.keys(imageBlocksValue).length >= imageBlocksAccess.filter((image) => !image.isMore).length
 	}
 
 	const onSubmit = () => {
@@ -185,7 +187,7 @@ const SellImages: React.FC = () => {
 					/>
 				)) : null}
 
-				{category === "Брендовая бижутерия" || category === "Часы" || category === "Ремни" || category === "Очки" || category === "Платки" || category === "Другой аксессуар" ? imageBlocksShoes.map((block, index) => (
+				{category === "Бижутерия" || category === "Часы" || category === "Ремни" || category === "Очки" || category === "Платки" || category === "Головные уборы" || category === "Другой аксессуар" ? imageBlocksAccess.map((block, index) => (
 					<SellImagesBlock
 						{...block}
 						number={index + 1}

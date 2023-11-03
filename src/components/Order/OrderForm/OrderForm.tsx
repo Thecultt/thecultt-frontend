@@ -53,7 +53,7 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				flatValue: flat,
 			};
 		});
-	
+
 	React.useEffect(() => {
 		if (emailValue && nameValue && phoneValue) {
 			setIndexForm(1)
@@ -82,7 +82,7 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 	React.useEffect(() => {
 		if (isLoaded) {
-			initialize({...user})
+			initialize({ ...user })
 		}
 	}, [isLoaded])
 
@@ -94,9 +94,9 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 			{indexForm >= 2 ? <OrderFormDelivery /> : null}
 
-			{indexForm >= 3 ? <OrderFormAddress /> : null}
+			{indexForm >= 3 && deliveryValue !== "Самовывоз" ? <OrderFormAddress /> : null}
 
-			{indexForm >= 4 ? <OrderFormPayments /> : null}
+			{indexForm >= 4 || (deliveryValue === "Самовывоз" && deliveryValue !== "Примерка") ? <OrderFormPayments /> : null}
 		</form>
 	);
 };

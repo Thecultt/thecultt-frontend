@@ -94,6 +94,30 @@
 		&__btn
 			width: 75%
 
+	&-delete
+		text-align: center
+
+		width: 420px
+
+		&__title
+			font-size: 22px
+			margin-bottom: 10px
+
+			+ManropeMedium
+
+		&__description
+			margin: 0 auto 25px auto
+
+			font-size: 14px
+
+		&-btn
+			display: flex
+			align-items: center
+			justify-content: space-between
+
+			&__btn
+				width: calc( 50% - 12.5px )
+
 	&-items-wrapper
 		margin-top: 15px
 
@@ -115,6 +139,7 @@
 		padding: 18px
 
 		+borderRadius
+		+open
 
 		&__remove
 			position: absolute
@@ -153,6 +178,11 @@
 
 				+ManropeMedium
 
+				&.disabled
+					pointer-events: none
+					color: $gray
+					text-decoration: none
+
 		&-info
 			margin-top: 15px
 
@@ -175,3 +205,33 @@
 					margin-left: 50px
 
 					+ManropeMedium
+
+/* MEDIA */
+@media screen and (max-width: 900px)
+	.cabinet-waiting-list
+		&__add
+			width: 100%
+			
+		&-item
+			&-title
+				flex-direction: column
+				align-items: flex-start
+
+				&__title
+					font-size: 18px
+				
+				&__subtitle
+					margin-top: 10px
+					margin-left: 0
+					font-size: 14px
+
+			&-info
+				&-item
+					flex-direction: column
+					align-items: flex-start
+
+					&__title
+						display: none
+
+					&__value
+						margin-left: 0

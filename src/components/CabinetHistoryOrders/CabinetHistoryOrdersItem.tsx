@@ -43,6 +43,10 @@ const CabinetHistoryOrdersItem: React.FC<Order> = ({
 						<p className="cabinet-history-orders-item-topinfo-block__sum">
 							{cost} ₽
 						</p>
+
+						<p className="cabinet-history-orders-item-topinfo-block__status__media success">
+							{status}
+						</p>
 					</div>
 					<div className="cabinet-history-orders-item-topinfo-block">
 						<p className="cabinet-history-orders-item-topinfo-block__status success">
@@ -135,37 +139,6 @@ const CabinetHistoryOrdersItem: React.FC<Order> = ({
 								<p className="cabinet-history-orders-item-info-block__subtitle">
 									<span>Тип оплаты:</span> {payment_type}
 								</p>
-
-								{/* <p className="cabinet-history-orders-item-info-block__subtitle">
-									<span>Статус оплаты:</span>{" "}
-									<p className="payment">
-										Оплачено{" "}
-										<svg
-											width="16"
-											height="15"
-											viewBox="0 0 16 15"
-											fill="none"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<g id="Group">
-												<path
-													id="Vector"
-													d="M7.50781 14.5C11.3738 14.5 14.5078 11.366 14.5078 7.5C14.5078 3.63401 11.3738 0.5 7.50781 0.5C3.64182 0.5 0.507812 3.63401 0.507812 7.5C0.507812 11.366 3.64182 14.5 7.50781 14.5Z"
-													stroke="#285141"
-													strokeLinecap="round"
-													strokeLinejoin="round"
-												/>
-												<path
-													id="Vector_2"
-													d="M4.39844 7.50477L6.73177 9.83811L10.6207 5.94922"
-													stroke="#285141"
-													strokeLinecap="round"
-													strokeLinejoin="round"
-												/>
-											</g>
-										</svg>
-									</p>
-								</p> */}
 							</div>
 						</div>
 

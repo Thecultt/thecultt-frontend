@@ -7,20 +7,44 @@ const initialState: ProductsState = {
 	itemByArticle: {
 		id: 0,
 		article: "",
-		name: "",
 		price: 0,
 		store_price: 0,
 		condition: "",
 		manufacturer: "",
+		model_name: "",
 		availability: 0,
 		category: "",
 		images: [],
 		description: "",
 		gender: "",
 		color: "",
-		height: "",
+
+		nuances: "",
+
+		external_material: "",
+		lining_material: "",
+		kit: "",
+		model_height: "",
 		length: "",
-		width: ""
+		width: "",
+		height: "",
+		handle_length: "",
+		strap_length: "",
+		leather_type: "",
+		bag_year: "",
+		brand_size: "",
+		hardware: "",
+		insole_length: "",
+		heel_height: "",
+		shoe_sizes: "",
+		style: "",
+		lens_type: "",
+		frame_type: "",
+		glasses_sizes: "",
+		diameter: "",
+		scarf_composition: "",
+		ring_size: "",
+		jewelry_material: "",
 	},
 	itemByArticleIsLoaded: false,
 
@@ -49,6 +73,7 @@ const initialState: ProductsState = {
 		colors: {},
 		sex: {},
 		availability: {},
+		size: {},
 
 		sort: ""
 	}
@@ -336,6 +361,28 @@ const products = (state = initialState, action: ProductTypes) => {
 			},
 		};
 	}
+
+	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SIZE) {
+		if (state.filters.size[action.payload]) {
+			delete state.filters.size[action.payload];
+
+			return {
+				...state,
+			};
+		}
+
+		return {
+			...state,
+			filters: {
+				...state.filters,
+				size: {
+					...state.filters.size,
+					[action.payload]: action.payload,
+				},
+			},
+		};
+	}
+
 
 	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT) {
 		return {

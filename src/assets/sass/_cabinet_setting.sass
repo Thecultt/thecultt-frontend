@@ -44,7 +44,7 @@
 				&.disabled
 					opacity: 0.5
 					pointer-events: none
-				
+
 			&-btn
 				+open
 
@@ -161,3 +161,22 @@
 
 		cursor: pointer
 		font-size: 16px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.cabinet-setting
+		&-block
+			width: 100%
+
+@media screen and (max-width: 500px)
+	.cabinet-setting
+		&-block
+			padding: 15px
+			
+			&-form
+				&-input
+					width: 100% !important
+
+		&__logout
+			margin-top: 10px
+			width: 100%

@@ -1,5 +1,5 @@
 export interface ProductsFiltersCategory {
-	subsubcategory: string[]
-	manufacturer: string[]
-	model_name: string[]
+	// subsubcategories: {Подкатегория: Бренд: Модели[]}
+	subsubcategories: { [key: string]: { [key: string]: string[] } }
+	size?: string[]
 }

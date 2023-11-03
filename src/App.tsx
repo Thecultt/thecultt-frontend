@@ -9,7 +9,7 @@ import "moment/locale/ru";
 
 import { useTypedSelector } from "./hooks/useTypedSelector";
 
-import { MenuMedia, Header, Reglog, Footer, OrderStatus, WaitingListCreate } from "./components";
+import { MenuMedia, Header, Reglog, Footer, OrderStatus, WaitingListCreate, WaitingListDelete } from "./components";
 
 import {
 	Home,
@@ -35,6 +35,7 @@ import {
 	Concierge,
 	Exchange,
 	CabinetSellsList,
+	Cart,
 } from "./pages/";
 
 import { fetchProductsFilters } from "./redux/actions/products_filters";
@@ -92,13 +93,14 @@ const App = () => {
 
 	return (
 		<div className="wrapper" id="wrapper">
-			{pathname.indexOf("/cabinet/sell") !== -1 ? null : <MenuMedia />}
+			{/* {pathname.indexOf("/cabinet/sell") !== -1 ? null : <MenuMedia />} */}
 
 			<Header />
 
 			<Reglog />
 
 			<WaitingListCreate />
+			<WaitingListDelete />
 
 			<React.Suspense fallback={<></>}>
 				<Routes>
@@ -171,6 +173,8 @@ const App = () => {
 					<Route path="/concierge" element={<Concierge />} />
 
 					<Route path="/exchange" element={<Exchange />} />
+
+					<Route path="/cart" element={<Cart />} />
 
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>

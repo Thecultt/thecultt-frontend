@@ -6,7 +6,9 @@ import {
 	ProductInfoTitle,
 	ProductInfoExchange,
 	ProductInfoState,
+	ProductInfoDescription,
 	ProductInfoParameters,
+	// ProductInfoParametersSize,
 	ProductInfoAuth,
 	ProductInfoTabs,
 } from "../../";
@@ -20,9 +22,13 @@ const ProductInfo: React.FC<ProductInfoProps> = (product) => {
 
 			<ProductInfoExchange />
 
-			<ProductInfoState />
+			<ProductInfoState {...product} />
+
+			<ProductInfoDescription  {...product} />
 
 			<ProductInfoParameters {...product} />
+
+			{/* <ProductInfoParametersSize {...product} /> */}
 
 			<ProductInfoAuth />
 

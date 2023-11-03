@@ -5,12 +5,15 @@
 	position: absolute
 	background-color: $lightBackgroundColor
 
-	width: 100%
+	width: 95%
+	max-width: 1280px
 
 	margin-top: 10px
 
-	left: 0
+	left: 50%
 	top: calc( 100% - 5px )
+
+	transform: translateX(-50%)
 
 	will-change: top
 
@@ -20,6 +23,8 @@
 
 	display: flex
 	justify-content: space-between
+
+	z-index: 20
 
 	opacity: 0
 	visibility: hidden
@@ -34,6 +39,14 @@
 
 		visibility: visible
 		pointer-events: auto
+
+	&-media-input
+		display: none
+
+		width: 100%
+		border: 1px solid $black
+
+		margin-bottom: 15px
 
 	&-history
 		width: 270px
@@ -124,4 +137,31 @@
 			+open
 
 			&:nth-child(4n+4)
+				margin-right: 0
+
+@media screen and ( max-width: 1200px )
+	.header-search-box
+		width: 100%
+
+		padding: 15px
+
+		flex-direction: column
+
+		&-media-input
+			display: flex
+
+		&-history
+			display: none
+
+		&-products
+			width: 100%
+
+			&-blocks-wrapper
+				flex-wrap: wrap
+				justify-content: space-between
+
+			&-block
+				width: calc(50% - 5px)
+				margin-bottom: 5px
+
 				margin-right: 0

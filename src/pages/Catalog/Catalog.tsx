@@ -24,6 +24,8 @@ const Catalog: React.FC = () => {
 		({ products_filters }) => products_filters.isLoaded
 	);
 
+	const [isOpenFiltersMedia, setIsOpenFiltersMedia] = React.useState<boolean>(false)
+
 	React.useEffect(() => {
 		if (filters.isParse) {
 			dispatch(
@@ -50,6 +52,7 @@ const Catalog: React.FC = () => {
 		Object.keys(filters.colors).length,
 		Object.keys(filters.sex).length,
 		Object.keys(filters.availability).length,
+		Object.keys(filters.size).length,
 		filters.sort,
 		currentPage,
 		typeFetch
@@ -62,10 +65,11 @@ const Catalog: React.FC = () => {
 					<div className="container">
 						<div className="catalog-wrapper">
 							<CatalogBanner />
-							<CatalogFiltersTop />
+
+							<CatalogFiltersTop setIsOpenFiltersMedia={setIsOpenFiltersMedia} isOpenFiltersMedia={isOpenFiltersMedia} />
 
 							<div className="catalog-blocks-and-filters-wrapper">
-								<CatalogFilters />
+								<CatalogFilters setIsOpenFiltersMedia={setIsOpenFiltersMedia} isOpenFiltersMedia={isOpenFiltersMedia} />
 
 								<CatalogProducts />
 							</div>

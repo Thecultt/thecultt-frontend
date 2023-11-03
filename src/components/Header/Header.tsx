@@ -6,7 +6,7 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 import { ProductsFiltersCategory } from "../../models/IProductFilters";
 
-import { HeaderCart, HeaderUser, HeaderHoverMenu, HeaderSearchBox, HeaderMedia } from "../";
+import { HeaderTopMessage, HeaderCart, HeaderUser, HeaderHoverMenu, HeaderSearchBox, HeaderMedia } from "../";
 
 import { setHeaderSearchValue, fetchHeaderSearchItems } from "../../redux/actions/header";
 
@@ -20,9 +20,7 @@ const Header: React.FC = () => {
 	const dispatch = useDispatch()
 
 	const [currentInfoMenu, setCurrentInfoMenu] = React.useState<HeaderHoverMenuCategory>({
-		subsubcategory: [],
-		manufacturer: [],
-		model_name: [],
+		subsubcategories: {},
 		title: ""
 	})
 	const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState<boolean>(false)
@@ -52,70 +50,73 @@ const Header: React.FC = () => {
 
 	return (
 		<>
-			<header className="header">
-				<div className="container">
-					<div className="header-wrapper">
-						<div className="header-wrapper-block">
-							<div className="header-block">
-								<Link to="/" className="header-block-logo">
-									<img
-										src={Logo}
-										alt="THECULTT"
-										className="header-block-logo__image"
-									/>
-								</Link>
+			{localStorage.getItem("header-message-visit-22.10.2023-isClose") ? null : <HeaderTopMessage />}
 
-								<div className="input-light" onClick={() => setIsOpenSearch(true)}>
-									<svg
-										width="20"
-										height="21"
-										viewBox="0 0 20 21"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
-									>
-										<path
-											d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
-											stroke="#838383"
-											strokeWidth="1.5"
-											strokeLinecap="round"
-											strokeLinejoin="round"
+			<div className="header-container">
+				<header className="header">
+					<div className="container">
+						<div className="header-wrapper">
+							<div className="header-wrapper-block">
+								<div className="header-block">
+									<Link to="/" className="header-block-logo">
+										<img
+											src={Logo}
+											alt="THECULTT"
+											className="header-block-logo__image"
 										/>
-										<path
-											d="M17.5 17.9844L13.875 14.3594"
-											stroke="#838383"
-											strokeWidth="1.5"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										/>
-									</svg>
+									</Link>
 
-									<input
-										type="text"
-										className="input-light__field"
-										placeholder="Поиск"
-										onChange={onChangeSearchInput}
-										value={search.value}
-									/>
-								</div>
-							</div>
-							
-							<div className="header-block">
-								<div className="header-block-btn">
-									<Link
-										to="/cabinet/sell"
-										className="header-block-btn__btn"
-									>
-										Продать
-									</Link>
-									<Link
-										to="/exchange"
-										className="header-block-btn__btn regular"
-									>
-										Обменять
-									</Link>
+									<div className="input-light" onClick={() => setIsOpenSearch(true)}>
+										<svg
+											width="20"
+											height="21"
+											viewBox="0 0 20 21"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
+												stroke="#838383"
+												strokeWidth="1.5"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											/>
+											<path
+												d="M17.5 17.9844L13.875 14.3594"
+												stroke="#838383"
+												strokeWidth="1.5"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											/>
+										</svg>
+
+										<input
+											type="text"
+											className="input-light__field"
+											placeholder="Поиск"
+											onChange={onChangeSearchInput}
+											value={search.value}
+										/>
+									</div>
 								</div>
 
-								{/* <button className="header-block__language">
+								<div className="header-block">
+									<div className="header-block-btn">
+										<Link
+											to="/cabinet/sell"
+											className="header-block-btn__btn"
+										>
+											Продать
+										</Link>
+										<Link
+											to="/exchange"
+											className="header-block-btn__btn regular"
+										>
+											Обменять
+										</Link>
+									</div>
+
+									{/* <button className="header-block__language">
 									<svg
 										width="22"
 										height="22"
@@ -140,55 +141,56 @@ const Header: React.FC = () => {
 									</svg>
 								</button> */}
 
-								<HeaderUser />
+									<HeaderUser />
 
-								<HeaderCart />
+									<HeaderCart />
+								</div>
 							</div>
-						</div>
 
-						<nav className="header-menu">
-							<Link to="/catalog" className="header-menu__link">
-								Новинки
-							</Link>
-
-							{Object.keys(categories).map((key, index) => (
-								<Link
-									to={`/catalog?categories=${key}`}
-									className="header-menu__link"
-									key={`header-menu__link-${index}`}
-									onMouseOver={() => openHoverMenu(categories[key], key)}
-									onMouseOut={() => closeHoverMenu()}
-								>
-
-									{key}
+							<nav className="header-menu">
+								<Link to="/catalog" className="header-menu__link">
+									Новинки
 								</Link>
-							))}
 
-							<Link to="/brands" className="header-menu__link">
-								Бренды
-							</Link>
+								{Object.keys(categories).map((key, index) => (
+									<Link
+										to={`/catalog?categories=${key}`}
+										className="header-menu__link"
+										key={`header-menu__link-${index}`}
+										onMouseOver={() => openHoverMenu(categories[key], key)}
+										onMouseOut={() => closeHoverMenu()}
+									>
 
-							<Link to="/auth" className="header-menu__link">
-								Подлинность
-							</Link>
-						</nav>
+										{key}
+									</Link>
+								))}
 
-						<HeaderHoverMenu
-							{...currentInfoMenu}
-							isOpenHoverMenu={isOpenHoverMenu}
-							onOpen={() => setIsOpenHoverMenu(true)}
-							onClose={() => setIsOpenHoverMenu(false)}
-						/>
+								<Link to="/brands" className="header-menu__link">
+									Бренды
+								</Link>
 
-						<HeaderSearchBox
-							state={isOpenSearch}
-							onClose={() => setIsOpenSearch(false)}
-						/>
+								<Link to="/auth" className="header-menu__link">
+									Подлинность
+								</Link>
+							</nav>
+
+							<HeaderHoverMenu
+								{...currentInfoMenu}
+								isOpenHoverMenu={isOpenHoverMenu}
+								onOpen={() => setIsOpenHoverMenu(true)}
+								onClose={() => setIsOpenHoverMenu(false)}
+							/>
+						</div>
 					</div>
-				</div>
-			</header>
+				</header>
 
-			<HeaderMedia />
+				<HeaderSearchBox
+					state={isOpenSearch}
+					onClose={() => setIsOpenSearch(false)}
+				/>
+
+				<HeaderMedia setIsOpenSearch={setIsOpenSearch} />
+			</div>
 		</>
 	);
 };
