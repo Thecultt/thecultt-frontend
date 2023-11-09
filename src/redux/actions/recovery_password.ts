@@ -44,6 +44,7 @@ export const sendRecoveryPasswordConfirmed = (password: string, code: string) =>
 			localStorage.setItem("accessToken", data.access)
 
 			window.location.hash = ""
+			window.location.reload()
 
 			dispatch({
 				type: RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND,

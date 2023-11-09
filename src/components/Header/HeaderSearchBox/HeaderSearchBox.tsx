@@ -79,58 +79,59 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 	}, [pathname]);
 
 	return (
-		<div className={`header-search-box ${state ? "active" : ""}`} ref={PopupRef}>
-			<div className="input-light header-search-box-media-input">
-				<svg
-					width="20"
-					height="21"
-					viewBox="0 0 20 21"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<path
-						d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
-						stroke="#838383"
-						strokeWidth="1.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
+		<div className={`header-search-box-wrapper ${state ? "active" : ""}`}>
+			<div className={`header-search-box ${state ? "active" : ""}`} ref={PopupRef}>
+				<div className="input-light header-search-box-media-input">
+					<svg
+						width="20"
+						height="21"
+						viewBox="0 0 20 21"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
+							stroke="#838383"
+							strokeWidth="1.5"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+						<path
+							d="M17.5 17.9844L13.875 14.3594"
+							stroke="#838383"
+							strokeWidth="1.5"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</svg>
+
+					<input
+						type="text"
+						className="input-light__field"
+						placeholder="Поиск"
+						onChange={onChangeSearchInput}
+						value={search.value}
 					/>
-					<path
-						d="M17.5 17.9844L13.875 14.3594"
-						stroke="#838383"
-						strokeWidth="1.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
-				</svg>
-
-				<input
-					type="text"
-					className="input-light__field"
-					placeholder="Поиск"
-					onChange={onChangeSearchInput}
-					value={search.value}
-				/>
-			</div>
-
-			<div className="header-search-box-history">
-				<div className="header-search-box-history-often">
-					<p className="header-search-box-history-often__title">
-						Часто ищут
-					</p>
-
-					<div className="header-search-box-history-often-items-wrapper">
-						<p className="header-search-box-history-often__item">
-							Сумка Gucci
-						</p>
-
-						<p className="header-search-box-history-often__item">
-							Часы Cartier
-						</p>
-					</div>
 				</div>
 
-				{/* 
+				<div className="header-search-box-history">
+					<div className="header-search-box-history-often">
+						<p className="header-search-box-history-often__title">
+							Часто ищут
+						</p>
+
+						<div className="header-search-box-history-often-items-wrapper">
+							<p className="header-search-box-history-often__item">
+								Сумка Gucci
+							</p>
+
+							<p className="header-search-box-history-often__item">
+								Часы Cartier
+							</p>
+						</div>
+					</div>
+
+					{/* 
 				<div className="header-search-box-history-search">
 					<p className="header-search-box-history-search__title">
 						История поиска
@@ -162,62 +163,63 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 						</p>
 					</div>
 				</div> */}
-			</div>
-
-			<div className={`header-search-box-products ${search.isFetch ? "fetch" : ""}`}>
-				<h3 className="header-search-box-products__title">
-					{search.value !== "" ? `${checkDeclension(search.totalCount, ["Найден", "Найдено", "Найдено"]).text}: ${checkDeclension(search.totalCount, ["товар", "товара", "товаров"]).title}` : "Новинки"} <Link to={`/catalog?search=${search.value}`} onClick={onClose}>Смотреть все</Link>
-				</h3>
-
-				<div className="header-search-box-products-blocks-wrapper">
-					{search.value !== "" ? search.items.map((item, index) => (
-						<div className="header-search-box-products-block" key={`header-search-box-products-block-${index}`}>
-							<ProductBlock
-								addCart={() =>
-									addCart({
-										id: item.id,
-										checked: true,
-										article: item.article,
-										manufacturer: item.manufacturer,
-										name: item.model_name,
-										image: item.images[0],
-										price: item.price,
-									})
-								}
-								isCart={cartItems[item.article] ? true : false}
-								addFavorite={() => addFavorite(item.id)}
-								removeFavorite={() => removeFavorite(item.id)}
-								isFavorite={favoritesItems[item.id] ? true : false}
-								{...item}
-							/>
-						</div>
-					)) : newItems.map((item, index) => (
-						<div className="header-search-box-products-block" key={`header-search-box-products-block-${index}`}>
-							<ProductBlock
-								addCart={() =>
-									addCart({
-										id: item.id,
-										checked: true,
-										article: item.article,
-										manufacturer: item.manufacturer,
-										name: item.model_name,
-										image: item.images[0],
-										price: item.price,
-									})
-								}
-								isCart={cartItems[item.article] ? true : false}
-								addFavorite={() => addFavorite(item.id)}
-								removeFavorite={() => removeFavorite(item.id)}
-								isFavorite={favoritesItems[item.id] ? true : false}
-								{...item}
-							/>
-						</div>
-					)).splice(0, 4)}
 				</div>
 
-				{/* <Link to="/catalog" className='btn-regular header-search-box-products__more' onClick={onClose}>Больше</Link> */}
+				<div className={`header-search-box-products ${search.isFetch ? "fetch" : ""}`}>
+					<h3 className="header-search-box-products__title">
+						{search.value !== "" ? `${checkDeclension(search.totalCount, ["Найден", "Найдено", "Найдено"]).text}: ${checkDeclension(search.totalCount, ["товар", "товара", "товаров"]).title}` : "Новинки"} <Link to={`/catalog?search=${search.value}`} onClick={onClose}>Смотреть все</Link>
+					</h3>
+
+					<div className="header-search-box-products-blocks-wrapper">
+						{search.value !== "" ? search.items.map((item, index) => (
+							<div className="header-search-box-products-block" key={`header-search-box-products-block-${index}`}>
+								<ProductBlock
+									addCart={() =>
+										addCart({
+											id: item.id,
+											checked: true,
+											article: item.article,
+											manufacturer: item.manufacturer,
+											name: item.model_name,
+											image: item.images[0],
+											price: item.price,
+										})
+									}
+									isCart={cartItems[item.article] ? true : false}
+									addFavorite={() => addFavorite(item.id)}
+									removeFavorite={() => removeFavorite(item.id)}
+									isFavorite={favoritesItems[item.id] ? true : false}
+									{...item}
+								/>
+							</div>
+						)) : newItems.map((item, index) => (
+							<div className="header-search-box-products-block" key={`header-search-box-products-block-${index}`}>
+								<ProductBlock
+									addCart={() =>
+										addCart({
+											id: item.id,
+											checked: true,
+											article: item.article,
+											manufacturer: item.manufacturer,
+											name: item.model_name,
+											image: item.images[0],
+											price: item.price,
+										})
+									}
+									isCart={cartItems[item.article] ? true : false}
+									addFavorite={() => addFavorite(item.id)}
+									removeFavorite={() => removeFavorite(item.id)}
+									isFavorite={favoritesItems[item.id] ? true : false}
+									{...item}
+								/>
+							</div>
+						)).splice(0, 4)}
+					</div>
+
+					{/* <Link to="/catalog" className='btn-regular header-search-box-products__more' onClick={onClose}>Больше</Link> */}
+				</div>
 			</div>
-		</div >
+		</div>
 	)
 }
 

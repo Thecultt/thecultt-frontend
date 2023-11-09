@@ -80,7 +80,7 @@ const CabinetSettingContactBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							label="Ваш номер телефона"
 							bgWhite
 							{...createTextMask({
-								pattern: "+7 999 999 99-99",
+								pattern: "+9 999 999 99-99",
 								guide: false,
 								stripMask: false,
 							})}

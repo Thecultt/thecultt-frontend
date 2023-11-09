@@ -18,6 +18,7 @@ const initialState: ProductsState = {
 		description: "",
 		gender: "",
 		color: "",
+		subcategory: "",
 
 		nuances: "",
 

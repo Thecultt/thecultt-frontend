@@ -23,7 +23,7 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
 	return (
 		<>
 			{isActive ?
-				<div className={`order-products-promocode ${disabled ? "disabled" : ""}`}>
+				<div className={`order-products-promocode ${isActive && disabled ? "error_disabled" : disabled ? "disabled" : ""}`}>
 					<div className="order-products-promocode-input">
 						<input
 							type="text"
@@ -32,11 +32,19 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
 							className={`order-products-promocode-input__field active`}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentPromocode(e.target.value.replace(" ", ""))}
 						/>
+
+						{isActive && disabled ?
+							<p className="order-products-promocode-input__error">
+								Промокод не действителен  для выбранного типа оплаты
+							</p>
+							: null}
 					</div>
 
-					<button className={`order-products-promocode__btn edit`} onClick={sendApplyPromocode}>
-						Изменить
-					</button>
+					{isActive && disabled ? null :
+						<button className={`order-products-promocode__btn edit`} onClick={sendApplyPromocode}>
+							Изменить
+						</button>
+					}
 				</div>
 				:
 				<div className={`order-products-promocode ${disabled ? "disabled" : ""} ${isError ? "error" : ""}`}>

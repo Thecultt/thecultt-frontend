@@ -19,6 +19,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 	model_name,
 	price,
 	availability,
+	subcategory,
+	ring_size,
 	images
 }) => {
 	const dispatch = useDispatch()
@@ -47,6 +49,14 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 
 	const removeFavorite = () => {
 		dispatch(sendRemoveFavorite(id) as any)
+	}
+
+	const subscribeGood = () => {
+		localStorage.setItem("waiting_init", JSON.stringify({
+			category, brand: manufacturer, model: model_name, type: subcategory, size: ring_size
+		}))
+
+		window.location.hash = "create_waiting"
 	}
 
 	return (
@@ -145,9 +155,9 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 				</div>
 				:
 				<div className="product-content-info-title-btn">
-					<Link to="#create_waiting" className="btn product-content-info-title-btn__btn subscribe">
+					<button className="btn product-content-info-title-btn__btn subscribe" onClick={subscribeGood}>
 						Подписаться на модель
-					</Link>
+					</button>
 
 					{isFavoriteLocal ? (
 						<button

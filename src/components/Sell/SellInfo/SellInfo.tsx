@@ -94,6 +94,18 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 		setCurrentBrand(value)
 		setBrands(newBrands)
+
+		const newModels: { title: string, value: string }[] = []
+
+		parameters[currentCategory].brands.map((brand) => {
+			if (brand.name === value) {
+				brand.models.map(model => {
+					newModels.push({ title: model.name, value: model.name })
+				})
+			}
+		})
+
+		setModels(newModels)
 	}
 
 	const onChangeInputModel = (value: string) => {

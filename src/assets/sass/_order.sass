@@ -131,6 +131,12 @@
 			&-remove
 				cursor: pointer
 
+				+transition
+
+				&.disabled
+					opacity: 0.5
+					pointer-events: none
+
 				&:hover > svg
 					stroke: $red
 
@@ -151,6 +157,19 @@
 			&.disabled
 				pointer-events: none
 				opacity: 0.5
+
+			&.error_disabled
+				margin-bottom: 55px
+
+			&.error_disabled &-input__field
+				border: .3px solid $red !important
+				color: $red
+
+			&.error_disabled &-input__error
+				bottom: -45px
+
+			&.error
+				margin-bottom: 35px
 
 			&.error
 				margin-bottom: 35px

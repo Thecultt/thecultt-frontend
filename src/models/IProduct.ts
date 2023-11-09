@@ -9,6 +9,9 @@ export interface Product {
 	availability: number,
 	images: string[]
 	num_of_favorites: number
+	category: string
+	subcategory: string
+	ring_size: string
 }
 
 export interface ProductPage {
@@ -25,6 +28,7 @@ export interface ProductPage {
 	description: string
 	gender: string
 	color: string
+	subcategory: string
 
 	nuances: string
 

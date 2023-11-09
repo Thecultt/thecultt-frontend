@@ -61,7 +61,7 @@ const CatalogProducts: React.FC = () => {
 								price: item.price,
 							})
 						}
-						isCart={cartItems[item.article] ? true : false}
+						isCart={cartItems[item.id] ? true : false}
 						addFavorite={() => addFavorite(item.id)}
 						removeFavorite={() => removeFavorite(item.id)}
 						isFavorite={favoritesItems[item.id] ? true : false}

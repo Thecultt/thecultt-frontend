@@ -125,13 +125,28 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 				})
 			);
 		};
-	}, [query]);
+	}, [
+		query
+	]);
 
 	React.useEffect(() => {
 		if (filters.isParse) {
 			dispatch(setProductsTypeFetch("btn-page"))
 
+			let oldParamsData: any = {};
+
+			const oldParams: any = new URLSearchParams(window.location.search);
+
+			for (var value of oldParams.keys()) {
+				if (value === "search" || value === "minPrice" || value === "maxPrice" || value === "sort") {
+					oldParamsData[value] = oldParams.get(value);
+				} else {
+					oldParamsData[value] = oldParams.getAll(value);
+				}
+			}
+
 			const params: { [key: string]: any } = {
+				...oldParamsData,
 				categories: Object.keys(filters.categories),
 				types: Object.keys(filters.types),
 				brands: Object.keys(filters.brands),
@@ -159,6 +174,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 			navigate({
 				pathname: "/catalog",
 				search: `?${createSearchParams(params)}`,
+				hash: `${window.location.hash}`
 			});
 		}
 	}, [

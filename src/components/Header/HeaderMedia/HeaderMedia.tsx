@@ -58,39 +58,41 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 		<header className="header-media" ref={ModalRef}>
 			<div className="container">
 				<div className="header-media-wrapper">
-					<div className="header-media-icon" onClick={toggleState}>
-						<svg
-							width="24"
-							height="18"
-							viewBox="0 0 24 18"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M23 1H1"
-								stroke="#202020"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-							<path
-								d="M23 9H1"
-								stroke="#202020"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-							<path
-								d="M23 17H1"
-								stroke="#202020"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
-					</div>
+					<div className="header-media-icon-group">
+						<div className="header-media-icon" onClick={toggleState}>
+							<svg
+								width="24"
+								height="18"
+								viewBox="0 0 24 18"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M23 1H1"
+									stroke="#202020"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								/>
+								<path
+									d="M23 9H1"
+									stroke="#202020"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								/>
+								<path
+									d="M23 17H1"
+									stroke="#202020"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								/>
+							</svg>
+						</div>
 
-					<div className="header-media-icon" onClick={() => setIsOpenSearch(true)}>
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
+						<div className="header-media-icon" onClick={() => setIsOpenSearch(true)}>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+							</svg>
+						</div>
 					</div>
 
 					<Link to="/" className="header-media-logo">
@@ -101,23 +103,25 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 						/>
 					</Link>
 
-					<Link to="/cabinet/setting" className="header-media-icon">
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
-					</Link>
+					<div className="header-media-icon-group">
+						<Link to="/cabinet/setting" className="header-media-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+							</svg>
+						</Link>
 
-					<Link to="/cart" className="header-media-icon">
-						{Object.keys(items).length ? (
-							<span className="header-media-icon__count">
-								{Object.keys(items).length}
-							</span>
-						) : null}
+						<Link to="/cart" className="header-media-icon">
+							{Object.keys(items).length ? (
+								<span className="header-media-icon__count">
+									{Object.keys(items).length}
+								</span>
+							) : null}
 
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M3 6L6 2H18L21 6M3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6M3 6H21M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-						</svg>
-					</Link>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M3 6L6 2H18L21 6M3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6M3 6H21M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+							</svg>
+						</Link>
+					</div>
 				</div>
 			</div>
 

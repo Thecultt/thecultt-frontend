@@ -2,8 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Slider from "react-slick";
 
-import HomeMainBannerImage from '../../../assets/images/home/home-main-banner.jpg'
+import HomeMainBannerImage from '../../../assets/images/home/home-main-banner1.jpg'
 import HomeMainBannerImage2 from '../../../assets/images/home/home-main-banner2.jpg'
+import HomeMainBannerImage3 from '../../../assets/images/home/home-main-banner3.jpg'
 
 const HomeMainBanner: React.FC = () => {
 	const SliderRef = React.useRef<any>(null)
@@ -42,14 +43,14 @@ const HomeMainBanner: React.FC = () => {
 					<div className='home-main-slider-banner-item' style={{ backgroundImage: `url("${HomeMainBannerImage}")` }}>
 						<div className="home-main-slider-banner-item-text">
 							<h2 className="home-main-slider-banner-item-text__title">
-								Продавай, покупай, обменивай <br /> сумки, обувь и аксессуары
+								Продавайте, покупайте, обменивайте <br /> сумки, обувь и аксессуары
 							</h2>
 
 							<p className="home-main-slider-banner-item-text__description">
-								Стань частью культуры нового потребления
+								Станьте частью культуры нового потребления
 							</p>
 
-							<Link to="/sell" className="home-main-slider-banner-item-text__btn">
+							<Link to="/sell" className="home-main-slider-banner-item-text__btn color">
 								Продать
 							</Link>
 						</div>
@@ -60,15 +61,33 @@ const HomeMainBanner: React.FC = () => {
 					<div className='home-main-slider-banner-item' style={{ backgroundImage: `url("${HomeMainBannerImage2}")` }}>
 						<div className="home-main-slider-banner-item-text">
 							<h2 className="home-main-slider-banner-item-text__title">
-								Продавай, покупай, обменивай <br /> сумки, обувь и аксессуары
+								Покупайте КУЛЬТовые лоты
 							</h2>
 
 							<p className="home-main-slider-banner-item-text__description">
-								Стань частью культуры нового потребления
+								Дарите им вторую жизнь
+							</p>
+
+							<Link to="/catalog" className="home-main-slider-banner-item-text__btn">
+								Купить
+							</Link>
+						</div>
+					</div>
+				</div>
+
+				<div className='home-main-slider-banner-item-wrapper'>
+					<div className='home-main-slider-banner-item' style={{ backgroundImage: `url("${HomeMainBannerImage3}")` }}>
+						<div className="home-main-slider-banner-item-text">
+							<h2 className="home-main-slider-banner-item-text__title">
+								Будьте разной — меняйте сумки с THE CULTT
+							</h2>
+
+							<p className="home-main-slider-banner-item-text__description">
+								Запускайте круговорот сумок и меняйте свой гардероб
 							</p>
 
 							<Link to="/sell" className="home-main-slider-banner-item-text__btn">
-								Продать
+								Обменять
 							</Link>
 						</div>
 					</div>

@@ -75,7 +75,7 @@ input[type="file"]
 
 	&.disabled
 		pointer-events: none
-		opacity: 0.5
+		// opacity: 0.5
 
 .input
 	display: flex
@@ -514,7 +514,10 @@ button
 
 	&.disabled
 		pointer-events: none
-		opacity: 0.5
+		// opacity: 0.5
+
+		& > svg
+			opacity: 0
 
 	&.active
 		& > svg

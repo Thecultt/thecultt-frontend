@@ -52,10 +52,12 @@ const WaitingListCreate: React.FC = () => {
 	const closeFunc = () => {
 		setState(false);
 
+		localStorage.removeItem("waiting_init")
+
 		navigate({
 			pathname: window.location.pathname,
-			search: window.location.search,
 			hash: "",
+			search: window.location.search
 		});
 	};
 

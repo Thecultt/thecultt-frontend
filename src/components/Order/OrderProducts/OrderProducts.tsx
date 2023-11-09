@@ -119,7 +119,6 @@ const OrderProducts: React.FC = () => {
 	}
 
 	const pay = (orderId: number) => {
-
 		if (paymentValue === "Кредит" || paymentValue === "Рассрочка от Тинькофф") {
 			tinkoff.create({
 				shopId: 'ce5ee097-c3d5-4f8f-89ab-f1c8f61955a7',
@@ -180,23 +179,13 @@ const OrderProducts: React.FC = () => {
 					className="order-products-check-all"
 					onClick={uncheckedAllItems}
 				>
-					<svg
-						width="18"
-						height="18"
-						viewBox="0 0 18 18"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<rect width="18" height="17.97" rx="4" fill="#285141" />
-						<path
-							d="M5.5 8.54688L8.125 11.1719L12.5 6.79688"
-							stroke="#F1EDE8"
-							strokeLinecap="round"
-						/>
+					<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect y="0.5" width="20" height="20" rx="10" fill="#285141" />
+						<path d="M13.636 7.77344L8.63601 12.7734L6.36328 10.5007" stroke="#F7F4F0" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
 
 					<p className="order-products-check-all__title">
-						Выделить всё
+						Выделить все
 					</p>
 				</div>
 			) : (
@@ -204,26 +193,12 @@ const OrderProducts: React.FC = () => {
 					className="order-products-check-all"
 					onClick={checkedAllItems}
 				>
-					<svg
-						width="18"
-						height="18"
-						viewBox="0 0 18 18"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<rect
-							x="0.25"
-							y="0.265625"
-							width="17.5"
-							height="17.47"
-							rx="3.75"
-							stroke="#838383"
-							strokeWidth="0.5"
-						/>
+					<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<circle cx="9" cy="9" r="8.75" stroke="#838383" strokeWidth="0.5" />
 					</svg>
 
 					<p className="order-products-check-all__title">
-						Выделить всё
+						Выделить все
 					</p>
 				</div>
 			)}
@@ -232,6 +207,7 @@ const OrderProducts: React.FC = () => {
 				{Object.keys(items).map((key, index) => (
 					<OrderProductsItem
 						{...items[key]}
+						disabledDelete={Object.keys(items).length === 1 ? true : false}
 						key={`order-products-item-${index}`}
 						changeCheck={() =>
 							changeCheck(key, !items[key].checked)

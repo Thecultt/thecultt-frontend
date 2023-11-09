@@ -77,11 +77,6 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 									name="pasport"
 									label="Серия и номер паспорта"
 									bgWhite
-									{...createTextMask({
-										pattern: "9999 999999",
-										guide: false,
-										stripMask: false,
-									})}
 								/>
 							</div>
 

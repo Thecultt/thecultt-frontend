@@ -42,6 +42,7 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			<SellBackBtn onClick={() => dispatch(setCabinetSellCurrentStep(currentType === CabinetSellTypes.EXCHANGE ? CabinetSellStepKeys.PRODUCT : CabinetSellStepKeys.IMAGES))} />
 
 			<h3 className="sell-block__title">Контактные данные</h3>
+
 			<p className="sell-block__subtitle">
 				Заполните контактные данные в соответствие с паспортными,
 				укажите актуальные номер телефона и почту для связи.
@@ -72,6 +73,7 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							component={RenderInput}
 							label="Ваша почта"
 							name="email"
+							disabled
 							bgWhite
 						/>
 					</div>
@@ -83,7 +85,7 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							name="phone"
 							bgWhite
 							{...createTextMask({
-								pattern: "+7 999 999 99-99",
+								pattern: "+9 999 999 99-99",
 								guide: false,
 								stripMask: false,
 							})}

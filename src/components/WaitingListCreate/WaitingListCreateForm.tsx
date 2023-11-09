@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { Field, reduxForm, InjectedFormProps, formValueSelector } from "redux-form";
 
@@ -13,7 +13,6 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	handleSubmit,
 	initialize,
 	invalid,
-	pristine,
 	submitting
 }) => {
 	const selector = formValueSelector("waiting-list-form");
@@ -33,6 +32,11 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			};
 		});
 
+	const initDataLocal = localStorage.getItem("waiting_init")
+
+	const [initData, setInitData] = React.useState<any>(null)
+	const [isInit, setIsInit] = React.useState<boolean>(false)
+
 	const [brands, setBrands] = React.useState<{ title: string, value: string }[]>([])
 	const [models, setModels] = React.useState<{ title: string, value: string }[]>([])
 
@@ -41,15 +45,50 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	const isLoadedProductsFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded)
 
 	React.useEffect(() => {
-		if (isLoaded) {
-			initialize(({
-				email: user.email
-			}))
-		}
-	}, [isLoaded])
+		setInitData(JSON.parse(localStorage.getItem("waiting_init") as string))
+	}, [initDataLocal])
 
 	React.useEffect(() => {
-		if (currentCategory) {
+		if (isLoaded) {
+			if (initData) {
+				initialize(({
+					email: user.email,
+					...initData
+				}))
+
+				setIsInit(true)
+			} else {
+				initialize(({
+					email: user.email
+				}))
+			}
+		}
+	}, [isLoaded, initData])
+
+	React.useEffect(() => {
+		// if (initData) {
+		// 	if (isInit) {
+		// 		initialize(({
+		// 			email: user.email,
+		// 			category: currentCategory,
+		// 			type: "",
+		// 			brand: "",
+		// 			model: "",
+		// 			size: "",
+		// 		}))
+		// 	}
+		// } else if (currentCategory) {
+		// 	initialize(({
+		// 		email: user.email,
+		// 		category: currentCategory,
+		// 		type: "",
+		// 		brand: "",
+		// 		model: "",
+		// 		size: "",
+		// 	}))
+		// }
+
+		if (currentCategory && !initData) {
 			initialize(({
 				email: user.email,
 				category: currentCategory,
@@ -113,6 +152,18 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 		})
 
 		setBrands(newBrands)
+
+		const newModels: { title: string, value: string }[] = []
+
+		Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
+			if (categories[currentCategory].subsubcategories[subsubcategory][value]) {
+				categories[currentCategory].subsubcategories[subsubcategory][value].map(model => {
+					newModels.push({ title: model, value: model })
+				})
+			}
+		})
+
+		setModels(newModels)
 	}
 
 	const onChangeInputModel = (value: string) => {
@@ -181,6 +232,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						label="Категория"
 						items={Object.keys(categories)}
 						name="category"
+						disabled={initData}
 					/>
 				</div>
 
@@ -195,7 +247,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 								name="brand"
 								label="Бренд"
 								hints={brands}
-								disabled={categories[currentCategory] ? false : true}
+								disabled={initData ? true : categories[currentCategory] ? false : true}
 								onChangeCustom={(value: string) => onChangeInputBrand(value)}
 								bgWhite
 								ifFreeField
@@ -211,7 +263,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 								name="model"
 								label="Модель"
 								hints={models}
-								disabled={categories[currentCategory] ? false : true}
+								disabled={initData ? true : categories[currentCategory] ? false : true}
 								onChangeCustom={(value: string) => onChangeInputModel(value)}
 								bgWhite
 								ifFreeField
@@ -231,7 +283,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 								label="Тип продукта"
 								items={categories[currentCategory] ? Object.keys(categories[currentCategory].subsubcategories) : []}
 								name="type"
-								disabled={categories[currentCategory] ? false : true}
+								disabled={initData ? true : categories[currentCategory] ? false : true}
 							/>
 						</div>
 
@@ -244,7 +296,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 								name="brand"
 								label="Бренд"
 								hints={brands}
-								disabled={categories[currentCategory] ? false : true}
+								disabled={initData ? true : categories[currentCategory] ? false : true}
 								onChangeCustom={(value: string) => onChangeInputBrand(value)}
 								bgWhite
 								ifFreeField
@@ -264,7 +316,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 								label="Тип продукта"
 								items={categories[currentCategory] ? Object.keys(categories[currentCategory].subsubcategories) : []}
 								name="type"
-								disabled={categories[currentCategory] ? false : true}
+								disabled={initData ? true : categories[currentCategory] ? false : true}
 							/>
 						</div>
 
@@ -277,7 +329,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 								name="brand"
 								label="Бренд"
 								hints={brands}
-								disabled={categories[currentCategory] ? false : true}
+								disabled={initData ? true : categories[currentCategory] ? false : true}
 								onChangeCustom={(value: string) => onChangeInputBrand(value)}
 								bgWhite
 								ifFreeField
@@ -293,15 +345,15 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 								label="Размер"
 								name="size"
 								items={categories[currentCategory].size}
-								disabled={categories[currentCategory] ? false : true}
+								disabled={initData ? true : categories[currentCategory] ? false : true}
 							/>
 						</div>
 					</>
 				) : null}
 
 				<button
-					className={`btn ${invalid || submitting || pristine ? "disabled" : ""} cabinet-waiting-list-form-content__btn`}
-					disabled={invalid || submitting || pristine}
+					className={`btn ${invalid || submitting ? "disabled" : ""} cabinet-waiting-list-form-content__btn`}
+					disabled={invalid || submitting}
 				>
 					Отправить заявку
 				</button>

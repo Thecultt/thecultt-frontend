@@ -36,6 +36,13 @@ const Sell: React.FC = () => {
 	}, []);
 
 	React.useEffect(() => {
+		localStorage.removeItem("sell-info-form")
+		localStorage.removeItem("sell-images-form")
+		localStorage.removeItem("sell-contact-form")
+		localStorage.removeItem("sell-product-form")
+	}, [currentType]);
+
+	React.useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [currentStep]);
 

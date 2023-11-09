@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -17,6 +17,8 @@ export interface HeaderHoverMenuCategory extends ProductsFiltersCategory {
 }
 
 const Header: React.FC = () => {
+	const { pathname } = useLocation();
+
 	const dispatch = useDispatch()
 
 	const [currentInfoMenu, setCurrentInfoMenu] = React.useState<HeaderHoverMenuCategory>({
@@ -31,9 +33,11 @@ const Header: React.FC = () => {
 	const { search } = useTypedSelector(({ header }) => header)
 
 	const openHoverMenu = (category: ProductsFiltersCategory, title: string) => {
-		setCurrentInfoMenu({ ...category, title })
+		if (!isOpenSearch) {
+			setCurrentInfoMenu({ ...category, title })
 
-		setIsOpenHoverMenu(true)
+			setIsOpenHoverMenu(true)
+		}
 	}
 
 	const closeHoverMenu = () => {
@@ -48,8 +52,13 @@ const Header: React.FC = () => {
 		if (search.value !== "") dispatch(fetchHeaderSearchItems(search.value) as any)
 	}, [search.value])
 
+	React.useEffect(() => {
+		setIsOpenHoverMenu(false)
+		setIsOpenSearch(false)
+	}, [pathname])
+
 	return (
-		<>
+		<div className="header-global-wrapper">
 			{localStorage.getItem("header-message-visit-22.10.2023-isClose") ? null : <HeaderTopMessage />}
 
 			<div className="header-container">
@@ -158,7 +167,8 @@ const Header: React.FC = () => {
 										className="header-menu__link"
 										key={`header-menu__link-${index}`}
 										onMouseOver={() => openHoverMenu(categories[key], key)}
-										onMouseOut={() => closeHoverMenu()}
+										onMouseOut={closeHoverMenu}
+										onClick={closeHoverMenu}
 									>
 
 										{key}
@@ -173,16 +183,16 @@ const Header: React.FC = () => {
 									Подлинность
 								</Link>
 							</nav>
-
-							<HeaderHoverMenu
-								{...currentInfoMenu}
-								isOpenHoverMenu={isOpenHoverMenu}
-								onOpen={() => setIsOpenHoverMenu(true)}
-								onClose={() => setIsOpenHoverMenu(false)}
-							/>
 						</div>
 					</div>
 				</header>
+
+				<HeaderHoverMenu
+					{...currentInfoMenu}
+					isOpenHoverMenu={isOpenHoverMenu}
+					onOpen={() => setIsOpenHoverMenu(true)}
+					onClose={() => setIsOpenHoverMenu(false)}
+				/>
 
 				<HeaderSearchBox
 					state={isOpenSearch}
@@ -191,7 +201,7 @@ const Header: React.FC = () => {
 
 				<HeaderMedia setIsOpenSearch={setIsOpenSearch} />
 			</div>
-		</>
+		</div>
 	);
 };
 

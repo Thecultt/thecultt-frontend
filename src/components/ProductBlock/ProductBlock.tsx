@@ -29,7 +29,10 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	addFavorite,
 	removeFavorite,
 	isFavorite,
-	num_of_favorites
+	num_of_favorites,
+	category,
+	subcategory,
+	ring_size
 }) => {
 	const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart)
 	const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(isFavorite)
@@ -57,6 +60,14 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 			setCurrentIndexImage(0);
 		}
 	};
+
+	const subscribeGood = () => {
+		localStorage.setItem("waiting_init", JSON.stringify({
+			category, brand: manufacturer, model: model_name, type: subcategory, size: ring_size
+		}))
+
+		window.location.hash = "create_waiting"
+	}
 
 	return (
 		<div className={`product-block ${addClass ? addClass : ""}`}>
@@ -245,7 +256,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 							Продано
 						</span>
 
-						<button className="product-block-text__btn regular">
+						<button className="product-block-text__btn regular" onClick={subscribeGood}>
 							Лист ожидания
 						</button>
 					</>
