@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
 									Консьерж-сервис
 								</Link>
 								<Link
-									to={""}
+									to={"/sell/brands"}
 									className="footer-block-menu-block__link"
 								>
 									Бренд-лист

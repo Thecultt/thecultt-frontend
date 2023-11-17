@@ -32,10 +32,12 @@ import {
 	Order,
 	Sell,
 	SellInfo,
+	SellInfoBrands,
 	Concierge,
 	Exchange,
 	CabinetSellsList,
 	Cart,
+	SubscribeEmail
 } from "./pages/";
 
 import { fetchProductsFilters } from "./redux/actions/products_filters";
@@ -163,18 +165,22 @@ const App = () => {
 						path="/order/:id"
 						element={<OrderStatus status="success" />}
 					/>
+
 					{/* <Route
 						path="/order/error"
 						element={<OrderStatus status="error" />}
 					/> */}
 
 					<Route path="/sell" element={<SellInfo />} />
+					<Route path="/sell/brands" element={<SellInfoBrands />} />
 
 					<Route path="/concierge" element={<Concierge />} />
 
 					<Route path="/exchange" element={<Exchange />} />
 
 					<Route path="/cart" element={<Cart />} />
+
+					<Route path="/subscribe" element={<SubscribeEmail />} />
 
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>

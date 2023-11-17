@@ -12,26 +12,7 @@ interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
 	onClose: () => void
 }
 
-const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategories, title, isOpenHoverMenu, onOpen, onClose }) => {
-	const [brands, setBrands] = React.useState<string[]>([])
-
-	React.useEffect(() => {
-		const newBrands: string[] = []
-
-		Object.keys(subsubcategories).map((subsubcategory) => {
-			if (newBrands.length < 16) {
-				Object.keys(subsubcategories[subsubcategory]).map((brand) => {
-					// console.log(newBrands.find((findBrand) => findBrand !== brand))
-					if (!newBrands.find((findBrand) => findBrand === brand)) {
-						newBrands.push(brand)
-					}
-				})
-			}
-		})
-
-		setBrands(newBrands)
-	}, [title])
-
+const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ types, brands, title, isOpenHoverMenu, onOpen, onClose }) => {
 	return (
 		<div className={`header-hover-menu-wrapper-wrapper ${isOpenHoverMenu ? "active" : ""}`}>
 			<div className={`header-hover-menu-wrapper ${isOpenHoverMenu ? "active" : ""}`} onMouseOver={() => onOpen()} onMouseOut={() => onClose()}>
@@ -44,9 +25,9 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ subsubcategories, tit
 
 							<div className="header-hover-menu-list-coll-wrapper">
 								<div className="header-hover-menu-list-coll">
-									{Object.keys(subsubcategories).map((subsubcategory, index) => (
-										<Link onClick={onClose} to={`/catalog?categories=${title}&types=${subsubcategory}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${subsubcategory}-${index}`}>
-											{subsubcategory}
+									{types.map((type, index) => (
+										<Link onClick={onClose} to={`/catalog?categories=${title}&types=${type}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${type}-${index}`}>
+											{type}
 										</Link>
 									)).slice(0, 7)}
 

@@ -211,5 +211,8 @@ export { default as ConciergeFormBottom } from "./Concierge/ConciergeFormBottom"
 // Cart
 export { default as CartItemBlock } from "./Cart/CartItemBlock";
 
+// SubscribeEmail
+export { default as SubscribeEmailForm } from "./SubscribeEmail/SubscribeEmailForm";
+
 // Footer
 export { default as Footer } from "./Footer/Footer";

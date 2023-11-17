@@ -12,7 +12,107 @@ import { setHeaderSearchValue, fetchHeaderSearchItems } from "../../redux/action
 
 import Logo from "../../assets/images/logo.svg";
 
-export interface HeaderHoverMenuCategory extends ProductsFiltersCategory {
+const categories: { [key: string]: { types: string[], brands: string[] } } = {
+	"Сумки": {
+		types: [
+			"Дорожная сумка",
+			"Клатч",
+			"Поясная сумка",
+			"Рюкзак",
+			"Сумка кроссбоди",
+			"Сумка на плечо",
+			"Сумка с ручками"
+		],
+		brands: [
+			"Acne Studios",
+			"Balenciaga",
+			"Bottega Veneta",
+			"Burberry",
+			"Celine",
+			"Chanel",
+			"Chloe",
+			"Christian Dior",
+			"Fendi",
+			"Gucci",
+			"Hermes",
+			"Jil Sander",
+			"Loewe",
+			"Louis Vuitton",
+			"Prada",
+			"Saint Laurent",
+			"Wandler"
+		],
+	},
+	"Аксессуары": {
+		types: [
+			"Часы",
+			"Очки",
+			"Ремни",
+			"Ювелирные украшения",
+			"Бижутерия",
+			"Кожаные аксессуары",
+			"Платки и шарфы",
+			"Головные уборы",
+			"Аксессуары для сумок",
+		],
+		brands: [
+			"Balenciaga",
+			"Bottega Veneta",
+			"Bulgari",
+			"Cartier",
+			"Celine",
+			"Chanel",
+			"Christian Dior",
+			"Fendi",
+			"Gucci",
+			"Hermes",
+			"Jil Sander",
+			"Louis Vuitton",
+			"Marni",
+			"Miu Miu",
+			"Prada",
+			"Saint Laurent",
+			"Tiffany & Co."
+		],
+	},
+	"Обувь": {
+		types: [
+			"Балетки",
+			"Ботильоны",
+			"Ботинки",
+			"Босоножки",
+			"Кеды и кроссовки",
+			"Лоферы",
+			"Мюли",
+			"Сандали",
+			"Сапоги",
+			"Туфли",
+		],
+		brands: [
+			"Acne Studios",
+			"Alaia",
+			"Alexander Wang",
+			"Bottega Veneta",
+			"Celine",
+			"Chanel",
+			"Chloe",
+			"Ganni",
+			"Gia Borghini",
+			"Hereu",
+			"Hermes",
+			"Isabel Marant",
+			"JW Anderson",
+			"Mach & Mach",
+			"Maison Margiela",
+			"Manolo Blahnik",
+			"Proenza Schouler",
+		],
+	},
+}
+
+export interface HeaderHoverMenuCategory {
+	types: string[],
+	brands: string[],
 	title: string
 }
 
@@ -22,17 +122,17 @@ const Header: React.FC = () => {
 	const dispatch = useDispatch()
 
 	const [currentInfoMenu, setCurrentInfoMenu] = React.useState<HeaderHoverMenuCategory>({
-		subsubcategories: {},
+		types: [],
+		brands: [],
 		title: ""
 	})
 	const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState<boolean>(false)
 
 	const [isOpenSearch, setIsOpenSearch] = React.useState<boolean>(false)
 
-	const { categories } = useTypedSelector(({ products_filters }) => products_filters)
 	const { search } = useTypedSelector(({ header }) => header)
 
-	const openHoverMenu = (category: ProductsFiltersCategory, title: string) => {
+	const openHoverMenu = (category: { types: string[], brands: string[] }, title: string) => {
 		if (!isOpenSearch) {
 			setCurrentInfoMenu({ ...category, title })
 

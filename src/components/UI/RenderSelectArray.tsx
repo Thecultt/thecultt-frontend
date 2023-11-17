@@ -30,14 +30,18 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 	};
 
 	const toggleCurrentItem = (item: string) => {
-		if (currentItems[item]) {
-			const newItems = { ...currentItems }
-
-			delete newItems[item]
-
-			setCurrentItems(newItems)
+		if (item === "Отсутствует" || item === "Нет дефектов") {
+			setCurrentItems({ [item]: item })
 		} else {
-			setCurrentItems({ ...currentItems, [item]: item })
+			if (currentItems[item]) {
+				const newItems = { ...currentItems }
+
+				delete newItems[item]
+
+				setCurrentItems(newItems)
+			} else {
+				setCurrentItems({ ...currentItems, [item]: item })
+			}
 		}
 	};
 

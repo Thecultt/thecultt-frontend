@@ -51,6 +51,8 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	React.useEffect(() => {
 		if (isLoaded) {
 			if (initData) {
+				console.log(initData, categories)
+
 				initialize(({
 					email: user.email,
 					...initData

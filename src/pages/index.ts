@@ -44,6 +44,9 @@ export { default as Sell } from "./Sell/Sell";
 // SellInfo
 export { default as SellInfo } from "./SellInfo/SellInfo";
 
+// SellInfoBrands
+export { default as SellInfoBrands } from "./SellInfoBrands/SellInfoBrands";
+
 // Concierge
 export { default as Concierge } from "./Concierge/Concierge";
 
@@ -55,3 +58,6 @@ export { default as Order } from "./Order/Order";
 
 // Cart
 export { default as Cart } from "./Cart/Cart";
+
+// SubscribeEmail
+export { default as SubscribeEmail } from "./SubscribeEmail/SubscribeEmail";
