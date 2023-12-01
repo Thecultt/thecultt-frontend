@@ -16,6 +16,8 @@ import { sendSaveFavorite, sendRemoveFavorite } from "../../redux/actions/favori
 
 import { CabinetMenu, ProductBlock } from "../../components/";
 
+import { Product } from "../../models/IProduct";
+
 const CabinetFavorites: React.FC = () => {
 	const dispatch = useDispatch()
 
@@ -33,8 +35,8 @@ const CabinetFavorites: React.FC = () => {
 		}, 5000);
 	};
 
-	const addFavorite = (id: number) => {
-		dispatch(sendSaveFavorite(id) as any)
+	const addFavorite = (item: Product) => {
+		dispatch(sendSaveFavorite(item) as any)
 	}
 
 	const removeFavorite = (id: number) => {
@@ -44,6 +46,31 @@ const CabinetFavorites: React.FC = () => {
 	React.useEffect(() => {
 		dispatch(fetchFavorites() as any)
 	}, [])
+
+	const onClickProduct = (item: any, index: number) => {
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+
+		window.dataLayer.push({
+			event: "select_item",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+				items: [{
+					item_name: item.model_name,
+					item_id: `${item.id}`,
+					price: `${item.price}`,
+					item_brand: item.manufacturer,
+					item_category: item.category,
+					item_category2: item.subcategory,
+					item_category3: "-",
+					item_category4: "-",
+					item_list_name: "Search Results",
+					item_list_id: item.article,
+					index,
+					quantity: 1
+				}]
+			}
+		});
+	}
 
 	return (
 		<section className="cabinet">
@@ -63,13 +90,17 @@ const CabinetFavorites: React.FC = () => {
 											checked: true,
 											article: items[key].article,
 											manufacturer: items[key].manufacturer,
+											category: items[key].category,
+											subcategory: items[key].subcategory,
 											name: items[key].name,
 											image: items[key].images[0],
 											price: items[key].price,
+											availability: items[key].availability
 										})
 									}
+									onClickProduct={() => onClickProduct(items[key], index)}
 									isCart={cartItems[items[key].article] ? true : false}
-									addFavorite={() => addFavorite(items[key].id)}
+									addFavorite={() => addFavorite(items[key])}
 									removeFavorite={() => removeFavorite(items[key].id)}
 									isFavorite={favoritesItems[items[key].id] ? true : false}
 									{...items[key]}

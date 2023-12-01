@@ -1,6 +1,6 @@
 // sell
 .sell
-	margin: 30px 0 
+	margin: 30px 0
 
 	+open
 
@@ -157,6 +157,8 @@
 				margin-bottom: 0
 
 			&__title
+				position: relative
+
 				display: flex
 				align-items: center
 
@@ -166,6 +168,10 @@
 				& > svg
 					cursor: pointer
 					margin-left: 5px
+
+					&:hover + .message-info-wrapper
+						opacity: 1
+						pointer-events: auto
 
 		&-input-wrapper
 			display: flex

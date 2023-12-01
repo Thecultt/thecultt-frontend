@@ -21,7 +21,10 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 	availability,
 	subcategory,
 	ring_size,
-	images
+	is_trial,
+	images,
+	store_price,
+	condition,
 }) => {
 	const dispatch = useDispatch()
 
@@ -44,7 +47,23 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 	};
 
 	const addFavorite = () => {
-		dispatch(sendSaveFavorite(id) as any)
+		dispatch(sendSaveFavorite({
+			id,
+			article,
+			price,
+			store_price,
+			condition,
+			manufacturer,
+			model_name,
+			availability,
+			images,
+			num_of_favorites: 0,
+			category,
+			subcategory,
+			ring_size,
+			is_trial
+
+		}) as any)
 	}
 
 	const removeFavorite = () => {
@@ -86,11 +105,19 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 				₽
 			</h3>
 
-			{!availability ? <p className="product-content-info-title__notavailable">
-				Нет в наличии
-			</p> : null}
+			{is_trial ? (
+				<p className="product-content-info-title__notavailable">
+					На примерке
+				</p>
+			) : (
+				!availability ? (
+					<p className="product-content-info-title__notavailable">
+						Нет в наличии
+					</p>
+				) : null
+			)}
 
-			{availability ?
+			{availability && !is_trial ?
 				<div className="product-content-info-title-btn">
 					{isCartLocal ?
 						<button
@@ -106,9 +133,12 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 								checked: true,
 								article: article,
 								manufacturer: manufacturer,
+								category: category,
+								subcategory: subcategory,
 								name: model_name,
 								image: images[0],
 								price: price,
+								availability: availability
 							})}
 						>
 							Добавить в корзину

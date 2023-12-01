@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { reduxForm, InjectedFormProps, Field } from "redux-form";
 
@@ -189,28 +190,20 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					<h4 className="sell-block-select__title">
 						Состояние товара
 
-						{/* <svg
-							width="18"
-							height="18"
-							viewBox="0 0 18 18"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<g clipPath="url(#clip0_6785_19443)">
-								<path
-									d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-									stroke="#202020"
-									strokeWidth="1.5"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</g>
-							<defs>
-								<clipPath id="clip0_6785_19443">
-									<rect width="18" height="18" fill="white" />
-								</clipPath>
-							</defs>
-						</svg> */}
+						<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+
+						<span className="message-info-wrapper">
+							<span className="message-info">
+								<ul>
+									<li><span>C биркой</span>: аксессуар не был в носке, фирменные бирки присутствуют.</li>
+									<li><span>Новое</span>: аксессуар не был в носке, фирменные  бирки отсутствуют.</li>
+									<li><span>Отличное</span>: видимые следы носки отсутствуют, аксессуар носился мало и бережно.</li>
+									<li><span>Хорошее</span>: присутствуют видимые глазу следы носки, без грубых дефектов.</li>
+								</ul>
+							</span>
+						</span>
 					</h4>
 
 					<Field
@@ -258,28 +251,15 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					<h4 className="sell-block-select__title">
 						Ожидание по цене
 
-						{/* <svg
-							width="18"
-							height="18"
-							viewBox="0 0 18 18"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<g clipPath="url(#clip0_6785_19443)">
-								<path
-									d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-									stroke="#202020"
-									strokeWidth="1.5"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</g>
-							<defs>
-								<clipPath id="clip0_6785_19443">
-									<rect width="18" height="18" fill="white" />
-								</clipPath>
-							</defs>
-						</svg> */}
+						<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+
+						<span className="message-info-wrapper">
+							<span className="message-info">
+								Напишите цену, которую хотели бы получить на руки при продаже товара.
+							</span>
+						</span>
 					</h4>
 
 					<Field
@@ -293,28 +273,16 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				<div className="sell-block-select">
 					<h4 className="sell-block-select__title">
 						Товар приобретен в THE CULTT
-						{/* <svg
-							width="18"
-							height="18"
-							viewBox="0 0 18 18"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<g clipPath="url(#clip0_6785_19443)">
-								<path
-									d="M9 12V9M9 6H9.0075M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9Z"
-									stroke="#202020"
-									strokeWidth="1.5"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</g>
-							<defs>
-								<clipPath id="clip0_6785_19443">
-									<rect width="18" height="18" fill="white" />
-								</clipPath>
-							</defs>
-						</svg> */}
+
+						<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+
+						<span className="message-info-wrapper">
+							<span className="message-info">
+								Укажите, если ранее товар был приобретен на нашей платформе, на него будут действовать особые условия. <Link to="/exchange">Подробнее</Link>
+							</span>
+						</span>
 					</h4>
 
 					<Field

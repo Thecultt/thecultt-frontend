@@ -12,6 +12,7 @@ import { sendSaveFavorite, sendRemoveFavorite } from "../../../redux/actions/fav
 
 import { ProductBlock, CatalogProductsPagination } from "../../";
 
+import { Product } from "../../../models/IProduct";
 import { CartItem } from "../../../models/ICartItem";
 
 const CatalogProducts: React.FC = () => {
@@ -32,12 +33,36 @@ const CatalogProducts: React.FC = () => {
 		}, 5000);
 	};
 
-	const addFavorite = (id: number) => {
-		dispatch(sendSaveFavorite(id) as any)
+	const addFavorite = (item: Product) => {
+		dispatch(sendSaveFavorite(item) as any)
 	}
 
 	const removeFavorite = (id: number) => {
 		dispatch(sendRemoveFavorite(id) as any)
+	}
+
+	const onClickProduct = (item: any, index: number) => {
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "select_item",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+				items: [{
+					item_name: item.model_name,
+					item_id: `${item.id}`,
+					price: `${item.price}`,
+					item_brand: item.manufacturer,
+					item_category: item.category,
+					item_category2: item.subcategory,
+					item_category3: "-",
+					item_category4: "-",
+					item_list_name: "Search Results",
+					item_list_id: item.article,
+					index,
+					quantity: 1
+				}]
+			}
+		});
 	}
 
 	return (
@@ -56,13 +81,17 @@ const CatalogProducts: React.FC = () => {
 								checked: true,
 								article: item.article,
 								manufacturer: item.manufacturer,
+								category: item.category,
+								subcategory: item.subcategory,
 								name: item.model_name,
 								image: item.images[0],
 								price: item.price,
+								availability: item.availability
 							})
 						}
+						onClickProduct={() => onClickProduct(item, index)}
 						isCart={cartItems[item.id] ? true : false}
-						addFavorite={() => addFavorite(item.id)}
+						addFavorite={() => addFavorite(item)}
 						removeFavorite={() => removeFavorite(item.id)}
 						isFavorite={favoritesItems[item.id] ? true : false}
 						{...item}

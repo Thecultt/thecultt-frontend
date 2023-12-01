@@ -12,6 +12,7 @@ export interface Product {
 	category: string
 	subcategory: string
 	ring_size: string
+	is_trial: boolean
 }
 
 export interface ProductPage {
@@ -29,6 +30,7 @@ export interface ProductPage {
 	gender: string
 	color: string
 	subcategory: string
+	is_trial: boolean
 
 	nuances: string
 

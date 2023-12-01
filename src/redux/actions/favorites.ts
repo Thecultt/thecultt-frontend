@@ -7,7 +7,7 @@ import { Product } from "../../models/IProduct"
 import { FavoritesActionTypes, FavoritesActions } from '../types/IFavorites'
 
 export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>) => {
-	const { data: { items } } = await $api.get<{ items: Product[] }>(`${process.env.REACT_APP_API_DOMEN}/favorite-products`)
+	const { data: { items } } = await $api.get<{ items: Product[] }>(`/favorite-products`)
 
 	dispatch({
 		type: FavoritesActionTypes.SET_FAVORITES_ITEMS,
@@ -15,9 +15,33 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
 	})
 }
 
-export const sendSaveFavorite = (id: number) => async (dispatch: Dispatch<FavoritesActions>) => {
+export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<FavoritesActions>) => {
 	if (localStorage.getItem("accessToken")) {
-		await $api.post(`${process.env.REACT_APP_API_DOMEN}/add-favorite-product/${id}/`)
+		await $api.post(`/add-favorite-product/${item.id}/`)
+
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "add_to_wishlist",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+				items: [{
+					item_name: item.model_name,
+					item_id: `${item.id}`,
+					price: `${item.price}`,
+					item_brand: item.manufacturer,
+					item_category: item.category,
+					item_category2: item.subcategory,
+					item_category3: "-",
+					item_category4: "-",
+					item_list_name: "Search Results",
+					item_list_id: item.article,
+					index: 1,
+					quantity: 1
+				}],
+				currency: "RUB",
+				value: `${item.price}`
+			}
+		});
 
 		dispatch(fetchFavorites() as any)
 	} else {
@@ -26,7 +50,7 @@ export const sendSaveFavorite = (id: number) => async (dispatch: Dispatch<Favori
 }
 
 export const sendRemoveFavorite = (id: number) => async (dispatch: Dispatch<FavoritesActions>) => {
-	await $api.delete(`${process.env.REACT_APP_API_DOMEN}/remove-favorite-product/${id}/`)
+	await $api.delete(`/remove-favorite-product/${id}/`)
 
 	dispatch(fetchFavorites() as any)
 }

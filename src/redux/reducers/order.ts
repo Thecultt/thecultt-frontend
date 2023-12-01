@@ -7,7 +7,10 @@ const initialState: OrderState = {
 		isActive: false,
 		isError: false,
 
-		saleSum: 0
+		name: "",
+		saleSum: 0,
+
+		errorMessage: ""
 	},
 
 	currentDelivery: {
@@ -85,12 +88,32 @@ const order = (state = initialState, action: OrderStateActions) => {
 		}
 	}
 
+	if (action.type === OrderStateActionTypes.SET_ORDER_PROMOCODE_NAME) {
+		return {
+			...state,
+			promocode: {
+				...state.promocode,
+				name: action.payload,
+			},
+		}
+	}
+
 	if (action.type === OrderStateActionTypes.SET_ORDER_PROMOCODE_SALE_SUM) {
 		return {
 			...state,
 			promocode: {
 				...state.promocode,
 				saleSum: action.payload,
+			},
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE) {
+		return {
+			...state,
+			promocode: {
+				...state.promocode,
+				errorMessage: action.payload,
 			},
 		}
 	}

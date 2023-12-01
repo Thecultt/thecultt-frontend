@@ -138,12 +138,8 @@
 			width: 100%
 			padding: 40px 30px
 			background-color: #F6F5EF
-			margin-right: 15px
 
 			+borderRadius
-
-			&:last-child
-				margin-left: 0
 
 			&__title
 				line-height: 120%
@@ -163,3 +159,70 @@
 
 			&__btn
 				width: 280px
+
+/* MEDIA */
+@media screen and (max-width: 1200px)
+	.visit
+		margin: 25px 0
+
+		&-main
+			flex-direction: column
+			margin-bottom: 25px
+
+			&-text
+				width: 100%
+
+				padding: 15px
+				order: 2
+
+				&__title
+					font-size: 17px
+
+				&__description
+					font-size: 12px
+
+				&__btn
+					width: 100%
+
+			&-image
+				order: 1
+
+				width: 100%
+				min-width: 100%
+
+				height: 300px
+
+		&-service
+			&-block
+				padding: 15px
+				margin-bottom: 15px
+
+				&__title
+					font-size: 17px
+
+				&__subtitle
+					font-size: 17px
+
+					& > ul > li
+						font-size: 12px
+						margin-bottom: 2px
+
+				&__description
+					font-size: 12px
+
+		&-office
+			margin-top: 15px
+
+			&-block
+				padding: 15px
+
+				&__title
+					font-size: 17px
+					margin-bottom: 10px
+
+				&__subtitle
+					width: 100%
+					font-size: 12px
+
+				&__btn
+					width: 100%

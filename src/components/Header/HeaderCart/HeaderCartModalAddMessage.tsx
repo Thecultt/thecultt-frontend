@@ -24,7 +24,7 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({
     const {items} = useTypedSelector(({cart}) => cart);
 
     const removeItem = (article: string) => {
-        dispatch(removeCartItem(article));
+        dispatch(removeCartItem(article, items[article]));
     };
 
     return (

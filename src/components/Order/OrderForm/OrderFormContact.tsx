@@ -15,7 +15,7 @@ const OrderFormContact: React.FC = () => {
 				</div>
 
 				<div className="order-form-block-input" style={{ width: "49%" }}>
-					<Field component={RenderInput} type="text" name="name" label="Получатель" />
+					<Field component={RenderInput} type="text" name="name" label="Получатель ФИО" />
 				</div>
 
 				<div className="order-form-block-input" style={{ width: "49%" }}>

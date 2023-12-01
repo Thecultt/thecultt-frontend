@@ -12,7 +12,7 @@ interface OrderProductsPromocodeProps {
 const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disabled }) => {
 	const dispatch = useDispatch()
 
-	const { promocode: { isActive, isError, isSend } } = useTypedSelector(({ order }) => order)
+	const { promocode: { isActive, isError, isSend, errorMessage } } = useTypedSelector(({ order }) => order)
 
 	const [currentPromocode, setCurrentPromocode] = React.useState<string>("")
 
@@ -59,7 +59,7 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
 
 						{isError ?
 							<p className="order-products-promocode-input__error">
-								Неверный промокод
+								{errorMessage}
 							</p>
 							: null
 						}

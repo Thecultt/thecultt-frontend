@@ -14,7 +14,7 @@ const CabinetMenu: React.FC = () => {
 							`cabinet-menu__item ${isActive && "active"}`
 						}
 					>
-						История Заказов
+						История заказов
 					</NavLink>
 					<NavLink
 						to="/cabinet/sells"
@@ -22,7 +22,7 @@ const CabinetMenu: React.FC = () => {
 							`cabinet-menu__item ${isActive && "active"}`
 						}
 					>
-						Мои Продажи
+						Мои продажи
 					</NavLink>
 					<NavLink
 						to="/cabinet/favorites"

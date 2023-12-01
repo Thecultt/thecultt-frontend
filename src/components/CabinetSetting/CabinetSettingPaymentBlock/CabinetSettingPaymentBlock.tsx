@@ -86,6 +86,18 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							>
 								<Field
 									component={RenderInput}
+									name="inn"
+									label="ИНН"
+									bgWhite
+								/>
+							</div>
+
+							<div
+								className="cabinet-setting-block-form-input"
+								style={{ width: "100%" }}
+							>
+								<Field
+									component={RenderInput}
 									name="bik"
 									label="БИК"
 									bgWhite

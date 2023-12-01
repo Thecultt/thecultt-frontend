@@ -44,11 +44,13 @@ import { fetchProductsFilters } from "./redux/actions/products_filters";
 import { fetchFirstProductsCatalog } from "./redux/actions/products";
 import { fetchFavorites } from "./redux/actions/favorites";
 import { fetchUser } from "./redux/actions/user";
+import { checkAvailabilityCartItems } from "./redux/actions/cart";
 
 declare global {
 	interface Window {
 		__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
 		cp: any;
+		dataLayer: any
 	}
 }
 
@@ -61,6 +63,18 @@ const App = () => {
 
 	const isLoadedProducts = useTypedSelector(
 		({ products }) => products.isLoaded
+	);
+
+	const cartItems = useTypedSelector(
+		({ cart }) => cart.items
+	);
+
+
+	const isLoadedUser = useTypedSelector(
+		({ user }) => user.isLoaded
+	);
+	const { user } = useTypedSelector(
+		({ user }) => user
 	);
 
 	const { pathname } = useLocation();
@@ -87,11 +101,20 @@ const App = () => {
 			dispatch(fetchFavorites() as any)
 			dispatch(fetchUser() as any)
 		}
+
+		dispatch(checkAvailabilityCartItems(cartItems) as any)
 	}, []);
 
 	React.useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [pathname]);
+
+	React.useEffect(() => {
+		if (isLoadedUser) {
+			window.dataLayer = window.dataLayer || [];
+			window.dataLayer.push({ 'user_id': `${user.user_id}` });
+		}
+	}, [isLoadedUser]);
 
 	return (
 		<div className="wrapper" id="wrapper">

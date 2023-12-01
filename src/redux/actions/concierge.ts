@@ -12,6 +12,14 @@ export const sendConciergeForm = (data: { phone: string, name: string }) => asyn
 
 	await $api.post(`/create_concierge/`, data)
 
+	window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+	window.dataLayer.push({
+		event: "concierge_send_application",
+		ecommerce: {
+			timestamp: Math.floor(Date.now() / 1000),
+		}
+	});
+
 	dispatch({
 		type: ConciergeActionTypes.SET_CONCIERGE_IS_SENDING,
 		payload: false

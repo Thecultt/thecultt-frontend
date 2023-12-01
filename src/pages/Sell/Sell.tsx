@@ -50,17 +50,41 @@ const Sell: React.FC = () => {
 		localStorage.setItem("sell-info-global-category", data.category)
 		localStorage.setItem("sell-info-form", JSON.stringify(data))
 
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "product_information_complete",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+			}
+		});
+
 		dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.IMAGES))
 	}
 
 	const onSubmitContact = (data: any) => {
 		localStorage.setItem("sell-contact-form", JSON.stringify(data))
 
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "contact_information_complete",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+			}
+		});
+
 		dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.DELIVERY))
 	}
 
 	const onSubmitProduct = (data: any) => {
 		localStorage.setItem("sell-product-form", JSON.stringify(data))
+
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "exchange_item_complete",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+			}
+		});
 
 		dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.CONTACT))
 	}
@@ -101,6 +125,14 @@ const Sell: React.FC = () => {
 			client_comment: delivery.comment ? delivery.comment : "",
 
 		}
+
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "shipping_method_complete",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+			}
+		});
 
 		dispatch(sendCreateCabinetSell(sell) as any)
 	}

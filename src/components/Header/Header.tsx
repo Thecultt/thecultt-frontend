@@ -214,12 +214,30 @@ const Header: React.FC = () => {
 										<Link
 											to="/cabinet/sell"
 											className="header-block-btn__btn"
+											onClick={() => {
+												window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+												window.dataLayer.push({
+													event: "sell_click",
+													ecommerce: {
+														timestamp: Math.floor(Date.now() / 1000),
+													}
+												});
+											}}
 										>
 											Продать
 										</Link>
 										<Link
 											to="/exchange"
 											className="header-block-btn__btn regular"
+											onClick={() => {
+												window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+												window.dataLayer.push({
+													event: "swap_click",
+													ecommerce: {
+														timestamp: Math.floor(Date.now() / 1000),
+													}
+												});
+											}}
 										>
 											Обменять
 										</Link>

@@ -7,7 +7,10 @@ export interface OrderState {
 		isActive: boolean
 		isError: boolean
 
+		name: string
 		saleSum: number
+
+		errorMessage: string
 	},
 
 	currentDelivery: {
@@ -54,7 +57,9 @@ export enum OrderStateActionTypes {
 	SET_ORDER_PROMOCODE_IS_SEND = "SET_ORDER_PROMOCODE_IS_SEND",
 	SET_ORDER_PROMOCODE_IS_ACTIVE = "SET_ORDER_PROMOCODE_IS_ACTIVE",
 	SET_ORDER_PROMOCODE_IS_ERROR = "SET_ORDER_PROMOCODE_IS_ERROR",
+	SET_ORDER_PROMOCODE_NAME = "SET_ORDER_PROMOCODE_NAME",
 	SET_ORDER_PROMOCODE_SALE_SUM = "SET_ORDER_PROMOCODE_SALE_SUM",
+	SET_ORDER_PROMOCODE_ERROR_MESSAGE = "SET_ORDER_PROMOCODE_ERROR_MESSAGE",
 
 	SET_ORDER_CURRENT_DELIVERY = "SET_ORDER_CURRENT_DELIVERY",
 
@@ -89,9 +94,19 @@ interface setOrderPromocodeIsError {
 	payload: boolean
 }
 
+interface setOrderPromocodeName {
+	type: OrderStateActionTypes.SET_ORDER_PROMOCODE_NAME,
+	payload: string
+}
+
 interface setOrderPromocodeSaleSum {
 	type: OrderStateActionTypes.SET_ORDER_PROMOCODE_SALE_SUM,
 	payload: number
+}
+
+interface setOrderPromocodeErrorMessage {
+	type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE,
+	payload: string
 }
 
 interface setOrderCurrentDelivery {
@@ -166,4 +181,4 @@ interface setOrderIsValid {
 	payload: boolean
 }
 
-export type OrderStateActions = setOrderPromocodeIsSend | setOrderPromocodeIsActive | setOrderPromocodeIsError | setOrderPromocodeSaleSum | setOrderCurrentDelivery | setOrderGlobalCountrys | setOrderGlobalCitys | setOrderGlobalStreets | setOrderAddressCountry | setOrderAddressCity | setOrderAddressStreet | setOrderOrder | setOrderIsLoadedOrder | setOrderIsValid
+export type OrderStateActions = setOrderPromocodeIsSend | setOrderPromocodeIsActive | setOrderPromocodeIsError | setOrderPromocodeName | setOrderPromocodeSaleSum | setOrderPromocodeErrorMessage | setOrderCurrentDelivery | setOrderGlobalCountrys | setOrderGlobalCitys | setOrderGlobalStreets | setOrderAddressCountry | setOrderAddressCity | setOrderAddressStreet | setOrderOrder | setOrderIsLoadedOrder | setOrderIsValid

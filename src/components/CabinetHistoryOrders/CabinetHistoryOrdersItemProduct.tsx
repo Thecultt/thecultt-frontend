@@ -1,11 +1,12 @@
 import React from 'react'
 import { NumericFormat } from "react-number-format";
+import { Link } from "react-router-dom";
 
 import { OrderProduct } from '../../models/IOrder'
 
-const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({ images, manufacturer, model_name, color, kit, condition, price }) => {
+const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({ article, images, manufacturer, model_name, color, kit, condition, price }) => {
 	return (
-		<div className="cabinet-history-orders-item-info-good">
+		<Link to={`/product/${article}`} className="cabinet-history-orders-item-info-good">
 			<div
 				className="cabinet-history-orders-item-info-good-image"
 				style={{
@@ -79,7 +80,7 @@ const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({ images, manuf
 					₽
 				</p>
 			</div>
-		</div>
+		</Link>
 	)
 }
 

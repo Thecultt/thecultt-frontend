@@ -41,7 +41,7 @@ const Concierge: React.FC = () => {
 							</h2>
 
 							<p className="concierge-main-text__description">
-								Закажите консьерж-сервис с выездом на дом для продажи более 10 лотов, соответствующих нашему <Link to="">бренд-листу</Link>.
+								Закажите консьерж-сервис с выездом на дом для продажи более 10 лотов, соответствующих нашему <Link to="/sell/brands">бренд-листу</Link>.
 							</p>
 
 							<ConciergeFormTop onSubmit={onSubmit} />

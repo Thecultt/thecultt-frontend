@@ -8,6 +8,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { changeCheckCartItem, removeCartItem } from "../../../redux/actions/cart";
 
 import { HeaderCartModalItem } from "../../";
+import { CartItem } from "../../../models/ICartItem";
 
 interface HeaderCartModalProps {
 	state: boolean;
@@ -18,15 +19,42 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
 	const dispatch = useDispatch();
 
 	const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
-	const { items, totalCount, totalPrice } = useTypedSelector(({ cart }) => cart);
+	const { items } = useTypedSelector(({ cart }) => cart);
 
 	const changeCheck = (article: string, status: boolean) => {
 		dispatch(changeCheckCartItem(article, status));
 	};
 
 	const removeItem = (article: string) => {
-		dispatch(removeCartItem(article));
+		dispatch(removeCartItem(article, items[article]));
 	};
+
+	React.useEffect(() => {
+		if (state) {
+			// Measure the removal of a product from a shopping cart.
+			window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+			window.dataLayer.push({
+				event: "view_cart",
+				ecommerce: {
+					timestamp: Math.floor(Date.now() / 1000),
+					items: Object.keys(items).map((article, index) => ({
+						item_name: items[article].name,
+						item_id: `${items[article].id}`,
+						price: `${items[article].price}`,
+						item_brand: items[article].manufacturer,
+						item_category: items[article].category,
+						item_category2: items[article].subcategory,
+						item_category3: "-",
+						item_category4: "-",
+						item_list_name: "Search Results",
+						item_list_id: article,
+						index,
+						quantity: 1
+					}))
+				}
+			});
+		}
+	}, [state])
 
 	return (
 		<div className={`header-block-cart-modal ${state ? "active" : ""}`}>
@@ -68,12 +96,12 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
 					<div className="header-block-cart-modal-btn">
 						<div className="header-block-cart-modal-btn-title">
 							<p className="header-block-cart-modal-btn-title__description">
-								Товары - {totalCount} шт.
+								Товары - {Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).length} шт.
 							</p>
 
 							<p className="header-block-cart-modal-btn-title__sum">
 								<NumericFormat
-									value={totalPrice}
+									value={Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).map(item => item.price).length ? Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).map(item => item.price).reduce((a: number, b: number) => a + b) : 0}
 									displayType={"text"}
 									thousandSeparator={" "}
 									renderText={(formattedValue: string) => (

@@ -1,30 +1,37 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
 import { HomeMainBanner, HomeCategories, CatalogProductsSection, HomeVisit, HomeSell, HomeSellPartners, HomeAbout, HomeWaiting } from '../../components/'
 
 const Home: React.FC = () => {
 	return (
-		<section className="home">
-			<div className="container">
-				<div className="home-wrapper">
-					<HomeMainBanner />
+		<>
+			<Helmet>
+				{/* <script src="//code.jivo.ru/widget/zAUiclp1Hy" async></script> */}
+			</Helmet>
 
-					<HomeCategories />
+			<section className="home">
+				<div className="container">
+					<div className="home-wrapper">
+						<HomeMainBanner />
 
-					<CatalogProductsSection title='Новинки' />
+						<HomeCategories />
 
-					<HomeVisit />
+						<CatalogProductsSection title='Новинки' />
 
-					<HomeSell />
+						<HomeVisit />
 
-					<HomeSellPartners />
+						<HomeSell />
 
-					<HomeAbout />
+						<HomeSellPartners />
 
-					<HomeWaiting />
+						<HomeAbout />
+
+						<HomeWaiting />
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		</>
 	)
 }
 

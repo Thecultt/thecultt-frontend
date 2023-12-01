@@ -680,6 +680,77 @@ button
 	&:hover
 		+transformHover
 
+// message-info
+.message-info-wrapper
+	display: inline-block
+	
+	position: absolute
+
+	width: 340px
+
+	z-index: 5
+
+	opacity: 0
+	pointer-events: none
+
+	bottom: calc( 100% - 5px )
+
+	padding-bottom: 15px
+
+	+transition
+
+	&:hover
+		opacity: 1
+		pointer-events: auto
+
+.message-info
+	display: block
+
+	padding: 15px
+
+	font-size: 14px
+
+	line-height: 1.4em
+
+	background-color: $lightBackgroundColor
+
+	+boxShadow
+	+borderRadius
+
+	& a
+		color: $mainColor
+		text-decoration: underline
+
+	& > ul
+		list-style: none
+
+		padding-left: 10px
+
+		& > li
+			position: relative
+			margin-bottom: 5px
+
+			&:last-child
+				margin-bottom: 0
+
+			&::before
+				content: ""
+				display: block
+				position: absolute
+
+				top: 8px
+				left: -10px
+
+				width: 3px
+				height: 3px
+
+				border-radius: 100%
+
+				background-color: $black
+
+			& > span
+				font-weight: 700
+
 /* MEDIA */
 @media screen and (max-width: 600px)
 	// popup
@@ -699,3 +770,7 @@ button
 	.radio
 		&__description
 			font-size: 12px
+
+	// message-info
+	.message-info
+		width: 100%

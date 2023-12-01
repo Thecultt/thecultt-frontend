@@ -1,5 +1,6 @@
 import React from "react";
 import { NumericFormat } from "react-number-format";
+import { Link } from "react-router-dom";
 
 import { CartItem } from "../../../models/ICartItem";
 
@@ -13,17 +14,19 @@ interface HeaderCartModalItemProps extends CartItem {
 const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
 	hiddenCheck,
 	checked,
+	article,
 	image,
 	manufacturer,
 	name,
 	price,
+	availability,
 	changeCheck,
 	removeItem,
 }) => {
 	return (
 		<div
 			className={`header-block-cart-modal-item ${checked ? "" : "disabled"
-				}`}
+				} ${availability ? "" : "notAvailability"}`}
 		>
 			<div className="header-block-cart-modal-item-content">
 				{hiddenCheck ? null : (
@@ -44,40 +47,50 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
 					</div>
 				)}
 
-				<div
-					className="header-block-cart-modal-item-content-image"
-					style={{
-						backgroundImage: `url('${image}')`,
-					}}
-				></div>
+				<Link to={`/product/${article}`}>
+					<div
+						className="header-block-cart-modal-item-content-image"
+						style={{
+							backgroundImage: `url('${image}')`,
+						}}
+					></div>
+				</Link>
 
-				<div className="header-block-cart-modal-item-content-text">
-					<p className="header-block-cart-modal-item-content-text__brand">
-						{manufacturer}
-					</p>
-					<p className="header-block-cart-modal-item-content-text__model">
-						{name}
-					</p>
-					<p className="header-block-cart-modal-item-content-text__sum">
-						<NumericFormat
-							value={price}
-							displayType={"text"}
-							thousandSeparator={" "}
-							renderText={(formattedValue: string) => (
-								<>
-									{parseInt(
-										formattedValue.split(" ").join("")
-									) >= 10000
-										? formattedValue
-										: parseInt(
-											formattedValue.split(" ").join("")
-										)}
-								</>
-							)}
-						/>{" "}
-						₽
-					</p>
-				</div>
+				<Link to={`/product/${article}`}>
+					<div className="header-block-cart-modal-item-content-text">
+						<p className="header-block-cart-modal-item-content-text__brand">
+							{manufacturer}
+						</p>
+						<p className="header-block-cart-modal-item-content-text__model">
+							{name}
+						</p>
+						{availability ? (
+							<p className="header-block-cart-modal-item-content-text__sum">
+								<NumericFormat
+									value={price}
+									displayType={"text"}
+									thousandSeparator={" "}
+									renderText={(formattedValue: string) => (
+										<>
+											{parseInt(
+												formattedValue.split(" ").join("")
+											) >= 10000
+												? formattedValue
+												: parseInt(
+													formattedValue.split(" ").join("")
+												)}
+										</>
+									)}
+								/>{" "}
+								₽
+							</p>
+						) : (
+							<p className="header-block-cart-modal-item-content-text__availability">
+								Нет в наличии
+							</p>
+						)}
+					</div>
+				</Link>
 			</div>
 
 			<div

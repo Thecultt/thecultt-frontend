@@ -163,6 +163,14 @@ const SellImages: React.FC = () => {
 	const onSubmit = () => {
 		localStorage.setItem("sell-images-form", JSON.stringify(imageBlocksValue))
 
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "photo_complete",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+			}
+		});
+
 		dispatch(setCabinetSellCurrentStep(currentType === CabinetSellTypes.EXCHANGE ? CabinetSellStepKeys.PRODUCT : CabinetSellStepKeys.CONTACT))
 	}
 

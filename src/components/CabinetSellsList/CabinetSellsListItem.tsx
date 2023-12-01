@@ -12,7 +12,8 @@ const CabinetSellsListItem: React.FC<any> = ({
 	model,
 	condition,
 	defects,
-	price
+	price,
+	status_description
 }) => {
 	const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
@@ -38,6 +39,16 @@ const CabinetSellsListItem: React.FC<any> = ({
 
 						<p className="cabinet-sells-list-item-topinfo-block__status__media">
 							{status}
+
+							<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
+							</svg>
+
+							<span className="message-info-wrapper">
+								<span className="message-info">
+									{status_description}
+								</span>
+							</span>
 						</p>
 					</div>
 					<div className="cabinet-sells-list-item-topinfo-block">
@@ -75,6 +86,16 @@ const CabinetSellsListItem: React.FC<any> = ({
 
 						<p className="cabinet-sells-list-item-topinfo-block__status">
 							{status}
+
+							<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
+							</svg>
+
+							<span className="message-info-wrapper">
+								<span className="message-info">
+									{status_description}
+								</span>
+							</span>
 						</p>
 
 						<div

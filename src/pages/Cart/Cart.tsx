@@ -13,14 +13,14 @@ const Cart: React.FC = () => {
 	const dispatch = useDispatch();
 
 	const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
-	const { items, totalCount, totalPrice } = useTypedSelector(({ cart }) => cart);
+	const { items } = useTypedSelector(({ cart }) => cart);
 
 	const changeCheck = (article: string, status: boolean) => {
 		dispatch(changeCheckCartItem(article, status));
 	};
 
 	const removeItem = (article: string) => {
-		dispatch(removeCartItem(article));
+		dispatch(removeCartItem(article, items[article]));
 	};
 
 	return (
@@ -49,12 +49,12 @@ const Cart: React.FC = () => {
 							<div className="cart-btn">
 								<div className="cart-btn-title">
 									<p className="cart-btn-title__description">
-										Товары - {totalCount} шт.
+										Товары - {Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).length} шт.
 									</p>
 
 									<p className="cart-btn-title__sum">
 										<NumericFormat
-											value={totalPrice}
+											value={Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).map(item => item.price).length ? Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).map(item => item.price).reduce((a: number, b: number) => a + b) : 0}
 											displayType={"text"}
 											thousandSeparator={" "}
 											renderText={(formattedValue: string) => (

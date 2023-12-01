@@ -351,6 +351,16 @@ const SellInfo: React.FC = () => {
 								<Link
 									to="/cabinet/sell"
 									className="btn-regular sell-info-contact-block__btn"
+									onClick={() => {
+										window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+										window.dataLayer.push({
+											event: "send_application_click",
+											ecommerce: {
+												timestamp: Math.floor(Date.now() / 1000),
+												application_method_type: "Site"
+											}
+										});
+									}}
 								>
 									Оформить заявку
 								</Link>
@@ -383,6 +393,16 @@ const SellInfo: React.FC = () => {
 								<a
 									href="https://t.me/thecultt_bot"
 									className="btn-regular sell-info-contact-block__btn"
+									onClick={() => {
+										window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+										window.dataLayer.push({
+											event: "send_application_click",
+											ecommerce: {
+												timestamp: Math.floor(Date.now() / 1000),
+												application_method_type: "TelegramBot"
+											}
+										});
+									}}
 								>
 									Оформить заявку
 								</a>
@@ -426,6 +446,16 @@ const SellInfo: React.FC = () => {
 								<Link
 									to="/visit"
 									className="btn-regular sell-info-contact-block__btn"
+									onClick={() => {
+										window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+										window.dataLayer.push({
+											event: "send_application_click",
+											ecommerce: {
+												timestamp: Math.floor(Date.now() / 1000),
+												application_method_type: "Office"
+											}
+										});
+									}}
 								>
 									Выбрать дату и время
 								</Link>
@@ -455,7 +485,7 @@ const SellInfo: React.FC = () => {
 									</p>
 								</div>
 								<Link
-									to="/"
+									to="/sell/brands"
 									className="sell-info-service-one-block__link"
 								>
 									Открыть бренд-лист
@@ -520,7 +550,7 @@ const SellInfo: React.FC = () => {
 							</p>
 
 							<Link
-								to="/"
+								to="/help/sellers"
 								className="btn sell-info-service-one-faq__btn"
 							>
 								Подробнее в FAQ

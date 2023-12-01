@@ -24,7 +24,7 @@ const ProductInfo: React.FC<ProductInfoProps> = (product) => {
 
 			<ProductInfoState {...product} />
 
-			<ProductInfoDescription  {...product} />
+			{product.description && product.description !== "" ? < ProductInfoDescription  {...product} /> : null}
 
 			<ProductInfoParameters {...product} />
 

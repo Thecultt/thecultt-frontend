@@ -13,6 +13,14 @@ export const sendRegister = (data: { name: string, lastname: string, email: stri
 		axios.post(`${process.env.REACT_APP_API_DOMEN}/register/`, data).then(({ data }) => {
 			localStorage.setItem("accessToken", data.access)
 
+			window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+			window.dataLayer.push({
+				event: "registration",
+				ecommerce: {
+					timestamp: Math.floor(Date.now() / 1000),
+				}
+			});
+
 			window.location.hash = "welcome"
 
 			dispatch({

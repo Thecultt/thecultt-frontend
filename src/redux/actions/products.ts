@@ -13,7 +13,30 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
 			total_items,
 			items
 		}
-	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`${process.env.REACT_APP_API_DOMEN}/catalog`)
+	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`/catalog`)
+
+	// Measure product views / impressions
+	window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+	window.dataLayer.push({
+		event: "view_item_list",
+		ecommerce: {
+			timestamp: Math.floor(Date.now() / 1000),
+			items: items.map((item, index) => ({
+				item_name: item.model_name,
+				item_id: `${item.id}`,
+				price: `${item.price}`,
+				item_brand: item.manufacturer,
+				item_category: item.category,
+				item_category2: item.subcategory,
+				item_category3: "-",
+				item_category4: "-",
+				item_list_name: "Search Results",
+				item_list_id: item.article,
+				index,
+				quantity: 1
+			}))
+		}
+	});
 
 	dispatch({
 		type: ProductActionTypes.SET_PRODUCTS_PAGE_COUNT,
@@ -111,10 +134,30 @@ export const fetchProductsCatalog = (
 			total_items,
 			items,
 		}
-	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`${process.env.REACT_APP_API_DOMEN}/catalog`,
-		{
-			params: params
-		})
+	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`/catalog`, { params: params })
+
+	// Measure product views / impressions
+	window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+	window.dataLayer.push({
+		event: "view_item_list",
+		ecommerce: {
+			timestamp: Math.floor(Date.now() / 1000),
+			items: items.map((item, index) => ({
+				item_name: item.model_name,
+				item_id: `${item.id}`,
+				price: `${item.price}`,
+				item_brand: item.manufacturer,
+				item_category: item.category,
+				item_category2: item.subcategory,
+				item_category3: "-",
+				item_category4: "-",
+				item_list_name: "Search Results",
+				item_list_id: item.article,
+				index,
+				quantity: 1
+			}))
+		}
+	});
 
 	dispatch({
 		type: ProductActionTypes.SET_PRODUCTS_PAGE_COUNT,
@@ -143,7 +186,29 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 		payload: false
 	})
 
-	const { data } = await $api.get<ProductPage>(`${process.env.REACT_APP_API_DOMEN}/product/${article}`)
+	const { data } = await $api.get<ProductPage>(`/product/${article}`)
+
+	window.dataLayer.push({ ecommerce: null });
+	window.dataLayer.push({
+		event: "view_item",
+		ecommerce: {
+			timestamp: Math.floor(Date.now() / 1000),
+			items: [{
+				item_name: data.model_name,
+				item_id: `${data.id}`,
+				price: `${data.price}`,
+				item_brand: data.manufacturer,
+				item_category: data.category,
+				item_category2: data.subcategory,
+				item_category3: "-",
+				item_category4: "-",
+				item_list_name: "Search Results",
+				item_list_id: data.article,
+				index: 1,
+				quantity: 1
+			}]
+		}
+	});
 
 	dispatch({
 		type: ProductActionTypes.SET_PRODUCTS_ITEM_BY_ARTICLE,

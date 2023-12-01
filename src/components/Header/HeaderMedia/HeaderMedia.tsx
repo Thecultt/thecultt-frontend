@@ -163,7 +163,19 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 				</div>
 
 				<div className="header-media-modal-menu-btn">
-					<Link to="/cabinet/sell" className="btn header-media-modal-menu-btn__btn">
+					<Link
+						to="/cabinet/sell"
+						className="btn header-media-modal-menu-btn__btn"
+						onClick={() => {
+							window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+							window.dataLayer.push({
+								event: "sell_click",
+								ecommerce: {
+									timestamp: Math.floor(Date.now() / 1000),
+								}
+							});
+						}}
+					>
 						Продать
 					</Link>
 				</div>

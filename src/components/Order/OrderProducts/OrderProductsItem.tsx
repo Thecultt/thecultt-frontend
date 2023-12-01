@@ -1,5 +1,6 @@
 import React from "react";
 import { NumericFormat } from "react-number-format";
+import { Link } from "react-router-dom";
 
 import { CartItem } from "../../../models/ICartItem";
 
@@ -15,15 +16,17 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
 	disabledDelete,
 	hiddenCheck,
 	checked,
+	article,
 	image,
 	manufacturer,
 	name,
 	price,
+	availability,
 	changeCheck,
 	removeItem,
 }) => {
 	return (
-		<div className={`order-products-item ${checked ? "" : "disabled"}`}>
+		<div className={`order-products-item ${checked ? "" : "disabled"} ${availability ? "" : "notAvailability"}`}>
 			<div className="order-products-item-content">
 				{hiddenCheck ? null : (
 					<div
@@ -43,39 +46,53 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
 					</div>
 				)}
 
-				<div
-					className="order-products-item-content-image"
-					style={{
-						backgroundImage: `url('${image}')`,
-					}}
-				></div>
-				<div className="order-products-item-content-text">
-					<p className="order-products-item-content-text__brand">
-						{manufacturer}
-					</p>
-					<p className="order-products-item-content-text__model">
-						{name}
-					</p>
-					<p className="order-products-item-content-text__sum">
-						<NumericFormat
-							value={price}
-							displayType={"text"}
-							thousandSeparator={" "}
-							renderText={(formattedValue: string) => (
-								<>
-									{parseInt(
-										formattedValue.split(" ").join("")
-									) >= 10000
-										? formattedValue
-										: parseInt(
-											formattedValue.split(" ").join("")
-										)}
-								</>
-							)}
-						/>{" "}
-						₽
-					</p>
-				</div>
+
+				<Link to={`/product/${article}`}>
+					<div
+						className="order-products-item-content-image"
+						style={{
+							backgroundImage: `url('${image}')`,
+						}}
+					></div>
+				</Link>
+
+
+				<Link to={`/product/${article}`}>
+					<div className="order-products-item-content-text">
+						<p className="order-products-item-content-text__brand">
+							{manufacturer}
+						</p>
+						<p className="order-products-item-content-text__model">
+							{name}
+						</p>
+
+						{availability ? (
+							<p className="order-products-item-content-text__sum">
+								<NumericFormat
+									value={price}
+									displayType={"text"}
+									thousandSeparator={" "}
+									renderText={(formattedValue: string) => (
+										<>
+											{parseInt(
+												formattedValue.split(" ").join("")
+											) >= 10000
+												? formattedValue
+												: parseInt(
+													formattedValue.split(" ").join("")
+												)}
+										</>
+									)}
+								/>{" "}
+								₽
+							</p>
+						) : (
+							<p className="order-products-item-content-text__availability">
+								Нет в наличии
+							</p>
+						)}
+					</div>
+				</Link>
 			</div>
 
 			<div className={`order-products-item-remove ${disabledDelete ? "disabled" : ""}`} onClick={removeItem}>

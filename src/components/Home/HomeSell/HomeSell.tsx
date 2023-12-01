@@ -21,7 +21,19 @@ const HomeSell: React.FC = () => {
 					Воспользуйтесь услугой выкупа, продажи с комиссией или обмена вашего аксессуара на новый.
 				</p>
 
-				<Link to="/sell" className="btn home-sell-text__btn">
+				<Link
+					to="/sell"
+					className="btn home-sell-text__btn"
+					onClick={() => {
+						window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+						window.dataLayer.push({
+							event: "sell_click",
+							ecommerce: {
+								timestamp: Math.floor(Date.now() / 1000),
+							}
+						});
+					}}
+				>
 					Продать сейчас
 				</Link>
 			</div>

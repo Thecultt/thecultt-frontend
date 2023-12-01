@@ -22,7 +22,16 @@ export const sendCreateCabinetSell = (data: any) => (dispatch: Dispatch<CabinetS
 		payload: true
 	})
 
-	$api.post(`/create_sell/`, data).then(() => {
+	$api.post(`/create_sell/`, data).then(({ data }) => {
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "application_sent",
+			ecommerce: {
+				applacation_id: data.id,
+				timestamp: Math.floor(Date.now() / 1000),
+			}
+		});
+
 		dispatch({
 			type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SEND,
 			payload: true

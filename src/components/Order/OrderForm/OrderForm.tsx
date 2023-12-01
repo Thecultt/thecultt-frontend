@@ -82,7 +82,7 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 	React.useEffect(() => {
 		if (isLoaded) {
-			initialize({ ...user })
+			initialize({ ...user, name: `${user.middlename} ${user.name} ${user.lastname}`})
 		}
 	}, [isLoaded])
 
@@ -96,7 +96,15 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 			{indexForm >= 3 && deliveryValue !== "Самовывоз" ? <OrderFormAddress /> : null}
 
-			{indexForm >= 4 || (deliveryValue === "Самовывоз" && deliveryValue !== "Примерка") ? <OrderFormPayments /> : null}
+			{indexForm >= 4 ? (
+				deliveryValue !== "Примерка" ? (
+					<OrderFormPayments />
+				) : (
+					null
+				)
+			) : (
+				deliveryValue == "Самовывоз" ? <OrderFormPayments /> : null
+			)}
 		</form>
 	);
 };

@@ -3,9 +3,6 @@ import { CartItem } from '../../models/ICartItem'
 export interface CartState {
 	items: { [key: string]: CartItem }
 
-	totalPrice: number
-	totalCount: number
-
 	isVisibleMessage: boolean
 }
 
@@ -13,6 +10,7 @@ export enum CartActionTypes {
 	SET_CART_ITEMS = "SET_CART_ITEMS",
 
 	ADD_CART_ITEMS = "ADD_CART_ITEMS",
+	CHANGE_CART_ITEMS = "CHANGE_CART_ITEMS",
 	CHANGE_CHECK_CART_ITEMS = "CHANGE_CHECK_CART_ITEMS",
 	REMOVE_CART_ITEMS = "REMOVE_CART_ITEMS",
 
@@ -27,6 +25,14 @@ interface setCartItems {
 interface addCartItems {
 	type: CartActionTypes.ADD_CART_ITEMS;
 	payload: CartItem;
+}
+
+interface changeCartItems {
+	type: CartActionTypes.CHANGE_CART_ITEMS;
+	payload: {
+		article: string
+		data: CartItem
+	};
 }
 
 interface changeCheckCartItems {
@@ -48,4 +54,4 @@ interface setCartIsVisibleMessage {
 }
 
 
-export type CartActions = setCartItems | addCartItems | changeCheckCartItems | removeCartItems | setCartIsVisibleMessage
+export type CartActions = setCartItems | addCartItems | changeCartItems | changeCheckCartItems | removeCartItems | setCartIsVisibleMessage

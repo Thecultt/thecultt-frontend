@@ -32,7 +32,7 @@ const ConciergeFormBottom: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							name="phone"
 							type="text"
 							{...createTextMask({
-								pattern: "+7 999 999 99-99",
+								pattern: "+9 999 999 99-99",
 								guide: false,
 								stripMask: false,
 							})}

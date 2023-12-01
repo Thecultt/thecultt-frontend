@@ -5,7 +5,7 @@ import $api from "../../http"
 import { BrandsActions, BrandsActionTypes } from "../types/IBrands"
 
 export const fetchBrands = () => async (dispatch: Dispatch<BrandsActions>) => {
-	const { data: { brands } } = await $api.get<{ brands: { [key: string]: string[] } }>(`${process.env.REACT_APP_API_DOMEN}/brands/`)
+	const { data: { brands } } = await $api.get<{ brands: { [key: string]: string[] } }>(`/brands/`)
 
 	dispatch({
 		type: BrandsActionTypes.SET_BRANDS,

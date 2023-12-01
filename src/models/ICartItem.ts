@@ -4,6 +4,9 @@ export interface CartItem {
 	article: string
 	image: string
 	manufacturer: string
+	category: string
+	subcategory: string
 	name: string
 	price: number
+	availability: number
 }

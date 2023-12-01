@@ -8,7 +8,7 @@ import { ProductsFiltersTypes, ProductsFiltersActionTypes } from '../types/IProd
 
 export const fetchProductsFilters = () => async (dispatch: Dispatch<ProductsFiltersTypes>) => {
 	const { data: { categories, colors, conditions, min_price, max_price } } =
-		await $api.get<{ categories: { [key: string]: ProductsFiltersCategory }, colors: { [key: string]: string }, conditions: string[], min_price: number, max_price: number, }>(`${process.env.REACT_APP_API_DOMEN}/filters`)
+		await $api.get<{ categories: { [key: string]: ProductsFiltersCategory }, colors: { [key: string]: string }, conditions: string[], min_price: number, max_price: number, }>(`/filters`)
 
 	dispatch({
 		type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_PRICE,

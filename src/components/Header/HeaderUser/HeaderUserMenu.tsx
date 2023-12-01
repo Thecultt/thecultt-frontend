@@ -22,7 +22,7 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
 							`header-block-user-menu-block__link ${isActive ? "active" : ""}`
 						}
 					>
-						История Заказов
+						История заказов
 					</NavLink>
 					<NavLink
 						to="/cabinet/sells"

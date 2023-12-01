@@ -1,5 +1,6 @@
 import React from "react";
 import { NumericFormat } from "react-number-format";
+import { Link } from "react-router-dom";
 
 import { CartItem } from "../../models/ICartItem";
 
@@ -13,15 +14,17 @@ interface CartItemBlockProps extends CartItem {
 const CartItemBlock: React.FC<CartItemBlockProps> = ({
 	hiddenCheck,
 	checked,
+	article,
 	image,
 	manufacturer,
 	name,
 	price,
+	availability,
 	changeCheck,
 	removeItem,
 }) => {
 	return (
-		<div className={`cart-item ${checked ? "" : "disabled"}`}>
+		<div className={`cart-item ${checked ? "" : "disabled"} ${availability ? "" : "notAvailability"}`}>
 			<div className="cart-item-content">
 				{hiddenCheck ? null : (
 					<div
@@ -29,81 +32,65 @@ const CartItemBlock: React.FC<CartItemBlockProps> = ({
 						onClick={changeCheck}
 					>
 						{checked ? (
-							<svg
-								width="18"
-								height="18"
-								viewBox="0 0 18 18"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<rect
-									width="18"
-									height="17.97"
-									rx="4"
-									fill="#285141"
-								/>
-								<path
-									d="M5.5 8.54688L8.125 11.1719L12.5 6.79688"
-									stroke="#F1EDE8"
-									strokeLinecap="round"
-								/>
+							<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<rect y="0.5" width="20" height="20" rx="10" fill="#285141" />
+								<path d="M13.636 7.77344L8.63601 12.7734L6.36328 10.5007" stroke="#F7F4F0" strokeLinecap="round" strokeLinejoin="round" />
 							</svg>
 						) : (
-							<svg
-								width="18"
-								height="18"
-								viewBox="0 0 18 18"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<rect
-									x="0.25"
-									y="0.265625"
-									width="17.5"
-									height="17.47"
-									rx="3.75"
-									stroke="#838383"
-									strokeWidth="0.5"
-								/>
+							<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="9" cy="9" r="8.75" stroke="#838383" strokeWidth="0.5" />
 							</svg>
 						)}
 					</div>
 				)}
 
-				<div
-					className="cart-item-content-image"
-					style={{
-						backgroundImage: `url('${image}')`,
-					}}
-				></div>
+				<Link to={`/product/${article}`}>
+					<div
+						className="cart-item-content-image"
+						style={{
+							backgroundImage: `url('${image}')`,
+						}}
+					></div>
+				</Link>
 
-				<div className="cart-item-content-text">
-					<p className="cart-item-content-text__brand">
-						{manufacturer}
-					</p>
-					<p className="cart-item-content-text__model">
-						{name}
-					</p>
-					<p className="cart-item-content-text__sum">
-						<NumericFormat
-							value={price}
-							displayType={"text"}
-							thousandSeparator={" "}
-							renderText={(formattedValue: string) => (
-								<>
-									{parseInt(
-										formattedValue.split(" ").join("")
-									) >= 10000
-										? formattedValue
-										: parseInt(
-											formattedValue.split(" ").join("")
-										)}
-								</>
-							)}
-						/>{" "}
-						₽
-					</p>
-				</div>
+
+				<Link to={`/product/${article}`}>
+					<div className="cart-item-content-text">
+						<p className="cart-item-content-text__brand">
+							{manufacturer}
+						</p>
+
+						<p className="cart-item-content-text__model">
+							{name}
+						</p>
+
+						{availability ? (
+							<p className="cart-item-content-text__sum">
+								<NumericFormat
+									value={price}
+									displayType={"text"}
+									thousandSeparator={" "}
+									renderText={(formattedValue: string) => (
+										<>
+											{parseInt(
+												formattedValue.split(" ").join("")
+											) >= 10000
+												? formattedValue
+												: parseInt(
+													formattedValue.split(" ").join("")
+												)}
+										</>
+									)}
+								/>{" "}
+								₽
+							</p>
+						) : (
+							<p className="cart-item-content-text__availability">
+								Нет в наличии
+							</p>
+						)}
+					</div>
+				</Link>
 			</div>
 
 			<div

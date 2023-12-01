@@ -23,7 +23,17 @@ const CatalogFiltersConditions: React.FC<CatalogFiltersConditionsProps> = ({
 	};
 
 	return (
-		<CatalogFiltersBlockWrapper title="Состояние">
+		<CatalogFiltersBlockWrapper
+			title="Состояние"
+			infoMessage={`
+				<ul>
+					<li><span>C биркой</span>: аксессуар не был в носке, фирменные бирки присутствуют.</li>
+					<li><span>Новое</span>: аксессуар не был в носке, фирменные  бирки отсутствуют.</li>
+					<li><span>Отличное</span>: видимые следы носки отсутствуют, аксессуар носился мало и бережно.</li>
+					<li><span>Хорошее</span>: присутствуют видимые глазу следы носки, без грубых дефектов.</li>
+				</ul>
+			`}
+		>
 			{conditions.map((condition, index) => (
 				<div
 					className="catalog-filters-block-content-checkbox"

@@ -51,6 +51,8 @@
 					+ManropeMedium
 
 				&__status__media
+					position: relative
+
 					display: none
 					align-items: center
 					user-select: none
@@ -66,9 +68,16 @@
 						color: $red
 
 					& > svg
+						cursor: pointer
 						margin-left: 5px
 
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
+
 				&__status
+					position: relative
+
 					display: inline-flex
 					align-items: center
 					user-select: none
@@ -84,7 +93,15 @@
 						color: $red
 
 					& > svg
+						cursor: pointer
 						margin-left: 5px
+
+						& + .message-info-wrapper
+							right: -25px
+
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
 
 				&-icon
 					display: inline-flex

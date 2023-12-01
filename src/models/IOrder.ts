@@ -1,4 +1,5 @@
 export interface OrderProduct {
+	article: string
 	color: string
 	condition: string
 	images: string[]

@@ -19,6 +19,7 @@ const initialState: ProductsState = {
 		gender: "",
 		color: "",
 		subcategory: "",
+		is_trial: false,
 
 		nuances: "",
 

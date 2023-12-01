@@ -30,10 +30,20 @@ export const sendOrderApplyPromocode = (promocode: string) => (dispatch: Dispatc
 		})
 
 		dispatch({
+			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_NAME,
+			payload: promocode
+		})
+
+		dispatch({
 			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_SALE_SUM,
 			payload: data.discount
 		})
-	}).catch(() => {
+	}).catch(({ response: { data: { message } } }) => {
+		dispatch({
+			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE,
+			payload: message
+		})
+
 		dispatch({
 			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_SEND,
 			payload: false

@@ -5,7 +5,7 @@ import $api from "../../http"
 import { UserActionTypes, UserActions } from "../types/IUser"
 
 export const fetchUser = () => async (dispatch: Dispatch<UserActions>) => {
-	const { data } = await $api.get(`${process.env.REACT_APP_API_DOMEN}/client-attributes/`)
+	const { data } = await $api.get(`/client-attributes/`)
 
 	dispatch({
 		type: UserActionTypes.SET_USER,
@@ -19,7 +19,7 @@ export const sendUpdateUser = (body: any) => async (dispatch: Dispatch<UserActio
 		payload: true
 	})
 
-	const { data } = await $api.post(`${process.env.REACT_APP_API_DOMEN}/client-attributes/update/`, body)
+	const { data } = await $api.post(`/client-attributes/update/`, body)
 
 	dispatch({
 		type: UserActionTypes.SET_USER,

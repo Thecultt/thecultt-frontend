@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import VisitImage from "../../assets/images/visit.jpg";
 
@@ -85,9 +86,9 @@ const Visit: React.FC = () => {
 								<ul>
 									<li>
 										Обратите внимание на критерии отбора и{" "}
-										<a href="https://thecultt.com/prodat">
+										<Link to="/sell/brands">
 											бренд-лист
-										</a>{" "}
+										</Link>{" "}
 										— какие аксессуары мы принимаем.
 									</li>
 

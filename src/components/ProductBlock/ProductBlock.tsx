@@ -10,6 +10,8 @@ interface ProductBlockProps extends Product {
 	addCart: () => void;
 	isCart: boolean;
 
+	onClickProduct: () => void
+
 	addFavorite: () => void;
 	removeFavorite: () => void;
 	isFavorite: boolean;
@@ -26,12 +28,14 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	addClass,
 	addCart,
 	isCart,
+	onClickProduct,
 	addFavorite,
 	removeFavorite,
 	isFavorite,
 	num_of_favorites,
 	category,
 	subcategory,
+	is_trial,
 	ring_size
 }) => {
 	const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart)
@@ -70,7 +74,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	}
 
 	return (
-		<div className={`product-block ${addClass ? addClass : ""}`}>
+		<div className={`product-block ${addClass ? addClass : ""}`} onClick={onClickProduct}>
 			<div className="product-block-cover">
 				<div className="product-block-cover-arrow prev" onClick={onClickPrevImage}>
 					<svg
@@ -178,7 +182,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 					<h3 className="product-block-text__model">{model_name}</h3>
 				</Link>
 
-				{availability ? (
+				{availability && !is_trial ? (
 					<>
 						<Link to={`/product/${article}`}>
 							<div className="product-block-text-state">
@@ -251,18 +255,30 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 						)}
 					</>
 				) : (
-					<>
-						<span className="product-block-text__outstock">
-							Продано
-						</span>
+					is_trial ? (
+						<>
+							<span className="product-block-text__outstock">
+								На примерке
+							</span>
 
-						<button className="product-block-text__btn regular" onClick={subscribeGood}>
-							Лист ожидания
-						</button>
-					</>
+							<button className="product-block-text__btn regular" onClick={subscribeGood}>
+								Лист ожидания
+							</button>
+						</>
+					) : (
+						<>
+							<span className="product-block-text__outstock">
+								Продано
+							</span>
+
+							<button className="product-block-text__btn regular" onClick={subscribeGood}>
+								Лист ожидания
+							</button>
+						</>
+					)
 				)}
 			</div>
-		</div>
+		</div >
 	);
 };
 

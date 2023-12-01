@@ -1,5 +1,6 @@
 import React from "react";
 import imageCompression from 'browser-image-compression'
+import heic2any from "heic2any"
 
 interface SellImagesBlockProps {
 	number: number;
@@ -25,20 +26,23 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
 	const [isSending, setIsSending] = React.useState<boolean>(false)
 
 	const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log(e.target.files)
+
 		if (e.target.files?.length) {
 			setIsSending(true)
 
 			let file = e.target.files[0]
 
-			const reader = new FileReader();
+			if (file && (file.name.includes(".HEIC") || file.name.includes(".heic"))) {
+				const reader = new FileReader();
 
-			const options = {
-				maxSizeMB: 1,
-				maxWidthOrHeight: 1920,
-				useWebWorker: true,
-			}
-			try {
-				const compressedFile = await imageCompression(file, options);
+				let blobURL = URL.createObjectURL(file);
+
+				let blobRes = await fetch(blobURL)
+
+				let blob = await blobRes.blob()
+
+				let conversionResult: any = await heic2any({ blob, quality: 0.5, toType: "image/jpeg" })
 
 				reader.onload = async () => {
 					await onChangeCustom(reader.result)
@@ -46,9 +50,29 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
 					setIsSending(false)
 				};
 
-				reader.readAsDataURL(compressedFile);
-			} catch (error) {
-				console.log(error);
+				reader.readAsDataURL(conversionResult);
+			} else {
+				const reader = new FileReader();
+
+				const options = {
+					maxSizeMB: 1,
+					maxWidthOrHeight: 1920,
+					useWebWorker: true,
+				}
+
+				try {
+					const compressedFile = await imageCompression(file, options);
+
+					reader.onload = async () => {
+						await onChangeCustom(reader.result)
+
+						setIsSending(false)
+					};
+
+					reader.readAsDataURL(compressedFile);
+				} catch (error) {
+					console.log(error);
+				}
 			}
 		}
 	};
