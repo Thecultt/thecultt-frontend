@@ -16,13 +16,17 @@ const Popup: React.FC<PopupProps> = ({
 	stateContent,
 	children,
 }) => {
+	const PopupRefWrapper = React.useRef<HTMLDivElement>(null);
 	const PopupRef = React.useRef<HTMLDivElement>(null);
 
 	React.useEffect(() => {
 		if (state) {
-			document.body.style.overflow = "hidden";
+			document.body.style.width = "100%";
+			document.body.style.left = "0";
+			document.body.style.overflowY = "scroll";
+			document.body.style.position = "fixed";
 		} else {
-			document.body.style.overflow = "visible";
+			document.body.style.position = "static";
 		}
 	}, [state]);
 
@@ -45,7 +49,7 @@ const Popup: React.FC<PopupProps> = ({
 	};
 
 	return (
-		<div className={`popup ${state ? "active" : ""}`}>
+		<div className={`popup ${state ? "active" : ""}`} ref={PopupRefWrapper}>
 			<div
 				className={`popup-content ${state
 					? stateContent !== undefined

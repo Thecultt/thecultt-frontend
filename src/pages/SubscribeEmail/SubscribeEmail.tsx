@@ -13,11 +13,11 @@ const SubscribeEmail: React.FC = () => {
 
 					<div className="subscribe-email-text">
 						<h2 className="subscribe-email-text__title">
-							Дарим <span>полезный гайд</span> по уходу за сумками!
+							Дарим <span>полезный гайд</span> по уходу за сумками за подписку на рассылку
 						</h2>
 
 						<p className="subscribe-email-text__description">
-							<span>Если вы хотите продать</span> свой аксессуар, ищите в гайде рекомендации по тому, как увеличить стоимость и скорость продажи.  
+							<span>Если вы хотите продать</span> свой аксессуар, ищите в гайде рекомендации по тому, как увеличить стоимость и скорость продажи.  
 						</p>
 
 						<p className="subscribe-email-text__description">

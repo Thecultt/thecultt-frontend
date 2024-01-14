@@ -9,7 +9,7 @@ import { CartActionTypes, CartActions } from "../types/ICart";
 
 export const checkAvailabilityCartItems = (items: { [key: string]: CartItem }) => async (dispatch: Dispatch<CartActions>) => {
 	await Promise.all(Object.keys(items).map(async (article) => {
-		const { data: { availability, id, images, manufacturer, category, subcategory, model_name, price } } = await $api.get<ProductPage>(`/product/${article}`)
+		const { data: { id, images, manufacturer, category, subcategory, name, price, availability, is_trial } } = await $api.get<ProductPage>(`/product/${article}`)
 
 		dispatch({
 			type: CartActionTypes.CHANGE_CART_ITEMS,
@@ -23,9 +23,10 @@ export const checkAvailabilityCartItems = (items: { [key: string]: CartItem }) =
 					subcategory,
 					image: images[0],
 					manufacturer,
-					name: model_name,
+					name,
 					price,
-					availability
+					availability,
+					is_trial
 				}
 			}
 		})

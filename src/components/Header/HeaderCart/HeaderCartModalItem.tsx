@@ -20,13 +20,15 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
 	name,
 	price,
 	availability,
+	is_trial,
 	changeCheck,
 	removeItem,
 }) => {
+	console.log(is_trial)
 	return (
 		<div
 			className={`header-block-cart-modal-item ${checked ? "" : "disabled"
-				} ${availability ? "" : "notAvailability"}`}
+				} ${availability ? is_trial ? "notAvailability" : "" : "notAvailability"}`}
 		>
 			<div className="header-block-cart-modal-item-content">
 				{hiddenCheck ? null : (
@@ -65,25 +67,31 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
 							{name}
 						</p>
 						{availability ? (
-							<p className="header-block-cart-modal-item-content-text__sum">
-								<NumericFormat
-									value={price}
-									displayType={"text"}
-									thousandSeparator={" "}
-									renderText={(formattedValue: string) => (
-										<>
-											{parseInt(
-												formattedValue.split(" ").join("")
-											) >= 10000
-												? formattedValue
-												: parseInt(
+							is_trial ? (
+								<p className="header-block-cart-modal-item-content-text__availability">
+									На примерке
+								</p>
+							) : (
+								<p className="header-block-cart-modal-item-content-text__sum">
+									<NumericFormat
+										value={price}
+										displayType={"text"}
+										thousandSeparator={" "}
+										renderText={(formattedValue: string) => (
+											<>
+												{parseInt(
 													formattedValue.split(" ").join("")
-												)}
-										</>
-									)}
-								/>{" "}
-								₽
-							</p>
+												) >= 10000
+													? formattedValue
+													: parseInt(
+														formattedValue.split(" ").join("")
+													)}
+											</>
+										)}
+									/>{" "}
+									₽
+								</p>
+							)
 						) : (
 							<p className="header-block-cart-modal-item-content-text__availability">
 								Нет в наличии

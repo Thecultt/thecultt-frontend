@@ -27,6 +27,43 @@ export const sendRegister = (data: { name: string, lastname: string, email: stri
 				type: RegisterActionTypes.SET_REGISTER_IS_SEND,
 				payload: false
 			})
+
+			// axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.AuthorizeCustomer&deviceUUID=${localStorage.getItem("uuid_mindbox")}`, {
+			// 	headers: {
+			// 		'Content-Type': 'application/json; charset=utf-8',
+			// 		'Accept': 'application/json',
+			// 		'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
+			// 		'User-Agent': '1'
+			// 	},
+			// 	data: {
+			// 		"customer": {
+			// 			"ids": {
+			// 				"websiteID": "1"
+			// 			},
+			// 			"discountCard": {
+			// 				"ids": {
+			// 					"number": ""
+			// 				}
+			// 			},
+			// 			"birthDate": "",
+			// 			"sex": "",
+			// 			"timeZone": "",
+			// 			"lastName": "",
+			// 			"firstName": data.name,
+			// 			"middleName": data.lastname,
+			// 			"fullName": "",
+			// 			"area": {
+			// 				"ids": {
+			// 					"externalId": ""
+			// 				}
+			// 			},
+			// 			"email": data.email,
+			// 			"mobilePhone": "",
+			// 			"subscriptions": []
+			// 		},
+			// 		"executionDateTimeUtc": new Date()
+			// 	}
+			// })
 		})
 	}
 }

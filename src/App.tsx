@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { compose } from "redux";
+import { v4 } from "uuid";
 
 import "react-dots-loader/index.css";
 
@@ -51,6 +52,8 @@ declare global {
 		__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
 		cp: any;
 		dataLayer: any
+		YaPay: any
+		mindbox: any
 	}
 }
 
@@ -103,6 +106,10 @@ const App = () => {
 		}
 
 		dispatch(checkAvailabilityCartItems(cartItems) as any)
+
+		if (!localStorage.getItem("uuid_mindbox")) {
+			localStorage.setItem("uuid_mindbox", v4())
+		}
 	}, []);
 
 	React.useEffect(() => {
@@ -186,7 +193,7 @@ const App = () => {
 
 					<Route
 						path="/order/:id"
-						element={<OrderStatus status="success" />}
+						element={<OrderStatus />}
 					/>
 
 					{/* <Route

@@ -51,6 +51,7 @@ const initialState: OrderState = {
 		products: [],
 		status: "",
 		status_description: "",
+		success_status: false,
 	},
 	isLoadedOrder: false,
 

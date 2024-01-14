@@ -23,7 +23,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	manufacturer,
 	availability,
 	condition,
-	model_name,
+	name,
 	price,
 	addClass,
 	addCart,
@@ -45,9 +45,27 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
 	const [currentIndexImage, setCurrentIndexImage] = React.useState<number>(0);
 
+	const YaPay = window.YaPay;
+
 	React.useEffect(() => {
 		setCurrentIndexImage(0)
 	}, [])
+
+	React.useEffect(() => {
+		// if (YaPay) {
+		// 	YaPay.mountBadge(
+		// 		document.querySelector('#product-block-text-yandex-split'),
+		// 		{
+		// 			type: 'bnpl',
+		// 			amount: `2000.00`,
+		// 			size: 's',
+		// 			variant: 'detailed',
+		// 			color: 'primary',
+		// 			merchantId: '40d34cdd-8666-4829-9988-aaea1b87ed9a',
+		// 		}
+		// 	)
+		// }
+	}, [YaPay])
 
 	const onClickPrevImage = () => {
 		if (currentIndexImage - 1 >= 0) {
@@ -67,7 +85,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
 	const subscribeGood = () => {
 		localStorage.setItem("waiting_init", JSON.stringify({
-			category, brand: manufacturer, model: model_name, type: subcategory, size: ring_size
+			category, brand: manufacturer, model: name, type: subcategory, size: ring_size
 		}))
 
 		window.location.hash = "create_waiting"
@@ -179,7 +197,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 				<Link to={`/product/${article}`}>
 					<p className="product-block-text__brand">{manufacturer}</p>
 
-					<h3 className="product-block-text__model">{model_name}</h3>
+					<h3 className="product-block-text__model">{name}</h3>
 				</Link>
 
 				{availability && !is_trial ? (
@@ -236,6 +254,16 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 								/>{" "}
 								₽
 							</h3>
+
+							{/* @ts-ignore */}
+							<yandex-pay-badge
+								type="bnpl"
+								amount={`${price}.00`}
+								size="s"
+								variant="detailed"
+								color="primary"
+								merchant-id="40d34cdd-8666-4829-9988-aaea1b87ed9a"
+							/>
 						</Link>
 
 						{isCartLocal ? (

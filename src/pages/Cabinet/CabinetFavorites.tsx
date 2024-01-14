@@ -95,7 +95,8 @@ const CabinetFavorites: React.FC = () => {
 											name: items[key].name,
 											image: items[key].images[0],
 											price: items[key].price,
-											availability: items[key].availability
+											availability: items[key].availability,
+											is_trial: items[key].is_trial
 										})
 									}
 									onClickProduct={() => onClickProduct(items[key], index)}

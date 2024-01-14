@@ -22,4 +22,5 @@ export interface Order {
 	products: OrderProduct[]
 	status: string
 	status_description: string
+	success_status: boolean
 }

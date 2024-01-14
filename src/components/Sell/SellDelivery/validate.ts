@@ -34,10 +34,6 @@ const validate = (values: validateInfoValues) => {
 		errors.dom = "Поле не может быть пустым";
 	}
 
-	if (!values.flat) {
-		errors.flat = "Поле не может быть пустым";
-	}
-
 	return errors;
 };
 

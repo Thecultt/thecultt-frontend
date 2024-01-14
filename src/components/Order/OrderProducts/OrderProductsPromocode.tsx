@@ -30,7 +30,8 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
 							name="promocode"
 							placeholder="Промокод"
 							className={`order-products-promocode-input__field active`}
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentPromocode(e.target.value.replace(" ", ""))}
+							value={currentPromocode}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentPromocode(e.target.value.replace(" ", "").toUpperCase())}
 						/>
 
 						{isActive && disabled ?
@@ -54,7 +55,8 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
 							name="promocode"
 							placeholder="Промокод"
 							className={`order-products-promocode-input__field ${currentPromocode === "" ? "disabled" : isError ? "error" : ""}`}
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentPromocode(e.target.value.replace(" ", ""))}
+							value={currentPromocode}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCurrentPromocode(e.target.value.replace(" ", "").toUpperCase())}
 						/>
 
 						{isError ?

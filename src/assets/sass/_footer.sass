@@ -43,6 +43,28 @@
 					&:hover
 						color: $mainColor
 
+			&-block-media
+				padding-bottom: 15px
+				border-bottom: 1px solid #D9D9D9
+				margin-bottom: 15px
+
+				&-top
+					display: flex
+					justify-content: space-between
+					align-items: center
+
+					&__title
+						font-size: 16px
+
+					&-icon
+						+transition
+
+						&.open
+							transform: rotate(90deg)
+
+				&-bottom
+					margin-top: 15px
+
 		&-telegram
 			width: 340px
 
@@ -58,6 +80,10 @@
 				& > svg
 					margin-left: 0
 					margin-right: 10px
+
+		&-telegram-media
+			display: flex
+			justify-content: center
 
 		&-bottom
 			margin-top: 30px
@@ -85,7 +111,7 @@
 @media screen and ( max-width: 1200px )
 	.footer
 		padding: 15px 0
-		
+
 		&-logo
 			display: none
 
@@ -99,7 +125,7 @@
 					margin-right: 0
 
 					padding-bottom: 15px
-					border-bottom: 0.6px solid #D9D9D9
+					border-bottom: 1px solid #D9D9D9
 					margin-bottom: 15px
 
 					&:last-child
@@ -111,7 +137,9 @@
 				display: none
 
 			&-bottom
-				margin-top: 15px
+				margin-top: 0
+				border: none
+				text-align: center
 
 				&-link
 					margin-top: 0
@@ -120,4 +148,3 @@
 						display: block
 						margin-top: 15px
 						margin-right: 0
-						

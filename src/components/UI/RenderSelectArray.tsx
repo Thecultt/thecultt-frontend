@@ -40,7 +40,15 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({ label, items, dis
 
 				setCurrentItems(newItems)
 			} else {
-				setCurrentItems({ ...currentItems, [item]: item })
+				const newItems: { [key: string]: string } = {}
+
+				Object.keys(currentItems).map((key) => {
+					if (key !== "Отсутствует" && key !== "Нет дефектов") {
+						newItems[key] = key
+					}
+				})
+
+				setCurrentItems({ ...newItems, [item]: item })
 			}
 		}
 	};

@@ -9,4 +9,5 @@ export interface CartItem {
 	name: string
 	price: number
 	availability: number
+	is_trial: boolean
 }

@@ -134,7 +134,7 @@
 
 	&-item
 		position: relative
-		border: 0.3px solid $gray
+		border: 1px solid $gray
 
 		padding: 18px
 
@@ -211,7 +211,7 @@
 	.cabinet-waiting-list
 		&__add
 			width: 100%
-			
+
 		&-item
 			&-title
 				flex-direction: column
@@ -219,7 +219,7 @@
 
 				&__title
 					font-size: 18px
-				
+
 				&__subtitle
 					margin-top: 10px
 					margin-left: 0
@@ -235,3 +235,48 @@
 
 					&__value
 						margin-left: 0
+
+@media screen and (max-width: 900px)
+	.cabinet-waiting-list
+		&-form
+			width: 100%
+
+			&__title
+				font-size: 18px
+
+			&__description
+				font-size: 14px
+				width: 100%
+
+			&-content
+				&-input, &-select
+					width: 100% !important
+
+				&__btn
+					width: 100%
+
+@media screen and (max-width: 600px)
+	.cabinet-waiting-list
+		&-success
+			width: 100%
+
+			&__title
+				font-size: 17px
+
+			&__description
+				font-size: 16px
+
+			&__btn
+				width: 100%
+
+		&-delete
+			width: 100%
+
+			&-btn
+				flex-direction: column
+
+				&__btn
+					width: 100%
+
+					&:first-child
+						margin-bottom: 10px

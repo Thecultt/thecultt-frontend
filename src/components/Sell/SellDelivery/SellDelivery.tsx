@@ -25,6 +25,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	const [currentCity, setCurrentCity] = React.useState<{ title: string, value: string }>({ title: "", value: "" })
 	const [currentTypeDelivery, setCurrentTypeDelivery] = React.useState<string>("Курьер")
 
+	const { user } = useTypedSelector(({ user }) => user)
 	const { globalCitys, globalStreets } = useTypedSelector(({ order }) => order)
 	const { isSending } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
@@ -49,13 +50,19 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	}, [currentTypeDelivery])
 
 	React.useEffect(() => {
-		initialize({
-			city: currentCity.title,
-			street: "",
-			dom: "",
-			flat: "",
-			comm: "",
-		})
+		if (user.city !== "") {
+			initialize({
+				...user
+			})
+		} else {
+			initialize({
+				city: currentCity.title,
+				street: "",
+				house: "",
+				flat: "",
+				comm: "",
+			})
+		}
 	}, [currentCity])
 
 	return (
@@ -119,7 +126,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 									</div>
 
 									<div className="sell-block-input" style={{ width: "49%" }}>
-										<Field component={RenderInput} name="dom" label="Дом" bgWhite />
+										<Field component={RenderInput} name="house" label="Дом" bgWhite />
 									</div>
 
 									<div className="sell-block-input" style={{ width: "49%" }}>
@@ -127,11 +134,12 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 									</div>
 
 									<div className="sell-block-input" style={{ width: "100%" }}>
-										<Field component={RenderTextarea} name="comm" label="Комментарий" bgWhite />
+										<Field component={RenderTextarea} name="comment" label="Комментарий" bgWhite />
 									</div>
 								</div>
 							</div>
-						</div>)}
+						</div>
+					)}
 				</> : null
 			}
 
@@ -141,8 +149,8 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				</button>
 				:
 				<button
-					className={`btn ${invalid || submitting ? "disabled" : ""} sell-block__btn`}
-					disabled={invalid || submitting}
+					className={`btn ${submitting ? "disabled" : ""} sell-block__btn`}
+					disabled={submitting}
 				>
 					Продолжить
 				</button>

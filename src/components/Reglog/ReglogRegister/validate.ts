@@ -64,9 +64,5 @@ export const validate = (values: validateValues) => {
 		errors.policyCheckbox = "Поле не может быть пустым";
 	}
 
-	if (!values.promoCheckbox) {
-		errors.promoCheckbox = "Поле не может быть пустым";
-	}
-
 	return errors;
 };

@@ -28,6 +28,7 @@ export interface ProductsState {
 	isLoaded: boolean
 
 	itemByArticle: ProductPage
+	itemByArticleSimilar: Product[]
 	itemByArticleIsLoaded: boolean
 
 	isFetchMore: boolean
@@ -82,7 +83,7 @@ interface setProductsItems {
 
 interface setProductsItemByArticle {
 	type: ProductActionTypes.SET_PRODUCTS_ITEM_BY_ARTICLE,
-	payload: ProductPage
+	payload: { data: ProductPage, similar: Product[] }
 }
 
 interface setProductsItemByArticleIsLoaded {

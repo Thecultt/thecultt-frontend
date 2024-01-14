@@ -106,13 +106,17 @@ export { default as ProductCover } from "./Product/ProductCover";
 // ProductInfo
 export { default as ProductInfo } from "./Product/ProductInfo/ProductInfo";
 export { default as ProductInfoBreadCrumbs } from "./Product/ProductInfo/ProductInfoBreadCrumbs";
-export { default as ProductInfoTitle } from "./Product/ProductInfo/ProductInfoTitle";
 export { default as ProductInfoExchange } from "./Product/ProductInfo/ProductInfoExchange";
 export { default as ProductInfoState } from "./Product/ProductInfo/ProductInfoState";
 export { default as ProductInfoDescription } from "./Product/ProductInfo/ProductInfoDescription";
 export { default as ProductInfoParameters } from "./Product/ProductInfo/ProductInfoParameters";
 export { default as ProductInfoParametersSize } from "./Product/ProductInfo/ProductInfoParametersSize";
 export { default as ProductInfoAuth } from "./Product/ProductInfo/ProductInfoAuth";
+// ProductInfoTitle
+export { default as ProductInfoTitle } from "./Product/ProductInfo/ProductInfoTitle/ProductInfoTitle";
+// ProductInfoTitleSplit
+export { default as ProductInfoTitleSplit } from "./Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplit";
+export { default as ProductInfoTitleSplitPopup } from "./Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplitPopup";
 // ProductInfoTabs
 export { default as ProductInfoTabs } from "./Product/ProductInfo/ProductInfoTabs/ProductInfoTabs";
 export { default as ProductInfoTabsItem } from "./Product/ProductInfo/ProductInfoTabs/ProductInfoTabsItem";
@@ -155,6 +159,9 @@ export { default as CabinetHistoryOrdersItemProduct } from "./CabinetHistoryOrde
 
 // CabinetSellsList
 export { default as CabinetSellsListItem } from "./CabinetSellsList/CabinetSellsListItem";
+// CabinetSellsListPaymentInfo
+export { default as CabinetSellsListPaymentInfoMessage } from "./CabinetSellsList/CabinetSellsListPaymentInfo/CabinetSellsListPaymentInfoMessage";
+export { default as CabinetSellsListPaymentInfoPopupForm } from "./CabinetSellsList/CabinetSellsListPaymentInfo/CabinetSellsListPaymentInfoPopupForm";
 
 // CabinetSetting
 export { default as CabinetSettingBrandBlock } from "./CabinetSetting/CabinetSettingBrandBlock";
@@ -184,6 +191,8 @@ export { default as OrderProductsItem } from "./Order/OrderProducts/OrderProduct
 export { default as OrderProductsPromocode } from "./Order/OrderProducts/OrderProductsPromocode";
 // OrderStatus
 export { default as OrderStatus } from "./Order/OrderStatus/OrderStatus";
+export { default as OrderStatusSuccess } from "./Order/OrderStatus/OrderStatusSuccess";
+export { default as OrderStatusError } from "./Order/OrderStatus/OrderStatusError";
 export { default as OrderStatusProduct } from "./Order/OrderStatus/OrderStatusProduct";
 
 // Sell
@@ -216,3 +225,4 @@ export { default as SubscribeEmailForm } from "./SubscribeEmail/SubscribeEmailFo
 
 // Footer
 export { default as Footer } from "./Footer/Footer";
+export { default as FooterMenuBlock } from "./Footer/FooterMenuBlock";

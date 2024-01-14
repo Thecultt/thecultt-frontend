@@ -18,6 +18,10 @@ const OrderFormPayments: React.FC = () => {
 			title: "Кредит",
 			description: ""
 		},
+		{
+			title: "Яндекс Сплит",
+			description: ""
+		},
 	];
 
 	return (

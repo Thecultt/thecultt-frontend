@@ -2,6 +2,91 @@
 .cabinet-sells-list
 	+open
 
+	&-payment-info
+		&-message
+			padding: 15px
+
+			background-color: $lightBackgroundColor
+
+			margin-bottom: 25px
+
+			+borderRadius
+
+			&__title
+				font-size: 17px
+				margin-bottom: 6px
+
+			&__description
+				font-size: 14px
+				margin-bottom: 10px
+
+			&__btn
+				cursor: pointer
+
+				border: none
+				border-bottom: 1px solid $mainColor
+
+				font-size: 15px
+				color: $mainColor
+
+				background-color: transparent
+
+		&-popup
+			width: 600px
+
+			&__title
+				font-size: 22px
+				text-align: center
+
+				margin-bottom: 8px
+
+			&__subtitle
+				font-size: 14px
+				text-align: center
+
+				margin-bottom: 16px
+
+			&-block
+				margin-top: 15px
+
+				&__title
+					position: relative
+
+					display: flex
+					align-items: center
+
+					font-size: 17px
+
+					margin-bottom: 10px
+
+					& > svg
+						cursor: pointer
+						margin-left: 8px
+
+						&:hover + .message-info-wrapper
+							opacity: 1
+							pointer-events: auto
+
+				&-input-wrapper
+					display: flex
+					justify-content: space-between
+					flex-wrap: wrap
+
+				&-input
+					margin-bottom: 15px
+
+			&-btn
+				margin-top: 15px
+
+				display: flex
+				flex-direction: column
+				align-items: center
+
+				&__btn
+					margin-top: 15px
+
+					width: 75%
+
 	&-top
 		display: flex
 		justify-content: flex-end
@@ -21,7 +106,7 @@
 
 	&-item
 		position: relative
-		border: 0.3px solid $gray
+		border: 1px solid $gray
 
 		cursor: pointer
 
@@ -115,7 +200,12 @@
 						transform: rotate(180deg)
 
 		&-info
+			display: flex
+			align-items: flex-start
+			justify-content: space-between
+
 			&-block
+				width: calc( 100% - 270px )
 				margin-top: 20px
 
 				&__title
@@ -153,9 +243,25 @@
 							color: $gray
 							margin-right: 7px
 
+				&__btn
+					margin-top: 15px
+
+			&-cover
+				margin-top: 20px
+
+				width: 170px
+				height: 230px
+
+				+backgroundSetting
+				+borderRadius
+
 /* MEDIA */
 @media screen and (max-width: 900px)
 	.cabinet-sells-list
+		&-payment-info
+			&-popup
+				width: 400px
+
 		&-top
 			&__add
 				width: 100%
@@ -174,11 +280,20 @@
 						margin-top: 10px
 						display: block
 
+						& > svg
+							& + .message-info-wrapper
+								width: 250px
+								left: 0
+
 					&__status
 						display: none
 
 			&-info
+				flex-direction: column
+
 				&-block
+					width: 100%
+
 					&-value-wrapper
 						flex-direction: column
 
@@ -189,3 +304,18 @@
 						&__value
 							flex-direction: column
 							align-items: flex-start
+
+@media screen and (max-width: 600px)
+	.cabinet-sells-list
+		&-payment-info
+			&-popup
+				width: 100%
+
+				&-block
+					&-input
+						width: 100% !important
+						margin-bottom: 15px !important
+
+				&-btn
+					&__btn
+						width: 100%

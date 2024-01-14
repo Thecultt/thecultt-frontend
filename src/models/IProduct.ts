@@ -5,7 +5,7 @@ export interface Product {
 	store_price: number,
 	condition: string,
 	manufacturer: string,
-	model_name: string,
+	name: string,
 	availability: number,
 	images: string[]
 	num_of_favorites: number
@@ -22,7 +22,7 @@ export interface ProductPage {
 	store_price: number,
 	condition: string,
 	manufacturer: string,
-	model_name: string,
+	name: string,
 	availability: number,
 	category: string,
 	images: string[]

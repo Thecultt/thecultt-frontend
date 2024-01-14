@@ -25,7 +25,7 @@ export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<Fav
 			ecommerce: {
 				timestamp: Math.floor(Date.now() / 1000),
 				items: [{
-					item_name: item.model_name,
+					item_name: item.name,
 					item_id: `${item.id}`,
 					price: `${item.price}`,
 					item_brand: item.manufacturer,

@@ -204,8 +204,24 @@
 		min-width: 240px
 		width: 240px
 
-		&-close-media
+		&-media-top
+			position: relative
 			display: none
+
+			text-align: center
+
+			margin-bottom: 25px
+
+			&__title
+				font-size: 17px
+
+			&-close
+				position: absolute
+
+				right: 0
+				top: 50%
+
+				transform: translateY(-50%)
 
 		&-block
 			cursor: pointer
@@ -284,7 +300,7 @@
 					&-input
 						width: calc( 50% - 2.5px )
 						padding: 12px 8px
-						border: 0.5px solid $gray
+						border: 1px solid $gray
 						border-radius: 9px
 
 						&-field
@@ -343,7 +359,7 @@
 
 						&__input
 							width: 100%
-							border: 0.3px solid $gray
+							border: 1px solid $gray
 							border-radius: 6px
 							font-size: 14px
 							padding: 8px 40px 8px 10px
@@ -416,6 +432,24 @@
 				color: $gray
 				background-color: transparent
 				font-size: 16px
+
+		&-btn-media
+			width: 100%
+
+			position: fixed
+
+			bottom: 0
+			left: 0
+
+			padding: 15px
+
+			display: none
+			justify-content: space-between
+
+			background-color: $lightBackgroundColor
+
+			&__clear, &__apply
+				width: calc( 50% - 7.5px )
 
 	&-product-wrapper
 		width: 100%
@@ -588,18 +622,20 @@
 				display: none
 
 		&-filters
-			padding: 15px
+			padding: 25px
 
 			position: fixed
 			z-index: 1
 			background-color: $lightBackgroundColor
+
+			border-radius: 12px 12px 0px 0px
 
 			left: 0
 			bottom: 0
 
 			overflow-x: scroll
 
-			height: 80vh
+			height: 85vh
 
 			z-index: 20
 
@@ -614,9 +650,25 @@
 				opacity: 1
 				pointer-events: auto
 
-			&-close-media
+			&-media-top
 				display: block
-				margin: 5px 0 15px 0
+
+			&-block
+				&:first-child
+					border: none
+
+				&:last-child
+					margin-bottom: 75px
+
+				&-top
+					&__title
+						font-size: 15px
+
+			&-btn
+				display: none
+
+			&-btn-media
+				display: flex
 
 		&-product-wrapper
 			margin-top: 12px

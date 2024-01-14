@@ -23,7 +23,7 @@ interface CatalogProductsSectionProps {
 const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }) => {
 	const dispatch = useDispatch();
 
-	const { items } = useTypedSelector(({ products }) => products)
+	const { items, itemByArticleSimilar } = useTypedSelector(({ products }) => products)
 	const cartItems = useTypedSelector(({ cart }) => cart.items);
 	const favoritesItems = useTypedSelector(({ favorites }) => favorites.items);
 
@@ -34,8 +34,8 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 		dots: false,
 		infinite: true,
 		speed: 500,
-		slidesToShow: 6,
-		slidesToScroll: 6,
+		slidesToShow: 5,
+		slidesToScroll: 5,
 
 		responsive: [{
 			breakpoint: 1200,
@@ -112,32 +112,63 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 				</button>
 
 				<Slider {...settings} className='catalog-product-section-slider' ref={SliderRef}>
-					{items.map((item, index) => (
-						<ProductBlock
-							addClass="catalog-product-block"
-							key={`catalog-product-block-${index}`}
-							addCart={() =>
-								addCart({
-									id: item.id,
-									checked: true,
-									article: item.article,
-									manufacturer: item.manufacturer,
-									category: item.category,
-									subcategory: item.subcategory,
-									name: item.model_name,
-									image: item.images[0],
-									price: item.price,
-									availability: item.availability
-								})
-							}
-							onClickProduct={() => onClickProduct(item, index)}
-							isCart={cartItems[item.article] ? true : false}
-							addFavorite={() => addFavorite(item)}
-							removeFavorite={() => removeFavorite(item.id)}
-							isFavorite={favoritesItems[item.id] ? true : false}
-							{...item}
-						/>
-					))}
+					{itemByArticleSimilar.length ? (
+						itemByArticleSimilar.map((item, index) => (
+							<ProductBlock
+								addClass="catalog-product-block"
+								key={`catalog-product-block-${index}`}
+								addCart={() =>
+									addCart({
+										id: item.id,
+										checked: true,
+										article: item.article,
+										manufacturer: item.manufacturer,
+										category: item.category,
+										subcategory: item.subcategory,
+										name: item.name,
+										image: item.images[0],
+										price: item.price,
+										availability: item.availability,
+										is_trial: item.is_trial
+									})
+								}
+								onClickProduct={() => onClickProduct(item, index)}
+								isCart={cartItems[item.article] ? true : false}
+								addFavorite={() => addFavorite(item)}
+								removeFavorite={() => removeFavorite(item.id)}
+								isFavorite={favoritesItems[item.id] ? true : false}
+								{...item}
+							/>
+						))
+					) : (
+						items.map((item, index) => (
+							<ProductBlock
+								addClass="catalog-product-block"
+								key={`catalog-product-block-${index}`}
+								addCart={() =>
+									addCart({
+										id: item.id,
+										checked: true,
+										article: item.article,
+										manufacturer: item.manufacturer,
+										category: item.category,
+										subcategory: item.subcategory,
+										name: item.name,
+										image: item.images[0],
+										price: item.price,
+										availability: item.availability,
+										is_trial: item.is_trial
+									})
+								}
+								onClickProduct={() => onClickProduct(item, index)}
+								isCart={cartItems[item.article] ? true : false}
+								addFavorite={() => addFavorite(item)}
+								removeFavorite={() => removeFavorite(item.id)}
+								isFavorite={favoritesItems[item.id] ? true : false}
+								{...item}
+							/>
+						))
+					)} 
 				</Slider>
 
 				<button className="catalog-product-section-slider-arrow next" onClick={onClickNext}>

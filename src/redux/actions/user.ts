@@ -13,7 +13,7 @@ export const fetchUser = () => async (dispatch: Dispatch<UserActions>) => {
 	})
 }
 
-export const sendUpdateUser = (body: any) => async (dispatch: Dispatch<UserActions>) => {
+export const sendUpdateUser = (body: any, onSubmitSuccess?: () => void) => async (dispatch: Dispatch<UserActions>) => {
 	dispatch({
 		type: UserActionTypes.SET_USER_IS_SENDING,
 		payload: true
@@ -25,6 +25,8 @@ export const sendUpdateUser = (body: any) => async (dispatch: Dispatch<UserActio
 		type: UserActionTypes.SET_USER,
 		payload: data
 	})
+
+	if (onSubmitSuccess) onSubmitSuccess()
 
 	dispatch({
 		type: UserActionTypes.SET_USER_IS_SENDING,

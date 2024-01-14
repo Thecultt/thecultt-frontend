@@ -18,7 +18,7 @@ const SubscribeEmailForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					<Input name='email' label='Ваша почта' type='text' />
 				</div>
 
-				<button className="btn subscribe-email-text-form-input__btn">Я с вами!</button>
+				<button className="btn subscribe-email-text-form-input__btn">Получить гайд</button>
 			</div>
 
 			<div className="subscribe-email-text-form-type-wrapper">

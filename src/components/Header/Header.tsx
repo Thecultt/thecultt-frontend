@@ -146,6 +146,7 @@ const Header: React.FC = () => {
 
 	const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(setHeaderSearchValue(e.target.value) as any)
+		setIsOpenSearch(true)
 	}
 
 	React.useEffect(() => {
@@ -212,7 +213,7 @@ const Header: React.FC = () => {
 								<div className="header-block">
 									<div className="header-block-btn">
 										<Link
-											to="/cabinet/sell"
+											to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"}
 											className="header-block-btn__btn"
 											onClick={() => {
 												window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.

@@ -82,10 +82,6 @@ const validate = (values: validateInfoValues) => {
 		errors.house = "Поле не может быть пустым";
 	}
 
-	if (!values.flat) {
-		errors.flat = "Поле не может быть пустым";
-	}
-
 	if (!values.payment) {
 		errors.payment = "Поле не может быть пустым";
 	}

@@ -22,11 +22,12 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
 	name,
 	price,
 	availability,
+	is_trial,
 	changeCheck,
 	removeItem,
 }) => {
 	return (
-		<div className={`order-products-item ${checked ? "" : "disabled"} ${availability ? "" : "notAvailability"}`}>
+		<div className={`order-products-item ${checked ? "" : "disabled"} ${availability ? is_trial ? "notAvailability" : "" : "notAvailability"}`}>
 			<div className="order-products-item-content">
 				{hiddenCheck ? null : (
 					<div
@@ -67,25 +68,31 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
 						</p>
 
 						{availability ? (
-							<p className="order-products-item-content-text__sum">
-								<NumericFormat
-									value={price}
-									displayType={"text"}
-									thousandSeparator={" "}
-									renderText={(formattedValue: string) => (
-										<>
-											{parseInt(
-												formattedValue.split(" ").join("")
-											) >= 10000
-												? formattedValue
-												: parseInt(
+							is_trial ? (
+								<p className="order-products-item-content-text__availability">
+									На примерке
+								</p>
+							) : (
+								<p className="order-products-item-content-text__sum">
+									<NumericFormat
+										value={price}
+										displayType={"text"}
+										thousandSeparator={" "}
+										renderText={(formattedValue: string) => (
+											<>
+												{parseInt(
 													formattedValue.split(" ").join("")
-												)}
-										</>
-									)}
-								/>{" "}
-								₽
-							</p>
+												) >= 10000
+													? formattedValue
+													: parseInt(
+														formattedValue.split(" ").join("")
+													)}
+											</>
+										)}
+									/>{" "}
+									₽
+								</p>
+							)
 						) : (
 							<p className="order-products-item-content-text__availability">
 								Нет в наличии

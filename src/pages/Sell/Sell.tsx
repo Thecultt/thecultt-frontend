@@ -175,14 +175,14 @@ const Sell: React.FC = () => {
 						{localStorage.getItem("sell-info-global-type-delivery") === "Лично в офис" ? (
 							<div className="sell-success">
 								<h3 className="sell-success__title">
-									Выберите время!
+									Заявка отправлена, выберите время для записи!
 								</h3>
 								<p className="sell-success__description">
 									Вы выбрали способ отправки товара - лично в офис. Для завершения заявки необходимо выбрать дату и время посещения.
 								</p>
-								<Link to="https://calendly.com/thecultt/visit" className="btn sell-success__link">
+								<a href="https://calendly.com/thecultt/visit" target="_blank" className="btn sell-success__link">
 									Выбрать дату и время
-								</Link>
+								</a>
 							</div>
 						) : (
 							<div className="sell-success">
@@ -192,9 +192,9 @@ const Sell: React.FC = () => {
 								<p className="sell-success__description">
 									Ваша заявка принята в работу, менеджер свяжется с вами для обсуждения деталей. Вы можете  отследить статус  заявки в личном кабинете или на почте.
 								</p>
-								<Link to="/cabinet/sells" className="btn sell-success__link">
+								<button onClick={() => window.location.href = "/cabinet/sells"} className="btn sell-success__link">
 									Перейти в личный кабинет
-								</Link>
+								</button>
 							</div>
 						)}
 					</Popup>

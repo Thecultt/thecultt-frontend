@@ -45,7 +45,7 @@ const SellCooperation: React.FC = () => {
 			<div className="sell-block sell-block-cooperation">
 				<h3 className="sell-block__title">Вариант сотрудничества</h3>
 				<p className="sell-block__subtitle">
-					Выберите вариант сотрудничества, который вам интересен.
+					Выберите вариант сотрудничества, который вам интересен. <Link to="/sell">Подробнее о способах продажи.</Link>
 				</p>
 
 				<div className="sell-block-cooperation-type-block-wrapper">

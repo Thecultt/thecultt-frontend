@@ -104,8 +104,8 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			</div>
 
 			<button
-				className={`btn ${invalid || submitting ? "disabled" : ""} sell-block__btn`}
-				disabled={invalid || submitting}
+				className={`btn ${submitting ? "disabled" : ""} sell-block__btn`}
+				disabled={submitting}
 			>
 				Продолжить
 			</button>

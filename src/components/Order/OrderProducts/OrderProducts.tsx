@@ -58,7 +58,7 @@ const OrderProducts: React.FC = () => {
 		});
 	}, [currentDelivery.title])
 
-	let totalPrice = Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).map(item => item.price).length ? Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).map(item => item.price).reduce((a: number, b: number) => a + b) : 0
+	let totalPrice = Object.keys(items).map((article) => items[article]).filter((item) => item.availability && !item.is_trial && item.checked).map(item => item.price).length ? Object.keys(items).map((article) => items[article]).filter((item) => item.availability && !item.is_trial && item.checked).map(item => item.price).reduce((a: number, b: number) => a + b) : 0
 
 	const changeCheck = (article: string, status: boolean) => {
 		dispatch(changeCheckCartItem(article, status));
@@ -137,6 +137,128 @@ const OrderProducts: React.FC = () => {
 				commentValue: comment ? comment : ""
 			};
 		});
+
+	const YaPay = window.YaPay;
+
+	// Обработчик на клик по кнопке
+	// Функция должна возвращать промис которые резолвит ссылку на оплату полученную от бэкенда Яндекс Пэй
+	// Подробнее про создание заказа: https://pay.yandex.ru/ru/docs/custom/backend/yandex-pay-api/order/merchant_v1_orders-post
+	async function onPayButtonClick() {
+		// axios.post("https://sandbox.pay.yandex.ru/api/merchant/v1/orders", {
+		// 	"availablePaymentMethods": ["SPLIT"],
+		// 	"cart": {
+		// 		"externalId": "string",
+		// 		"items": [
+		// 			{
+		// 				"discountedUnitPrice": "123.45",
+		// 				"productId": "string",
+		// 				"quantity": {
+		// 					"available": "123.45",
+		// 					"count": "123.45",
+		// 					"label": "string"
+		// 				},
+		// 				"receipt": {
+		// 					"agent": {
+		// 						"agentType": 1,
+		// 						"operation": "string",
+		// 						"paymentsOperator": {
+		// 							"phones": [
+		// 								"string"
+		// 							]
+		// 						},
+		// 						"phones": [
+		// 							"string"
+		// 						],
+		// 						"transferOperator": {
+		// 							"address": "string",
+		// 							"inn": "string",
+		// 							"name": "string",
+		// 							"phones": [
+		// 								"string"
+		// 							]
+		// 						}
+		// 					},
+		// 					"excise": "123.45",
+		// 					"markQuantity": {
+		// 						"denominator": 0,
+		// 						"numerator": 0
+		// 					},
+		// 					"measure": 0,
+		// 					"paymentMethodType": 1,
+		// 					"paymentSubjectType": 1,
+		// 					"productCode": "REdERzQzRg==",
+		// 					"supplier": {
+		// 						"inn": "string",
+		// 						"name": "string",
+		// 						"phones": [
+		// 							"string"
+		// 						]
+		// 					},
+		// 					"tax": 1,
+		// 					"title": "string"
+		// 				},
+		// 				"subtotal": "123.45",
+		// 				"title": "string",
+		// 				"total": "123.45",
+		// 				"unitPrice": "123.45"
+		// 			}
+		// 		],
+		// 		"total": {
+		// 			"amount": "123.45",
+		// 			"label": "string"
+		// 		}
+		// 	},
+		// 	"currencyCode": "RUB",
+		// 	"orderId": "4521",
+		// 	"purpose": "string",
+		// 	"redirectUrls": {
+		// 		"onError": "string",
+		// 		"onSuccess": "string"
+		// 	},
+		// 	"ttl": 1800
+		// }, {
+		// 	headers: {
+		// 		"Authorization": "API-Key 40d34cdd-8666-4829-9988-aaea1b87ed9a"
+		// 	},
+		// })
+	}
+
+	// Обработчик на ошибки при открытии формы оплаты
+	function onFormOpenError(reason: any) {
+		// Выводим информацию о недоступности оплаты в данный момент
+		// и предлагаем пользователю другой способ оплаты.
+		console.error(`Payment error — ${reason}`);
+	}
+
+	React.useEffect(() => {
+		if (YaPay && paymentValue === "Яндекс Сплит") {
+			// Данные платежа
+			const paymentData = {
+				env: YaPay.PaymentEnv.Sandbox,
+				version: 4,
+				currencyCode: YaPay.CurrencyCode.Rub,
+				merchantId: process.env.REACT_APP_YANDEX_SPLIT_MERCHANT_ID,
+				totalAmount: '15980.00',
+				availablePaymentMethods: ['SPLIT'],
+			};
+
+			// Создаем платежную сессию
+			YaPay.createSession(paymentData, {
+				onPayButtonClick: onPayButtonClick,
+				onFormOpenError: onFormOpenError,
+			})
+				.then((paymentSession: any) => {
+					paymentSession.mountButton(document.querySelector('#button_container'), {
+						type: YaPay.ButtonType.Pay,
+						theme: YaPay.ButtonTheme.Black,
+						width: YaPay.ButtonWidth.Max,
+					});
+				})
+				.catch((err: any) => {
+					console.log(err)
+				});
+		}
+	}, [YaPay, paymentValue])
 
 	React.useEffect(() => {
 		const products: CartItem[] = []
@@ -262,9 +384,9 @@ const OrderProducts: React.FC = () => {
 			dispatch(sendSubmitOrder(orderId) as any)
 		} else {
 			if (paymentValue === "Кредит" || paymentValue === "Рассрочка от Тинькофф") {
-				tinkoff.create({
-					shopId: 'ce5ee097-c3d5-4f8f-89ab-f1c8f61955a7',
-					showcaseId: 'fb8dc801-85dd-4741-b15a-d594d22a4f5b',
+				tinkoff.createDemo({
+					shopId: process.env.REACT_APP_TINKOFF_SHOP_ID as string,
+					showcaseId: process.env.REACT_APP_TINKOFF_SHOW_CASE_ID as string,
 					orderNumber: String(orderId),
 					items: Object.keys(items).filter((keyCartItem) => items[keyCartItem].checked).map((key) => ({ name: items[key].name, price: items[key].price, quantity: 1 })),
 					sum: totalPrice
@@ -273,34 +395,30 @@ const OrderProducts: React.FC = () => {
 				var widget = new window.cp.CloudPayments();
 
 				widget.pay(
-					"auth", // или 'charge'
+					"auth",
 					{
-						//options
-						publicId: "pk_e121fab75d40b1ed19854b69df6ff", //id из личного кабинета
-						description: "Оплата товаров TheCultt", //назначение
-						amount: totalPrice, //сумма
-						currency: "RUB", //валюта
-						payer: {
-							firstName: "Тест",
-							lastName: "Тестов",
-							middleName: "Тестович",
-							birth: "1955-02-24",
-							address: "тестовый проезд дом тест",
-							street: "Lenina",
-							city: "MO",
-							country: "RU",
-							phone: "123",
-							postcode: "345",
-						},
+						publicId: process.env.REACT_APP_CLOUD_PAYMENTS_PUBLIC_ID,
+						description: "Оплата товаров TheCultt",
+						amount: totalPrice,
+						currency: "RUB",
+						// payer: {
+						// 	firstName: "Тест",
+						// 	lastName: "Тестов",
+						// 	middleName: "Тестович",
+						// 	birth: "1955-02-24",
+						// 	address: "тестовый проезд дом тест",
+						// 	street: "Lenina",
+						// 	city: "MO",
+						// 	country: "RU",
+						// 	phone: "123",
+						// 	postcode: "345",
+						// },
 					},
 					{
-						// onSuccess: (options: any) => {
-						// 	console.log(options)
-						// },
-						// onFail: function (reason: any, options: any) {
-						// 	window.location.href = "/order/error"
-						// },
-						onComplete: (paymentResult: any, options: any) => {
+						onFail: () => {
+							window.location.href = `/order/${orderId}`
+						},
+						onComplete: (paymentResult: any) => {
 							if (paymentResult.success) {
 								const newCart: { [key: string]: CartItem } = {}
 
@@ -396,12 +514,12 @@ const OrderProducts: React.FC = () => {
 				))}
 			</div>
 
-			<OrderProductsPromocode disabled={paymentValue === "Рассрочка от Тинькофф" || paymentValue === "Кредит"} />
+			<OrderProductsPromocode disabled={paymentValue === "Рассрочка от Тинькофф" || paymentValue === "Кредит" || paymentValue === "Яндекс Сплит"} />
 
 			<div className="order-products-total">
 				<div className="order-products-total-item">
 					<p className="order-products-total-item__title">
-						Товары - {Object.keys(items).map((article) => items[article]).filter((item) => item.availability && item.checked).length} шт
+						Товары - {Object.keys(items).map((article) => items[article]).filter((item) => item.availability && !item.is_trial && item.checked).length} шт
 					</p>
 					<p className="order-products-total-item__value">
 						<NumericFormat
@@ -502,6 +620,11 @@ const OrderProducts: React.FC = () => {
 					Нажимая на кнопку, вы принимаете условия <Link to="/help/user-agreement">пользовательского соглашения</Link> и <Link to="/help/public-offerte">публичной оферты</Link>.
 				</p>
 
+				{/* <p onClick={onPayButtonClick}>123</p> */}
+				{/* 
+				<div id="button_container">
+
+				</div> */}
 				<button
 					className={`btn ${isDisableSendBtn ? "loader" : ""} ${isCheckNull() && isValid ? "" : "disabled"
 						} order-products__btn`}

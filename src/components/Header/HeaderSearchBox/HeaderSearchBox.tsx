@@ -207,10 +207,11 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 											manufacturer: item.manufacturer,
 											category: item.category,
 											subcategory: item.subcategory,
-											name: item.model_name,
+											name: item.name,
 											image: item.images[0],
 											price: item.price,
-											availability: item.availability
+											availability: item.availability,
+											is_trial: item.is_trial
 										})
 									}
 									onClickProduct={() => onClickProduct(item, index)}
@@ -232,10 +233,11 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 											manufacturer: item.manufacturer,
 											category: item.category,
 											subcategory: item.subcategory,
-											name: item.model_name,
+											name: item.name,
 											image: item.images[0],
 											price: item.price,
-											availability: item.availability
+											availability: item.availability,
+											is_trial: item.is_trial
 										})
 									}
 									onClickProduct={() => onClickProduct(item, index)}

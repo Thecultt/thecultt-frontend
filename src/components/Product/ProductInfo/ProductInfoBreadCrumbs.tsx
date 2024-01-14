@@ -10,7 +10,7 @@ interface ProductInfoBreadCrumbsProps {
 const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ category, brand, model }) => {
 	return (
 		<div className="product-content-info-bread-crumbs">
-			<Link to="/catalog">
+			{/* <Link to="/catalog">
 				<div className="product-content-info-bread-crumbs-back">
 					<svg
 						width="26"
@@ -34,7 +34,31 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
 						/>
 					</svg>
 				</div>
-			</Link>
+			</Link> */}
+
+			<button className="product-content-info-bread-crumbs-back" onClick={() => window.history.back()}>
+				<svg
+					width="26"
+					height="27"
+					viewBox="0 0 26 27"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<rect
+						y="0.0234375"
+						width="26"
+						height="26"
+						rx="13"
+						fill="#F7F4F0"
+					/>
+					<path
+						d="M20 13.0234H6M6 13.0234L13 20.0234M6 13.0234L13 6.02344"
+						stroke="#202020"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					/>
+				</svg>
+			</button>
 
 			<Link to="/catalog" className="product-content-info-bread-crumbs__item">
 				Главная страница

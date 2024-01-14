@@ -33,7 +33,9 @@ const CatalogFiltersTop: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFilters
 					{filters.search !== "" ? (
 						filters.search
 					) : (
-						Object.keys(filters.categories).length && Object.keys(filters.categories).length !== Object.keys(categories).length ? (
+						Object.keys(filters.brands).length ? (
+							Object.keys(filters.brands).map((brand, index) => `${brand}${Object.keys(filters.brands).length === index + 1 ? "" : ", "}`)
+						) : Object.keys(filters.categories).length && Object.keys(filters.categories).length !== Object.keys(categories).length ? (
 							Object.keys(filters.categories).map((category, index) => `${category}${Object.keys(filters.categories).length === index + 1 ? "" : ", "}`)
 						) : "Новинки"
 					)}

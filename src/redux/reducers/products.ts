@@ -11,7 +11,7 @@ const initialState: ProductsState = {
 		store_price: 0,
 		condition: "",
 		manufacturer: "",
-		model_name: "",
+		name: "",
 		availability: 0,
 		category: "",
 		images: [],
@@ -48,6 +48,7 @@ const initialState: ProductsState = {
 		ring_size: "",
 		jewelry_material: "",
 	},
+	itemByArticleSimilar: [],
 	itemByArticleIsLoaded: false,
 
 	isFetchMore: false,
@@ -93,7 +94,8 @@ const products = (state = initialState, action: ProductTypes) => {
 	if (action.type === ProductActionTypes.SET_PRODUCTS_ITEM_BY_ARTICLE) {
 		return {
 			...state,
-			itemByArticle: action.payload,
+			itemByArticle: action.payload.data,
+			itemByArticleSimilar: action.payload.similar,
 			itemByArticleIsLoaded: true
 		}
 	}

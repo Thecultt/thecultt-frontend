@@ -182,6 +182,9 @@
 				&-back
 					cursor: pointer
 
+					border: none
+					background-color: transparent
+
 					display: flex
 					align-items: center
 					justify-content: center
@@ -218,15 +221,29 @@
 					display: inline-block
 					text-decoration: underline
 					font-size: 18px
-					margin-bottom: 5px
+					margin-bottom: 15px
 
 				&__model
 					font-size: 26px
 					margin-bottom: 5px
 
-				&__price
+				&-price
 					margin-bottom: 25px
-					font-size: 28px
+
+					&__price
+						font-size: 28px
+
+					&-split
+						margin-top: 5px
+
+						display: flex
+						align-items: center
+
+						&-icon
+							margin-top: 3px
+							margin-left: -7px
+
+							cursor: pointer
 
 				&__description
 					font-size: 16px
@@ -262,7 +279,7 @@
 				justify-content: space-between
 
 				padding: 12px 20px
-				border: 0.6px solid $gray
+				border: 1px solid $gray
 
 				margin-bottom: 20px
 
@@ -399,7 +416,7 @@
 				justify-content: space-between
 
 				padding: 12px 20px
-				border: 0.6px solid $gray
+				border: 1px solid $gray
 
 				margin-bottom: 30px
 
@@ -439,8 +456,45 @@
 							font-size: 18px
 
 					&__description
-						margin-top: 25px
+						margin-top: 15px
+						font-weight: 400
 						font-size: 16px
+
+						& > span
+							display: block
+							margin-bottom: 10px
+
+							&:last-child
+								margin-bottom: 0
+
+							& > a
+								color: $mainColor
+								border-bottom: 1px solid $mainColor
+
+			&-split-popup
+				width: 420px
+
+				&__logo
+					width: 200px
+
+					margin-bottom: 25px
+
+				&__title
+					font-size: 15px
+
+					font-weight: 500
+
+					margin-bottom: 8px
+
+				&__description
+					font-size: 14px
+
+				&-widget
+					margin-top: 25px
+
+				&__btn
+					margin-top: 25px
+					width: 100%
 
 @media screen and ( max-width: 1200px )
 	.product
@@ -493,6 +547,13 @@
 
 						&__link
 							font-size: 14px
+
+@media screen and ( max-width: 600px )
+	.product
+		&-content
+			&-info
+				&-split-popup
+					width: 100%
 
 @media screen and ( max-width: 500px )
 	.product

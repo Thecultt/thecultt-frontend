@@ -6,11 +6,12 @@ import { useTypedSelector } from '../../hooks/useTypedSelector'
 
 import { fetchCabinetSellsList } from '../../redux/actions/cabinet_sell'
 
-import { CabinetMenu, CabinetSellsListItem } from '../../components/'
+import { CabinetMenu, CabinetSellsListPaymentInfoMessage, CabinetSellsListItem } from '../../components/'
 
 const CabinetSellsList: React.FC = () => {
 	const dispatch = useDispatch()
 
+	const { user } = useTypedSelector(({ user }) => user)
 	const { sellsList } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
 	React.useEffect(() => {
@@ -24,6 +25,11 @@ const CabinetSellsList: React.FC = () => {
 					<CabinetMenu />
 
 					<div className="cabinet-content cabinet-sells-list">
+						{user.bik === "" || user.bik === null || user.inn === "" || user.inn === null || user.passport === "" || user.passport === null || user.rs === "" || user.rs === null ? (
+							<CabinetSellsListPaymentInfoMessage />
+						) : null}
+
+
 						<div className="cabinet-sells-list-top">
 							<Link to="/cabinet/sell" className="btn cabinet-sells-list-top__add">
 								Оставить заявку

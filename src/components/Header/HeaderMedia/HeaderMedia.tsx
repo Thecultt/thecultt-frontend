@@ -135,7 +135,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 				<div className="header-media-modal-menu-links">
 					<HeaderMediaLinkTab title="Личный кабинет">
 						<Link to="/cabinet/setting" className="header-media-modal-menu-links__link">Профиль</Link>
-						<Link to="/cabinet/sells" className="header-media-modal-menu-links__link">Мои продажи</Link>
+						<Link to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"} className="header-media-modal-menu-links__link">Мои продажи</Link>
 						<Link to="/cabinet/history" className="header-media-modal-menu-links__link">История заказов</Link>
 						<Link to="/cabinet/favorites" className="header-media-modal-menu-links__link">Избранное</Link>
 						<Link to="/cabinet/waiting" className="header-media-modal-menu-links__link">Лист ожидания</Link>
@@ -144,7 +144,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 					<Link to="/catalog" className="header-media-modal-menu-links-link">Новинки</Link>
 
 					{Object.keys(categories).map((category, index) => (
-						<HeaderMediaLinkTab title={category} key={`header-media-modal-menu-links-tab${index}`}>
+						<HeaderMediaLinkTab title={category} linkTitle={`/catalog?categories=${category}`} key={`header-media-modal-menu-links-tab${index}`}>
 							{Object.keys(categories[category].subsubcategories).map((subsubcategory, subindex) => (
 								<Link to={`/catalog?categories=${category}&types=${subsubcategory}`} className="header-media-modal-menu-links__link" key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`}>{subsubcategory}</Link>
 							))}
@@ -164,7 +164,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
 				<div className="header-media-modal-menu-btn">
 					<Link
-						to="/cabinet/sell"
+						to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"}
 						className="btn header-media-modal-menu-btn__btn"
 						onClick={() => {
 							window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.

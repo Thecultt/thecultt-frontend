@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
 	Field,
 	reduxForm,
@@ -49,6 +49,10 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				<h3 className="reglog-content-form__title">
 					Завершить регистрацию
 				</h3>
+
+				<p className="reglog-content-form__description">
+					Аккаунт, зарегистрированный на указанную почту, не найден. Завершите регистрацию для использования платформы.
+				</p>
 
 				<div className="reglog-content-form-input-wrapper">
 					<div className="reglog-content-form-input">
@@ -104,7 +108,7 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						<Field
 							component={RenderCheckbox}
 							name="policyCheckbox"
-							label="Я принимаю условия Публичной оферты и согласен (-а) на обработку своих персональных данных"
+							label="Я принимаю условия <a href='/help/public-offerte'>Публичной оферты</a> и согласен (-а) на обработку своих персональных данных"
 							small
 						/>
 					</div>

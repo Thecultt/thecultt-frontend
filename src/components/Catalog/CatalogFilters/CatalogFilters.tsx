@@ -10,7 +10,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import { ProductsStateFilters } from "../../../redux/types/IProducts";
 
-import { setFiltersCatalog, setFiltersCategoriesProduct, setProductsTypeFetch } from "../../../redux/actions/products";
+import { setFiltersCatalog, setFiltersCategoriesProduct, setFiltersAvailabilityProduct, setProductsTypeFetch } from "../../../redux/actions/products";
 
 import {
 	CatalogFiltersPrice,
@@ -196,13 +196,17 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 	]);
 
 	React.useEffect(() => {
-		if (isLoaded && filters.isParse && !Object.keys(filters.categories).length) {
-			Object.keys(categories).map(category => dispatch(setFiltersCategoriesProduct(category)))
+		if (isLoaded && filters.isParse) {
+			dispatch(setFiltersAvailabilityProduct("Доступно"))
+
+			if (!Object.keys(filters.categories).length) Object.keys(categories).map(category => dispatch(setFiltersCategoriesProduct(category)))
 		}
 	}, [isLoaded, filters.isParse, Object.keys(filters.categories).length])
 
 	const onClickClearFilters = () => {
 		window.scrollTo(0, 0)
+
+		setIsOpenFiltersMedia(false)
 
 		dispatch(
 			setFiltersCatalog({
@@ -232,34 +236,52 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 
 	return (
 		<div className={`catalog-filters ${isOpenFiltersMedia ? "active" : ""}`}>
-			<div className="catalog-filters-close-media" onClick={() => setIsOpenFiltersMedia(false)}>
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M18 6L6 18M6 6L18 18" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-				</svg>
+			<div className="catalog-filters-media-top">
+				<h4 className="catalog-filters-media-top__title">
+					Фильтры
+				</h4>
+
+				<div className="catalog-filters-media-top-close" onClick={() => setIsOpenFiltersMedia(false)}>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M18 6L6 18M6 6L18 18" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+					</svg>
+				</div>
 			</div>
 
-			<CatalogFiltersPrice
-				defaultMin={price.min}
-				defaultMax={price.max}
-			/>
-			<CatalogFiltersConditions conditions={conditions} />
-			<CatalogFiltersCategories />
-			<CatalogFiltersTypes />
-			<CatalogFiltersBrands />
-			<CatalogFiltersModels />
-			<CatalogFiltersColors colors={colors} />
-			<CatalogFiltersSex />
-			<CatalogFiltersAvailability />
+			<div className="catalog-filters-block-wrapper">
+				<CatalogFiltersPrice
+					defaultMin={price.min}
+					defaultMax={price.max}
+				/>
+				<CatalogFiltersConditions conditions={conditions} />
+				<CatalogFiltersCategories />
+				<CatalogFiltersTypes />
+				<CatalogFiltersBrands />
+				<CatalogFiltersModels />
+				<CatalogFiltersColors colors={colors} />
+				<CatalogFiltersSex />
+				<CatalogFiltersAvailability />
 
-			{Object.keys(filters.categories).map((category) => (
-				filters.categories[category] === "Обувь" ? (
-					<CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} />
-				) : null
-			))}
+				{Object.keys(filters.categories).map((category) => (
+					filters.categories[category] === "Обувь" ? (
+						<CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} />
+					) : null
+				))}
+			</div>
 
 			<div className="catalog-filters-btn">
 				<button className="catalog-filters-btn__clear" onClick={onClickClearFilters}>
 					Очистить все фильтры
+				</button>
+			</div>
+
+			<div className="catalog-filters-btn-media">
+				<button className="btn-regular catalog-filters-btn-media__clear" onClick={onClickClearFilters}>
+					Сбросить
+				</button>
+
+				<button className="btn catalog-filters-btn-media__apply" onClick={() => setIsOpenFiltersMedia(false)}>
+					Применить
 				</button>
 			</div>
 		</div>

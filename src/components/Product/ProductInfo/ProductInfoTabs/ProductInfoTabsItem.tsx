@@ -48,8 +48,7 @@ const ProductInfoTabsItem: React.FC<ProductInfoTabsItemProps> = ({ title, descri
 			</div>
 
 			<AnimateHeight duration={300} height={isOpen ? "auto" : 1}>
-				<p className="product-content-info-tabs-item__description">
-					{description}
+				<p className="product-content-info-tabs-item__description" dangerouslySetInnerHTML={{ __html: description }}>
 				</p>
 			</AnimateHeight>
 		</div>

@@ -6,34 +6,34 @@ import { OrderProduct } from '../../models/IOrder'
 
 const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({ article, images, manufacturer, model_name, color, kit, condition, price }) => {
 	return (
-		<Link to={`/product/${article}`} className="cabinet-history-orders-item-info-good">
+		<Link to={`/product/${article}`} className="cabinet-history-orders-item-info-product">
 			<div
-				className="cabinet-history-orders-item-info-good-image"
+				className="cabinet-history-orders-item-info-product-image"
 				style={{
 					backgroundImage:
 						`url('${images[0]}')`,
 				}}
 			></div>
-			<div className="cabinet-history-orders-item-info-good-text">
-				<p className="cabinet-history-orders-item-info-good-text__brand">
+			<div className="cabinet-history-orders-item-info-product-text">
+				<p className="cabinet-history-orders-item-info-product-text__brand">
 					{manufacturer}
 				</p>
-				<p className="cabinet-history-orders-item-info-good-text__model">
+				<p className="cabinet-history-orders-item-info-product-text__model">
 					{model_name}
 				</p>
-				<p className="cabinet-history-orders-item-info-good-text__option">
+				<p className="cabinet-history-orders-item-info-product-text__option">
 					<span>Цвет:</span> {color}
 				</p>
-				<p className="cabinet-history-orders-item-info-good-text__option">
+				<p className="cabinet-history-orders-item-info-product-text__option">
 					<span>Комплект:</span>{kit}
 				</p>
 
-				<div className="cabinet-history-orders-item-info-good-text-state">
-					<span className="cabinet-history-orders-item-info-good-text-state__subtitle">
+				<div className="cabinet-history-orders-item-info-product-text-state">
+					<span className="cabinet-history-orders-item-info-product-text-state__subtitle">
 						Состояние
 					</span>
 
-					<span className="cabinet-history-orders-item-info-good-text-state__title">
+					<span className="cabinet-history-orders-item-info-product-text-state__title">
 						<svg
 							viewBox="0 0 11 12"
 							fill="none"
@@ -58,7 +58,7 @@ const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({ article, imag
 					</span>
 				</div>
 
-				<p className="cabinet-history-orders-item-info-good-text-state__price">
+				<p className="cabinet-history-orders-item-info-product-text-state__price">
 					<NumericFormat
 						value={price}
 						displayType={"text"}

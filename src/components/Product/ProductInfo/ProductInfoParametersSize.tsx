@@ -19,17 +19,17 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
 }) => {
 	const parameters: { title: string, value: string }[] = [
 		{ title: "Рост модели, см", value: model_height },
-		{ title: "Длина", value: length },
-		{ title: "Ширина", value: width },
-		{ title: "Высота", value: height },
-		{ title: "Длина ручек", value: handle_length },
-		{ title: "Длина плечевого ремня", value: strap_length },
+		{ title: "Длина, см", value: length },
+		{ title: "Ширина, см", value: width },
+		{ title: "Высота, см", value: height },
+		{ title: "Длина ручек, см", value: handle_length },
+		{ title: "Длина плечевого ремня, см", value: strap_length },
 		{ title: "Размер в сетке бренда", value: brand_size },
-		{ title: "Длина по стельке", value: insole_length },
-		{ title: "Высота каблука", value: heel_height },
-		{ title: "Размеры", value: shoe_sizes },
-		{ title: "Размеры", value: glasses_sizes },
-		{ title: "Диаметр", value: diameter },
+		{ title: "Длина по стельке, см", value: insole_length },
+		{ title: "Высота каблука, см", value: heel_height },
+		{ title: "Размер", value: shoe_sizes },
+		{ title: "Размер", value: glasses_sizes },
+		{ title: "Диаметр, см", value: diameter },
 		{ title: "Размер", value: ring_size },
 	]
 

@@ -20,11 +20,12 @@ const CartItemBlock: React.FC<CartItemBlockProps> = ({
 	name,
 	price,
 	availability,
+	is_trial,
 	changeCheck,
 	removeItem,
 }) => {
 	return (
-		<div className={`cart-item ${checked ? "" : "disabled"} ${availability ? "" : "notAvailability"}`}>
+		<div className={`cart-item ${checked ? "" : "disabled"} ${availability ? is_trial ? "notAvailability" : "" : "notAvailability"}`}>
 			<div className="cart-item-content">
 				{hiddenCheck ? null : (
 					<div
@@ -65,25 +66,31 @@ const CartItemBlock: React.FC<CartItemBlockProps> = ({
 						</p>
 
 						{availability ? (
-							<p className="cart-item-content-text__sum">
-								<NumericFormat
-									value={price}
-									displayType={"text"}
-									thousandSeparator={" "}
-									renderText={(formattedValue: string) => (
-										<>
-											{parseInt(
-												formattedValue.split(" ").join("")
-											) >= 10000
-												? formattedValue
-												: parseInt(
+							is_trial ? (
+								<p className="cart-item-content-text__availability">
+									На примерке
+								</p>
+							) : (
+								<p className="cart-item-content-text__sum">
+									<NumericFormat
+										value={price}
+										displayType={"text"}
+										thousandSeparator={" "}
+										renderText={(formattedValue: string) => (
+											<>
+												{parseInt(
 													formattedValue.split(" ").join("")
-												)}
-										</>
-									)}
-								/>{" "}
-								₽
-							</p>
+												) >= 10000
+													? formattedValue
+													: parseInt(
+														formattedValue.split(" ").join("")
+													)}
+											</>
+										)}
+									/>{" "}
+									₽
+								</p>
+							)
 						) : (
 							<p className="cart-item-content-text__availability">
 								Нет в наличии

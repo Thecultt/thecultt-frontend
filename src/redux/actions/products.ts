@@ -22,8 +22,8 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
 		ecommerce: {
 			timestamp: Math.floor(Date.now() / 1000),
 			items: items.map((item, index) => ({
-				item_name: item.model_name,
-				item_id: `${item.id}`,
+				item_name: item.name,
+				item_id: `${item.article}`,
 				price: `${item.price}`,
 				item_brand: item.manufacturer,
 				item_category: item.category,
@@ -143,8 +143,8 @@ export const fetchProductsCatalog = (
 		ecommerce: {
 			timestamp: Math.floor(Date.now() / 1000),
 			items: items.map((item, index) => ({
-				item_name: item.model_name,
-				item_id: `${item.id}`,
+				item_name: item.name,
+				item_id: `${item.article}`,
 				price: `${item.price}`,
 				item_brand: item.manufacturer,
 				item_category: item.category,
@@ -187,6 +187,7 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 	})
 
 	const { data } = await $api.get<ProductPage>(`/product/${article}`)
+	const similar = await $api.get<{ items: Product[] }>(`/product/${article}/similar`).then(({ data }) => data.items)
 
 	window.dataLayer.push({ ecommerce: null });
 	window.dataLayer.push({
@@ -194,8 +195,8 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 		ecommerce: {
 			timestamp: Math.floor(Date.now() / 1000),
 			items: [{
-				item_name: data.model_name,
-				item_id: `${data.id}`,
+				item_name: data.name,
+				item_id: `${data.article}`,
 				price: `${data.price}`,
 				item_brand: data.manufacturer,
 				item_category: data.category,
@@ -212,7 +213,7 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 
 	dispatch({
 		type: ProductActionTypes.SET_PRODUCTS_ITEM_BY_ARTICLE,
-		payload: data
+		payload: { data, similar }
 	})
 }
 

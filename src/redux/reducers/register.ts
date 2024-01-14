@@ -4,7 +4,7 @@ const initialState: RegisterState = {
 	isSend: false
 }
 
-const reglog = (state = initialState, action: RegisterActions) => {
+const register = (state = initialState, action: RegisterActions) => {
 	if (action.type === RegisterActionTypes.SET_REGISTER_IS_SEND) {
 		return {
 			...state,
@@ -15,4 +15,4 @@ const reglog = (state = initialState, action: RegisterActions) => {
 	return state;
 }
 
-export default reglog
+export default register

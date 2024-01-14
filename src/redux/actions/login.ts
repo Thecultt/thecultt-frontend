@@ -22,6 +22,17 @@ export const sendLogin = (data: { username: string | null, password: string }, o
 				}
 			});
 
+			// window.mindbox("async", {
+			// 	operation: "Website.AuthorizeCustomer",
+			// 	data: {
+			// 		customer: {
+			// 			ids: {
+			// 				websiteID: "<Идентификатор на сайте>"
+			// 			}
+			// 		}
+			// 	}
+			// });
+
 			if (onChangeSuccess) {
 				onChangeSuccess()
 			} else {
