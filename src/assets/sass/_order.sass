@@ -39,11 +39,33 @@
 			&-input
 				margin-bottom: 15px
 
+			&-input-fake
+				display: block
+
+				position: relative
+				cursor: text
+				width: 100%
+
+				background-color: $lightBackgroundColor
+				border: 1px solid $gray
+
+				padding: 18px 14px
+				font-size: 16px
+
+				+borderRadius
+
+				&__title
+					font-weight: 500
+
 			&-checkbox
 				margin-bottom: 15px
 
 				&:last-child
 					margin-bottom: 0
+
+			&-payments
+				&-split-widget
+					margin-top: 15px
 
 	&-products
 		position: sticky
@@ -171,7 +193,7 @@
 				margin-bottom: 55px
 
 			&.error_disabled &-input__field
-				border: .3px solid $red !important
+				border: 1px solid $red !important
 				color: $red
 
 			&.error_disabled &-input__error

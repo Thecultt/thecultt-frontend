@@ -19,9 +19,9 @@ const Visit: React.FC = () => {
 							<path
 								d="M7 1.5L1 7.5L7 13.5"
 								stroke="#202020"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 						</svg>
 						Вернуться

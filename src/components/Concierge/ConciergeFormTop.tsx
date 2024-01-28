@@ -26,11 +26,11 @@ const ConciergeFormTop: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						label="Ваш телефон"
 						name="phone"
 						type="text"
-						{...createTextMask({
-							pattern: "+9 999 999 99-99",
-							guide: false,
-							stripMask: false,
-						})}
+						// {...createTextMask({
+						// 	pattern: "+9 999 999 99-99",
+						// 	guide: false,
+						// 	stripMask: false,
+						// })}
 					/>
 				</div>
 				<div className="concierge-main-text-form-input">

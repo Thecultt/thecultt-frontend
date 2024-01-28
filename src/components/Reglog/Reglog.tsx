@@ -15,6 +15,9 @@ import {
 	ReglogLogin,
 	ReglogRegister,
 	ReglogWelcome,
+	ReglogOldUserNewPassword,
+	ReglogWarningBlockedEmailRegister,
+	ReglogWarningBlockedEmailLogin,
 	ReglogRecoveryPassword,
 	ReglogRecoveryPasswordSuccess,
 	ReglogRecoveryPasswordConfirmed,
@@ -28,6 +31,11 @@ export enum ReglogStateTypesNotLogin {
 
 	WELCOME = "welcome",
 
+	OLD_USER_NEW_PASSWORD = "old_user_new_password",
+
+	WARNING_BLOCKED_EMAIL_REGISTER = "warning_blocked_email_register",
+	WARNING_BLOCKED_EMAIL_LOGIN = "warning_blocked_email_login ",
+
 	RECOVERY_PASSWORD = "recovery_password",
 	RECOVERY_PASSWORD_SUCCESS = "recovery_password_success",
 
@@ -37,6 +45,7 @@ export enum ReglogStateTypesNotLogin {
 const Reglog: React.FC = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
 	const { hash, pathname } = useLocation();
 
 	const [type, setType] = React.useState<string>(
@@ -47,6 +56,12 @@ const Reglog: React.FC = () => {
 
 	React.useEffect(() => {
 		const type_hash: string = hash.split("#")[1] && hash.split("#")[1].split("?") ? hash.split("#")[1].split("?")[0] : hash.split("#")[1];
+
+		if (new URLSearchParams(window.location.search).get("redirect")) {
+			localStorage.setItem("redirect_reglog", new URLSearchParams(window.location.search).get("redirect") as string)
+		} else {
+			localStorage.removeItem("redirect_reglog")
+		}
 
 		if (
 			Object.values(ReglogStateTypesNotLogin).find(
@@ -83,6 +98,8 @@ const Reglog: React.FC = () => {
 	};
 
 	const onSubmitCheckEmail = (data: any) => {
+		localStorage.setItem("email", data.email)
+
 		return dispatch(sendCheckEmail(data.email) as any);
 	};
 
@@ -95,7 +112,7 @@ const Reglog: React.FC = () => {
 	};
 
 	const onSubmitRecoveryPassword = (data: any) => {
-		return dispatch(sendRecoveryPassword(data.email) as any);
+		return dispatch(sendRecoveryPassword(data.email, true) as any)
 	};
 
 	const onSubmitRecoveryPasswordConfirmed = (data: any) => {
@@ -121,6 +138,18 @@ const Reglog: React.FC = () => {
 
 				{type === ReglogStateTypesNotLogin.WELCOME ? (
 					<ReglogWelcome />
+				) : null}
+
+				{type === ReglogStateTypesNotLogin.OLD_USER_NEW_PASSWORD ? (
+					<ReglogOldUserNewPassword />
+				) : null}
+
+				{type === ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_REGISTER ? (
+					<ReglogWarningBlockedEmailRegister />
+				) : null}
+
+				{type === ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_LOGIN ? (
+					<ReglogWarningBlockedEmailLogin />
 				) : null}
 
 				{type === ReglogStateTypesNotLogin.RECOVERY_PASSWORD ? (

@@ -14,14 +14,14 @@ import {
 
 import { sendSaveFavorite, sendRemoveFavorite } from "../../redux/actions/favorites";
 
-import { CabinetMenu, ProductBlock } from "../../components/";
+import { CabinetMenu, ProductBlock, CabinetFavoritesNull, PageLoader } from "../../components/";
 
 import { Product } from "../../models/IProduct";
 
 const CabinetFavorites: React.FC = () => {
 	const dispatch = useDispatch()
 
-	const { items, isLoaded } = useTypedSelector(({ favorites }) => favorites)
+	const { isLoaded, items } = useTypedSelector(({ favorites }) => favorites)
 	const cartItems = useTypedSelector(({ cart }) => cart.items);
 	const favoritesItems = useTypedSelector(({ favorites }) => favorites.items);
 
@@ -78,40 +78,48 @@ const CabinetFavorites: React.FC = () => {
 				<div className="cabinet-wrapper">
 					<CabinetMenu />
 
-					<div className="cabinet-content cabinet-favorites">
-						<div className="cabinet-favorites-blocks-wrapper">
-							{Object.keys(items).map((key, index) => (
-								<ProductBlock
-									addClass="cabinet-favorites-block"
-									key={`cabinet-favorites-block-${items[key].article}-${index}`}
-									addCart={() =>
-										addCart({
-											id: items[key].id,
-											checked: true,
-											article: items[key].article,
-											manufacturer: items[key].manufacturer,
-											category: items[key].category,
-											subcategory: items[key].subcategory,
-											name: items[key].name,
-											image: items[key].images[0],
-											price: items[key].price,
-											availability: items[key].availability,
-											is_trial: items[key].is_trial
-										})
-									}
-									onClickProduct={() => onClickProduct(items[key], index)}
-									isCart={cartItems[items[key].article] ? true : false}
-									addFavorite={() => addFavorite(items[key])}
-									removeFavorite={() => removeFavorite(items[key].id)}
-									isFavorite={favoritesItems[items[key].id] ? true : false}
-									{...items[key]}
-								/>
-							))}
+					{isLoaded ? (
+						<div className="cabinet-content cabinet-favorites">
+							{Object.keys(items).length ? (
+								<div className="cabinet-favorites-blocks-wrapper">
+									{Object.keys(items).map((key, index) => (
+										<ProductBlock
+											addClass="cabinet-favorites-block"
+											key={`cabinet-favorites-block-${items[key].article}-${index}`}
+											addCart={() =>
+												addCart({
+													id: items[key].id,
+													checked: true,
+													article: items[key].article,
+													manufacturer: items[key].manufacturer,
+													category: items[key].category,
+													subcategory: items[key].subcategory,
+													name: items[key].name,
+													image: items[key].images[0],
+													price: items[key].price,
+													availability: items[key].availability,
+													is_trial: items[key].is_trial
+												})
+											}
+											onClickProduct={() => onClickProduct(items[key], index)}
+											isCart={cartItems[items[key].article] ? true : false}
+											addFavorite={() => addFavorite(items[key])}
+											removeFavorite={() => removeFavorite(items[key].id)}
+											isFavorite={favoritesItems[items[key].id] ? true : false}
+											{...items[key]}
+										/>
+									))}
+								</div>
+							) : (
+								<CabinetFavoritesNull />
+							)}
 						</div>
-					</div>
+					) : (
+						<PageLoader />
+					)}
 				</div>
 			</div>
-		</section>
+		</section >
 	);
 };
 

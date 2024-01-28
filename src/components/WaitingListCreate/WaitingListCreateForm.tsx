@@ -186,10 +186,10 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 	return (
 		<form className="cabinet-waiting-list-form" onSubmit={handleSubmit}>
-			<h2 className="cabinet-waiting-list-form__title">Подписаться на товар</h2>
+			<h2 className="cabinet-waiting-list-form__title">Подписаться на модель</h2>
 
 			<p className="cabinet-waiting-list-form__description">
-				Заполните заявку, чтобы узнать о появлении в наличии нужного вам аксессуара.
+				Отправьте заявку, чтобы получить уведомление о появлении аналогичной модели на нашем сайте
 			</p>
 
 			{!isLoaded ? (

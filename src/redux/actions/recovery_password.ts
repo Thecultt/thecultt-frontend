@@ -4,7 +4,7 @@ import { Dispatch } from "react";
 
 import { RecoveryPasswordActions, RecoveryPasswordActionTypes } from '../types/IRecoveryPassword'
 
-export const sendRecoveryPassword = (email: string) => {
+export const sendRecoveryPassword = (email: string, isRedirect?: boolean) => {
 	return async (dispatch: Dispatch<RecoveryPasswordActions>) => {
 		dispatch({
 			type: RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND,
@@ -12,7 +12,7 @@ export const sendRecoveryPassword = (email: string) => {
 		});
 
 		return axios.post(`${process.env.REACT_APP_API_DOMEN}/reset_password/`, { email }).then(({ data }) => {
-			window.location.hash = "recovery_password_success"
+			if (isRedirect) window.location.hash = "recovery_password_success"
 
 			dispatch({
 				type: RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND,

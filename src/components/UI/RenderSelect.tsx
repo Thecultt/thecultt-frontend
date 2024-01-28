@@ -44,11 +44,11 @@ const RenderSelect: React.FC<RenderSelectProps> = ({ label, items, disabled, inp
 		}
 	}, [initial])
 
-	React.useEffect(() => {
-		if (input.value === "") {
-			setCurrentItem("");
-		}
-	}, [input.value])
+	// React.useEffect(() => {
+	// 	if (input.value === "") {
+	// 		setCurrentItem("");
+	// 	}
+	// }, [input.value])
 
 	React.useEffect(() => {
 		dispatch(change(form, input.name, currentItem));

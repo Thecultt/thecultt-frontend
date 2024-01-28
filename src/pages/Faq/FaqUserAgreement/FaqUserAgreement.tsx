@@ -28,7 +28,6 @@ const FaqUserAgreement: React.FC = () => {
 						</h1>
 						<h1
 							style={{
-								paddingTop: "6pt",
 								paddingLeft: "5pt",
 								textIndent: "0pt",
 								textAlign: "left",
@@ -38,6 +37,13 @@ const FaqUserAgreement: React.FC = () => {
 								– ООО «КУЛЬТ», ОГРН 1227700002936, являющееся владельцем
 								Сайта.{" "}
 							</span>
+						</h1>
+						<h1
+							style={{
+								paddingLeft: "5pt",
+								textIndent: "0pt",
+								textAlign: "left",
+							}}>
 							Сайт{" "}
 							<a
 								href="https://thecultt.com/"
@@ -52,10 +58,24 @@ const FaqUserAgreement: React.FC = () => {
 								target="_blank">
 								https://thecultt.com
 							</a>
-							<span className="p">. </span>Бот{" "}
+						</h1>
+						<h1
+							style={{
+								paddingLeft: "5pt",
+								textIndent: "0pt",
+								textAlign: "left",
+							}}>
+							Бот{" "}
 							<span className="p">
-								- бот по ссылке https://t.me/thecultt_bot в мессенджере
-								Telegram.
+								- бот по ссылке{" "}
+								<a
+									href="https://t.me/thecultt_bot"
+									className="a"
+									target="_blank"
+								>
+									https://t.me/thecultt_bot
+								</a>{" "}
+								в мессенджере Telegram.
 							</span>
 						</h1>
 						<h1

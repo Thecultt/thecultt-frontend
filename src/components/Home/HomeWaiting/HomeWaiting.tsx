@@ -18,7 +18,12 @@ const HomeWaiting: React.FC = () => {
 				<Link to="#create_waiting" className="btn home-waiting-text__btn">Оставить заявку</Link>
 			</div>
 
-			<img src={HomeWaitingImage} alt="" className="home-waiting__img" />
+			<div
+				className="home-waiting-image"
+				style={{
+					backgroundImage: `url('${HomeWaitingImage}')`,
+				}}
+			></div>
 		</div>
 	)
 }

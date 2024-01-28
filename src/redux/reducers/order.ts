@@ -19,6 +19,11 @@ const initialState: OrderState = {
 		id: 0
 	},
 
+	sum: {
+		products: 0,
+		delivery: 0
+	},
+
 	globalCountrys: [],
 	globalCitys: [],
 	globalStreets: [],
@@ -123,6 +128,26 @@ const order = (state = initialState, action: OrderStateActions) => {
 		return {
 			...state,
 			currentDelivery: action.payload
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_SUM_PRODUCTS) {
+		return {
+			...state,
+			sum: {
+				...state.sum,
+				products: action.payload
+			}
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_SUM_DELIVERY) {
+		return {
+			...state,
+			sum: {
+				...state.sum,
+				delivery: action.payload
+			}
 		}
 	}
 

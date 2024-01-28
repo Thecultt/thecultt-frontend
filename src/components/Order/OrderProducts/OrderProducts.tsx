@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { NumericFormat } from "react-number-format";
 import { formValueSelector } from "redux-form";
-import tinkoff from '@tcb-web/create-credit';
 import moment from "moment";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
@@ -13,6 +12,8 @@ import { CartItem } from "../../../models/ICartItem";
 import { changeCheckCartItem, removeCartItem } from "../../../redux/actions/cart";
 import { sendCreateOrder, sendSubmitOrder } from "../../../redux/actions/order";
 import { sendUpdateUser } from "../../../redux/actions/user";
+
+import orderPay from '../orderPay'
 
 import { Loader, OrderProductsItem, OrderProductsPromocode } from "../../";
 
@@ -82,7 +83,7 @@ const OrderProducts: React.FC = () => {
 		const checkedArr: boolean[] = [];
 
 		Object.keys(items).map((key) => {
-			if (items[key].checked) checkedArr.push(true);
+			if (items[key].checked && !items[key].is_trial) checkedArr.push(true);
 		});
 
 		return checkedArr.length;
@@ -106,9 +107,9 @@ const OrderProducts: React.FC = () => {
 
 	const { emailValue, nameValue, phoneValue, countryValue, cityValue, deliveryValue, paymentValue, streetValue, houseValue, flatValue, commentValue } =
 		useTypedSelector((state) => {
-			const { email, name, phone, country, city, delivery, payment, street, house, flat, comment } = selector(
+			const { emailThecultt, name, phone, country, city, delivery, payment, street, house, flat, comment } = selector(
 				state,
-				"email",
+				"emailThecultt",
 				"name",
 				"phone",
 				"country",
@@ -121,7 +122,7 @@ const OrderProducts: React.FC = () => {
 				"comment"
 			);
 			return {
-				emailValue: email,
+				emailValue: emailThecultt,
 				nameValue: name,
 				phoneValue: phone,
 
@@ -137,128 +138,6 @@ const OrderProducts: React.FC = () => {
 				commentValue: comment ? comment : ""
 			};
 		});
-
-	const YaPay = window.YaPay;
-
-	// Обработчик на клик по кнопке
-	// Функция должна возвращать промис которые резолвит ссылку на оплату полученную от бэкенда Яндекс Пэй
-	// Подробнее про создание заказа: https://pay.yandex.ru/ru/docs/custom/backend/yandex-pay-api/order/merchant_v1_orders-post
-	async function onPayButtonClick() {
-		// axios.post("https://sandbox.pay.yandex.ru/api/merchant/v1/orders", {
-		// 	"availablePaymentMethods": ["SPLIT"],
-		// 	"cart": {
-		// 		"externalId": "string",
-		// 		"items": [
-		// 			{
-		// 				"discountedUnitPrice": "123.45",
-		// 				"productId": "string",
-		// 				"quantity": {
-		// 					"available": "123.45",
-		// 					"count": "123.45",
-		// 					"label": "string"
-		// 				},
-		// 				"receipt": {
-		// 					"agent": {
-		// 						"agentType": 1,
-		// 						"operation": "string",
-		// 						"paymentsOperator": {
-		// 							"phones": [
-		// 								"string"
-		// 							]
-		// 						},
-		// 						"phones": [
-		// 							"string"
-		// 						],
-		// 						"transferOperator": {
-		// 							"address": "string",
-		// 							"inn": "string",
-		// 							"name": "string",
-		// 							"phones": [
-		// 								"string"
-		// 							]
-		// 						}
-		// 					},
-		// 					"excise": "123.45",
-		// 					"markQuantity": {
-		// 						"denominator": 0,
-		// 						"numerator": 0
-		// 					},
-		// 					"measure": 0,
-		// 					"paymentMethodType": 1,
-		// 					"paymentSubjectType": 1,
-		// 					"productCode": "REdERzQzRg==",
-		// 					"supplier": {
-		// 						"inn": "string",
-		// 						"name": "string",
-		// 						"phones": [
-		// 							"string"
-		// 						]
-		// 					},
-		// 					"tax": 1,
-		// 					"title": "string"
-		// 				},
-		// 				"subtotal": "123.45",
-		// 				"title": "string",
-		// 				"total": "123.45",
-		// 				"unitPrice": "123.45"
-		// 			}
-		// 		],
-		// 		"total": {
-		// 			"amount": "123.45",
-		// 			"label": "string"
-		// 		}
-		// 	},
-		// 	"currencyCode": "RUB",
-		// 	"orderId": "4521",
-		// 	"purpose": "string",
-		// 	"redirectUrls": {
-		// 		"onError": "string",
-		// 		"onSuccess": "string"
-		// 	},
-		// 	"ttl": 1800
-		// }, {
-		// 	headers: {
-		// 		"Authorization": "API-Key 40d34cdd-8666-4829-9988-aaea1b87ed9a"
-		// 	},
-		// })
-	}
-
-	// Обработчик на ошибки при открытии формы оплаты
-	function onFormOpenError(reason: any) {
-		// Выводим информацию о недоступности оплаты в данный момент
-		// и предлагаем пользователю другой способ оплаты.
-		console.error(`Payment error — ${reason}`);
-	}
-
-	React.useEffect(() => {
-		if (YaPay && paymentValue === "Яндекс Сплит") {
-			// Данные платежа
-			const paymentData = {
-				env: YaPay.PaymentEnv.Sandbox,
-				version: 4,
-				currencyCode: YaPay.CurrencyCode.Rub,
-				merchantId: process.env.REACT_APP_YANDEX_SPLIT_MERCHANT_ID,
-				totalAmount: '15980.00',
-				availablePaymentMethods: ['SPLIT'],
-			};
-
-			// Создаем платежную сессию
-			YaPay.createSession(paymentData, {
-				onPayButtonClick: onPayButtonClick,
-				onFormOpenError: onFormOpenError,
-			})
-				.then((paymentSession: any) => {
-					paymentSession.mountButton(document.querySelector('#button_container'), {
-						type: YaPay.ButtonType.Pay,
-						theme: YaPay.ButtonTheme.Black,
-						width: YaPay.ButtonWidth.Max,
-					});
-				})
-				.catch((err: any) => {
-					console.log(err)
-				});
-		}
-	}, [YaPay, paymentValue])
 
 	React.useEffect(() => {
 		const products: CartItem[] = []
@@ -320,6 +199,20 @@ const OrderProducts: React.FC = () => {
 			dispatch(sendUpdateUser({ lastname }) as any)
 		}
 
+		let paymentId;
+
+		if (currentDelivery.title === "Примерка") {
+			paymentId = 1
+		} else if (paymentValue === "Кредит") {
+			paymentId = 7
+		} else if (paymentValue === "Рассрочка от Тинькофф") {
+			paymentId = 4
+		} else if (paymentValue === "Яндекс Сплит") {
+			paymentId = 9
+		} else {
+			paymentId = 6
+		}
+
 		dispatch(sendCreateOrder({
 			mail: emailValue,
 			name: nameValue,
@@ -335,135 +228,75 @@ const OrderProducts: React.FC = () => {
 			products,
 
 			delivery_type: currentDelivery.id,
-			payment_type: currentDelivery.title === "Примерка" ? 1 : paymentValue === "Кредит" ? 7 : paymentValue === "Рассрочка от Тинькофф" ? 4 : 6,
+			payment_type: paymentId,
 
 			coupon_id: ""
 		}, (orderId: number) => pay(orderId)) as any)
 	}
 
+	const successPayment = (orderId: number) => {
+		const newCart: { [key: string]: CartItem } = {}
+
+		Object.keys(items).map(article => {
+			if (!items[article].checked) newCart[article] = { ...items[article], checked: true }
+		})
+
+		localStorage.setItem("cart", JSON.stringify(newCart))
+
+		const products: CartItem[] = []
+
+		Object.keys(items).map((keyCartItem) => {
+			if (items[keyCartItem].checked) {
+				products.push(items[keyCartItem])
+			}
+		})
+
+		window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		window.dataLayer.push({
+			event: "purchase",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+				transaction_id: `${orderId}`,
+				value: `${promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
+				tax: "-",
+				shipping: `${promocode.saleSum}`,
+				currency: "RUB",
+				coupon: `${promocode.name}`,
+				items: products.map((item) => ({
+					item_name: item.name,
+					item_id: `${item.id}`,
+					price: `${item.price}`,
+					item_brand: item.manufacturer,
+					item_category: item.category,
+					quantity: 1
+				}))
+			}
+		});
+
+		dispatch(sendSubmitOrder(orderId) as any)
+	}
+
 	const pay = (orderId: number) => {
 		if (currentDelivery.title === "Примерка") {
-			const newCart: { [key: string]: CartItem } = {}
-
-			Object.keys(items).map(article => {
-				if (!items[article].checked) newCart[article] = { ...items[article], checked: true }
-			})
-
-			localStorage.setItem("cart", JSON.stringify(newCart))
-
-			const products: CartItem[] = []
+			successPayment(orderId)
+		} else {
+			const products: { name: string, price: number }[] = []
 
 			Object.keys(items).map((keyCartItem) => {
 				if (items[keyCartItem].checked) {
-					products.push(items[keyCartItem])
+					products.push({ name: items[keyCartItem].name, price: items[keyCartItem].price })
 				}
 			})
 
-			window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-			window.dataLayer.push({
-				event: "purchase",
-				ecommerce: {
-					timestamp: Math.floor(Date.now() / 1000),
-					transaction_id: `${orderId}`,
-					value: `${promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
-					tax: "-",
-					shipping: `${promocode.saleSum}`,
-					currency: "RUB",
-					coupon: `${promocode.name}`,
-					items: products.map((item) => ({
-						item_name: item.name,
-						item_id: `${item.id}`,
-						price: `${item.price}`,
-						item_brand: item.manufacturer,
-						item_category: item.category,
-						quantity: 1
-					}))
+			orderPay(
+				{
+					type: paymentValue,
+					orderId,
+					totalPrice,
+					products,
+					onSuccessCallback: () => successPayment(orderId)
 				}
-			});
-
-			dispatch(sendSubmitOrder(orderId) as any)
-		} else {
-			if (paymentValue === "Кредит" || paymentValue === "Рассрочка от Тинькофф") {
-				tinkoff.createDemo({
-					shopId: process.env.REACT_APP_TINKOFF_SHOP_ID as string,
-					showcaseId: process.env.REACT_APP_TINKOFF_SHOW_CASE_ID as string,
-					orderNumber: String(orderId),
-					items: Object.keys(items).filter((keyCartItem) => items[keyCartItem].checked).map((key) => ({ name: items[key].name, price: items[key].price, quantity: 1 })),
-					sum: totalPrice
-				});
-			} else {
-				var widget = new window.cp.CloudPayments();
-
-				widget.pay(
-					"auth",
-					{
-						publicId: process.env.REACT_APP_CLOUD_PAYMENTS_PUBLIC_ID,
-						description: "Оплата товаров TheCultt",
-						amount: totalPrice,
-						currency: "RUB",
-						// payer: {
-						// 	firstName: "Тест",
-						// 	lastName: "Тестов",
-						// 	middleName: "Тестович",
-						// 	birth: "1955-02-24",
-						// 	address: "тестовый проезд дом тест",
-						// 	street: "Lenina",
-						// 	city: "MO",
-						// 	country: "RU",
-						// 	phone: "123",
-						// 	postcode: "345",
-						// },
-					},
-					{
-						onFail: () => {
-							window.location.href = `/order/${orderId}`
-						},
-						onComplete: (paymentResult: any) => {
-							if (paymentResult.success) {
-								const newCart: { [key: string]: CartItem } = {}
-
-								Object.keys(items).map(article => {
-									if (!items[article].checked) newCart[article] = { ...items[article], checked: true }
-								})
-
-								localStorage.setItem("cart", JSON.stringify(newCart))
-
-								const products: CartItem[] = []
-
-								Object.keys(items).map((keyCartItem) => {
-									if (items[keyCartItem].checked) {
-										products.push(items[keyCartItem])
-									}
-								})
-
-								window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-								window.dataLayer.push({
-									event: "purchase",
-									ecommerce: {
-										timestamp: Math.floor(Date.now() / 1000),
-										transaction_id: `${orderId}`,
-										value: `${promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
-										tax: "-",
-										shipping: `${promocode.saleSum}`,
-										currency: "RUB",
-										coupon: `${promocode.name}`,
-										items: products.map((item) => ({
-											item_name: item.name,
-											item_id: `${item.id}`,
-											price: `${item.price}`,
-											item_brand: item.manufacturer,
-											item_category: item.category,
-											quantity: 1
-										}))
-									}
-								});
-
-								dispatch(sendSubmitOrder(orderId) as any)
-							}
-						},
-					}
-				);
-			}
+			)
 		}
 	};
 

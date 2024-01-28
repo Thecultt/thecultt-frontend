@@ -33,12 +33,19 @@ export const sendLogin = (data: { username: string | null, password: string }, o
 			// 	}
 			// });
 
-			if (onChangeSuccess) {
-				onChangeSuccess()
+			if (localStorage.getItem("redirect_reglog")) {
+				window.location.href = localStorage.getItem("redirect_reglog") as string
 			} else {
 				window.location.hash = ""
 				window.location.reload()
 			}
+
+			// if (onChangeSuccess) {
+			// 	onChangeSuccess()
+			// } else {
+			// 	window.location.hash = ""
+			// 	window.location.reload()
+			// }
 
 			dispatch({
 				type: LoginActionTypes.SET_LOGIN_IS_SEND,

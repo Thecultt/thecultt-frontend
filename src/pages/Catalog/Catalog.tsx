@@ -10,6 +10,7 @@ import {
 
 import {
 	CatalogBanner,
+	PageLoader,
 	CatalogFiltersTop,
 	CatalogFilters,
 	CatalogProducts,
@@ -18,7 +19,7 @@ import {
 const Catalog: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const { filters, currentPage, typeFetch } = useTypedSelector(({ products }) => products);
+	const { isLoaded, filters, currentPage, typeFetch } = useTypedSelector(({ products }) => products);
 
 	const isLoadedFilters = useTypedSelector(
 		({ products_filters }) => products_filters.isLoaded
@@ -60,23 +61,29 @@ const Catalog: React.FC = () => {
 
 	return (
 		<>
-			{isLoadedFilters ? (
-				<section className="catalog">
-					<div className="container">
-						<div className="catalog-wrapper">
-							<CatalogBanner />
 
-							<CatalogFiltersTop setIsOpenFiltersMedia={setIsOpenFiltersMedia} isOpenFiltersMedia={isOpenFiltersMedia} />
+			<section className="catalog">
+				<div className="container">
+					<div className="catalog-wrapper">
+						<CatalogBanner />
 
-							<div className="catalog-blocks-and-filters-wrapper">
-								<CatalogFilters setIsOpenFiltersMedia={setIsOpenFiltersMedia} isOpenFiltersMedia={isOpenFiltersMedia} />
+						{isLoadedFilters ? (
+							<>
+								<CatalogFiltersTop setIsOpenFiltersMedia={setIsOpenFiltersMedia} isOpenFiltersMedia={isOpenFiltersMedia} />
 
-								<CatalogProducts />
-							</div>
-						</div>
+								<div className="catalog-blocks-and-filters-wrapper">
+									<CatalogFilters setIsOpenFiltersMedia={setIsOpenFiltersMedia} isOpenFiltersMedia={isOpenFiltersMedia} />
+
+									<CatalogProducts />
+								</div>
+							</>
+						) : (
+							<PageLoader />
+						)}
 					</div>
-				</section>
-			) : null}
+				</div>
+			</section>
+
 		</>
 	);
 };

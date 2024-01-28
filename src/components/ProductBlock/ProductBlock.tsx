@@ -296,7 +296,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 					) : (
 						<>
 							<span className="product-block-text__outstock">
-								Продано
+								Нет в наличии
 							</span>
 
 							<button className="product-block-text__btn regular" onClick={subscribeGood}>

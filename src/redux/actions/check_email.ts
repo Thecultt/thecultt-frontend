@@ -3,6 +3,8 @@ import { Dispatch } from "react";
 
 import { CheckEmailActionTypes, CheckEmailActions } from '../types/ICheckEmail'
 
+import { sendRecoveryPassword } from './recovery_password'
+
 export const sendCheckEmail = (email: string) => (dispatch: Dispatch<CheckEmailActions>) => {
 	dispatch({
 		type: CheckEmailActionTypes.SET_CHECK_EMAIL_EMAIL,
@@ -17,14 +19,26 @@ export const sendCheckEmail = (email: string) => (dispatch: Dispatch<CheckEmailA
 	sessionStorage.setItem("email", email)
 
 	axios.post(`${process.env.REACT_APP_API_DOMEN}/email_check/`, { email }).then(() => {
-		window.location.hash = "register"
+		if (email.split("@")[1] === "icloud.com" || email.split("@")[1] === "hotmail.com") {
+			window.location.hash = "warning_blocked_email_register"
+		} else {
+			window.location.hash = "register"
+		}
 
 		dispatch({
 			type: CheckEmailActionTypes.SET_CHECK_EMAIL_IS_SEND,
 			payload: false
 		})
-	}).catch(() => {
-		window.location.hash = "login"
+	}).catch(({ response: { data } }) => {
+		if (data.login_first_time) {
+			window.location.hash = "old_user_new_password"
+
+			dispatch(sendRecoveryPassword(email) as any)
+		} else if (email.split("@")[1] === "icloud.com" || email.split("@")[1] === "hotmail.com") {
+			window.location.hash = "warning_blocked_email_register"
+		} else {
+			window.location.hash = "login"
+		}
 
 		dispatch({
 			type: CheckEmailActionTypes.SET_CHECK_EMAIL_IS_SEND,

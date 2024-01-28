@@ -197,7 +197,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 
 	React.useEffect(() => {
 		if (isLoaded && filters.isParse) {
-			dispatch(setFiltersAvailabilityProduct("Доступно"))
+			// dispatch(setFiltersAvailabilityProduct("Доступно"))
 
 			if (!Object.keys(filters.categories).length) Object.keys(categories).map(category => dispatch(setFiltersCategoriesProduct(category)))
 		}

@@ -13,6 +13,7 @@ export { default as Select } from "./UI/Select";
 export { default as Textarea } from "./UI/Textarea";
 export { default as RadioSelect } from "./UI/RadioSelect";
 export { default as Loader } from "./UI/Loader";
+export { default as PageLoader } from "./UI/PageLoader";
 
 // MenuMedia
 export { default as MenuMedia } from "./MenuMedia/MenuMedia";
@@ -51,6 +52,12 @@ export { default as ReglogLogin } from "./Reglog/ReglogLogin/ReglogLogin";
 export { default as ReglogRegister } from "./Reglog/ReglogRegister/ReglogRegister";
 // ReglogWelcome
 export { default as ReglogWelcome } from "./Reglog/ReglogWelcome/ReglogWelcome";
+// ReglogOldUserNewPassword
+export { default as ReglogOldUserNewPassword } from "./Reglog/ReglogOldUserNewPassword/ReglogOldUserNewPassword";
+// ReglogWarningBlockedEmailRegister
+export { default as ReglogWarningBlockedEmailRegister } from "./Reglog/ReglogWarningBlockedEmailRegister/ReglogWarningBlockedEmailRegister";
+// ReglogWarningBlockedEmailLogin
+export { default as ReglogWarningBlockedEmailLogin } from "./Reglog/ReglogWarningBlockedEmailLogin/ReglogWarningBlockedEmailLogin";
 // ReglogRecoveryPassword
 export { default as ReglogRecoveryPassword } from "./Reglog/ReglogRecoveryPassword/ReglogRecoveryPassword";
 export { default as ReglogRecoveryPasswordSuccess } from "./Reglog/ReglogRecoveryPassword/ReglogRecoveryPasswordSuccess";
@@ -103,6 +110,7 @@ export { default as CatalogProductsSection } from "./Catalog/CatalogProducts/Cat
 
 // Product
 export { default as ProductCover } from "./Product/ProductCover";
+export { default as ProductExchange } from "./Product/ProductExchange";
 // ProductInfo
 export { default as ProductInfo } from "./Product/ProductInfo/ProductInfo";
 export { default as ProductInfoBreadCrumbs } from "./Product/ProductInfo/ProductInfoBreadCrumbs";
@@ -120,9 +128,6 @@ export { default as ProductInfoTitleSplitPopup } from "./Product/ProductInfo/Pro
 // ProductInfoTabs
 export { default as ProductInfoTabs } from "./Product/ProductInfo/ProductInfoTabs/ProductInfoTabs";
 export { default as ProductInfoTabsItem } from "./Product/ProductInfo/ProductInfoTabs/ProductInfoTabsItem";
-
-// SellAndSale
-export { default as SellAndSale } from "./SellAndSale/SellAndSale";
 
 // Faq
 export { default as FaqBreadCrumbs } from "./Faq/FaqBreadCrumbs";
@@ -156,12 +161,16 @@ export { default as CabinetWaitingListItem } from "./CabinetWaitingList/CabinetW
 // CabinetHistoryOrders
 export { default as CabinetHistoryOrdersItem } from "./CabinetHistoryOrders/CabinetHistoryOrdersItem";
 export { default as CabinetHistoryOrdersItemProduct } from "./CabinetHistoryOrders/CabinetHistoryOrdersItemProduct";
+export { default as CabinetHistoryOrdersNull } from "./CabinetHistoryOrders/CabinetHistoryOrdersNull";
 
 // CabinetSellsList
 export { default as CabinetSellsListItem } from "./CabinetSellsList/CabinetSellsListItem";
 // CabinetSellsListPaymentInfo
 export { default as CabinetSellsListPaymentInfoMessage } from "./CabinetSellsList/CabinetSellsListPaymentInfo/CabinetSellsListPaymentInfoMessage";
 export { default as CabinetSellsListPaymentInfoPopupForm } from "./CabinetSellsList/CabinetSellsListPaymentInfo/CabinetSellsListPaymentInfoPopupForm";
+
+// CabinetFavorites
+export { default as CabinetFavoritesNull } from "./CabinetFavorites/CabinetFavoritesNull";
 
 // CabinetSetting
 export { default as CabinetSettingBrandBlock } from "./CabinetSetting/CabinetSettingBrandBlock";

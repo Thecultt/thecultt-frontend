@@ -106,37 +106,51 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 	return (
 		<div className={`header-search-box-wrapper ${state ? "active" : ""}`}>
 			<div className={`header-search-box ${state ? "active" : ""}`} ref={PopupRef}>
-				<div className="input-light header-search-box-media-input">
-					<svg
-						width="20"
-						height="21"
-						viewBox="0 0 20 21"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
-							stroke="#838383"
-							strokeWidth="1.5"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
-						<path
-							d="M17.5 17.9844L13.875 14.3594"
-							stroke="#838383"
-							strokeWidth="1.5"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						/>
-					</svg>
+				<div className="header-search-box-media-input-wrapper">
+					<div className={`input-light header-search-box-media-input ${search.value !== "" ? "active" : ""}`}>
+						<svg
+							width="20"
+							height="21"
+							viewBox="0 0 20 21"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
+								stroke="#838383"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							/>
+							<path
+								d="M17.5 17.9844L13.875 14.3594"
+								stroke="#838383"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							/>
+						</svg>
 
-					<input
-						type="text"
-						className="input-light__field"
-						placeholder="Поиск"
-						onChange={onChangeSearchInput}
-						value={search.value}
-					/>
+						<input
+							type="text"
+							className="input-light__field"
+							placeholder="Поиск"
+							onChange={onChangeSearchInput}
+							value={search.value}
+						/>
+
+						{search.value !== "" ? (
+							<span className="header-search-box-media-input__clear" onClick={() => dispatch(setHeaderSearchValue("") as any)}>
+								<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M13.5 4.5L4.5 13.5M4.5 4.5L13.5 13.5" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+								</svg>
+							</span>
+						) : null}
+					</div>
+
+					<button className="header-search-box-media-input__close" onClick={onClose}>
+						Закрыть
+					</button>
 				</div>
 
 				<div className="header-search-box-history">
@@ -194,6 +208,12 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 					<h3 className="header-search-box-products__title">
 						{search.value !== "" ? `${checkDeclension(search.totalCount, ["Найден", "Найдено", "Найдено"]).text}: ${checkDeclension(search.totalCount, ["товар", "товара", "товаров"]).title}` : "Новинки"} <Link to={`/catalog?search=${search.value}`} onClick={onClose}>Смотреть все</Link>
 					</h3>
+
+					{search.value !== "" ? (
+						<p className="header-search-box-products-media__subtitle">
+							Результаты поиска
+						</p>
+					) : null}
 
 					<div className="header-search-box-products-blocks-wrapper">
 						{search.value !== "" ? search.items.map((item, index) => (

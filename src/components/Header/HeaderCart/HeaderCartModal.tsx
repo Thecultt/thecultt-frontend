@@ -8,7 +8,6 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { changeCheckCartItem, removeCartItem } from "../../../redux/actions/cart";
 
 import { HeaderCartModalItem } from "../../";
-import { CartItem } from "../../../models/ICartItem";
 
 interface HeaderCartModalProps {
 	state: boolean;
@@ -135,7 +134,7 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
 								</Link>
 							) : (
 								<Link
-									to="#reglog"
+									to="/?redirect=/order#reglog"
 									className={`btn ${Object.keys(items).filter(key => items[key].checked === true).length ? "" : "disabled"} header-block-cart-modal-btn__btn`}
 								>
 									Перейти к заказу

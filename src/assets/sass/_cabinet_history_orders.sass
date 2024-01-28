@@ -240,23 +240,44 @@
 
 						+ManropeMedium
 
+	&-null
+		&__title
+			font-size: 16px
+			margin-bottom: 30px
+
 /* MEDIA */
 @media screen and (max-width: 1200px)
 	.cabinet-history-orders
-		margin-top: 15px
 		width: 100%
 
 @media screen and (max-width: 900px)
 	.cabinet-history-orders
+		&-item-wrapper
+			padding: 0
+
 		&-item
+			padding: 15px
+			border: none
+
 			&-topinfo
 				&-block
 					align-items: flex-start
 					flex-direction: column
 
-					&__date, &__sum
-						margin-top: 10px
+					&__date
+						order: 1
+						color: $gray
+						font-size: 14px
+
 						margin-left: 0
+						margin-bottom: 5px
+
+					&__title
+						order: 2
+						font-size: 15px
+
+					&__sum
+						display: none
 
 					&__status
 						display: none
@@ -264,10 +285,9 @@
 					&__status__media
 						margin-top: 10px
 						display: inline-flex
+						font-size: 15px
 
-						& > svg
-							& + .message-info-wrapper
-								width: 250px
+						order: 3
 
 			&-info
 				&-good

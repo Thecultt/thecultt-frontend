@@ -32,30 +32,29 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 	const selector = formValueSelector("order-form");
 
-	const { emailValue, nameValue, phoneValue, deliveryValue, houseValue, flatValue } =
+	const { nameValue, phoneValue, deliveryValue, houseValue, paymentValue } =
 		useTypedSelector((state) => {
-			const { email, name, phone, delivery, house, flat } = selector(
+			const { name, phone, delivery, house, payment } = selector(
 				state,
-				"email",
 				"name",
 				"phone",
 				"delivery",
 				"house",
-				"flat"
+				"payment"
 			);
 			return {
-				emailValue: email,
 				nameValue: name,
 				phoneValue: phone,
 				deliveryValue: delivery,
 
 				houseValue: house,
-				flatValue: flat,
+
+				paymentValue: payment,
 			};
 		});
 
 	React.useEffect(() => {
-		if (emailValue && nameValue && phoneValue) {
+		if (nameValue && phoneValue) {
 			setIndexForm(1)
 		}
 
@@ -67,10 +66,10 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			setIndexForm(3)
 		}
 
-		if (street.value !== "" && houseValue && flatValue) {
+		if (street.value !== "" && houseValue) {
 			setIndexForm(4)
 		}
-	}, [emailValue, nameValue, phoneValue, country, city, street, deliveryValue, houseValue, flatValue])
+	}, [nameValue, phoneValue, country, city, street, deliveryValue, houseValue])
 
 	React.useEffect(() => {
 		if (invalid || pristine || submitting) {
@@ -82,13 +81,13 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 	React.useEffect(() => {
 		if (isLoaded) {
-			initialize({ ...user, name: `${user.middlename} ${user.name} ${user.lastname}`})
+			initialize({ name: `${user.middlename ? `${user.middlename} ` : ""}${user.name ? `${user.name} ` : ""}${user.lastname ? `${user.lastname} ` : ""}`, phone: user.phone })
 		}
 	}, [isLoaded])
 
 	return (
 		<form className="order-form" onSubmit={handleSubmit}>
-			<OrderFormContact />
+			<OrderFormContact email={user.email} />
 
 			{indexForm >= 1 ? <OrderFormCountry /> : null}
 
@@ -98,12 +97,12 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 			{indexForm >= 4 ? (
 				deliveryValue !== "Примерка" ? (
-					<OrderFormPayments />
+					<OrderFormPayments paymentValue={paymentValue} />
 				) : (
 					null
 				)
 			) : (
-				deliveryValue == "Самовывоз" ? <OrderFormPayments /> : null
+				deliveryValue == "Самовывоз" ? <OrderFormPayments paymentValue={paymentValue} /> : null
 			)}
 		</form>
 	);

@@ -11,7 +11,8 @@ import {
 	ProductCover,
 	ProductInfo,
 	CatalogProductsSection,
-	SellAndSale,
+	ProductExchange,
+	PageLoader,
 } from "../../components/";
 
 const Product: React.FC = () => {
@@ -49,12 +50,14 @@ const Product: React.FC = () => {
 							</div>
 
 							<CatalogProductsSection title="Может быть интересно" />
+
+							<ProductExchange />
 						</div>
 					</section>
-
-					<SellAndSale />
 				</>
-			) : null}
+			) : (
+				<PageLoader />
+			)}
 		</>
 	);
 };

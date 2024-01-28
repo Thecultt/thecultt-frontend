@@ -63,13 +63,41 @@
 		visibility: visible
 		pointer-events: auto
 
-	&-media-input
+	&-media-input-wrapper
 		display: none
-
-		width: 100%
-		border: 1px solid $black
+		justify-content: space-between
+		align-items: center
 
 		margin-bottom: 15px
+
+	&-media-input
+		position: relative
+
+		width: calc( 100% - 70px )
+
+		border: 1px solid $lightBackgroundColor
+
+		+transition
+
+		&.active
+			border: 1px solid $black
+
+		&__close
+			width: auto
+			display: inline-block
+			border: none
+			background-color: transparent
+
+			font-size: 15px
+
+		&__clear
+			display: inline-block
+
+			position: absolute
+
+			right: 10px
+			top: 50%
+			transform: translateY(-40%)
 
 	&-history
 		width: 270px
@@ -149,6 +177,15 @@
 
 				+ManropeRegular
 
+		&-media__subtitle
+			display: none
+
+			font-size: 16px
+			color: $gray
+			font-weight: 500
+
+			margin-bottom: 10px
+
 		&-blocks-wrapper
 			display: flex
 
@@ -164,13 +201,19 @@
 
 @media screen and ( max-width: 1200px )
 	.header-search-box
+		margin-top: 0
+
 		width: 100%
 
 		padding: 15px
 
 		flex-direction: column
 
-		&-media-input
+		border-radius: 0
+
+		background-color: $backgroundColor
+
+		&-media-input-wrapper
 			display: flex
 
 		&-history
@@ -178,6 +221,18 @@
 
 		&-products
 			width: 100%
+
+			&__title
+				display: flex
+				justify-content: space-between
+				align-items: center
+
+				font-weight: 400
+
+				width: 100%
+
+			&-media__subtitle
+				display: block
 
 			&-blocks-wrapper
 				flex-wrap: wrap

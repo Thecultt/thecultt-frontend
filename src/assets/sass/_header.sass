@@ -3,10 +3,10 @@
 	top: 0
 	position: sticky
 
-	z-index: 22
+	z-index: 22000
 
 .header
-	z-index: 20
+	z-index: 20000
 
 	background-color: $backgroundColor
 
@@ -378,7 +378,7 @@
 					margin-bottom: 0
 
 		&-btn
-			margin-bottom: 100px
+			// margin-bottom: 100px
 
 			&__btn
 				width: 100%
@@ -389,6 +389,9 @@
 @media screen and ( max-width: 1250px )
 	.header
 		display: none
+
+		&-hover-menu-wrapper-wrapper
+			display: none !important
 
 	.header-media
 		display: block

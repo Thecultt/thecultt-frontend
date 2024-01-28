@@ -10,12 +10,12 @@ const FaqBreadCrumbs: React.FC<FaqBreadCrumbsProps> = ({ title }) => {
 		<>
 			<Link to="/help/all" className="faq-bread-crumbs__back">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M19 12L5 12M5 12L12 19M5 12L12 5" stroke="#202020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					<path d="M19 12L5 12M5 12L12 19M5 12L12 5" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 				</svg>
 			</Link>
 
 			<div className="faq-bread-crumbs">
-				<Link to="/help/all" className="faq-bread-crumbs__item">Центр Помощи</Link>
+				<Link to="/help/all" className="faq-bread-crumbs__item">Вопросы и ответы</Link>
 
 				<svg
 					width="6"

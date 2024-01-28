@@ -21,7 +21,6 @@ const FaqAll: React.FC = () => {
 
 				<div className="faq-main-content-all-col">
 					<a href="https://resalereport2023.ru/" className='faq-main-content-all-col__link' target='_blank'>Resale Report 2023</a>
-					<Link to="/" className='faq-main-content-all-col__link'>Устойчивое развитие</Link>
 				</div>
 			</div>
 		</div>

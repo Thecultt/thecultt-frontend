@@ -41,9 +41,15 @@ const CabinetSellsList: React.FC = () => {
 							</Link>
 						</div>
 
-						{sellsList.map((sell, index) => (
-							<CabinetSellsListItem {...sell} key={`cabinet-sells-list-item-${index}`} />
-						))}
+						{sellsList.length ? (
+							sellsList.map((sell, index) => (
+								<CabinetSellsListItem {...sell} key={`cabinet-sells-list-item-${index}`} />
+							))
+						) : (
+							<h5 className="cabinet-sells-list-null__title">
+								{/* Ваш список ожидания пока пуст */}
+							</h5>
+						)}
 					</div>
 				</div>
 			</div>

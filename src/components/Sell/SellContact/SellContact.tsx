@@ -84,11 +84,11 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							label="Ваш номер телефона"
 							name="phone"
 							bgWhite
-							{...createTextMask({
-								pattern: "+9 999 999 99-99",
-								guide: false,
-								stripMask: false,
-							})}
+							// {...createTextMask({
+							// 	pattern: "+9 999 999 99-99",
+							// 	guide: false,
+							// 	stripMask: false,
+							// })}
 						/>
 					</div>
 

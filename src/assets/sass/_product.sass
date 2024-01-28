@@ -45,13 +45,14 @@
 
 			width: calc( 50% - 35px )
 
-			max-height: 640px
-			height: 640px
+			// max-height: 640px
+			// height: 640px
+			height: 78vh
 
 			&-list-wrapper
 				position: relative
 
-				height: 640px
+				height: 78vh
 
 				margin-right: 55px
 
@@ -82,8 +83,8 @@
 
 					width: 88px
 
-					min-height: 120px
-					height: 120px
+					min-height: 100px
+					height: 100px
 
 					border-radius: 3px
 
@@ -496,6 +497,36 @@
 					margin-top: 25px
 					width: 100%
 
+	&-exchange
+		display: flex
+		justify-content: space-between
+		align-items: center
+
+		background-color: $lightBackgroundColor
+
+		padding: 0 35px 0 65px
+
+		border-radius: 24px
+
+		&-text
+			width: 45%
+
+			padding: 120px 0
+
+			&__title
+				font-size: 26px
+				margin-bottom: 15px
+
+			&__subtitle
+				font-size: 14px
+				margin-bottom: 25px
+
+			&__btn
+				width: 250px
+
+		&__image
+			width: 50%
+
 @media screen and ( max-width: 1200px )
 	.product
 		margin: 25px 0
@@ -548,6 +579,27 @@
 						&__link
 							font-size: 14px
 
+		&-exchange
+			flex-direction: column
+			align-items: flex-start
+
+			padding: 0 25px
+
+			&-text
+				width: 100%
+				order: 2
+				padding: 0 0 25px 0
+
+				&__title
+					font-size: 22px
+
+				&__btn
+					width: 100%
+
+			&__image
+				width: 90%
+				order: 1
+
 @media screen and ( max-width: 600px )
 	.product
 		&-content
@@ -565,4 +617,4 @@
 
 						&-item
 							&__title
-								font-size: 10px
+								font-size: 12px

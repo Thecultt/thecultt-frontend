@@ -87,7 +87,7 @@ const Cart: React.FC = () => {
 										</Link>
 									) : (
 										<Link
-											to="#reglog"
+											to="/?redirect=/order#reglog"
 											className={`btn ${Object.keys(items).filter(key => items[key].checked === true).length ? "" : "disabled"} cart-btn__btn`}
 										>
 											Перейти к заказу

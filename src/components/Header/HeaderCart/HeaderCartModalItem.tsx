@@ -24,7 +24,6 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
 	changeCheck,
 	removeItem,
 }) => {
-	console.log(is_trial)
 	return (
 		<div
 			className={`header-block-cart-modal-item ${checked ? "" : "disabled"

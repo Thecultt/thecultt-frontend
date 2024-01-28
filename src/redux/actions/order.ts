@@ -86,6 +86,11 @@ export const setOrderCurrentDelivery = (delivery: { title: string, price: number
 	payload: delivery
 })
 
+export const setOrderSumProducts = (sum: number) => ({
+	type: OrderStateActionTypes.SET_ORDER_SUM_DELIVERY,
+	payload: sum
+})
+
 export const fetchOrderAddressCountrys = (query: string) => async (dispatch: Dispatch<OrderStateActions>) => {
 	const { data: { suggestions } } = await axios.post<{ suggestions: { value: string }[] }>(`https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/country`, {
 		query,
@@ -206,7 +211,11 @@ export const sendCreateOrder = (
 ) => async (dispatch: Dispatch<OrderStateActions>) => {
 	const res = await $api.post(`create_order/`, data)
 
-	onComplete(res.data.order_id)
+	if (res.data.link) {
+		window.location.href = res.data.link
+	} else {
+		onComplete(res.data.order_id)
+	}
 }
 
 export const sendSubmitOrder = (

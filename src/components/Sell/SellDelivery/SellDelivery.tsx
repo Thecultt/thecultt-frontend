@@ -63,7 +63,7 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				comm: "",
 			})
 		}
-	}, [currentCity])
+	}, [])
 
 	return (
 		<form onSubmit={handleSubmit} className="sell-block sell-block-delivery">

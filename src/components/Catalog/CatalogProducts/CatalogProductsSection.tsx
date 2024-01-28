@@ -114,61 +114,65 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 				<Slider {...settings} className='catalog-product-section-slider' ref={SliderRef}>
 					{itemByArticleSimilar.length ? (
 						itemByArticleSimilar.map((item, index) => (
-							<ProductBlock
-								addClass="catalog-product-block"
-								key={`catalog-product-block-${index}`}
-								addCart={() =>
-									addCart({
-										id: item.id,
-										checked: true,
-										article: item.article,
-										manufacturer: item.manufacturer,
-										category: item.category,
-										subcategory: item.subcategory,
-										name: item.name,
-										image: item.images[0],
-										price: item.price,
-										availability: item.availability,
-										is_trial: item.is_trial
-									})
-								}
-								onClickProduct={() => onClickProduct(item, index)}
-								isCart={cartItems[item.article] ? true : false}
-								addFavorite={() => addFavorite(item)}
-								removeFavorite={() => removeFavorite(item.id)}
-								isFavorite={favoritesItems[item.id] ? true : false}
-								{...item}
-							/>
+							item.availability && !item.is_trial && item.images.length && item.price ? (
+								<ProductBlock
+									addClass="catalog-product-block"
+									key={`catalog-product-block-${index}`}
+									addCart={() =>
+										addCart({
+											id: item.id,
+											checked: true,
+											article: item.article,
+											manufacturer: item.manufacturer,
+											category: item.category,
+											subcategory: item.subcategory,
+											name: item.name,
+											image: item.images[0],
+											price: item.price,
+											availability: item.availability,
+											is_trial: item.is_trial
+										})
+									}
+									onClickProduct={() => onClickProduct(item, index)}
+									isCart={cartItems[item.article] ? true : false}
+									addFavorite={() => addFavorite(item)}
+									removeFavorite={() => removeFavorite(item.id)}
+									isFavorite={favoritesItems[item.id] ? true : false}
+									{...item}
+								/>
+							) : null
 						))
 					) : (
 						items.map((item, index) => (
-							<ProductBlock
-								addClass="catalog-product-block"
-								key={`catalog-product-block-${index}`}
-								addCart={() =>
-									addCart({
-										id: item.id,
-										checked: true,
-										article: item.article,
-										manufacturer: item.manufacturer,
-										category: item.category,
-										subcategory: item.subcategory,
-										name: item.name,
-										image: item.images[0],
-										price: item.price,
-										availability: item.availability,
-										is_trial: item.is_trial
-									})
-								}
-								onClickProduct={() => onClickProduct(item, index)}
-								isCart={cartItems[item.article] ? true : false}
-								addFavorite={() => addFavorite(item)}
-								removeFavorite={() => removeFavorite(item.id)}
-								isFavorite={favoritesItems[item.id] ? true : false}
-								{...item}
-							/>
+							item.availability && !item.is_trial && item.images.length && item.price ? (
+								<ProductBlock
+									addClass="catalog-product-block"
+									key={`catalog-product-block-${index}`}
+									addCart={() =>
+										addCart({
+											id: item.id,
+											checked: true,
+											article: item.article,
+											manufacturer: item.manufacturer,
+											category: item.category,
+											subcategory: item.subcategory,
+											name: item.name,
+											image: item.images[0],
+											price: item.price,
+											availability: item.availability,
+											is_trial: item.is_trial
+										})
+									}
+									onClickProduct={() => onClickProduct(item, index)}
+									isCart={cartItems[item.article] ? true : false}
+									addFavorite={() => addFavorite(item)}
+									removeFavorite={() => removeFavorite(item.id)}
+									isFavorite={favoritesItems[item.id] ? true : false}
+									{...item}
+								/>
+							) : null
 						))
-					)} 
+					)}
 				</Slider>
 
 				<button className="catalog-product-section-slider-arrow next" onClick={onClickNext}>

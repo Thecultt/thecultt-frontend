@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import { HeaderMediaBanner, HeaderMediaLinkTab } from '../../'
+import { HeaderMediaBanner, HeaderMediaLinkTab, Footer } from '../../'
 
 import Logo from "../../../assets/images/logo.svg";
 
@@ -13,7 +13,7 @@ interface HeaderMediaProps {
 }
 
 const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
-	const { pathname } = useLocation()
+	const { pathname, search } = useLocation()
 
 	const [state, setState] = React.useState<boolean>(false);
 
@@ -34,7 +34,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
 	React.useEffect(() => {
 		setState(false)
-	}, [pathname])
+	}, [pathname, search])
 
 	React.useEffect(() => {
 		if (state) {
@@ -126,39 +126,39 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 			</div>
 
 			<div className={`header-media-modal-menu ${state ? "active" : ""}`}>
-				<HeaderMediaBanner />
+				{/* <HeaderMediaBanner /> */}
 
 				<p className="header-media-modal-menu__title">
 					Меню
 				</p>
 
 				<div className="header-media-modal-menu-links">
-					<HeaderMediaLinkTab title="Личный кабинет">
-						<Link to="/cabinet/setting" className="header-media-modal-menu-links__link">Профиль</Link>
-						<Link to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"} className="header-media-modal-menu-links__link">Мои продажи</Link>
-						<Link to="/cabinet/history" className="header-media-modal-menu-links__link">История заказов</Link>
-						<Link to="/cabinet/favorites" className="header-media-modal-menu-links__link">Избранное</Link>
-						<Link to="/cabinet/waiting" className="header-media-modal-menu-links__link">Лист ожидания</Link>
-					</HeaderMediaLinkTab>
-
-					<Link to="/catalog" className="header-media-modal-menu-links-link">Новинки</Link>
+					<Link to="/catalog" className="header-media-modal-menu-links-link" onClick={toggleState}>Новинки</Link>
 
 					{Object.keys(categories).map((category, index) => (
 						<HeaderMediaLinkTab title={category} linkTitle={`/catalog?categories=${category}`} key={`header-media-modal-menu-links-tab${index}`}>
 							{Object.keys(categories[category].subsubcategories).map((subsubcategory, subindex) => (
-								<Link to={`/catalog?categories=${category}&types=${subsubcategory}`} className="header-media-modal-menu-links__link" key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`}>{subsubcategory}</Link>
+								<Link to={`/catalog?categories=${category}&types=${subsubcategory}`} className="header-media-modal-menu-links__link" key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`} onClick={toggleState}>{subsubcategory}</Link>
 							))}
 						</HeaderMediaLinkTab>
 					))}
 
-					<Link to="/brands" className="header-media-modal-menu-links-link">Бренды</Link>
+					<Link to="/brands" className="header-media-modal-menu-links-link" onClick={toggleState}>Бренды</Link>
 
-					<Link to="/auth" className="header-media-modal-menu-links-link">Подлинность</Link>
+					<Link to="/auth" className="header-media-modal-menu-links-link" onClick={toggleState}>Подлинность</Link>
+
+					<HeaderMediaLinkTab title="Личный кабинет">
+						<Link to="/cabinet/setting" className="header-media-modal-menu-links__link" onClick={toggleState}>Профиль</Link>
+						<Link to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"} className="header-media-modal-menu-links__link" onClick={toggleState}>Мои продажи</Link>
+						<Link to="/cabinet/history" className="header-media-modal-menu-links__link" onClick={toggleState}>История заказов</Link>
+						<Link to="/cabinet/favorites" className="header-media-modal-menu-links__link" onClick={toggleState}>Избранное</Link>
+						<Link to="/cabinet/waiting" className="header-media-modal-menu-links__link" onClick={toggleState}>Лист ожидания</Link>
+					</HeaderMediaLinkTab>
 
 					<HeaderMediaLinkTab title="Сервисы для продажи">
-						<Link to="/sell" className="header-media-modal-menu-links__link">Продажа</Link>
-						<Link to="/exchange" className="header-media-modal-menu-links__link">Обмен</Link>
-						<Link to="/concierge" className="header-media-modal-menu-links__link">Консьерж сервис</Link>
+						<Link to="/sell" className="header-media-modal-menu-links__link" onClick={toggleState}>Продажа</Link>
+						<Link to="/exchange" className="header-media-modal-menu-links__link" onClick={toggleState}>Обмен</Link>
+						<Link to="/concierge" className="header-media-modal-menu-links__link" onClick={toggleState}>Консьерж сервис</Link>
 					</HeaderMediaLinkTab>
 				</div>
 
@@ -174,11 +174,15 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 									timestamp: Math.floor(Date.now() / 1000),
 								}
 							});
+
+							toggleState()
 						}}
 					>
 						Продать
 					</Link>
 				</div>
+
+				<Footer transparent />
 			</div>
 		</header>
 	);

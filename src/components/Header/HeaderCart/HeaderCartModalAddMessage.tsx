@@ -95,7 +95,7 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({
 						</Link>
 					) : (
 						<Link
-							to="#reglog"
+							to="/?redirect=/order#reglog"
 							className="btn header-block-cart-modal-btn-more__btn"
 							onClick={setState}
 						>

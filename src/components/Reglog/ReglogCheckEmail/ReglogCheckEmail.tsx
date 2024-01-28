@@ -29,7 +29,17 @@ const ReglogCheckEmail: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			className="reglog-content-form reglog-content-form-register"
 			onSubmit={handleSubmit}
 		>
-			<h3 className="reglog-content-form__title">Вход/Регистрация</h3>
+			{new URLSearchParams(window.location.search).get("redirect") === "/order" ? (
+				<>
+					<h3 className="reglog-content-form__title">Войдите в аккаунт, чтобы продолжить</h3>
+
+					<p className="reglog-content-form__description">
+						Для завершения процедуры оформления заказа необходима авторизация или регистрация на сайте.
+					</p>
+				</>
+			) : (
+				<h3 className="reglog-content-form__title">Вход/Регистрация</h3>
+			)}
 
 			<div className="reglog-content-form-input-wrapper">
 				<div className="reglog-content-form-input">

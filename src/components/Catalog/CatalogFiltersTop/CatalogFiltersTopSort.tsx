@@ -40,11 +40,11 @@ const CatalogFiltersTopSort: React.FC = () => {
 	};
 
 	const sortItems: { [key: string]: string } = {
-		"default": "По умолчанию",
-		"a": "Сначала новые",
-		"price": "По возрастанию цены",
-		"-price": "По убыванию цены",
-		// "f": "По популярности"
+		"default": "умолчанию",
+		"a": "новизне",
+		"price": "возрастанию цены",
+		"-price": "убыванию цены",
+		// "f": "популярности"
 	}
 
 	const onClickSetItem = (key: string) => {

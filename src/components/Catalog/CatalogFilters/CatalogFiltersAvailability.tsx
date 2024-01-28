@@ -31,10 +31,10 @@ const CatalogFiltersAvailability: React.FC = () => {
 			<div className="catalog-filters-block-content-checkbox">
 				<Checkbox
 					id="catalog-filters-block-content-availability-2-checkbox"
-					label="Нет в продаже"
-					onChange={() => onChangeSetAvailability("Нет в продаже")}
+					label="Нет в наличии"
+					onChange={() => onChangeSetAvailability("Нет в наличии")}
 					checked={Object.keys(filters.availability).find((filtersAvailability) => (
-						filtersAvailability === "Нет в продаже"
+						filtersAvailability === "Нет в наличии"
 					)) ? true : false}
 				/>
 			</div>

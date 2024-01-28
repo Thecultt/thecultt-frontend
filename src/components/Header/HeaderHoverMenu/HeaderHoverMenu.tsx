@@ -3,7 +3,9 @@ import { Link } from "react-router-dom"
 
 import { HeaderHoverMenuCategory } from "../Header"
 
-import HeaderHoverImage from "../../../assets/images/header-hover-image.jpg"
+import HeaderHoverImageBag from "../../../assets/images/header/header-image-hover-menu-bag.jpg"
+import HeaderHoverImageShoes from "../../../assets/images/header/header-image-hover-menu-shoes.jpg"
+import HeaderHoverImageDecoration from "../../../assets/images/header/header-image-hover-menu-decoration.jpg"
 
 interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
 	isOpenHoverMenu: boolean
@@ -18,7 +20,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ types, brands, title,
 			<div className={`header-hover-menu-wrapper ${isOpenHoverMenu ? "active" : ""}`} onMouseOver={() => onOpen()} onMouseOut={() => onClose()}>
 				<nav className={`header-hover-menu`}>
 					<div className="header-hover-menu-list-wrapper">
-						<div className="header-hover-menu-list">
+						<div className="header-hover-menu-list type">
 							<h3 className="header-hover-menu-list__title">
 								Тип
 							</h3>
@@ -81,7 +83,9 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ types, brands, title,
 						</div>
 					</div>
 
-					<div className="header-hover-menu-image" style={{ backgroundImage: `url("${HeaderHoverImage}")` }}></div>
+					{title === "Сумки" ? <div className="header-hover-menu-image" style={{ backgroundImage: `url("${HeaderHoverImageBag}")` }}></div> : null}
+					{title === "Обувь" ? <div className="header-hover-menu-image" style={{ backgroundImage: `url("${HeaderHoverImageShoes}")` }}></div> : null}
+					{title === "Аксессуары" ? <div className="header-hover-menu-image" style={{ backgroundImage: `url("${HeaderHoverImageDecoration}")` }}></div> : null}
 				</nav>
 			</div>
 		</div>

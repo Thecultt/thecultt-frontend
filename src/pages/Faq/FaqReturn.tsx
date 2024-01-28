@@ -261,9 +261,9 @@ const Faq: React.FC = () => {
                                         </b>
                                     </p>
 
-                                    <button style={{marginTop: "15px"}}>
+                                    <a href="https://storage.yandexcloud.net/prod-thecultt/znvti.docx" download={true} style={{display: "block", marginTop: "15px", textDecoration: "none", fontSize: "15px"}}>
                                         Заявление на возврат
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

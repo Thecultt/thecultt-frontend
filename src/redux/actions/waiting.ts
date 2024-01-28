@@ -36,6 +36,8 @@ export const sendNewWaitingListItem = (item: {
 		}
 	});
 
+	localStorage.removeItem("waiting_init")
+
 	window.location.hash = "create_waiting_success"
 }
 

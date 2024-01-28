@@ -5,7 +5,7 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 import { fetchHistoryOrders } from "../../redux/actions/history_orders";
 
-import { CabinetMenu, CabinetHistoryOrdersItem } from "../../components/";
+import { CabinetMenu, CabinetHistoryOrdersItem, CabinetHistoryOrdersNull, PageLoader } from "../../components/";
 
 const CabinetHistoryOrders: React.FC = () => {
 	const dispatch = useDispatch()
@@ -24,11 +24,17 @@ const CabinetHistoryOrders: React.FC = () => {
 
 					{isLoaded ? (
 						<div className="cabinet-content cabinet-history-orders">
-							{items.map((item, index) => (
-								<CabinetHistoryOrdersItem {...item} key={`cabinet-history-orders-${index}`} />
-							))}
+							{items.length ? (
+								items.map((item, index) => (
+									<CabinetHistoryOrdersItem {...item} key={`cabinet-history-orders-${index}`} />
+								))
+							) : (
+								<CabinetHistoryOrdersNull />
+							)}
 						</div>
-					) : null}
+					) : (
+						<PageLoader />
+					)}
 				</div>
 			</div>
 		</section>

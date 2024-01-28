@@ -387,10 +387,10 @@ const products = (state = initialState, action: ProductTypes) => {
 		};
 	}
 
-
 	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT) {
 		return {
 			...state,
+			currentPage: 1,
 			filters: {
 				...state.filters,
 				sort: action.payload

@@ -6,9 +6,37 @@
 	&-main-banner-wrapper
 		position: relative
 
+		will-change: transform
+
 		margin-bottom: 50px
 
 	&-main-banner
+		&-arrow
+			cursor: pointer
+
+			position: absolute
+			z-index: 1
+
+			top: 50%
+			transform: translateY(-50%)
+
+			background-color: transparent
+			border: none
+
+			+transition
+
+			&:hover
+				transform: scale3d(1.02, 1.02, 1.02) translateY(-50%)
+
+			&:active
+				transform: scale3d(0.95, 0.95, 0.95) translateY(-50%)
+
+			&.prev
+				left: 10px
+
+			&.next
+				right: 10px
+
 		&-nav
 			position: absolute
 
@@ -43,9 +71,10 @@
 
 	&-main-slider-banner
 		overflow: hidden
-		border-radius: 24px
 
 		margin: 0 -20px
+
+		+borderRadius
 
 		&-item-wrapper
 			padding: 0 20px
@@ -55,9 +84,9 @@
 			align-items: flex-end
 			justify-content: center
 
-			height: 600px
-
-			border-radius: 24px
+			// height: 600px
+			height: 60vh
+			min-height: 300px
 
 			padding: 50px
 
@@ -66,6 +95,7 @@
 			color: $white
 
 			+backgroundSetting
+			+borderRadius
 
 			&-text
 				&__title
@@ -191,9 +221,9 @@
 
 		overflow: hidden
 
-		border-radius: 24px
-
 		margin-bottom: 50px
+
+		+borderRadius
 
 		&-image
 			width: 45%
@@ -305,7 +335,7 @@
 
 			padding: 60px 25px
 
-			border-radius: 24px
+			+borderRadius
 
 			&__title
 				font-size: 22px
@@ -316,17 +346,24 @@
 				margin-bottom: 25px
 
 	&-about
-		padding: 75px
-		border-radius: 24px
+		display: flex
 
 		margin-bottom: 50px
 
-		+backgroundSetting
+		overflow: hidden
+
+		+borderRadius
+
+		&-image
+			width: 50%
+			+backgroundSetting
 
 		&-text
-			margin-left: auto
+			background-color: $mainColor
 
-			width: 500px
+			padding: 110px 75px
+
+			width: 50%
 
 			color: $white
 
@@ -367,17 +404,18 @@
 	&-waiting
 		display: flex
 		justify-content: space-between
-		align-items: center
 
 		background-color: $lightBackgroundColor
 
-		padding: 25px 100px
-
-		border-radius: 24px
+		overflow: hidden
 
 		margin-bottom: 65px
 
+		+borderRadius
+
 		&-text
+			padding: 150px 100px
+
 			&__title
 				font-size: 26px
 				margin-bottom: 10px
@@ -386,9 +424,10 @@
 				font-size: 14px
 				margin-bottom: 25px
 
-		&__img
-			pointer-events: none
-			user-select: none
+		&-image
+			width: 45%
+
+			+backgroundSetting
 
 // MEDIA
 @media screen and ( max-width: 1200px )
@@ -470,13 +509,17 @@
 			display: flex
 			align-items: flex-end
 
-			padding: 25px
+			padding: 5px
 
 			height: 500px
 
+			+backgroundSetting
+
 			&-text
 				width: 100%
-				margin-left: 0
+				background-color: transparent
+
+				padding: 15px
 
 				&__title
 					font-size: 17px
@@ -486,19 +529,25 @@
 
 				&__btn
 					width: 100%
+					background-color: #fff
+					color: #000
 
 		&-waiting
 			flex-direction: column
 
 			padding: 15px
 
-			&__img
-				width: 75%
+			&-image
+				height: 300px
+				width: 100%
+
+				+borderRadius
 
 			&-text
 				order: 2
-
 				text-align: center
+
+				padding: 25px
 
 				&__title
 					font-size: 18px

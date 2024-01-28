@@ -13,7 +13,7 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
 			total_items,
 			items
 		}
-	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`/catalog`)
+	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`/catalog?availability=1&availability=-1`)
 
 	// Measure product views / impressions
 	window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
@@ -121,7 +121,22 @@ export const fetchProductsCatalog = (
 	modelsArrray.map((model) => params.append("model_names", model))
 	colorsArrray.map((color) => params.append("color", color))
 	sexArrray.map((sex) => params.append("genders", sex))
-	availabilityArrray.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
+
+	if (availabilityArrray.length) {
+		// availabilityArrray.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
+		availabilityArrray.map((availability) => {
+			if (availability == "Доступно") {
+				params.append("availability", "1")
+			} else if (availability == "На примерке") {
+				params.append("availability", "-1")
+			} else {
+				params.append("availability", "0")
+			}
+		})
+	} else {
+		params.append("availability", "1")
+	}
+
 	sizeArrray.map((size) => params.append("size", size))
 
 	params.append("sort_by", filters.sort)

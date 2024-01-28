@@ -55,7 +55,7 @@ const OrderFormAddress: React.FC = () => {
 				</div>
 
 				<div className="order-form-block-input" style={{ width: "100%" }}>
-					<Field component={RenderTextarea} name="comment" label="Комментарий" />
+					<Field component={RenderTextarea} name="comment" label="Комментарий (желаемые дата и время доставки; комментарии курьеру и т.д.)" />
 				</div>
 			</div>
 		</div>

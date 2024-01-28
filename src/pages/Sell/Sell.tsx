@@ -143,12 +143,12 @@ const Sell: React.FC = () => {
 				<div className="sell-wrapper">
 					<SellSteps />
 
+					{currentStep === CabinetSellStepKeys.COOPERATION ? (
+						<SellCooperation />
+					) : null}
+
 					{isLoadedParameters ? (
 						<>
-							{currentStep === CabinetSellStepKeys.COOPERATION ? (
-								<SellCooperation />
-							) : null}
-
 							{currentStep === CabinetSellStepKeys.INFO ? (
 								<SellInfo onSubmit={onSubmitInfo} />
 							) : null}

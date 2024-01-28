@@ -73,9 +73,15 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 	}
 
 	const subscribeGood = () => {
-		localStorage.setItem("waiting_init", JSON.stringify({
-			category, brand: manufacturer, model: name, type: subcategory, size: ring_size
-		}))
+		if (category === "Сумки") {
+			localStorage.setItem("waiting_init", JSON.stringify({
+				category, brand: manufacturer, model: name, type: "", size: ring_size
+			}))
+		} else {
+			localStorage.setItem("waiting_init", JSON.stringify({
+				category, brand: manufacturer, model: name, type: subcategory, size: ring_size
+			}))
+		}
 
 		window.location.hash = "create_waiting"
 	}

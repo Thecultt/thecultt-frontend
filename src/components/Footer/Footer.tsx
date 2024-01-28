@@ -5,7 +5,11 @@ import Logo from "../../assets/images/logo.svg";
 
 import { FooterMenuBlock } from '../'
 
-const Footer: React.FC = () => {
+interface FooterProps {
+	transparent?: boolean
+}
+
+const Footer: React.FC<FooterProps> = ({ transparent }) => {
 	const blocks: {
 		title: string
 		children: React.ReactNode
@@ -111,7 +115,7 @@ const Footer: React.FC = () => {
 						to={"/help/all"}
 						className="footer-block-menu-block__link"
 					>
-						Центр помощи
+						Вопросы и ответы
 					</Link>
 					<Link
 						to={"/contact"}
@@ -130,7 +134,7 @@ const Footer: React.FC = () => {
 		]
 
 	return (
-		<footer className="footer">
+		<footer className={`footer ${transparent ? "transparent" : ""}`}>
 			<div className="container">
 				<div className="footer-wrapper">
 					<Link to="/" className="footer-logo">
@@ -147,7 +151,6 @@ const Footer: React.FC = () => {
 								<FooterMenuBlock {...block} key={`footer-block-menu-${index}`} />
 							))}
 						</nav>
-
 
 						{window.innerWidth > 1200 ? (
 							<div className="footer-block-telegram">

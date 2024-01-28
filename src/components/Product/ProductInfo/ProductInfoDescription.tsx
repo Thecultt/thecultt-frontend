@@ -9,8 +9,7 @@ const ProductInfoDescription: React.FC<ProductPage> = ({ description }) => {
 				Описание
 			</h3>
 
-			<p className="product-content-info-description__description">
-				{description}
+			<p className="product-content-info-description__description" dangerouslySetInnerHTML={{ __html: description }}>
 			</p>
 		</div>
 	)

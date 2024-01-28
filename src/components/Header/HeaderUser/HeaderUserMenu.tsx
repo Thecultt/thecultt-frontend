@@ -78,7 +78,7 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
 					className={({ isActive }) =>
 						`header-block-user-menu-block__link ${isActive ? "active" : ""}`
 					}>
-					Центр помощи
+					Вопросы и ответы
 				</NavLink>
 
 				{localStorage.getItem("accessToken") ? <>

@@ -1,11 +1,75 @@
 import React from 'react'
+import { useDispatch } from "react-redux";
 
 import { OrderStatusProduct } from "../../../components/";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
+import { CartItem } from "../../../models/ICartItem";
+
+import { sendSubmitOrder } from "../../../redux/actions/order";
+
+import orderPay from '../orderPay'
+
 const OrderStatusError: React.FC = () => {
-	const { order } = useTypedSelector(({ order }) => order)
+	const dispatch = useDispatch();
+
+	const { items } = useTypedSelector(({ cart }) => cart);
+	const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order)
+
+	const { order: { payment_type, id, cost, products, client_name, client_phone, delivery_type, delivery_address } } = useTypedSelector(({ order }) => order)
+
+	const successPayment = (orderId: number) => {
+		const newCart: { [key: string]: CartItem } = {}
+
+		Object.keys(items).map(article => {
+			if (!items[article].checked) newCart[article] = { ...items[article], checked: true }
+		})
+
+		localStorage.setItem("cart", JSON.stringify(newCart))
+
+		const products: CartItem[] = []
+
+		Object.keys(items).map((keyCartItem) => {
+			if (items[keyCartItem].checked) {
+				products.push(items[keyCartItem])
+			}
+		})
+
+		// window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+		// window.dataLayer.push({
+		// 	event: "purchase",
+		// 	ecommerce: {
+		// 		timestamp: Math.floor(Date.now() / 1000),
+		// 		transaction_id: `${orderId}`,
+		// 		value: `${promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
+		// 		tax: "-",
+		// 		shipping: `${promocode.saleSum}`,
+		// 		currency: "RUB",
+		// 		coupon: `${promocode.name}`,
+		// 		items: products.map((item) => ({
+		// 			item_name: item.name,
+		// 			item_id: `${item.id}`,
+		// 			price: `${item.price}`,
+		// 			item_brand: item.manufacturer,
+		// 			item_category: item.category,
+		// 			quantity: 1
+		// 		}))
+		// 	}
+		// });
+
+		dispatch(sendSubmitOrder(orderId) as any)
+	}
+
+	const onClickPay = () => {
+		orderPay({
+			type: payment_type,
+			orderId: id,
+			totalPrice: parseInt(cost),
+			products: products.map((product) => ({ name: product.model_name, price: product.price })),
+			onSuccessCallback: () => successPayment(id)
+		})
+	}
 
 	return (
 		<section className="order-status">
@@ -49,21 +113,24 @@ const OrderStatusError: React.FC = () => {
 									/>
 								</svg>
 							</div>
+
 							<h2 className="order-status-content-info__title">
 								К сожалению, ваша оплата не прошла.
 								Попробуйте еще раз.
 							</h2>
+
 							<p className="order-status-content-info__subtitle">
 								Мы зарезервировали для вас товар на 10
 								минут.
 							</p>
-							<button className="btn-black order-status-content-info__repeatbtn">
+
+							<button className="btn-black order-status-content-info__repeatbtn" onClick={onClickPay}>
 								Оплатите ещё раз
 							</button>
 						</div>
 
 						<div className="order-status-content-product-wrapper">
-							{order.products.map((product, index) => (
+							{products.map((product, index) => (
 								<OrderStatusProduct {...product} key={`order-status-content-product-${index}`} />
 							))}
 						</div>
@@ -76,11 +143,11 @@ const OrderStatusError: React.FC = () => {
 							</h3>
 
 							<p className="order-status-recipient-block__subtitle">
-								<span>Имя:</span> {order.client_name}
+								<span>Имя:</span> {client_name}
 							</p>
 
 							<p className="order-status-recipient-block__subtitle">
-								<span>Телефон:</span> {order.client_phone}
+								<span>Телефон:</span> {client_phone}
 							</p>
 						</div>
 						<div className="order-status-recipient-block">
@@ -89,11 +156,11 @@ const OrderStatusError: React.FC = () => {
 							</h3>
 
 							<p className="order-status-recipient-block__subtitle">
-								<span>Вариант доставки:</span> {order.delivery_type}
+								<span>Вариант доставки:</span> {delivery_type}
 							</p>
 
 							<p className="order-status-recipient-block__subtitle">
-								<span>Адрес доставки:</span> {order.delivery_address}
+								<span>Адрес доставки:</span> {delivery_address}
 							</p>
 						</div>
 						<div className="order-status-recipient-block">
@@ -102,7 +169,7 @@ const OrderStatusError: React.FC = () => {
 							</h3>
 
 							<p className="order-status-recipient-block__subtitle">
-								<span>Тип оплаты:</span> {order.payment_type}
+								<span>Тип оплаты:</span> {payment_type}
 							</p>
 							{/* 
 						<p className="order-status-recipient-block__subtitle">
