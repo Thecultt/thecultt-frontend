@@ -12,7 +12,7 @@ interface orderPayParams {
 
 const orderPay = ({ type, orderId, totalPrice, deliveryPrice, products, onSuccessCallback }: orderPayParams) => {
 	if (type === "Кредит" || type === "Рассрочка от Тинькофф") {
-		tinkoff.createDemo({
+		tinkoff.create({
 			shopId: process.env.REACT_APP_TINKOFF_SHOP_ID as string,
 			showcaseId: process.env.REACT_APP_TINKOFF_SHOW_CASE_ID as string,
 			orderNumber: String(orderId),
