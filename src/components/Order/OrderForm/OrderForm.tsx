@@ -96,7 +96,7 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			{indexForm >= 3 && deliveryValue !== "Самовывоз" ? <OrderFormAddress /> : null}
 
 			{indexForm >= 4 ? (
-				deliveryValue !== "Примерка" ? (
+				deliveryValue !== "Доставка с примеркой (по Москве)" ? (
 					<OrderFormPayments paymentValue={paymentValue} />
 				) : (
 					null

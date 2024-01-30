@@ -15,6 +15,7 @@ import { ProductBlock } from "../../";
 
 import { Product } from "../../../models/IProduct";
 import { CartItem } from "../../../models/ICartItem";
+import { Link } from "react-router-dom";
 
 interface CatalogProductsSectionProps {
 	title: string
@@ -99,9 +100,9 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 
 	return (
 		<div className="catalog-product-section">
-			<h3 className="catalog-product-section__title">
+			<Link to="/catalog" className="catalog-product-section__title">
 				{title}
-			</h3>
+			</Link>
 
 			<div className="catalog-product-section-slider-wrapper">
 				<button className="catalog-product-section-slider-arrow prev" onClick={onClickPrev}>

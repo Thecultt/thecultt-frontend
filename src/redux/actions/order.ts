@@ -30,6 +30,11 @@ export const sendOrderApplyPromocode = (promocode: string) => (dispatch: Dispatc
 		})
 
 		dispatch({
+			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ID,
+			payload: data.id
+		})
+
+		dispatch({
 			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_NAME,
 			payload: promocode
 		})
@@ -205,7 +210,7 @@ export const sendCreateOrder = (
 		delivery_type: number,
 		payment_type: number,
 
-		coupon_id: ""
+		coupon_id: number
 	},
 	onComplete: (orderId: number) => void
 ) => async (dispatch: Dispatch<OrderStateActions>) => {

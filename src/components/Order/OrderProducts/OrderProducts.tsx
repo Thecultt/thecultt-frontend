@@ -172,6 +172,14 @@ const OrderProducts: React.FC = () => {
 		});
 	}, [paymentValue])
 
+	const isPromocode = () => {
+		if (promocode.isActive && paymentValue !== "Рассрочка от Тинькофф" && paymentValue !== "Кредит" && paymentValue !== "Яндекс Сплит") {
+			return true
+		}
+
+		return false
+	}
+
 	const onClickSendCreateOrder = () => {
 		setIsDisableSendBtn(true)
 
@@ -201,7 +209,7 @@ const OrderProducts: React.FC = () => {
 
 		let paymentId;
 
-		if (currentDelivery.title === "Примерка") {
+		if (currentDelivery.title === "Доставка с примеркой (по Москве)") {
 			paymentId = 1
 		} else if (paymentValue === "Кредит") {
 			paymentId = 7
@@ -230,7 +238,7 @@ const OrderProducts: React.FC = () => {
 			delivery_type: currentDelivery.id,
 			payment_type: paymentId,
 
-			coupon_id: ""
+			coupon_id: promocode.id
 		}, (orderId: number) => pay(orderId)) as any)
 	}
 
@@ -257,7 +265,7 @@ const OrderProducts: React.FC = () => {
 			ecommerce: {
 				timestamp: Math.floor(Date.now() / 1000),
 				transaction_id: `${orderId}`,
-				value: `${promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
+				value: `${isPromocode() ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price}`,
 				tax: "-",
 				shipping: `${promocode.saleSum}`,
 				currency: "RUB",
@@ -277,7 +285,7 @@ const OrderProducts: React.FC = () => {
 	}
 
 	const pay = (orderId: number) => {
-		if (currentDelivery.title === "Примерка") {
+		if (currentDelivery.title === "Доставка с примеркой (по Москве)") {
 			successPayment(orderId)
 		} else {
 			const products: { name: string, price: number }[] = []
@@ -292,11 +300,14 @@ const OrderProducts: React.FC = () => {
 				{
 					type: paymentValue,
 					orderId,
-					totalPrice,
+					totalPrice: isPromocode() ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price,
+					deliveryPrice: currentDelivery.price,
 					products,
 					onSuccessCallback: () => successPayment(orderId)
 				}
 			)
+
+			localStorage.removeItem("cart")
 		}
 	};
 
@@ -375,7 +386,7 @@ const OrderProducts: React.FC = () => {
 					</p>
 				</div>
 
-				{promocode.isActive ?
+				{isPromocode() ?
 					<div className="order-products-total-item promocode">
 						<p className="order-products-total-item__title">
 							Скидка в корзине
@@ -430,7 +441,7 @@ const OrderProducts: React.FC = () => {
 					<p className="order-products-total-item__title">Итого:</p>
 					<p className="order-products-total-item__value">
 						<NumericFormat
-							value={totalPrice > 0 ? promocode.isActive ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price : 0}
+							value={totalPrice > 0 ? isPromocode() ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price : 0}
 							displayType={"text"}
 							thousandSeparator={" "}
 							renderText={(formattedValue: string) => (
@@ -467,7 +478,7 @@ const OrderProducts: React.FC = () => {
 					{isDisableSendBtn ? (
 						<Loader />
 					) : (
-						currentDelivery.title === "Примерка" ? "Оформить заказ" : "Перейти к оплате"
+						currentDelivery.title === "Доставка с примеркой (по Москве)" ? "Оформить заказ" : "Перейти к оплате"
 					)}
 				</button>
 			</div>

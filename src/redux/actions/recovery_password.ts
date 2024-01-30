@@ -12,6 +12,10 @@ export const sendRecoveryPassword = (email: string, isRedirect?: boolean) => {
 		});
 
 		return axios.post(`${process.env.REACT_APP_API_DOMEN}/reset_password/`, { email }).then(({ data }) => {
+			if (localStorage.getItem("redirect_reglog")) {
+				window.location.href = localStorage.getItem("redirect_reglog") as string
+			}
+
 			if (isRedirect) window.location.hash = "recovery_password_success"
 
 			dispatch({

@@ -215,9 +215,7 @@ const Contact: React.FC = () => {
                                 Адрес офиса
                             </h3>
                             <p className="contact-block-office__description">
-                                Мы находимся по адресу Трубная 25с3 (3 этаж,
-                                офис THE CULTT) ежедневно с 11 до 21:30. Для
-                                посещения необходима регистрация!
+							Мы находимся по адресу Трубная 25с3 (3 этаж, офис THE CULTT) ежедневно с 11:00 до 21:00. Для посещения необходима регистрация!
                             </p>
                             <button className="btn-regular contact-block-office__btn">
                                 Выбрать время

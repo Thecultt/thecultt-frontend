@@ -10,6 +10,8 @@ import { HeaderTopMessage, HeaderCart, HeaderUser, HeaderHoverMenu, HeaderSearch
 
 import { setHeaderSearchValue, fetchHeaderSearchItems } from "../../redux/actions/header";
 
+import { useDebounce } from './useDebounce'
+
 import Logo from "../../assets/images/logo.svg";
 
 const categories: { [key: string]: { types: string[], brands: string[] } } = {
@@ -132,6 +134,8 @@ const Header: React.FC = () => {
 
 	const { search } = useTypedSelector(({ header }) => header)
 
+	const debouncedValue = useDebounce(search.value)
+
 	const openHoverMenu = (category: { types: string[], brands: string[] }, title: string) => {
 		if (!isOpenSearch) {
 			setCurrentInfoMenu({ ...category, title })
@@ -150,8 +154,8 @@ const Header: React.FC = () => {
 	}
 
 	React.useEffect(() => {
-		if (search.value !== "") dispatch(fetchHeaderSearchItems(search.value) as any)
-	}, [search.value])
+		if (debouncedValue !== "") dispatch(fetchHeaderSearchItems(search.value) as any)
+	}, [debouncedValue])
 
 	React.useEffect(() => {
 		setIsOpenHoverMenu(false)

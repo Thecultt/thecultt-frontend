@@ -6,7 +6,12 @@ import { Order } from '../../models/IOrder'
 
 import { CabinetHistoryOrdersItemProduct } from '../../components/'
 
-const CabinetHistoryOrdersItem: React.FC<Order> = ({
+interface CabinetHistoryOrdersItemProps extends Order {
+	statusColor: string
+	onClickPay?: () => void
+}
+
+const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 	num,
 	createdon,
 	cost,
@@ -16,8 +21,11 @@ const CabinetHistoryOrdersItem: React.FC<Order> = ({
 	delivery_type,
 	payment_type,
 	products,
+	statusColor,
 	status,
-	status_description
+	status_description,
+	yandex_split_link,
+	onClickPay
 }) => {
 	const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
@@ -28,10 +36,10 @@ const CabinetHistoryOrdersItem: React.FC<Order> = ({
 	return (
 		<div
 			className="cabinet-history-orders-item-wrapper"
-			onClick={toggleOpen}
+
 		>
 			<div className="cabinet-history-orders-item">
-				<div className="cabinet-history-orders-item-topinfo">
+				<div className="cabinet-history-orders-item-topinfo" onClick={toggleOpen}>
 					<div className="cabinet-history-orders-item-topinfo-block">
 						<h3 className="cabinet-history-orders-item-topinfo-block__title">
 							Заказ: #{num}
@@ -45,7 +53,7 @@ const CabinetHistoryOrdersItem: React.FC<Order> = ({
 							{cost} ₽
 						</p>
 
-						<p className="cabinet-history-orders-item-topinfo-block__status__media success">
+						<p className={`cabinet-history-orders-item-topinfo-block__status__media ${statusColor}`}>
 							{status}
 
 							<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +69,7 @@ const CabinetHistoryOrdersItem: React.FC<Order> = ({
 
 					</div>
 					<div className="cabinet-history-orders-item-topinfo-block">
-						<p className="cabinet-history-orders-item-topinfo-block__status success">
+						<p className={`cabinet-history-orders-item-topinfo-block__status ${statusColor}`}>
 							{status}
 
 							<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -158,10 +166,23 @@ const CabinetHistoryOrdersItem: React.FC<Order> = ({
 								<CabinetHistoryOrdersItemProduct {...product} key={`cabinet-history-orders-item-info-product-${index}`} />
 							))}
 						</div>
+
+						{status === "Ожидает оплаты" ? (
+							yandex_split_link ? (
+								<a href={yandex_split_link} className="btn cabinet-history-orders-item-info__btn">
+									Оплатить заказ
+								</a>
+							) : (
+								<button className="btn cabinet-history-orders-item-info__btn" onClick={onClickPay}>
+									Оплатить заказ
+								</button>)
+						) : (
+							null
+						)}
 					</div>
 				</AnimateHeight>
-			</div>
-		</div>
+			</div >
+		</div >
 	);
 };
 

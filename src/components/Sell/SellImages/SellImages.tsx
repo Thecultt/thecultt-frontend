@@ -377,7 +377,7 @@ const SellImages: React.FC = () => {
 		if (category === "Головные уборы") return Object.keys(imageBlocksValue).length >= imageBlocksHat.filter((image) => !image.isMore).length
 		if (category === "Ремни") return Object.keys(imageBlocksValue).length >= imageBlocksBelt.filter((image) => !image.isMore).length
 		if (category === "Часы") return Object.keys(imageBlocksValue).length >= imageBlocksClock.filter((image) => !image.isMore).length
-		if (category === "Платки") return Object.keys(imageBlocksValue).length >= imageBlocksHand.filter((image) => !image.isMore).length
+		if (category === "Платки и шарфы") return Object.keys(imageBlocksValue).length >= imageBlocksHand.filter((image) => !image.isMore).length
 	}
 
 	const onSubmit = () => {
@@ -481,7 +481,7 @@ const SellImages: React.FC = () => {
 					/>
 				)) : null}
 
-				{category === "Платки" ? imageBlocksHand.map((block, index) => (
+				{category === "Платки и шарфы" ? imageBlocksHand.map((block, index) => (
 					<SellImagesBlock
 						{...block}
 						number={index + 1}

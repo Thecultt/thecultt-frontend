@@ -16,6 +16,7 @@ export interface Order {
 	createdon: string | null
 	delivery_address: string
 	delivery_type: string
+	delivery_price: string
 	id: number
 	num: string
 	payment_type: string
@@ -23,4 +24,5 @@ export interface Order {
 	status: string
 	status_description: string
 	success_status: boolean
+	yandex_split_link?: string
 }

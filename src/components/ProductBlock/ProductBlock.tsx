@@ -39,33 +39,15 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	ring_size
 }) => {
 	const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart)
-	const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(isFavorite)
+	const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(false)
 
 	const totalImageLength = 5;
 
 	const [currentIndexImage, setCurrentIndexImage] = React.useState<number>(0);
 
-	const YaPay = window.YaPay;
-
 	React.useEffect(() => {
 		setCurrentIndexImage(0)
 	}, [])
-
-	React.useEffect(() => {
-		// if (YaPay) {
-		// 	YaPay.mountBadge(
-		// 		document.querySelector('#product-block-text-yandex-split'),
-		// 		{
-		// 			type: 'bnpl',
-		// 			amount: `2000.00`,
-		// 			size: 's',
-		// 			variant: 'detailed',
-		// 			color: 'primary',
-		// 			merchantId: '40d34cdd-8666-4829-9988-aaea1b87ed9a',
-		// 		}
-		// 	)
-		// }
-	}, [YaPay])
 
 	const onClickPrevImage = () => {
 		if (currentIndexImage - 1 >= 0) {
@@ -90,6 +72,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
 		window.location.hash = "create_waiting"
 	}
+
 
 	return (
 		<div className={`product-block ${addClass ? addClass : ""}`} onClick={onClickProduct}>
@@ -137,10 +120,10 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 							addFavorite()
 						}
 
-						setIsFavoriteLocal(!isFavorite)
+						setIsFavoriteLocal(true)
 					}}
 				>
-					{isFavoriteLocal ? (
+					{isFavorite || isFavoriteLocal ? (
 						<svg
 							width="19"
 							height="16"
@@ -255,15 +238,17 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 								₽
 							</h3>
 
-							{/* @ts-ignore */}
-							<yandex-pay-badge
-								type="bnpl"
-								amount={`${price}.00`}
-								size="s"
-								variant="detailed"
-								color="primary"
-								merchant-id="40d34cdd-8666-4829-9988-aaea1b87ed9a"
-							/>
+							<div className="product-block-text-yandex-split">
+								{/* @ts-ignore */}
+								<yandex-pay-badge
+									type="bnpl"
+									amount={`${price}.00`}
+									size="s"
+									variant="detailed"
+									color="primary"
+									merchant-id="40d34cdd-8666-4829-9988-aaea1b87ed9a"
+								/>
+							</div>
 						</Link>
 
 						{isCartLocal ? (

@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.bb6d4e78.css",
-    "main.js": "/static/js/main.cc1a8b1d.js",
+    "main.css": "/static/css/main.8d821347.css",
+    "main.js": "/static/js/main.ca692a91.js",
     "static/media/daria.jpg": "/static/media/daria.1589a28c9084fefad758.jpg",
     "static/media/tatiana.jpg": "/static/media/tatiana.6f2013ed51ca44d9626c.jpg",
     "static/media/home-categories-hand.jpg": "/static/media/home-categories-hand.b32c0b778e1016b11247.jpg",
@@ -16,7 +16,7 @@
     "static/media/home-visit.jpg": "/static/media/home-visit.e9c9705c1db24cfedb5f.jpg",
     "static/media/visit.jpg": "/static/media/visit.e9c9705c1db24cfedb5f.jpg",
     "static/media/sell-block-cooperation-concierge-service.jpg": "/static/media/sell-block-cooperation-concierge-service.24b34dddbdfc05b2f74f.jpg",
-    "static/media/faq-main-image.jpg": "/static/media/faq-main-image.4d3870cedf55fac17227.jpg",
+    "static/media/faq-main-image.jpg": "/static/media/faq-main-image.84efa32e6a4143c25567.jpg",
     "static/media/home-main-banner3.jpg": "/static/media/home-main-banner3.4c6a431734637b7512a7.jpg",
     "static/media/exchange-main-image.png": "/static/media/exchange-main-image.2c89db1a3e0854c99da5.png",
     "static/media/home-categories-bag.jpg": "/static/media/home-categories-bag.718eb692fce63db09351.jpg",
@@ -86,11 +86,11 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.bb6d4e78.css.map": "/static/css/main.bb6d4e78.css.map",
-    "main.cc1a8b1d.js.map": "/static/js/main.cc1a8b1d.js.map"
+    "main.8d821347.css.map": "/static/css/main.8d821347.css.map",
+    "main.ca692a91.js.map": "/static/js/main.ca692a91.js.map"
   },
   "entrypoints": [
-    "static/css/main.bb6d4e78.css",
-    "static/js/main.cc1a8b1d.js"
+    "static/css/main.8d821347.css",
+    "static/js/main.ca692a91.js"
   ]
 }

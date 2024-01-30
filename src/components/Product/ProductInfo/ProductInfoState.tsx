@@ -28,6 +28,8 @@ const ProductInfoState: React.FC<ProductPage> = ({ condition, nuances }) => {
 				</span>
 			</h3>
 
+			<p>{condition}</p>
+{/* 
 			<div className="product-content-info-state-bar">
 				{conditions.map((conditionItem, index) => (
 					<div className={`product-content-info-state-bar-item ${condition.toLocaleLowerCase() === conditionItem.toLocaleLowerCase() ? "active" : ""}`} key={`product-content-info-state-bar-item-${index}`}>
@@ -38,8 +40,7 @@ const ProductInfoState: React.FC<ProductPage> = ({ condition, nuances }) => {
 						</p>
 					</div>
 				))}
-
-			</div>
+			</div> */}
 
 			{nuances !== null && nuances !== "" && nuances ? <p className="product-content-info-state__info">
 				<span>Следы жизни:</span> {nuances}

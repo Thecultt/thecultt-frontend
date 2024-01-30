@@ -8,13 +8,14 @@ const CabinetSellsListItem: React.FC<any> = ({
 	id,
 	time,
 	time_edit,
-	status,
 	category,
 	vendor,
 	model,
 	condition,
 	defects,
 	price,
+	statusColor,
+	status,
 	status_description,
 	link,
 	image,
@@ -38,10 +39,10 @@ const CabinetSellsListItem: React.FC<any> = ({
 						</h3>
 
 						<p className="cabinet-sells-list-item-topinfo-block__date">
-							{model}
+							{vendor} {model}
 						</p>
 
-						<p className="cabinet-sells-list-item-topinfo-block__status__media">
+						<p className={`cabinet-sells-list-item-topinfo-block__status__media ${statusColor}`}>
 							{status}
 
 							{status_description ? (
@@ -92,7 +93,7 @@ const CabinetSellsListItem: React.FC<any> = ({
 							</p>
 						)} */}
 
-						<p className="cabinet-sells-list-item-topinfo-block__status">
+						<p className={`cabinet-sells-list-item-topinfo-block__status ${statusColor}`}>
 							{status}
 
 							{status_description ? (

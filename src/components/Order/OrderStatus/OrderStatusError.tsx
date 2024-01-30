@@ -15,9 +15,8 @@ const OrderStatusError: React.FC = () => {
 	const dispatch = useDispatch();
 
 	const { items } = useTypedSelector(({ cart }) => cart);
-	const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order)
 
-	const { order: { payment_type, id, cost, products, client_name, client_phone, delivery_type, delivery_address } } = useTypedSelector(({ order }) => order)
+	const { order: { payment_type, id, cost, products, client_name, client_phone, delivery_type, delivery_address, delivery_price, yandex_split_link } } = useTypedSelector(({ order }) => order)
 
 	const successPayment = (orderId: number) => {
 		const newCart: { [key: string]: CartItem } = {}
@@ -66,6 +65,7 @@ const OrderStatusError: React.FC = () => {
 			type: payment_type,
 			orderId: id,
 			totalPrice: parseInt(cost),
+			deliveryPrice: parseInt(delivery_price),
 			products: products.map((product) => ({ name: product.model_name, price: product.price })),
 			onSuccessCallback: () => successPayment(id)
 		})
@@ -124,9 +124,15 @@ const OrderStatusError: React.FC = () => {
 								минут.
 							</p>
 
-							<button className="btn-black order-status-content-info__repeatbtn" onClick={onClickPay}>
-								Оплатите ещё раз
-							</button>
+							{yandex_split_link ? (
+								<a href={yandex_split_link} className="btn-black order-status-content-info__repeatbtn">
+									Оплатите ещё раз
+								</a>
+							) : (
+								<button className="btn-black order-status-content-info__repeatbtn" onClick={onClickPay}>
+									Оплатите ещё раз
+								</button>
+							)}
 						</div>
 
 						<div className="order-status-content-product-wrapper">
@@ -220,7 +226,7 @@ const OrderStatusError: React.FC = () => {
 					</div>
 				</div>
 			</div>
-		</section>
+		</section >
 	)
 }
 

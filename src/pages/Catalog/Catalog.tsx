@@ -19,7 +19,7 @@ import {
 const Catalog: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const { isLoaded, filters, currentPage, typeFetch } = useTypedSelector(({ products }) => products);
+	const { filters, currentPage, typeFetch } = useTypedSelector(({ products }) => products);
 
 	const isLoadedFilters = useTypedSelector(
 		({ products_filters }) => products_filters.isLoaded
@@ -65,7 +65,7 @@ const Catalog: React.FC = () => {
 			<section className="catalog">
 				<div className="container">
 					<div className="catalog-wrapper">
-						<CatalogBanner />
+						{/* <CatalogBanner /> */}
 
 						{isLoadedFilters ? (
 							<>

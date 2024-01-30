@@ -7,11 +7,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 const OrderStatusSuccess: React.FC = () => {
 	const { order } = useTypedSelector(({ order }) => order)
-
-	React.useEffect(() => {
-		localStorage.removeItem("cart")
-	}, [])
-
+	
 	return (
 		<section className="order-status">
 			<div className="container">

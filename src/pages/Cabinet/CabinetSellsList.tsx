@@ -18,6 +18,23 @@ const CabinetSellsList: React.FC = () => {
 		dispatch(fetchCabinetSellsList() as any)
 	}, [])
 
+	const statuses: { [key: string]: string } = {
+		"Заявка в обработке": "black",
+		"Отклонено": "red",
+		"Ожидаем в офис": "green",
+		"На проверке": "black",
+		"В ремонте": "black",
+		"На съемке": "green",
+		"В продаже": "green",
+		"На примерке": "green",
+		"На доставке": "green",
+		"Выплачено": "green",
+		"Снят с продаж": "black",
+		"Сделка завершена": "green",
+		"Ожидает выплаты": "green",
+		"Ожидает доплаты": "green",
+	}
+
 	return (
 		<section className="cabinet">
 			<div className="container">
@@ -43,7 +60,7 @@ const CabinetSellsList: React.FC = () => {
 
 						{sellsList.length ? (
 							sellsList.map((sell, index) => (
-								<CabinetSellsListItem {...sell} key={`cabinet-sells-list-item-${index}`} />
+								<CabinetSellsListItem {...sell} statusColor={statuses[sell.status]} key={`cabinet-sells-list-item-${index}`} />
 							))
 						) : (
 							<h5 className="cabinet-sells-list-null__title">

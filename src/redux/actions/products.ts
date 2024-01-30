@@ -13,7 +13,7 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
 			total_items,
 			items
 		}
-	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`/catalog?availability=1&availability=-1`)
+	} = await $api.get<{ total_pages: number; current_page: number; total_items: number; items: Product[] }>(`/catalog?availability=1&sort_by=a`)
 
 	// Measure product views / impressions
 	window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
@@ -138,6 +138,8 @@ export const fetchProductsCatalog = (
 	}
 
 	sizeArrray.map((size) => params.append("size", size))
+
+	console.log(filters)
 
 	params.append("sort_by", filters.sort)
 

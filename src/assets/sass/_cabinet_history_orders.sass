@@ -60,10 +60,10 @@
 
 					+ManropeMedium
 
-					&.success
+					&.green
 						color: $mainColor
 
-					&.error
+					&.red
 						color: $red
 
 					& > svg
@@ -85,10 +85,10 @@
 
 					+ManropeMedium
 
-					&.success
+					&.green
 						color: $mainColor
 
-					&.error
+					&.red
 						color: $red
 
 					& > svg
@@ -277,7 +277,12 @@
 						font-size: 15px
 
 					&__sum
-						display: none
+						margin-top: 10px
+
+						order: 4
+						font-size: 17px
+						font-weight: 500
+						margin-left: 0
 
 					&__status
 						display: none
@@ -290,6 +295,23 @@
 						order: 3
 
 			&-info
-				&-good
+				&-block
+					width: 100%
+
+					margin-right: 0
+
+					&__title
+						font-size: 16px
+
+					&__subtitle
+						width: 100%
+
+						display: flex
+						justify-content: space-between
+						flex-wrap: wrap
+
+						font-size: 14px
+
+				&-product
 					width: 100%
 					margin-right: 0

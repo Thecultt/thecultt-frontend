@@ -106,6 +106,7 @@ export { default as CatalogFiltersSize } from "./Catalog/CatalogFilters/CatalogF
 // CatalogProducts
 export { default as CatalogProducts } from "./Catalog/CatalogProducts/CatalogProducts";
 export { default as CatalogProductsPagination } from "./Catalog/CatalogProducts/CatalogProductsPagination";
+export { default as CatalogProductsNull } from "./Catalog/CatalogProducts/CatalogProductsNull";
 export { default as CatalogProductsSection } from "./Catalog/CatalogProducts/CatalogProductsSection";
 
 // Product

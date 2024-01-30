@@ -16,7 +16,7 @@ const ProductExchange: React.FC = () => {
 					на покупку нового лота на нашем сайте
 				</p>
 
-				<Link to="/" className='btn product-exchange-text__btn'>Начать продавать</Link>
+				<Link to="/exchange" className='btn product-exchange-text__btn'>Начать продавать</Link>
 			</div>
 
 			<img alt="" src={ExchangeMainImage} className="product-exchange__image" />

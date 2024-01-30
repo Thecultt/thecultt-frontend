@@ -10,7 +10,7 @@ import {
 
 import { sendSaveFavorite, sendRemoveFavorite } from "../../../redux/actions/favorites";
 
-import { ProductBlock, CatalogProductsPagination } from "../../";
+import { ProductBlock, CatalogProductsPagination, CatalogProductsNull } from "../../";
 
 import { Product } from "../../../models/IProduct";
 import { CartItem } from "../../../models/ICartItem";
@@ -18,7 +18,7 @@ import { CartItem } from "../../../models/ICartItem";
 const CatalogProducts: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const { isLoaded, items, itemsCount, isFetchMore, isFetchPage, filters } =
+	const { items, itemsCount, isFetchMore, isFetchPage } =
 		useTypedSelector(({ products }) => products);
 	const cartItems = useTypedSelector(({ cart }) => cart.items);
 	const favoritesItems = useTypedSelector(({ favorites }) => favorites.items);
@@ -67,40 +67,46 @@ const CatalogProducts: React.FC = () => {
 
 	return (
 		<div className="catalog-product-wrapper">
-			<div
-				className={`catalog-product-blocks-wrapper ${isFetchMore || isFetchPage ? "isFetch" : ""
-					}`}
-			>
-				{items.map((item, index) => (
-					<ProductBlock
-						addClass="catalog-product-block"
-						key={`catalog-product-block-${item.article}-${index}`}
-						addCart={() =>
-							addCart({
-								id: item.id,
-								checked: true,
-								article: item.article,
-								manufacturer: item.manufacturer,
-								category: item.category,
-								subcategory: item.subcategory,
-								name: item.name,
-								image: item.images[0],
-								price: item.price,
-								availability: item.availability,
-								is_trial: item.is_trial
-							})
-						}
-						onClickProduct={() => onClickProduct(item, index)}
-						isCart={cartItems[item.id] ? true : false}
-						addFavorite={() => addFavorite(item)}
-						removeFavorite={() => removeFavorite(item.id)}
-						isFavorite={favoritesItems[item.id] ? true : false}
-						{...item}
-					/>
-				))}
-			</div>
+			{items.length ? (
+				<>
+					<div
+						className={`catalog-product-blocks-wrapper ${isFetchMore || isFetchPage ? "isFetch" : ""
+							}`}
+					>
+						{items.map((item, index) => (
+							<ProductBlock
+								addClass="catalog-product-block"
+								key={`catalog-product-block-${item.article}-${index}`}
+								addCart={() =>
+									addCart({
+										id: item.id,
+										checked: true,
+										article: item.article,
+										manufacturer: item.manufacturer,
+										category: item.category,
+										subcategory: item.subcategory,
+										name: item.name,
+										image: item.images[0],
+										price: item.price,
+										availability: item.availability,
+										is_trial: item.is_trial
+									})
+								}
+								onClickProduct={() => onClickProduct(item, index)}
+								isCart={cartItems[item.id] ? true : false}
+								addFavorite={() => addFavorite(item)}
+								removeFavorite={() => removeFavorite(item.id)}
+								isFavorite={favoritesItems[item.id] ? true : false}
+								{...item}
+							/>
+						))}
+					</div>
 
-			{itemsCount > 20 ? <CatalogProductsPagination /> : null}
+					{itemsCount > 20 ? <CatalogProductsPagination /> : null}
+				</>
+			) : (
+				<CatalogProductsNull />
+			)}
 		</div>
 	);
 };

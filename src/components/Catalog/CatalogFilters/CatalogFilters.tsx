@@ -58,7 +58,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 			availability: {},
 			size: {},
 
-			sort: query.get("sort") ? query.get("sort") as string : ""
+			sort: "a"
 		}
 
 		query.getAll("conditions").map((condition) => {
@@ -121,7 +121,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 					availability: {},
 					size: {},
 
-					sort: ""
+					sort: "a"
 				})
 			);
 		};
@@ -229,7 +229,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 				availability: {},
 				size: {},
 
-				sort: ""
+				sort: "a"
 			})
 		);
 	}

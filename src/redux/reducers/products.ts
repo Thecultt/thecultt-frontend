@@ -78,7 +78,7 @@ const initialState: ProductsState = {
 		availability: {},
 		size: {},
 
-		sort: ""
+		sort: "a"
 	}
 }
 

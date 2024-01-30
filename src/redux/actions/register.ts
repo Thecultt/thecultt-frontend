@@ -13,10 +13,6 @@ export const sendRegister = (data: { name: string, lastname: string, email: stri
 		axios.post(`${process.env.REACT_APP_API_DOMEN}/register/`, data).then(({ data }) => {
 			localStorage.setItem("accessToken", data.access)
 
-			if (localStorage.getItem("redirect_reglog")) {
-				window.location.href = localStorage.getItem("redirect_reglog") as string
-			}
-
 			window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
 			window.dataLayer.push({
 				event: "registration",
@@ -24,6 +20,10 @@ export const sendRegister = (data: { name: string, lastname: string, email: stri
 					timestamp: Math.floor(Date.now() / 1000),
 				}
 			});
+
+			if (localStorage.getItem("redirect_reglog")) {
+				window.location.href = localStorage.getItem("redirect_reglog") as string
+			}
 
 			window.location.hash = "welcome"
 

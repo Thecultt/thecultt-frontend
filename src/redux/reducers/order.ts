@@ -7,6 +7,8 @@ const initialState: OrderState = {
 		isActive: false,
 		isError: false,
 
+		id: 0,
+
 		name: "",
 		saleSum: 0,
 
@@ -50,6 +52,7 @@ const initialState: OrderState = {
 		createdon: "",
 		delivery_address: "",
 		delivery_type: "",
+		delivery_price: "",
 		id: 0,
 		num: "",
 		payment_type: "",
@@ -90,6 +93,16 @@ const order = (state = initialState, action: OrderStateActions) => {
 			promocode: {
 				...state.promocode,
 				isError: action.payload,
+			},
+		}
+	}
+
+	if (action.type === OrderStateActionTypes.SET_ORDER_PROMOCODE_ID) {
+		return {
+			...state,
+			promocode: {
+				...state.promocode,
+				id: action.payload,
 			},
 		}
 	}

@@ -11,7 +11,7 @@ const CatalogFiltersTopSortMedia: React.FC = () => {
 	const { filters } = useTypedSelector(({ products }) => products);
 
 	const [state, setState] = React.useState<boolean>(false);
-	const [currentSortKey, setCurrentSortKey] = React.useState<string>("");
+	const [currentSortKey, setCurrentSortKey] = React.useState<string>("a");
 
 	const ModalRef = React.useRef<HTMLDivElement>(null);
 
@@ -40,7 +40,6 @@ const CatalogFiltersTopSortMedia: React.FC = () => {
 	};
 
 	const sortItems: { [key: string]: string } = {
-		"default": "умолчанию",
 		"a": "новизне",
 		"price": "возрастанию цены",
 		"-price": "убыванию цены",

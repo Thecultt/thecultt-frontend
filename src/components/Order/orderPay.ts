@@ -4,20 +4,21 @@ interface orderPayParams {
 	type: string,
 	orderId: number,
 	totalPrice: number,
+	deliveryPrice: number
 	products: { name: string, price: number }[]
 
 	onSuccessCallback: () => void
 }
 
-const orderPay = ({ type, orderId, totalPrice, products, onSuccessCallback }: orderPayParams) => {
+const orderPay = ({ type, orderId, totalPrice, deliveryPrice, products, onSuccessCallback }: orderPayParams) => {
 	if (type === "Кредит" || type === "Рассрочка от Тинькофф") {
 		tinkoff.createDemo({
 			shopId: process.env.REACT_APP_TINKOFF_SHOP_ID as string,
 			showcaseId: process.env.REACT_APP_TINKOFF_SHOW_CASE_ID as string,
 			orderNumber: String(orderId),
-			items: products.map((product) => ({ name: product.name, price: product.price, quantity: 1 })),
+			items: [...products.map((product) => ({ name: product.name, price: product.price, quantity: 1 })), { name: "Доставка", price: deliveryPrice, quantity: 1 }],
 			sum: totalPrice,
-			successURL: `https://thecultt.co/order/${orderId}`	
+			successURL: `https://thecultt.co/order/${orderId}`
 		}, { view: "self" });
 
 		// tinkoff.methods.on(tinkoff.constants.MODAL_CLOSED, () => {

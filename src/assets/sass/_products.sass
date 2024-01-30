@@ -4,7 +4,7 @@
 		position: relative
 
 		width: 100%
-		height: 415px
+		height: 470px
 
 		display: flex
 		flex-direction: column
@@ -19,7 +19,10 @@
 		+borderRadius
 
 		&:hover &-cover
-			height: 200px
+			height: 260px
+
+		&:hover &-cover-image
+			background-position: center 70%
 
 		&:hover &-cover-arrow
 			opacity: 1
@@ -31,7 +34,7 @@
 			position: relative
 
 			width: 100%
-			height: 255px
+			height: 310px
 
 			+transition
 
@@ -115,8 +118,10 @@
 				border-radius: 9px
 
 				background-size: cover
-				background-position: center 70%
+				background-position: center 30%
 				background-repeat: no-repeat
+
+				+transition
 
 		&-text
 			width: 100%
@@ -231,18 +236,38 @@
 	// product
 	.product
 		&-block
+			height: 370px
+
 			&-cover
-				height: 230px
+				height: 200px
+
+				&-image
+					background-position: center 20%
+
+				&-arrow, &-dots
+					display: none
 
 			&:hover &-cover
-				height: 230px
+				height: 200px
 
-			&:hover &-cover-arrow
-				opacity: 1
-
-			&-cover-arrow
-				opacity: 1
+			&:hover &-cover-image
+				background-position: center 20%
 
 			&-text
+				&__model
+					font-size: 14px
+
+				&-state
+					justify-content: center
+
+					&__subtitle
+						font-size: 10px
+
+					&__title
+						font-size: 10px
+
+				&-yandex-split
+					transform: scale(.8)
+
 				&__btn
 					display: none

@@ -160,13 +160,16 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 						</p>
 
 						<div className="header-search-box-history-often-items-wrapper">
-							<p className="header-search-box-history-often__item">
-								Сумка Gucci
-							</p>
-
-							<p className="header-search-box-history-often__item">
-								Часы Cartier
-							</p>
+							{[
+								"Сумка Louis Vuitton",
+								"Hermes Birkin",
+								"Сумка Gucci",
+								"Prada",
+							].map((search, index) => (
+								<p className="header-search-box-history-often__item" key={`header-search-box-history-often__item-${index}`} onClick={() => dispatch(setHeaderSearchValue(search))}>
+									{search}
+								</p>
+							))}
 						</div>
 					</div>
 
@@ -206,7 +209,16 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 
 				<div className={`header-search-box-products ${search.isFetch ? "fetch" : ""}`}>
 					<h3 className="header-search-box-products__title">
-						{search.value !== "" ? `${checkDeclension(search.totalCount, ["Найден", "Найдено", "Найдено"]).text}: ${checkDeclension(search.totalCount, ["товар", "товара", "товаров"]).title}` : "Новинки"} <Link to={`/catalog?search=${search.value}`} onClick={onClose}>Смотреть все</Link>
+						{search.value !== "" ?
+							`${checkDeclension(search.totalCount, ["Найден", "Найдено", "Найдено"]).text}: ${checkDeclension(search.totalCount, ["товар", "товара", "товаров"]).title}` : "Новинки"
+						}
+
+						{search.value !== "" && !search.items.length ? (
+							<Link to={`/catalog`} onClick={onClose}>Перейти в каталог</Link>
+						) : (
+							<Link to={`/catalog?search=${search.value}`} onClick={onClose}>Смотреть все</Link>
+						)}
+
 					</h3>
 
 					{search.value !== "" ? (
@@ -216,33 +228,41 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 					) : null}
 
 					<div className="header-search-box-products-blocks-wrapper">
-						{search.value !== "" ? search.items.map((item, index) => (
-							<div className="header-search-box-products-block" key={`header-search-box-products-block-${index}`}>
-								<ProductBlock
-									addCart={() =>
-										addCart({
-											id: item.id,
-											checked: true,
-											article: item.article,
-											manufacturer: item.manufacturer,
-											category: item.category,
-											subcategory: item.subcategory,
-											name: item.name,
-											image: item.images[0],
-											price: item.price,
-											availability: item.availability,
-											is_trial: item.is_trial
-										})
-									}
-									onClickProduct={() => onClickProduct(item, index)}
-									isCart={cartItems[item.article] ? true : false}
-									addFavorite={() => addFavorite(item)}
-									removeFavorite={() => removeFavorite(item.id)}
-									isFavorite={favoritesItems[item.id] ? true : false}
-									{...item}
-								/>
-							</div>
-						)) : newItems.map((item, index) => (
+						{search.value !== "" ? (
+							search.items.length ? (
+								search.items.map((item, index) => (
+									<div className="header-search-box-products-block" key={`header-search-box-products-block-${index}`}>
+										<ProductBlock
+											addCart={() =>
+												addCart({
+													id: item.id,
+													checked: true,
+													article: item.article,
+													manufacturer: item.manufacturer,
+													category: item.category,
+													subcategory: item.subcategory,
+													name: item.name,
+													image: item.images[0],
+													price: item.price,
+													availability: item.availability,
+													is_trial: item.is_trial
+												})
+											}
+											onClickProduct={() => onClickProduct(item, index)}
+											isCart={cartItems[item.article] ? true : false}
+											addFavorite={() => addFavorite(item)}
+											removeFavorite={() => removeFavorite(item.id)}
+											isFavorite={favoritesItems[item.id] ? true : false}
+											{...item}
+										/>
+									</div>
+								))
+							) : (
+								<p className="header-search-box-products-blocks__null">
+									К сожалению, мы не смогли ничего найти
+								</p>
+							)
+						) : newItems.map((item, index) => (
 							<div className="header-search-box-products-block" key={`header-search-box-products-block-${index}`}>
 								<ProductBlock
 									addCart={() =>
