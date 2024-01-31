@@ -145,7 +145,7 @@
 				+ManropeMedium
 
 			&-state
-				display: flex
+				display: inline-flex
 				align-items: center
 				margin-bottom: 5px
 
@@ -236,10 +236,10 @@
 	// product
 	.product
 		&-block
-			height: 370px
+			height: 390px
 
 			&-cover
-				height: 200px
+				height: 220px
 
 				&-image
 					background-position: center 20%
@@ -248,26 +248,32 @@
 					display: none
 
 			&:hover &-cover
-				height: 200px
+				height: 220px
 
 			&:hover &-cover-image
 				background-position: center 20%
 
 			&-text
 				&__model
-					font-size: 14px
+					font-size: 15px
 
 				&-state
 					justify-content: center
 
 					&__subtitle
-						font-size: 10px
+						font-size: 13px
 
 					&__title
-						font-size: 10px
+						font-size: 13px
+
+						& > svg
+							display: none
+
+				&__price
+					font-size: 15px
 
 				&-yandex-split
-					transform: scale(.8)
+					transform: scale(.85)
 
 				&__btn
 					display: none

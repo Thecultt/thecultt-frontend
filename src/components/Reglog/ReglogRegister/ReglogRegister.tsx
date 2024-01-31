@@ -108,7 +108,9 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						<Field
 							component={RenderCheckbox}
 							name="policyCheckbox"
-							label="Я принимаю условия <a href='/help/public-offerte'>Публичной оферты</a> и согласен (-а) на обработку своих персональных данных"
+							label={`
+								Я принимаю условия <a href="https://drive.google.com/file/d/1fV5mvttAFMQkRDPg_iM-2OoJTNj_oB0R/view">агентского договора</a>, договора <a href="https://drive.google.com/file/d/1gDePwQmUPry6NvX9RORUssyrnzkxvSVu/view">купли-продажи</a> и даю свое согласие на <a href="https://drive.google.com/file/d/1BK_TzD4u4z7iBIbc7Gw-hCb54-q-ilFW/view">обработку персональных данных</a>.
+							`}
 							small
 						/>
 					</div>
@@ -117,7 +119,9 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						<Field
 							component={RenderCheckbox}
 							name="promoCheckbox"
-							label="Согласен (-а) на получение рекламной рассылки и обработки своих персональных данных"
+							label={`
+								Согласен (-а) <a href="https://drive.google.com/file/d/1boXYWorAMhCifykbhO3UPu4iybSrEZNB/view">получать</a> информационные письма и персональные предложения на указанную почту
+							`}
 							small
 						/>
 					</div>

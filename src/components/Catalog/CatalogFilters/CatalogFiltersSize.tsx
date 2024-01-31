@@ -34,7 +34,7 @@ const CatalogFiltersSize: React.FC<CatalogFiltersSizeProps> = ({
 						label={size}
 						onChange={() => onChangeSetType(size)}
 						checked={Object.keys(filters.size).find((filtersSize) => (
-							size === filtersSize
+							size == filtersSize
 						)) ? true : false}
 					/>
 				</div>

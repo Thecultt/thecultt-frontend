@@ -461,14 +461,12 @@ const OrderProducts: React.FC = () => {
 				</div>
 
 				<p className="order-products__description">
-					Нажимая на кнопку, вы принимаете условия <Link to="/help/user-agreement">пользовательского соглашения</Link> и <Link to="/help/public-offerte">публичной оферты</Link>.
+					Нажимая кнопку, вы принимаете условия{" "}
+					<a href="https://drive.google.com/file/d/143bXR-O4Ip2VKss6aHcPXNTr1hBWrFjN/view">пользовательского соглашения</a>
+					и
+					<a href="https://drive.google.com/file/d/1gDePwQmUPry6NvX9RORUssyrnzkxvSVu/view">публичной оферты</a>.
 				</p>
-
-				{/* <p onClick={onPayButtonClick}>123</p> */}
-				{/* 
-				<div id="button_container">
-
-				</div> */}
+				
 				<button
 					className={`btn ${isDisableSendBtn ? "loader" : ""} ${isCheckNull() && isValid ? "" : "disabled"
 						} order-products__btn`}

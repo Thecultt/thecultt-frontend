@@ -194,7 +194,10 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
 							CULTT
 						</p>
 						<div className="footer-block-bottom-link">
-							<Link
+							<a href="https://drive.google.com/file/d/143bXR-O4Ip2VKss6aHcPXNTr1hBWrFjN/view" className="footer-block-bottom-link__link">Пользовательское соглашение</a>
+							<a href="https://drive.google.com/file/d/1fV5mvttAFMQkRDPg_iM-2OoJTNj_oB0R/view" className="footer-block-bottom-link__link">Публичная оферта продавца</a>
+							<a href="https://drive.google.com/file/d/1gDePwQmUPry6NvX9RORUssyrnzkxvSVu/view" className="footer-block-bottom-link__link">Публичная оферта покупателя</a>
+							{/* <Link
 								to="/help/public-offerte"
 								className="footer-block-bottom-link__link"
 							>
@@ -205,7 +208,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
 								className="footer-block-bottom-link__link"
 							>
 								Пользовательсткое соглашение
-							</Link>
+							</Link> */}
 						</div>
 					</div>
 				</div>

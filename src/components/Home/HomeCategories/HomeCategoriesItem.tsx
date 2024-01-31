@@ -5,7 +5,11 @@ import { CategoriesItem } from "./HomeCategories";
 
 const HomeCategoriesItem: React.FC<CategoriesItem> = ({ image, title }) => {
 	return (
-		<Link to={title === "Бижутерия" || title === "Часы" || title === "Ремни" || title === "Платки и шарфы" ? `/catalog?categories=Аксессуары&types=${title}` : `/catalog?categories=${title}`} className="home-categories-item-wrapper">
+		<Link to={title === "Бижутерия" || title === "Часы" || title === "Ремни" || title === "Платки и шарфы" ?
+			`/catalog?categories=Аксессуары${title === "Платки и шарфы" ? `&types=Платки&types=Платки+и+шарфы&types=Шарфы` : `&types=${title}`}`
+			:
+			`/catalog?categories=${title}`
+		} className="home-categories-item-wrapper">
 			<div className="home-categories-item">
 				<div className="home-categories-item-image" style={{ backgroundImage: `url("${image}")` }}></div>
 

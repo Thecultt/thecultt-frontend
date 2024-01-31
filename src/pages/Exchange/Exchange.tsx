@@ -17,11 +17,11 @@ const Exchange: React.FC = () => {
 					<div className="exchange-main hover-scale">
 						<div className="exchange-main-text">
 							<h2 className="exchange-main-text__title">
-								Меняем старую сумку на новую
+								Меняем старую вещь на новую
 							</h2>
 
 							<p className="exchange-main-text__description">
-								Хотите расстаться со своими вещами - просто обменяйте их на новые в THE CULTT.  Вы можете продать нам свои сумку, обувь или аксессуары в счет новых.
+								Хотите расстаться со своими вещами - просто обменяйте их на новые в THE CULTT. Передайте нам старые сумки, обувь и аксессуары и получите депозит для покупки новых.
 							</p>
 
 							<Link to="/cabinet/sell?type=exchange" className="btn exchange-main-text__btn">
@@ -43,7 +43,7 @@ const Exchange: React.FC = () => {
 						</h2>
 
 						<p className="exchange__description mb exchange-steps__description">
-							Всего три шага, и у вас новая сумка
+							Всего три шага, и у вас новая вещь в гардеробе
 						</p>
 
 						<div className="exchange-steps-blocks-wrapper">
@@ -54,7 +54,7 @@ const Exchange: React.FC = () => {
 									Шаг 1
 								</h3>
 								<p className="exchange-steps-block__description">
-									Выберите сумку <br /> на нашем сайте
+									Выберите сумку, обувь или аксессуар на нашем сайте
 								</p>
 							</div>
 
@@ -66,7 +66,7 @@ const Exchange: React.FC = () => {
 								</h3>
 
 								<p className="exchange-steps-block__description">
-									Подайте заявку на обмен старой <br /> сумки на новую, указав ссылку на нее
+									Подайте заявку на обмен вашего старого лота, указав ссылку на новый
 								</p>
 							</div>
 
@@ -77,7 +77,7 @@ const Exchange: React.FC = () => {
 									Шаг 3
 								</h3>
 								<p className="exchange-steps-block__description">
-									Готово! Вы осознанно <br /> обновили гардероб
+									Готово! Вы осознанно обновили гардероб
 								</p>
 							</div>
 						</div>
@@ -88,7 +88,7 @@ const Exchange: React.FC = () => {
 							Что еще мне нужно знать?
 						</h2>
 						<p className="exchange__description exchange-option__description">
-							У нас есть две программы
+							У нас есть две программы*
 						</p>
 
 						<div className="exchange-option-blocks-wrapper">
@@ -97,7 +97,9 @@ const Exchange: React.FC = () => {
 									Обмен
 								</h3>
 								<p className="exchange-option-block__description">
-									Мы принимаем к обмену сумки, необязательно купленные у нас. Оцениваем ваш лот и предлагаем депозит в размере его стоимости. На эту сумму вы можете выбрать себе новую сумку на нашем сайте.
+									Мы принимаем к обмену <b>сумки, обувь, аксессуары</b> - необязательно купленные у нас. Оцениваем ваш лот и предлагаем депозит, который вы можете использовать при покупке нового на нашем сайте.
+									<br />
+									Разница будет компенсирована одной из сторон.
 								</p>
 
 								<Link
@@ -114,7 +116,7 @@ const Exchange: React.FC = () => {
 								</h3>
 
 								<p className="exchange-option-block__description">
-									По этой программе мы принимаем только сумки, купленные на нашей платформе, снова в свою коллекцию. А вам предлагаем альтернативу на специальных условиях.
+									По этой программе мы принимаем <b>только сумки</b>, купленные на нашей платформе, снова в коллекцию. Вам предлагаем депозит на особых условиях для приобретения новой вещи любой категории.
 								</p>
 
 								<div className="exchange-option-block-option">
@@ -139,18 +141,9 @@ const Exchange: React.FC = () => {
 									</div>
 
 									<div className="exchange-option-block-option-block">
-										<h4 className="exchange-option-block-option-block__title">
-											от 4 до 6 месяцев
-										</h4>
-
 										<p className="exchange-option-block-option-block__description">
-											80% от изначальной стоимости
-										</p>
-									</div>
-
-									<div className="exchange-option-block-option-block">
-										<p className="exchange-option-block-option-block__description">
-											На сумки Hermes (Birkin, Kelly, Constance) распространяется фиксированный размер депозита — 85%, если ее состояние не изменилось.
+											На сумки Hermes (Birkin, Kelly, Constance) распространяется фиксированный размер депозита — 85%,
+											если ее состояние не изменилось.
 										</p>
 									</div>
 								</div>
@@ -170,6 +163,10 @@ const Exchange: React.FC = () => {
 								</Link>
 							</div>
 						</div>
+
+						<p className="exchange-option__subtitle">
+							*в программах Обмен и Круговорот не участвуют лоты в новом состоянии и с пометкой “Данный лот не участвует в программе Круговорот”
+						</p>
 					</div>
 
 					<div className="exchange-thecycle">
@@ -177,7 +174,7 @@ const Exchange: React.FC = () => {
 							О Круговороте
 						</h2>
 						<p className="exchange__description exchange-thecycle__description">
-							Участвовать могут только лоты, купленные у нас не более, чем 6 месяцев назад. <br />
+							Участвовать могут только лоты, купленные у нас не более, чем 3 месяца назад. <br />
 							Депозит на новую сумку зависит от того, сколько времени вы провели вместе со старой.
 						</p>
 
@@ -200,14 +197,14 @@ const Exchange: React.FC = () => {
 								</p>
 							</div>
 
-							<div className="exchange-thecycle-block">
+							{/* <div className="exchange-thecycle-block">
 								<h3 className="exchange-thecycle-block__title">
 									от 4 до 6 месяцев
 								</h3>
 								<p className="exchange-thecycle-block__description">
 									80% от изначальной стоимости
 								</p>
-							</div>
+							</div> */}
 						</div>
 
 						<p className="exchange-thecycle__subtitle">
@@ -240,16 +237,13 @@ const Exchange: React.FC = () => {
 									Стоимость депозита
 								</h3>
 
-								<p className="exchange-example-block-price__value">Фиксированный процент 90/85/80 от стоимости лота</p>
+								<p className="exchange-example-block-price__value">Фиксированный процент 90/85 от стоимости лота</p>
 
 								<p className="exchange-example-block-price__subvalue">
 									<span>90.000₽</span> - при обмене сумки менее чем через месяц после покупки
 								</p>
 								<p className="exchange-example-block-price__subvalue">
 									<span>85.000₽</span> - при обмене сумки в период от 1 до 3 месяцев
-								</p>
-								<p className="exchange-example-block-price__subvalue">
-									<span>80.000₽</span> - при обмене сумки в период от 4 до 6 месяцев
 								</p>
 
 								<p className="exchange-example-block-price__subtitle">

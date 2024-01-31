@@ -83,8 +83,8 @@ const HomeMainBanner: React.FC = () => {
 								Дарите им вторую жизнь
 							</p>
 
-							<Link to="/sell" className="home-main-slider-banner-item-text__btn color">
-								Продать
+							<Link to="/catalog" className="home-main-slider-banner-item-text__btn color">
+								Перейти в каталог
 							</Link>
 						</div>
 					</div>
@@ -101,8 +101,8 @@ const HomeMainBanner: React.FC = () => {
 								Запускайте круговорот сумок и меняйте свой гардероб
 							</p>
 
-							<Link to="/sell" className="home-main-slider-banner-item-text__btn color">
-								Продать
+							<Link to="/exchange" className="home-main-slider-banner-item-text__btn color">
+								Подробнее
 							</Link>
 						</div>
 					</div>
