@@ -68,8 +68,8 @@ const CabinetHistoryOrders: React.FC = () => {
 		dispatch(sendSubmitOrder(orderId) as any)
 	}
 
-	const onClickPay = ({ payment_type, id, cost, delivery_price, products }: {
-		payment_type: string, id: number, cost: string, delivery_price: string, products: { model_name: string, price: number }[]
+	const onClickPay = ({ payment_type, id, cost, delivery_price, num, products }: {
+		payment_type: string, id: number, cost: string, delivery_price: string, num: string, products: { model_name: string, price: number }[]
 	}) => {
 		orderPay({
 			type: payment_type,
@@ -77,6 +77,7 @@ const CabinetHistoryOrders: React.FC = () => {
 			totalPrice: parseInt(cost),
 			deliveryPrice: parseInt(delivery_price),
 			products: products.map((product) => ({ name: product.model_name, price: product.price })),
+			orderNum: num,
 			onSuccessCallback: () => successPayment(id)
 		})
 	}
@@ -100,6 +101,7 @@ const CabinetHistoryOrders: React.FC = () => {
 											id: item.id,
 											cost: item.cost,
 											delivery_price: item.delivery_price,
+											num: item.num,
 											products: item.products,
 										})}
 									/>

@@ -18,6 +18,16 @@ const HeaderTopMessage: React.FC = () => {
 				</div>
 			</Link>
 
+			{/* <div className='header-top-message-link'>
+				<div className="container">
+					<div className="header-top-message-link-wrapper">
+						<p className="header-top-message-link__text">
+							Технические работы. Мы правда недолго!
+						</p>
+					</div>
+				</div>
+			</div> */}
+			
 			<Link to={window.location.pathname} className='header-top-message-close'>
 				<div className="container">
 					<div className="header-top-message-close-wrapper">

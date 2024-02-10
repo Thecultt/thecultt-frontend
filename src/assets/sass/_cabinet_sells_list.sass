@@ -18,7 +18,10 @@
 
 			&__description
 				font-size: 14px
-				margin-bottom: 10px
+				// margin-bottom: 10px
+
+				& > a
+					color: $mainColor
 
 			&__btn
 				cursor: pointer
@@ -322,3 +325,14 @@
 				&-btn
 					&__btn
 						width: 100%
+
+@media screen and (max-width: 500px)
+	.cabinet-sells
+		&-list
+			&-payment-info-message
+				background-color: $mainColor
+				color: $white
+
+				&__description
+					& > a
+						color: $white

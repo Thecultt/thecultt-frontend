@@ -33,7 +33,7 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
 	const parameters: { title: string, value: string }[] = [
 		{ title: "Год выпуска", value: bag_year },
 		{ title: "Внешний материал", value: external_material },
-		{ title: "Материал подклада", value: lining_material },
+		{ title: "Материал подкладки", value: lining_material },
 		{ title: "Материал", value: jewelry_material },
 		{ title: "Состав", value: scarf_composition },
 		{ title: "Тип кожи", value: leather_type },

@@ -57,7 +57,7 @@
 		display: flex
 		flex-direction: column
 		align-items: center
-		
+
 		text-align: center
 
 		background-color: $lightBackgroundColor
@@ -77,3 +77,29 @@
 		&__btn
 			margin-top: 25px
 			width: 240px
+
+@media screen and ( max-width: 900px )
+	.contact
+		&-wrapper
+			width: 100%
+
+		&-block
+			&-content
+				&-text
+					&__title, &__subtitle
+						font-size: 15px
+
+		&-block-office
+			display: block
+			text-align: left
+
+			padding: 24px 16px
+
+			&__title
+				font-size: 17px
+
+			&__description
+				width: 100%
+
+			&__btn
+				width: auto

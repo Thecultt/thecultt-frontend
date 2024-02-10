@@ -32,7 +32,7 @@ const HomeCategories: React.FC = () => {
 		},
 		{
 			image: HomeCategoriesDecorationImage,
-			title: "Бижутерия",
+			title: "Украшения",
 		},
 		{
 			image: HomeCategoriesClockImage,

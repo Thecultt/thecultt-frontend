@@ -239,7 +239,7 @@ const OrderProducts: React.FC = () => {
 			payment_type: paymentId,
 
 			coupon_id: promocode.id
-		}, (orderId: number) => pay(orderId)) as any)
+		}, (orderId: number, orderNum: string) => pay(orderId, orderNum)) as any)
 	}
 
 	const successPayment = (orderId: number) => {
@@ -284,7 +284,7 @@ const OrderProducts: React.FC = () => {
 		dispatch(sendSubmitOrder(orderId) as any)
 	}
 
-	const pay = (orderId: number) => {
+	const pay = (orderId: number, orderNum: string) => {
 		if (currentDelivery.title === "Доставка с примеркой (по Москве)") {
 			successPayment(orderId)
 		} else {
@@ -303,6 +303,7 @@ const OrderProducts: React.FC = () => {
 					totalPrice: isPromocode() ? totalPrice + currentDelivery.price - promocode.saleSum : totalPrice + currentDelivery.price,
 					deliveryPrice: currentDelivery.price,
 					products,
+					orderNum,
 					onSuccessCallback: () => successPayment(orderId)
 				}
 			)

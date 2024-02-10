@@ -373,7 +373,7 @@ const SellImages: React.FC = () => {
 		if (category === "Женские сумки" || category === "Мужские сумки") return Object.keys(imageBlocksValue).length >= imageBlocksBag.filter((image) => !image.isMore).length
 		if (category === "Обувь") return Object.keys(imageBlocksValue).length >= imageBlocksShoes.filter((image) => !image.isMore).length
 		if (category === "Очки" || category === "Другой аксессуар") return Object.keys(imageBlocksValue).length >= imageBlocksAccess.filter((image) => !image.isMore).length
-		if (category === "Брендовая бижутерия") return Object.keys(imageBlocksValue).length >= imageBlocksJewerly.filter((image) => !image.isMore).length
+		if (category === "Украшения") return Object.keys(imageBlocksValue).length >= imageBlocksJewerly.filter((image) => !image.isMore).length
 		if (category === "Головные уборы") return Object.keys(imageBlocksValue).length >= imageBlocksHat.filter((image) => !image.isMore).length
 		if (category === "Ремни") return Object.keys(imageBlocksValue).length >= imageBlocksBelt.filter((image) => !image.isMore).length
 		if (category === "Часы") return Object.keys(imageBlocksValue).length >= imageBlocksClock.filter((image) => !image.isMore).length
@@ -437,7 +437,7 @@ const SellImages: React.FC = () => {
 					/>
 				)) : null}
 
-				{category === "Брендовая бижутерия" ? imageBlocksJewerly.map((block, index) => (
+				{category === "Украшения" ? imageBlocksJewerly.map((block, index) => (
 					<SellImagesBlock
 						{...block}
 						number={index + 1}

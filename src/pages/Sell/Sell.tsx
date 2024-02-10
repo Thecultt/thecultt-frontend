@@ -171,8 +171,8 @@ const Sell: React.FC = () => {
 						</>
 					) : null}
 
-					<Popup state={isSend} setState={() => window.location.reload()}>
-						{localStorage.getItem("sell-info-global-type-delivery") === "Лично в офис" ? (
+					{localStorage.getItem("sell-info-global-type-delivery") === "Лично в офис" ? (
+						<Popup state={isSend} setState={() => window.location.href = "https://calendly.com/thecultt/visit"}>
 							<div className="sell-success">
 								<h3 className="sell-success__title">
 									Заявка отправлена, выберите время для записи!
@@ -184,7 +184,9 @@ const Sell: React.FC = () => {
 									Выбрать дату и время
 								</a>
 							</div>
-						) : (
+						</Popup>
+					) : (
+						<Popup state={isSend} setState={() => window.location.href = "/cabinet/sells"}>
 							<div className="sell-success">
 								<h3 className="sell-success__title">
 									Заявка отправлена!
@@ -196,8 +198,8 @@ const Sell: React.FC = () => {
 									Перейти в личный кабинет
 								</button>
 							</div>
-						)}
-					</Popup>
+						</Popup>
+					)}
 				</div>
 			</div>
 		</section>

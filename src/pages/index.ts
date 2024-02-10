@@ -41,6 +41,9 @@ export { default as CabinetSellsList } from "./Cabinet/CabinetSellsList";
 // Sell
 export { default as Sell } from "./Sell/Sell";
 
+// SellAdmin
+export { default as SellAdmin } from "./SellAdmin/SellAdmin";
+
 // SellInfo
 export { default as SellInfo } from "./SellInfo/SellInfo";
 

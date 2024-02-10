@@ -22,16 +22,16 @@ export const sendLogin = (data: { username: string | null, password: string }, o
 				}
 			});
 
-			// window.mindbox("async", {
-			// 	operation: "Website.AuthorizeCustomer",
-			// 	data: {
-			// 		customer: {
-			// 			ids: {
-			// 				websiteID: "<Идентификатор на сайте>"
-			// 			}
-			// 		}
-			// 	}
-			// });
+			window.mindbox("async", {
+				operation: "Website.AuthorizeCustomer",
+				data: {
+					customer: {
+						ids: {
+							websiteID: data.id
+						}
+					}
+				}
+			});
 
 			if (localStorage.getItem("redirect_reglog")) {
 				window.location.href = localStorage.getItem("redirect_reglog") as string

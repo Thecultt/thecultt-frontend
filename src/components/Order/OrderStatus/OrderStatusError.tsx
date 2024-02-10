@@ -16,7 +16,7 @@ const OrderStatusError: React.FC = () => {
 
 	const { items } = useTypedSelector(({ cart }) => cart);
 
-	const { order: { payment_type, id, cost, products, client_name, client_phone, delivery_type, delivery_address, delivery_price, yandex_split_link } } = useTypedSelector(({ order }) => order)
+	const { order: { payment_type, id, cost, products, client_name, client_phone, delivery_type, delivery_address, delivery_price, num, yandex_split_link } } = useTypedSelector(({ order }) => order)
 
 	const successPayment = (orderId: number) => {
 		const newCart: { [key: string]: CartItem } = {}
@@ -67,6 +67,7 @@ const OrderStatusError: React.FC = () => {
 			totalPrice: parseInt(cost),
 			deliveryPrice: parseInt(delivery_price),
 			products: products.map((product) => ({ name: product.model_name, price: product.price })),
+			orderNum: num,
 			onSuccessCallback: () => successPayment(id)
 		})
 	}

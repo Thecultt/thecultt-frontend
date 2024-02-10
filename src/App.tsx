@@ -32,6 +32,7 @@ import {
 	Visit,
 	Order,
 	Sell,
+	SellAdmin,
 	SellInfo,
 	SellInfoBrands,
 	Concierge,
@@ -188,6 +189,11 @@ const App = () => {
 						path="/cabinet/sell"
 						element={<Sell />}
 					/>
+
+					{/* <Route
+						path="/cabinet/sell-admin"
+						element={<SellAdmin />}
+					/> */}
 
 					<Route path="/order" element={<Order />} />
 

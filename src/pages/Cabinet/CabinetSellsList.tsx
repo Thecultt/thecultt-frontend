@@ -42,10 +42,10 @@ const CabinetSellsList: React.FC = () => {
 					<CabinetMenu />
 
 					<div className="cabinet-content cabinet-sells-list">
-						{user.bik === "" || user.bik === null || user.inn === "" || user.inn === null || user.passport === "" || user.passport === null || user.rs === "" || user.rs === null ? (
+						{/* {user.bik === "" || user.bik === null || user.inn === "" || user.inn === null || user.passport === "" || user.passport === null || user.rs === "" || user.rs === null ? (
 							<CabinetSellsListPaymentInfoMessage />
-						) : null}
-
+						) : null} */}
+						<CabinetSellsListPaymentInfoMessage />
 
 						<div className="cabinet-sells-list-top">
 							<Link to="/cabinet/sell" className="btn cabinet-sells-list-top__add">

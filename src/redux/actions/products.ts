@@ -177,6 +177,11 @@ export const fetchProductsCatalog = (
 	});
 
 	dispatch({
+		type: ProductActionTypes.SET_PRODUCTS_IS_LOADED,
+		payload: true
+	})
+
+	dispatch({
 		type: ProductActionTypes.SET_PRODUCTS_PAGE_COUNT,
 		payload: total_pages
 	})
@@ -225,6 +230,19 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 				index: 1,
 				quantity: 1
 			}]
+		}
+	});
+
+	window.mindbox("async", {
+		operation: "Website.ViewProduct",
+		data: {
+			viewProduct: {
+				product: {
+					ids: {
+						website: `${data.id}`
+					}
+				}
+			}
 		}
 	});
 

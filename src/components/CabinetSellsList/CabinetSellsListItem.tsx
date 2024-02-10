@@ -160,7 +160,7 @@ const CabinetSellsListItem: React.FC<any> = ({
 									) : null}
 								</div>
 
-								<div className="cabinet-sells-list-item-info-block-value ml">
+								{/* <div className="cabinet-sells-list-item-info-block-value ml">
 									{time_edit ? (
 										<p className="cabinet-sells-list-item-info-block-value__value">
 											<span>Статус обновлен:</span> {moment(time_edit).format("DD.MM.YYYY, hh:ss")}
@@ -170,7 +170,7 @@ const CabinetSellsListItem: React.FC<any> = ({
 									<p className="cabinet-sells-list-item-info-block-value__value">
 										<span>Дата оформления:</span> {moment(time).format("DD.MM.YYYY, hh:ss")}
 									</p>
-								</div>
+								</div> */}
 							</div>
 
 							<div className="cabinet-sells-list-item-info-block-value">

@@ -7,43 +7,54 @@
 	&-banner
 		display: flex
 		justify-content: space-between
+		align-items: center
+
+		height: 300px
 
 		&-image
 			width: 50%
+			height: 300px
 
 			border-radius: 12px 0px 0px 12px
 
 			+backgroundSetting
 
 		&-text
+			display: flex
+			flex-direction: column
+			justify-content: center
+			align-items: center
+
 			text-align: center
 			width: 50%
-			padding: 58px
+			height: 300px
+			padding: 60px
 
 			background-color: $lightBackgroundColor
 			border-radius: 0px 12px 12px 0px
 
 			&__title
-				font-weight: 400
-				font-size: 26px
-				margin-bottom: 15px
+				font-size: 22px
+				margin-bottom: 10px
 
 			&__description
 				font-size: 14px
 				margin-bottom: 25px
 
 			&__link
-				width: 185px
+				width: 255px
 
 	&-banner-media
 		display: none
 
-		padding: 40px 18px
+		padding: 15px
 
 		+backgroundSetting
 		+borderRadius
 
 		&-text
+			padding-top: 150px
+
 			color: $white
 
 			&__title
@@ -54,6 +65,12 @@
 
 			&__description
 				font-size: 12px
+				margin-bottom: 10px
+
+			&__link
+				color: $white
+				font-size: 12px
+				border-bottom: 1px solid $white
 
 	&-filters-top
 		margin-top: 55px
@@ -582,7 +599,7 @@
 
 			&__title
 				display: block
-				
+
 				font-size: 26px
 				font-weight: 500
 				margin-bottom: 15px
@@ -704,7 +721,7 @@
 			&-null
 				&__title
 					font-size: 17px
-					
+
 			&-section
 				margin: 25px 0
 
@@ -740,3 +757,12 @@
 						padding: 5px 10px
 						font-size: 12px
 						margin: 0 2px
+
+@media screen and ( max-width: 500px )
+	.catalog
+		&-banner-media
+			&-text
+				padding-top: 75px
+
+				&__description
+					width: 75%

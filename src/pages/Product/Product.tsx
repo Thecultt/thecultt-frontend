@@ -48,12 +48,12 @@ const Product: React.FC = () => {
 									<ProductInfo {...itemByArticle} />
 								</div>
 							</div>
-
-							<CatalogProductsSection title="Может быть интересно" />
-
-							<ProductExchange />
 						</div>
 					</section>
+
+					<CatalogProductsSection title="Может быть интересно" />
+
+					<ProductExchange />
 				</>
 			) : (
 				<PageLoader />

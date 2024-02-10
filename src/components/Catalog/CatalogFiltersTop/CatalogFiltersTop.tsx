@@ -1,4 +1,5 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { checkDeclension } from "../../../functions/checkDeclension";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
@@ -8,6 +9,8 @@ import { CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from "../../";
 const CatalogFiltersTop: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
 	const { filters, itemsCount } = useTypedSelector(({ products }) => products);
 	const { categories } = useTypedSelector(({ products_filters }) => products_filters);
+
+	const [query] = useSearchParams();
 
 	return (
 		<div className="catalog-filters-top">
@@ -30,14 +33,18 @@ const CatalogFiltersTop: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFilters
 
 			<div className="catalog-filters-top-title">
 				<p className="catalog-filters-top-title__title">
-					{filters.search !== "" ? (
-						filters.search
+					{query.get("theme") ? (
+						query.get("theme")
 					) : (
-						Object.keys(filters.brands).length ? (
-							Object.keys(filters.brands).map((brand, index) => `${brand}${Object.keys(filters.brands).length === index + 1 ? "" : ", "}`)
-						) : Object.keys(filters.categories).length && Object.keys(filters.categories).length !== Object.keys(categories).length ? (
-							Object.keys(filters.categories).map((category, index) => `${category}${Object.keys(filters.categories).length === index + 1 ? "" : ", "}`)
-						) : "Новинки"
+						filters.search !== "" ? (
+							filters.search
+						) : (
+							Object.keys(filters.brands).length ? (
+								Object.keys(filters.brands).map((brand, index) => `${brand}${Object.keys(filters.brands).length === index + 1 ? "" : ", "}`)
+							) : Object.keys(filters.categories).length && Object.keys(filters.categories).length !== Object.keys(categories).length ? (
+								Object.keys(filters.categories).map((category, index) => `${category}${Object.keys(filters.categories).length === index + 1 ? "" : ", "}`)
+							) : "Новинки"
+						)
 					)}
 				</p>
 

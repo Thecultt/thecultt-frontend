@@ -10,6 +10,7 @@ import {
 
 import {
 	CatalogBanner,
+	CatalogBannerMedia,
 	PageLoader,
 	CatalogFiltersTop,
 	CatalogFilters,
@@ -65,7 +66,11 @@ const Catalog: React.FC = () => {
 			<section className="catalog">
 				<div className="container">
 					<div className="catalog-wrapper">
-						{/* <CatalogBanner /> */}
+						{window.innerWidth > 1200 ? (
+							<CatalogBanner />
+						) : (
+							<CatalogBannerMedia />
+						)}
 
 						{isLoadedFilters ? (
 							<>

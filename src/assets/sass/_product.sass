@@ -4,30 +4,6 @@
 
 	+open
 
-	&__back
-		display: flex
-		align-items: center
-
-		cursor: pointer
-
-		background-color: transparent
-		border: none
-
-		will-change: transform
-
-		font-size: 16px
-
-		+transition
-
-		&:hover
-			+transformHover
-
-		&:active
-			+transformClick
-
-		& > svg
-			margin-right: 10px
-
 	&-content
 		margin: 40px 0 0 0
 
@@ -123,6 +99,9 @@
 					width: 1200px
 
 					transition: opacity .2s ease
+
+					pointer-events: auto !important
+					user-select: all !important
 
 				&-nav
 					display: flex
@@ -262,7 +241,6 @@
 
 				&-btn
 					display: flex
-					align-items: center
 					justify-content: space-between
 
 					&__btn
@@ -330,7 +308,7 @@
 					display: flex
 					justify-content: space-between
 
-					width: 360px
+					width: 300px
 
 					margin-bottom: 15px
 
@@ -448,6 +426,7 @@
 
 					&:last-child
 						border-bottom: none
+						margin-bottom: 0
 
 					&-top
 						display: flex
@@ -531,10 +510,16 @@
 
 @media screen and ( max-width: 1200px )
 	.product
-		margin: 25px 0
+		margin: 0
+
+		& > .container
+			width: 100%
+
+		&-wrapper
+			position: relative
 
 		&-content
-			margin: 25px 0 0 0
+			margin: 0
 
 			flex-direction: column
 
@@ -544,15 +529,34 @@
 			&-cover-media
 				display: block
 
+				&-slider-image
+					border-radius: 0
+
 			&-info
-				margin-top: 15px
+				margin-top: -15px
+
+				z-index: 2
 
 				width: 100%
 
 				padding: 15px
 
+				background-color: $backgroundColor
+
 				&-bread-crumbs
-					margin-bottom: 5px
+					position: absolute
+
+					top: 15px
+					left: 15px
+
+					z-index: 2
+
+					&-back
+						margin-right: 0
+
+						& > svg
+							height: 30px
+							width: 30px
 
 					&__item
 						display: none
@@ -565,15 +569,57 @@
 
 				&-title
 					&-btn
-						flex-direction: column
+						&__btn.add, &__btn.subscribe
+							margin-bottom: 0
 
 						&__btn.add, &__btn.subscribe
-							margin-bottom: 15px
+							width: calc( 80% - 5px )
 
-						&__btn.add, &__btn.fav, &__btn.subscribe
-							width: 100%
+						&__btn.fav
+							width: calc( 20% - 5px )
+
+							font-size: 0
+
+							border: none
+
+							& > svg
+								margin-left: 0
+
+								min-width: 45px
+								width: 45px
+
+					&__notavailable
+						position: absolute
+
+						top: 15px
+						right: 15px
+
+						font-weight: 400
+
+						font-size: 12px
+						background-color: $black
+						color: $white
+
+						padding: 6px 10px
+
+						border-radius: 6px
+
+					&-btn
+						padding: 10px
+
+						background-color: $lightBackgroundColor
+
+						width: 100%
+						position: fixed
+
+						left: 0
+						bottom: 0
 
 				&-auth
+					border: none
+					padding: 12px 20px
+					background-color: $lightBackgroundColor
+
 					&-text
 						&__title
 							font-size: 14px
@@ -581,11 +627,17 @@
 						&__link
 							font-size: 14px
 
+				&-exchange
+					border: none
+					background-color: $lightBackgroundColor
+
 		&-exchange
 			flex-direction: column
 			align-items: flex-start
 
 			padding: 0 25px
+
+			margin-bottom: 25px
 
 			&-text
 				width: 100%
@@ -615,8 +667,8 @@
 			&-info
 				&-state
 					&-bar
-						width: 100%
+						width: 290px
 
 						&-item
 							&__title
-								font-size: 12px
+								font-size: 15px

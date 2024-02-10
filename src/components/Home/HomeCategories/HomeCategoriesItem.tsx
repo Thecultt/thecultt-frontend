@@ -5,7 +5,7 @@ import { CategoriesItem } from "./HomeCategories";
 
 const HomeCategoriesItem: React.FC<CategoriesItem> = ({ image, title }) => {
 	return (
-		<Link to={title === "Бижутерия" || title === "Часы" || title === "Ремни" || title === "Платки и шарфы" ?
+		<Link to={title === "Украшения" || title === "Часы" || title === "Ремни" || title === "Платки и шарфы" ?
 			`/catalog?categories=Аксессуары${title === "Платки и шарфы" ? `&types=Платки&types=Платки+и+шарфы&types=Шарфы` : `&types=${title}`}`
 			:
 			`/catalog?categories=${title}`

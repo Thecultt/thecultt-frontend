@@ -6,11 +6,12 @@ interface orderPayParams {
 	totalPrice: number,
 	deliveryPrice: number
 	products: { name: string, price: number }[]
+	orderNum: string
 
 	onSuccessCallback: () => void
 }
 
-const orderPay = ({ type, orderId, totalPrice, deliveryPrice, products, onSuccessCallback }: orderPayParams) => {
+const orderPay = ({ type, orderId, totalPrice, deliveryPrice, products, orderNum, onSuccessCallback }: orderPayParams) => {
 	if (type === "Кредит" || type === "Рассрочка от Тинькофф") {
 		tinkoff.create({
 			shopId: process.env.REACT_APP_TINKOFF_SHOP_ID as string,
@@ -18,7 +19,7 @@ const orderPay = ({ type, orderId, totalPrice, deliveryPrice, products, onSucces
 			orderNumber: String(orderId),
 			items: [...products.map((product) => ({ name: product.name, price: product.price, quantity: 1 })), { name: "Доставка", price: deliveryPrice, quantity: 1 }],
 			sum: totalPrice,
-			successURL: `https://thecultt.co/order/${orderId}`
+			successURL: `https://thecultt.com/order/${orderId}`
 		}, { view: "self" });
 
 		// tinkoff.methods.on(tinkoff.constants.MODAL_CLOSED, () => {
@@ -74,11 +75,12 @@ const orderPay = ({ type, orderId, totalPrice, deliveryPrice, products, onSucces
 	let widget = new window.cp.CloudPayments();
 
 	widget.pay(
-		"auth",
+		"charge",
 		{
 			publicId: process.env.REACT_APP_CLOUD_PAYMENTS_PUBLIC_ID,
-			description: "Оплата товаров TheCultt",
+			description: `${orderNum}`,
 			amount: totalPrice,
+			invoiceId: String(orderId),
 			currency: "RUB",
 		},
 		{

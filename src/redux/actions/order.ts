@@ -212,14 +212,14 @@ export const sendCreateOrder = (
 
 		coupon_id: number
 	},
-	onComplete: (orderId: number) => void
+	onComplete: (orderId: number, orderNum: string) => void
 ) => async (dispatch: Dispatch<OrderStateActions>) => {
 	const res = await $api.post(`create_order/`, data)
 
 	if (res.data.link) {
 		window.location.href = res.data.link
 	} else {
-		onComplete(res.data.order_id)
+		onComplete(res.data.order_id, res.data.order_num)
 	}
 }
 

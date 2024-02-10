@@ -43,6 +43,23 @@ export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<Fav
 			}
 		});
 
+		window.mindbox("async", {
+			operation: "Website.SetWishList",
+			data: {
+				productList: [
+					{
+						product: {
+							ids: {
+								website: `${item.id}`
+							}
+						},
+						count: 1,
+						pricePerItem: `${item.price}`
+					}
+				]
+			}
+		});
+
 		dispatch(fetchFavorites() as any)
 	} else {
 		window.location.hash = "reglog"

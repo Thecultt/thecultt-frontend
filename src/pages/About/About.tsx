@@ -253,7 +253,7 @@ const About: React.FC = () => {
 								}}
 							>
 								<h4 className="about-team-members-item__name">
-									Татьяна Ермакова
+									Таня Ермакова
 								</h4>
 								<p className="about-team-members-item__status">
 									Chief creative officer

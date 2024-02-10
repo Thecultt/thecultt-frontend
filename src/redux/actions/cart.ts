@@ -56,6 +56,23 @@ export const addCartItem = (item: CartItem) => {
 		}
 	});
 
+	window.mindbox("async", {
+		operation: "Website.SetCart",
+		data: {
+			productList: [
+				{
+					product: {
+						ids: {
+							website: `${item.id}`
+						}
+					},
+					count: "1",
+					pricePerItem: `${item.price}`
+				}
+			]
+		}
+	});
+
 	return {
 		type: CartActionTypes.ADD_CART_ITEMS,
 		payload: item

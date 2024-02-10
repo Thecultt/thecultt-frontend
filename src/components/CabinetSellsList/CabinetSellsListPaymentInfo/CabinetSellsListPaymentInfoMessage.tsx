@@ -18,7 +18,19 @@ const CabinetSellsListPaymentInfoMessage: React.FC = () => {
 		<>
 			<div className='cabinet-sells-list-payment-info-message'>
 				<h4 className="cabinet-sells-list-payment-info-message__title">
-					Введите реквизиты для выплат
+					Мы обновляем сайт, чтобы сделать его удобнее
+				</h4>
+
+				<p className="cabinet-sells-list-payment-info-message__description">
+					Мы стараемся сделать это быстро и незаметно, но возможны сбои в отображении сделок по продаже ваших лотов. По всем техническим вопросам всегда можно обратиться в telegram <a href="https://t.me/thecultt_help_it">@thecultt_help_it</a>.
+				</p>
+
+				{/* <button className="cabinet-sells-list-payment-info-message__btn" onClick={() => setIsOpenPopup(true)}>Заполнить данные</button> */}
+			</div>
+
+			{/* <div className='cabinet-sells-list-payment-info-message'>
+				<h4 className="cabinet-sells-list-payment-info-message__title">
+					Мы обновляем сайт, чтобы сделать его удобнее
 				</h4>
 
 				<p className="cabinet-sells-list-payment-info-message__description">
@@ -30,7 +42,7 @@ const CabinetSellsListPaymentInfoMessage: React.FC = () => {
 
 			<Popup state={isOpenPopup} setState={() => setIsOpenPopup(!isOpenPopup)}>
 				<CabinetSellsListPaymentInfoPopupForm onSubmit={onSubmit} />
-			</Popup>
+			</Popup> */}
 		</>
 	)
 }

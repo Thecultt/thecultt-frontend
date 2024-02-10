@@ -10,11 +10,11 @@ const Home: React.FC = () => {
 				{/* <script src="//code.jivo.ru/widget/zAUiclp1Hy" async></script> */}
 			</Helmet>
 
+			<HomeMainBanner />
+
 			<section className="home">
 				<div className="container">
 					<div className="home-wrapper">
-						<HomeMainBanner />
-
 						<HomeCategories />
 
 						<CatalogProductsSection title='Новинки' />

@@ -138,7 +138,8 @@ const ProductCover: React.FC<ProductCoverProps> = ({ images }) => {
 										}`}
 									style={{ backgroundImage: `url("${image}")` }}
 									onMouseEnter={() => setCurrentIndexImage(index)}
-								></div>
+								>
+								</div>
 							</SwiperSlide>
 						))}
 					</Swiper>

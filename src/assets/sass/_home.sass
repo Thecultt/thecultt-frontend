@@ -3,14 +3,14 @@
 	margin: 30px 0
 	overflow-x: hidden
 
-	&-main-banner-wrapper
-		position: relative
-
-		will-change: transform
-
-		margin-bottom: 50px
-
 	&-main-banner
+		margin: 30px 0 45px 0
+
+		&-wrapper
+			position: relative
+
+			will-change: transform
+
 		&-arrow
 			cursor: pointer
 
@@ -32,10 +32,10 @@
 				transform: scale3d(0.95, 0.95, 0.95) translateY(-50%)
 
 			&.prev
-				left: 10px
+				left: 15px
 
 			&.next
-				right: 10px
+				right: 15px
 
 		&-nav
 			position: absolute
@@ -69,70 +69,77 @@
 				&.active
 					background-color: $mainColor
 
-	&-main-slider-banner
-		overflow: hidden
+		&-slider
+			overflow: hidden
 
-		margin: 0 -20px
+			margin: 0 -20px
 
-		+borderRadius
-
-		&-item-wrapper
-			padding: 0 20px
-
-		&-item
-			display: flex
-			align-items: flex-end
-			justify-content: center
-
-			// height: 600px
-			height: 80vh
-			min-height: 300px
-
-			padding: 50px
-
-			text-align: center
-
-			color: $white
-
-			+backgroundSetting
 			+borderRadius
 
-			&-text
-				&__title
-					font-size: 36px
-					margin-bottom: 12px
+			&-item-wrapper
+				padding: 0 20px
 
-				&__description
-					font-size: 18px
+			&-item
+				display: flex
+				align-items: flex-end
+				justify-content: center
 
-					margin-bottom: 25px
+				// height: 600px
+				height: 80vh
+				min-height: 300px
+				max-height: 700px
 
-				&__btn
-					cursor: pointer
-					display: inline-block
+				padding: 50px
 
-					padding: 15px 80px
+				text-align: center
 
-					font-size: 16px
-					color: $white
-					border-radius: 9px
-					border: 0.7px solid var(--background-second, #F6F4F0)
-					background: rgba(246, 244, 240, 0.15)
-					box-shadow: 0px 0.29629629850387573px 2.6365740299224854px 0px rgba(0, 0, 0, 0.02), 0px 1.3037036657333374px 5.459259033203125px 0px rgba(0, 0, 0, 0.03), 0px 3.200000047683716px 10.887499809265137px 0px rgba(0, 0, 0, 0.04), 0px 6.162962913513184px 21.340740203857422px 0px rgba(0, 0, 0, 0.05), 0px 10.370369911193848px 39.238426208496094px 0px rgba(0, 0, 0, 0.06), 0px 16px 67px 0px rgba(0, 0, 0, 0.08)
+				color: $white
 
-					will-change: transform
+				+backgroundSetting
+				+borderRadius
 
-					+transition
+				&-text
+					&__title
+						font-size: 36px
+						margin-bottom: 12px
 
-					&:hover
-						+transformHover
+					&__description
+						font-size: 18px
 
-					&:active
-						+transformClick
+						margin-bottom: 25px
 
-					&.color
-						background-color: $mainColor
-						border: none
+					&__btn
+						cursor: pointer
+						display: inline-block
+
+						padding: 15px 80px
+
+						font-size: 16px
+						color: $white
+						border-radius: 12px
+						// border: 0.7px solid var(--background-second, #F6F4F0)
+						border: 1px solid #FFFFFF
+						// background: rgba(246, 244, 240, 0.15)
+						// box-shadow: 0px 0.29629629850387573px 2.6365740299224854px 0px rgba(0, 0, 0, 0.02), 0px 1.3037036657333374px 5.459259033203125px 0px rgba(0, 0, 0, 0.03), 0px 3.200000047683716px 10.887499809265137px 0px rgba(0, 0, 0, 0.04), 0px 6.162962913513184px 21.340740203857422px 0px rgba(0, 0, 0, 0.05), 0px 10.370369911193848px 39.238426208496094px 0px rgba(0, 0, 0, 0.06), 0px 16px 67px 0px rgba(0, 0, 0, 0.08)
+
+						will-change: transform
+
+						+transition
+
+						&:hover
+							+transformHover
+
+						&:active
+							+transformClick
+
+						&.color
+							background-color: $mainColor
+							border: none
+
+						&.white
+							background-color: $white
+							color: $black
+							border: none
 
 	&-categories-wrapper
 		position: relative
@@ -432,22 +439,38 @@
 // MEDIA
 @media screen and ( max-width: 1200px )
 	.home
-		&-main-slider-banner
-			&-item
-				padding: 15px 15px 35px 15px
-				height: 350px
+		&-main-banner
+			margin: 0 0 45px 0
 
-				&-text
-					width: 100%
+			& > .container
+				width: 100%
 
-					&__title
-						font-size: 21px
+			&-arrow
+				display: none
 
-					&__description
-						font-size: 18px
+			&-slider
+				margin: 0
+				border-radius: 0
 
-					&__btn
+				&-item-wrapper
+					padding: 0
+
+				&-item
+					padding: 15px 15px 50px 15px
+					height: 350px
+					border-radius: 0
+
+					&-text
 						width: 100%
+
+						&__title
+							font-size: 21px
+
+						&__description
+							font-size: 18px
+
+						&__btn
+							width: 100%
 
 		&-categories
 			&__title
@@ -485,9 +508,20 @@
 
 				&__description
 					font-size: 12px
+					margin-bottom: 15px
 
 				&__btn
-					width: 100%
+					display: inline-block
+					width: auto
+
+					background-color: transparent
+					padding: 0
+					color: $mainColor
+					font-size: 15px
+					border: none
+
+					text-decoration: underline
+					text-underline-offset: 2px
 
 		&-sell-partners
 			flex-direction: column
@@ -510,7 +544,17 @@
 					font-size: 12px
 
 				&__btn
-					width: 100%
+					display: inline-block
+					width: auto
+
+					background-color: transparent
+					padding: 0
+					color: $mainColor
+					font-size: 15px
+					border: none
+
+					text-decoration: underline
+					text-underline-offset: 2px
 
 		&-about
 			display: flex
@@ -562,10 +606,28 @@
 				&__description
 					font-size: 12px
 
+				&__btn
+					color: $mainColor
+					background-color: transparent
+
 @media screen and ( max-width: 500px )
 	.home
 		&-main-banner-wrapper
 			margin-bottom: 25px
+
+		&-main-banner
+			&-slider
+				&-item
+					height: 640px
+					min-height: 640px
+					max-height: 640px
+
+					&-text
+						&__title
+							font-size: 20px
+
+						&__description
+							font-size: 12px
 
 		&-categories
 			margin-bottom: 25px

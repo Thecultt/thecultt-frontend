@@ -140,6 +140,24 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 							{Object.keys(categories[category].subsubcategories).map((subsubcategory, subindex) => (
 								<Link to={`/catalog?categories=${category}&types=${subsubcategory}`} className="header-media-modal-menu-links__link" key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`} onClick={toggleState}>{subsubcategory}</Link>
 							))}
+
+							{category === "Обувь" ?
+								<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+									Вся обувь
+								</Link> : null
+							}
+
+							{category === "Сумки" ?
+								<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+									Все сумки
+								</Link> : null
+							}
+
+							{category === "Аксессуары" ?
+								<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+									Все аксессуары
+								</Link> : null
+							}
 						</HeaderMediaLinkTab>
 					))}
 
