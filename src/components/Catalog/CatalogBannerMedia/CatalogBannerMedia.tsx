@@ -24,22 +24,23 @@ const CatalogBannerMedia: React.FC = () => {
 					</div>
 				</div>
 			) : (
-				<div
-					className="catalog-banner-media"
-					style={{ backgroundImage: `url("${CatalogBannerImageMedia}")` }}
-				>
-					<div className="catalog-banner-media-text">
-						<h3 className="catalog-banner-media-text__title">
-							Свидание с сумками мечты <br />
-							в офисе THE CULTT
-						</h3>
-						<p className="catalog-banner-media-text__description">
-							С 10 по 14 февраля приходите в офис THE CULTT
-							без предварительной записи по адресу
-							ул. Трубная 25с3, с 11:00 до 21:00.
-						</p>
-					</div>
-				</div>
+				null
+				// <div
+				// 	className="catalog-banner-media"
+				// 	style={{ backgroundImage: `url("${CatalogBannerImageMedia}")` }}
+				// >
+				// 	<div className="catalog-banner-media-text">
+				// 		<h3 className="catalog-banner-media-text__title">
+				// 			Свидание с сумками мечты <br />
+				// 			в офисе THE CULTT
+				// 		</h3>
+				// 		<p className="catalog-banner-media-text__description">
+				// 			С 10 по 14 февраля приходите в офис THE CULTT
+				// 			без предварительной записи по адресу
+				// 			ул. Трубная 25с3, с 11:00 до 21:00.
+				// 		</p>
+				// 	</div>
+				// </div>
 			)}
 		</>
 

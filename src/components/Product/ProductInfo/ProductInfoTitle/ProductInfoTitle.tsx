@@ -69,7 +69,23 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 	}
 
 	const removeFavorite = () => {
-		dispatch(sendRemoveFavorite(id) as any)
+		dispatch(sendRemoveFavorite({
+			id,
+			article,
+			price,
+			store_price,
+			condition,
+			manufacturer,
+			name,
+			availability,
+			images,
+			num_of_favorites: 0,
+			category,
+			subcategory,
+			ring_size,
+			is_trial
+
+		}) as any)
 	}
 
 	const subscribeGood = () => {

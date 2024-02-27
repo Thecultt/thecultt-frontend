@@ -2,7 +2,8 @@ import { CheckEmailState, CheckEmailActions, CheckEmailActionTypes } from '../ty
 
 const initialState: CheckEmailState = {
 	isSend: false,
-	email: sessionStorage.getItem("email") ? sessionStorage.getItem("email") : ""
+	email: sessionStorage.getItem("email") ? sessionStorage.getItem("email") : "",
+	isExisting: false
 }
 
 const check_email = (state = initialState, action: CheckEmailActions) => {
@@ -17,6 +18,13 @@ const check_email = (state = initialState, action: CheckEmailActions) => {
 		return {
 			...state,
 			email: action.payload
+		};
+	}
+
+	if (action.type === CheckEmailActionTypes.SET_CHECK_EMAIL_IS_EXISTING) {
+		return {
+			...state,
+			isExisting: action.payload
 		};
 	}
 

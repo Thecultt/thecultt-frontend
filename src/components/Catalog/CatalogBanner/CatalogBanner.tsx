@@ -32,25 +32,26 @@ const CatalogBanner: React.FC = () => {
 					</div>
 				</div>
 			) : (
-				<div className="catalog-banner">
-					<div
-						className="catalog-banner-image"
-						style={{ backgroundImage: `url("${CatalogBannerImage}")` }}
-					></div>
+				null
+				// <div className="catalog-banner">
+				// 	<div
+				// 		className="catalog-banner-image"
+				// 		style={{ backgroundImage: `url("${CatalogBannerImage}")` }}
+				// 	></div>
 
-					<div className="catalog-banner-text">
-						<h3 className="catalog-banner-text__title">
-							Свидание с сумками мечты в офисе THE CULTT
-						</h3>
-						<p className="catalog-banner-text__description">
-							С 10 по 14 февраля вы можете прийти в офис THE CULTT
-							<br />
-							без предварительной записи по адресу
-							<br />
-							ул. Трубная 25с3, с 11:00 до 21:00.
-						</p>
-					</div>
-				</div>
+				// 	<div className="catalog-banner-text">
+				// 		<h3 className="catalog-banner-text__title">
+				// 			Свидание с сумками мечты в офисе THE CULTT
+				// 		</h3>
+				// 		<p className="catalog-banner-text__description">
+				// 			С 10 по 14 февраля вы можете прийти в офис THE CULTT
+				// 			<br />
+				// 			без предварительной записи по адресу
+				// 			<br />
+				// 			ул. Трубная 25с3, с 11:00 до 21:00.
+				// 		</p>
+				// 	</div>
+				// </div>
 			)}
 		</>
 	);

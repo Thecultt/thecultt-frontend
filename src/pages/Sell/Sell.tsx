@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import axios from "axios"
 
 import { fetchCabinetSellParameters, setCabinetSellCurrentStep, sendCreateCabinetSell } from "../../redux/actions/cabinet_sell";
 
@@ -23,11 +23,101 @@ const Sell: React.FC = () => {
 	const dispatch = useDispatch()
 
 	const { isLoadedParameters, isSend, currentStep, currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
+	const { user } = useTypedSelector(({ user }) => user)
 
 	React.useEffect(() => {
 		dispatch(fetchCabinetSellParameters() as any)
 
 		return () => {
+			try {
+				const info = JSON.parse(localStorage.getItem("sell-info-form") as string)
+				const images = JSON.parse(localStorage.getItem("sell-images-form") as string)
+
+				let data: any = {
+					"otpravilAnketyNaProdazy": "Нет",
+					"visitNaProdat": "Нет"
+				}
+
+				if (info) {
+					data = {
+						...data,
+						"brand": `${info.brand}`,
+						"coctoyanie": `${info.condition}`,
+						"defecti": `${info.defects}`,
+						"kategoria": `${info.category}`,
+						"model": `${info.model}`,
+						"ojidaniePoTcene": `${info.price}`,
+						"tovarIzKulta": `${info.isBuyTheCultt}`,
+
+						"photo1": "<Фото 1>",
+						"photo2": "<Фото 2>",
+						"photo3": "<Фото 3>",
+						"photo4": "<Фото 4>",
+					}
+				}
+
+				if (images) {
+					data = {
+						...data,
+
+						"photo1": `${images[0]}`,
+						"photo2": `${images[1]}`,
+						"photo3": `${images[2]}`,
+						"photo4": `${images[3]}`,
+					}
+				}
+
+				if (info) {
+					axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=ZapolnenieAnkety&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
+						{
+							"customerAction": {
+								"customFields": data
+							},
+							"customer": {
+								"email": `${user.email}`,
+								"discountCard": {
+									"ids": {
+										"number": "<Номер дисконтной карты>"
+									}
+								},
+								"birthDate": "<Дата рождения>",
+								"sex": "<Пол>",
+								"timeZone": "<Часовой пояс>",
+								"lastName": "<Фамилия>",
+								"firstName": "<Имя>",
+								"middleName": "<Отчество>",
+								"fullName": "<ФИО>",
+								"area": {
+									"ids": {
+										"externalId": "<Внешний идентификатор зоны>"
+									}
+								},
+								"mobilePhone": "<Мобильный телефон>",
+								"ids": {
+									"websiteID": `${user.id}`
+								},
+								"customFields": {
+									"tipKlienta": "<Тип клиента>",
+									"gorod": "<Город>",
+									"istochnikPodpiski": "<Источник подписки>"
+								},
+								"subscriptions": []
+							},
+							"executionDateTimeUtc": new Date()
+						},
+						{
+							headers: {
+								'Content-Type': 'application/json; charset=utf-8',
+								'Accept': 'application/json',
+								'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+							}
+						}
+					)
+				}
+			} catch (e) {
+				console.log(e)
+			}
+
 			localStorage.removeItem("sell-info-form")
 			localStorage.removeItem("sell-images-form")
 			localStorage.removeItem("sell-contact-form")

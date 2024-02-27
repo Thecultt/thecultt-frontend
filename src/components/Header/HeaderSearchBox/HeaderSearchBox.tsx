@@ -61,8 +61,8 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 		dispatch(sendSaveFavorite(item) as any)
 	}
 
-	const removeFavorite = (id: number) => {
-		dispatch(sendRemoveFavorite(id) as any)
+	const removeFavorite = (item: Product) => {
+		dispatch(sendRemoveFavorite(item) as any)
 	}
 
 	const togglePopup = (e: any) => {
@@ -251,7 +251,7 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 											onClickProduct={() => onClickProduct(item, index)}
 											isCart={cartItems[item.article] ? true : false}
 											addFavorite={() => addFavorite(item)}
-											removeFavorite={() => removeFavorite(item.id)}
+											removeFavorite={() => removeFavorite(item)}
 											isFavorite={favoritesItems[item.id] ? true : false}
 											{...item}
 										/>
@@ -283,7 +283,7 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 									onClickProduct={() => onClickProduct(item, index)}
 									isCart={cartItems[item.article] ? true : false}
 									addFavorite={() => addFavorite(item)}
-									removeFavorite={() => removeFavorite(item.id)}
+									removeFavorite={() => removeFavorite(item)}
 									isFavorite={favoritesItems[item.id] ? true : false}
 									{...item}
 								/>

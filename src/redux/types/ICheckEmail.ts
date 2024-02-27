@@ -1,11 +1,14 @@
 export interface CheckEmailState {
 	isSend: boolean
+
 	email: string | null
+	isExisting: boolean
 }
 
 export enum CheckEmailActionTypes {
 	SET_CHECK_EMAIL_IS_SEND = "SET_CHECK_EMAIL_IS_SEND",
 	SET_CHECK_EMAIL_EMAIL = "SET_CHECK_EMAIL_EMAIL",
+	SET_CHECK_EMAIL_IS_EXISTING = "SET_IS_EXISTING",
 }
 
 interface setCheckEmailIsSend {
@@ -18,4 +21,9 @@ interface setCheckEmailEmail {
 	payload: string;
 }
 
-export type CheckEmailActions = setCheckEmailIsSend | setCheckEmailEmail
+interface setCheckEmailIsExisting {
+	type: CheckEmailActionTypes.SET_CHECK_EMAIL_IS_EXISTING;
+	payload: boolean;
+}
+
+export type CheckEmailActions = setCheckEmailIsSend | setCheckEmailEmail | setCheckEmailIsExisting

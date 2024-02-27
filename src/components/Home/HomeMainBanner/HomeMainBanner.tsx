@@ -58,7 +58,7 @@ const HomeMainBanner: React.FC = () => {
 					</button>
 
 					<Slider {...settings} className='home-main-banner-slider' ref={SliderRef}>
-						<div className='home-main-banner-slider-item-wrapper'>
+						{/* <div className='home-main-banner-slider-item-wrapper'>
 							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${window.innerWidth > 500 ? HomeMainBannerImage14feb : HomeMainBannerImage14febMedia}")` }}>
 								<div className="home-main-banner-slider-item-text">
 									<h2 className="home-main-banner-slider-item-text__title">
@@ -74,7 +74,7 @@ const HomeMainBanner: React.FC = () => {
 									</a>
 								</div>
 							</div>
-						</div>
+						</div> */}
 
 						<div className='home-main-banner-slider-item-wrapper'>
 							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImage1}")` }}>

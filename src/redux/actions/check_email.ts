@@ -35,7 +35,7 @@ export const sendCheckEmail = (email: string) => (dispatch: Dispatch<CheckEmailA
 
 			dispatch(sendRecoveryPassword(email) as any)
 		} else if (email.split("@")[1] === "icloud.com" || email.split("@")[1] === "hotmail.com") {
-			window.location.hash = "warning_blocked_email_register"
+			window.location.hash = "warning_blocked_email_login"
 		} else {
 			window.location.hash = "login"
 		}
@@ -43,6 +43,11 @@ export const sendCheckEmail = (email: string) => (dispatch: Dispatch<CheckEmailA
 		dispatch({
 			type: CheckEmailActionTypes.SET_CHECK_EMAIL_IS_SEND,
 			payload: false
+		})
+
+		dispatch({
+			type: CheckEmailActionTypes.SET_CHECK_EMAIL_IS_EXISTING,
+			payload: true
 		})
 	})
 }

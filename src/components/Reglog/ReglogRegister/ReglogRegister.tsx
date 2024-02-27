@@ -109,7 +109,7 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 							component={RenderCheckbox}
 							name="policyCheckbox"
 							label={`
-								Я принимаю условия <a href="https://drive.google.com/file/d/1fV5mvttAFMQkRDPg_iM-2OoJTNj_oB0R/view">агентского договора</a>, договора <a href="https://drive.google.com/file/d/1gDePwQmUPry6NvX9RORUssyrnzkxvSVu/view">купли-продажи</a> и даю свое согласие на <a href="https://drive.google.com/file/d/1BK_TzD4u4z7iBIbc7Gw-hCb54-q-ilFW/view">обработку персональных данных</a>.
+								Я принимаю условия <a href="https://storage.yandexcloud.net/the-cultt-docs/Файлы Февраль 2024/Оферта для продавца 150224.pdf">агентского договора</a>, договора <a href="https://storage.yandexcloud.net/the-cultt-docs/Файлы Февраль 2024/Oferta dlya pokupatelya 090224.pdf">купли-продажи</a> и даю свое согласие на <a href="https://drive.google.com/file/d/1BK_TzD4u4z7iBIbc7Gw-hCb54-q-ilFW/view">обработку персональных данных</a>.
 							`}
 							small
 						/>

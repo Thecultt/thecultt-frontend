@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { Dispatch } from "redux";
 
 import $api from "../../http";
@@ -233,18 +235,46 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 		}
 	});
 
-	window.mindbox("async", {
-		operation: "Website.ViewProduct",
-		data: {
-			viewProduct: {
-				product: {
-					ids: {
-						website: `${data.id}`
+	try {
+		axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ViewProduct&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
+			{
+				"viewProduct": {
+					"product": {
+						"ids": {
+							"website": `${data.id}`
+						}
+					},
+					"price": `${data.price}`,
+					"customerAction": {
+						"customFields": {
+							"brand": `${data.manufacturer}`,
+							"coctoyanie": `${data.condition}`,
+							"defecti": `${data.nuances}`,
+							"kategoria": `${data.category}`,
+							"model": `${data.name}`,
+							"ojidaniePoTcene": "<Ожидание по цене>",
+							"otpravilAnketyNaProdazy": "<Отправил анкету на продажу>",
+							"photo1": "<Фото 1>",
+							"photo2": "<Фото 2>",
+							"photo3": "<Фото 3>",
+							"photo4": "<Фото 4>",
+							"tovarIzKulta": "<Товар приобретен в Культе>",
+							"visitNaProdat": "<Визит на страницу Продать>"
+						}
 					}
 				}
+			},
+			{
+				headers: {
+					'Content-Type': 'application/json; charset=utf-8',
+					'Accept': 'application/json',
+					'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+				}
 			}
-		}
-	});
+		)
+	} catch (e) {
+		console.log(e)
+	}
 
 	dispatch({
 		type: ProductActionTypes.SET_PRODUCTS_ITEM_BY_ARTICLE,

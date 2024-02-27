@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Dispatch } from "react";
 
 import $api from "../../http"
@@ -66,8 +67,32 @@ export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<Fav
 	}
 }
 
-export const sendRemoveFavorite = (id: number) => async (dispatch: Dispatch<FavoritesActions>) => {
-	await $api.delete(`/remove-favorite-product/${id}/`)
+export const sendRemoveFavorite = (item: Product) => async (dispatch: Dispatch<FavoritesActions>) => {
+	await $api.delete(`/remove-favorite-product/${item.id}/`)
+
+	try {
+		axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.RemoveFromWishList&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
+			{
+				"removeProductFromList": {
+					"product": {
+						"ids": {
+							"website": `${item.id}`
+						}
+					},
+					"pricePerItem": `${item.price}`
+				}
+			},
+			{
+				headers: {
+					'Content-Type': 'application/json; charset=utf-8',
+					'Accept': 'application/json',
+					'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+				}
+			}
+		)
+	} catch (e) {
+		console.log(e)
+	}
 
 	dispatch(fetchFavorites() as any)
 }

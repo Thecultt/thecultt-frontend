@@ -69,8 +69,8 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 		dispatch(sendSaveFavorite(item) as any)
 	}
 
-	const removeFavorite = (id: number) => {
-		dispatch(sendRemoveFavorite(id) as any)
+	const removeFavorite = (item: Product) => {
+		dispatch(sendRemoveFavorite(item) as any)
 	}
 
 	const onClickProduct = (item: any, index: number) => {
@@ -138,7 +138,7 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 										onClickProduct={() => onClickProduct(item, index)}
 										isCart={cartItems[item.article] ? true : false}
 										addFavorite={() => addFavorite(item)}
-										removeFavorite={() => removeFavorite(item.id)}
+										removeFavorite={() => removeFavorite(item)}
 										isFavorite={favoritesItems[item.id] ? true : false}
 										{...item}
 									/>
@@ -168,7 +168,7 @@ const CatalogProductsSection: React.FC<CatalogProductsSectionProps> = ({ title }
 										onClickProduct={() => onClickProduct(item, index)}
 										isCart={cartItems[item.article] ? true : false}
 										addFavorite={() => addFavorite(item)}
-										removeFavorite={() => removeFavorite(item.id)}
+										removeFavorite={() => removeFavorite(item)}
 										isFavorite={favoritesItems[item.id] ? true : false}
 										{...item}
 									/>

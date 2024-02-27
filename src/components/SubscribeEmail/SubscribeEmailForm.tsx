@@ -3,30 +3,58 @@ import { Link } from 'react-router-dom'
 
 import { Field, reduxForm, InjectedFormProps } from "redux-form";
 
-import { Input, RenderRadioSelect } from '../'
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+
+import { Loader, RenderInput, RenderRadioSelect } from '../'
+
+import validate from './validate'
 
 const SubscribeEmailForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	handleSubmit,
+	initialize,
 	invalid,
 	pristine,
 	submitting,
 }) => {
+	const { isSending } = useTypedSelector(({ subscribe_email }) => subscribe_email);
+
+	React.useEffect(() => {
+		initialize({ type: "Prodavec" })
+	}, [])
+
 	return (
-		<form className='subscribe-email-text-form'>
+		<form className='subscribe-email-text-form' onSubmit={handleSubmit}>
 			<div className="subscribe-email-text-form-input-wrapper">
 				<div className="subscribe-email-text-form-input">
-					<Input name='email' label='Ваша почта' type='text' />
+					<Field component={RenderInput} name='email' label='Ваша почта' type='text' />
 				</div>
 
-				<button className="btn subscribe-email-text-form-input__btn">Получить гайд</button>
+				{isSending ? (
+
+					<button
+						className={`btn subscribe-email-text-form-input__btn`}
+						disabled
+					>
+						<Loader />
+					</button>
+				) : (
+					<button
+						className={`btn ${invalid || pristine || submitting ? "disabled" : ""} subscribe-email-text-form-input__btn`}
+						disabled={invalid || pristine || submitting}
+					>
+						Получить гайд
+					</button>
+				)}
 			</div>
 
 			<div className="subscribe-email-text-form-type-wrapper">
 				<div className="subscribe-email-text-form-type">
 					<Field
 						component={RenderRadioSelect}
+						type='radio'
 						name="type"
 						label="Продавец"
+						value="Prodavec"
 						small
 					/>
 				</div>
@@ -34,8 +62,10 @@ const SubscribeEmailForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 				<div className="subscribe-email-text-form-type">
 					<Field
 						component={RenderRadioSelect}
+						type='radio'
 						name="type"
 						label="Покупатель"
+						value="Pokupatel"
 						small
 					/>
 				</div>
@@ -51,5 +81,5 @@ const SubscribeEmailForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 export default reduxForm<{}, {}>({
 	form: "subscribe-email-form",
-	// validate,
+	validate,
 })(SubscribeEmailForm);

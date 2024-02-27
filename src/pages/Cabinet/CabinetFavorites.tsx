@@ -39,8 +39,8 @@ const CabinetFavorites: React.FC = () => {
 		dispatch(sendSaveFavorite(item) as any)
 	}
 
-	const removeFavorite = (id: number) => {
-		dispatch(sendRemoveFavorite(id) as any)
+	const removeFavorite = (item: Product) => {
+		dispatch(sendRemoveFavorite(item) as any)
 	}
 
 	React.useEffect(() => {
@@ -104,7 +104,7 @@ const CabinetFavorites: React.FC = () => {
 											onClickProduct={() => onClickProduct(items[key], index)}
 											isCart={cartItems[items[key].article] ? true : false}
 											addFavorite={() => addFavorite(items[key])}
-											removeFavorite={() => removeFavorite(items[key].id)}
+											removeFavorite={() => removeFavorite(items[key])}
 											isFavorite={favoritesItems[items[key].id] ? true : false}
 											{...items[key]}
 										/>

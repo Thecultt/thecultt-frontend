@@ -80,7 +80,7 @@ const orderPay = ({ type, orderId, totalPrice, deliveryPrice, products, orderNum
 			publicId: process.env.REACT_APP_CLOUD_PAYMENTS_PUBLIC_ID,
 			description: `${orderNum}`,
 			amount: totalPrice,
-			invoiceId: String(orderId),
+			invoiceId: String(orderNum),
 			currency: "RUB",
 		},
 		{

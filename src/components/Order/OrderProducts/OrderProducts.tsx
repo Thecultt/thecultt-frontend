@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { NumericFormat } from "react-number-format";
 import { formValueSelector } from "redux-form";
@@ -281,6 +281,139 @@ const OrderProducts: React.FC = () => {
 			}
 		});
 
+		try {
+			axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.CreateAuthorizedOrder&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
+				{
+					"customer": {
+						"ids": {
+							"websiteID": `${user.id}`
+						},
+						"discountCard": {
+							"ids": {
+								"number": "<Номер дисконтной карты>"
+							}
+						},
+						"birthDate": "<Дата рождения>",
+						"sex": "<Пол>",
+						"timeZone": "<Часовой пояс>",
+						"lastName": "<Фамилия>",
+						"firstName": "<Имя>",
+						"middleName": "<Отчество>",
+						"fullName": "<ФИО>",
+						"area": {
+							"ids": {
+								"externalId": "<Внешний идентификатор зоны>"
+							}
+						},
+						"email": "<Email>",
+						"mobilePhone": "<Мобильный телефон>",
+						"customFields": {
+							"tipKlienta": "<Тип клиента>",
+							"gorod": "<Город>",
+							"istochnikPodpiski": "<Источник подписки>"
+						},
+						"subscriptions": [
+							{
+								"brand": "<Системное имя бренда подписки клиента>",
+								"pointOfContact": "<Системное имя канала подписки: Email, SMS, Viber, Webpush, Mobilepush>",
+								"topic": "<Внешний идентификатор тематики подписки>"
+							},
+							{
+								"brand": "<Системное имя бренда подписки клиента>",
+								"pointOfContact": "<Системное имя канала подписки: Email, SMS, Viber, Webpush, Mobilepush>",
+								"topic": "<Внешний идентификатор тематики подписки>"
+							}
+						]
+					},
+					"order": {
+						"ids": {
+							"mindboxId": "<Идентификатор заказа в Mindbox>",
+							"websiteID": `${orderId}`
+						},
+						"cashdesk": {
+							"ids": {
+								"externalId": "<Идентификатор кассы>"
+							}
+						},
+						"deliveryCost": `${currentDelivery.price}`,
+						"customFields": {
+							"deliveryType": `${currentDelivery.title}`
+						},
+						"area": {
+							"ids": {
+								"externalId": "<Внешний идентификатор зоны>"
+							}
+						},
+						"totalPrice": "<Итоговая сумма, полученная от клиента. Должна учитывать возвраты и отмены. Используется для подсчета среднего чека.>",
+						"discounts": [
+							{
+								"type": "<promoCode>",
+								"promoCode": {
+									"ids": {
+										"code": "<Идентификатор промокода>"
+									}
+								},
+								"amount": "<Размер скидки в рублях>"
+							}
+						],
+						"lines": products.map((product) => {
+							return {
+								"minPricePerItem": `${product.price}`,
+								"costPricePerItem": "<Себестоимость за единицу продукта>",
+								"basePricePerItem": `${product.price}`,
+								"quantity": "1",
+								"quantityType": "int",
+								"discountedPricePerLine": `${totalPrice}`,
+								"lineId": `${orderId}`,
+								"lineNumber": "<Порядковый номер позиции заказа>",
+								"discounts": promocode.isActive ? [
+									{
+										"type": "Промокод",
+										"externalPromoAction": {
+											"ids": {
+												"externalId": `${promocode.name}`
+											}
+										},
+										"amount": `${promocode.saleSum}`
+									}
+								] : [],
+								"product": {
+									"ids": {
+										"website": `${product.id}`
+									}
+								}
+							}
+						}),
+						"email": `${user.email}`,
+						"mobilePhone": `${phoneValue.replace(/[^0-9]/g, "")}`
+					},
+					"executionDateTimeUtc": new Date()
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json; charset=utf-8',
+						'Accept': 'application/json',
+						'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+					}
+				}
+			)
+
+			axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ClearCart&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
+				{
+					"executionDateTimeUtc": new Date()
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json; charset=utf-8',
+						'Accept': 'application/json',
+						'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+					}
+				}
+			)
+		} catch (e) {
+			console.log(e)
+		}
+
 		dispatch(sendSubmitOrder(orderId) as any)
 	}
 
@@ -465,9 +598,9 @@ const OrderProducts: React.FC = () => {
 					Нажимая кнопку, вы принимаете условия{" "}
 					<a href="https://drive.google.com/file/d/143bXR-O4Ip2VKss6aHcPXNTr1hBWrFjN/view">пользовательского соглашения</a>
 					и
-					<a href="https://drive.google.com/file/d/1gDePwQmUPry6NvX9RORUssyrnzkxvSVu/view">публичной оферты</a>.
+					<a href="https://storage.yandexcloud.net/the-cultt-docs/Файлы Февраль 2024/Oferta dlya pokupatelya 090224.pdf">публичной оферты</a>.
 				</p>
-				
+
 				<button
 					className={`btn ${isDisableSendBtn ? "loader" : ""} ${isCheckNull() && isValid ? "" : "disabled"
 						} order-products__btn`}

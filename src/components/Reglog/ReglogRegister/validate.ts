@@ -20,7 +20,7 @@ export const validate = (values: validateValues) => {
 	const errors: validateErrors = {};
 
 	const defaultMin = 2;
-	const defaultMax = 32;
+	const defaultMax = 100;
 
 	if (!values.name) {
 		errors.name = "Поле не может быть пустым";

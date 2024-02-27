@@ -10,7 +10,7 @@ const validate = (values: validateInfoValues) => {
 	const errors: validateInfoErrors = {};
 
 	const defaultMin = 2;
-	const defaultMax = 32;
+	const defaultMax = 100;
 
 	if (!values.password) {
 		errors.password = "Поле не может быть пустым";

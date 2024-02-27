@@ -1,9 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d930065a.css",
-    "main.js": "/static/js/main.3f3898cb.js",
-    "static/media/home-main-banner-14feb.jpg": "/static/media/home-main-banner-14feb.b7bfda8af102714a5a88.jpg",
-    "static/media/home-main-banner-14feb-media.jpg": "/static/media/home-main-banner-14feb-media.2c23bfe91eb8c078600a.jpg",
+    "main.css": "/static/css/main.6b144aca.css",
+    "main.js": "/static/js/main.fd4113fd.js",
     "static/media/daria.jpg": "/static/media/daria.1589a28c9084fefad758.jpg",
     "static/media/tatiana.jpg": "/static/media/tatiana.6f2013ed51ca44d9626c.jpg",
     "static/media/home-about-media.jpg": "/static/media/home-about-media.ff18aff90a4cf244ec9e.jpg",
@@ -15,12 +13,10 @@
     "static/media/home-categories-decoration.jpg": "/static/media/home-categories-decoration.685afe5b103f83e23a0f.jpg",
     "static/media/exchange-example-image.jpg": "/static/media/exchange-example-image.7c2f422b79e1361090d3.jpg",
     "static/media/home-categories-clock.jpg": "/static/media/home-categories-clock.25c4558fcb6b9af2d6e3.jpg",
-    "static/media/catalog-banner-media.jpg": "/static/media/catalog-banner-media.2752e4e443513f3c456c.jpg",
     "static/media/catalog-banner-media-14feb.jpg": "/static/media/catalog-banner-media-14feb.6722b6af2cf1a70d32fc.jpg",
     "static/media/home-visit-media.jpg": "/static/media/home-visit-media.02fa192b94063947fbe1.jpg",
     "static/media/home-visit.jpg": "/static/media/home-visit.e9c9705c1db24cfedb5f.jpg",
     "static/media/visit.jpg": "/static/media/visit.e9c9705c1db24cfedb5f.jpg",
-    "static/media/catalog-banner.jpg": "/static/media/catalog-banner.8d0b98adb13dedd63e4a.jpg",
     "static/media/sell-block-cooperation-concierge-service.jpg": "/static/media/sell-block-cooperation-concierge-service.24b34dddbdfc05b2f74f.jpg",
     "static/media/faq-main-image.jpg": "/static/media/faq-main-image.84efa32e6a4143c25567.jpg",
     "static/media/home-main-banner3.jpg": "/static/media/home-main-banner3.4c6a431734637b7512a7.jpg",
@@ -90,11 +86,11 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.d930065a.css.map": "/static/css/main.d930065a.css.map",
-    "main.3f3898cb.js.map": "/static/js/main.3f3898cb.js.map"
+    "main.6b144aca.css.map": "/static/css/main.6b144aca.css.map",
+    "main.fd4113fd.js.map": "/static/js/main.fd4113fd.js.map"
   },
   "entrypoints": [
-    "static/css/main.d930065a.css",
-    "static/js/main.3f3898cb.js"
+    "static/css/main.6b144aca.css",
+    "static/js/main.fd4113fd.js"
   ]
 }
