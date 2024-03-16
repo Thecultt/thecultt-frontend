@@ -214,7 +214,33 @@ export const sendCreateOrder = (
 	},
 	onComplete: (orderId: number, orderNum: string) => void
 ) => async (dispatch: Dispatch<OrderStateActions>) => {
-	const res = await $api.post(`create_order/`, data)
+	const newData: any = data
+
+	if (localStorage.getItem("_ym_uid")) {
+		newData["_ym_uid"] = localStorage.getItem("_ym_uid")
+	}
+
+	if (localStorage.getItem("utm_source")) {
+		newData["utm_source"] = localStorage.getItem("utm_source")
+	}
+
+	if (localStorage.getItem("utm_medium")) {
+		newData["utm_medium"] = localStorage.getItem("utm_medium")
+	}
+
+	if (localStorage.getItem("utm_campaign")) {
+		newData["utm_campaign"] = localStorage.getItem("utm_campaign")
+	}
+
+	if (localStorage.getItem("utm_content")) {
+		newData["utm_content"] = localStorage.getItem("utm_content")
+	}
+
+	if (localStorage.getItem("utm_term")) {
+		newData["utm_term"] = localStorage.getItem("utm_term")
+	}
+
+	const res = await $api.post(`create_order/`, newData)
 
 	if (res.data.link) {
 		window.location.href = res.data.link

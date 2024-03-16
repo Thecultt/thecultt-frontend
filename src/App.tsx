@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { compose } from "redux";
-import { v4 } from "uuid";
 
 import "react-dots-loader/index.css";
 
@@ -81,7 +80,7 @@ const App = () => {
 		({ user }) => user
 	);
 
-	const { pathname } = useLocation();
+	const { pathname, search } = useLocation();
 
 	const isLogin = localStorage.getItem("accessToken")
 
@@ -108,8 +107,26 @@ const App = () => {
 
 		dispatch(checkAvailabilityCartItems(cartItems) as any)
 
-		if (!localStorage.getItem("uuid_mindbox")) {
-			localStorage.setItem("uuid_mindbox", v4())
+		const query: any = new URLSearchParams(search)
+
+		if (query.get("utm_source")) {
+			localStorage.setItem("utm_source", query.get("utm_source"))
+		}
+
+		if (query.get("utm_medium")) {
+			localStorage.setItem("utm_medium", query.get("utm_medium"))
+		}
+
+		if (query.get("utm_campaign")) {
+			localStorage.setItem("utm_campaign", query.get("utm_campaign"))
+		}
+
+		if (query.get("utm_content")) {
+			localStorage.setItem("utm_content", query.get("utm_content"))
+		}
+
+		if (query.get("utm_term")) {
+			localStorage.setItem("utm_term", query.get("utm_term"))
 		}
 	}, []);
 

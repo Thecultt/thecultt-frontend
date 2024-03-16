@@ -62,7 +62,7 @@ const Contact: React.FC = () => {
 						</a>
 
 						<a
-							href="https://t.me/thecultt_help"
+							href="https://t.me/thecultthelp"
 							className="contact-block hover-scale"
 						>
 							<div className="contact-block-content">
@@ -86,7 +86,7 @@ const Contact: React.FC = () => {
 										Telegram (Поддержка по общим вопросам)
 									</h3>
 									<span className="contact-block-content-text__subtitle">
-										@thecultt_help
+										@thecultthelp
 									</span>
 								</div>
 							</div>

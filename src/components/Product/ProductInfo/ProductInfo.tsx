@@ -20,7 +20,7 @@ const ProductInfo: React.FC<ProductInfoProps> = (product) => {
 		<div className="product-content-info">
 			<ProductInfoTitle {...product} article={product.article} />
 
-			{product.availability ? (
+			{/* {product.availability ? (
 				<>
 					<ProductInfoExchange />
 
@@ -30,9 +30,17 @@ const ProductInfo: React.FC<ProductInfoProps> = (product) => {
 
 					<ProductInfoParameters {...product} />
 				</>
-			) : null}
+			) : null} */}
 
 			{/* <ProductInfoParametersSize {...product} /> */}
+
+			<ProductInfoExchange />
+
+			<ProductInfoState {...product} />
+
+			{product.description && product.description !== "" ? < ProductInfoDescription {...product} /> : null}
+
+			<ProductInfoParameters {...product} />
 
 			<ProductInfoAuth />
 

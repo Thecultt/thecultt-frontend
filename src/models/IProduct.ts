@@ -11,7 +11,8 @@ export interface Product {
 	num_of_favorites: number
 	category: string
 	subcategory: string
-	ring_size: string
+	shoe_size: string
+	size: string
 	is_trial: boolean
 }
 
@@ -49,7 +50,8 @@ export interface ProductPage {
 	hardware: string
 	insole_length: string
 	heel_height: string
-	shoe_sizes: string
+	shoe_size: string
+	size: string
 	style: string
 	lens_type: string
 	frame_type: string

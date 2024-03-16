@@ -55,6 +55,8 @@
 		&-text
 			padding-top: 150px
 
+			text-align: center
+
 			color: $white
 
 			&__title
@@ -69,8 +71,12 @@
 
 			&__link
 				color: $white
-				font-size: 12px
-				border-bottom: 1px solid $white
+				font-size: 15px
+
+				&.white
+					color: $black
+					background-color: $white
+					border: none
 
 	&-filters-top
 		margin-top: 55px
@@ -762,7 +768,7 @@
 	.catalog
 		&-banner-media
 			&-text
-				padding-top: 75px
+				padding: 45px 0
 
-				&__description
-					width: 75%
+				// &__description
+				// 	width: 75%

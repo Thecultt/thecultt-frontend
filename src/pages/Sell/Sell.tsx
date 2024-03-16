@@ -67,39 +67,39 @@ const Sell: React.FC = () => {
 					}
 				}
 
-				if (info) {
-					axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=ZapolnenieAnkety&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
+				if (info && user.email && localStorage.getItem("mindboxDeviceUUID")) {
+					axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=ZapolnenieAnkety&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
 						{
 							"customerAction": {
 								"customFields": data
 							},
 							"customer": {
 								"email": `${user.email}`,
-								"discountCard": {
-									"ids": {
-										"number": "<Номер дисконтной карты>"
-									}
-								},
-								"birthDate": "<Дата рождения>",
-								"sex": "<Пол>",
-								"timeZone": "<Часовой пояс>",
-								"lastName": "<Фамилия>",
-								"firstName": "<Имя>",
-								"middleName": "<Отчество>",
-								"fullName": "<ФИО>",
-								"area": {
-									"ids": {
-										"externalId": "<Внешний идентификатор зоны>"
-									}
-								},
-								"mobilePhone": "<Мобильный телефон>",
+								// "discountCard": {
+								// 	"ids": {
+								// 		"number": "<Номер дисконтной карты>"
+								// 	}
+								// },
+								// "birthDate": "<Дата рождения>",
+								// "sex": "<Пол>",
+								// "timeZone": "<Часовой пояс>",
+								// "lastName": "<Фамилия>",
+								// "firstName": "<Имя>",
+								// "middleName": "<Отчество>",
+								// "fullName": "<ФИО>",
+								// "area": {
+								// 	"ids": {
+								// 		"externalId": "<Внешний идентификатор зоны>"
+								// 	}
+								// },
+								// "mobilePhone": "<Мобильный телефон>",
 								"ids": {
 									"websiteID": `${user.id}`
 								},
 								"customFields": {
-									"tipKlienta": "<Тип клиента>",
-									"gorod": "<Город>",
-									"istochnikPodpiski": "<Источник подписки>"
+									"tipKlienta": "Prodavec",
+									// "gorod": "<Город>",
+									// "istochnikPodpiski": "<Источник подписки>"
 								},
 								"subscriptions": []
 							},

@@ -214,9 +214,9 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 						}
 
 						{search.value !== "" && !search.items.length ? (
-							<Link to={`/catalog`} onClick={onClose}>Перейти в каталог</Link>
+							<a href={`/catalog`} onClick={onClose}>Перейти в каталог</a>
 						) : (
-							<Link to={`/catalog?search=${search.value}`} onClick={onClose}>Смотреть все</Link>
+							<a href={`/catalog?search=${search.value}`} onClick={onClose}>Смотреть все</a>
 						)}
 
 					</h3>

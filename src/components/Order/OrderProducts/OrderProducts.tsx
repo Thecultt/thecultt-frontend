@@ -281,135 +281,127 @@ const OrderProducts: React.FC = () => {
 			}
 		});
 
+
 		try {
-			axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.CreateAuthorizedOrder&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
-				{
-					"customer": {
-						"ids": {
-							"websiteID": `${user.id}`
-						},
-						"discountCard": {
+			if (localStorage.getItem("mindboxDeviceUUID")) {
+				axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.CreateAuthorizedOrder&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+					{
+						"customer": {
 							"ids": {
-								"number": "<Номер дисконтной карты>"
-							}
-						},
-						"birthDate": "<Дата рождения>",
-						"sex": "<Пол>",
-						"timeZone": "<Часовой пояс>",
-						"lastName": "<Фамилия>",
-						"firstName": "<Имя>",
-						"middleName": "<Отчество>",
-						"fullName": "<ФИО>",
-						"area": {
-							"ids": {
-								"externalId": "<Внешний идентификатор зоны>"
-							}
-						},
-						"email": "<Email>",
-						"mobilePhone": "<Мобильный телефон>",
-						"customFields": {
-							"tipKlienta": "<Тип клиента>",
-							"gorod": "<Город>",
-							"istochnikPodpiski": "<Источник подписки>"
-						},
-						"subscriptions": [
-							{
-								"brand": "<Системное имя бренда подписки клиента>",
-								"pointOfContact": "<Системное имя канала подписки: Email, SMS, Viber, Webpush, Mobilepush>",
-								"topic": "<Внешний идентификатор тематики подписки>"
+								"websiteID": `${user.id}`
 							},
-							{
-								"brand": "<Системное имя бренда подписки клиента>",
-								"pointOfContact": "<Системное имя канала подписки: Email, SMS, Viber, Webpush, Mobilepush>",
-								"topic": "<Внешний идентификатор тематики подписки>"
-							}
-						]
-					},
-					"order": {
-						"ids": {
-							"mindboxId": "<Идентификатор заказа в Mindbox>",
-							"websiteID": `${orderId}`
+							"discountCard": {
+								"ids": {
+									"number": "<Номер дисконтной карты>"
+								}
+							},
+							// "birthDate": "<Дата рождения>",
+							// "sex": "<Пол>",
+							// "timeZone": "<Часовой пояс>",
+							"lastName": `${user.middlename}`,
+							"firstName": `${user.name}`,
+							// "middleName": "<Отчество>",
+							// "fullName": "<ФИО>",
+							// "area": {
+							// 	"ids": {
+							// 		"externalId": "<Внешний идентификатор зоны>"
+							// 	}
+							// },
+							"email": `${user.email}`,
+							"mobilePhone": `${phoneValue}`,
+							"customFields": {
+								"tipKlienta": "Pokupatel",
+								"gorod": `${cityValue}`,
+								// "istochnikPodpiski": "<Источник подписки>"
+							},
+							// "subscriptions": []
 						},
-						"cashdesk": {
+						"order": {
 							"ids": {
-								"externalId": "<Идентификатор кассы>"
-							}
-						},
-						"deliveryCost": `${currentDelivery.price}`,
-						"customFields": {
-							"deliveryType": `${currentDelivery.title}`
-						},
-						"area": {
-							"ids": {
-								"externalId": "<Внешний идентификатор зоны>"
-							}
-						},
-						"totalPrice": "<Итоговая сумма, полученная от клиента. Должна учитывать возвраты и отмены. Используется для подсчета среднего чека.>",
-						"discounts": [
-							{
-								"type": "<promoCode>",
-								"promoCode": {
-									"ids": {
-										"code": "<Идентификатор промокода>"
-									}
-								},
-								"amount": "<Размер скидки в рублях>"
-							}
-						],
-						"lines": products.map((product) => {
-							return {
-								"minPricePerItem": `${product.price}`,
-								"costPricePerItem": "<Себестоимость за единицу продукта>",
-								"basePricePerItem": `${product.price}`,
-								"quantity": "1",
-								"quantityType": "int",
-								"discountedPricePerLine": `${totalPrice}`,
-								"lineId": `${orderId}`,
-								"lineNumber": "<Порядковый номер позиции заказа>",
-								"discounts": promocode.isActive ? [
-									{
-										"type": "Промокод",
-										"externalPromoAction": {
-											"ids": {
-												"externalId": `${promocode.name}`
-											}
-										},
-										"amount": `${promocode.saleSum}`
-									}
-								] : [],
-								"product": {
-									"ids": {
-										"website": `${product.id}`
+								// "mindboxId": "<Идентификатор заказа в Mindbox>",
+								"websiteID": `${orderId}`
+							},
+							// "cashdesk": {
+							// 	"ids": {
+							// 		"externalId": "<Идентификатор кассы>"
+							// 	}
+							// },
+							"deliveryCost": `${currentDelivery.price}`,
+							"customFields": {
+								"deliveryType": `${currentDelivery.title}`
+							},
+							// "area": {
+							// 	"ids": {
+							// 		"externalId": "<Внешний идентификатор зоны>"
+							// 	}
+							// },
+							// "totalPrice": "<Итоговая сумма, полученная от клиента. Должна учитывать возвраты и отмены. Используется для подсчета среднего чека.>",
+							"discounts": promocode.isActive ? [
+								{
+									"type": "Промокод",
+									"promoCode": {
+										"ids": {
+											"code": promocode.name
+										}
+									},
+									"amount": promocode.saleSum
+								}
+							] : [],
+							"lines": products.map((product) => {
+								return {
+									"minPricePerItem": `${product.price}`,
+									// "costPricePerItem": "<Себестоимость за единицу продукта>",
+									"basePricePerItem": `${product.price}`,
+									"quantity": "1",
+									"quantityType": "int",
+									"discountedPricePerLine": `${totalPrice}`,
+									"lineId": `${orderId}`,
+									// "lineNumber": "<Порядковый номер позиции заказа>",
+									"discounts": promocode.isActive ? [
+										{
+											"type": "Промокод",
+											"externalPromoAction": {
+												"ids": {
+													"externalId": `${promocode.name}`
+												}
+											},
+											"amount": `${promocode.saleSum}`
+										}
+									] : [],
+									"product": {
+										"ids": {
+											"website": `${product.id}`
+										}
 									}
 								}
-							}
-						}),
-						"email": `${user.email}`,
-						"mobilePhone": `${phoneValue.replace(/[^0-9]/g, "")}`
+							}),
+							"email": `${user.email}`,
+							"mobilePhone": `${phoneValue.replace(/[^0-9]/g, "")}`
+						},
+						"executionDateTimeUtc": new Date()
 					},
-					"executionDateTimeUtc": new Date()
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json; charset=utf-8',
-						'Accept': 'application/json',
-						'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+					{
+						headers: {
+							'Content-Type': 'application/json; charset=utf-8',
+							'Accept': 'application/json',
+							'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+						}
 					}
-				}
-			)
+				)
 
-			axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ClearCart&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
-				{
-					"executionDateTimeUtc": new Date()
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json; charset=utf-8',
-						'Accept': 'application/json',
-						'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+				axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ClearCart&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+					{
+						"executionDateTimeUtc": new Date()
+					},
+					{
+						headers: {
+							'Content-Type': 'application/json; charset=utf-8',
+							'Accept': 'application/json',
+							'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+						}
 					}
-				}
-			)
+				)
+			}
 		} catch (e) {
 			console.log(e)
 		}
@@ -597,8 +589,8 @@ const OrderProducts: React.FC = () => {
 				<p className="order-products__description">
 					Нажимая кнопку, вы принимаете условия{" "}
 					<a href="https://drive.google.com/file/d/143bXR-O4Ip2VKss6aHcPXNTr1hBWrFjN/view">пользовательского соглашения</a>
-					и
-					<a href="https://storage.yandexcloud.net/the-cultt-docs/Файлы Февраль 2024/Oferta dlya pokupatelya 090224.pdf">публичной оферты</a>.
+					{" "}и{" "}
+					<a href="https://storage.yandexcloud.net/the-cultt-docs/%D0%9E%D1%84%D1%84%D0%B5%D1%80%D1%82%D0%B0%20/%D0%9E%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%BE%D0%BA%D1%83%D0%BF%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%20130324.pdf">публичной оферты</a>.
 				</p>
 
 				<button

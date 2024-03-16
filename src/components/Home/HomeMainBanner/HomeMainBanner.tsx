@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Slider from "react-slick";
 
-import HomeMainBannerImage14feb from '../../../assets/images/home/home-main-banner-14feb.jpg'
-import HomeMainBannerImage14febMedia from '../../../assets/images/home/home-main-banner-14feb-media.jpg'
 import HomeMainBannerImage1 from '../../../assets/images/home/home-main-banner1.jpg'
 import HomeMainBannerImage2 from '../../../assets/images/home/home-main-banner2.jpg'
 import HomeMainBannerImage3 from '../../../assets/images/home/home-main-banner3.jpg'

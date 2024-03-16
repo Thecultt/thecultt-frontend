@@ -120,7 +120,7 @@ const FaqBuyers: React.FC = () => {
 			Наши менеджеры всегда готовы отправить дополнительное видео или фотографии лота, чтобы вам было легче принять решение. Напишите нам в удобном мессенджере:
 			<br />
 			<br />
-			- Telegram: <a href="https://t.me/thecultt_help">thecultt_help</a>
+			- Telegram: <a href="https://t.me/thecultthelp">thecultthelp</a>
 			<br />
 			<br />
 			- WhatsApp: <a href="https://api.whatsapp.com/send/?phone=79955026591&text&type=phone_number&app_absent=0">+79955026591</a> 

@@ -53,8 +53,9 @@ const Catalog: React.FC = () => {
 		filters.models[Object.keys(filters.models)[0]],
 		Object.keys(filters.colors).length,
 		Object.keys(filters.sex).length,
-		Object.keys(filters.availability).length,
+		Object.keys(filters.availability)[0],
 		Object.keys(filters.size).length,
+		Object.keys(filters.selections).length,
 		filters.sort,
 		currentPage,
 		typeFetch
@@ -66,11 +67,11 @@ const Catalog: React.FC = () => {
 			<section className="catalog">
 				<div className="container">
 					<div className="catalog-wrapper">
-						{window.innerWidth > 1200 ? (
+						{/* {window.innerWidth > 1200 ? (
 							<CatalogBanner />
 						) : (
 							<CatalogBannerMedia />
-						)}
+						)} */}
 
 						{isLoadedFilters ? (
 							<>

@@ -22,7 +22,8 @@ import {
 	CatalogFiltersColors,
 	CatalogFiltersSex,
 	CatalogFiltersAvailability,
-	CatalogFiltersSize
+	CatalogFiltersSize,
+	CatalogFiltersSelections
 } from "../../";
 
 const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
@@ -57,6 +58,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 			sex: {},
 			availability: {},
 			size: {},
+			selections: {},
 
 			sort: "a"
 		}
@@ -97,6 +99,10 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 			filters.size[size] = size;
 		});
 
+		query.getAll("selections").map((selection) => {
+			filters.selections[selection] = selection;
+		});
+
 		dispatch(setFiltersCatalog(filters));
 
 		return () => {
@@ -120,6 +126,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 					sex: {},
 					availability: {},
 					size: {},
+					selections: {},
 
 					sort: "a"
 				})
@@ -145,6 +152,34 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 				}
 			}
 
+			// let params: { [key: string]: any } = {};
+
+			// if (filters.search !== "") {
+			// 	params["search"] = filters.search
+			// } else {
+			// 	params = {
+			// 		...oldParamsData,
+			// 		categories: Object.keys(filters.categories),
+			// 		types: Object.keys(filters.types),
+			// 		brands: Object.keys(filters.brands),
+			// 		models: Object.keys(filters.models),
+			// 		colors: Object.keys(filters.colors),
+			// 		sex: Object.keys(filters.sex),
+			// 		availability: Object.keys(filters.availability),
+			// 		size: Object.keys(filters.size),
+			// 		conditions: Object.keys(filters.conditions),
+			// 	}
+
+			// 	if (filters.price.max !== 0) {
+			// 		params["minPrice"] = String(filters.price.min)
+			// 		params["maxPrice"] = String(filters.price.max)
+			// 	}
+
+			// 	if (filters.price.min !== 0 && filters.price.max === 0) {
+			// 		params["minPrice"] = String(filters.price.min)
+			// 	}
+			// }
+
 			const params: { [key: string]: any } = {
 				...oldParamsData,
 				categories: Object.keys(filters.categories),
@@ -156,6 +191,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 				availability: Object.keys(filters.availability),
 				size: Object.keys(filters.size),
 				conditions: Object.keys(filters.conditions),
+				selections: Object.keys(filters.selections),
 			}
 
 			if (filters.search !== "") {
@@ -189,9 +225,9 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 		Object.keys(filters.models).length,
 		Object.keys(filters.colors).length,
 		Object.keys(filters.sex).length,
-		Object.keys(filters.availability).length,
+		Object.keys(filters.availability)[0],
 		Object.keys(filters.size).length,
-		Object.keys(filters.conditions).length,
+		Object.keys(filters.selections).length,
 		filters.sort,
 	]);
 
@@ -228,6 +264,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 				sex: {},
 				availability: {},
 				size: {},
+				selections: {},
 
 				sort: "a"
 			})
@@ -267,6 +304,8 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 						<CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} />
 					) : null
 				))}
+
+				<CatalogFiltersSelections />
 			</div>
 
 			<div className="catalog-filters-btn">

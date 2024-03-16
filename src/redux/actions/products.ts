@@ -73,7 +73,8 @@ export const fetchProductsCatalog = (
 		colors: { [key: string]: string }
 		sex: { [key: string]: string }
 		availability: { [key: string]: string }
-		size: { [key: string]: string }
+		size: { [key: string]: string },
+		selections: { [key: string]: string }
 
 		sort: string
 	},
@@ -102,6 +103,9 @@ export const fetchProductsCatalog = (
 		(key) => key
 	);
 	const sizeArrray = Object.keys(filters.size).map(
+		(key) => key
+	);
+	const selectionsArrray = Object.keys(filters.selections).map(
 		(key) => key
 	);
 
@@ -140,8 +144,7 @@ export const fetchProductsCatalog = (
 	}
 
 	sizeArrray.map((size) => params.append("size", size))
-
-	console.log(filters)
+	selectionsArrray.map((selection) => params.append("selections", selection))
 
 	params.append("sort_by", filters.sort)
 
@@ -235,43 +238,46 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 		}
 	});
 
+
 	try {
-		axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ViewProduct&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
-			{
-				"viewProduct": {
-					"product": {
-						"ids": {
-							"website": `${data.id}`
-						}
-					},
-					"price": `${data.price}`,
-					"customerAction": {
-						"customFields": {
-							"brand": `${data.manufacturer}`,
-							"coctoyanie": `${data.condition}`,
-							"defecti": `${data.nuances}`,
-							"kategoria": `${data.category}`,
-							"model": `${data.name}`,
-							"ojidaniePoTcene": "<Ожидание по цене>",
-							"otpravilAnketyNaProdazy": "<Отправил анкету на продажу>",
-							"photo1": "<Фото 1>",
-							"photo2": "<Фото 2>",
-							"photo3": "<Фото 3>",
-							"photo4": "<Фото 4>",
-							"tovarIzKulta": "<Товар приобретен в Культе>",
-							"visitNaProdat": "<Визит на страницу Продать>"
+		if (localStorage.getItem("mindboxDeviceUUID")) {
+			axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ViewProduct&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+				{
+					"viewProduct": {
+						"product": {
+							"ids": {
+								"website": `${data.id}`
+							}
+						},
+						"price": `${data.price}`,
+						"customerAction": {
+							"customFields": {
+								"brand": `${data.manufacturer}`,
+								"coctoyanie": `${data.condition}`,
+								"defecti": `${data.nuances}`,
+								"kategoria": `${data.category}`,
+								"model": `${data.name}`,
+								"ojidaniePoTcene": "<Ожидание по цене>",
+								"otpravilAnketyNaProdazy": "<Отправил анкету на продажу>",
+								"photo1": "<Фото 1>",
+								"photo2": "<Фото 2>",
+								"photo3": "<Фото 3>",
+								"photo4": "<Фото 4>",
+								"tovarIzKulta": "<Товар приобретен в Культе>",
+								"visitNaProdat": "<Визит на страницу Продать>"
+							}
 						}
 					}
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json; charset=utf-8',
+						'Accept': 'application/json',
+						'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+					}
 				}
-			},
-			{
-				headers: {
-					'Content-Type': 'application/json; charset=utf-8',
-					'Accept': 'application/json',
-					'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
-				}
-			}
-		)
+			)
+		}
 	} catch (e) {
 		console.log(e)
 	}
@@ -345,6 +351,11 @@ export const setFiltersAvailabilityProduct = (availability: string) => ({
 export const setFiltersSizeProduct = (size: string) => ({
 	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SIZE,
 	payload: size
+})
+
+export const setFiltersSelectionsProduct = (selection: string) => ({
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS,
+	payload: selection
 })
 
 export const setFiltersSortProduct = (sort: string) => ({

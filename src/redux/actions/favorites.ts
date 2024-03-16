@@ -70,26 +70,29 @@ export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<Fav
 export const sendRemoveFavorite = (item: Product) => async (dispatch: Dispatch<FavoritesActions>) => {
 	await $api.delete(`/remove-favorite-product/${item.id}/`)
 
+
 	try {
-		axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.RemoveFromWishList&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
-			{
-				"removeProductFromList": {
-					"product": {
-						"ids": {
-							"website": `${item.id}`
-						}
-					},
-					"pricePerItem": `${item.price}`
+		if (localStorage.getItem("mindboxDeviceUUID")) {
+			axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.RemoveFromWishList&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+				{
+					"removeProductFromList": {
+						"product": {
+							"ids": {
+								"website": `${item.id}`
+							}
+						},
+						"pricePerItem": `${item.price}`
+					}
+				},
+				{
+					headers: {
+						'Content-Type': 'application/json; charset=utf-8',
+						'Accept': 'application/json',
+						'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+					}
 				}
-			},
-			{
-				headers: {
-					'Content-Type': 'application/json; charset=utf-8',
-					'Accept': 'application/json',
-					'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
-				}
-			}
-		)
+			)
+		}
 	} catch (e) {
 		console.log(e)
 	}

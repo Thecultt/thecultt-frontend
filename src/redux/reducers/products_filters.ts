@@ -6,7 +6,8 @@ const initialState: ProductsFiltersState = {
 	price: { min: 0, max: 0 },
 	conditions: [],
 	categories: {},
-	colors: {}
+	colors: {},
+	selections: {}
 }
 
 const products_filters = (state = initialState, action: ProductsFiltersTypes) => {
@@ -42,6 +43,13 @@ const products_filters = (state = initialState, action: ProductsFiltersTypes) =>
 		return {
 			...state,
 			colors: action.payload
+		}
+	}
+
+	if (action.type === ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_SELECTIONS) {
+		return {
+			...state,
+			selections: action.payload
 		}
 	}
 

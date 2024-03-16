@@ -27,7 +27,7 @@ const CatalogFiltersSize: React.FC<CatalogFiltersSizeProps> = ({
 			{size.map((size, index) => (
 				<div
 					className="catalog-filters-block-content-checkbox"
-					key={`catalog-filters-block-content-Размер-${size}-checkbox-${index}`}
+					key={`catalog-filters-block-content-size-${size}-checkbox-${index}`}
 				>
 					<Checkbox
 						id={`catalog-filters-block-content-size-${size}-checkbox-${index}`}

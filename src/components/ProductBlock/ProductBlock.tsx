@@ -36,7 +36,8 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	category,
 	subcategory,
 	is_trial,
-	ring_size
+	shoe_size,
+	size,
 }) => {
 	const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart)
 	const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(false)
@@ -66,8 +67,10 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	};
 
 	const subscribeGood = () => {
+		console.log(size, shoe_size)
+		
 		localStorage.setItem("waiting_init", JSON.stringify({
-			category, brand: manufacturer, model: name, type: subcategory, size: ring_size
+			category, brand: manufacturer, model: name, type: subcategory, size: size || shoe_size
 		}))
 
 		window.location.hash = "create_waiting"

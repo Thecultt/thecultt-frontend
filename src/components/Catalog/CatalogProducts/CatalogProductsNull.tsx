@@ -29,6 +29,7 @@ const CatalogProductsNull: React.FC = () => {
 				sex: {},
 				availability: {},
 				size: {},
+				selections: {},
 
 				sort: "a"
 			})

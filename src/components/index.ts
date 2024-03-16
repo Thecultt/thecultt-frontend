@@ -103,6 +103,7 @@ export { default as CatalogFiltersColors } from "./Catalog/CatalogFilters/Catalo
 export { default as CatalogFiltersSex } from "./Catalog/CatalogFilters/CatalogFiltersSex";
 export { default as CatalogFiltersAvailability } from "./Catalog/CatalogFilters/CatalogFiltersAvailability";
 export { default as CatalogFiltersSize } from "./Catalog/CatalogFilters/CatalogFiltersSize";
+export { default as CatalogFiltersSelections } from "./Catalog/CatalogFilters/CatalogFiltersSelections";
 // CatalogProducts
 export { default as CatalogProducts } from "./Catalog/CatalogProducts/CatalogProducts";
 export { default as CatalogProductsPagination } from "./Catalog/CatalogProducts/CatalogProductsPagination";

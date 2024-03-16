@@ -10,70 +10,68 @@ export const sendSubscribeEmail = (data: { email: string, type: string }) => {
 			payload: true
 		})
 
+
+
 		try {
-			await axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.AuthorizeCustomer&deviceUUID=${localStorage.getItem("uuid_mindbox")}`,
-				{
-					"customer": {
-						"discountCard": {
-							"ids": {
-								"number": "<Номер дисконтной карты>"
-							}
-						},
-						"birthDate": "<Дата рождения>",
-						"sex": "<Пол>",
-						"timeZone": "<Часовой пояс>",
-						"lastName": "<Фамилия>",
-						"firstName": "<Имя>",
-						"middleName": "<Отчество>",
-						"fullName": "<ФИО>",
-						"area": {
-							"ids": {
-								"externalId": "<Внешний идентификатор зоны>"
-							}
-						},
-						"email": data.email,
-						"mobilePhone": "<Мобильный телефон>",
-						"ids": {
-							"websiteID": "<Идентификатор на сайте>"
-						},
-						"customFields": {
-							"tipKlienta": data.type,
-							"gorod": "<Город>",
-							"istochnikPodpiski": "FormaSGaidom"
-						},
-						"subscriptions": [
-							{
-								"brand": "<Системное имя бренда подписки клиента>",
-								"pointOfContact": "<Системное имя канала подписки: Email, SMS, Viber, Webpush, Mobilepush>",
-								"topic": "<Внешний идентификатор тематики подписки>"
+			if (localStorage.getItem("mindboxDeviceUUID")) {
+				await axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportirovanieKlienta&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+					{
+						"customer": {
+							"discountCard": {
+								"ids": {
+									"number": "<Номер дисконтной карты>"
+								}
 							},
-							{
-								"brand": "<Системное имя бренда подписки клиента>",
-								"pointOfContact": "<Системное имя канала подписки: Email, SMS, Viber, Webpush, Mobilepush>",
-								"topic": "<Внешний идентификатор тематики подписки>"
-							}
-						]
+							"birthDate": "<Дата рождения>",
+							"sex": "<Пол>",
+							"timeZone": "<Часовой пояс>",
+							"lastName": "<Фамилия>",
+							"firstName": "<Имя>",
+							"middleName": "<Отчество>",
+							"fullName": "<ФИО>",
+							"area": {
+								"ids": {
+									"externalId": "<Внешний идентификатор зоны>"
+								}
+							},
+							"email": data.email,
+							"mobilePhone": "<Мобильный телефон>",
+							"ids": {
+								"websiteID": "<Идентификатор на сайте>"
+							},
+							"customFields": {
+								"tipKlienta": data.type,
+								"gorod": "<Город>",
+								"istochnikPodpiski": "FormaSGaidom"
+							},
+							"subscriptions": [
+								{
+									"pointOfContact": "Email",
+									"isSubscribed": true
+								}
+							]
+						},
+						"executionDateTimeUtc": new Date()
 					},
-					"executionDateTimeUtc": new Date()
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json; charset=utf-8',
-						'Accept': 'application/json',
-						'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+					{
+						headers: {
+							'Content-Type': 'application/json; charset=utf-8',
+							'Accept': 'application/json',
+							'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+						}
 					}
-				}
-			)
+				)
 
-			dispatch({
-				type: SubscribeEmailActionTypes.SET_SUBSCRIBE_EMAIL_IS_SEND,
-				payload: true
-			})
+				dispatch({
+					type: SubscribeEmailActionTypes.SET_SUBSCRIBE_EMAIL_IS_SEND,
+					payload: true
+				})
 
-			dispatch({
-				type: SubscribeEmailActionTypes.SET_SUBSCRIBE_EMAIL_IS_SENDING,
-				payload: false
-			})
+				dispatch({
+					type: SubscribeEmailActionTypes.SET_SUBSCRIBE_EMAIL_IS_SENDING,
+					payload: false
+				})
+			}
 		} catch (e) {
 			console.log(e)
 		}

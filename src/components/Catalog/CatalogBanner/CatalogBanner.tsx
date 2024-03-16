@@ -4,6 +4,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import CatalogBannerImage14feb from "../../../assets/images/catalog/catalog-banner-14feb.jpg";
 import CatalogBannerImage from "../../../assets/images/catalog/catalog-banner.jpg";
 
+import CatalogBannerImage8mart from "../../../assets/images/catalog/catalog-banner-8mart.jpg";
+import CatalogBannerImage8mart2 from "../../../assets/images/catalog/catalog-banner-8mart2.jpg";
+
 const CatalogBanner: React.FC = () => {
 	const [query] = useSearchParams();
 
@@ -33,25 +36,44 @@ const CatalogBanner: React.FC = () => {
 				</div>
 			) : (
 				null
-				// <div className="catalog-banner">
-				// 	<div
-				// 		className="catalog-banner-image"
-				// 		style={{ backgroundImage: `url("${CatalogBannerImage}")` }}
-				// 	></div>
+			)}
 
-				// 	<div className="catalog-banner-text">
-				// 		<h3 className="catalog-banner-text__title">
-				// 			Свидание с сумками мечты в офисе THE CULTT
-				// 		</h3>
-				// 		<p className="catalog-banner-text__description">
-				// 			С 10 по 14 февраля вы можете прийти в офис THE CULTT
-				// 			<br />
-				// 			без предварительной записи по адресу
-				// 			<br />
-				// 			ул. Трубная 25с3, с 11:00 до 21:00.
-				// 		</p>
-				// 	</div>
-				// </div>
+			{query.get("theme") === "Подарки к 8 марта" ? (
+				<div className="catalog-banner">
+					<div
+						className="catalog-banner-image"
+						style={{ backgroundImage: `url("${CatalogBannerImage8mart2}")` }}
+					></div>
+
+					<div className="catalog-banner-text">
+						<h3 className="catalog-banner-text__title">
+							Беспроигрышные подарки
+						</h3>
+						<p className="catalog-banner-text__description">
+							Культовые лоты, которые сделают <br /> 8 марта особенно приятным
+						</p>
+					</div>
+				</div>
+			) : (
+				<div className="catalog-banner">
+					<div
+						className="catalog-banner-image"
+						style={{ backgroundImage: `url("${CatalogBannerImage8mart}")` }}
+					></div>
+
+					<div className="catalog-banner-text">
+						<h3 className="catalog-banner-text__title">
+							Намекни ему на подарок
+						</h3>
+						<p className="catalog-banner-text__description">
+							Лоты, которые сделают 8 марта <br /> особенно приятным
+						</p>
+
+						<a href="/catalog?categories=Сумки&categories=Аксессуары&conditions=Новое&conditions=Отличное&brands=Chanel&brands=Hermes&brands=Saint+Laurent&brands=Celine&brands=Christian+Dior&brands=Dior&brands=Louis+Vuitton&theme=Подарки+к+8+марта" className="btn catalog-banner-text__link">
+							Выбрать подарок
+						</a>
+					</div>
+				</div>
 			)}
 		</>
 	);

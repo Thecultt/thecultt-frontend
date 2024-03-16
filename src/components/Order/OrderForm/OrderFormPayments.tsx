@@ -15,7 +15,7 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
 		{
 			title: "На сайте",
 			description:
-				"В случае возникновения проблем с оплатой международными картами обратитесь в нашу службу поддержки @thecultt_help"
+				"В случае возникновения проблем с оплатой международными картами обратитесь в нашу службу поддержки @thecultthelp"
 		},
 		{
 			title: "Яндекс Сплит",

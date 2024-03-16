@@ -22,7 +22,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 	price,
 	availability,
 	subcategory,
-	ring_size,
+	shoe_size,
+	size,
 	is_trial,
 	images,
 	store_price,
@@ -62,9 +63,9 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 			num_of_favorites: 0,
 			category,
 			subcategory,
-			ring_size,
+			shoe_size,
+			size,
 			is_trial
-
 		}) as any)
 	}
 
@@ -82,7 +83,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 			num_of_favorites: 0,
 			category,
 			subcategory,
-			ring_size,
+			shoe_size,
+			size,
 			is_trial
 
 		}) as any)
@@ -91,11 +93,11 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 	const subscribeGood = () => {
 		if (category === "Сумки") {
 			localStorage.setItem("waiting_init", JSON.stringify({
-				category, brand: manufacturer, model: name, type: "", size: ring_size
+				category, brand: manufacturer, model: name, type: "", size: size || shoe_size
 			}))
 		} else {
 			localStorage.setItem("waiting_init", JSON.stringify({
-				category, brand: manufacturer, model: name, type: subcategory, size: ring_size
+				category, brand: manufacturer, model: name, type: subcategory, size: size || shoe_size
 			}))
 		}
 

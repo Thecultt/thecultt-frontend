@@ -7,6 +7,7 @@ import { sendUpdateUser } from '../../redux/actions/user'
 
 import {
 	CabinetMenu,
+	PageLoader,
 	CabinetSettingInfoBlock,
 	CabinetSettingContactBlock,
 	CabinetSettingPasswordRecovery,
@@ -44,18 +45,33 @@ const CabinetSetting: React.FC = () => {
 				<div className="cabinet-wrapper">
 					<CabinetMenu />
 
-					{isLoaded ? <div className="cabinet-content cabinet-setting">
-						<CabinetSettingInfoBlock onSubmit={onSubmit} />
-						<CabinetSettingContactBlock onSubmit={onSubmit} />
-						{/* <CabinetSettingPasswordRecovery /> */}
-						{/* <CabinetSettingBrandBlock /> */}
-						<CabinetSettingAddressBlock onSubmit={onSubmit} />
-						<CabinetSettingPaymentBlock onSubmit={onSubmit} />
+					{isLoaded ? (
+						<>
+							<div className="cabinet-content cabinet-setting">
+								<CabinetSettingInfoBlock onSubmit={onSubmit} />
+								<CabinetSettingContactBlock onSubmit={onSubmit} />
+								{/* <CabinetSettingPasswordRecovery /> */}
+								{/* <CabinetSettingBrandBlock /> */}
+								<CabinetSettingAddressBlock onSubmit={onSubmit} />
+								<CabinetSettingPaymentBlock onSubmit={onSubmit} />
 
-						<button className="btn-regular cabinet-setting__logout" onClick={onClickLogout}>
-							Выйти из профиля
-						</button>
-					</div> : null}
+								<button className="btn-regular cabinet-setting__logout" onClick={onClickLogout}>
+									Выйти из профиля
+								</button>
+							</div>
+						</>
+					) : (
+						<>
+							<div className="cabinet-content cabinet-setting">
+								<button className="btn-regular cabinet-setting__logout" onClick={onClickLogout}>
+									Выйти из профиля
+								</button>
+
+								<PageLoader />
+							</div>
+						</>
+					)
+					}
 				</div>
 			</div>
 		</section>
