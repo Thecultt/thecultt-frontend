@@ -13,6 +13,7 @@ export const sendLogin = (data: { username: string | null, password: string }, o
 
 		return axios.post(`${process.env.REACT_APP_API_DOMEN}/login/`, data).then(({ data }) => {
 			localStorage.setItem("accessToken", data.access)
+			localStorage.setItem("accessToken_is_remove", "true")
 
 			window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
 			window.dataLayer.push({

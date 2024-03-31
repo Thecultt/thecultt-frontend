@@ -22,6 +22,7 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
 	height,
 	handle_length,
 	strap_length,
+	size,
 	brand_size,
 	insole_length,
 	heel_height,
@@ -43,6 +44,7 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
 		{ title: "Цвет", value: color },
 		{ title: "Пол", value: gender },
 		{ title: "Комплект", value: kit },
+		{ title: "Размер", value: size },
 		{ title: "Размер", value: shoe_size },
 		{ title: "Размер", value: glasses_sizes },
 		{ title: "Размер", value: ring_size },
@@ -58,7 +60,6 @@ const ProductInfoParametersSize: React.FC<ProductPage> = ({
 		{ title: "Рост модели, см", value: model_height },
 		{ title: "Стиль", value: style },
 	]
-
 
 	return (
 		<div className="product-content-info-parameters">

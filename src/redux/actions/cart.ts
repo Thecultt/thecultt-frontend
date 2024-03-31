@@ -56,22 +56,53 @@ export const addCartItem = (item: CartItem) => {
 		}
 	});
 
-	window.mindbox("async", {
-		operation: "Website.SetCart",
-		data: {
-			productList: [
-				{
-					product: {
-						ids: {
-							website: `${item.id}`
+	const cart = JSON.parse(localStorage.getItem("cart") as string);
+
+	if (cart) {
+		window.mindbox("async", {
+			operation: "Website.SetCart",
+			data: {
+				productList: [
+					...Object.keys(cart).map((article: any) => (
+						{
+							product: {
+								ids: {
+									website: `${cart[article].id}`
+								}
+							},
+							count: "1",
+							pricePerItem: `${cart[article].price}`
 						}
-					},
-					count: "1",
-					pricePerItem: `${item.price}`
-				}
-			]
-		}
-	});
+					)),
+					{
+						product: {
+							ids: {
+								website: `${item.id}`
+							}
+						},
+						count: "1",
+						pricePerItem: `${item.price}`
+					}]
+			}
+		});
+	} else {
+		window.mindbox("async", {
+			operation: "Website.SetCart",
+			data: {
+				productList: [
+					{
+						product: {
+							ids: {
+								website: `${item.id}`
+							}
+						},
+						count: "1",
+						pricePerItem: `${item.price}`
+					}
+				]
+			}
+		});
+	}
 
 	return {
 		type: CartActionTypes.ADD_CART_ITEMS,

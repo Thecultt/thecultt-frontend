@@ -270,11 +270,12 @@ button
 	&.loader
 		height: 53px
 
-	&:hover
-		background-color: $hoverMainColor
-
 	& > svg
 		margin-left: 10px
+
+	// @media all and (min-width: 1200px)
+	// 	&:hover
+	// 		background-color: $hoverMainColor
 
 .btn-light
 	cursor: pointer
@@ -493,7 +494,7 @@ button
 		& > span
 			display: block
 			font-weight: 400
-			
+
 			margin-bottom: 5px
 
 // select
@@ -770,7 +771,6 @@ button
 	display: flex
 	justify-content: center
 	align-items: center
-
 
 .page-loader
 	margin-left: 10px

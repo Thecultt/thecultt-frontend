@@ -182,7 +182,7 @@ const CabinetSellsListItem: React.FC<any> = ({
 									<span>Дефекты:</span> {defects}
 								</p>
 
-								<p className="cabinet-sells-list-item-info-block-value__value">
+								{/* <p className="cabinet-sells-list-item-info-block-value__value">
 									<span>Ожидание по цене:</span> 	<NumericFormat
 										value={price}
 										displayType={"text"}
@@ -202,7 +202,7 @@ const CabinetSellsListItem: React.FC<any> = ({
 										)}
 									/>{" "}
 									₽
-								</p>
+								</p> */}
 							</div>
 
 							{link !== null ? <Link to={link} className="btn cabinet-sells-list-item-info-block__btn">Перейти к товару</Link> : null}

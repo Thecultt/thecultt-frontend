@@ -64,3 +64,9 @@ export { default as Cart } from "./Cart/Cart";
 
 // SubscribeEmail
 export { default as SubscribeEmail } from "./SubscribeEmail/SubscribeEmail";
+
+// PublicFavorites
+export { default as PublicFavorites } from "./PublicFavorites/PublicFavorites";
+
+// AlyonaDoletskaya
+export { default as AlyonaDoletskaya } from "./AlyonaDoletskaya/AlyonaDoletskaya";

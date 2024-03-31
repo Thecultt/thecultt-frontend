@@ -590,7 +590,7 @@ const OrderProducts: React.FC = () => {
 					Нажимая кнопку, вы принимаете условия{" "}
 					<a href="https://drive.google.com/file/d/143bXR-O4Ip2VKss6aHcPXNTr1hBWrFjN/view">пользовательского соглашения</a>
 					{" "}и{" "}
-					<a href="https://storage.yandexcloud.net/the-cultt-docs/%D0%9E%D1%84%D1%84%D0%B5%D1%80%D1%82%D0%B0%20/%D0%9E%D1%84%D0%B5%D1%80%D1%82%D0%B0%20%D0%B4%D0%BB%D1%8F%20%D0%BF%D0%BE%D0%BA%D1%83%D0%BF%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%20130324.pdf">публичной оферты</a>.
+					<a href="https://storage.yandexcloud.net/the-cultt-docs/Офферта /Оферта для покупателя 210324.pdf ">публичной оферты</a>.
 				</p>
 
 				<button

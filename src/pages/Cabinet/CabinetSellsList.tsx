@@ -11,7 +11,6 @@ import { CabinetMenu, CabinetSellsListPaymentInfoMessage, CabinetSellsListItem }
 const CabinetSellsList: React.FC = () => {
 	const dispatch = useDispatch()
 
-	const { user } = useTypedSelector(({ user }) => user)
 	const { sellsList } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 
 	React.useEffect(() => {

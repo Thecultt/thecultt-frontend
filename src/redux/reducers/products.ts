@@ -348,28 +348,32 @@ const products = (state = initialState, action: ProductTypes) => {
 	}
 
 	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY) {
-		// if (state.filters.availability[action.payload]) {
-		// delete state.filters.availability[action.payload];
-
-		return {
-			...state,
-			filters: {
-				...state.filters,
-				availability: { [action.payload]: action.payload }
-			}
-		};
-		// }
+		if (state.filters.availability[action.payload]) {
+			delete state.filters.availability[action.payload];
+			
+			return {
+				...state,
+			};
+		}
 
 		// return {
 		// 	...state,
 		// 	filters: {
 		// 		...state.filters,
-		// 		availability: {
-		// 			...state.filters.availability,
-		// 			[action.payload]: action.payload,
-		// 		},
-		// 	},
+		// 		availability: { [action.payload]: action.payload }
+		// 	}
 		// };
+
+		return {
+			...state,
+			filters: {
+				...state.filters,
+				availability: {
+					...state.filters.availability,
+					[action.payload]: action.payload,
+				},
+			},
+		};
 	}
 
 	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SIZE) {

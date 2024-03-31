@@ -10,7 +10,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import { ProductsStateFilters } from "../../../redux/types/IProducts";
 
-import { setFiltersCatalog, setFiltersCategoriesProduct, setFiltersAvailabilityProduct, setProductsTypeFetch } from "../../../redux/actions/products";
+import { setFiltersCatalog, setFiltersCategoriesProduct, setFiltersAvailabilityProduct, setProductsTypeFetch, setCurrentPageProduct } from "../../../redux/actions/products";
 
 import {
 	CatalogFiltersPrice,
@@ -106,6 +106,8 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 		dispatch(setFiltersCatalog(filters));
 
 		return () => {
+			dispatch(setCurrentPageProduct(1))
+
 			dispatch(
 				setFiltersCatalog({
 					isParse: false,
@@ -225,7 +227,8 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 		Object.keys(filters.models).length,
 		Object.keys(filters.colors).length,
 		Object.keys(filters.sex).length,
-		Object.keys(filters.availability)[0],
+		// Object.keys(filters.availability)[0],
+		Object.keys(filters.availability).length,
 		Object.keys(filters.size).length,
 		Object.keys(filters.selections).length,
 		filters.sort,
@@ -244,7 +247,10 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 
 		setIsOpenFiltersMedia(false)
 
+		dispatch(setCurrentPageProduct(1))
+
 		dispatch(
+
 			setFiltersCatalog({
 				isParse: true,
 

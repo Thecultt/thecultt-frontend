@@ -217,7 +217,7 @@ export const sendCreateOrder = (
 	const newData: any = data
 
 	if (localStorage.getItem("_ym_uid")) {
-		newData["_ym_uid"] = localStorage.getItem("_ym_uid")
+		newData["_ym_uid"] = JSON.parse(localStorage.getItem("_ym_uid") as string)
 	}
 
 	if (localStorage.getItem("utm_source")) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { reduxForm, InjectedFormProps, Field } from "redux-form";
+import { reduxForm, InjectedFormProps, formValueSelector, Field } from "redux-form";
 
 import { CabinetSellStepKeys } from "../../../redux/types/ICabinetSell";
 
@@ -31,6 +31,38 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	const [models, setModels] = React.useState<{ title: string, value: string }[]>([])
 
 	const { parameters } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
+	const selector = formValueSelector("sell-info-form");
+
+	const { brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, isBuyTheCulttValue } =
+		useTypedSelector((state) => {
+			const {
+				brand,
+				condition,
+				defects,
+				category,
+				model,
+				price,
+				isBuyTheCultt
+			} = selector(
+				state,
+				"brand",
+				"condition",
+				"defects",
+				"category",
+				"model",
+				"price",
+				"isBuyTheCultt"
+			);
+			return {
+				brandValue: brand,
+				conditionValue: condition,
+				defectsValue: defects,
+				categoryValue: category,
+				modelValue: model,
+				priceValue: price,
+				isBuyTheCulttValue: isBuyTheCultt
+			};
+		});
 
 	React.useEffect(() => {
 		if (data) {
@@ -45,6 +77,18 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			initialize(data)
 		}
 	}, [])
+
+	React.useEffect(() => {
+		localStorage.setItem("sell-info-form", JSON.stringify({
+			brand: brandValue,
+			condition: conditionValue,
+			defects: defectsValue,
+			category: categoryValue,
+			model: modelValue,
+			price: priceValue,
+			isBuyTheCultt: isBuyTheCulttValue
+		}))
+	}, [brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, isBuyTheCulttValue])
 
 	React.useEffect(() => {
 		if (parameters[currentCategory]) {

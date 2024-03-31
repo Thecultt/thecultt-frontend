@@ -77,7 +77,7 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						<Field
 							component={RenderInput}
 							label="Фамилия"
-							name="middlename"
+							name="lastname"
 							bgWhite
 						/>
 					</div>
@@ -89,7 +89,7 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 						<Field
 							component={RenderInput}
 							label="Отчество"
-							name="lastname"
+							name="middlename"
 							bgWhite
 						/>
 					</div>

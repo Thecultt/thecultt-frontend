@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios"
+import { formValueSelector } from "redux-form";
 
 import { fetchCabinetSellParameters, setCabinetSellCurrentStep, sendCreateCabinetSell } from "../../redux/actions/cabinet_sell";
-
-import { CabinetSellStepKeys } from '../../redux/types/ICabinetSell'
+import { CabinetSellStepKeys } from "../../redux/types/ICabinetSell";
 
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 
@@ -25,6 +25,15 @@ const Sell: React.FC = () => {
 	const { isLoadedParameters, isSend, currentStep, currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
 	const { user } = useTypedSelector(({ user }) => user)
 
+	const initStep = new URLSearchParams(window.location.search).get("step")
+
+	React.useEffect(() => {
+		if (initStep === "info") {
+			dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.INFO))
+		}
+	}, [initStep])
+
+
 	React.useEffect(() => {
 		dispatch(fetchCabinetSellParameters() as any)
 
@@ -32,6 +41,8 @@ const Sell: React.FC = () => {
 			try {
 				const info = JSON.parse(localStorage.getItem("sell-info-form") as string)
 				const images = JSON.parse(localStorage.getItem("sell-images-form") as string)
+
+				console.log(info)
 
 				let data: any = {
 					"otpravilAnketyNaProdazy": "Нет",
@@ -67,7 +78,7 @@ const Sell: React.FC = () => {
 					}
 				}
 
-				if (info && user.email && localStorage.getItem("mindboxDeviceUUID")) {
+				if (user.email && localStorage.getItem("mindboxDeviceUUID")) {
 					axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=ZapolnenieAnkety&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
 						{
 							"customerAction": {
@@ -262,7 +273,7 @@ const Sell: React.FC = () => {
 					) : null}
 
 					{localStorage.getItem("sell-info-global-type-delivery") === "Лично в офис" ? (
-						<Popup state={isSend} setState={() => window.location.href = "https://calendly.com/thecultt/visit"}>
+						<Popup state={isSend} setState={() => window.location.href = "/cabinet/sells"}>
 							<div className="sell-success">
 								<h3 className="sell-success__title">
 									Заявка отправлена, выберите время для записи!

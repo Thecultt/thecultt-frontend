@@ -38,7 +38,9 @@ import {
 	Exchange,
 	CabinetSellsList,
 	Cart,
-	SubscribeEmail
+	SubscribeEmail,
+	PublicFavorites,
+	AlyonaDoletskaya
 } from "./pages/";
 
 import { fetchProductsFilters } from "./redux/actions/products_filters";
@@ -108,6 +110,12 @@ const App = () => {
 		dispatch(checkAvailabilityCartItems(cartItems) as any)
 
 		const query: any = new URLSearchParams(search)
+
+		if (localStorage.getItem("accessToken") && !localStorage.getItem("accessToken_is_remove")) {
+			localStorage.removeItem("accessToken")
+			localStorage.setItem("accessToken_is_remove", "true")
+			window.location.reload()
+		}
 
 		if (query.get("utm_source")) {
 			localStorage.setItem("utm_source", query.get("utm_source"))
@@ -234,6 +242,10 @@ const App = () => {
 					<Route path="/cart" element={<Cart />} />
 
 					<Route path="/subscribe" element={<SubscribeEmail />} />
+
+					<Route path="/favorites/:userId" element={<PublicFavorites />} />
+
+					<Route path="/AlionaDoletskaya" element={<AlyonaDoletskaya />} />
 
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>

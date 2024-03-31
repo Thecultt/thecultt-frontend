@@ -22,12 +22,12 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	const dispatch = useDispatch()
 
 	const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell)
-	const { user: { name, middlename, email, phone } } = useTypedSelector(({ user }) => user)
+	const { user: { name, lastname, email, phone } } = useTypedSelector(({ user }) => user)
 
 	React.useEffect(() => {
 		initialize({
 			name,
-			surname: middlename,
+			surname: lastname,
 			email,
 			phone,
 		})

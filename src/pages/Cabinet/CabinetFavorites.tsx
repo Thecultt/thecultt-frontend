@@ -14,7 +14,7 @@ import {
 
 import { sendSaveFavorite, sendRemoveFavorite } from "../../redux/actions/favorites";
 
-import { CabinetMenu, ProductBlock, CabinetFavoritesNull, PageLoader } from "../../components/";
+import { CabinetMenu, ProductBlock, CabinetFavoritesShare, CabinetFavoritesNull, PageLoader } from "../../components/";
 
 import { Product } from "../../models/IProduct";
 
@@ -80,6 +80,8 @@ const CabinetFavorites: React.FC = () => {
 
 					{isLoaded ? (
 						<div className="cabinet-content cabinet-favorites">
+							<CabinetFavoritesShare />
+
 							{Object.keys(items).length ? (
 								<div className="cabinet-favorites-blocks-wrapper">
 									{Object.keys(items).map((key, index) => (

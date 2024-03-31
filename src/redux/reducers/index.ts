@@ -18,6 +18,7 @@ import recovery_password from './recovery_password'
 import history_orders from './history_orders'
 import concierge from './concierge'
 import subscribe_email from './subscribe_email'
+import public_favorites from './public_favorites'
 
 export const rootReducer = combineReducers({
 	form: formReducer,
@@ -37,7 +38,8 @@ export const rootReducer = combineReducers({
 	recovery_password,
 	history_orders,
 	concierge,
-	subscribe_email
+	subscribe_email,
+	public_favorites
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -10,6 +10,23 @@ import { FavoritesActionTypes, FavoritesActions } from '../types/IFavorites'
 export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>) => {
 	const { data: { items } } = await $api.get<{ items: Product[] }>(`/favorite-products`)
 
+
+
+	window.mindbox("async", {
+		operation: "Website.SetWishList",
+		data: {
+			productList: items.map((product) => ({
+				product: {
+					ids: {
+						website: `${product.id}`
+					}
+				},
+				count: 1,
+				pricePerItem: `${product.price}`
+			}))
+		}
+	});
+
 	dispatch({
 		type: FavoritesActionTypes.SET_FAVORITES_ITEMS,
 		payload: items
@@ -44,23 +61,6 @@ export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<Fav
 			}
 		});
 
-		window.mindbox("async", {
-			operation: "Website.SetWishList",
-			data: {
-				productList: [
-					{
-						product: {
-							ids: {
-								website: `${item.id}`
-							}
-						},
-						count: 1,
-						pricePerItem: `${item.price}`
-					}
-				]
-			}
-		});
-
 		dispatch(fetchFavorites() as any)
 	} else {
 		window.location.hash = "reglog"
@@ -69,7 +69,6 @@ export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<Fav
 
 export const sendRemoveFavorite = (item: Product) => async (dispatch: Dispatch<FavoritesActions>) => {
 	await $api.delete(`/remove-favorite-product/${item.id}/`)
-
 
 	try {
 		if (localStorage.getItem("mindboxDeviceUUID")) {

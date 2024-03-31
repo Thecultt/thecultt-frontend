@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import { setFiltersSelectionsProduct } from "../../../redux/actions/products";
+import { setFiltersSelectionsProduct, setFiltersAvailabilityProduct } from "../../../redux/actions/products";
 
 import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
 
@@ -16,6 +16,9 @@ const CatalogFiltersSelections: React.FC = () => {
 
 	const onChangeSetSelection = (selection: string) => {
 		dispatch(setFiltersSelectionsProduct(selection));
+
+		dispatch(setFiltersAvailabilityProduct("Доступно"));
+		dispatch(setFiltersAvailabilityProduct("На примерке"));
 	};
 
 	return (

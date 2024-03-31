@@ -65,8 +65,8 @@ const SellCooperation: React.FC = () => {
 					))}
 				</div>
 
-				<button className="btn sell-block__btn" onClick={() => {
-					if (localStorage.getItem("accessToken")) {
+				{localStorage.getItem("accessToken") ? (
+					<button className="btn sell-block__btn" onClick={() => {
 						dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.INFO))
 
 						window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
@@ -77,12 +77,15 @@ const SellCooperation: React.FC = () => {
 								cooperation_type: currentType === "sell" ? "sell" : "swap"
 							}
 						});
-					} else {
-						window.location.hash = "reglog"
-					}
-				}}>
-					Продолжить
-				</button>
+
+					}}>
+						Продолжить
+					</button>
+				) : (
+					<Link to="/cabinet/sell/?redirect=/cabinet/sell?step=info#reglog" className="btn sell-block__btn">
+						Продолжить
+					</Link>
+				)}
 			</div>
 
 			<Link

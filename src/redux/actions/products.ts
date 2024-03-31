@@ -257,14 +257,6 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 								"defecti": `${data.nuances}`,
 								"kategoria": `${data.category}`,
 								"model": `${data.name}`,
-								"ojidaniePoTcene": "<Ожидание по цене>",
-								"otpravilAnketyNaProdazy": "<Отправил анкету на продажу>",
-								"photo1": "<Фото 1>",
-								"photo2": "<Фото 2>",
-								"photo3": "<Фото 3>",
-								"photo4": "<Фото 4>",
-								"tovarIzKulta": "<Товар приобретен в Культе>",
-								"visitNaProdat": "<Визит на страницу Продать>"
 							}
 						}
 					}

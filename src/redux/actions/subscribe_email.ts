@@ -17,31 +17,31 @@ export const sendSubscribeEmail = (data: { email: string, type: string }) => {
 				await axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportirovanieKlienta&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
 					{
 						"customer": {
-							"discountCard": {
-								"ids": {
-									"number": "<Номер дисконтной карты>"
-								}
-							},
-							"birthDate": "<Дата рождения>",
-							"sex": "<Пол>",
-							"timeZone": "<Часовой пояс>",
-							"lastName": "<Фамилия>",
-							"firstName": "<Имя>",
-							"middleName": "<Отчество>",
-							"fullName": "<ФИО>",
-							"area": {
-								"ids": {
-									"externalId": "<Внешний идентификатор зоны>"
-								}
-							},
+							// "discountCard": {
+							// 	"ids": {
+							// 		"number": "<Номер дисконтной карты>"
+							// 	}
+							// },
+							// "birthDate": "<Дата рождения>",
+							// "sex": "<Пол>",
+							// "timeZone": "<Часовой пояс>",
+							// "lastName": "<Фамилия>",
+							// "firstName": "<Имя>",
+							// "middleName": "<Отчество>",
+							// "fullName": "<ФИО>",
+							// "area": {
+							// 	"ids": {
+							// 		"externalId": "<Внешний идентификатор зоны>"
+							// 	}
+							// },
 							"email": data.email,
-							"mobilePhone": "<Мобильный телефон>",
-							"ids": {
-								"websiteID": "<Идентификатор на сайте>"
-							},
+							// "mobilePhone": "<Мобильный телефон>",
+							// "ids": {
+							// 	"websiteID": "<Идентификатор на сайте>"
+							// },
 							"customFields": {
 								"tipKlienta": data.type,
-								"gorod": "<Город>",
+								// "gorod": "<Город>",
 								"istochnikPodpiski": "FormaSGaidom"
 							},
 							"subscriptions": [

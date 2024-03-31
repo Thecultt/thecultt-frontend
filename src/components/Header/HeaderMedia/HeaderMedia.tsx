@@ -60,32 +60,38 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 				<div className="header-media-wrapper">
 					<div className="header-media-icon-group">
 						<div className="header-media-icon" onClick={toggleState}>
-							<svg
-								width="24"
-								height="18"
-								viewBox="0 0 24 18"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M23 1H1"
-									stroke="#202020"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-								<path
-									d="M23 9H1"
-									stroke="#202020"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-								<path
-									d="M23 17H1"
-									stroke="#202020"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</svg>
+							{state ? (
+								<svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M20 1L12 9M12 9L4 17M12 9L4 1M12 9L20 17" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+								</svg>
+							) : (
+								<svg
+									width="24"
+									height="18"
+									viewBox="0 0 24 18"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M23 1H1"
+										stroke="#202020"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+									<path
+										d="M23 9H1"
+										stroke="#202020"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+									<path
+										d="M23 17H1"
+										stroke="#202020"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									/>
+								</svg>
+							)}
 						</div>
 
 						<div className="header-media-icon" onClick={() => setIsOpenSearch(true)}>
@@ -126,81 +132,83 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 			</div>
 
 			<div className={`header-media-modal-menu ${state ? "active" : ""}`}>
-				{/* <HeaderMediaBanner /> */}
+				<div className="header-media-modal-menu-wrapper">
+					{/* <HeaderMediaBanner /> */}
 
-				<p className="header-media-modal-menu__title">
-					Меню
-				</p>
+					<p className="header-media-modal-menu__title">
+						Меню
+					</p>
 
-				<div className="header-media-modal-menu-links">
-					<Link to="/catalog" className="header-media-modal-menu-links-link" onClick={toggleState}>Новинки</Link>
+					<div className="header-media-modal-menu-links">
+						<Link to="/catalog" className="header-media-modal-menu-links-link" onClick={toggleState}>Новинки</Link>
 
-					{Object.keys(categories).map((category, index) => (
-						<HeaderMediaLinkTab title={category} linkTitle={`/catalog?categories=${category}`} key={`header-media-modal-menu-links-tab${index}`}>
-							{Object.keys(categories[category].subsubcategories).map((subsubcategory, subindex) => (
-								<Link to={`/catalog?categories=${category}&types=${subsubcategory}`} className="header-media-modal-menu-links__link" key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`} onClick={toggleState}>{subsubcategory}</Link>
-							))}
+						{Object.keys(categories).map((category, index) => (
+							<HeaderMediaLinkTab title={category} linkTitle={`/catalog?categories=${category}`} key={`header-media-modal-menu-links-tab${index}`}>
+								{Object.keys(categories[category].subsubcategories).map((subsubcategory, subindex) => (
+									<Link to={`/catalog?categories=${category}&types=${subsubcategory}`} className="header-media-modal-menu-links__link" key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`} onClick={toggleState}>{subsubcategory}</Link>
+								))}
 
-							{category === "Обувь" ?
-								<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
-									Вся обувь
-								</Link> : null
-							}
-
-							{category === "Сумки" ?
-								<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
-									Все сумки
-								</Link> : null
-							}
-
-							{category === "Аксессуары" ?
-								<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
-									Все аксессуары
-								</Link> : null
-							}
-						</HeaderMediaLinkTab>
-					))}
-
-					<Link to="/brands" className="header-media-modal-menu-links-link" onClick={toggleState}>Бренды</Link>
-
-					<Link to="/auth" className="header-media-modal-menu-links-link" onClick={toggleState}>Подлинность</Link>
-
-					<HeaderMediaLinkTab title="Личный кабинет">
-						<Link to="/cabinet/setting" className="header-media-modal-menu-links__link" onClick={toggleState}>Профиль</Link>
-						<Link to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"} className="header-media-modal-menu-links__link" onClick={toggleState}>Мои продажи</Link>
-						<Link to="/cabinet/history" className="header-media-modal-menu-links__link" onClick={toggleState}>История заказов</Link>
-						<Link to="/cabinet/favorites" className="header-media-modal-menu-links__link" onClick={toggleState}>Избранное</Link>
-						<Link to="/cabinet/waiting" className="header-media-modal-menu-links__link" onClick={toggleState}>Лист ожидания</Link>
-					</HeaderMediaLinkTab>
-
-					<HeaderMediaLinkTab title="Сервисы для продажи">
-						<Link to="/sell" className="header-media-modal-menu-links__link" onClick={toggleState}>Продажа</Link>
-						<Link to="/exchange" className="header-media-modal-menu-links__link" onClick={toggleState}>Обмен</Link>
-						<Link to="/concierge" className="header-media-modal-menu-links__link" onClick={toggleState}>Консьерж сервис</Link>
-					</HeaderMediaLinkTab>
-				</div>
-
-				<div className="header-media-modal-menu-btn">
-					<Link
-						to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"}
-						className="btn header-media-modal-menu-btn__btn"
-						onClick={() => {
-							window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
-							window.dataLayer.push({
-								event: "sell_click",
-								ecommerce: {
-									timestamp: Math.floor(Date.now() / 1000),
+								{category === "Обувь" ?
+									<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+										Вся обувь
+									</Link> : null
 								}
-							});
 
-							toggleState()
-						}}
-					>
-						Продать
-					</Link>
+								{category === "Сумки" ?
+									<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+										Все сумки
+									</Link> : null
+								}
+
+								{category === "Аксессуары" ?
+									<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+										Все аксессуары
+									</Link> : null
+								}
+							</HeaderMediaLinkTab>
+						))}
+
+						<Link to="/brands" className="header-media-modal-menu-links-link" onClick={toggleState}>Бренды</Link>
+
+						<Link to="/auth" className="header-media-modal-menu-links-link" onClick={toggleState}>Подлинность</Link>
+
+						<HeaderMediaLinkTab title="Личный кабинет">
+							<Link to="/cabinet/setting" className="header-media-modal-menu-links__link" onClick={toggleState}>Профиль</Link>
+							<Link to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"} className="header-media-modal-menu-links__link" onClick={toggleState}>Мои продажи</Link>
+							<Link to="/cabinet/history" className="header-media-modal-menu-links__link" onClick={toggleState}>История заказов</Link>
+							<Link to="/cabinet/favorites" className="header-media-modal-menu-links__link" onClick={toggleState}>Избранное</Link>
+							<Link to="/cabinet/waiting" className="header-media-modal-menu-links__link" onClick={toggleState}>Лист ожидания</Link>
+						</HeaderMediaLinkTab>
+
+						<HeaderMediaLinkTab title="Сервисы для продажи">
+							<Link to="/sell" className="header-media-modal-menu-links__link" onClick={toggleState}>Продажа</Link>
+							<Link to="/exchange" className="header-media-modal-menu-links__link" onClick={toggleState}>Обмен</Link>
+							<Link to="/concierge" className="header-media-modal-menu-links__link" onClick={toggleState}>Консьерж сервис</Link>
+						</HeaderMediaLinkTab>
+					</div>
+
+					<div className="header-media-modal-menu-btn">
+						<Link
+							to={localStorage.getItem("accessToken") ? "/cabinet/sell" : "sell"}
+							className="btn header-media-modal-menu-btn__btn"
+							onClick={() => {
+								window.dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+								window.dataLayer.push({
+									event: "sell_click",
+									ecommerce: {
+										timestamp: Math.floor(Date.now() / 1000),
+									}
+								});
+
+								toggleState()
+							}}
+						>
+							Продать
+						</Link>
+					</div>
 				</div>
 
-				<Footer transparent />
+				<Footer />
 			</div>
 		</header>
 	);

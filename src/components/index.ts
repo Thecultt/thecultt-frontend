@@ -173,6 +173,7 @@ export { default as CabinetSellsListPaymentInfoPopupForm } from "./CabinetSellsL
 
 // CabinetFavorites
 export { default as CabinetFavoritesNull } from "./CabinetFavorites/CabinetFavoritesNull";
+export { default as CabinetFavoritesShare } from "./CabinetFavorites/CabinetFavoritesShare";
 
 // CabinetSetting
 export { default as CabinetSettingBrandBlock } from "./CabinetSetting/CabinetSettingBrandBlock";
