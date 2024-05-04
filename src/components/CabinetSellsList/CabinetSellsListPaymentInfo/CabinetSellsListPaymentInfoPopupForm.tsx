@@ -102,7 +102,7 @@ const CabinetSellsListPaymentInfoPopupForm: React.FC<{} & InjectedFormProps<{}, 
 					</div>
 
 					<div className="cabinet-sells-list-payment-info-popup-block-input" style={{ width: "100%" }}>
-						<Field component={RenderInput} name='inn' label="ИНН" />
+						<Field component={RenderInput} name='inn' label="Ваш ИНН" />
 					</div>
 
 					<div className="cabinet-sells-list-payment-info-popup-block-input" style={{ width: "100%", marginBottom: 0 }}>

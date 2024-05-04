@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, NavLink } from 'react-router-dom'
 
-import { FaqAll, FaqBuyers, FaqSellers } from '../../components/'
+import { FaqAll, FaqBuyers, FaqSellers, FaqTheCultt } from '../../components/'
 
 import FaqMainBannerImage from '../../assets/images/faq/faq-main-image.jpg'
 
@@ -22,6 +22,7 @@ const Faq: React.FC = () => {
 						<NavLink to="/help/all" className={(({ isActive }) => `faq-main-menu__link ${isActive ? "active" : ""}`)}>Общее</NavLink>
 						<NavLink to="/help/buyers" className={(({ isActive }) => `faq-main-menu__link ${isActive ? "active" : ""}`)}>Покупателям</NavLink>
 						<NavLink to="/help/sellers" className={(({ isActive }) => `faq-main-menu__link ${isActive ? "active" : ""}`)}>Продавцам</NavLink>
+						<NavLink to="/help/thecultt" className={(({ isActive }) => `faq-main-menu__link ${isActive ? "active" : ""}`)}>Условия использования сервисов THE CULTT и реквизиты</NavLink>
 					</div>
 
 					<div className="faq-main-content">
@@ -35,6 +36,10 @@ const Faq: React.FC = () => {
 
 						{block === "sellers" ? (
 							<FaqSellers />
+						) : null}
+
+						{block === "thecultt" ? (
+							<FaqTheCultt />
 						) : null}
 					</div>
 				</div>

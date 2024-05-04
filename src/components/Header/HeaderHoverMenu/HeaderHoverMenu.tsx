@@ -31,7 +31,8 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ types, brands, title,
 										<Link onClick={onClose} to={`/catalog?categories=${title}&types=${type}`} className="header-hover-menu-list-coll__item" key={`header-hover-menu-list-coll__item-${type}-${index}`}>
 											{type}
 										</Link>
-									)).slice(0, 7)}
+									)).slice(0, 4)}
+									{/* 4 / 7 */}
 
 									{title === "Обувь" ?
 										<Link onClick={onClose} to={`/catalog?categories=${title}`} className="header-hover-menu-list-coll__item last">
@@ -50,6 +51,13 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ types, brands, title,
 											Все аксессуары
 										</Link> : null
 									}
+
+									<Link onClick={onClose} to={`/catalog?categories=${title}&boutique=true`} className="header-hover-menu-list-boutique">
+										<p className="header-hover-menu-list-boutique__btn">Из бутика</p>
+										<p className="header-hover-menu-list-boutique__subtitle">
+											Новые, <br /> не были в носке
+										</p>
+									</Link>
 								</div>
 							</div>
 						</div>

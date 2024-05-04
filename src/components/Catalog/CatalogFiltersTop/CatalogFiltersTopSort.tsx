@@ -5,19 +5,35 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 import { setFiltersSortProduct } from "../../../redux/actions/products";
 
-const CatalogFiltersTopSort: React.FC = () => {
+const sortItems: { [key: string]: string } = {
+	"a": "новизне",
+	"price": "возрастанию цены",
+	"-price": "убыванию цены",
+	"popular": "популярности"
+}
+
+interface CatalogFiltersTopSortProps {
+	initSortKey: string;
+}
+
+const CatalogFiltersTopSort: React.FC<CatalogFiltersTopSortProps> = React.memo(({ initSortKey }) => {
 	const dispatch = useDispatch();
 
-	const { filters } = useTypedSelector(({ products }) => products);
-
 	const [state, setState] = React.useState<boolean>(false);
-	const [currentSortKey, setCurrentSortKey] = React.useState<string>("a");
+	const [currentSortKey, setCurrentSortKey] = React.useState<string>(initSortKey);
+	// const [currentSortKey, setCurrentSortKey] = React.useState<string>("a");
+
+	// const { filters } = useTypedSelector(({ products }) => products)
 
 	const ModalRef = React.useRef<HTMLDivElement>(null);
 
-	React.useEffect(() => {
-		if (filters.isParse && filters.sort !== "") setCurrentSortKey(filters.sort)
-	}, [filters.isParse, filters.sort])
+	// React.useEffect(() => {
+	// 	if (filters.isParse && filters.sort !== "") setCurrentSortKey(filters.sort)
+	// }, [filters.isParse, filters.sort])
+
+	// React.useEffect(() => {
+	// 	if (initSortKey) setCurrentSortKey(initSortKey)
+	// }, [])
 
 	React.useEffect(() => {
 		document.addEventListener("mousedown", hiddeModal);
@@ -38,13 +54,6 @@ const CatalogFiltersTopSort: React.FC = () => {
 	const toggleState = () => {
 		setState(!state);
 	};
-
-	const sortItems: { [key: string]: string } = {
-		"a": "новизне",
-		"price": "возрастанию цены",
-		"-price": "убыванию цены",
-		// "f": "популярности"
-	}
 
 	const onClickSetItem = (key: string) => {
 		setCurrentSortKey(key);
@@ -114,6 +123,6 @@ const CatalogFiltersTopSort: React.FC = () => {
 			</div>
 		</div>
 	);
-};
+});
 
 export default CatalogFiltersTopSort;

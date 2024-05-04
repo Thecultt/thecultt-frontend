@@ -204,15 +204,52 @@
 					color: $gray
 					margin-bottom: 5px
 
+				&__model
+					font-size: 26px
+					margin-bottom: 5px
+
 				&__brand
-					display: inline-block
+					display: block
 					text-decoration: underline
 					font-size: 18px
 					margin-bottom: 15px
 
-				&__model
-					font-size: 26px
-					margin-bottom: 5px
+				&-boutique
+					display: inline-block
+					cursor: pointer
+					margin-bottom: 12px
+
+					& .popup
+						align-items: center
+
+					&-badge
+						display: inline-flex
+						align-items: center
+
+						padding: 5px 12px
+						border: 1px solid $mainColor
+						color: $mainColor
+						border-radius: 6px
+
+						&__text
+							font-size: 12px
+							padding-right: 5px
+
+					&-popup
+						text-align: center
+						width: 400px
+						z-index: 2
+
+						&__title
+							font-size: 17px
+							margin-bottom: 10px
+
+						&__description
+							font-size: 14px
+							margin-bottom: 15px
+
+						&__btn
+							width: 100%
 
 				&-price
 					margin-bottom: 25px
@@ -496,6 +533,8 @@
 
 		border-radius: 24px
 
+		margin-bottom: 50px
+
 		&-text
 			width: 45%
 
@@ -544,8 +583,6 @@
 				margin-top: 0
 
 				border-radius: 0
-
-				z-index: 2
 
 				width: 100%
 
@@ -672,6 +709,10 @@
 			&-info
 				&-split-popup
 					width: 100%
+
+				&-title
+					&-boutique-popup
+						width: 100%
 
 @media screen and ( max-width: 500px )
 	.product

@@ -19,6 +19,8 @@ const CabinetSellsListItem: React.FC<any> = ({
 	status_description,
 	link,
 	image,
+	sales_payment,
+	purchase_amount
 }) => {
 	const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
@@ -145,13 +147,13 @@ const CabinetSellsListItem: React.FC<any> = ({
 
 							<div className="cabinet-sells-list-item-info-block-value-wrapper bb">
 								<div className="cabinet-sells-list-item-info-block-value">
-									<p className="cabinet-sells-list-item-info-block-value__value">
+									{category ? <p className="cabinet-sells-list-item-info-block-value__value">
 										<span>Категория:</span> {category}
-									</p>
+									</p> : null}
 
-									<p className="cabinet-sells-list-item-info-block-value__value">
+									{vendor ? <p className="cabinet-sells-list-item-info-block-value__value">
 										<span>Бренд:</span> {vendor}
-									</p>
+									</p> : null}
 
 									{model !== "" && model ? (
 										<p className="cabinet-sells-list-item-info-block-value__value">
@@ -174,13 +176,17 @@ const CabinetSellsListItem: React.FC<any> = ({
 							</div>
 
 							<div className="cabinet-sells-list-item-info-block-value">
-								<p className="cabinet-sells-list-item-info-block-value__value">
+								{condition ? <p className="cabinet-sells-list-item-info-block-value__value">
 									<span>Состояние:</span> {condition}
-								</p>
+								</p> : null}
 
-								<p className="cabinet-sells-list-item-info-block-value__value">
+								{defects ? <p className="cabinet-sells-list-item-info-block-value__value">
 									<span>Дефекты:</span> {defects}
-								</p>
+								</p> : null}
+
+								{sales_payment || purchase_amount ? <p className="cabinet-sells-list-item-info-block-value__value">
+									<span>Сумма к выплате:</span> {sales_payment || purchase_amount}₽
+								</p> : null}
 
 								{/* <p className="cabinet-sells-list-item-info-block-value__value">
 									<span>Ожидание по цене:</span> 	<NumericFormat

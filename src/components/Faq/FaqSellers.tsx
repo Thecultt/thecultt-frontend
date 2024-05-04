@@ -128,10 +128,26 @@ const FaqSellers: React.FC = () => {
 			</tr>
 			<tr>
 			<td>
-			<p align="center">от 500.001₽ и выше</p>
+			<p align="center">от 500.001₽ и 1.000.000</p>
 			</td>
 			<td>
 			<p align="center">20%</p>
+			</td>
+			</tr>
+			<tr>
+			<td>
+			<p align="center">от 1.000.001₽ и выше</p>
+			</td>
+			<td>
+			<p align="center">15%</p>
+			</td>
+			</tr>
+			<tr>
+			<td>
+			<p align="center">Hermes Birkin и Kelly в состоянии "Из бутика" </p>
+			</td>
+			<td>
+			<p align="center">10%</p>
 			</td>
 			</tr>
 			</tbody>

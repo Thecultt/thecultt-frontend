@@ -3,6 +3,8 @@
 	&-main
 		margin-bottom: 85px
 
+		+open
+
 		&__image
 			width: 100%
 			margin-bottom: 40px
@@ -101,6 +103,9 @@
 			width: 100%
 
 	&-lot2
+		display: block
+
+		cursor: pointer
 		position: relative
 		margin-left: 40px
 
@@ -130,6 +135,9 @@
 			width: 100%
 
 	&-lot3
+		display: block
+
+		cursor: pointer
 		position: relative
 
 		margin-bottom: 90px
@@ -159,7 +167,10 @@
 			width: 100%
 
 	&-lot4
+		display: block
 		position: relative
+
+		cursor: pointer
 
 		margin-bottom: 90px
 
@@ -173,7 +184,10 @@
 			left: 55%
 
 	&-lot5
+		display: block
 		position: relative
+		
+		cursor: pointer
 
 		margin-left: 80px
 		margin-right: 40px
@@ -196,7 +210,10 @@
 			width: 100%
 
 	&-lot6
+		display: block
 		position: relative
+		
+		cursor: pointer
 
 		display: flex
 		align-items: flex-end
@@ -268,6 +285,22 @@
 /* MEDIA */
 @media screen and (max-width: 1450px)
 	.alyona-doletskaya
+		&-lot2
+			&-text
+				width: 500px
+				bottom: -75px
+
+		&-lot3
+			&-text
+				width: 500px
+
+		&-lot4
+			&-text
+				top: -50px
+				width: 600px
+
+@media screen and (max-width: 1400px)
+	.alyona-doletskaya
 		&-main
 			&__image
 				margin-bottom: 35px
@@ -321,7 +354,7 @@
 					margin-bottom: 15px
 
 				&__description
-					font-size: 12px
+					font-size: 14px
 
 		&-lot1
 			margin-bottom: 25px

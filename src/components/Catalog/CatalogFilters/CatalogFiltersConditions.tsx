@@ -32,6 +32,7 @@ const CatalogFiltersConditions: React.FC<CatalogFiltersConditionsProps> = ({
 					<li><span>Хорошее</span>: присутствуют значительные следы носки. Могут присутствовать следующие нюансы: отсутствие элементов полного комплекта,  загар, потертости или царапины на коже, пятна на материале, следы носки на подкладке, потертости на фурнитуре, сумка была в спа</li>
 				</ul>
 			`}
+			disabled={filters.boutique}
 		>
 			{conditions.map((condition, index) => (
 				<div

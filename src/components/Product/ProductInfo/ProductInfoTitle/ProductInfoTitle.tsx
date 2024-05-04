@@ -11,7 +11,7 @@ import { sendSaveFavorite, sendRemoveFavorite } from "../../../../redux/actions/
 
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 
-import { ProductInfoTitleSplit } from "../../../";
+import { ProductInfoTitleBoutique, ProductInfoTitleSplit } from "../../../";
 
 const ProductInfoTitle: React.FC<ProductPage> = ({
 	id,
@@ -28,6 +28,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 	images,
 	store_price,
 	condition,
+	from_boutique
 }) => {
 	const dispatch = useDispatch()
 
@@ -65,7 +66,9 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 			subcategory,
 			shoe_size,
 			size,
-			is_trial
+			is_trial,
+			from_boutique,
+			price_drop: false
 		}) as any)
 	}
 
@@ -85,8 +88,9 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 			subcategory,
 			shoe_size,
 			size,
-			is_trial
-
+			is_trial,
+			from_boutique,
+			price_drop: false
 		}) as any)
 	}
 
@@ -114,6 +118,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 				<Link to={`/catalog?categories=${category}&brands=${manufacturer}`} className="product-content-info-title__brand">
 					{manufacturer}
 				</Link>
+
+				{from_boutique ? <ProductInfoTitleBoutique /> : null}
 
 				<div className="product-content-info-title-price">
 					<h3 className="product-content-info-title-price__price">

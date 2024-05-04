@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3a432100.css",
-    "main.js": "/static/js/main.f78149b8.js",
+    "main.css": "/static/css/main.6e758696.css",
+    "main.js": "/static/js/main.dbd4cf44.js",
     "static/media/lot5-media.jpg": "/static/media/lot5-media.4af141493f5b1f5a02b3.jpg",
     "static/media/deco-images-1.jpg": "/static/media/deco-images-1.f93d3de1c0cfd6b8699a.jpg",
     "static/media/daria.jpg": "/static/media/daria.1589a28c9084fefad758.jpg",
@@ -26,6 +26,7 @@
     "static/media/lot2-more-images.jpg": "/static/media/lot2-more-images.4aa4f66192bc84eae04a.jpg",
     "static/media/home-visit.jpg": "/static/media/home-visit.e9c9705c1db24cfedb5f.jpg",
     "static/media/visit.jpg": "/static/media/visit.e9c9705c1db24cfedb5f.jpg",
+    "static/media/catalog-banner-boutique.jpg": "/static/media/catalog-banner-boutique.8a6a87d49310ad5cdd2a.jpg",
     "static/media/sell-block-cooperation-concierge-service.jpg": "/static/media/sell-block-cooperation-concierge-service.24b34dddbdfc05b2f74f.jpg",
     "static/media/lot6.jpg": "/static/media/lot6.77af587065a0d9fb3d5d.jpg",
     "static/media/faq-main-image.jpg": "/static/media/faq-main-image.84efa32e6a4143c25567.jpg",
@@ -73,6 +74,7 @@
     "static/media/sell-images-image-hand-3.jpg": "/static/media/sell-images-image-hand-3.ac30796eae47410860d4.jpg",
     "static/media/subscribe-email-image.jpg": "/static/media/subscribe-email-image.4921da4cec0acb9934c4.jpg",
     "static/media/logo-split.svg": "/static/media/logo-split.6d13c8d309887b80fa2abaa7301e4bdc.svg",
+    "static/media/notfound.jpg": "/static/media/notfound.9302a68fee5581c295c9.jpg",
     "static/media/sell-info-main-image.jpg": "/static/media/sell-info-main-image.907340010d1ba08595bc.jpg",
     "static/media/sell-images-image-shoes-2.jpg": "/static/media/sell-images-image-shoes-2.3f74f6b8fde74c8fd855.jpg",
     "static/media/home-about.jpg": "/static/media/home-about.41585e1579affe6bec8d.jpg",
@@ -83,6 +85,7 @@
     "static/media/sell-images-image-hand-1.jpg": "/static/media/sell-images-image-hand-1.2fb8c4fcc2ad3c028a25.jpg",
     "static/media/header-image-hover-menu-decoration.jpg": "/static/media/header-image-hover-menu-decoration.8414e800ec394332dc2f.jpg",
     "static/media/header-image-hover-menu-shoes.jpg": "/static/media/header-image-hover-menu-shoes.b42d26a15eebe6502820.jpg",
+    "static/media/home-main-banner-AlionaDoletskaya.jpg": "/static/media/home-main-banner-AlionaDoletskaya.96faebf9db2fcbfae781.jpg",
     "static/media/sell-images-image-bag-2.jpg": "/static/media/sell-images-image-bag-2.74fe3ac38ded40008412.jpg",
     "static/media/sell-images-image-hand-4.jpg": "/static/media/sell-images-image-hand-4.bcdf60579b1babdf4604.jpg",
     "static/media/deco-images-2.jpg": "/static/media/deco-images-2.f1c39e0d709ca6cc19f7.jpg",
@@ -105,7 +108,10 @@
     "static/media/sell-images-image-jewerly-4.jpg": "/static/media/sell-images-image-jewerly-4.491aeee1555e13864639.jpg",
     "static/media/sell-images-image-belt-1.jpg": "/static/media/sell-images-image-belt-1.13bb90442bc8b9329c0f.jpg",
     "static/media/sell-images-image-jewerly-2.jpg": "/static/media/sell-images-image-jewerly-2.2fb4eba1a25ec83e30ba.jpg",
+    "static/media/catalog-banner-price-drop.jpg": "/static/media/catalog-banner-price-drop.9178d8c2557e2810792a.jpg",
     "static/media/sell-images-image-clock-4.jpg": "/static/media/sell-images-image-clock-4.1b09a0ae9848527384ef.jpg",
+    "static/media/catalog-banner-price-drop-media.jpg": "/static/media/catalog-banner-price-drop-media.3d6bd91b4af24f979bfc.jpg",
+    "static/media/catalog-banner-boutique-media.jpg": "/static/media/catalog-banner-boutique-media.c666978739e04ef7a2b3.jpg",
     "static/media/bluepint.png": "/static/media/bluepint.846b384551cc568f8358.png",
     "static/media/rbk.png": "/static/media/rbk.5a8c7ac25e8a57e6c643.png",
     "static/media/about-title.svg": "/static/media/about-title.eddb483cec77b05a1f7d8a79e5e27826.svg",
@@ -116,11 +122,11 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "main.3a432100.css.map": "/static/css/main.3a432100.css.map",
-    "main.f78149b8.js.map": "/static/js/main.f78149b8.js.map"
+    "main.6e758696.css.map": "/static/css/main.6e758696.css.map",
+    "main.dbd4cf44.js.map": "/static/js/main.dbd4cf44.js.map"
   },
   "entrypoints": [
-    "static/css/main.3a432100.css",
-    "static/js/main.f78149b8.js"
+    "static/css/main.6e758696.css",
+    "static/js/main.dbd4cf44.js"
   ]
 }

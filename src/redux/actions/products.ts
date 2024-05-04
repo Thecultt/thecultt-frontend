@@ -76,6 +76,11 @@ export const fetchProductsCatalog = (
 		size: { [key: string]: string },
 		selections: { [key: string]: string }
 
+		boutique: boolean
+		price_drop: boolean
+
+		glass_frame: { [key: string]: string },
+
 		sort: string
 	},
 	page: number,
@@ -108,6 +113,9 @@ export const fetchProductsCatalog = (
 	const selectionsArrray = Object.keys(filters.selections).map(
 		(key) => key
 	);
+	const glassFrameArrray = Object.keys(filters.glass_frame).map(
+		(key) => key
+	);
 
 	params.append("search", filters.search)
 
@@ -128,6 +136,8 @@ export const fetchProductsCatalog = (
 	colorsArrray.map((color) => params.append("color", color))
 	sexArrray.map((sex) => params.append("genders", sex))
 
+	glassFrameArrray.map((glass_frame) => params.append("glass_frame", glass_frame))
+
 	if (availabilityArrray.length) {
 		// availabilityArrray.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
 		availabilityArrray.map((availability) => {
@@ -139,14 +149,19 @@ export const fetchProductsCatalog = (
 				params.append("availability", "0")
 			}
 		})
-	} else {
-		params.append("availability", "1")
 	}
+	// else {
+	// 	params.append("availability", "1")
+	// }
 
 	sizeArrray.map((size) => params.append("size", size))
 	selectionsArrray.map((selection) => params.append("selections", selection))
 
+	if (filters.boutique) params.append("from_boutique", String(filters.boutique))
+	if (filters.price_drop) params.append("price_drop", String(filters.price_drop))
+
 	params.append("sort_by", filters.sort)
+
 
 	params.append("page", String(page))
 
@@ -348,6 +363,21 @@ export const setFiltersSizeProduct = (size: string) => ({
 export const setFiltersSelectionsProduct = (selection: string) => ({
 	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS,
 	payload: selection
+})
+
+export const setFiltersBoutiqueProduct = (boutique: boolean) => ({
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE,
+	payload: boutique
+})
+
+export const setFiltersGlassFrameProduct = (glass_frame: string) => ({
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME,
+	payload: glass_frame
+})
+
+export const setFiltersPriceDropProduct = (price_drop: boolean) => ({
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP,
+	payload: price_drop
 })
 
 export const setFiltersSortProduct = (sort: string) => ({

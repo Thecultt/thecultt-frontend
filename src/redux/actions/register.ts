@@ -22,58 +22,106 @@ export const sendRegister = (info: { name: string, lastname: string, email: stri
 				}
 			});
 
-
-
 			if (info.promoCheckbox) {
 				try {
 					if (localStorage.getItem("mindboxDeviceUUID")) {
-						axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportirovanieKlienta&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
-							{
-								"customer": {
-									"ids": {
-										"websiteID": data.id
-									},
-									"discountCard": {
+						if (localStorage.getItem("redirect_reglog") === "/order") {
+							axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeVZakaze&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+								{
+									"customer": {
 										"ids": {
-											"number": ""
-										}
+											"websiteID": data.id
+										},
+										"discountCard": {
+											"ids": {
+												"number": ""
+											}
+										},
+										"birthDate": "",
+										"sex": "",
+										"timeZone": "",
+										"lastName": "",
+										"firstName": info.name,
+										"middleName": info.lastname,
+										"fullName": "",
+										"area": {
+											"ids": {
+												"externalId": ""
+											}
+										},
+										"customFields": {
+											"tipKlienta": "",
+											"gorod": "",
+											"istochnikPodpiski": "PriRegistraciiLK"
+										},
+										"email": info.email,
+										"mobilePhone": "",
+										"subscriptions": [
+											{
+												"pointOfContact": "Email",
+												"isSubscribed": true
+											}
+										]
 									},
-									"birthDate": "",
-									"sex": "",
-									"timeZone": "",
-									"lastName": "",
-									"firstName": info.name,
-									"middleName": info.lastname,
-									"fullName": "",
-									"area": {
-										"ids": {
-											"externalId": ""
-										}
-									},
-									"customFields": {
-										"tipKlienta": "",
-										"gorod": "<Город>",
-										"istochnikPodpiski": "PriRegistraciiLK"
-									},
-									"email": info.email,
-									"mobilePhone": "",
-									"subscriptions": [
-										{
-											"pointOfContact": "Email",
-											"isSubscribed": true
-										}
-									]
+									"executionDateTimeUtc": new Date()
 								},
-								"executionDateTimeUtc": new Date()
-							},
-							{
-								headers: {
-									'Content-Type': 'application/json; charset=utf-8',
-									'Accept': 'application/json',
-									'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+								{
+									headers: {
+										'Content-Type': 'application/json; charset=utf-8',
+										'Accept': 'application/json',
+										'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+									}
 								}
-							}
-						)
+							)
+						} else {
+							axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeRegaLK&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+								{
+									"customer": {
+										"ids": {
+											"websiteID": data.id
+										},
+										"discountCard": {
+											"ids": {
+												"number": ""
+											}
+										},
+										"birthDate": "",
+										"sex": "",
+										"timeZone": "",
+										"lastName": "",
+										"firstName": info.name,
+										"middleName": info.lastname,
+										"fullName": "",
+										"area": {
+											"ids": {
+												"externalId": ""
+											}
+										},
+										"customFields": {
+											"tipKlienta": "",
+											"gorod": "",
+											"istochnikPodpiski": "PriRegistraciiLK"
+										},
+										"email": info.email,
+										"mobilePhone": "",
+										"subscriptions": [
+											{
+												"pointOfContact": "Email",
+												"isSubscribed": true
+											}
+										]
+									},
+									"executionDateTimeUtc": new Date()
+								},
+								{
+									headers: {
+										'Content-Type': 'application/json; charset=utf-8',
+										'Accept': 'application/json',
+										'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+									}
+								}
+							)
+						}
 					}
 				} catch (e) {
 					console.log(e)

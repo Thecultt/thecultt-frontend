@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Slider from "react-slick";
 
+import HomeMainBannerImageAlionaDoletskaya from '../../../assets/images/home/home-main-banner-AlionaDoletskaya.jpg'
+
 import HomeMainBannerImage1 from '../../../assets/images/home/home-main-banner1.jpg'
 import HomeMainBannerImage2 from '../../../assets/images/home/home-main-banner2.jpg'
 import HomeMainBannerImage3 from '../../../assets/images/home/home-main-banner3.jpg'
@@ -73,6 +75,25 @@ const HomeMainBanner: React.FC = () => {
 								</div>
 							</div>
 						</div> */}
+
+						<div className='home-main-banner-slider-item-wrapper'>
+							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImageAlionaDoletskaya}")` }}>
+								<div className="home-main-banner-slider-item-text">
+									<h2 className="home-main-banner-slider-item-text__title">
+										Алена Долецкая x THE CULTT
+									</h2>
+
+									<p className="home-main-banner-slider-item-text__description">
+										Знаковые лоты из личных архивов Алены Долецкой — теперь на THE CULTT.
+										Часть средств от продажи будет направлена в благотворительный фонд «Вера»
+									</p>
+
+									<a href="/AlionaDoletskaya?utm_source=website&utm_medium=banner_main&utm_campaign=landing_doletskya" className="home-main-banner-slider-item-text__btn color">
+										Читать истории лотов
+									</a>
+								</div>
+							</div>
+						</div>
 
 						<div className='home-main-banner-slider-item-wrapper'>
 							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImage1}")` }}>

@@ -87,7 +87,7 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 								<Field
 									component={RenderInput}
 									name="inn"
-									label="ИНН"
+									label="Ваш ИНН"
 									bgWhite
 								/>
 							</div>

@@ -13,7 +13,7 @@ const BrandsListBlock: React.FC<BrandsListBlockProps> = ({ letter, brands }) => 
 
 			<div className="brands-list-block-items-wrapper">
 				{brands.map((brand, index) => (
-					<Link to={`/catalog?brands=${brand}`} className="brands-list-block__item" key={`brands-list-block__item-${index}`}>
+					<Link to={`/catalog?brands=${brand.replace("&", "%26")}`} className="brands-list-block__item" key={`brands-list-block__item-${index}`}>
 						{brand}
 					</Link>
 				))}

@@ -7,7 +7,8 @@ const initialState: ProductsFiltersState = {
 	conditions: [],
 	categories: {},
 	colors: {},
-	selections: {}
+	selections: {},
+	glass_frame: [],
 }
 
 const products_filters = (state = initialState, action: ProductsFiltersTypes) => {
@@ -50,6 +51,13 @@ const products_filters = (state = initialState, action: ProductsFiltersTypes) =>
 		return {
 			...state,
 			selections: action.payload
+		}
+	}
+
+	if (action.type === ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_GLASS_FRAME) {
+		return {
+			...state,
+			glass_frame: action.payload
 		}
 	}
 

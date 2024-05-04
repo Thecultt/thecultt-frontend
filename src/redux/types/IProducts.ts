@@ -21,6 +21,11 @@ export interface ProductsStateFilters {
 	size: { [key: string]: string }
 	selections: { [key: string]: string }
 
+	boutique: boolean
+	price_drop: boolean
+
+	glass_frame: { [key: string]: string }
+
 	sort: string
 }
 
@@ -75,6 +80,9 @@ export enum ProductActionTypes {
 	SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY = "SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY",
 	SET_PRODUCTS_FILTERS_CATALOG_SIZE = "SET_PRODUCTS_FILTERS_CATALOG_SIZE",
 	SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS = "SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS",
+	SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE = "SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE",
+	SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME = "SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME",
+	SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP = "SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP",
 	SET_PRODUCTS_FILTERS_CATALOG_SORT = "SET_PRODUCTS_FILTERS_CATALOG_SORT",
 }
 
@@ -207,9 +215,24 @@ interface setProductsFiltersSelections {
 	payload: string
 }
 
+interface setProductsFiltersBoutique {
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE,
+	payload: boolean
+}
+
+interface setProductsFiltersGlassFrame {
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME,
+	payload: string
+}
+
+interface setProductsFiltersPriceDrop {
+	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP,
+	payload: boolean
+}
+
 interface setProductsFiltersSort {
 	type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT,
 	payload: string
 }
 
-export type ProductTypes = setProductsItems | setProductsItemByArticle | setProductsItemByArticleIsLoaded | setProductsItemsMore | setProductsItemsPage | setProductsIsLoaded | setProductsIsFetchMore | setProductsIsFetchPage | setProductsTypeFetch | setProductsPageCurrentPage | setProductsPageCount | setProductsItemsCount | setProductsFilters | setProductsFiltersSearch | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategories | setProductsFiltersTypes | setProductsFiltersBrands | setProductsFiltersModels | setProductsFiltersColors | setProductsFiltersSex | setProductsFiltersAvailability | setProductsFiltersSize | setProductsFiltersSelections | setProductsFiltersSort
+export type ProductTypes = setProductsItems | setProductsItemByArticle | setProductsItemByArticleIsLoaded | setProductsItemsMore | setProductsItemsPage | setProductsIsLoaded | setProductsIsFetchMore | setProductsIsFetchPage | setProductsTypeFetch | setProductsPageCurrentPage | setProductsPageCount | setProductsItemsCount | setProductsFilters | setProductsFiltersSearch | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategories | setProductsFiltersTypes | setProductsFiltersBrands | setProductsFiltersModels | setProductsFiltersColors | setProductsFiltersSex | setProductsFiltersAvailability | setProductsFiltersSize | setProductsFiltersSelections | setProductsFiltersBoutique | setProductsFiltersGlassFrame | setProductsFiltersPriceDrop | setProductsFiltersSort

@@ -14,6 +14,8 @@ export interface Product {
 	shoe_size: string
 	size: string
 	is_trial: boolean
+	from_boutique: boolean
+	price_drop: boolean
 }
 
 export interface ProductPage {
@@ -32,6 +34,8 @@ export interface ProductPage {
 	color: string
 	subcategory: string
 	is_trial: boolean
+	from_boutique: boolean;
+	// price_drop: boolean;
 
 	nuances: string
 
@@ -56,8 +60,19 @@ export interface ProductPage {
 	lens_type: string
 	frame_type: string
 	glasses_sizes: string
+	glass_frame: string
 	diameter: string
 	scarf_composition: string
 	ring_size: string
 	jewelry_material: string
+
+	reference_number_clock: string
+	case_material_clock: string
+	bracelet_material_clock: string
+	dial_color_clock: string
+	movement_type_clock: string
+	country_of_origin_clock: string
+	waterproof_clock: string
+	branded_box_clock: string
+	documents_clock: string
 }

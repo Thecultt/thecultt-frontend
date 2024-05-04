@@ -4,9 +4,9 @@ import { useSearchParams } from "react-router-dom";
 import { checkDeclension } from "../../../functions/checkDeclension";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
-import { CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from "../../";
+import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from "../../";
 
-const CatalogFiltersTop: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
+const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
 	const { filters, itemsCount } = useTypedSelector(({ products }) => products);
 	const { categories } = useTypedSelector(({ products_filters }) => products_filters);
 
@@ -33,22 +33,32 @@ const CatalogFiltersTop: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFilters
 
 			<div className="catalog-filters-top-title">
 				<p className="catalog-filters-top-title__title">
-					{Object.keys(filters.selections).length ? (
-						"Архив Алены Долецкой"
-					) : (
+					{filters.boutique ? "Из бутика" : (
 						<>
-							{query.get("theme") ? (
-								query.get("theme")
+							{filters.price_drop ? (
+								"THE CULTT SALE"
 							) : (
-								filters.search !== "" ? (
-									filters.search
-								) : (
-									Object.keys(filters.brands).length ? (
-										Object.keys(filters.brands).map((brand, index) => `${brand}${Object.keys(filters.brands).length === index + 1 ? "" : ", "}`)
-									) : Object.keys(filters.categories).length && Object.keys(filters.categories).length !== Object.keys(categories).length ? (
-										Object.keys(filters.categories).map((category, index) => `${category}${Object.keys(filters.categories).length === index + 1 ? "" : ", "}`)
-									) : "Новинки"
-								)
+								<>
+									{Object.keys(filters.selections).length ? (
+										"Архив Алены Долецкой"
+									) : (
+										<>
+											{query.get("theme") ? (
+												query.get("theme")
+											) : (
+												filters.search !== "" ? (
+													filters.search
+												) : (
+													Object.keys(filters.brands).length ? (
+														Object.keys(filters.brands).map((brand, index) => `${brand}${Object.keys(filters.brands).length === index + 1 ? "" : ", "}`)
+													) : Object.keys(filters.categories).length && Object.keys(filters.categories).length !== Object.keys(categories).length ? (
+														Object.keys(filters.categories).map((category, index) => `${category}${Object.keys(filters.categories).length === index + 1 ? "" : ", "}`)
+													) : "Новинки"
+												)
+											)}
+										</>
+									)}
+								</>
 							)}
 						</>
 					)}
@@ -66,9 +76,11 @@ const CatalogFiltersTop: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFilters
 				</p>
 			</div>
 
-			<CatalogFiltersTopSort />
+			<CatalogFiltersTopBoutique />
+
+			<CatalogFiltersTopSort initSortKey="a" />
 		</div>
 	);
-};
+});
 
 export default CatalogFiltersTop;

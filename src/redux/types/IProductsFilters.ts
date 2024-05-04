@@ -8,6 +8,7 @@ export interface ProductsFiltersState {
 	categories: { [key: string]: ProductsFiltersCategory },
 	colors: { [key: string]: string }
 	selections: { [key: string]: string }
+	glass_frame: string[]
 }
 
 export enum ProductsFiltersActionTypes {
@@ -16,7 +17,8 @@ export enum ProductsFiltersActionTypes {
 	SET_PRODUCTS_FILTERS_CONDITIONS = "SET_PRODUCTS_FILTERS_CONDITIONS",
 	SET_PRODUCTS_FILTERS_CATEGORIES = "SET_PRODUCTS_FILTERS_CATEGORIES",
 	SET_PRODUCTS_FILTERS_COLORS = "SET_PRODUCTS_FILTERS_COLORS",
-	SET_PRODUCTS_FILTERS_SELECTIONS = "SET_PRODUCTS_FILTERS_SELECTIONS"
+	SET_PRODUCTS_FILTERS_SELECTIONS = "SET_PRODUCTS_FILTERS_SELECTIONS",
+	SET_PRODUCTS_FILTERS_GLASS_FRAME = "SET_PRODUCTS_FILTERS_GLASS_FRAME"
 }
 
 interface setProductsFiltersIsLoaded {
@@ -49,4 +51,9 @@ interface setProductsFiltersSelections {
 	payload: { [key: string]: string }
 }
 
-export type ProductsFiltersTypes = setProductsFiltersIsLoaded | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategory | setProductsFiltersColors | setProductsFiltersSelections
+interface setProductsFiltersGlassFrame {
+	type: ProductsFiltersActionTypes.SET_PRODUCTS_FILTERS_GLASS_FRAME,
+	payload: string[]
+}
+
+export type ProductsFiltersTypes = setProductsFiltersIsLoaded | setProductsFiltersPrice | setProductsFiltersConditions | setProductsFiltersCategory | setProductsFiltersColors | setProductsFiltersSelections | setProductsFiltersGlassFrame

@@ -279,13 +279,13 @@ const Header: React.FC = () => {
 							</div>
 
 							<nav className="header-menu">
-								<Link to="/catalog" className="header-menu__link">
+								<Link to="/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-menu__link">
 									Новинки
 								</Link>
 
 								{Object.keys(categories).map((key, index) => (
 									<Link
-										to={`/catalog?categories=${key}`}
+										to={`/catalog?categories=${key}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
 										className="header-menu__link"
 										key={`header-menu__link-${index}`}
 										onMouseOver={() => openHoverMenu(categories[key], key)}
@@ -303,6 +303,14 @@ const Header: React.FC = () => {
 
 								<Link to="/auth" className="header-menu__link">
 									Подлинность
+								</Link>
+
+								<a href="/catalog?categories=Сумки&categories=Обувь&categories=Одежда&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-menu__link">
+									Архив Алены Долецкой
+								</a>
+
+								<Link to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-menu__link">
+									<b>THE CULTT SALE</b>
 								</Link>
 							</nav>
 						</div>

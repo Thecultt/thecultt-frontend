@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import axios from "axios";
 
 import $api from "../../http";
 
@@ -56,53 +57,103 @@ export const addCartItem = (item: CartItem) => {
 		}
 	});
 
-	const cart = JSON.parse(localStorage.getItem("cart") as string);
+	// window.mindbox("async", {
+	// 	operation: "Website.SetCart",
+	// 	data: {
+	// 		addProductToList: {
+	// 			product: {
+	// 				ids: {
+	// 					website: item.id
+	// 				}
+	// 			},
+	// 			productGroup: {
+	// 				ids: {
+	// 					website: item.id
+	// 				}
+	// 			},
+	// 			pricePerItem: item.price
+	// 		},
+	// 		customer: {
+	// 			email: `${localStorage.getItem("email")}`
+	// 		}
+	// 	}
+	// });
 
-	if (cart) {
-		window.mindbox("async", {
-			operation: "Website.SetCart",
-			data: {
-				productList: [
-					...Object.keys(cart).map((article: any) => (
-						{
-							product: {
-								ids: {
-									website: `${cart[article].id}`
-								}
-							},
-							count: "1",
-							pricePerItem: `${cart[article].price}`
-						}
-					)),
-					{
-						product: {
-							ids: {
-								website: `${item.id}`
-							}
-						},
-						count: "1",
-						pricePerItem: `${item.price}`
-					}]
-			}
-		});
-	} else {
-		window.mindbox("async", {
-			operation: "Website.SetCart",
-			data: {
-				productList: [
-					{
-						product: {
-							ids: {
-								website: `${item.id}`
-							}
-						},
-						count: "1",
-						pricePerItem: `${item.price}`
+	axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.SetCart&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+		{
+			addProductToList: {
+				product: {
+					ids: {
+						website: item.id
 					}
-				]
+				},
+				// productGroup: {
+				// 	ids: {
+				// 		website: item.id
+				// 	}
+				// },
+				pricePerItem: item.price
+			},
+			customer: {
+				email: `${localStorage.getItem("email")}`
 			}
-		});
-	}
+		},
+		{
+			headers: {
+				'Content-Type': 'application/json; charset=utf-8',
+				'Accept': 'application/json',
+				'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+			}
+		}
+	)
+
+	// const cart = JSON.parse(localStorage.getItem("cart") as string);
+
+	// if (cart) {
+	// 	window.mindbox("async", {
+	// 		operation: "Website.SetCart",
+	// 		data: {
+	// 			productList: [
+	// 				...Object.keys(cart).map((article: any) => (
+	// 					{
+	// 						product: {
+	// 							ids: {
+	// 								website: `${cart[article].id}`
+	// 							}
+	// 						},
+	// 						count: "1",
+	// 						pricePerItem: cart[article].price
+	// 					}
+	// 				)),
+	// 				{
+	// 					product: {
+	// 						ids: {
+	// 							website: `${item.id}`
+	// 						}
+	// 					},
+	// 					count: "1",
+	// 					pricePerItem: item.price
+	// 				}]
+	// 		}
+	// 	});
+	// } else {
+	// 	window.mindbox("async", {
+	// 		operation: "Website.SetCart",
+	// 		data: {
+	// 			productList: [
+	// 				{
+	// 					product: {
+	// 						ids: {
+	// 							website: `${item.id}`
+	// 						}
+	// 					},
+	// 					count: "1",
+	// 					pricePerItem: item.price
+	// 				}
+	// 			]
+	// 		}
+	// 	});
+	// }
 
 	return {
 		type: CartActionTypes.ADD_CART_ITEMS,
@@ -137,6 +188,58 @@ export const removeCartItem = (id: string, item: CartItem) => {
 			}]
 		}
 	});
+
+	axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ClearCart&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+		{
+			customer: {
+				email: `${localStorage.getItem("email")}`
+			},
+			removeProductFromList: {
+				product: {
+					ids: {
+						website: item.id
+					}
+				},
+				// productGroup: {
+				// 	ids: {
+				// 		website: item.id
+				// 	}
+				// },
+				pricePerItem: item.price
+			},
+			executionDateTimeUtc: new Date()
+		},
+		{
+			headers: {
+				'Content-Type': 'application/json; charset=utf-8',
+				'Accept': 'application/json',
+				'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+			}
+		}
+	)
+
+	// window.mindbox("async", {
+	// 	operation: "Website.ClearCart",
+	// 	data: {
+	// 		customer: {
+	// 			email: `${localStorage.getItem("email")}`
+	// 		},
+	// 		removeProductFromList: {
+	// 			product: {
+	// 				ids: {
+	// 					website: item.id
+	// 				}
+	// 			},
+	// 			productGroup: {
+	// 				ids: {
+	// 					website: item.id
+	// 				}
+	// 			},
+	// 			pricePerItem: item.price
+	// 		},
+	// 		executionDateTimeUtc: new Date()
+	// 	}
+	// });
 
 	return {
 		type: CartActionTypes.REMOVE_CART_ITEMS,

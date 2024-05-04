@@ -7,9 +7,10 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector"
 
 interface OrderProductsPromocodeProps {
 	disabled?: boolean;
+	totalPrice: number;
 }
 
-const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disabled }) => {
+const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disabled, totalPrice }) => {
 	const dispatch = useDispatch()
 
 	const { promocode: { isActive, isError, isSend, errorMessage } } = useTypedSelector(({ order }) => order)
@@ -17,7 +18,7 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
 	const [currentPromocode, setCurrentPromocode] = React.useState<string>("")
 
 	const sendApplyPromocode = () => {
-		dispatch(sendOrderApplyPromocode(currentPromocode) as any)
+		dispatch(sendOrderApplyPromocode(currentPromocode, totalPrice) as any)
 	}
 
 	return (

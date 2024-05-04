@@ -21,6 +21,8 @@ const initialState: ProductsState = {
 		subcategory: "",
 		is_trial: false,
 
+		from_boutique: false,
+
 		nuances: "",
 
 		external_material: "",
@@ -44,10 +46,21 @@ const initialState: ProductsState = {
 		lens_type: "",
 		frame_type: "",
 		glasses_sizes: "",
+		glass_frame: "",
 		diameter: "",
 		scarf_composition: "",
 		ring_size: "",
 		jewelry_material: "",
+
+		reference_number_clock: "",
+		case_material_clock: "",
+		bracelet_material_clock: "",
+		dial_color_clock: "",
+		movement_type_clock: "",
+		country_of_origin_clock: "",
+		waterproof_clock: "",
+		branded_box_clock: "",
+		documents_clock: "",
 	},
 	itemByArticleSimilar: [],
 	itemByArticleIsLoaded: false,
@@ -79,6 +92,11 @@ const initialState: ProductsState = {
 		availability: {},
 		size: {},
 		selections: {},
+
+		boutique: false,
+		price_drop: false,
+
+		glass_frame: {},
 
 		sort: "a"
 	}
@@ -350,7 +368,7 @@ const products = (state = initialState, action: ProductTypes) => {
 	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY) {
 		if (state.filters.availability[action.payload]) {
 			delete state.filters.availability[action.payload];
-			
+
 			return {
 				...state,
 			};
@@ -416,6 +434,49 @@ const products = (state = initialState, action: ProductTypes) => {
 				},
 			},
 		};
+	}
+
+	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME) {
+		if (state.filters.glass_frame[action.payload]) {
+			delete state.filters.glass_frame[action.payload];
+
+			return {
+				...state,
+			};
+		}
+
+		return {
+			...state,
+			filters: {
+				...state.filters,
+				glass_frame: {
+					...state.filters.glass_frame,
+					[action.payload]: action.payload,
+				},
+			},
+		};
+	}
+
+	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE) {
+		return {
+			...state,
+			filters: {
+				...state.filters,
+				boutique: action.payload,
+				conditions: {}
+			},
+		}
+	}
+
+	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP) {
+		return {
+			...state,
+			filters: {
+				...state.filters,
+				price_drop: action.payload,
+				boutique: false
+			},
+		}
 	}
 
 	if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT) {

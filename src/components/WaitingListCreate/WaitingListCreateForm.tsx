@@ -364,7 +364,6 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 	);
 };
 
-
 export default reduxForm<{}, {}>({
 	form: "waiting-list-form",
 	validate,

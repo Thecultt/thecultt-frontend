@@ -81,7 +81,7 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 	React.useEffect(() => {
 		if (isLoaded) {
-			initialize({ name: `${user.middlename ? `${user.middlename} ` : ""}${user.name ? `${user.name} ` : ""}${user.lastname ? `${user.lastname} ` : ""}`, phone: user.phone })
+			initialize({ name: `${user.lastname ? `${user.lastname} ` : ""}${user.name ? `${user.name} ` : ""}${user.middlename ? `${user.middlename} ` : ""}`, phone: user.phone })
 		}
 	}, [isLoaded])
 

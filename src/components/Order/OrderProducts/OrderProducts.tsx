@@ -288,11 +288,11 @@ const OrderProducts: React.FC = () => {
 					{
 						"customer": {
 							"ids": {
-								"websiteID": `${user.id}`
+								"websiteID": `${user.user_id}`
 							},
 							"discountCard": {
 								"ids": {
-									"number": "<Номер дисконтной карты>"
+									"number": ""
 								}
 							},
 							// "birthDate": "<Дата рождения>",
@@ -355,8 +355,8 @@ const OrderProducts: React.FC = () => {
 									"quantity": "1",
 									"quantityType": "int",
 									"discountedPricePerLine": `${totalPrice}`,
-									"lineId": `${orderId}`,
 									// "lineNumber": "<Порядковый номер позиции заказа>",
+									"lineId": `${product.id}`,
 									"discounts": promocode.isActive ? [
 										{
 											"type": "Промокод",
@@ -484,7 +484,7 @@ const OrderProducts: React.FC = () => {
 				))}
 			</div>
 
-			<OrderProductsPromocode disabled={paymentValue === "Рассрочка от Тинькофф" || paymentValue === "Кредит" || paymentValue === "Яндекс Сплит"} />
+			<OrderProductsPromocode disabled={paymentValue === "Рассрочка от Тинькофф" || paymentValue === "Кредит" || paymentValue === "Яндекс Сплит"} totalPrice={totalPrice + currentDelivery.price} />
 
 			<div className="order-products-total">
 				<div className="order-products-total-item">
@@ -587,10 +587,7 @@ const OrderProducts: React.FC = () => {
 				</div>
 
 				<p className="order-products__description">
-					Нажимая кнопку, вы принимаете условия{" "}
-					<a href="https://drive.google.com/file/d/143bXR-O4Ip2VKss6aHcPXNTr1hBWrFjN/view">пользовательского соглашения</a>
-					{" "}и{" "}
-					<a href="https://storage.yandexcloud.net/the-cultt-docs/Офферта /Оферта для покупателя 210324.pdf ">публичной оферты</a>.
+					Нажимая кнопку, вы принимаете условия {" "}<a href="https://storage.yandexcloud.net/the-cultt-docs/03.05.2024/Положение_об_обработке_персональных_данных_с_Ботом.pdf">обработки персональных данных</a> и <a href="https://www.thecultt.com/help/thecultt">условия продажи</a>.
 				</p>
 
 				<button

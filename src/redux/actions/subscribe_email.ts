@@ -10,11 +10,9 @@ export const sendSubscribeEmail = (data: { email: string, type: string }) => {
 			payload: true
 		})
 
-
-
 		try {
 			if (localStorage.getItem("mindboxDeviceUUID")) {
-				await axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportirovanieKlienta&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+				await axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeZaGuide&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
 					{
 						"customer": {
 							// "discountCard": {

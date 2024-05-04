@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Slider from "react-slick";
 
+import $api from '../../http';
+
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 
 import {
@@ -62,7 +64,8 @@ import AboutImage6 from '../../assets/images/doletskaya/about-image6.jpg'
 const ProductSection: React.FC = () => {
 	const dispatch = useDispatch();
 
-	const { items, itemByArticleSimilar } = useTypedSelector(({ products }) => products)
+	const [items, setItems] = React.useState<Product[]>([])
+
 	const cartItems = useTypedSelector(({ cart }) => cart.items);
 	const favoritesItems = useTypedSelector(({ favorites }) => favorites.items);
 
@@ -84,6 +87,12 @@ const ProductSection: React.FC = () => {
 			}
 		}]
 	};
+
+	React.useEffect(() => {
+		$api.get<{ items: Product[] }>(`/catalog/?category=Сумки&category=Аксессуары&category=Обувь&category=Одежда&availability=1&availability=-1&selections=1`).then(({ data }) => {
+			setItems(data.items)
+		})
+	}, [])
 
 	const onClickPrev = () => {
 		SliderRef.current.slickPrev()
@@ -137,102 +146,68 @@ const ProductSection: React.FC = () => {
 	}
 
 	return (
-		<>
-			<div className="container">
-				<div className="catalog-product-section">
-					<Link to="/catalog" className="catalog-product-section__title">
-						Архив Алёны Долецкой
-					</Link>
+		<div className="container">
+			<div className="catalog-product-section">
+				<Link to="/catalog" className="catalog-product-section__title">
+					Архив Алёны Долецкой
+				</Link>
 
-					<div className="catalog-product-section-slider-wrapper">
-						<button className="catalog-product-section-slider-arrow prev" onClick={onClickPrev}>
-							<svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<rect y="0.476562" width="40" height="40" rx="20" fill="white" />
-								<path d="M24 12.4766L16 20.4766L24 28.4766" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
-							</svg>
-						</button>
+				<div className="catalog-product-section-slider-wrapper">
+					<button className="catalog-product-section-slider-arrow prev" onClick={onClickPrev}>
+						<svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<rect y="0.476562" width="40" height="40" rx="20" fill="white" />
+							<path d="M24 12.4766L16 20.4766L24 28.4766" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+					</button>
 
-						<Slider {...settings} className='catalog-product-section-slider' ref={SliderRef}>
-							{itemByArticleSimilar.length ? (
-								itemByArticleSimilar.map((item, index) => (
-									item.availability && !item.is_trial && item.images.length && item.price ? (
-										<ProductBlock
-											addClass="catalog-product-block"
-											key={`catalog-product-block-${index}`}
-											addCart={() =>
-												addCart({
-													id: item.id,
-													checked: true,
-													article: item.article,
-													manufacturer: item.manufacturer,
-													category: item.category,
-													subcategory: item.subcategory,
-													name: item.name,
-													image: item.images[0],
-													price: item.price,
-													availability: item.availability,
-													is_trial: item.is_trial
-												})
-											}
-											onClickProduct={() => onClickProduct(item, index)}
-											isCart={cartItems[item.article] ? true : false}
-											addFavorite={() => addFavorite(item)}
-											removeFavorite={() => removeFavorite(item)}
-											isFavorite={favoritesItems[item.id] ? true : false}
-											{...item}
-										/>
-									) : null
-								))
-							) : (
-								items.map((item, index) => (
-									item.availability && !item.is_trial && item.images.length && item.price ? (
-										<ProductBlock
-											addClass="catalog-product-block"
-											key={`catalog-product-block-${index}`}
-											addCart={() =>
-												addCart({
-													id: item.id,
-													checked: true,
-													article: item.article,
-													manufacturer: item.manufacturer,
-													category: item.category,
-													subcategory: item.subcategory,
-													name: item.name,
-													image: item.images[0],
-													price: item.price,
-													availability: item.availability,
-													is_trial: item.is_trial
-												})
-											}
-											onClickProduct={() => onClickProduct(item, index)}
-											isCart={cartItems[item.article] ? true : false}
-											addFavorite={() => addFavorite(item)}
-											removeFavorite={() => removeFavorite(item)}
-											isFavorite={favoritesItems[item.id] ? true : false}
-											{...item}
-										/>
-									) : null
-								))
-							)}
-						</Slider>
+					<Slider {...settings} className='catalog-product-section-slider' ref={SliderRef}>
+						{items.map((item, index) => (
+							item.availability && !item.is_trial && item.images.length && item.price ? (
+								<ProductBlock
+									addClass="catalog-product-block"
+									key={`catalog-product-block-${index}`}
+									addCart={() =>
+										addCart({
+											id: item.id,
+											checked: true,
+											article: item.article,
+											manufacturer: item.manufacturer,
+											category: item.category,
+											subcategory: item.subcategory,
+											name: item.name,
+											image: item.images[0],
+											price: item.price,
+											availability: item.availability,
+											is_trial: item.is_trial
+										})
+									}
+									onClickProduct={() => onClickProduct(item, index)}
+									isCart={cartItems[item.article] ? true : false}
+									addFavorite={() => addFavorite(item)}
+									removeFavorite={() => removeFavorite(item)}
+									isFavorite={favoritesItems[item.id] ? true : false}
+									{...item}
+								/>
+							) : null
+						))}
+					</Slider>
 
-						<button className="catalog-product-section-slider-arrow next" onClick={onClickNext}>
-							<svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<rect y="0.476562" width="40" height="40" rx="20" fill="white" />
-								<path d="M16 28.4766L24 20.4766L16 12.4766" fill="white" />
-								<path d="M16 28.4766L24 20.4766L16 12.4766" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
-							</svg>
-						</button>
-					</div>
+					<button className="catalog-product-section-slider-arrow next" onClick={onClickNext}>
+						<svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<rect y="0.476562" width="40" height="40" rx="20" fill="white" />
+							<path d="M16 28.4766L24 20.4766L16 12.4766" fill="white" />
+							<path d="M16 28.4766L24 20.4766L16 12.4766" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
+						</svg>
+					</button>
+				</div>
 
-					<div className="alyona-doletskaya-slider-btn">
-						<Link to="" className="btn alyona-doletskaya-slider-btn__btn">
-							Смотреть весь архив
-						</Link>
-					</div>
+				<div className="alyona-doletskaya-slider-btn">
+					<a href="/catalog?categories=Сумки&categories=Обувь&categories=Одежда&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya" className="btn alyona-doletskaya-slider-btn__btn">
+						Смотреть весь архив
+					</a>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 
@@ -260,31 +235,27 @@ const AlyonaDoletskaya: React.FC = () => {
 		<>
 			<section className='alyona-doletskaya-main'>
 				<picture>
-					<source srcSet={MainBannerMedia} media="(max-width: 1450px)" />
+					<source srcSet={MainBannerMedia} media="(max-width: 1400px)" />
 					<img src={MainBanner} alt="" className="alyona-doletskaya-main__image" />
 				</picture>
 
 				<div className="alyona-doletskaya-main-text">
 					<p className="alyona-doletskaya-main-text__description">
-						Алёна Долецкая, публицист, креативный консультант и журналист, а в прошлом первый главный редактор журнала VOGUE RUSSIA и Andy Warhol’s INTERVIEW , выбрала знаковые позиции из своих модных архивов и передала их THE CULTT. Это лоты одежды, обуви и аксессуаров. Многие из них — легендарные, у каждого богатая биография, которую теперь дополните вы.
+						Алёна Долецкая, публицист, креативный консультант и&nbsp;журналист, а&nbsp;в&nbsp;прошлом первый главный редактор журнала VOGUE RUSSIA и&nbsp;Andy Warhol&rsquo;s INTERVIEW , выбрала знаковые позиции из&nbsp;своих модных архивов и&nbsp;передала их&nbsp;THE CULTT. Это лоты одежды, обуви и&nbsp;аксессуаров. Многие из&nbsp;них&nbsp;&mdash; легендарные, у&nbsp;каждого богатая биография, которую теперь дополните&nbsp;вы.
 					</p>
 
 					<p className="alyona-doletskaya-main-text__description medium">
-						«Я всегда любила, люблю и буду любить винтажные вещи.
-						<br />
-						Качество дизайна и материала у них часто лучше, чем у новых.
-						<br />
-						И что особенно важно: вы всегда будете одна такая, уникальная».
+						&laquo;Я&nbsp;всегда любила, люблю и&nbsp;буду любить винтажные вещи. Качество дизайна и&nbsp;материала у&nbsp;них часто лучше, чем у&nbsp;новых. И&nbsp;что особенно важно: вы&nbsp;всегда будете одна такая, уникальная&raquo;.
 					</p>
 
-					<a href="" className="btn alyona-doletskaya-main-text__btn">
+					<a target='_blank' href="/catalog?categories=Сумки&categories=Обувь&categories=Одежда&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya" className="btn alyona-doletskaya-main-text__btn">
 						Смотреть весь архив
 					</a>
 				</div>
 
 				<div className="alyona-doletskaya-main-charity">
 					<h3 className="alyona-doletskaya-main-charity__title">
-						Часть средств от продажи будет переведена
+						Часть средств от продажи будет направлена
 						<br /> в благотворительный фонд «Вера»
 					</h3>
 
@@ -292,15 +263,15 @@ const AlyonaDoletskaya: React.FC = () => {
 						<img src={CharityLogo} alt="" className="alyona-doletskaya-main-charity-logo__image" />
 
 						<p className="alyona-doletskaya-main-charity-logo__text">
-							Благотворительный фонд помощи хосписам «Вера» c 2006 года поддерживает неизлечимо больных людей и их близких, создавая примеры хосписов, в которых не страшно. Фонд «Вера» работает для того, чтобы у каждого была жизнь — на всю оставшуюся жизнь.
+							Благотворительный фонд помощи хосписам &laquo;Вера&raquo; c&nbsp;2006 года поддерживает неизлечимо больных людей и&nbsp;их&nbsp;близких, создавая примеры хосписов, в&nbsp;которых не&nbsp;страшно. Фонд &laquo;Вера&raquo; работает для того, чтобы у&nbsp;каждого была жизнь&nbsp;&mdash; на&nbsp;всю оставшуюся жизнь.
 						</p>
 					</div>
 				</div>
 			</section>
 
-			<section className='alyona-doletskaya-lot1'>
+			<a target='_blank' href="https://thecultt.com/product/SP225894513?utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya" className='alyona-doletskaya-lot1'>
 				<picture>
-					<source srcSet={Lot1Media} media="(max-width: 1450px)" />
+					<source srcSet={Lot1Media} media="(max-width: 1400px)" />
 					<img src={Lot1} alt="" className="alyona-doletskaya-lot1__image" />
 				</picture>
 
@@ -320,15 +291,15 @@ const AlyonaDoletskaya: React.FC = () => {
 						</p>
 
 						<p className="alyona-doletskaya-lot-text__description">
-							Это платье Louis Vuitton, созданное Николя Жескьером. Оно феноменального качества, и в нем мне нравится сочетание трех фактур: очень крупные черные матовые стразы,  плотный креп, который комплиментарен фигуре абсолютно любого человека, и удивительно нежный, в сборку, шифоновый топ с бретелями цвета топленого молока. Платье само по себе — произведение очень  талантливого дизайна, но у него есть и добавленная стоимость: оно видело вручение приза журнала Vogue за лучшее стилевое решение фильма на московском кинофестивале и страшно понравилось нашей гостье по имени Мерил Стрип.
+							Это платье Louis Vuitton, созданное Николя Жескьером. Оно феноменального качества, и&nbsp;в&nbsp;нем мне нравится сочетание трех фактур: очень крупные черные матовые стразы, плотный креп, который комплиментарен фигуре абсолютно любого человека, и&nbsp;удивительно нежный, в&nbsp;сборку, шифоновый топ с&nbsp;бретелями цвета топленого молока. Платье само по&nbsp;себе&nbsp;&mdash; произведение очень талантливого дизайна, но&nbsp;у&nbsp;него есть и&nbsp;добавленная стоимость: оно видело вручение приза журнала Vogue за&nbsp;лучшее стилевое решение фильма на&nbsp;московском кинофестивале и&nbsp;страшно понравилось нашей гостье по&nbsp;имени Мерил Стрип.
 						</p>
 					</div>
 				</div>
-			</section>
+			</a>
 
-			<section className='alyona-doletskaya-lot2'>
+			<a className='alyona-doletskaya-lot2' target='_blank' href="https://thecultt.com/product/SP6425906827?utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya">
 				<picture>
-					<source srcSet={Lot2Media} media="(max-width: 1450px)" />
+					<source srcSet={Lot2Media} media="(max-width: 1400px)" />
 					<img src={Lot2} alt="" className="alyona-doletskaya-lot2__image" />
 				</picture>
 
@@ -348,12 +319,12 @@ const AlyonaDoletskaya: React.FC = () => {
 						</p>
 
 						<p className="alyona-doletskaya-lot-text__description">
-							Это юбка Céline с аксаном на букве è, что говорит о том, что она была выполнена по дизайну моего любимого дизайнера Фиби Фило. Я увидела эту юбку в ее бутике в Париже и влюбилась с первого взгляда. Я понятия не имела, пойдет она мне или нет. Я поняла, что это идеальная юбка, которая, казалось бы, очень лаконична, но на самом деле невероятно дорогая с точки зрения того, как выглядит, как построена, как придумана. При том, что вы не увидите на ней ни одного шва, она хитро и умно скроена.
-							Ремешок из настоящего питона цвета бургунди особенно элегантен.
+							Это юбка C&eacute;line с&nbsp;аксаном на&nbsp;букве&nbsp;&egrave;, что говорит о&nbsp;том, что она
+							была выполнена по&nbsp;дизайну моего любимого дизайнера Фиби Фило. Я&nbsp;увидела эту юбку в&nbsp;ее&nbsp;бутике в&nbsp;Париже и&nbsp;влюбилась с&nbsp;первого взгляда, но&nbsp;понятия не&nbsp;имела, пойдет она мне или нет. Это идеальная юбка, которая, казалось&nbsp;бы, очень лаконична, но&nbsp;на&nbsp;самом деле невероятно дорогая с&nbsp;точки зрения того, как выглядит, как построена, как придумана. При том, что вы&nbsp;не&nbsp;увидите на&nbsp;ней ни&nbsp;одного шва, она хитро и&nbsp;умно скроена. Ремешок из&nbsp;настоящего питона цвета бургунди особенно элегантен.
 						</p>
 					</div>
 				</div>
-			</section>
+			</a>
 
 			<section className='alyona-doletskaya-lot2-more'>
 				<img src={Lot2MoreImages} alt="" className="alyona-doletskaya-lot2-more__image" />
@@ -361,14 +332,14 @@ const AlyonaDoletskaya: React.FC = () => {
 
 			<section className='alyona-doletskaya-deco1'>
 				<picture>
-					<source srcSet={Deco1ImagesMedia} media="(max-width: 1450px)" />
+					<source srcSet={Deco1ImagesMedia} media="(max-width: 1400px)" />
 					<img src={Deco1Images} alt="" className="alyona-doletskaya-deco1__image" />
 				</picture>
 			</section>
 
-			<section className='alyona-doletskaya-lot3'>
+			<a className='alyona-doletskaya-lot3' target='_blank' href="https://thecultt.com/product/SP2325899513?utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya">
 				<picture>
-					<source srcSet={Lot3Media} media="(max-width: 1450px)" />
+					<source srcSet={Lot3Media} media="(max-width: 1400px)" />
 					<img src={Lot3} alt="" className="alyona-doletskaya-lot3__image" />
 				</picture>
 
@@ -388,15 +359,15 @@ const AlyonaDoletskaya: React.FC = () => {
 						</p>
 
 						<p className="alyona-doletskaya-lot-text__description">
-							Чего только эта сумка Диор не видела внутри себя и кого только не встречала «лицом». Ей повезло, потому что в период редактирования глянца мне приходилось не только свое личное, но и пару номеров журнала (в 400-500 страниц) туда уложить. Лондон–Милан–Париж ликовали от этой блондинки красавицы.
+							Чего только эта сумка Диор не&nbsp;видела внутри себя и&nbsp;кого только не&nbsp;встречала &laquo;лицом&raquo;. Ей&nbsp;повезло, потому что в&nbsp;период редактирования глянца мне приходилось не&nbsp;только свое личное, но&nbsp;и&nbsp;пару номеров журнала (в&nbsp;400-500&nbsp;страниц) туда уложить. Лондон&mdash;Милан&mdash;Париж ликовали от&nbsp;этой блондинки красавицы.
 						</p>
 					</div>
 				</div>
-			</section>
+			</a>
 
 			<section className='alyona-doletskaya-lot3-more'>
 				<picture>
-					<source srcSet={Lot3MoreImagesMedia} media="(max-width: 1450px)" />
+					<source srcSet={Lot3MoreImagesMedia} media="(max-width: 1400px)" />
 					<img src={Lot3MoreImages} alt="" className="alyona-doletskaya-lot3-more__image" />
 				</picture>
 			</section>
@@ -405,14 +376,14 @@ const AlyonaDoletskaya: React.FC = () => {
 
 			<section className='alyona-doletskaya-deco2'>
 				<picture>
-					<source srcSet={Deco2ImagesMedia} media="(max-width: 1450px)" />
+					<source srcSet={Deco2ImagesMedia} media="(max-width: 1400px)" />
 					<img src={Deco2Images} alt="" className="alyona-doletskaya-deco2__image" />
 				</picture>
 			</section>
 
-			<section className='alyona-doletskaya-lot4'>
+			<a className='alyona-doletskaya-lot4' target='_blank' href="https://thecultt.com/product/SP3025899781?utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya">
 				<picture>
-					<source srcSet={Lot4Media} media="(max-width: 1450px)" />
+					<source srcSet={Lot4Media} media="(max-width: 1400px)" />
 					<img src={Lot4} alt="" className="alyona-doletskaya-lot4__image" />
 				</picture>
 
@@ -432,15 +403,15 @@ const AlyonaDoletskaya: React.FC = () => {
 						</p>
 
 						<p className="alyona-doletskaya-lot-text__description">
-							Признаюсь честно: оно мне досталось, как говорится, по дружбе и по симпатии. Я пришла на отсмотр коллекции, которые делают для редакторов после всех показов в шоуруме у дизайнера. Я увидела пальто и спросила Джамбаттиста, почему его не было на показе? Он сказал: «Как же не было, оно было, но в таком стайлинге, что его было довольно трудно определить». Я его шутливо примерила, а Джамбаттиста вдруг говорит: «На тебе оно лучше, чем на показе, просто забирай». Так и произошло. Пальто это я люблю за его способность быть  элегантным платьем, когда оно надето на голое тело. Но оно не менее интересно, современно и, при хорошем стайлинге, даже хулигански может смотреться в многослойности. Учитесь, смотрите, надевайте, покупайте.
+							Признаюсь честно: оно мне досталось, как говорится, по&nbsp;дружбе и&nbsp;по&nbsp;симпатии. Я&nbsp;пришла на&nbsp;отсмотр коллекции, которые делают для редакторов после всех показов в&nbsp;шоуруме у&nbsp;дизайнера. Я&nbsp;увидела пальто и&nbsp;спросила Джамбаттиста, почему его не&nbsp;было на&nbsp;показе? Он&nbsp;сказал: &laquo;Как&nbsp;же не&nbsp;было, оно было, но&nbsp;в&nbsp;таком стайлинге, что его было довольно трудно определить&raquo;. Я&nbsp;его шутливо примерила, а&nbsp;Джамбаттиста вдруг говорит: &laquo;На&nbsp;тебе оно лучше, чем на&nbsp;показе, просто забирай&raquo;. Так и&nbsp;произошло. Пальто это я&nbsp;люблю за&nbsp;его способность быть элегантным платьем, когда оно надето на&nbsp;голое тело. Но&nbsp;оно не&nbsp;менее интересно, современно&nbsp;и, при хорошем стайлинге, даже хулигански может смотреться в&nbsp;многослойности. Учитесь, смотрите, надевайте, покупайте.
 						</p>
 					</div>
 				</div>
-			</section>
+			</a>
 
-			<section className='alyona-doletskaya-lot5'>
+			<a className='alyona-doletskaya-lot5' target='_blank' href="https://thecultt.com/product/SP5125902493?utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya">
 				<picture>
-					<source srcSet={Lot5Media} media="(max-width: 1450px)" />
+					<source srcSet={Lot5Media} media="(max-width: 1400px)" />
 					<img src={Lot5} alt="" className="alyona-doletskaya-lot5__image" />
 				</picture>
 
@@ -460,19 +431,19 @@ const AlyonaDoletskaya: React.FC = () => {
 						</p>
 
 						<p className="alyona-doletskaya-lot-text__description">
-							Наверное, одна из самых дорогих моему сердцу вещей. Мы праздновали 10-летие русского Vogue в Милане вместе со всеми коллегами по издательскому цеху. Я понимала, кто  будет присутствовать на этом вечере, и выбрать платье было довольно непросто. Невероятно мне повезло, потому что это темно-синее платье, во-первых, очень комплиментарно. Оно делает женщину красивой, женственной и нарядной. В нем мне больше слышится Джанни, чем Донателла. Но  в этом платье важнее всего то, что оно настоящий  праздник в мире моды.  Оно встретилось с лучшими  дизайнерами и редакторами  своего времени
+							Наверное, одна из&nbsp;самых дорогих моему сердцу вещей. Мы&nbsp;праздновали 10-летие русского Vogue в&nbsp;Милане вместе со&nbsp;всеми коллегами по&nbsp;издательскому цеху. Я&nbsp;понимала, кто будет присутствовать на&nbsp;этом вечере, и&nbsp;выбрать платье было довольно непросто. Невероятно мне повезло, потому что это темно-синее платье, во-первых, очень комплиментарно. Оно делает женщину красивой, женственной и&nbsp;нарядной. В&nbsp;нем мне больше слышится Джанни, чем Донателла. Но&nbsp;в&nbsp;этом платье важнее всего&nbsp;то, что оно настоящий праздник в&nbsp;мире моды. Оно встретилось с&nbsp;лучшими дизайнерами и&nbsp;редакторами своего времени
 						</p>
 					</div>
 				</div>
-			</section>
+			</a>
 
 			<section className='alyona-doletskaya-deco3'>
 				<img src={Deco3Images} alt="" className="alyona-doletskaya-deco3__image" />
 			</section>
 
-			<section className='alyona-doletskaya-lot6'>
+			<a className='alyona-doletskaya-lot6' target='_blank' href="https://thecultt.com/product/SP325894523?utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya">
 				<picture className="alyona-doletskaya-lot6__image">
-					<source srcSet={Lot6Media} media="(max-width: 1450px)" />
+					<source srcSet={Lot6Media} media="(max-width: 1400px)" />
 					<img src={Lot6} alt="" />
 				</picture>
 
@@ -492,11 +463,11 @@ const AlyonaDoletskaya: React.FC = () => {
 						</p>
 
 						<p className="alyona-doletskaya-lot-text__description">
-							Да, возможно, сейчас не самый яркий бум кружева, но кружево возвращается в моду, как солнце восходит на востоке и заходит на западе. Эта юбка вне времени, как мне кажется. Она была выполнена Миуччей Прада, когда кружева заказывались на Сицилии. Ощутить это можно только пощупав ее руками. Кружева плотные, но удивительно эластичные. Особенно я люблю ее подбой, нижнюю юбочку цвета обнаженного тела. Приятно, что когда я поднималась на какую-то встречу в этой юбке и в простой черной кашемировой водолазке, навстречу шла Анна Винтур, главный редактор американского Vogue. Она оценивающе  посмотрела на меня ровно так, как героиня  Мерил Стрип осматривает Энн Хэтэуэй — от шеи до пола. По взгляду оценка была 5, как говорили в школе — «на отлично».
+							Да, возможно, сейчас не&nbsp;самый яркий бум кружева, но&nbsp;кружево возвращается в&nbsp;моду, как солнце восходит на&nbsp;востоке и&nbsp;заходит на&nbsp;западе. Эта юбка вне времени, как мне кажется. Она была выполнена Миуччей Прада, когда кружева заказывались на&nbsp;Сицилии. Ощутить это можно только пощупав ее&nbsp;руками. Кружева плотные, но&nbsp;удивительно эластичные. Особенно я&nbsp;люблю ее&nbsp;подбой, нижнюю юбочку цвета обнаженного тела. Приятно, что когда я&nbsp;поднималась на&nbsp;какую-то встречу в&nbsp;этой юбке и&nbsp;в&nbsp;простой черной кашемировой водолазке, навстречу шла Анна Винтур, главный редактор американского Vogue. Она оценивающе посмотрела на&nbsp;меня ровно так, как героиня Мерил Стрип осматривает Энн Хэтэуэй&nbsp;&mdash; от&nbsp;шеи до&nbsp;пола. По&nbsp;взгляду оценка была&nbsp;5, как говорили в&nbsp;школе&nbsp;&mdash; &laquo;на&nbsp;отлично&raquo;.
 						</p>
 					</div>
 				</div>
-			</section>
+			</a>
 
 			<ProductSection />
 

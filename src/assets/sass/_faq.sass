@@ -15,7 +15,7 @@
 		margin-bottom: 40px
 
 		+backgroundSetting
-		
+
 		&__title
 			color: $white
 			font-size: 26px
@@ -24,11 +24,14 @@
 				font-weight: 600
 
 	&-menu
+		display: flex
+		overflow-y: auto
 		margin-bottom: 40px
 
 		&__link
 			margin-right: 25px
 			font-size: 18px
+			white-space: nowrap
 
 			+transition
 
@@ -60,7 +63,14 @@
 				margin-right: 80px
 
 				&:last-child
+					margin-left: 75px
 					margin-right: 0
+
+				&__title
+					font-size: 26px
+					font-weight: 400
+
+					margin-bottom: 25px
 
 				&__link
 					display: block
@@ -294,6 +304,13 @@
 					flex-direction: column
 
 				&-col
+					&:last-child
+						margin-top: 25px
+						margin-left: 0
+
+					&__title
+						font-size: 17px
+
 					&__link
 						font-size: 14px
 
@@ -311,3 +328,10 @@
 
 				&__description
 					width: 100%
+
+@media screen and (max-width: 500px)
+	.faq
+		&-main
+			&-banner
+				&__title
+					font-size: 17px

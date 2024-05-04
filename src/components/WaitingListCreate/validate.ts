@@ -24,11 +24,7 @@ export const validate = (values: validateValues) => {
 
 	if (!values.email) {
 		errors.email = "Поле не может быть пустым";
-	} else if (
-		!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-	) {
-		errors.email = "Неверная почта";
-	} else if (values.email.length > defaultMax) {
+	}else if (values.email.length > defaultMax) {
 		errors.email = `Не более ${defaultMax} символов`;
 	} else if (values.email.length < defaultMin) {
 		errors.email = `Не менее ${defaultMin} символов`;

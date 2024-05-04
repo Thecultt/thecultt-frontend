@@ -13,14 +13,20 @@ interface orderPayParams {
 
 const orderPay = ({ type, orderId, totalPrice, deliveryPrice, products, orderNum, onSuccessCallback }: orderPayParams) => {
 	if (type === "Кредит" || type === "Рассрочка от Тинькофф") {
-		tinkoff.create({
+		const data: any = {
 			shopId: process.env.REACT_APP_TINKOFF_SHOP_ID as string,
 			showcaseId: process.env.REACT_APP_TINKOFF_SHOW_CASE_ID as string,
 			orderNumber: String(orderId),
 			items: [...products.map((product) => ({ name: product.name, price: product.price, quantity: 1 })), { name: "Доставка", price: deliveryPrice, quantity: 1 }],
 			sum: totalPrice,
 			successURL: `https://thecultt.com/order/${orderId}`
-		}, { view: "self" });
+		}
+
+		if (type === "Рассрочка от Тинькофф") {
+			data.promoCode = "installment_0_0_3_3,87"
+		}
+
+		tinkoff.create(data, { view: "self" });
 
 		// tinkoff.methods.on(tinkoff.constants.MODAL_CLOSED, () => {
 		// 	window.location.href = `/order/${orderId}`

@@ -22,7 +22,7 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
 					}
 				},
 				count: 1,
-				pricePerItem: `${product.price}`
+				pricePerItem: product.price
 			}))
 		}
 	});
@@ -80,7 +80,7 @@ export const sendRemoveFavorite = (item: Product) => async (dispatch: Dispatch<F
 								"website": `${item.id}`
 							}
 						},
-						"pricePerItem": `${item.price}`
+						"pricePerItem": item.price
 					}
 				},
 				{

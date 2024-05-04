@@ -6,27 +6,27 @@ import VisitImage from "../../assets/images/visit.jpg";
 const Visit: React.FC = () => {
 	return (
 		<section className="visit">
-			<div className="container">
-				<div className="visit-wrapper">
-					<a href="/" className="visit-back__btn">
-						<svg
-							width="8"
-							height="15"
-							viewBox="0 0 8 15"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M7 1.5L1 7.5L7 13.5"
-								stroke="#202020"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
-						Вернуться
-					</a>
+			<a href="/" className="visit-back__btn">
+				<svg
+					width="8"
+					height="15"
+					viewBox="0 0 8 15"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M7 1.5L1 7.5L7 13.5"
+						stroke="#202020"
+						strokeWidth="2"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					/>
+				</svg>
+				Вернуться
+			</a>
 
+			<div className="visit-main-wrapper">
+				<div className="container">
 					<div className="visit-main hover-scale">
 						<div
 							className="visit-main-image"
@@ -60,7 +60,11 @@ const Visit: React.FC = () => {
 							</a>
 						</div>
 					</div>
+				</div>
+			</div>
 
+			<div className="container">
+				<div className="visit-wrapper">
 					<div className="visit-service">
 						<div className="visit-service-block hover-scale">
 							<h2 className="visit-service-block__title">

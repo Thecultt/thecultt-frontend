@@ -38,6 +38,8 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	is_trial,
 	shoe_size,
 	size,
+	from_boutique,
+	price_drop
 }) => {
 	const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart)
 	const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(false)
@@ -68,7 +70,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
 	const subscribeGood = () => {
 		console.log(size, shoe_size)
-		
+
 		localStorage.setItem("waiting_init", JSON.stringify({
 			category, brand: manufacturer, model: name, type: subcategory, size: size || shoe_size
 		}))
@@ -80,6 +82,18 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 	return (
 		<div className={`product-block ${addClass ? addClass : ""}`} onClick={onClickProduct}>
 			<div className="product-block-cover">
+				{from_boutique ? (
+					<span className="product-block-cover__boutique">
+						Из бутика
+					</span>
+				) : null}
+
+				{price_drop ? (
+					<span className="product-block-cover__boutique green">
+						Цена снизилась
+					</span>
+				) : null}
+
 				<div className="product-block-cover-arrow prev" onClick={onClickPrevImage}>
 					<svg
 						width="9"

@@ -7,7 +7,7 @@ import { Order } from "../../models/IOrder"
 
 import { OrderStateActionTypes, OrderStateActions } from "../types/IOrder"
 
-export const sendOrderApplyPromocode = (promocode: string) => (dispatch: Dispatch<OrderStateActions>) => {
+export const sendOrderApplyPromocode = (promocode: string, totalPrice: number) => (dispatch: Dispatch<OrderStateActions>) => {
 	dispatch({
 		type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_SEND,
 		payload: true
@@ -19,30 +19,50 @@ export const sendOrderApplyPromocode = (promocode: string) => (dispatch: Dispatc
 			payload: false
 		})
 
-		dispatch({
-			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ACTIVE,
-			payload: true
-		})
+		if (totalPrice < 25000 && promocode == "BYEAPRIL") {
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE,
+				payload: "Промокод не действителен на корзину менее 25 000₽"
+			})
 
-		dispatch({
-			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ERROR,
-			payload: false
-		})
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ACTIVE,
+				payload: false
+			})
 
-		dispatch({
-			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ID,
-			payload: data.id
-		})
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ERROR,
+				payload: true
+			})
+		} else {
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ACTIVE,
+				payload: true
+			})
 
-		dispatch({
-			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_NAME,
-			payload: promocode
-		})
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ERROR,
+				payload: false
+			})
 
-		dispatch({
-			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_SALE_SUM,
-			payload: data.discount
-		})
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ID,
+				payload: data.id
+			})
+
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_NAME,
+				payload: promocode
+			})
+
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_SALE_SUM,
+				payload: data.discount
+			})
+		}
+
+
+
 	}).catch(({ response: { data: { message } } }) => {
 		dispatch({
 			type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE,

@@ -57,6 +57,9 @@ const Catalog: React.FC = () => {
 		Object.keys(filters.availability).length,
 		Object.keys(filters.size).length,
 		Object.keys(filters.selections).length,
+		Object.keys(filters.glass_frame).length,
+		filters.boutique,
+		filters.price_drop,
 		filters.sort,
 		currentPage,
 		typeFetch

@@ -140,37 +140,53 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 					</p>
 
 					<div className="header-media-modal-menu-links">
-						<Link to="/catalog" className="header-media-modal-menu-links-link" onClick={toggleState}>Новинки</Link>
+						<Link to="/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-media-modal-menu-links-link" onClick={toggleState}>Новинки</Link>
 
 						{Object.keys(categories).map((category, index) => (
 							<HeaderMediaLinkTab title={category} linkTitle={`/catalog?categories=${category}`} key={`header-media-modal-menu-links-tab${index}`}>
 								{Object.keys(categories[category].subsubcategories).map((subsubcategory, subindex) => (
-									<Link to={`/catalog?categories=${category}&types=${subsubcategory}`} className="header-media-modal-menu-links__link" key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`} onClick={toggleState}>{subsubcategory}</Link>
+									<Link to={`/catalog?categories=${category}&types=${subsubcategory}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`} className="header-media-modal-menu-links__link" key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`} onClick={toggleState}>{subsubcategory}</Link>
 								))}
 
 								{category === "Обувь" ?
-									<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+									<Link onClick={toggleState} to={`/catalog?categories=${category}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`} className="header-media-modal-menu-links__link">
 										Вся обувь
 									</Link> : null
 								}
 
 								{category === "Сумки" ?
-									<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+									<Link onClick={toggleState} to={`/catalog?categories=${category}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`} className="header-media-modal-menu-links__link">
 										Все сумки
 									</Link> : null
 								}
 
 								{category === "Аксессуары" ?
-									<Link onClick={toggleState} to={`/catalog?categories=${category}`} className="header-media-modal-menu-links__link">
+									<Link onClick={toggleState} to={`/catalog?categories=${category}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`} className="header-media-modal-menu-links__link">
 										Все аксессуары
 									</Link> : null
 								}
+
+								<Link onClick={toggleState} to={`/catalog?categories=${category}&boutique=true`} className="header-media-modal-menu-links-boutique">
+									<span className="header-media-modal-menu-links-boutique__badge">
+										Из бутика
+									</span>
+
+									<p className="header-media-modal-menu-links-boutique__subtitle">
+										Новые, не были в носке
+									</p>
+								</Link>
 							</HeaderMediaLinkTab>
 						))}
 
 						<Link to="/brands" className="header-media-modal-menu-links-link" onClick={toggleState}>Бренды</Link>
 
 						<Link to="/auth" className="header-media-modal-menu-links-link" onClick={toggleState}>Подлинность</Link>
+
+						<a href="/catalog?categories=Сумки&categories=Обувь&categories=Одежда&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-media-modal-menu-links-link">
+							Архив Алены Долецкой
+						</a>
+
+						<Link to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-media-modal-menu-links-link" onClick={toggleState}><b>THE CULTT SALE</b></Link>
 
 						<HeaderMediaLinkTab title="Личный кабинет">
 							<Link to="/cabinet/setting" className="header-media-modal-menu-links__link" onClick={toggleState}>Профиль</Link>

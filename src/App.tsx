@@ -9,9 +9,10 @@ import "moment/locale/ru";
 
 import { useTypedSelector } from "./hooks/useTypedSelector";
 
-import { MenuMedia, Header, Reglog, Footer, OrderStatus, WaitingListCreate, WaitingListDelete } from "./components";
+import { NotificationsSuccess, NotificationsError, MenuMedia, Header, Reglog, Footer, OrderStatus, WaitingListCreate, WaitingListDelete } from "./components";
 
 import {
+	NotFound,
 	Home,
 	Catalog,
 	Product,
@@ -153,6 +154,9 @@ const App = () => {
 		<div className="wrapper" id="wrapper">
 			{/* {pathname.indexOf("/cabinet/sell") !== -1 ? null : <MenuMedia />} */}
 
+			{/* <NotificationsSuccess /> */}
+			{/* <NotificationsError /> */}
+
 			<Header />
 
 			<Reglog />
@@ -247,7 +251,7 @@ const App = () => {
 
 					<Route path="/AlionaDoletskaya" element={<AlyonaDoletskaya />} />
 
-					<Route path="*" element={<Navigate to="/" />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</React.Suspense>
 

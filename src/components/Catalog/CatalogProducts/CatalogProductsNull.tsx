@@ -31,6 +31,11 @@ const CatalogProductsNull: React.FC = () => {
 				size: {},
 				selections: {},
 
+				boutique: false,
+				price_drop: false,
+
+				glass_frame: {},
+				
 				sort: "a"
 			})
 		);
