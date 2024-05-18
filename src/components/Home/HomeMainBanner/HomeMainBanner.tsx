@@ -2,11 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Slider from "react-slick";
 
-import HomeMainBannerImageAlionaDoletskaya from '../../../assets/images/home/home-main-banner-AlionaDoletskaya.jpg'
-
 import HomeMainBannerImage1 from '../../../assets/images/home/home-main-banner1.jpg'
 import HomeMainBannerImage2 from '../../../assets/images/home/home-main-banner2.jpg'
 import HomeMainBannerImage3 from '../../../assets/images/home/home-main-banner3.jpg'
+
+import HomeMainBannerImageNew from '../../../assets/images/home/home-main-banner-new.jpg'
+import HomeMainBannerImageBoutique from '../../../assets/images/home/home-main-banner-boutique.jpg'
+import HomeMainBannerImageConcierge from '../../../assets/images/home/home-main-banner-concierge.jpg'
 
 const HomeMainBanner: React.FC = () => {
 	const SliderRef = React.useRef<any>(null)
@@ -58,44 +60,64 @@ const HomeMainBanner: React.FC = () => {
 					</button>
 
 					<Slider {...settings} className='home-main-banner-slider' ref={SliderRef}>
-						{/* <div className='home-main-banner-slider-item-wrapper'>
-							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${window.innerWidth > 500 ? HomeMainBannerImage14feb : HomeMainBannerImage14febMedia}")` }}>
-								<div className="home-main-banner-slider-item-text">
-									<h2 className="home-main-banner-slider-item-text__title">
-										Попадание в сердце
-									</h2>
-
-									<p className="home-main-banner-slider-item-text__description">
-										Подарки ко Дню всех влюбленных
-									</p>
-
-									<a href="/catalog?categories=Сумки&categories=Аксессуары&conditions=Новое&conditions=Отличное&brands=Chanel&brands=Hermes&brands=Hermès&brands=Saint+Laurent&brands=Celine&brands=Christian+Dior&brands=Louis+Vuitton&theme=Подарки+ко+дню+всех+влюбленных" className="home-main-banner-slider-item-text__btn white">
-										Выбрать подарок
-									</a>
-								</div>
-							</div>
-						</div> */}
-
 						<div className='home-main-banner-slider-item-wrapper'>
-							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImageAlionaDoletskaya}")` }}>
+							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImageNew}")` }}>
 								<div className="home-main-banner-slider-item-text">
 									<h2 className="home-main-banner-slider-item-text__title">
-										Алена Долецкая x THE CULTT
+										Главные новинки недели
 									</h2>
 
 									<p className="home-main-banner-slider-item-text__description">
-										Знаковые лоты из личных архивов Алены Долецкой — теперь на THE CULTT.
-										Часть средств от продажи будет направлена в благотворительный фонд «Вера»
+										Новые лоты Hermes, Chanel, Celine,
+										<br />
+										Louis Vuitton, Prada и Saint Laurent
 									</p>
 
-									<a href="/AlionaDoletskaya?utm_source=website&utm_medium=banner_main&utm_campaign=landing_doletskya" className="home-main-banner-slider-item-text__btn color">
-										Читать истории лотов
+									<a href="https://thecultt.com/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии&price_drop=false" className="home-main-banner-slider-item-text__btn color">
+										Смотреть
 									</a>
 								</div>
 							</div>
 						</div>
 
 						<div className='home-main-banner-slider-item-wrapper'>
+							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImageBoutique}")` }}>
+								<div className="home-main-banner-slider-item-text">
+									<h2 className="home-main-banner-slider-item-text__title">
+										Коллекция THE CULTT из бутика
+									</h2>
+
+									<p className="home-main-banner-slider-item-text__description">
+										Лоты, доставленные напрямую из бутика-партнера или от частного байера — в таком состоянии, в каком вы бы купили их в магазине бренда.
+									</p>
+
+									<a href="https://thecultt.com/catalog?boutique=true&price_drop=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="home-main-banner-slider-item-text__btn color">
+										Смотреть подборку
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div className='home-main-banner-slider-item-wrapper'>
+							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImageConcierge}")` }}>
+								<div className="home-main-banner-slider-item-text">
+									<h2 className="home-main-banner-slider-item-text__title">
+										Разгрузите гардероб с VIP-сервисом ТНЕ CULTT
+									</h2>
+
+									<p className="home-main-banner-slider-item-text__description">
+										Нужно продать 10 и более лотов? Закажите бесплатный VIP-сервис.
+										Вам не нужно заполнять заявки, фотографировать вещи, искать покупателей - все это мы берем на себя.
+									</p>
+
+									<Link to="/concierge" className="home-main-banner-slider-item-text__btn color">
+										Узнать больше
+									</Link>
+								</div>
+							</div>
+						</div>
+
+						{/* <div className='home-main-banner-slider-item-wrapper'>
 							<div className='home-main-banner-slider-item' style={{ backgroundImage: `url("${HomeMainBannerImage1}")` }}>
 								<div className="home-main-banner-slider-item-text">
 									<h2 className="home-main-banner-slider-item-text__title">
@@ -147,7 +169,7 @@ const HomeMainBanner: React.FC = () => {
 									</Link>
 								</div>
 							</div>
-						</div>
+						</div> */}
 					</Slider>
 
 					<button className="home-main-banner-arrow next" onClick={onClickNext}>

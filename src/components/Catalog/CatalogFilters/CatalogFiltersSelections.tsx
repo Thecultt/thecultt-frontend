@@ -17,8 +17,8 @@ const CatalogFiltersSelections: React.FC = () => {
 	const onChangeSetSelection = (selection: string) => {
 		dispatch(setFiltersSelectionsProduct(selection));
 
-		dispatch(setFiltersAvailabilityProduct("Доступно"));
-		dispatch(setFiltersAvailabilityProduct("На примерке"));
+		// dispatch(setFiltersAvailabilityProduct("Доступно"));
+		// dispatch(setFiltersAvailabilityProduct("На примерке"));
 	};
 
 	return (

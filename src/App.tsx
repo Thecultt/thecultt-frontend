@@ -9,7 +9,7 @@ import "moment/locale/ru";
 
 import { useTypedSelector } from "./hooks/useTypedSelector";
 
-import { NotificationsSuccess, NotificationsError, MenuMedia, Header, Reglog, Footer, OrderStatus, WaitingListCreate, WaitingListDelete } from "./components";
+import { NotificationsServer, MenuMedia, Header, Reglog, Footer, OrderStatus, WaitingListCreate, WaitingListDelete } from "./components";
 
 import {
 	NotFound,
@@ -41,7 +41,9 @@ import {
 	Cart,
 	SubscribeEmail,
 	PublicFavorites,
-	AlyonaDoletskaya
+	AlyonaDoletskaya,
+	BuyerTheCulttMain,
+	BuyerTheCulttProduct
 } from "./pages/";
 
 import { fetchProductsFilters } from "./redux/actions/products_filters";
@@ -154,8 +156,7 @@ const App = () => {
 		<div className="wrapper" id="wrapper">
 			{/* {pathname.indexOf("/cabinet/sell") !== -1 ? null : <MenuMedia />} */}
 
-			{/* <NotificationsSuccess /> */}
-			{/* <NotificationsError /> */}
+			<NotificationsServer />
 
 			<Header />
 
@@ -250,6 +251,9 @@ const App = () => {
 					<Route path="/favorites/:userId" element={<PublicFavorites />} />
 
 					<Route path="/AlionaDoletskaya" element={<AlyonaDoletskaya />} />
+
+					{/* <Route path="/buyer" element={<BuyerTheCulttMain />} />
+					<Route path="/buyer/product/:id" element={<BuyerTheCulttProduct />} /> */}
 
 					<Route path="*" element={<NotFound />} />
 				</Routes>

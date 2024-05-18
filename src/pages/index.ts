@@ -73,3 +73,7 @@ export { default as PublicFavorites } from "./PublicFavorites/PublicFavorites";
 
 // AlyonaDoletskaya
 export { default as AlyonaDoletskaya } from "./AlyonaDoletskaya/AlyonaDoletskaya";
+
+// BuyerTheCultt
+export { default as BuyerTheCulttMain } from "./BuyerTheCultt/BuyerTheCulttMain";
+export { default as BuyerTheCulttProduct } from "./BuyerTheCultt/BuyerTheCulttProduct";

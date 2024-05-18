@@ -40,7 +40,11 @@ const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, is
 							) : (
 								<>
 									{Object.keys(filters.selections).length ? (
-										"Архив Алены Долецкой"
+										`${checkDeclension(Object.keys(filters.selections).length, [
+											"Подборка",
+											"Подборки",
+											"Подборок",
+										]).title}`
 									) : (
 										<>
 											{query.get("theme") ? (

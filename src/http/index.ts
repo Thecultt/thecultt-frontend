@@ -1,4 +1,7 @@
 import axios from "axios";
+import store from "../redux/store";
+
+import { setIsNotificationServerError } from "../redux/actions/notifications_server";
 
 const $api = axios.create({
 	withCredentials: false,
@@ -21,6 +24,10 @@ $api.interceptors.response.use(
 		const originalRequest = error.config;
 
 		if (error.response) {
+			if (error.response.status == 500) {
+				store.dispatch(setIsNotificationServerError(true, "Ошибка сервера") as any)
+			}
+
 			if (
 				error.response.status == 401 &&
 				error.config &&

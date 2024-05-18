@@ -14,8 +14,22 @@ import { useDebounce } from './useDebounce'
 
 import Logo from "../../assets/images/logo.svg";
 
-const categories: { [key: string]: { types: string[], brands: string[] } } = {
-	"Сумки": {
+import HeaderHoverImageBag from "../../assets/images/header/header-image-hover-menu-bag.jpg"
+import HeaderHoverImageAccessories from "../../assets/images/header/header-image-hover-menu-accessories.jpg"
+import HeaderHoverImageShoes from "../../assets/images/header/header-image-hover-menu-shoes.jpg"
+import HeaderHoverImageDecoration from "../../assets/images/header/header-image-hover-menu-decoration.jpg"
+
+export interface HeaderHoverMenuCategory {
+	title: string,
+	types: string[],
+	brands: string[],
+	fullTextView: string,
+	image: string,
+}
+
+const categories: { title: string, types: string[], brands: string[], fullTextView: string, image: string }[] = [
+	{
+		title: "Сумки",
 		types: [
 			"Дорожная сумка",
 			"Клатч",
@@ -44,23 +58,27 @@ const categories: { [key: string]: { types: string[], brands: string[] } } = {
 			"Saint Laurent",
 			"Wandler"
 		],
+		fullTextView: "Все сумки",
+		image: HeaderHoverImageBag
 	},
-	"Аксессуары": {
+	{
+		title: "Аксессуары",
 		types: [
-			"Часы",
-			"Очки",
-			"Ремни",
-			"Украшения",
-			"Кожаные аксессуары",
-			"Платки и шарфы",
-			"Головные уборы",
 			"Аксессуары для сумок",
+			"Головные уборы",
+			"Аксессуары для волос",
+			"Кошельки",
+			"Косметички",
+			"Очки",
+			"Платки и шарфы",
+			"Ремни",
+			"Обложки и футляры",
 		],
 		brands: [
 			"Balenciaga",
 			"Bottega Veneta",
-			"Bulgari",
-			"Cartier",
+			"Brunello Cucinelli",
+			"Loro Piana",
 			"Celine",
 			"Chanel",
 			"Christian Dior",
@@ -72,11 +90,12 @@ const categories: { [key: string]: { types: string[], brands: string[] } } = {
 			"Marni",
 			"Miu Miu",
 			"Prada",
-			"Saint Laurent",
-			"Tiffany & Co."
 		],
+		fullTextView: "Все аксессуары",
+		image: HeaderHoverImageAccessories
 	},
-	"Обувь": {
+	{
+		title: "Обувь",
 		types: [
 			"Балетки",
 			"Ботильоны",
@@ -108,25 +127,46 @@ const categories: { [key: string]: { types: string[], brands: string[] } } = {
 			"Manolo Blahnik",
 			"Proenza Schouler",
 		],
+		fullTextView: "Вся обувь",
+		image: HeaderHoverImageShoes
 	},
-}
-
-export interface HeaderHoverMenuCategory {
-	types: string[],
-	brands: string[],
-	title: string
-}
+	{
+		title: "Украшения",
+		types: [
+			"Браслеты",
+			"Колье и подвески",
+			"Кольца",
+			"Часы",
+			"Броши",
+		],
+		brands: [
+			"Balenciaga",
+			"Bottega Veneta",
+			"Bulgari",
+			"Cartier",
+			"Celine",
+			"Chanel",
+			"Christian Dior",
+			"Gucci",
+			"Hermes",
+			"Jil Sander",
+			"Louis Vuitton",
+			"Miu Miu",
+			"Prada",
+			"Tiffani",
+			"Van Cleef & Arpels",
+		],
+		fullTextView: "Все украшения",
+		image: HeaderHoverImageDecoration
+	},
+]
 
 const Header: React.FC = () => {
 	const { pathname } = useLocation();
 
 	const dispatch = useDispatch()
 
-	const [currentInfoMenu, setCurrentInfoMenu] = React.useState<HeaderHoverMenuCategory>({
-		types: [],
-		brands: [],
-		title: ""
-	})
+	const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState<number>(0)
 	const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState<boolean>(false)
 
 	const [isOpenSearch, setIsOpenSearch] = React.useState<boolean>(false)
@@ -135,9 +175,9 @@ const Header: React.FC = () => {
 
 	const debouncedValue = useDebounce(search.value)
 
-	const openHoverMenu = (category: { types: string[], brands: string[] }, title: string) => {
+	const openHoverMenu = (index: number) => {
 		if (!isOpenSearch) {
-			setCurrentInfoMenu({ ...category, title })
+			setCurrentCategoryHoverMenuIndex(index)
 
 			setIsOpenHoverMenu(true)
 		}
@@ -283,17 +323,16 @@ const Header: React.FC = () => {
 									Новинки
 								</Link>
 
-								{Object.keys(categories).map((key, index) => (
+								{categories.map((category, index) => (
 									<Link
-										to={`/catalog?categories=${key}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
+										to={`/catalog?categories=${category.title}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
 										className="header-menu__link"
 										key={`header-menu__link-${index}`}
-										onMouseOver={() => openHoverMenu(categories[key], key)}
+										onMouseOver={() => openHoverMenu(index)}
 										onMouseOut={closeHoverMenu}
 										onClick={closeHoverMenu}
 									>
-
-										{key}
+										{category.title}
 									</Link>
 								))}
 
@@ -304,10 +343,10 @@ const Header: React.FC = () => {
 								<Link to="/auth" className="header-menu__link">
 									Подлинность
 								</Link>
-
+								{/* 
 								<a href="/catalog?categories=Сумки&categories=Обувь&categories=Одежда&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-menu__link">
 									Архив Алены Долецкой
-								</a>
+								</a> */}
 
 								<Link to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-menu__link">
 									<b>THE CULTT SALE</b>
@@ -318,7 +357,7 @@ const Header: React.FC = () => {
 				</header>
 
 				<HeaderHoverMenu
-					{...currentInfoMenu}
+					{...categories[currentCategoryHoverMenuIndex]}
 					isOpenHoverMenu={isOpenHoverMenu}
 					onOpen={() => setIsOpenHoverMenu(true)}
 					onClose={() => setIsOpenHoverMenu(false)}

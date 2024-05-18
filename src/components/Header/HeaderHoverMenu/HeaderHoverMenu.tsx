@@ -3,10 +3,6 @@ import { Link } from "react-router-dom"
 
 import { HeaderHoverMenuCategory } from "../Header"
 
-import HeaderHoverImageBag from "../../../assets/images/header/header-image-hover-menu-bag.jpg"
-import HeaderHoverImageShoes from "../../../assets/images/header/header-image-hover-menu-shoes.jpg"
-import HeaderHoverImageDecoration from "../../../assets/images/header/header-image-hover-menu-decoration.jpg"
-
 interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
 	isOpenHoverMenu: boolean
 
@@ -14,7 +10,7 @@ interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
 	onClose: () => void
 }
 
-const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ types, brands, title, isOpenHoverMenu, onOpen, onClose }) => {
+const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ title, types, brands, fullTextView, image, isOpenHoverMenu, onOpen, onClose }) => {
 	return (
 		<div className={`header-hover-menu-wrapper-wrapper ${isOpenHoverMenu ? "active" : ""}`}>
 			<div className={`header-hover-menu-wrapper ${isOpenHoverMenu ? "active" : ""}`} onMouseOver={() => onOpen()} onMouseOut={() => onClose()}>
@@ -34,23 +30,9 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ types, brands, title,
 									)).slice(0, 4)}
 									{/* 4 / 7 */}
 
-									{title === "Обувь" ?
-										<Link onClick={onClose} to={`/catalog?categories=${title}`} className="header-hover-menu-list-coll__item last">
-											Вся обувь
-										</Link> : null
-									}
-
-									{title === "Сумки" ?
-										<Link onClick={onClose} to={`/catalog?categories=${title}`} className="header-hover-menu-list-coll__item last">
-											Все сумки
-										</Link> : null
-									}
-
-									{title === "Аксессуары" ?
-										<Link onClick={onClose} to={`/catalog?categories=${title}`} className="header-hover-menu-list-coll__item last">
-											Все аксессуары
-										</Link> : null
-									}
+									<Link onClick={onClose} to={`/catalog?categories=${title}`} className="header-hover-menu-list-coll__item last">
+										{fullTextView}
+									</Link>
 
 									<Link onClick={onClose} to={`/catalog?categories=${title}&boutique=true`} className="header-hover-menu-list-boutique">
 										<p className="header-hover-menu-list-boutique__btn">Из бутика</p>
@@ -91,9 +73,7 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({ types, brands, title,
 						</div>
 					</div>
 
-					{title === "Сумки" ? <div className="header-hover-menu-image" style={{ backgroundImage: `url("${HeaderHoverImageBag}")` }}></div> : null}
-					{title === "Обувь" ? <div className="header-hover-menu-image" style={{ backgroundImage: `url("${HeaderHoverImageShoes}")` }}></div> : null}
-					{title === "Аксессуары" ? <div className="header-hover-menu-image" style={{ backgroundImage: `url("${HeaderHoverImageDecoration}")` }}></div> : null}
+					<div className="header-hover-menu-image" style={{ backgroundImage: `url("${image}")` }}></div>
 				</nav>
 			</div>
 		</div>

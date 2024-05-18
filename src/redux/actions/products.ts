@@ -4,6 +4,8 @@ import { Dispatch } from "redux";
 
 import $api from "../../http";
 
+import { setIsNotificationServerError } from "../actions/notifications_server";
+
 import { ProductActionTypes, ProductTypes, ProductsStateFilters } from "../types/IProducts";
 
 import { Product, ProductPage } from "../../models/IProduct";
@@ -228,70 +230,75 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
 		payload: false
 	})
 
-	const { data } = await $api.get<ProductPage>(`/product/${article}`)
-	const similar = await $api.get<{ items: Product[] }>(`/product/${article}/similar`).then(({ data }) => data.items)
+	await $api.get<ProductPage>(`/product/${article}`).then(async ({ data }) => {
+		const similar = await $api.get<{ items: Product[] }>(`/product/${article}/similar`).then(({ data }) => data.items)
 
-	window.dataLayer.push({ ecommerce: null });
-	window.dataLayer.push({
-		event: "view_item",
-		ecommerce: {
-			timestamp: Math.floor(Date.now() / 1000),
-			items: [{
-				item_name: data.name,
-				item_id: `${data.article}`,
-				price: `${data.price}`,
-				item_brand: data.manufacturer,
-				item_category: data.category,
-				item_category2: data.subcategory,
-				item_category3: "-",
-				item_category4: "-",
-				item_list_name: "Search Results",
-				item_list_id: data.article,
-				index: 1,
-				quantity: 1
-			}]
-		}
-	});
+		window.dataLayer.push({ ecommerce: null });
+		window.dataLayer.push({
+			event: "view_item",
+			ecommerce: {
+				timestamp: Math.floor(Date.now() / 1000),
+				items: [{
+					item_name: data.name,
+					item_id: `${data.article}`,
+					price: `${data.price}`,
+					item_brand: data.manufacturer,
+					item_category: data.category,
+					item_category2: data.subcategory,
+					item_category3: "-",
+					item_category4: "-",
+					item_list_name: "Search Results",
+					item_list_id: data.article,
+					index: 1,
+					quantity: 1
+				}]
+			}
+		});
 
-
-	try {
-		if (localStorage.getItem("mindboxDeviceUUID")) {
-			axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ViewProduct&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
-				{
-					"viewProduct": {
-						"product": {
-							"ids": {
-								"website": `${data.id}`
-							}
-						},
-						"price": `${data.price}`,
-						"customerAction": {
-							"customFields": {
-								"brand": `${data.manufacturer}`,
-								"coctoyanie": `${data.condition}`,
-								"defecti": `${data.nuances}`,
-								"kategoria": `${data.category}`,
-								"model": `${data.name}`,
+		try {
+			if (localStorage.getItem("mindboxDeviceUUID")) {
+				axios.post(`https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ViewProduct&deviceUUID=${localStorage.getItem("mindboxDeviceUUID")}`,
+					{
+						"viewProduct": {
+							"product": {
+								"ids": {
+									"website": `${data.id}`
+								}
+							},
+							"price": `${data.price}`,
+							"customerAction": {
+								"customFields": {
+									"brand": `${data.manufacturer}`,
+									"coctoyanie": `${data.condition}`,
+									"defecti": `${data.nuances}`,
+									"kategoria": `${data.category}`,
+									"model": `${data.name}`,
+								}
 							}
 						}
+					},
+					{
+						headers: {
+							'Content-Type': 'application/json; charset=utf-8',
+							'Accept': 'application/json',
+							'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
+						}
 					}
-				},
-				{
-					headers: {
-						'Content-Type': 'application/json; charset=utf-8',
-						'Accept': 'application/json',
-						'Authorization': 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"'
-					}
-				}
-			)
+				)
+			}
+		} catch (e) {
+			console.log(e)
 		}
-	} catch (e) {
-		console.log(e)
-	}
 
-	dispatch({
-		type: ProductActionTypes.SET_PRODUCTS_ITEM_BY_ARTICLE,
-		payload: { data, similar }
+		dispatch({
+			type: ProductActionTypes.SET_PRODUCTS_ITEM_BY_ARTICLE,
+			payload: { data, similar }
+		})
+	}).catch(() => {
+		dispatch({
+			type: ProductActionTypes.SET_PRODUCTS_ITEM_BY_ARTICLE_IS_LOADED,
+			payload: true
+		})
 	})
 }
 

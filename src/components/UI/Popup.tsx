@@ -21,12 +21,14 @@ const Popup: React.FC<PopupProps> = ({
 
 	React.useEffect(() => {
 		if (state) {
-			document.body.style.width = "100%";
-			document.body.style.left = "0";
-			document.body.style.overflowY = "scroll";
-			document.body.style.position = "fixed";
+			document.body.style.overflowY = "hidden";
+			// document.body.style.width = "100%";
+			// document.body.style.left = "0";
+			// document.body.style.overflowY = "scroll";
+			// document.body.style.position = "fixed";
 		} else {
-			document.body.style.position = "static";
+			document.body.style.overflowY = "scroll";
+			// document.body.style.position = "static";
 		}
 	}, [state]);
 

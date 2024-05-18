@@ -7,6 +7,8 @@ import { Order } from "../../models/IOrder"
 
 import { OrderStateActionTypes, OrderStateActions } from "../types/IOrder"
 
+import { setIsNotificationServerError } from "../actions/notifications_server"
+
 export const sendOrderApplyPromocode = (promocode: string, totalPrice: number) => (dispatch: Dispatch<OrderStateActions>) => {
 	dispatch({
 		type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_SEND,
@@ -23,6 +25,21 @@ export const sendOrderApplyPromocode = (promocode: string, totalPrice: number) =
 			dispatch({
 				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE,
 				payload: "Промокод не действителен на корзину менее 25 000₽"
+			})
+
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ACTIVE,
+				payload: false
+			})
+
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ERROR,
+				payload: true
+			})
+		} else if (totalPrice < 700000 && promocode == "MAY27") {
+			dispatch({
+				type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE,
+				payload: "Промокод не действителен на корзину менее 700 000₽"
 			})
 
 			dispatch({
@@ -260,13 +277,22 @@ export const sendCreateOrder = (
 		newData["utm_term"] = localStorage.getItem("utm_term")
 	}
 
-	const res = await $api.post(`create_order/`, newData)
+	$api.post(`create_order/`, newData).then(res => {
+		if (res.data.link) {
+			window.location.href = res.data.link
+		} else {
+			onComplete(res.data.order_id, res.data.order_num)
+		}
+	}).catch(({ response }) => {
+		if (response.data.message) dispatch(setIsNotificationServerError(true, response.data.message) as any)
+	})
+	// const res = await $api.post(`create_order/`, newData)
 
-	if (res.data.link) {
-		window.location.href = res.data.link
-	} else {
-		onComplete(res.data.order_id, res.data.order_num)
-	}
+	// if (res.data.link) {
+	// 	window.location.href = res.data.link
+	// } else {
+	// 	onComplete(res.data.order_id, res.data.order_num)
+	// }
 }
 
 export const sendSubmitOrder = (

@@ -7,6 +7,8 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 import { fetchProductByArticle } from "../../redux/actions/products";
 
+import { NotFound } from '../../pages/'
+
 import {
 	ProductInfoBreadCrumbs,
 	ProductCover,
@@ -59,29 +61,33 @@ const Product: React.FC = () => {
 			</Helmet>
 
 			{itemByArticleIsLoaded ? (
-				<>
-					<section className="product">
-						<div className="container">
-							<div className="product-wrapper">
-								<ProductInfoBreadCrumbs
-									category={itemByArticle.category}
-									brand={itemByArticle.manufacturer}
-									model={itemByArticle.name}
-								/>
+				itemByArticle.article !== "" ? (
+					<>
+						<section className="product">
+							<div className="container">
+								<div className="product-wrapper">
+									<ProductInfoBreadCrumbs
+										category={itemByArticle.category}
+										brand={itemByArticle.manufacturer}
+										model={itemByArticle.name}
+									/>
 
-								<div className="product-content">
-									<ProductCover {...itemByArticle} />
+									<div className="product-content">
+										<ProductCover {...itemByArticle} />
 
-									<ProductInfo {...itemByArticle} />
+										<ProductInfo {...itemByArticle} />
+									</div>
 								</div>
 							</div>
-						</div>
-					</section>
+						</section>
 
-					<CatalogProductsSection title="Может быть интересно" />
+						<CatalogProductsSection title="Может быть интересно" />
 
-					<ProductExchange />
-				</>
+						<ProductExchange />
+					</>
+				) : (
+					<NotFound />
+				)
 			) : (
 				<PageLoader />
 			)}
