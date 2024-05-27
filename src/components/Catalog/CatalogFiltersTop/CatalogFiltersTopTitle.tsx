@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
 interface CatalogFiltersTopTitleProps {
-	itemsCount: number;
+    itemsCount: number;
 }
 
 const CatalogFiltersTopTitle: React.FC<CatalogFiltersTopTitleProps> = ({ itemsCount }) => {
-	return (
-		<div className="catalog-filters-top-title">
-			<p className="catalog-filters-top-title__title">
-				{/* {Object.keys(filters.selections).length ? (
+    return (
+        <div className="catalog-filters-top-title">
+            <p className="catalog-filters-top-title__title">
+                {/* {Object.keys(filters.selections).length ? (
 					"Архив Алены Долецкой"
 				) : (
 					<>
@@ -27,19 +27,19 @@ const CatalogFiltersTopTitle: React.FC<CatalogFiltersTopTitleProps> = ({ itemsCo
 						)}
 					</>
 				)} */}
-			</p>
+            </p>
 
-			<p className="catalog-filters-top-title__count">
-				{/* {
+            <p className="catalog-filters-top-title__count">
+                {/* {
 					checkDeclension(itemsCount, [
 						"товар",
 						"товара",
 						"товаров",
 					]).title
 				} */}
-			</p>
-		</div>
-	)
-}
+            </p>
+        </div>
+    );
+};
 
-export default CatalogFiltersTopTitle
+export default CatalogFiltersTopTitle;

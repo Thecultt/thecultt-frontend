@@ -1,76 +1,76 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector'
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-import { fetchBuyerTheCulttProduct, sendBuyerTheCulttProductApplication, setBuyerTheCulttProductIsSendFormProductPage } from '../../redux/actions/buyer_thecultt'
+import {
+    fetchBuyerTheCulttProduct,
+    sendBuyerTheCulttProductApplication,
+    setBuyerTheCulttProductIsSendFormProductPage,
+} from '../../redux/actions/buyer_thecultt';
 
-import { BuyerTheCulttProductInfo, BuyerTheCulttProductForm, PageLoader, Popup } from '../../components/'
+import { BuyerTheCulttProductInfo, BuyerTheCulttProductForm, PageLoader, Popup } from '../../components/';
 
 const BuyerTheCulttProduct: React.FC = () => {
-	const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-	const { id } = useParams()
+    const { id } = useParams();
 
-	const { isLoadedProduct, product, isSendFormProductPageSuccess } = useTypedSelector(({ buyer_thecultt }) => buyer_thecultt)
+    const { isLoadedProduct, product, isSendFormProductPageSuccess } = useTypedSelector(
+        ({ buyer_thecultt }) => buyer_thecultt,
+    );
 
-	React.useEffect(() => {
-		dispatch(fetchBuyerTheCulttProduct(id as string) as any)
-	}, [])
+    React.useEffect(() => {
+        dispatch(fetchBuyerTheCulttProduct(id as string) as any);
+    }, []);
 
-	const onSubmitProductApplication = (data: any) => {
-		dispatch(sendBuyerTheCulttProductApplication(data, parseInt(id as string)) as any)
-	}
+    const onSubmitProductApplication = (data: any) => {
+        dispatch(sendBuyerTheCulttProductApplication(data, parseInt(id as string)) as any);
+    };
 
-	return (
-		<section className='buyer-thecultt-product'>
-			<Popup state={isSendFormProductPageSuccess} setState={() => dispatch(setBuyerTheCulttProductIsSendFormProductPage(false))}>
-				<div className='buyer-thecultt-product-success'>
-					<h4 className='buyer-thecultt-product-success__title'>
-						Спасибо! Ваша заявка принята
-					</h4>
-					<p className='buyer-thecultt-product-success__subtitle'>
-						Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
-					</p>
-				</div>
-			</Popup>
+    return (
+        <section className="buyer-thecultt-product">
+            <Popup
+                state={isSendFormProductPageSuccess}
+                setState={() => dispatch(setBuyerTheCulttProductIsSendFormProductPage(false))}
+            >
+                <div className="buyer-thecultt-product-success">
+                    <h4 className="buyer-thecultt-product-success__title">Спасибо! Ваша заявка принята</h4>
+                    <p className="buyer-thecultt-product-success__subtitle">
+                        Скоро мы свяжемся с вами в WhatsApp <br /> по указанному номеру телефона.
+                    </p>
+                </div>
+            </Popup>
 
-			<div className="container">
-				<div className="buyer-thecultt-product-wrapper">
-					<button className="buyer-thecultt-product__back" onClick={() => window.history.back()}>
-						<svg
-							width="8"
-							height="15"
-							viewBox="0 0 8 15"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="M7 1.5L1 7.5L7 13.5"
-								stroke="#202020"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
+            <div className="container">
+                <div className="buyer-thecultt-product-wrapper">
+                    <button className="buyer-thecultt-product__back" onClick={() => window.history.back()}>
+                        <svg width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7 1.5L1 7.5L7 13.5"
+                                stroke="#202020"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                        Вернуться
+                    </button>
 
-						Вернуться
-					</button>
+                    {isLoadedProduct ? (
+                        <>
+                            <BuyerTheCulttProductInfo {...product} />
 
-					{isLoadedProduct ? (
-						<>
-							<BuyerTheCulttProductInfo {...product} />
+                            <BuyerTheCulttProductForm onSubmit={onSubmitProductApplication} />
+                        </>
+                    ) : (
+                        <PageLoader />
+                    )}
+                </div>
+            </div>
+        </section>
+    );
+};
 
-							<BuyerTheCulttProductForm onSubmit={onSubmitProductApplication} />
-						</>
-					) : (
-						<PageLoader />
-					)}
-				</div>
-			</div>
-		</section>
-	)
-}
-
-export default BuyerTheCulttProduct
+export default BuyerTheCulttProduct;

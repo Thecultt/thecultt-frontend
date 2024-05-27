@@ -1,69 +1,73 @@
-import React from "react";
-import AnimateHeight from "react-animate-height";
-import { NumericFormat } from "react-number-format";
-import moment from "moment";
-import { Link } from "react-router-dom";
+import React from 'react';
+import AnimateHeight from 'react-animate-height';
+import { NumericFormat } from 'react-number-format';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const CabinetSellsListItem: React.FC<any> = ({
-	id,
-	time,
-	time_edit,
-	category,
-	vendor,
-	model,
-	condition,
-	defects,
-	price,
-	statusColor,
-	status,
-	status_description,
-	link,
-	image,
-	sales_payment,
-	purchase_amount
+    id,
+    time,
+    time_edit,
+    category,
+    vendor,
+    model,
+    condition,
+    defects,
+    price,
+    statusColor,
+    status,
+    status_description,
+    link,
+    image,
+    sales_payment,
+    purchase_amount,
 }) => {
-	const [isOpen, setIsOpen] = React.useState<boolean>(false);
+    const [isOpen, setIsOpen] = React.useState<boolean>(false);
 
-	const toggleOpen = () => {
-		setIsOpen(!isOpen);
-	};
+    const toggleOpen = () => {
+        setIsOpen(!isOpen);
+    };
 
-	return (
-		<div
-			className="cabinet-sells-list-item-wrapper"
-			onClick={toggleOpen}
-		>
-			<div className="cabinet-sells-list-item">
-				<div className="cabinet-sells-list-item-topinfo">
-					<div className="cabinet-sells-list-item-topinfo-block">
-						<h3 className="cabinet-sells-list-item-topinfo-block__title">
-							Заявка: #{id}
-						</h3>
+    return (
+        <div className="cabinet-sells-list-item-wrapper" onClick={toggleOpen}>
+            <div className="cabinet-sells-list-item">
+                <div className="cabinet-sells-list-item-topinfo">
+                    <div className="cabinet-sells-list-item-topinfo-block">
+                        <h3 className="cabinet-sells-list-item-topinfo-block__title">Заявка: #{id}</h3>
 
-						<p className="cabinet-sells-list-item-topinfo-block__date">
-							{vendor} {model}
-						</p>
+                        <p className="cabinet-sells-list-item-topinfo-block__date">
+                            {vendor} {model}
+                        </p>
 
-						<p className={`cabinet-sells-list-item-topinfo-block__status__media ${statusColor}`}>
-							{status}
+                        <p className={`cabinet-sells-list-item-topinfo-block__status__media ${statusColor}`}>
+                            {status}
 
-							{status_description ? (
-								<>
-									<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
-									</svg>
+                            {status_description ? (
+                                <>
+                                    <svg
+                                        width="17"
+                                        height="17"
+                                        viewBox="0 0 17 17"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z"
+                                            stroke="#202020"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
 
-									<span className="message-info-wrapper">
-										<span className="message-info">
-											{status_description}
-										</span>
-									</span>
-								</>
-							) : null}
-						</p>
-					</div>
-					<div className="cabinet-sells-list-item-topinfo-block">
-						{/* {status === "success" ? (
+                                    <span className="message-info-wrapper">
+                                        <span className="message-info">{status_description}</span>
+                                    </span>
+                                </>
+                            ) : null}
+                        </p>
+                    </div>
+                    <div className="cabinet-sells-list-item-topinfo-block">
+                        {/* {status === "success" ? (
 							<p className="cabinet-sells-list-item-topinfo-block__status success">
 								Заказ отправлен СДЭКr 44r
 
@@ -95,74 +99,82 @@ const CabinetSellsListItem: React.FC<any> = ({
 							</p>
 						)} */}
 
-						<p className={`cabinet-sells-list-item-topinfo-block__status ${statusColor}`}>
-							{status}
+                        <p className={`cabinet-sells-list-item-topinfo-block__status ${statusColor}`}>
+                            {status}
 
-							{status_description ? (
-								<>
-									<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
-									</svg>
+                            {status_description ? (
+                                <>
+                                    <svg
+                                        width="17"
+                                        height="17"
+                                        viewBox="0 0 17 17"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M8.19987 11.1654V8.4987M8.19987 5.83203H8.20376M14.8665 8.4987C14.8665 12.1806 11.8818 15.1654 8.19987 15.1654C4.51797 15.1654 1.5332 12.1806 1.5332 8.4987C1.5332 4.8168 4.51797 1.83203 8.19987 1.83203C11.8818 1.83203 14.8665 4.8168 14.8665 8.4987Z"
+                                            stroke="#202020"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
 
-									<span className="message-info-wrapper">
-										<span className="message-info">
-											{status_description}
-										</span>
-									</span>
-								</>
-							) : null}
-						</p>
+                                    <span className="message-info-wrapper">
+                                        <span className="message-info">{status_description}</span>
+                                    </span>
+                                </>
+                            ) : null}
+                        </p>
 
-						<div
-							className={`cabinet-sells-list-item-topinfo-block-icon ${isOpen ? "rotate" : ""
-								}`}
-						>
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<g id="Icons">
-									<path
-										id="Vector"
-										d="M5 8L12 15L19 8"
-										stroke="#202020"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
-								</g>
-							</svg>
-						</div>
-					</div>
-				</div>
+                        <div className={`cabinet-sells-list-item-topinfo-block-icon ${isOpen ? 'rotate' : ''}`}>
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <g id="Icons">
+                                    <path
+                                        id="Vector"
+                                        d="M5 8L12 15L19 8"
+                                        stroke="#202020"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
 
-				<AnimateHeight duration={300} height={isOpen ? "auto" : 1}>
-					<div className="cabinet-sells-list-item-info">
-						<div className="cabinet-sells-list-item-info-block">
-							<h4 className="cabinet-sells-list-item-info-block__title">
-								Информация о товаре
-							</h4>
+                <AnimateHeight duration={300} height={isOpen ? 'auto' : 1}>
+                    <div className="cabinet-sells-list-item-info">
+                        <div className="cabinet-sells-list-item-info-block">
+                            <h4 className="cabinet-sells-list-item-info-block__title">Информация о товаре</h4>
 
-							<div className="cabinet-sells-list-item-info-block-value-wrapper bb">
-								<div className="cabinet-sells-list-item-info-block-value">
-									{category ? <p className="cabinet-sells-list-item-info-block-value__value">
-										<span>Категория:</span> {category}
-									</p> : null}
+                            <div className="cabinet-sells-list-item-info-block-value-wrapper bb">
+                                <div className="cabinet-sells-list-item-info-block-value">
+                                    {category ? (
+                                        <p className="cabinet-sells-list-item-info-block-value__value">
+                                            <span>Категория:</span> {category}
+                                        </p>
+                                    ) : null}
 
-									{vendor ? <p className="cabinet-sells-list-item-info-block-value__value">
-										<span>Бренд:</span> {vendor}
-									</p> : null}
+                                    {vendor ? (
+                                        <p className="cabinet-sells-list-item-info-block-value__value">
+                                            <span>Бренд:</span> {vendor}
+                                        </p>
+                                    ) : null}
 
-									{model !== "" && model ? (
-										<p className="cabinet-sells-list-item-info-block-value__value">
-											<span>Модель:</span> {model}
-										</p>
-									) : null}
-								</div>
+                                    {model !== '' && model ? (
+                                        <p className="cabinet-sells-list-item-info-block-value__value">
+                                            <span>Модель:</span> {model}
+                                        </p>
+                                    ) : null}
+                                </div>
 
-								{/* <div className="cabinet-sells-list-item-info-block-value ml">
+                                {/* <div className="cabinet-sells-list-item-info-block-value ml">
 									{time_edit ? (
 										<p className="cabinet-sells-list-item-info-block-value__value">
 											<span>Статус обновлен:</span> {moment(time_edit).format("DD.MM.YYYY, hh:ss")}
@@ -173,22 +185,28 @@ const CabinetSellsListItem: React.FC<any> = ({
 										<span>Дата оформления:</span> {moment(time).format("DD.MM.YYYY, hh:ss")}
 									</p>
 								</div> */}
-							</div>
+                            </div>
 
-							<div className="cabinet-sells-list-item-info-block-value">
-								{condition ? <p className="cabinet-sells-list-item-info-block-value__value">
-									<span>Состояние:</span> {condition}
-								</p> : null}
+                            <div className="cabinet-sells-list-item-info-block-value">
+                                {condition ? (
+                                    <p className="cabinet-sells-list-item-info-block-value__value">
+                                        <span>Состояние:</span> {condition}
+                                    </p>
+                                ) : null}
 
-								{defects ? <p className="cabinet-sells-list-item-info-block-value__value">
-									<span>Дефекты:</span> {defects}
-								</p> : null}
+                                {defects ? (
+                                    <p className="cabinet-sells-list-item-info-block-value__value">
+                                        <span>Дефекты:</span> {defects}
+                                    </p>
+                                ) : null}
 
-								{sales_payment || purchase_amount ? <p className="cabinet-sells-list-item-info-block-value__value">
-									<span>Сумма к выплате:</span> {sales_payment || purchase_amount}₽
-								</p> : null}
+                                {sales_payment || purchase_amount ? (
+                                    <p className="cabinet-sells-list-item-info-block-value__value">
+                                        <span>Сумма к выплате:</span> {sales_payment || purchase_amount}₽
+                                    </p>
+                                ) : null}
 
-								{/* <p className="cabinet-sells-list-item-info-block-value__value">
+                                {/* <p className="cabinet-sells-list-item-info-block-value__value">
 									<span>Ожидание по цене:</span> 	<NumericFormat
 										value={price}
 										displayType={"text"}
@@ -209,17 +227,26 @@ const CabinetSellsListItem: React.FC<any> = ({
 									/>{" "}
 									₽
 								</p> */}
-							</div>
+                            </div>
 
-							{link !== null ? <Link to={link} className="btn cabinet-sells-list-item-info-block__btn">Перейти к товару</Link> : null}
-						</div>
+                            {link !== null ? (
+                                <Link to={link} className="btn cabinet-sells-list-item-info-block__btn">
+                                    Перейти к товару
+                                </Link>
+                            ) : null}
+                        </div>
 
-						{image !== null ? <div className="cabinet-sells-list-item-info-cover" style={{ backgroundImage: `url("${image}")` }}></div> : null}
-					</div>
-				</AnimateHeight>
-			</div>
-		</div>
-	);
+                        {image !== null ? (
+                            <div
+                                className="cabinet-sells-list-item-info-cover"
+                                style={{ backgroundImage: `url("${image}")` }}
+                            ></div>
+                        ) : null}
+                    </div>
+                </AnimateHeight>
+            </div>
+        </div>
+    );
 };
 
 export default CabinetSellsListItem;

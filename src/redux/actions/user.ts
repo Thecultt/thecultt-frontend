@@ -1,39 +1,39 @@
-import { Dispatch } from "react";
+import { Dispatch } from 'react';
 
-import $api from "../../http"
+import $api from '../../http';
 
-import { UserActionTypes, UserActions } from "../types/IUser"
+import { UserActionTypes, UserActions } from '../types/IUser';
 
-import { setIsNotificationServerSuccess } from "../actions/notifications_server"
+import { setIsNotificationServerSuccess } from '../actions/notifications_server';
 
 export const fetchUser = () => async (dispatch: Dispatch<UserActions>) => {
-	const { data } = await $api.get(`/client-attributes/`)
+    const { data } = await $api.get(`/client-attributes/`);
 
-	dispatch({
-		type: UserActionTypes.SET_USER,
-		payload: data
-	})
-}
+    dispatch({
+        type: UserActionTypes.SET_USER,
+        payload: data,
+    });
+};
 
 export const sendUpdateUser = (body: any, onSubmitSuccess?: () => void) => async (dispatch: Dispatch<UserActions>) => {
-	dispatch({
-		type: UserActionTypes.SET_USER_IS_SENDING,
-		payload: true
-	})
+    dispatch({
+        type: UserActionTypes.SET_USER_IS_SENDING,
+        payload: true,
+    });
 
-	$api.post(`/client-attributes/update/`, body).then(({ data }) => {
-		dispatch({
-			type: UserActionTypes.SET_USER,
-			payload: data
-		})
+    $api.post(`/client-attributes/update/`, body).then(({ data }) => {
+        dispatch({
+            type: UserActionTypes.SET_USER,
+            payload: data,
+        });
 
-		if (onSubmitSuccess) onSubmitSuccess()
+        if (onSubmitSuccess) onSubmitSuccess();
 
-		dispatch({
-			type: UserActionTypes.SET_USER_IS_SENDING,
-			payload: false
-		})
+        dispatch({
+            type: UserActionTypes.SET_USER_IS_SENDING,
+            payload: false,
+        });
 
-		dispatch(setIsNotificationServerSuccess(true, "Изминения созранены успешно") as any)
-	})
-}
+        dispatch(setIsNotificationServerSuccess(true, 'Изминения созранены успешно') as any);
+    });
+};

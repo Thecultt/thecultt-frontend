@@ -1,11 +1,11 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
-import { setFiltersTypesProduct } from "../../../redux/actions/products";
+import { setFiltersTypesProduct } from '../../../redux/actions/products';
 
-import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
+import { CatalogFiltersBlockWrapper, Checkbox } from '../../';
 
 const CatalogFiltersTypes: React.FC = () => {
     const dispatch = useDispatch();
@@ -13,18 +13,14 @@ const CatalogFiltersTypes: React.FC = () => {
     const [types, setTypes] = React.useState<{ [key: string]: string[] }>({});
 
     const { filters } = useTypedSelector(({ products }) => products);
-    const { categories } = useTypedSelector(
-        ({ products_filters }) => products_filters
-    );
+    const { categories } = useTypedSelector(({ products_filters }) => products_filters);
 
     React.useEffect(() => {
         const newTypes: { [key: string]: string[] } = {};
 
         Object.keys(filters.categories).map((category) => {
             if (categories[category] && categories[category].subsubcategories) {
-                newTypes[category] = Object.keys(
-                    categories[category].subsubcategories
-                );
+                newTypes[category] = Object.keys(categories[category].subsubcategories);
             }
         });
 
@@ -38,12 +34,8 @@ const CatalogFiltersTypes: React.FC = () => {
     return (
         <CatalogFiltersBlockWrapper title="Тип">
             {Object.keys(types).map((key, index) => (
-                <div
-                    key={`catalog-filters-block-content-types-checkbox-${index}-wrapper`}
-                >
-                    <p className="catalog-filters-block-content-checkbox__subtitle">
-                        {key}
-                    </p>
+                <div key={`catalog-filters-block-content-types-checkbox-${index}-wrapper`}>
+                    <p className="catalog-filters-block-content-checkbox__subtitle">{key}</p>
 
                     {types[key].map((type, subindex) => (
                         <div
@@ -54,11 +46,7 @@ const CatalogFiltersTypes: React.FC = () => {
                                 id={`catalog-filters-block-content-types-checkbox-${index}-${subindex}`}
                                 label={type}
                                 onChange={() => onChangeSetType(type)}
-                                checked={
-                                    !!Object.keys(filters.types).find(
-                                        (filtersType) => type === filtersType
-                                    )
-                                }
+                                checked={!!Object.keys(filters.types).find((filtersType) => type === filtersType)}
                             />
                         </div>
                     ))}

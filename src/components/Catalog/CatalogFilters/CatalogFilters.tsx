@@ -1,367 +1,371 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import {
-	useNavigate,
-	createSearchParams,
-	useSearchParams,
-} from "react-router-dom";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate, createSearchParams, useSearchParams } from 'react-router-dom';
 
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
-import { ProductsStateFilters } from "../../../redux/types/IProducts";
-
-import { setFiltersCatalog, setFiltersCategoriesProduct, setFiltersAvailabilityProduct, setProductsTypeFetch, setCurrentPageProduct } from "../../../redux/actions/products";
+import { ProductsStateFilters } from '../../../redux/types/IProducts';
 
 import {
-	CatalogFiltersBoutiqueMedia,
-	CatalogFiltersPrice,
-	CatalogFiltersConditions,
-	CatalogFiltersCategories,
-	CatalogFiltersTypes,
-	CatalogFiltersBrands,
-	CatalogFiltersModels,
-	CatalogFiltersColors,
-	CatalogFiltersSex,
-	CatalogFiltersAvailability,
-	CatalogFiltersSize,
-	CatalogFiltersSelections,
-	CatalogFiltersGlassFrame,
-	CatalogFiltersPriceDrop
-} from "../../";
+    setFiltersCatalog,
+    setFiltersCategoriesProduct,
+    setFiltersAvailabilityProduct,
+    setProductsTypeFetch,
+    setCurrentPageProduct,
+} from '../../../redux/actions/products';
+
+import {
+    CatalogFiltersBoutiqueMedia,
+    CatalogFiltersPrice,
+    CatalogFiltersConditions,
+    CatalogFiltersCategories,
+    CatalogFiltersTypes,
+    CatalogFiltersBrands,
+    CatalogFiltersModels,
+    CatalogFiltersColors,
+    CatalogFiltersSex,
+    CatalogFiltersAvailability,
+    CatalogFiltersSize,
+    CatalogFiltersSelections,
+    CatalogFiltersGlassFrame,
+    CatalogFiltersPriceDrop,
+} from '../../';
 
 const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
-	const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-	const [query] = useSearchParams();
-	const navigate = useNavigate();
+    const [query] = useSearchParams();
+    const navigate = useNavigate();
 
-	const { filters } = useTypedSelector(({ products }) => products);
+    const { filters } = useTypedSelector(({ products }) => products);
 
-	const { price, conditions, categories, colors, glass_frame, isLoaded } = useTypedSelector(
-		({ products_filters }) => products_filters
-	);
+    const { price, conditions, categories, colors, glass_frame, isLoaded } = useTypedSelector(
+        ({ products_filters }) => products_filters,
+    );
 
-	React.useEffect(() => {
-		const filters: ProductsStateFilters = {
-			isParse: true,
+    React.useEffect(() => {
+        const filters: ProductsStateFilters = {
+            isParse: true,
 
-			search: query.get("search") ? query.get("search") as string : "",
+            search: query.get('search') ? (query.get('search') as string) : '',
 
-			price: {
-				min: query.get("minPrice") ? parseInt(query.get("minPrice") as string) : 0,
-				max: query.get("maxPrice") ? parseInt(query.get("maxPrice") as string) : 0
-			},
+            price: {
+                min: query.get('minPrice') ? parseInt(query.get('minPrice') as string) : 0,
+                max: query.get('maxPrice') ? parseInt(query.get('maxPrice') as string) : 0,
+            },
 
-			conditions: {},
-			categories: {},
-			types: {},
-			brands: {},
-			models: {},
-			colors: {},
-			sex: {},
-			availability: {},
-			size: {},
-			selections: {},
+            conditions: {},
+            categories: {},
+            types: {},
+            brands: {},
+            models: {},
+            colors: {},
+            sex: {},
+            availability: {},
+            size: {},
+            selections: {},
 
-			boutique: query.get("boutique") === "true" ? true : false,
-			price_drop: query.get("price_drop") === "true" ? true : false,
+            boutique: query.get('boutique') === 'true' ? true : false,
+            price_drop: query.get('price_drop') === 'true' ? true : false,
 
-			glass_frame: {},
+            glass_frame: {},
 
-			sort: "a"
-		}
+            sort: 'a',
+        };
 
-		query.getAll("conditions").map((condition) => {
-			filters.conditions[condition] = condition;
-		});
+        query.getAll('conditions').map((condition) => {
+            filters.conditions[condition] = condition;
+        });
 
-		query.getAll("categories").map((category) => {
-			filters.categories[category] = category;
-		});
+        query.getAll('categories').map((category) => {
+            filters.categories[category] = category;
+        });
 
-		query.getAll("types").map((type) => {
-			filters.types[type] = type;
-		});
+        query.getAll('types').map((type) => {
+            filters.types[type] = type;
+        });
 
-		query.getAll("brands").map((brand) => {
-			filters.brands[brand] = brand;
-		});
+        query.getAll('brands').map((brand) => {
+            filters.brands[brand] = brand;
+        });
 
-		query.getAll("models").map((model) => {
-			filters.models[model] = model;
-		});
+        query.getAll('models').map((model) => {
+            filters.models[model] = model;
+        });
 
-		query.getAll("colors").map((color) => {
-			filters.colors[color] = color;
-		});
+        query.getAll('colors').map((color) => {
+            filters.colors[color] = color;
+        });
 
-		query.getAll("sex").map((sex) => {
-			filters.sex[sex] = sex;
-		});
+        query.getAll('sex').map((sex) => {
+            filters.sex[sex] = sex;
+        });
 
-		query.getAll("availability").map((availability) => {
-			filters.availability[availability] = availability;
-		});
+        query.getAll('availability').map((availability) => {
+            filters.availability[availability] = availability;
+        });
 
-		query.getAll("size").map((size) => {
-			filters.size[size] = size;
-		});
+        query.getAll('size').map((size) => {
+            filters.size[size] = size;
+        });
 
-		query.getAll("selections").map((selection) => {
-			filters.selections[selection] = selection;
-		});
+        query.getAll('selections').map((selection) => {
+            filters.selections[selection] = selection;
+        });
 
-		query.getAll("glass_frame").map((glass_fame) => {
-			filters.glass_frame[glass_fame] = glass_fame;
-		});
+        query.getAll('glass_frame').map((glass_fame) => {
+            filters.glass_frame[glass_fame] = glass_fame;
+        });
 
-		dispatch(setFiltersCatalog(filters));
+        dispatch(setFiltersCatalog(filters));
 
-		return () => {
-			dispatch(setCurrentPageProduct(1))
+        return () => {
+            dispatch(setCurrentPageProduct(1));
 
-			dispatch(
-				setFiltersCatalog({
-					isParse: false,
+            dispatch(
+                setFiltersCatalog({
+                    isParse: false,
 
-					search: "",
+                    search: '',
 
-					price: {
-						min: 0,
-						max: 0
-					},
+                    price: {
+                        min: 0,
+                        max: 0,
+                    },
 
-					conditions: {},
-					categories: {},
-					types: {},
-					brands: {},
-					models: {},
-					colors: {},
-					sex: {},
-					availability: {},
-					size: {},
-					selections: {},
+                    conditions: {},
+                    categories: {},
+                    types: {},
+                    brands: {},
+                    models: {},
+                    colors: {},
+                    sex: {},
+                    availability: {},
+                    size: {},
+                    selections: {},
 
-					boutique: false,
-					price_drop: false,
+                    boutique: false,
+                    price_drop: false,
 
-					glass_frame: {},
+                    glass_frame: {},
 
-					sort: "a"
-				})
-			);
-		};
-	}, [
-		query
-	]);
+                    sort: 'a',
+                }),
+            );
+        };
+    }, [query]);
 
-	React.useEffect(() => {
-		if (filters.isParse) {
-			dispatch(setProductsTypeFetch("btn-page"))
+    React.useEffect(() => {
+        if (filters.isParse) {
+            dispatch(setProductsTypeFetch('btn-page'));
 
-			let oldParamsData: any = {};
+            const oldParamsData: any = {};
 
-			const oldParams: any = new URLSearchParams(window.location.search);
+            const oldParams: any = new URLSearchParams(window.location.search);
 
-			for (var value of oldParams.keys()) {
-				if (value === "search" || value === "minPrice" || value === "maxPrice" || value === "sort") {
-					oldParamsData[value] = oldParams.get(value);
-				} else {
-					oldParamsData[value] = oldParams.getAll(value);
-				}
-			}
+            for (const value of oldParams.keys()) {
+                if (value === 'search' || value === 'minPrice' || value === 'maxPrice' || value === 'sort') {
+                    oldParamsData[value] = oldParams.get(value);
+                } else {
+                    oldParamsData[value] = oldParams.getAll(value);
+                }
+            }
 
-			const params: { [key: string]: any } = {
-				...oldParamsData,
-				categories: Object.keys(filters.categories),
-				types: Object.keys(filters.types),
-				brands: Object.keys(filters.brands),
-				models: Object.keys(filters.models),
-				colors: Object.keys(filters.colors),
-				sex: Object.keys(filters.sex),
-				availability: Object.keys(filters.availability),
-				size: Object.keys(filters.size),
-				conditions: Object.keys(filters.conditions),
-				selections: Object.keys(filters.selections),
-				glass_frame: Object.keys(filters.glass_frame),
-			}
+            const params: { [key: string]: any } = {
+                ...oldParamsData,
+                categories: Object.keys(filters.categories),
+                types: Object.keys(filters.types),
+                brands: Object.keys(filters.brands),
+                models: Object.keys(filters.models),
+                colors: Object.keys(filters.colors),
+                sex: Object.keys(filters.sex),
+                availability: Object.keys(filters.availability),
+                size: Object.keys(filters.size),
+                conditions: Object.keys(filters.conditions),
+                selections: Object.keys(filters.selections),
+                glass_frame: Object.keys(filters.glass_frame),
+            };
 
-			if (filters.search !== "") {
-				params["search"] = filters.search
-			}
+            if (filters.search !== '') {
+                params['search'] = filters.search;
+            }
 
-			if (filters.price.max !== 0) {
-				params["minPrice"] = String(filters.price.min)
-				params["maxPrice"] = String(filters.price.max)
-			}
+            if (filters.price.max !== 0) {
+                params['minPrice'] = String(filters.price.min);
+                params['maxPrice'] = String(filters.price.max);
+            }
 
-			if (filters.price.min !== 0 && filters.price.max === 0) {
-				params["minPrice"] = String(filters.price.min)
-			}
+            if (filters.price.min !== 0 && filters.price.max === 0) {
+                params['minPrice'] = String(filters.price.min);
+            }
 
-			if (filters.boutique !== undefined) {
-				params["boutique"] = filters.boutique
-			}
+            if (filters.boutique !== undefined) {
+                params['boutique'] = filters.boutique;
+            }
 
-			if (filters.price_drop !== undefined) {
-				params["price_drop"] = filters.price_drop
-			}
+            if (filters.price_drop !== undefined) {
+                params['price_drop'] = filters.price_drop;
+            }
 
-			navigate({
-				pathname: "/catalog",
-				search: `?${createSearchParams(params)}`,
-				hash: `${window.location.hash}`
-			});
-		}
-	}, [
-		filters.isParse,
-		filters.search,
-		filters.price.min,
-		filters.price.max,
-		Object.keys(filters.conditions).length,
-		Object.keys(filters.categories).length,
-		Object.keys(filters.types).length,
-		Object.keys(filters.brands).length,
-		Object.keys(filters.models).length,
-		Object.keys(filters.colors).length,
-		Object.keys(filters.sex).length,
-		// Object.keys(filters.availability)[0],
-		Object.keys(filters.availability).length,
-		Object.keys(filters.size).length,
-		Object.keys(filters.selections).length,
-		Object.keys(filters.glass_frame).length,
-		filters.boutique,
-		filters.price_drop,
-		filters.sort,
-	]);
+            navigate({
+                pathname: '/catalog',
+                search: `?${createSearchParams(params)}`,
+                hash: `${window.location.hash}`,
+            });
+        }
+    }, [
+        filters.isParse,
+        filters.search,
+        filters.price.min,
+        filters.price.max,
+        Object.keys(filters.conditions).length,
+        Object.keys(filters.categories).length,
+        Object.keys(filters.types).length,
+        Object.keys(filters.brands).length,
+        Object.keys(filters.models).length,
+        Object.keys(filters.colors).length,
+        Object.keys(filters.sex).length,
+        // Object.keys(filters.availability)[0],
+        Object.keys(filters.availability).length,
+        Object.keys(filters.size).length,
+        Object.keys(filters.selections).length,
+        Object.keys(filters.glass_frame).length,
+        filters.boutique,
+        filters.price_drop,
+        filters.sort,
+    ]);
 
-	React.useEffect(() => {
-		if (isLoaded && filters.isParse) {
-			if (!Object.keys(filters.categories).length) {
-				Object.keys(categories).map(category => dispatch(setFiltersCategoriesProduct(category)))
-			}
-		}
-	}, [isLoaded, filters.isParse, Object.keys(filters.categories).length, filters.categories[0]])
+    React.useEffect(() => {
+        if (isLoaded && filters.isParse) {
+            if (!Object.keys(filters.categories).length) {
+                Object.keys(categories).map((category) => dispatch(setFiltersCategoriesProduct(category)));
+            }
+        }
+    }, [isLoaded, filters.isParse, Object.keys(filters.categories).length, filters.categories[0]]);
 
-	React.useEffect(() => {
-		if (isLoaded && filters.isParse) {
-			if (!Object.keys(filters.availability).length) {
-				dispatch(setFiltersAvailabilityProduct("Доступно"))
-				dispatch(setFiltersAvailabilityProduct("На примерке"))
-				dispatch(setFiltersAvailabilityProduct("Нет в наличии"))
-			}
-		}
-	}, [
-		isLoaded,
-		filters.isParse,
-		filters.search,
-		Object.keys(filters.categories).map((category) => category),
-		Object.keys(filters.types).map((type) => type),
-		Object.keys(filters.brands).map((brand) => brand)
-	])
+    React.useEffect(() => {
+        if (isLoaded && filters.isParse) {
+            if (!Object.keys(filters.availability).length) {
+                dispatch(setFiltersAvailabilityProduct('Доступно'));
+                dispatch(setFiltersAvailabilityProduct('На примерке'));
+                dispatch(setFiltersAvailabilityProduct('Нет в наличии'));
+            }
+        }
+    }, [
+        isLoaded,
+        filters.isParse,
+        filters.search,
+        Object.keys(filters.categories).map((category) => category),
+        Object.keys(filters.types).map((type) => type),
+        Object.keys(filters.brands).map((brand) => brand),
+    ]);
 
-	const onClickClearFilters = () => {
-		window.scrollTo(0, 0)
+    const onClickClearFilters = () => {
+        window.scrollTo(0, 0);
 
-		setIsOpenFiltersMedia(false)
+        setIsOpenFiltersMedia(false);
 
-		dispatch(setCurrentPageProduct(1))
+        dispatch(setCurrentPageProduct(1));
 
-		dispatch(
+        dispatch(
+            setFiltersCatalog({
+                isParse: true,
 
-			setFiltersCatalog({
-				isParse: true,
+                search: '',
 
-				search: "",
+                price: {
+                    min: 0,
+                    max: 0,
+                },
 
-				price: {
-					min: 0,
-					max: 0
-				},
+                conditions: {},
+                categories: {},
+                types: {},
+                brands: {},
+                models: {},
+                colors: {},
+                sex: {},
+                availability: {},
+                size: {},
+                selections: {},
 
-				conditions: {},
-				categories: {},
-				types: {},
-				brands: {},
-				models: {},
-				colors: {},
-				sex: {},
-				availability: {},
-				size: {},
-				selections: {},
+                boutique: false,
+                price_drop: false,
 
-				boutique: false,
-				price_drop: false,
+                glass_frame: {},
 
-				glass_frame: {},
+                sort: 'a',
+            }),
+        );
+    };
 
-				sort: "a"
-			})
-		);
-	}
+    return (
+        <div className={`catalog-filters ${isOpenFiltersMedia ? 'active' : ''}`}>
+            <div className="catalog-filters-media-top">
+                <h4 className="catalog-filters-media-top__title">Фильтры</h4>
 
-	return (
-		<div className={`catalog-filters ${isOpenFiltersMedia ? "active" : ""}`}>
-			<div className="catalog-filters-media-top">
-				<h4 className="catalog-filters-media-top__title">
-					Фильтры
-				</h4>
+                <div className="catalog-filters-media-top-close" onClick={() => setIsOpenFiltersMedia(false)}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M18 6L6 18M6 6L18 18"
+                            stroke="#202020"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </div>
+            </div>
 
-				<div className="catalog-filters-media-top-close" onClick={() => setIsOpenFiltersMedia(false)}>
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M18 6L6 18M6 6L18 18" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-					</svg>
-				</div>
-			</div>
+            <div className="catalog-filters-block-wrapper">
+                <CatalogFiltersBoutiqueMedia />
 
-			<div className="catalog-filters-block-wrapper">
-				<CatalogFiltersBoutiqueMedia />
+                <CatalogFiltersSelections />
 
-				<CatalogFiltersSelections />
+                <CatalogFiltersPrice defaultMin={price.min} defaultMax={price.max} />
+                <CatalogFiltersConditions conditions={conditions} />
+                <CatalogFiltersCategories />
+                <CatalogFiltersTypes />
+                <CatalogFiltersBrands />
+                <CatalogFiltersModels />
+                <CatalogFiltersColors colors={colors} />
 
-				<CatalogFiltersPrice
-					defaultMin={price.min}
-					defaultMax={price.max}
-				/>
-				<CatalogFiltersConditions conditions={conditions} />
-				<CatalogFiltersCategories />
-				<CatalogFiltersTypes />
-				<CatalogFiltersBrands />
-				<CatalogFiltersModels />
-				<CatalogFiltersColors colors={colors} />
+                {Object.keys(filters.categories).find((category) => category === 'Аксессуары') ? (
+                    <CatalogFiltersGlassFrame glass_frame={glass_frame} />
+                ) : null}
 
-				{Object.keys(filters.categories).find((category) => category === "Аксессуары") ? <CatalogFiltersGlassFrame glass_frame={glass_frame} /> : null}
+                <CatalogFiltersSex />
+                <CatalogFiltersAvailability />
 
-				<CatalogFiltersSex />
-				<CatalogFiltersAvailability />
-
-				{Object.keys(filters.categories).find((category) => category === "Обувь") ? <CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} /> : null}
-				{/* {Object.keys(filters.categories).map((category) => (
+                {Object.keys(filters.categories).find((category) => category === 'Обувь') ? (
+                    <CatalogFiltersSize size={categories['Обувь'].size ? categories['Обувь'].size : []} />
+                ) : null}
+                {/* {Object.keys(filters.categories).map((category) => (
 					filters.categories[category] === "Обувь" ? (
 						<CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} />
 					) : null
 				))} */}
 
-				<CatalogFiltersPriceDrop />
-			</div>
+                <CatalogFiltersPriceDrop />
+            </div>
 
-			<div className="catalog-filters-btn">
-				<button className="catalog-filters-btn__clear" onClick={onClickClearFilters}>
-					Очистить все фильтры
-				</button>
-			</div>
+            <div className="catalog-filters-btn">
+                <button className="catalog-filters-btn__clear" onClick={onClickClearFilters}>
+                    Очистить все фильтры
+                </button>
+            </div>
 
-			<div className="catalog-filters-btn-media">
-				<button className="btn-regular catalog-filters-btn-media__clear" onClick={onClickClearFilters}>
-					Сбросить
-				</button>
+            <div className="catalog-filters-btn-media">
+                <button className="btn-regular catalog-filters-btn-media__clear" onClick={onClickClearFilters}>
+                    Сбросить
+                </button>
 
-				<button className="btn catalog-filters-btn-media__apply" onClick={() => setIsOpenFiltersMedia(false)}>
-					Применить
-				</button>
-			</div>
-		</div>
-	);
+                <button className="btn catalog-filters-btn-media__apply" onClick={() => setIsOpenFiltersMedia(false)}>
+                    Применить
+                </button>
+            </div>
+        </div>
+    );
 };
 
 export default CatalogFilters;

@@ -1,17 +1,17 @@
-import { WaitingListItem } from '../../models/IWaitingListItem'
+import { WaitingListItem } from '../../models/IWaitingListItem';
 
 export interface WaitingState {
-	items: WaitingListItem[]
-	isLoaded: boolean
+    items: WaitingListItem[];
+    isLoaded: boolean;
 }
 
 export enum WaitingActionTypes {
-	SET_WAITING_ITEMS = "SET_WAITING_ITEMS",
+    SET_WAITING_ITEMS = 'SET_WAITING_ITEMS',
 }
 
 interface setWaitingItems {
-	type: WaitingActionTypes.SET_WAITING_ITEMS;
-	payload: WaitingListItem[];
+    type: WaitingActionTypes.SET_WAITING_ITEMS;
+    payload: WaitingListItem[];
 }
 
-export type WaitingActions = setWaitingItems
+export type WaitingActions = setWaitingItems;

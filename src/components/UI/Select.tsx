@@ -1,23 +1,23 @@
-import React from "react";
+import React from 'react';
 
 interface SelectProps {
     label: string;
     items: string[];
 }
 
-const Select: React.FC<SelectProps> = ({label, items}) => {
+const Select: React.FC<SelectProps> = ({ label, items }) => {
     const [state, setState] = React.useState<boolean>(false);
-    const [currentItem, setCurrentItem] = React.useState<string>("");
+    const [currentItem, setCurrentItem] = React.useState<string>('');
 
     const SelectRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-        document.addEventListener("mousedown", toggleSelect);
-        document.addEventListener("touchstart", toggleSelect);
+        document.addEventListener('mousedown', toggleSelect);
+        document.addEventListener('touchstart', toggleSelect);
 
         return () => {
-            document.removeEventListener("mousedown", toggleSelect);
-            document.removeEventListener("touchstart", toggleSelect);
+            document.removeEventListener('mousedown', toggleSelect);
+            document.removeEventListener('touchstart', toggleSelect);
         };
     }, [SelectRef]);
 
@@ -37,17 +37,9 @@ const Select: React.FC<SelectProps> = ({label, items}) => {
 
     return (
         <div className="select" ref={SelectRef} onClick={() => setState(true)}>
-            <p className="select__label">
-                {currentItem !== "" ? currentItem : <span>{label}</span>}
-            </p>
+            <p className="select__label">{currentItem !== '' ? currentItem : <span>{label}</span>}</p>
 
-            <svg
-                width="19"
-                height="19"
-                viewBox="0 0 19 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Icons">
                     <path
                         id="Vector"
@@ -59,24 +51,16 @@ const Select: React.FC<SelectProps> = ({label, items}) => {
                 </g>
             </svg>
 
-            <div className={`select-list ${state ? "active" : ""}`}>
+            <div className={`select-list ${state ? 'active' : ''}`}>
                 {items.map((item, index) => (
                     <p
-                        className={`select-list__item ${
-                            item === currentItem ? "active" : ""
-                        }`}
+                        className={`select-list__item ${item === currentItem ? 'active' : ''}`}
                         key={`select-list__item-${index}`}
                         onClick={() => toggleCurrentItem(item)}
                     >
                         {item}
 
-                        <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="Icons">
                                 <path
                                     id="Vector"

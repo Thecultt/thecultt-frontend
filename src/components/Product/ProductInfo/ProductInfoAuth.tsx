@@ -1,25 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductInfoAuth: React.FC = () => {
     return (
         <Link to="/auth" className="product-content-info-auth">
             <div className="product-content-info-auth-text">
-                <h4 className="product-content-info-auth-text__title">
-                    Гарантия подлинности
-                </h4>
-                <p className="product-content-info-auth-text__link">
-                    Подробнее о проверке подлинности
-                </p>
+                <h4 className="product-content-info-auth-text__title">Гарантия подлинности</h4>
+                <p className="product-content-info-auth-text__link">Подробнее о проверке подлинности</p>
             </div>
             <div className="product-content-info-auth-arrow">
-                <svg
-                    width="61"
-                    height="60"
-                    viewBox="0 0 61 60"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg width="61" height="60" viewBox="0 0 61 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_2251_33886)">
                         <path
                             fillRule="evenodd"
@@ -166,12 +156,7 @@ const ProductInfoAuth: React.FC = () => {
                     </g>
                     <defs>
                         <clipPath id="clip0_2251_33886">
-                            <rect
-                                width="60"
-                                height="60"
-                                fill="white"
-                                transform="translate(0.75)"
-                            />
+                            <rect width="60" height="60" fill="white" transform="translate(0.75)" />
                         </clipPath>
                     </defs>
                 </svg>

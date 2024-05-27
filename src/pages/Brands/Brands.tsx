@@ -1,36 +1,36 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-import { fetchBrands } from "../../redux/actions/brands";
+import { fetchBrands } from '../../redux/actions/brands';
 
-import { BrandsSearch, BrandsList } from "../../components/";
+import { BrandsSearch, BrandsList } from '../../components/';
 
 const Brands: React.FC = () => {
-	const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
-	const { isLoaded } = useTypedSelector(({ brands }) => brands)
+    const { isLoaded } = useTypedSelector(({ brands }) => brands);
 
-	React.useEffect(() => {
-		dispatch(fetchBrands() as any)
-	}, [])
+    React.useEffect(() => {
+        dispatch(fetchBrands() as any);
+    }, []);
 
-	return (
-		<>
-			{isLoaded ? (
-				<section className="brands">
-					<div className="container">
-						<div className="brands-wrapper">
-							<BrandsSearch />
+    return (
+        <>
+            {isLoaded ? (
+                <section className="brands">
+                    <div className="container">
+                        <div className="brands-wrapper">
+                            <BrandsSearch />
 
-							<BrandsList />
-						</div>
-					</div>
-				</section>
-			) : null}
-		</>
-	);
+                            <BrandsList />
+                        </div>
+                    </div>
+                </section>
+            ) : null}
+        </>
+    );
 };
 
 export default Brands;

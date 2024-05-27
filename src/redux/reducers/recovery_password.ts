@@ -1,18 +1,22 @@
-import { RecoveryPasswordState, RecoveryPasswordActions, RecoveryPasswordActionTypes } from '../types/IRecoveryPassword'
+import {
+    RecoveryPasswordState,
+    RecoveryPasswordActions,
+    RecoveryPasswordActionTypes,
+} from '../types/IRecoveryPassword';
 
 const initialState: RecoveryPasswordState = {
-	isSend: false
-}
+    isSend: false,
+};
 
 const recovery_password = (state = initialState, action: RecoveryPasswordActions) => {
-	if (action.type === RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND) {
-		return {
-			...state,
-			isSend: action.payload
-		};
-	}
+    if (action.type === RecoveryPasswordActionTypes.SET_RECOVERY_PASSWORD_IS_SEND) {
+        return {
+            ...state,
+            isSend: action.payload,
+        };
+    }
 
-	return state;
-}
+    return state;
+};
 
-export default recovery_password
+export default recovery_password;

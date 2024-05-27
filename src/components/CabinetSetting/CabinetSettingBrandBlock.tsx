@@ -1,22 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import {Select} from "../";
+import { Select } from '../';
 
 const CabinetSettingBrandBlock: React.FC = () => {
     return (
         <div className="cabinet-setting-block">
             <div className="cabinet-setting-block-title">
-                <h3 className="cabinet-setting-block-title__title">
-                    Дополнительные данные
-                </h3>
+                <h3 className="cabinet-setting-block-title__title">Дополнительные данные</h3>
             </div>
             <div className="cabinet-setting-block-form">
                 <div className="cabinet-setting-block-form-select-wrapper">
                     <div className="cabinet-setting-block-form-select">
-                        <Select
-                            items={["Бренд 1", "Бренд 2", "Бренд 3"]}
-                            label="Добавьте любимые бренды"
-                        />
+                        <Select items={['Бренд 1', 'Бренд 2', 'Бренд 3']} label="Добавьте любимые бренды" />
                     </div>
                 </div>
             </div>
