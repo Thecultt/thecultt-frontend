@@ -2,9 +2,10 @@ import React from "react";
 
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-import { OrderForm, OrderProducts } from "../../components/";
+import { PageLoader, OrderForm, OrderProducts } from "../../components/";
 
 const Order: React.FC = () => {
+	const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
 	const { items } = useTypedSelector(({ cart }) => cart);
 
 	React.useEffect(() => {
@@ -39,7 +40,13 @@ const Order: React.FC = () => {
 		<section className="order">
 			<div className="container">
 				<div className="order-wrapper">
-					<OrderForm onSubmit={onSubmit} />
+					{isLoadedUser ? (
+						<OrderForm onSubmit={onSubmit} />
+					) : (
+						<div className="order-loader">
+							<PageLoader />
+						</div>
+					)}
 
 					<OrderProducts />
 				</div>
