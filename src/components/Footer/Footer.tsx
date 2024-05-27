@@ -36,7 +36,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
 						Доставка и оплата
 					</Link>
 					<Link
-						to={""}
+						to={"#create_waiting"}
 						className="footer-block-menu-block__link"
 					>
 						Лист ожидания
