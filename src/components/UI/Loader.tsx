@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 // @ts-ignore
-import { default as LoaderComponent } from "react-dots-loader";
+import { default as LoaderComponent } from 'react-dots-loader';
 
 const Loader: React.FC = () => {
-	return <LoaderComponent size={7} color="#FFFFFF" />;
+    return <LoaderComponent size={7} color="#FFFFFF" />;
 };
 
 export default Loader;

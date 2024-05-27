@@ -1,58 +1,57 @@
-import { BrandsState, BrandsActions, BrandsActionTypes } from '../types/IBrands'
+import { BrandsState, BrandsActions, BrandsActionTypes } from '../types/IBrands';
 
 const initialState: BrandsState = {
-	isLoaded: false,
-	allBrands: {},
-	brands: {},
+    isLoaded: false,
+    allBrands: {},
+    brands: {},
 
-	letter: "",
-	search: ""
-}
+    letter: '',
+    search: '',
+};
 
 const brands = (state = initialState, action: BrandsActions) => {
-	if (action.type === BrandsActionTypes.SET_BRANDS) {
-		return {
-			...state,
-			isLoaded: true,
-			allBrands: action.payload,
-			brands: action.payload
-		}
-	}
+    if (action.type === BrandsActionTypes.SET_BRANDS) {
+        return {
+            ...state,
+            isLoaded: true,
+            allBrands: action.payload,
+            brands: action.payload,
+        };
+    }
 
-	if (action.type === BrandsActionTypes.SET_BRANDS_LETTER) {
+    if (action.type === BrandsActionTypes.SET_BRANDS_LETTER) {
+        return {
+            ...state,
+            brands: { [action.payload]: state.allBrands[action.payload] },
+            letter: action.payload,
+            search: '',
+        };
+    }
 
-		return {
-			...state,
-			brands: { [action.payload]: state.allBrands[action.payload] },
-			letter: action.payload,
-			search: ""
-		}
-	}
+    if (action.type === BrandsActionTypes.SET_BRANDS_SEARCH) {
+        const newBrands: { [key: string]: string[] } = {};
 
-	if (action.type === BrandsActionTypes.SET_BRANDS_SEARCH) {
-		const newBrands: { [key: string]: string[] } = {}
+        Object.keys(state.allBrands).map((key) => {
+            state.allBrands[key].map((brand) => {
+                if (brand.toLowerCase().indexOf(action.payload) !== -1) {
+                    if (newBrands[key] !== undefined) {
+                        newBrands[key] = [...newBrands[key], brand];
+                    } else {
+                        newBrands[key] = [brand];
+                    }
+                }
+            });
+        });
 
-		Object.keys(state.allBrands).map(key => {
-			state.allBrands[key].map(brand => {
-				if (brand.toLowerCase().indexOf(action.payload) !== -1) {
-					if (newBrands[key] !== undefined) {
-						newBrands[key] = [...newBrands[key], brand]
-					} else {
-						newBrands[key] = [brand]
-					}
-				}
-			})
-		})
+        return {
+            ...state,
+            brands: newBrands,
+            search: action.payload,
+            letter: '',
+        };
+    }
 
-		return {
-			...state,
-			brands: newBrands,
-			search: action.payload,
-			letter: ""
-		}
-	}
+    return state;
+};
 
-	return state
-}
-
-export default brands
+export default brands;

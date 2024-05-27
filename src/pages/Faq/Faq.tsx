@@ -1,51 +1,68 @@
-import React from 'react'
-import { useParams, NavLink } from 'react-router-dom'
+import React from 'react';
+import { useParams, NavLink } from 'react-router-dom';
 
-import { FaqAll, FaqBuyers, FaqSellers, FaqTheCultt } from '../../components/'
+import { FaqAll, FaqBuyers, FaqSellers, FaqTheCultt } from '../../components/';
 
-import FaqMainBannerImage from '../../assets/images/faq/faq-main-image.jpg'
+import FaqMainBannerImage from '../../assets/images/faq/faq-main-image.jpg';
 
 const Faq: React.FC = () => {
-	const { block } = useParams()
+    const { block } = useParams();
 
-	return (
-		<section className='faq-main'>
-			<div className="container">
-				<div className="faq-main-wrapper">
-					<div className="faq-main-banner" style={{ backgroundImage: `url(${FaqMainBannerImage})` }}>
-						<p className="faq-main-banner__title">
-							Вопросы и ответы <span>THE CULTT</span>
-						</p>
-					</div>
+    return (
+        <section className="faq-main">
+            <div className="container">
+                <div className="faq-main-wrapper">
+                    <div
+                        className="faq-main-banner"
+                        style={{
+                            backgroundImage: `url(${FaqMainBannerImage})`,
+                        }}
+                    >
+                        <p className="faq-main-banner__title">
+                            Вопросы и ответы <span>THE CULTT</span>
+                        </p>
+                    </div>
 
-					<div className="faq-main-menu">
-						<NavLink to="/help/all" className={(({ isActive }) => `faq-main-menu__link ${isActive ? "active" : ""}`)}>Общее</NavLink>
-						<NavLink to="/help/buyers" className={(({ isActive }) => `faq-main-menu__link ${isActive ? "active" : ""}`)}>Покупателям</NavLink>
-						<NavLink to="/help/sellers" className={(({ isActive }) => `faq-main-menu__link ${isActive ? "active" : ""}`)}>Продавцам</NavLink>
-						<NavLink to="/help/thecultt" className={(({ isActive }) => `faq-main-menu__link ${isActive ? "active" : ""}`)}>Условия использования сервисов THE CULTT и реквизиты</NavLink>
-					</div>
+                    <div className="faq-main-menu">
+                        <NavLink
+                            to="/help/all"
+                            className={({ isActive }) => `faq-main-menu__link ${isActive ? 'active' : ''}`}
+                        >
+                            Общее
+                        </NavLink>
+                        <NavLink
+                            to="/help/buyers"
+                            className={({ isActive }) => `faq-main-menu__link ${isActive ? 'active' : ''}`}
+                        >
+                            Покупателям
+                        </NavLink>
+                        <NavLink
+                            to="/help/sellers"
+                            className={({ isActive }) => `faq-main-menu__link ${isActive ? 'active' : ''}`}
+                        >
+                            Продавцам
+                        </NavLink>
+                        <NavLink
+                            to="/help/thecultt"
+                            className={({ isActive }) => `faq-main-menu__link ${isActive ? 'active' : ''}`}
+                        >
+                            Условия использования сервисов THE CULTT и реквизиты
+                        </NavLink>
+                    </div>
 
-					<div className="faq-main-content">
-						{block === "all" ? (
-							<FaqAll />
-						) : null}
+                    <div className="faq-main-content">
+                        {block === 'all' ? <FaqAll /> : null}
 
-						{block === "buyers" ? (
-							<FaqBuyers />
-						) : null}
+                        {block === 'buyers' ? <FaqBuyers /> : null}
 
-						{block === "sellers" ? (
-							<FaqSellers />
-						) : null}
+                        {block === 'sellers' ? <FaqSellers /> : null}
 
-						{block === "thecultt" ? (
-							<FaqTheCultt />
-						) : null}
-					</div>
-				</div>
-			</div>
-		</section>
-	)
-}
+                        {block === 'thecultt' ? <FaqTheCultt /> : null}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
 
-export default Faq
+export default Faq;

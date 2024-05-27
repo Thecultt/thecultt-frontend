@@ -1,18 +1,18 @@
-import { LoginState, LoginActions, LoginActionTypes } from '../types/ILogin'
+import { LoginState, LoginActions, LoginActionTypes } from '../types/ILogin';
 
 const initialState: LoginState = {
-	isSend: false
-}
+    isSend: false,
+};
 
 const login = (state = initialState, action: LoginActions) => {
-	if (action.type === LoginActionTypes.SET_LOGIN_IS_SEND) {
-		return {
-			...state,
-			isSend: action.payload
-		};
-	}
+    if (action.type === LoginActionTypes.SET_LOGIN_IS_SEND) {
+        return {
+            ...state,
+            isSend: action.payload,
+        };
+    }
 
-	return state;
-}
+    return state;
+};
 
-export default login
+export default login;

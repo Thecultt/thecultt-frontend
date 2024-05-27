@@ -1,43 +1,45 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
-import { setFiltersCategoriesProduct } from "../../../redux/actions/products";
+import { setFiltersCategoriesProduct } from '../../../redux/actions/products';
 
-import { ProductsFiltersCategory } from "../../../models/IProductFilters";
+import { ProductsFiltersCategory } from '../../../models/IProductFilters';
 
-import { CatalogFiltersBlockWrapper, Checkbox } from "../../";
+import { CatalogFiltersBlockWrapper, Checkbox } from '../../';
 
 const CatalogFiltersCategories: React.FC = () => {
-	const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-	const { filters } = useTypedSelector(({ products }) => products)
-	const { categories } = useTypedSelector(({ products_filters }) => products_filters)
+    const { filters } = useTypedSelector(({ products }) => products);
+    const { categories } = useTypedSelector(({ products_filters }) => products_filters);
 
-	const onChangeSetCategory = (category: string) => {
-		dispatch(setFiltersCategoriesProduct(category));
-	};
+    const onChangeSetCategory = (category: string) => {
+        dispatch(setFiltersCategoriesProduct(category));
+    };
 
-	return (
-		<CatalogFiltersBlockWrapper title="Категория">
-			{Object.keys(categories).map((category, index) => (
-				<div
-					className="catalog-filters-block-content-checkbox"
-					key={`catalog-filters-block-content-category-checkbox-${index}`}
-				>
-					<Checkbox
-						id={`catalog-filters-block-content-category-checkbox-${index}`}
-						label={category}
-						onChange={() => onChangeSetCategory(category)}
-						checked={Object.keys(filters.categories).find((filtersCategory) => (
-							category === filtersCategory
-						)) ? true : false}
-					/>
-				</div>
-			))}
-		</CatalogFiltersBlockWrapper>
-	);
+    return (
+        <CatalogFiltersBlockWrapper title="Категория">
+            {Object.keys(categories).map((category, index) => (
+                <div
+                    className="catalog-filters-block-content-checkbox"
+                    key={`catalog-filters-block-content-category-checkbox-${index}`}
+                >
+                    <Checkbox
+                        id={`catalog-filters-block-content-category-checkbox-${index}`}
+                        label={category}
+                        onChange={() => onChangeSetCategory(category)}
+                        checked={
+                            Object.keys(filters.categories).find((filtersCategory) => category === filtersCategory)
+                                ? true
+                                : false
+                        }
+                    />
+                </div>
+            ))}
+        </CatalogFiltersBlockWrapper>
+    );
 };
 
 export default CatalogFiltersCategories;

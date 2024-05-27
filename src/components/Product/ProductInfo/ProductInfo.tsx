@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 
-import { ProductPage } from "../../../models/IProduct";
+import { ProductPage } from '../../../models/IProduct';
 
 import {
-	ProductInfoTitle,
-	ProductInfoExchange,
-	ProductInfoState,
-	ProductInfoDescription,
-	ProductInfoParameters,
-	// ProductInfoParametersSize,
-	ProductInfoAuth,
-	ProductInfoTabs,
-} from "../../";
+    ProductInfoTitle,
+    ProductInfoExchange,
+    ProductInfoState,
+    ProductInfoDescription,
+    ProductInfoParameters,
+    // ProductInfoParametersSize,
+    ProductInfoAuth,
+    ProductInfoTabs,
+} from '../../';
 
-interface ProductInfoProps extends ProductPage { }
+type ProductInfoProps = ProductPage;
 
 const ProductInfo: React.FC<ProductInfoProps> = (product) => {
-	return (
-		<div className="product-content-info">
-			<ProductInfoTitle {...product} article={product.article} />
+    return (
+        <div className="product-content-info">
+            <ProductInfoTitle {...product} article={product.article} />
 
-			{/* {product.availability ? (
+            {/* {product.availability ? (
 				<>
 					<ProductInfoExchange />
 
@@ -32,21 +32,21 @@ const ProductInfo: React.FC<ProductInfoProps> = (product) => {
 				</>
 			) : null} */}
 
-			{/* <ProductInfoParametersSize {...product} /> */}
+            {/* <ProductInfoParametersSize {...product} /> */}
 
-			<ProductInfoExchange />
+            <ProductInfoExchange />
 
-			<ProductInfoState {...product} />
+            <ProductInfoState {...product} />
 
-			{product.description && product.description !== "" ? < ProductInfoDescription {...product} /> : null}
+            {product.description && product.description !== '' ? <ProductInfoDescription {...product} /> : null}
 
-			<ProductInfoParameters {...product} />
+            <ProductInfoParameters {...product} />
 
-			<ProductInfoAuth />
+            <ProductInfoAuth />
 
-			<ProductInfoTabs />
-		</div>
-	);
+            <ProductInfoTabs />
+        </div>
+    );
 };
 
 export default ProductInfo;

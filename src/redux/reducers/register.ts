@@ -1,18 +1,18 @@
-import { RegisterState, RegisterActions, RegisterActionTypes } from '../types/IRegister'
+import { RegisterState, RegisterActions, RegisterActionTypes } from '../types/IRegister';
 
 const initialState: RegisterState = {
-	isSend: false
-}
+    isSend: false,
+};
 
 const register = (state = initialState, action: RegisterActions) => {
-	if (action.type === RegisterActionTypes.SET_REGISTER_IS_SEND) {
-		return {
-			...state,
-			isSend: action.payload
-		};
-	}
+    if (action.type === RegisterActionTypes.SET_REGISTER_IS_SEND) {
+        return {
+            ...state,
+            isSend: action.payload,
+        };
+    }
 
-	return state;
-}
+    return state;
+};
 
-export default register
+export default register;
