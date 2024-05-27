@@ -27,7 +27,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
                     <Link to={'/help-delivery'} className="footer-block-menu-block__link">
                         Доставка и оплата
                     </Link>
-                    <Link to={''} className="footer-block-menu-block__link">
+                    <Link to={'#create_waiting'} className="footer-block-menu-block__link">
                         Лист ожидания
                     </Link>
                     <Link to={'/brands'} className="footer-block-menu-block__link">
@@ -69,11 +69,11 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
                         Карьера
                     </a>
                     {/* <Link
-									to={""}
-									className="footer-block-menu-block__link"
-								>
-									Устойчивое развитие
-								</Link> */}
+                        to={""}
+                        className="footer-block-menu-block__link"
+                    >
+                        Устойчивое развитие
+                    </Link> */}
                     <a
                         href="https://resalereport2023.ru"
                         className="footer-block-menu-block__link"
