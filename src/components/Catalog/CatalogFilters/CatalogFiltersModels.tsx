@@ -15,40 +15,45 @@ const CatalogFiltersModels: React.FC = () => {
 	const [search, setSearch] = React.useState<string>("");
 
 	const { filters } = useTypedSelector(({ products }) => products)
-	const { categories } = useTypedSelector(
+	const { isLoaded, categories } = useTypedSelector(
 		({ products_filters }) => products_filters
 	);
 
 	React.useEffect(() => {
-		let newModels: string[] = []
+		if (isLoaded) {
+			let newModels: string[] = []
 
-		Object.keys(filters.categories).map((category) => {
-			Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
-				Object.keys(categories[category].subsubcategories[subsubcategory]).map((brand) => {
-					if (Object.keys(filters.brands).length) {
-						Object.keys(filters.brands).map((currentBrand) => {
-							if (currentBrand === brand && categories[category].subsubcategories[subsubcategory][brand]) {
-								categories[category].subsubcategories[subsubcategory][brand].map(model => {
-									if (!newModels.find((findModel) => model === findModel)) {
-										newModels.push(model)
+			Object.keys(filters.categories).map((category) => {
+				if (categories[category] && categories[category].subsubcategories) {
+					Object.keys(categories[category].subsubcategories).map((subsubcategory) => {
+						Object.keys(categories[category].subsubcategories[subsubcategory]).map((brand) => {
+							if (Object.keys(filters.brands).length) {
+								Object.keys(filters.brands).map((currentBrand) => {
+									if (currentBrand === brand && categories[category].subsubcategories[subsubcategory][brand]) {
+										categories[category].subsubcategories[subsubcategory][brand].map(model => {
+											if (!newModels.find((findModel) => model === findModel)) {
+												newModels.push(model)
+											}
+										})
 									}
 								})
+							} else {
+								if (categories[category].subsubcategories[subsubcategory][brand]) {
+									categories[category].subsubcategories[subsubcategory][brand].map(model => {
+										if (!newModels.find((findModel) => model === findModel)) {
+											newModels.push(model)
+										}
+									})
+								}
 							}
 						})
-					} else {
-						if (categories[category].subsubcategories[subsubcategory][brand]) {
-							categories[category].subsubcategories[subsubcategory][brand].map(model => {
-								if (!newModels.find((findModel) => model === findModel)) {
-									newModels.push(model)
-								}
-							})
-						}
-					}
-				})
-			})
-		});
+					})
+				}
+			});
 
-		setModels(newModels);
+			setModels(newModels);
+
+		}
 	}, [Object.keys(filters.categories).length, Object.keys(filters.brands).length]);
 
 	const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

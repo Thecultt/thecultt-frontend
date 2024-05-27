@@ -202,7 +202,7 @@ const ProductSection: React.FC = () => {
 				</div>
 
 				<div className="alyona-doletskaya-slider-btn">
-					<a href="/catalog?categories=Сумки&categories=Обувь&categories=Одежда&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya" className="btn alyona-doletskaya-slider-btn__btn">
+					<a href="/catalog?categories=Сумки&categories=Обувь&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya" className="btn alyona-doletskaya-slider-btn__btn">
 						Смотреть весь архив
 					</a>
 				</div>
@@ -248,7 +248,7 @@ const AlyonaDoletskaya: React.FC = () => {
 						&laquo;Я&nbsp;всегда любила, люблю и&nbsp;буду любить винтажные вещи. Качество дизайна и&nbsp;материала у&nbsp;них часто лучше, чем у&nbsp;новых. И&nbsp;что особенно важно: вы&nbsp;всегда будете одна такая, уникальная&raquo;.
 					</p>
 
-					<a target='_blank' href="/catalog?categories=Сумки&categories=Обувь&categories=Одежда&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya" className="btn alyona-doletskaya-main-text__btn">
+					<a target='_blank' href="/catalog?categories=Сумки&categories=Обувь&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=landing&utm_campaign=selection_Doletskaya" className="btn alyona-doletskaya-main-text__btn">
 						Смотреть весь архив
 					</a>
 				</div>

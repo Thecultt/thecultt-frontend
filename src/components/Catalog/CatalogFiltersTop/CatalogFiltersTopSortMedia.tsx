@@ -43,7 +43,7 @@ const CatalogFiltersTopSortMedia: React.FC = () => {
 		"a": "новизне",
 		"price": "возрастанию цены",
 		"-price": "убыванию цены",
-		// "f": "популярности"
+		"popular": "популярности"
 	}
 
 	const onClickSetItem = (key: string) => {

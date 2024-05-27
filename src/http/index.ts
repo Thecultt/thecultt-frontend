@@ -36,18 +36,22 @@ $api.interceptors.response.use(
 				originalRequest._isRetry = true;
 
 				try {
-					const response = await axios.post(
-						`${process.env.REACT_APP_API_DOMEN}/users/token/refresh`,
-						{},
-						{ withCredentials: true }
-					);
+					// const response = await axios.post(
+					// 	`${process.env.REACT_APP_API_DOMEN}/users/token/refresh`,
+					// 	{},
+					// 	{ withCredentials: true }
+					// );
 
-					localStorage.setItem(
-						"accessToken",
-						response.data.accessToken
-					);
+					// localStorage.setItem(
+					// 	"accessToken",
+					// 	response.data.accessToken
+					// );
 
-					return $api.request(originalRequest);
+					// return $api.request(originalRequest);
+
+					localStorage.removeItem("accessToken")
+
+					window.location.reload()
 				} catch (e) {
 					// if (localStorage.getItem("accessToken")) {
 					// 	await $api.post("/users/revoke")

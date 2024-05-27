@@ -12,6 +12,7 @@ import { CartItem } from "../../../models/ICartItem";
 import { changeCheckCartItem, removeCartItem } from "../../../redux/actions/cart";
 import { sendCreateOrder, sendSubmitOrder } from "../../../redux/actions/order";
 import { sendUpdateUser } from "../../../redux/actions/user";
+import { sendOrderApplyPromocode } from "../../../redux/actions/order"
 
 import orderPay from '../orderPay'
 
@@ -67,6 +68,10 @@ const OrderProducts: React.FC = () => {
 
 	const removeItem = (article: string) => {
 		dispatch(removeCartItem(article, items[article]));
+
+		if (promocode.name) {
+			dispatch(sendOrderApplyPromocode(promocode.name, Object.keys(items).map((article) => items[article]).filter((item) => item.availability && !item.is_trial && item.checked).map(item => item.price).length ? Object.keys(items).map((article) => items[article]).filter((item) => item.availability && !item.is_trial && item.checked).map(item => item.price).reduce((a: number, b: number) => a + b) : 0) as any);
+		}
 	};
 
 	const isCheckAll = () => {

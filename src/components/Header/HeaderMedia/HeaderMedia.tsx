@@ -148,7 +148,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 					</p>
 
 					<div className="header-media-modal-menu-links">
-						<Link to="/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-media-modal-menu-links-link" onClick={toggleState}>Новинки</Link>
+						<Link to="/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-media-modal-menu-links-link" onClick={toggleState}>Новинки</Link>
 
 						{Object.keys(categories).map((category, index) => (
 							<HeaderMediaLinkTab title={category} linkTitle={`/catalog?categories=${category}`} key={`header-media-modal-menu-links-tab${index}`}>
@@ -190,11 +190,11 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
 						<Link to="/auth" className="header-media-modal-menu-links-link" onClick={toggleState}>Подлинность</Link>
 
-						{/* <a href="/catalog?categories=Сумки&categories=Обувь&categories=Одежда&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-media-modal-menu-links-link">
+						{/* <a href="/catalog?categories=Сумки&categories=Обувь&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-media-modal-menu-links-link">
 							Архив Алены Долецкой
 						</a> */}
 
-						<Link to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-media-modal-menu-links-link" onClick={toggleState}><b>THE CULTT SALE</b></Link>
+						<Link to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="header-media-modal-menu-links-link" onClick={toggleState}><b>THE CULTT SALE</b></Link>
 
 						<HeaderMediaLinkTab title="Личный кабинет">
 							<Link to="/cabinet/setting" className="header-media-modal-menu-links__link" onClick={toggleState}>Профиль</Link>

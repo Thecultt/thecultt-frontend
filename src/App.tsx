@@ -252,8 +252,8 @@ const App = () => {
 
 					<Route path="/AlionaDoletskaya" element={<AlyonaDoletskaya />} />
 
-					{/* <Route path="/buyer" element={<BuyerTheCulttMain />} />
-					<Route path="/buyer/product/:id" element={<BuyerTheCulttProduct />} /> */}
+					<Route path="/buyer" element={<BuyerTheCulttMain />} />
+					<Route path="/buyer/product/:id" element={<BuyerTheCulttProduct />} />
 
 					<Route path="*" element={<NotFound />} />
 				</Routes>

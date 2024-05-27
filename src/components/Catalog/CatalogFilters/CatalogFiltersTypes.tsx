@@ -21,7 +21,9 @@ const CatalogFiltersTypes: React.FC = () => {
 		const newTypes: { [key: string]: string[] } = {}
 
 		Object.keys(filters.categories).map((category) => {
-			newTypes[category] = Object.keys(categories[category].subsubcategories);
+			if (categories[category] && categories[category].subsubcategories) {
+				newTypes[category] = Object.keys(categories[category].subsubcategories);
+			}
 		});
 
 		setTypes(newTypes)

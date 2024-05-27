@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.99ecbd48.css",
-    "main.js": "/static/js/main.d7bb281d.js",
+    "main.js": "/static/js/main.ed89b51e.js",
     "static/media/lot5-media.jpg": "/static/media/lot5-media.4af141493f5b1f5a02b3.jpg",
     "static/media/home-main-banner-new.jpg": "/static/media/home-main-banner-new.fddf1074c4a000c5f074.jpg",
     "static/media/deco-images-1.jpg": "/static/media/deco-images-1.f93d3de1c0cfd6b8699a.jpg",
@@ -12,12 +12,14 @@
     "static/media/home-about-media.jpg": "/static/media/home-about-media.ff18aff90a4cf244ec9e.jpg",
     "static/media/home-categories-hand.jpg": "/static/media/home-categories-hand.b32c0b778e1016b11247.jpg",
     "static/media/maria.jpg": "/static/media/maria.926f214b8ceee807a56d.jpg",
+    "static/media/catalog-banner-invest-media.jpg": "/static/media/catalog-banner-invest-media.50b910e94f4d784408fc.jpg",
     "static/media/anna.jpg": "/static/media/anna.0a24205d8a0818acf92a.jpg",
     "static/media/about-image3.jpg": "/static/media/about-image3.c358007add507c9e2f11.jpg",
     "static/media/home-categories-belt.jpg": "/static/media/home-categories-belt.497c51175784361e506c.jpg",
     "static/media/about-image6.jpg": "/static/media/about-image6.c7e461f4019821178595.jpg",
     "static/media/about-image1.jpg": "/static/media/about-image1.4809127a0fccfd9d14e7.jpg",
     "static/media/home-categories-shoes.jpg": "/static/media/home-categories-shoes.f131f2f03bea65f5e336.jpg",
+    "static/media/catalog-banner-invest.jpg": "/static/media/catalog-banner-invest.ccda6aed514d05312638.jpg",
     "static/media/about-image2.jpg": "/static/media/about-image2.7e5187f10cd32941979c.jpg",
     "static/media/about-image5.jpg": "/static/media/about-image5.fbf68c91f7517a4006d5.jpg",
     "static/media/lot6-media.jpg": "/static/media/lot6-media.a8e97aeed370156f9cf6.jpg",
@@ -25,6 +27,7 @@
     "static/media/exchange-example-image.jpg": "/static/media/exchange-example-image.7c2f422b79e1361090d3.jpg",
     "static/media/home-categories-clock.jpg": "/static/media/home-categories-clock.25c4558fcb6b9af2d6e3.jpg",
     "static/media/about-image4.jpg": "/static/media/about-image4.209598724d4a31c4adc3.jpg",
+    "static/media/catalog-banner-price-itbag-media.jpg": "/static/media/catalog-banner-price-itbag-media.821c41c1e645f545a78f.jpg",
     "static/media/home-visit-media.jpg": "/static/media/home-visit-media.02fa192b94063947fbe1.jpg",
     "static/media/lot2-more-images.jpg": "/static/media/lot2-more-images.4aa4f66192bc84eae04a.jpg",
     "static/media/home-visit.jpg": "/static/media/home-visit.e9c9705c1db24cfedb5f.jpg",
@@ -34,6 +37,7 @@
     "static/media/lot6.jpg": "/static/media/lot6.77af587065a0d9fb3d5d.jpg",
     "static/media/faq-main-image.jpg": "/static/media/faq-main-image.84efa32e6a4143c25567.jpg",
     "static/media/deco-images-3.jpg": "/static/media/deco-images-3.9b8961e71e07ed69153c.jpg",
+    "static/media/catalog-banner-price-itbag.jpg": "/static/media/catalog-banner-price-itbag.622111e44a267f2d8e32.jpg",
     "static/media/exchange-main-image.png": "/static/media/exchange-main-image.2c89db1a3e0854c99da5.png",
     "static/media/lot2-media.jpg": "/static/media/lot2-media.4b0dcd092a0664fbe844.jpg",
     "static/media/home-categories-bag.jpg": "/static/media/home-categories-bag.718eb692fce63db09351.jpg",
@@ -52,6 +56,7 @@
     "static/media/charity-logo.svg": "/static/media/charity-logo.e458147bee5eaaa05c0906c58a1ef547.svg",
     "static/media/lot1-media.jpg": "/static/media/lot1-media.08024e6ba8a9c0cd7b6f.jpg",
     "static/media/sell-images-image-belt-3.jpg": "/static/media/sell-images-image-belt-3.9050e1cb3731424ec4d6.jpg",
+    "static/media/catalog-banner-price-may-promocode.jpg": "/static/media/catalog-banner-price-may-promocode.bb57dd9f4da42ab5e9e4.jpg",
     "static/media/home-waiting.jpg": "/static/media/home-waiting.8c10647da08fdce5afd7.jpg",
     "static/media/exchange-steps-image-3.png": "/static/media/exchange-steps-image-3.e69467336e446e667dff.png",
     "static/media/exchange-steps-image-1.png": "/static/media/exchange-steps-image-1.1fc076250965f47a87ad.png",
@@ -70,6 +75,7 @@
     "static/media/sell-images-image-bag-1.jpg": "/static/media/sell-images-image-bag-1.8826b7bc4000f4d7484e.jpg",
     "static/media/sell-images-image-clock-3.jpg": "/static/media/sell-images-image-clock-3.5e1c7d3f31340ea2a67d.jpg",
     "static/media/sell-images-image-shoes-3.jpg": "/static/media/sell-images-image-shoes-3.e3a31fb1095abf323844.jpg",
+    "static/media/catalog-banner-price-may-promocode-media.jpg": "/static/media/catalog-banner-price-may-promocode-media.7910a1a6973559e2034a.jpg",
     "static/media/forbes.png": "/static/media/forbes.d223990a7be51b0cdfa7.png",
     "static/media/sell-images-image-bag-4.jpg": "/static/media/sell-images-image-bag-4.0d539b0a4b55483a0ecb.jpg",
     "static/media/buyer-thecultt-main-media.jpg": "/static/media/buyer-thecultt-main-media.de87bfd12d9822bf6e63.jpg",
@@ -124,10 +130,10 @@
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "main.99ecbd48.css.map": "/static/css/main.99ecbd48.css.map",
-    "main.d7bb281d.js.map": "/static/js/main.d7bb281d.js.map"
+    "main.ed89b51e.js.map": "/static/js/main.ed89b51e.js.map"
   },
   "entrypoints": [
     "static/css/main.99ecbd48.css",
-    "static/js/main.d7bb281d.js"
+    "static/js/main.ed89b51e.js"
   ]
 }

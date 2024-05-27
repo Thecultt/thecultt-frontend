@@ -73,7 +73,7 @@ const HomeMainBanner: React.FC = () => {
 										Louis Vuitton, Prada и Saint Laurent
 									</p>
 
-									<a href="https://thecultt.com/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии&price_drop=false" className="home-main-banner-slider-item-text__btn color">
+									<a href="https://thecultt.com/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии&price_drop=false" className="home-main-banner-slider-item-text__btn color">
 										Смотреть
 									</a>
 								</div>
@@ -91,7 +91,7 @@ const HomeMainBanner: React.FC = () => {
 										Лоты, доставленные напрямую из бутика-партнера или от частного байера — в таком состоянии, в каком вы бы купили их в магазине бренда.
 									</p>
 
-									<a href="https://thecultt.com/catalog?boutique=true&price_drop=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Одежда&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="home-main-banner-slider-item-text__btn color">
+									<a href="https://thecultt.com/catalog?boutique=true&price_drop=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии" className="home-main-banner-slider-item-text__btn color">
 										Смотреть подборку
 									</a>
 								</div>

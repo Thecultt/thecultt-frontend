@@ -107,34 +107,36 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 			let newBrands: { title: string, value: string }[] = []
 			let newModels: { title: string, value: string }[] = []
 
-			if (categories[currentCategory].subsubcategories[currentType]) {
-				Object.keys(categories[currentCategory].subsubcategories[currentType]).map(brand => {
-					newBrands.push({ title: brand, value: brand })
-				})
-
-				Object.keys(categories[currentCategory].subsubcategories[currentType]).map(type => {
-					categories[currentCategory].subsubcategories[currentType][type].map(brand => {
-						newModels.push({ title: brand, value: brand })
-					})
-				})
-			} else {
-				Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
-					Object.keys(categories[currentCategory].subsubcategories[subsubcategory]).map((brand) => {
-						if (!newBrands.find((findBrand) => brand === findBrand.title)) {
-							newBrands.push({ title: brand, value: brand })
-						}
+			if (categories[currentCategory] && categories[currentCategory].subsubcategories && categories[currentCategory].subsubcategories[currentType]) {
+				if (categories[currentCategory].subsubcategories[currentType]) {
+					Object.keys(categories[currentCategory].subsubcategories[currentType]).map(brand => {
+						newBrands.push({ title: brand, value: brand })
 					})
 
-					if (categories[currentCategory].subsubcategories[subsubcategory]) {
-						if (categories[currentCategory].subsubcategories[subsubcategory][currentBrand]) {
-							categories[currentCategory].subsubcategories[subsubcategory][currentBrand].map(model => {
-								if (!newModels.find(findModel => model === findModel.title)) {
-									newModels.push({ title: model, value: model })
-								}
-							})
+					Object.keys(categories[currentCategory].subsubcategories[currentType]).map(type => {
+						categories[currentCategory].subsubcategories[currentType][type].map(brand => {
+							newModels.push({ title: brand, value: brand })
+						})
+					})
+				} else {
+					Object.keys(categories[currentCategory].subsubcategories).map((subsubcategory) => {
+						Object.keys(categories[currentCategory].subsubcategories[subsubcategory]).map((brand) => {
+							if (!newBrands.find((findBrand) => brand === findBrand.title)) {
+								newBrands.push({ title: brand, value: brand })
+							}
+						})
+
+						if (categories[currentCategory].subsubcategories[subsubcategory]) {
+							if (categories[currentCategory].subsubcategories[subsubcategory][currentBrand]) {
+								categories[currentCategory].subsubcategories[subsubcategory][currentBrand].map(model => {
+									if (!newModels.find(findModel => model === findModel.title)) {
+										newModels.push({ title: model, value: model })
+									}
+								})
+							}
 						}
-					}
-				})
+					})
+				}
 			}
 
 			setBrands(newBrands)

@@ -23,23 +23,28 @@ const CatalogFiltersBrands: React.FC = () => {
 
 		if (Object.keys(filters.categories).length) {
 			Object.keys(filters.categories).map((category) => {
-				Object.keys(categories[category].subsubcategories).map(subsubcategory => {
-					Object.keys(categories[category].subsubcategories[subsubcategory]).map(brand => {
-						if (!newBrands.find((findBrand) => findBrand === brand)) {
-							newBrands.push(brand)
-						}
+				if (categories[category] && categories[category].subsubcategories) {
+					Object.keys(categories[category].subsubcategories).map(subsubcategory => {
+						Object.keys(categories[category].subsubcategories[subsubcategory]).map(brand => {
+							if (!newBrands.find((findBrand) => findBrand === brand)) {
+								newBrands.push(brand)
+							}
+						})
 					})
-				})
+				}
 			});
 		} else {
 			Object.keys(categories).map(category => {
-				Object.keys(categories[category].subsubcategories).map(subsubcategory => {
-					Object.keys(categories[category].subsubcategories[subsubcategory]).map(brand => {
-						if (!newBrands.find((findBrand) => findBrand === brand)) {
-							newBrands.push(brand)
-						}
+				if (categories[category] && categories[category].subsubcategories) {
+
+					Object.keys(categories[category].subsubcategories).map(subsubcategory => {
+						Object.keys(categories[category].subsubcategories[subsubcategory]).map(brand => {
+							if (!newBrands.find((findBrand) => findBrand === brand)) {
+								newBrands.push(brand)
+							}
+						})
 					})
-				})
+				}
 			})
 		}
 

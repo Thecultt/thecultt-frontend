@@ -317,6 +317,8 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 			<div className="catalog-filters-block-wrapper">
 				<CatalogFiltersBoutiqueMedia />
 
+				<CatalogFiltersSelections />
+
 				<CatalogFiltersPrice
 					defaultMin={price.min}
 					defaultMax={price.max}
@@ -333,15 +335,12 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 				<CatalogFiltersSex />
 				<CatalogFiltersAvailability />
 
-
 				{Object.keys(filters.categories).find((category) => category === "Обувь") ? <CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} /> : null}
 				{/* {Object.keys(filters.categories).map((category) => (
 					filters.categories[category] === "Обувь" ? (
 						<CatalogFiltersSize size={categories["Обувь"].size ? categories["Обувь"].size : []} />
 					) : null
 				))} */}
-
-				<CatalogFiltersSelections />
 
 				<CatalogFiltersPriceDrop />
 			</div>
