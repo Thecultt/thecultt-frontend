@@ -14,7 +14,7 @@ const HeaderMediaBanner: React.FC = () => {
 			></div>
 
 			<div className="header-media-modal-menu-banner-text">
-				<h4 className="header-media-modal-menu-banner-text__title">Консьерж сервис</h4>
+				<h4 className="header-media-modal-menu-banner-text__title">VIP-сервис</h4>
 
 				<p className="header-media-modal-menu-banner-text__subtitle">
 					Мы создали удобный сервис для всех, кто хочет продать от 7 лотов

@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.5b5ee485.css",
-    "main.js": "/static/js/main.b3ad3ef7.js",
+    "main.js": "/static/js/main.f88735fd.js",
     "static/media/lot5-media.jpg": "/static/media/lot5-media.4af141493f5b1f5a02b3.jpg",
     "static/media/home-main-banner-new.jpg": "/static/media/home-main-banner-new.fddf1074c4a000c5f074.jpg",
     "static/media/deco-images-1.jpg": "/static/media/deco-images-1.f93d3de1c0cfd6b8699a.jpg",
@@ -57,7 +57,6 @@
     "static/media/charity-logo.svg": "/static/media/charity-logo.e458147bee5eaaa05c0906c58a1ef547.svg",
     "static/media/lot1-media.jpg": "/static/media/lot1-media.08024e6ba8a9c0cd7b6f.jpg",
     "static/media/sell-images-image-belt-3.jpg": "/static/media/sell-images-image-belt-3.9050e1cb3731424ec4d6.jpg",
-    "static/media/catalog-banner-price-may-promocode.jpg": "/static/media/catalog-banner-price-may-promocode.bb57dd9f4da42ab5e9e4.jpg",
     "static/media/home-waiting.jpg": "/static/media/home-waiting.8c10647da08fdce5afd7.jpg",
     "static/media/exchange-steps-image-3.png": "/static/media/exchange-steps-image-3.e69467336e446e667dff.png",
     "static/media/exchange-steps-image-1.png": "/static/media/exchange-steps-image-1.1fc076250965f47a87ad.png",
@@ -76,7 +75,6 @@
     "static/media/sell-images-image-bag-1.jpg": "/static/media/sell-images-image-bag-1.8826b7bc4000f4d7484e.jpg",
     "static/media/sell-images-image-clock-3.jpg": "/static/media/sell-images-image-clock-3.5e1c7d3f31340ea2a67d.jpg",
     "static/media/sell-images-image-shoes-3.jpg": "/static/media/sell-images-image-shoes-3.e3a31fb1095abf323844.jpg",
-    "static/media/catalog-banner-price-may-promocode-media.jpg": "/static/media/catalog-banner-price-may-promocode-media.7910a1a6973559e2034a.jpg",
     "static/media/forbes.png": "/static/media/forbes.d223990a7be51b0cdfa7.png",
     "static/media/sell-images-image-bag-4.jpg": "/static/media/sell-images-image-bag-4.0d539b0a4b55483a0ecb.jpg",
     "static/media/buyer-thecultt-main-media.jpg": "/static/media/buyer-thecultt-main-media.de87bfd12d9822bf6e63.jpg",
@@ -130,10 +128,10 @@
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "main.5b5ee485.css.map": "/static/css/main.5b5ee485.css.map",
-    "main.b3ad3ef7.js.map": "/static/js/main.b3ad3ef7.js.map"
+    "main.f88735fd.js.map": "/static/js/main.f88735fd.js.map"
   },
   "entrypoints": [
     "static/css/main.5b5ee485.css",
-    "static/js/main.b3ad3ef7.js"
+    "static/js/main.f88735fd.js"
   ]
 }
