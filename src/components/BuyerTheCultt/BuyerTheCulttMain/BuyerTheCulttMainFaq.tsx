@@ -5,7 +5,7 @@ const BuyerTheCulttMainFaq: React.FC = () => {
         {
             title: 'Какие модели и бренды доступны?',
             description: `
-			Вы можете оформить заявку на доставку консьерж-сервисом украшений Cartier, Bvlgari, Messika, Van Cleef & Arpels. Также доступны часы Rolex, Cartier, Panerai, Audemars Piguet и других брендов первого эшелона.
+			Вы можете оформить заявку на доставку Консьерж-сервисом украшений Cartier, Bvlgari, Messika, Van Cleef & Arpels. Также доступны часы Rolex, Cartier, Panerai, Audemars Piguet и других брендов первого эшелона.
 			<br />
 			<br />
 			Если вы хотите модель, не представленную на сайте, напишите нам.`,

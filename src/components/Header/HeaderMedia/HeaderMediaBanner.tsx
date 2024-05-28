@@ -5,7 +5,7 @@ import HeaderMediaMenuBannerConcierge from '../../../assets/images/header-media-
 
 const HeaderMediaBanner: React.FC = () => {
     return (
-        <Link to="/concierge" className="header-media-modal-menu-banner">
+        <Link to="/vipservice" className="header-media-modal-menu-banner">
             <div
                 className="header-media-modal-menu-banner-image"
                 style={{

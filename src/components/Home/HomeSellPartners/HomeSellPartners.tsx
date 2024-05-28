@@ -18,14 +18,14 @@ const HomeSellPartners: React.FC = () => {
             </div>
 
             <div className="home-sell-partners-block hover-scale">
-                <h2 className="home-sell-partners-block__title">Консьерж-сервис</h2>
+                <h2 className="home-sell-partners-block__title">VIP-сервис</h2>
 
                 <p className="home-sell-partners-block__description">
                     Мы создали удобный сервис для всех, кто хочет продать от 10 лотов - это могут быть сумки, обувь,
                     аксессуары. Это сэкономит время, силы и даже нервы.
                 </p>
 
-                <Link to="/concierge" className="btn home-sell-partners-block__btn">
+                <Link to="/vipservice" className="btn home-sell-partners-block__btn">
                     Подробнее
                 </Link>
             </div>

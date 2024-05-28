@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.5b5ee485.css",
-    "main.js": "/static/js/main.8bbef6c2.js",
+    "main.js": "/static/js/main.e5cff3a0.js",
     "static/media/lot5-media.jpg": "/static/media/lot5-media.4af141493f5b1f5a02b3.jpg",
     "static/media/home-main-banner-new.jpg": "/static/media/home-main-banner-new.fddf1074c4a000c5f074.jpg",
     "static/media/deco-images-1.jpg": "/static/media/deco-images-1.f93d3de1c0cfd6b8699a.jpg",
@@ -25,6 +25,7 @@
     "static/media/lot6-media.jpg": "/static/media/lot6-media.a8e97aeed370156f9cf6.jpg",
     "static/media/home-categories-decoration.jpg": "/static/media/home-categories-decoration.685afe5b103f83e23a0f.jpg",
     "static/media/exchange-example-image.jpg": "/static/media/exchange-example-image.7c2f422b79e1361090d3.jpg",
+    "static/media/product.jpg": "/static/media/product.58209cf13eb967abbf4f.jpg",
     "static/media/home-categories-clock.jpg": "/static/media/home-categories-clock.25c4558fcb6b9af2d6e3.jpg",
     "static/media/about-image4.jpg": "/static/media/about-image4.209598724d4a31c4adc3.jpg",
     "static/media/catalog-banner-price-itbag-media.jpg": "/static/media/catalog-banner-price-itbag-media.821c41c1e645f545a78f.jpg",
@@ -116,7 +117,6 @@
     "static/media/catalog-banner-price-drop.jpg": "/static/media/catalog-banner-price-drop.9178d8c2557e2810792a.jpg",
     "static/media/sell-images-image-clock-4.jpg": "/static/media/sell-images-image-clock-4.1b09a0ae9848527384ef.jpg",
     "static/media/catalog-banner-price-drop-media.jpg": "/static/media/catalog-banner-price-drop-media.3d6bd91b4af24f979bfc.jpg",
-    "static/media/product.jpg": "/static/media/product.e93455e0521cb3e39489.jpg",
     "static/media/catalog-banner-boutique-media.jpg": "/static/media/catalog-banner-boutique-media.c666978739e04ef7a2b3.jpg",
     "static/media/bluepint.png": "/static/media/bluepint.846b384551cc568f8358.png",
     "static/media/header-image-hover-menu-accessories.jpg": "/static/media/header-image-hover-menu-accessories.2a6f17ab47ffe4ded8ef.jpg",
@@ -130,10 +130,10 @@
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "main.5b5ee485.css.map": "/static/css/main.5b5ee485.css.map",
-    "main.8bbef6c2.js.map": "/static/js/main.8bbef6c2.js.map"
+    "main.e5cff3a0.js.map": "/static/js/main.e5cff3a0.js.map"
   },
   "entrypoints": [
     "static/css/main.5b5ee485.css",
-    "static/js/main.8bbef6c2.js"
+    "static/js/main.e5cff3a0.js"
   ]
 }

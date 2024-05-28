@@ -46,8 +46,8 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
                     <Link to={'/exchange'} className="footer-block-menu-block__link">
                         Обменять товар
                     </Link>
-                    <Link to={'/concierge'} className="footer-block-menu-block__link">
-                        Консьерж-сервис
+                    <Link to={'/vipservice'} className="footer-block-menu-block__link">
+                        VIP-сервис
                     </Link>
                     <Link to={'/sell/brands'} className="footer-block-menu-block__link">
                         Бренд-лист

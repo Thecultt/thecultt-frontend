@@ -88,13 +88,13 @@ const SellCooperation: React.FC = () => {
             </div>
 
             <Link
-                to="/concierge"
+                to="/vipservice"
                 className="sell-block-cooperation-concierge-service"
                 style={{
                     backgroundImage: `url("${SellBlockCooperationConciergeImage}")`,
                 }}
             >
-                <h3 className="sell-block-cooperation-concierge-service__title">Консьерж-сервис</h3>
+                <h3 className="sell-block-cooperation-concierge-service__title">VIP-сервис</h3>
                 <p className="sell-block-cooperation-concierge-service__subtitle">
                     Премиальная услуга для продажи более 10 товаров
                 </p>

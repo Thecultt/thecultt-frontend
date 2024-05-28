@@ -79,14 +79,14 @@ const SellInfo: React.FC = () => {
                             </div>
 
                             <div className="sell-info-cooperation-types-block hover-scale">
-                                <h3 className="sell-info-cooperation-types-block__title">Консьерж-сервис</h3>
+                                <h3 className="sell-info-cooperation-types-block__title">VIP-сервис</h3>
                                 <p className="sell-info-cooperation-types-block__description">
                                     Премиальная услуга для продажи от 10 товаров за раз. Личный менеджер THE CULTT
                                     приедет по удобному вам адресу для оценки аксессуаров, оформления документов и
                                     доставки.
                                 </p>
 
-                                <Link to="/concierge" className="sell-info-cooperation-types-block__link">
+                                <Link to="/vipservice" className="sell-info-cooperation-types-block__link">
                                     Подробнее
                                 </Link>
                             </div>

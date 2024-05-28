@@ -136,7 +136,7 @@ const HomeMainBanner: React.FC = () => {
                                         себя.
                                     </p>
 
-                                    <Link to="/concierge" className="home-main-banner-slider-item-text__btn color">
+                                    <Link to="/vipservice" className="home-main-banner-slider-item-text__btn color">
                                         Узнать больше
                                     </Link>
                                 </div>

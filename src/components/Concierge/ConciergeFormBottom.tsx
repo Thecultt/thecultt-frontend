@@ -20,7 +20,7 @@ const ConciergeFormBottom: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     return (
         <form className="concierge-form" onSubmit={handleSubmit}>
             <div className="concierge-form-content">
-                <h2 className="concierge-form-content__title">Закажите консьерж-сервис в один клик</h2>
+                <h2 className="concierge-form-content__title">Закажите VIP-сервис в один клик</h2>
 
                 <div className="concierge-form-content-input-wrapper">
                     <div className="concierge-form-content-input">
