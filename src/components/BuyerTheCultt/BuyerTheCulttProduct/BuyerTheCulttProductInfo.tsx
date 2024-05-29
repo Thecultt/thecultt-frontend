@@ -1,16 +1,11 @@
 import React from 'react';
 
-import ProductImage from '../../../assets/images/buyer-thecultt/product.jpg';
-
 import { BuyerTheCulttProduct } from '../../../models/IBuyerTheCultt';
 
 const BuyerTheCulttProductInfo: React.FC<BuyerTheCulttProduct> = ({ image, title, price, description }) => {
     return (
         <div className="buyer-thecultt-product-info">
-            <div
-                className="buyer-thecultt-product-info-image"
-                style={{ backgroundImage: `url(${ProductImage})` }}
-            ></div>
+            <div className="buyer-thecultt-product-info-image" style={{ backgroundImage: `url(${image})` }}></div>
 
             <div className="buyer-thecultt-product-info-text">
                 <h2 className="buyer-thecultt-product-info-text__title">{title}</h2>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface ProductInfoBreadCrumbsProps {
     category: string;
@@ -8,6 +8,8 @@ interface ProductInfoBreadCrumbsProps {
 }
 
 const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ category, brand, model }) => {
+    const navigate = useNavigate();
+
     return (
         <div className="product-content-info-bread-crumbs">
             {/* <Link to="/catalog">
@@ -36,7 +38,7 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
 				</div>
 			</Link> */}
 
-            <button className="product-content-info-bread-crumbs-back" onClick={() => window.history.back()}>
+            <button className="product-content-info-bread-crumbs-back" onClick={() => navigate(-1)}>
                 <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect y="0.0234375" width="26" height="26" rx="13" fill="#F7F4F0" />
                     <path

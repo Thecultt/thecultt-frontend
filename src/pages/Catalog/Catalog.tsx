@@ -19,7 +19,7 @@ const Catalog: React.FC = () => {
 
     const { filters, currentPage, typeFetch } = useTypedSelector(({ products }) => products);
 
-    const isLoadedFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
+    const { isLoaded: isLoadedFilters } = useTypedSelector(({ products_filters }) => products_filters);
 
     const [isOpenFiltersMedia, setIsOpenFiltersMedia] = React.useState<boolean>(false);
 
