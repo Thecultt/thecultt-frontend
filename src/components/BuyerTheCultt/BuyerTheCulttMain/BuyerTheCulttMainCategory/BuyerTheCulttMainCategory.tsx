@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { BuyerTheCulttCategory } from '../../../../models/IBuyerTheCultt';
-
-import { BuyerTheCulttMainCategoryBrands, BuyerTheCulttMainCategoryProduct } from '../../../';
+import { BuyerTheCulttCategory } from 'src/models/IBuyerTheCultt';
+import { BuyerTheCulttMainCategoryBrands, BuyerTheCulttMainCategoryProduct } from 'src/components';
 
 interface BuyerTheCulttMainCategoryProps extends BuyerTheCulttCategory {
     title: string;

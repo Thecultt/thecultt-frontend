@@ -2,13 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { CabinetSellTypes, CabinetSellStepKeys } from '../../../redux/types/ICabinetSell';
-
-import { setCabinetSellCurrentType, setCabinetSellCurrentStep } from '../../../redux/actions/cabinet_sell';
-
-import SellBlockCooperationConciergeImage from '../../../assets/images/sell/sell-block-cooperation-concierge-service.jpg';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CabinetSellTypes, CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
+import { setCabinetSellCurrentType, setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
+import SellBlockCooperationConciergeImage from 'src/assets/images/sell/sell-block-cooperation-concierge-service.jpg';
 
 const SellCooperation: React.FC = () => {
     const dispatch = useDispatch();

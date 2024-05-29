@@ -10,7 +10,7 @@ import {
     HomeSellPartners,
     HomeAbout,
     HomeWaiting,
-} from '../../components/';
+} from 'src/components';
 
 const Home: React.FC = () => {
     return (

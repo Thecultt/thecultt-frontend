@@ -1,9 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { setFiltersSortProduct } from '../../../redux/actions/products';
+import { setFiltersSortProduct } from 'src/redux/actions/products';
 
 const sortItems: { [key: string]: string } = {
     a: 'новизне',

@@ -1,13 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { OrderStatusProduct } from '../../../components/';
-
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { CartItem } from '../../../models/ICartItem';
-
-import { sendSubmitOrder } from '../../../redux/actions/order';
+import { OrderStatusProduct } from 'src/components';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CartItem } from 'src/models/ICartItem';
+import { sendSubmitOrder } from 'src/redux/actions/order';
 
 import orderPay from '../orderPay';
 

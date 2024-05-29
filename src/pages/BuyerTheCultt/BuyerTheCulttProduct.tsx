@@ -2,15 +2,13 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import {
     fetchBuyerTheCulttProduct,
     sendBuyerTheCulttProductApplication,
     setBuyerTheCulttProductIsSendFormProductPage,
-} from '../../redux/actions/buyer_thecultt';
-
-import { BuyerTheCulttProductInfo, BuyerTheCulttProductForm, PageLoader, Popup } from '../../components/';
+} from 'src/redux/actions/buyer_thecultt';
+import { BuyerTheCulttProductInfo, BuyerTheCulttProductForm, PageLoader, Popup } from 'src/components';
 
 const BuyerTheCulttProduct: React.FC = () => {
     const dispatch = useDispatch();

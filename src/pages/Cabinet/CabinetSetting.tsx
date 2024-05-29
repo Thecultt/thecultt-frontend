@@ -1,20 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { sendUpdateUser } from '../../redux/actions/user';
-
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { sendUpdateUser } from 'src/redux/actions/user';
 import {
     CabinetMenu,
     PageLoader,
     CabinetSettingInfoBlock,
     CabinetSettingContactBlock,
-    CabinetSettingPasswordRecovery,
-    CabinetSettingBrandBlock,
     CabinetSettingAddressBlock,
     CabinetSettingPaymentBlock,
-} from '../../components/';
+} from 'src/components';
 
 const CabinetSetting: React.FC = () => {
     const dispatch = useDispatch();

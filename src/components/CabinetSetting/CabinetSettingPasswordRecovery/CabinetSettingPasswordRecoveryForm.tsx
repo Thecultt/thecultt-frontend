@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Input } from '../../';
+import { Input } from 'src/components';
+
 const CabinetSettingPasswordRecoveryForm: React.FC = () => {
     return (
         <div className="cabinet-setting-password-recovery-form">

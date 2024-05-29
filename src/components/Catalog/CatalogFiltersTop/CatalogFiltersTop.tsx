@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { checkDeclension } from '../../../functions/checkDeclension';
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from '../../';
+import { checkDeclension } from 'src/functions/checkDeclension';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSortMedia } from 'src/components';
 
 const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
     const { filters, itemsCount } = useTypedSelector(({ products }) => products);

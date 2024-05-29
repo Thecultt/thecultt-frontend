@@ -1,8 +1,7 @@
 import { Dispatch } from 'redux';
 
-import $api from '../../http';
-
-import { ProductsFiltersCategory } from '../../models/IProductFilters';
+import $api from 'src/http';
+import { ProductsFiltersCategory } from 'src/models/IProductFilters';
 
 import { ProductsFiltersTypes, ProductsFiltersActionTypes } from '../types/IProductsFilters';
 

@@ -1,14 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import {
-    setIsNotificationServerSuccess,
-    setIsNotificationServerError,
-} from '../../../redux/actions/notifications_server';
-
-import { NotificationsServerError, NotificationsServerSuccess } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { setIsNotificationServerSuccess, setIsNotificationServerError } from 'src/redux/actions/notifications_server';
+import { NotificationsServerError, NotificationsServerSuccess } from 'src/components';
 
 const NotificationsServer: React.FC = () => {
     const dispatch = useDispatch();

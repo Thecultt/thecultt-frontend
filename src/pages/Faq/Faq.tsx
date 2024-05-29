@@ -1,9 +1,8 @@
 import React from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 
-import { FaqAll, FaqBuyers, FaqSellers, FaqTheCultt } from '../../components/';
-
-import FaqMainBannerImage from '../../assets/images/faq/faq-main-image.jpg';
+import { FaqAll, FaqBuyers, FaqSellers, FaqTheCultt } from 'src/components';
+import FaqMainBannerImage from 'src/assets/images/faq/faq-main-image.jpg';
 
 const Faq: React.FC = () => {
     const { block } = useParams();

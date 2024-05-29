@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import $api from '../../http';
+import $api from 'src/http';
 
 import { ConciergeActions, ConciergeActionTypes } from '../types/IConcierge';
 

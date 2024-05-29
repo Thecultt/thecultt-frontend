@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ExchangeMainImage from '../../assets/images/exchange/exchange-main-image.png';
-
-import ExchangeStepsImage1 from '../../assets/images/exchange/exchange-steps-image-1.png';
-import ExchangeStepsImage2 from '../../assets/images/exchange/exchange-steps-image-2.png';
-import ExchangeStepsImage3 from '../../assets/images/exchange/exchange-steps-image-3.png';
-
-import ExchangeExampleImage from '../../assets/images/exchange/exchange-example-image.jpg';
+import ExchangeMainImage from 'src/assets/images/exchange/exchange-main-image.png';
+import ExchangeStepsImage1 from 'src/assets/images/exchange/exchange-steps-image-1.png';
+import ExchangeStepsImage2 from 'src/assets/images/exchange/exchange-steps-image-2.png';
+import ExchangeStepsImage3 from 'src/assets/images/exchange/exchange-steps-image-3.png';
+import ExchangeExampleImage from 'src/assets/images/exchange/exchange-example-image.jpg';
 
 const Exchange: React.FC = () => {
     return (

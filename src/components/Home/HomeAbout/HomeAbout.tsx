@@ -1,9 +1,8 @@
 import React from 'react';
-
-import HomeAboutImage from '../../../assets/images/home/home-about.jpg';
-import HomeAboutImageMedia from '../../../assets/images/home/home-about-media.jpg';
-
 import { Link } from 'react-router-dom';
+
+import HomeAboutImage from 'src/assets/images/home/home-about.jpg';
+import HomeAboutImageMedia from 'src/assets/images/home/home-about-media.jpg';
 
 const HomeAbout: React.FC = () => {
     return (

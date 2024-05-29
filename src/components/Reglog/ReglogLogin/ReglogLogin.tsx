@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { Loader, RenderInput } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { Loader, RenderInput } from 'src/components';
 
 import validate from './validate';
 

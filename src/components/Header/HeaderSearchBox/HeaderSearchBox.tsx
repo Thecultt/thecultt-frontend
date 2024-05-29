@@ -1,20 +1,15 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { addCartItem, setCartIsVisibleMessage } from '../../../redux/actions/cart';
-
-import { sendSaveFavorite, sendRemoveFavorite } from '../../../redux/actions/favorites';
-import { setHeaderSearchValue } from '../../../redux/actions/header';
-
-import { Product } from '../../../models/IProduct';
-import { CartItem } from '../../../models/ICartItem';
-
-import { ProductBlock } from '../../';
-
-import { checkDeclension } from '../../../functions/checkDeclension';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
+import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
+import { setHeaderSearchValue } from 'src/redux/actions/header';
+import { Product } from 'src/models/IProduct';
+import { CartItem } from 'src/models/ICartItem';
+import { ProductBlock } from 'src/components';
+import { checkDeclension } from 'src/functions/checkDeclension';
 
 interface HeaderSearchBoxProps {
     state: boolean;

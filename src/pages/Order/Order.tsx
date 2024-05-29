@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { PageLoader, OrderForm, OrderProducts } from '../../components/';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { PageLoader, OrderForm, OrderProducts } from 'src/components';
 
 const Order: React.FC = () => {
     const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);

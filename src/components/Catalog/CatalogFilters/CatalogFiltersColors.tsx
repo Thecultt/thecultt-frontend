@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { setFiltersColorsProduct } from '../../../redux/actions/products';
-
-import { CatalogFiltersBlockWrapper } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { setFiltersColorsProduct } from 'src/redux/actions/products';
+import { CatalogFiltersBlockWrapper } from 'src/components';
 
 interface CatalogFiltersColorsProps {
     colors: { [key: string]: string };

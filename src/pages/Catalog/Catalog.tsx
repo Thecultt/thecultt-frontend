@@ -1,10 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { fetchFirstProductsCatalog, fetchProductsCatalog } from '../../redux/actions/products';
-
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { fetchProductsCatalog } from 'src/redux/actions/products';
 import {
     CatalogBanner,
     CatalogBannerMedia,
@@ -12,7 +10,7 @@ import {
     CatalogFiltersTop,
     CatalogFilters,
     CatalogProducts,
-} from '../../components/';
+} from 'src/components';
 
 const Catalog: React.FC = () => {
     const dispatch = useDispatch();

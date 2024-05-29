@@ -1,9 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Popup, CabinetSellsListPaymentInfoPopupForm } from '../../';
-
-import { sendUpdateUser } from '../../../redux/actions/user';
+import { sendUpdateUser } from 'src/redux/actions/user';
 
 const CabinetSellsListPaymentInfoMessage: React.FC = () => {
     const dispatch = useDispatch();

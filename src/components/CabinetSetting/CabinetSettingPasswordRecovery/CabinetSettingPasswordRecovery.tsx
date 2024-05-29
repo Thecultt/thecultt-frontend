@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { Popup, CabinetSettingPasswordRecoveryForm } from '../../../components/';
+import { Popup, CabinetSettingPasswordRecoveryForm } from 'src/components';
 
 const CabinetSettingPasswordRecovery: React.FC = () => {
-    const [stateAdd, setStateAdd] = React.useState<boolean>(false);
-    // const [isChange, setIsChange] = React.useState<boolean>(false);
+    const [stateAdd, setStateAdd] = React.useState(false);
 
     const onClickChangePassword = () => {
         setStateAdd(true);

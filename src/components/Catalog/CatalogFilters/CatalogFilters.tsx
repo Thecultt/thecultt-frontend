@@ -2,18 +2,15 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, createSearchParams, useSearchParams } from 'react-router-dom';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { ProductsStateFilters } from '../../../redux/types/IProducts';
-
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { ProductsStateFilters } from 'src/redux/types/IProducts';
 import {
     setFiltersCatalog,
     setFiltersCategoriesProduct,
     setFiltersAvailabilityProduct,
     setProductsTypeFetch,
     setCurrentPageProduct,
-} from '../../../redux/actions/products';
-
+} from 'src/redux/actions/products';
 import {
     CatalogFiltersBoutiqueMedia,
     CatalogFiltersPrice,
@@ -29,7 +26,7 @@ import {
     CatalogFiltersSelections,
     CatalogFiltersGlassFrame,
     CatalogFiltersPriceDrop,
-} from '../../';
+} from 'src/components';
 
 const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
     const dispatch = useDispatch();

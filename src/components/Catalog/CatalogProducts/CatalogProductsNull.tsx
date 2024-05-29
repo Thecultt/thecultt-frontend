@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setFiltersCatalog } from '../../../redux/actions/products';
+import { setFiltersCatalog } from 'src/redux/actions/products';
 
 const CatalogProductsNull: React.FC = () => {
     const dispatch = useDispatch();

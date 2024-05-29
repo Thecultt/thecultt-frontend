@@ -2,16 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import {
     fetchOrderAddressCountrys,
     fetchOrderAddressCitys,
     setOrderAddressContry,
     setOrderAddressCity,
-} from '../../../redux/actions/order';
-
-import { RenderInputHints } from '../../';
+} from 'src/redux/actions/order';
+import { RenderInputHints } from 'src/components';
 
 const OrderFormCountry: React.FC = () => {
     const dispatch = useDispatch();

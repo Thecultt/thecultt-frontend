@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FaqTabItem } from '../';
+import { FaqTabItem } from 'src/components';
 
 const FaqBuyers: React.FC = () => {
     const tabs: { title: string; description: string }[] = [

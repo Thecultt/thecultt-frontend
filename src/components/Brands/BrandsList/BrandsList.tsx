@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { BrandsListBlock } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { BrandsListBlock } from 'src/components';
 
 const BrandsList: React.FC = () => {
     const { brands, letter, search } = useTypedSelector(({ brands }) => brands);

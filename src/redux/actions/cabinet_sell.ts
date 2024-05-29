@@ -1,8 +1,7 @@
 import { Dispatch } from 'react';
 
-import $api from '../../http/';
-
-import { CabinetSellOption } from '../../models/ICabinetSellOption';
+import $api from 'src/http/';
+import { CabinetSellOption } from 'src/models/ICabinetSellOption';
 
 import {
     CabinetSellActionTypes,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProductPage } from '../../../models/IProduct';
+import { ProductPage } from 'src/models/IProduct';
 
 const ProductInfoParametersSize: React.FC<ProductPage> = ({
     gender,

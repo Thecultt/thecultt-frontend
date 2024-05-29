@@ -2,11 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { fetchOrderAddressStreet, setOrderAddressStreet } from '../../../redux/actions/order';
-
-import { RenderInputHints, RenderInput, RenderTextarea } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { fetchOrderAddressStreet, setOrderAddressStreet } from 'src/redux/actions/order';
+import { RenderInputHints, RenderInput, RenderTextarea } from 'src/components';
 
 const OrderFormAddress: React.FC = () => {
     const dispatch = useDispatch();

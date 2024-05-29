@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setFiltersPriceProduct } from '../../../redux/actions/products';
-
-import { CatalogFiltersBlockWrapper } from '../../';
+import { setFiltersPriceProduct } from 'src/redux/actions/products';
+import { CatalogFiltersBlockWrapper } from 'src/components';
 
 interface CatalogFiltersPriceProps {
     defaultMin: number;

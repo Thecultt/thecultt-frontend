@@ -3,11 +3,9 @@ import { useDispatch } from 'react-redux';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { changeCheckCartItem, removeCartItem } from '../../redux/actions/cart';
-
-import { CartItemBlock } from '../../components/';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
+import { CartItemBlock } from 'src/components';
 
 const Cart: React.FC = () => {
     const dispatch = useDispatch();

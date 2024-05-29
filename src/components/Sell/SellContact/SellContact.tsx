@@ -1,15 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
-import { createTextMask } from 'redux-form-input-masks';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { CabinetSellTypes, CabinetSellStepKeys } from '../../../redux/types/ICabinetSell';
-
-import { setCabinetSellCurrentStep } from '../../../redux/actions/cabinet_sell';
-
-import { SellBackBtn, RenderInput } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CabinetSellTypes, CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
+import { setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
+import { SellBackBtn, RenderInput } from 'src/components';
 
 import validate from './validate';
 

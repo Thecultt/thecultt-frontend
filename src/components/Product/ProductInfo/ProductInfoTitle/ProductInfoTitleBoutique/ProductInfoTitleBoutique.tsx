@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Popup, ProductInfoTitleBoutiquePopup } from '../../../../';
+import { Popup, ProductInfoTitleBoutiquePopup } from 'src/components';
 
 const ProductInfoTitleBoutique: React.FC = () => {
     const [isStateBoutiquePopup, setIsStateBoutiquePopup] = React.useState<boolean>(false);

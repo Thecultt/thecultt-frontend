@@ -2,11 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { fetchOrder } from '../../../redux/actions/order';
-
-import { OrderStatusSuccess, OrderStatusError } from '../../../components/';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { fetchOrder } from 'src/redux/actions/order';
+import { OrderStatusSuccess, OrderStatusError } from 'src/components';
 
 const OrderStatus: React.FC = () => {
     const { id } = useParams();

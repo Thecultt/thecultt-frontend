@@ -1,15 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { CabinetSellTypes, CabinetSellStepKeys } from '../../redux/types/ICabinetSell';
-
-import { setCabinetSellCurrentType } from '../../redux/actions/cabinet_sell';
-
-import { RenderSelect, RenderInputHints } from '../../components/';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CabinetSellTypes } from 'src/redux/types/ICabinetSell';
+import { setCabinetSellCurrentType } from 'src/redux/actions/cabinet_sell';
 
 const SellAdmin: React.FC = () => {
     const dispatch = useDispatch();

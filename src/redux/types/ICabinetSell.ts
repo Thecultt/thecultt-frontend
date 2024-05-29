@@ -1,4 +1,4 @@
-import { CabinetSellOption } from '../../models/ICabinetSellOption';
+import { CabinetSellOption } from 'src/models/ICabinetSellOption';
 
 export enum CabinetSellStepKeys {
     COOPERATION = 'cooperation',

@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { fetchBrands } from '../../redux/actions/brands';
-
-import { BrandsSearch, BrandsList } from '../../components/';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { fetchBrands } from 'src/redux/actions/brands';
+import { BrandsSearch, BrandsList } from 'src/components';
 
 const Brands: React.FC = () => {
     const dispatch = useDispatch();

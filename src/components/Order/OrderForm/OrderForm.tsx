@@ -2,11 +2,15 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { setOrderIsValid } from '../../../redux/actions/order';
-
-import { OrderFormContact, OrderFormCountry, OrderFormDelivery, OrderFormAddress, OrderFormPayments } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { setOrderIsValid } from 'src/redux/actions/order';
+import {
+    OrderFormContact,
+    OrderFormCountry,
+    OrderFormDelivery,
+    OrderFormAddress,
+    OrderFormPayments,
+} from 'src/components';
 
 import validate from './validate';
 

@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { ProductPage } from '../../../models/IProduct';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { ProductPage } from 'src/models/IProduct';
 
 const ProductInfoState: React.FC<ProductPage> = ({ condition, nuances }) => {
     const { conditions } = useTypedSelector(({ products_filters }) => products_filters);

@@ -1,9 +1,8 @@
 import { Dispatch } from 'react';
 
-import $api from '../../http';
+import $api from 'src/http';
 
 import { UserActionTypes, UserActions } from '../types/IUser';
-
 import { setIsNotificationServerSuccess } from '../actions/notifications_server';
 
 export const fetchUser = () => async (dispatch: Dispatch<UserActions>) => {

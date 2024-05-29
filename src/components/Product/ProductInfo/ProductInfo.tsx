@@ -1,17 +1,15 @@
 import React from 'react';
 
-import { ProductPage } from '../../../models/IProduct';
-
+import { ProductPage } from 'src/models/IProduct';
 import {
     ProductInfoTitle,
     ProductInfoExchange,
     ProductInfoState,
     ProductInfoDescription,
     ProductInfoParameters,
-    // ProductInfoParametersSize,
     ProductInfoAuth,
     ProductInfoTabs,
-} from '../../';
+} from 'src/components';
 
 type ProductInfoProps = ProductPage;
 

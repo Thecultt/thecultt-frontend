@@ -2,9 +2,8 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { sendDeleteWaitingListItem } from '../../redux/actions/waiting';
-
-import { Popup, WaitingListDeleteConfirm } from '../';
+import { sendDeleteWaitingListItem } from 'src/redux/actions/waiting';
+import { Popup, WaitingListDeleteConfirm } from 'src/components';
 
 const WaitingListDeleteForm: React.FC = () => {
     const dispatch = useDispatch();

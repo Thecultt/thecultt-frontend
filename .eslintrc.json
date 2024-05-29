@@ -19,6 +19,7 @@
   },
   "plugins": ["@typescript-eslint", "react", "prettier"], // prettier
   "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "react/no-unescaped-entities": "off",
     "react/react-in-jsx-scope": "off",
     "react/display-name": "off",

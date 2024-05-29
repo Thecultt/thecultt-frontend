@@ -1,7 +1,7 @@
 import React from 'react';
 
-import AuthImage1 from '../../assets/images/auth/auth-image1.jpg';
-import AuthImage2 from '../../assets/images/auth/auth-image2.jpg';
+import AuthImage1 from 'src/assets/images/auth/auth-image1.jpg';
+import AuthImage2 from 'src/assets/images/auth/auth-image2.jpg';
 
 const Auth: React.FC = () => {
     return (

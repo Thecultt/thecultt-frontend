@@ -1,7 +1,5 @@
 import React from 'react';
 import AnimateHeight from 'react-animate-height';
-import { NumericFormat } from 'react-number-format';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const CabinetSellsListItem: React.FC<any> = ({
@@ -177,12 +175,12 @@ const CabinetSellsListItem: React.FC<any> = ({
                                 {/* <div className="cabinet-sells-list-item-info-block-value ml">
 									{time_edit ? (
 										<p className="cabinet-sells-list-item-info-block-value__value">
-											<span>Статус обновлен:</span> {moment(time_edit).format("DD.MM.YYYY, hh:ss")}
+											<span>Статус обновлен:</span> {dayjs(time_edit).format("DD.MM.YYYY, hh:ss")}
 										</p>
 									) : null}
 
 									<p className="cabinet-sells-list-item-info-block-value__value">
-										<span>Дата оформления:</span> {moment(time).format("DD.MM.YYYY, hh:ss")}
+										<span>Дата оформления:</span> {dayjs(time).format("DD.MM.YYYY, hh:ss")}
 									</p>
 								</div> */}
                             </div>

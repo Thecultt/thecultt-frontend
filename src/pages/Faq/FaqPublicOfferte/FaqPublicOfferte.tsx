@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FaqBreadCrumbs } from '../../../components/';
+import { FaqBreadCrumbs } from 'src/components';
 
 const FaqPublicOfferte: React.FC = () => {
     return (

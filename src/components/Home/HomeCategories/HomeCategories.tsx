@@ -1,14 +1,14 @@
 import React from 'react';
 import Slider from 'react-slick';
 
-import { HomeCategoriesItem } from '../../../components/';
+import { HomeCategoriesItem } from 'src/components';
 
-import HomeCategoriesBagImage from '../../../assets/images/home/home-categories-bag.jpg';
-import HomeCategoriesShoesImage from '../../../assets/images/home/home-categories-shoes.jpg';
-import HomeCategoriesDecorationImage from '../../../assets/images/home/home-categories-decoration.jpg';
-import HomeCategoriesClockImage from '../../../assets/images/home/home-categories-clock.jpg';
-import HomeCategoriesBeltImage from '../../../assets/images/home/home-categories-belt.jpg';
-import HomeCategoriesHandImage from '../../../assets/images/home/home-categories-hand.jpg';
+import HomeCategoriesBagImage from 'src/assets/images/home/home-categories-bag.jpg';
+import HomeCategoriesShoesImage from 'src/assets/images/home/home-categories-shoes.jpg';
+import HomeCategoriesDecorationImage from 'src/assets/images/home/home-categories-decoration.jpg';
+import HomeCategoriesClockImage from 'src/assets/images/home/home-categories-clock.jpg';
+import HomeCategoriesBeltImage from 'src/assets/images/home/home-categories-belt.jpg';
+import HomeCategoriesHandImage from 'src/assets/images/home/home-categories-hand.jpg';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

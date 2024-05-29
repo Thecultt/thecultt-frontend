@@ -1,4 +1,4 @@
-import { WaitingListItem } from '../../models/IWaitingListItem';
+import { WaitingListItem } from 'src/models/IWaitingListItem';
 
 export interface WaitingState {
     items: WaitingListItem[];

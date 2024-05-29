@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { BuyerTheCulttProduct } from '../../../../models/IBuyerTheCultt';
+import { BuyerTheCulttProduct } from 'src/models/IBuyerTheCultt';
 
 const BuyerTheCulttMainCategoryProduct: React.FC<BuyerTheCulttProduct> = ({ id, image, title }) => {
     return (

@@ -2,11 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { setOrderCurrentDelivery } from '../../../redux/actions/order';
-
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { RenderRadioSelect } from '../../';
+import { setOrderCurrentDelivery } from 'src/redux/actions/order';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { RenderRadioSelect } from 'src/components';
 
 const deliveryItemsRussiaMoscow: {
     title: string;

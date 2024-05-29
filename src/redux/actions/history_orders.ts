@@ -1,8 +1,7 @@
 import { Dispatch } from 'react';
 
-import $api from '../../http';
-
-import { Order } from '../../models/IOrder';
+import $api from 'src/http';
+import { Order } from 'src/models/IOrder';
 
 import { HistoryOrdersActionTypes, HistoryOrdersActions } from '../types/IHistoryOrders';
 

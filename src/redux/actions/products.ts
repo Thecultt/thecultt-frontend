@@ -1,14 +1,11 @@
 import axios from 'axios';
-
 import { Dispatch } from 'redux';
 
-import $api from '../../http';
-
-import { setIsNotificationServerError } from '../actions/notifications_server';
+import $api from 'src/http';
 
 import { ProductActionTypes, ProductTypes, ProductsStateFilters } from '../types/IProducts';
 
-import { Product, ProductPage } from '../../models/IProduct';
+import { Product, ProductPage } from 'src/models/IProduct';
 
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {

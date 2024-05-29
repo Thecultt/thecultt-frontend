@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Link as LinkScroll } from 'react-scroll';
 
-import SellInfoMainImage from '../../assets/images/sell-info/sell-info-main-image.jpg';
+import SellInfoMainImage from 'src/assets/images/sell-info/sell-info-main-image.jpg';
 
 const SellInfo: React.FC = () => {
     return (

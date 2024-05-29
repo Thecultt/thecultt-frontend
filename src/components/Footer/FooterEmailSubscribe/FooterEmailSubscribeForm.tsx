@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,

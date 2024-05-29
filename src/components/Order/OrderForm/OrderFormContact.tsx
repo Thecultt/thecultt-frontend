@@ -1,8 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { createTextMask } from 'redux-form-input-masks';
 
-import { RenderInput } from '../../';
+import { RenderInput } from 'src/components';
 
 interface OrderFormContactProps {
     email: string;

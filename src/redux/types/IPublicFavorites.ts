@@ -1,4 +1,4 @@
-import { Product } from '../../models/IProduct';
+import { Product } from 'src/models/IProduct';
 
 export interface PublicFavoritesState {
     items: { [key: string]: Product };

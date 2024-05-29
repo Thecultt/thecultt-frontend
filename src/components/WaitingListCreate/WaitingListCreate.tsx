@@ -2,9 +2,8 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { sendNewWaitingListItem } from '../../redux/actions/waiting';
-
-import { Popup, WaitingListCreateForm, WaitingListCreateSuccess } from '../';
+import { sendNewWaitingListItem } from 'src/redux/actions/waiting';
+import { Popup, WaitingListCreateForm, WaitingListCreateSuccess } from 'src/components';
 
 const WaitingListCreate: React.FC = () => {
     const dispatch = useDispatch();

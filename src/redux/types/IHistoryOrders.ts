@@ -1,4 +1,4 @@
-import { Order } from '../../models/IOrder';
+import { Order } from 'src/models/IOrder';
 
 export interface HistoryOrdersState {
     items: Order[];

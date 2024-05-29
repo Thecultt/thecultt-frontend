@@ -1,53 +1,50 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CabinetSellTypes, CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
+import { setCabinetSellCurrentStep, sendCreateCabinetSellImage } from 'src/redux/actions/cabinet_sell';
+import { SellBackBtn, SellImagesBlock } from 'src/components';
 
-import { CabinetSellTypes, CabinetSellStepKeys } from '../../../redux/types/ICabinetSell';
+import SellImagesImageBag1 from 'src/assets/images/sell/sell-images-image-bag-1.jpg';
+import SellImagesImageBag2 from 'src/assets/images/sell/sell-images-image-bag-2.jpg';
+import SellImagesImageBag3 from 'src/assets/images/sell/sell-images-image-bag-3.jpg';
+import SellImagesImageBag4 from 'src/assets/images/sell/sell-images-image-bag-4.jpg';
 
-import { setCabinetSellCurrentStep, sendCreateCabinetSellImage } from '../../../redux/actions/cabinet_sell';
+import SellImagesImageShoes1 from 'src/assets/images/sell/sell-images-image-shoes-1.jpg';
+import SellImagesImageShoes2 from 'src/assets/images/sell/sell-images-image-shoes-2.jpg';
+import SellImagesImageShoes3 from 'src/assets/images/sell/sell-images-image-shoes-3.jpg';
+import SellImagesImageShoes4 from 'src/assets/images/sell/sell-images-image-shoes-4.jpg';
 
-import SellImagesImageBag1 from '../../../assets/images/sell/sell-images-image-bag-1.jpg';
-import SellImagesImageBag2 from '../../../assets/images/sell/sell-images-image-bag-2.jpg';
-import SellImagesImageBag3 from '../../../assets/images/sell/sell-images-image-bag-3.jpg';
-import SellImagesImageBag4 from '../../../assets/images/sell/sell-images-image-bag-4.jpg';
+import SellImagesImageAccess1 from 'src/assets/images/sell/sell-images-image-access-1.jpg';
+import SellImagesImageAccess2 from 'src/assets/images/sell/sell-images-image-access-2.jpg';
+import SellImagesImageAccess3 from 'src/assets/images/sell/sell-images-image-access-3.jpg';
+import SellImagesImageAccess4 from 'src/assets/images/sell/sell-images-image-access-4.jpg';
 
-import SellImagesImageShoes1 from '../../../assets/images/sell/sell-images-image-shoes-1.jpg';
-import SellImagesImageShoes2 from '../../../assets/images/sell/sell-images-image-shoes-2.jpg';
-import SellImagesImageShoes3 from '../../../assets/images/sell/sell-images-image-shoes-3.jpg';
-import SellImagesImageShoes4 from '../../../assets/images/sell/sell-images-image-shoes-4.jpg';
+import SellImagesImageJewerly1 from 'src/assets/images/sell/sell-images-image-jewerly-1.jpg';
+import SellImagesImageJewerly2 from 'src/assets/images/sell/sell-images-image-jewerly-2.jpg';
+import SellImagesImageJewerly3 from 'src/assets/images/sell/sell-images-image-jewerly-3.jpg';
+import SellImagesImageJewerly4 from 'src/assets/images/sell/sell-images-image-jewerly-4.jpg';
 
-import SellImagesImageAccess1 from '../../../assets/images/sell/sell-images-image-access-1.jpg';
-import SellImagesImageAccess2 from '../../../assets/images/sell/sell-images-image-access-2.jpg';
-import SellImagesImageAccess3 from '../../../assets/images/sell/sell-images-image-access-3.jpg';
-import SellImagesImageAccess4 from '../../../assets/images/sell/sell-images-image-access-4.jpg';
+import SellImagesImageHat1 from 'src/assets/images/sell/sell-images-image-hat-1.jpg';
+import SellImagesImageHat2 from 'src/assets/images/sell/sell-images-image-hat-2.jpg';
+import SellImagesImageHat3 from 'src/assets/images/sell/sell-images-image-hat-3.jpg';
+import SellImagesImageHat4 from 'src/assets/images/sell/sell-images-image-hat-4.jpg';
 
-import SellImagesImageJewerly1 from '../../../assets/images/sell/sell-images-image-jewerly-1.jpg';
-import SellImagesImageJewerly2 from '../../../assets/images/sell/sell-images-image-jewerly-2.jpg';
-import SellImagesImageJewerly3 from '../../../assets/images/sell/sell-images-image-jewerly-3.jpg';
-import SellImagesImageJewerly4 from '../../../assets/images/sell/sell-images-image-jewerly-4.jpg';
+import SellImagesImageBelt1 from 'src/assets/images/sell/sell-images-image-belt-1.jpg';
+import SellImagesImageBelt2 from 'src/assets/images/sell/sell-images-image-belt-2.jpg';
+import SellImagesImageBelt3 from 'src/assets/images/sell/sell-images-image-belt-3.jpg';
+import SellImagesImageBelt4 from 'src/assets/images/sell/sell-images-image-belt-4.jpg';
 
-import SellImagesImageHat1 from '../../../assets/images/sell/sell-images-image-hat-1.jpg';
-import SellImagesImageHat2 from '../../../assets/images/sell/sell-images-image-hat-2.jpg';
-import SellImagesImageHat3 from '../../../assets/images/sell/sell-images-image-hat-3.jpg';
-import SellImagesImageHat4 from '../../../assets/images/sell/sell-images-image-hat-4.jpg';
+import SellImagesImageClock1 from 'src/assets/images/sell/sell-images-image-clock-1.jpg';
+import SellImagesImageClock2 from 'src/assets/images/sell/sell-images-image-clock-2.jpg';
+import SellImagesImageClock3 from 'src/assets/images/sell/sell-images-image-clock-3.jpg';
+import SellImagesImageClock4 from 'src/assets/images/sell/sell-images-image-clock-4.jpg';
 
-import SellImagesImageBelt1 from '../../../assets/images/sell/sell-images-image-belt-1.jpg';
-import SellImagesImageBelt2 from '../../../assets/images/sell/sell-images-image-belt-2.jpg';
-import SellImagesImageBelt3 from '../../../assets/images/sell/sell-images-image-belt-3.jpg';
-import SellImagesImageBelt4 from '../../../assets/images/sell/sell-images-image-belt-4.jpg';
-
-import SellImagesImageClock1 from '../../../assets/images/sell/sell-images-image-clock-1.jpg';
-import SellImagesImageClock2 from '../../../assets/images/sell/sell-images-image-clock-2.jpg';
-import SellImagesImageClock3 from '../../../assets/images/sell/sell-images-image-clock-3.jpg';
-import SellImagesImageClock4 from '../../../assets/images/sell/sell-images-image-clock-4.jpg';
-
-import SellImagesImageHand1 from '../../../assets/images/sell/sell-images-image-hand-1.jpg';
-import SellImagesImageHand2 from '../../../assets/images/sell/sell-images-image-hand-2.jpg';
-import SellImagesImageHand3 from '../../../assets/images/sell/sell-images-image-hand-3.jpg';
-import SellImagesImageHand4 from '../../../assets/images/sell/sell-images-image-hand-4.jpg';
-
-import { SellBackBtn, SellImagesBlock } from '../../';
+import SellImagesImageHand1 from 'src/assets/images/sell/sell-images-image-hand-1.jpg';
+import SellImagesImageHand2 from 'src/assets/images/sell/sell-images-image-hand-2.jpg';
+import SellImagesImageHand3 from 'src/assets/images/sell/sell-images-image-hand-3.jpg';
+import SellImagesImageHand4 from 'src/assets/images/sell/sell-images-image-hand-4.jpg';
 
 const SellImages: React.FC = () => {
     const dispatch = useDispatch();

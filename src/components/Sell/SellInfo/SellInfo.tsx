@@ -3,13 +3,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, formValueSelector, Field } from 'redux-form';
 
-import { CabinetSellStepKeys } from '../../../redux/types/ICabinetSell';
-
-import { setCabinetSellCurrentStep } from '../../../redux/actions/cabinet_sell';
-
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from '../../';
+import { CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
+import { setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from 'src/components';
 
 import validate from './validate';
 

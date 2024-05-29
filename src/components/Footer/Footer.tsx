@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Logo from '../../assets/images/logo.svg';
-
-import { FooterEmailSubscribe, FooterMenuBlock } from '../';
+import Logo from 'src/assets/images/logo.svg';
+import { FooterMenuBlock } from 'src/components';
 
 interface FooterProps {
     transparent?: boolean;

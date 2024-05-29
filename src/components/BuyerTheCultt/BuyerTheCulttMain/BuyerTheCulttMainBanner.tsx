@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BuyerTheculttMainImage from '../../../assets/images/buyer-thecultt/buyer-thecultt-main.jpg';
-import BuyerTheculttMainImageMedia from '../../../assets/images/buyer-thecultt/buyer-thecultt-main-media.jpg';
+import BuyerTheculttMainImage from 'src/assets/images/buyer-thecultt/buyer-thecultt-main.jpg';
+import BuyerTheculttMainImageMedia from 'src/assets/images/buyer-thecultt/buyer-thecultt-main-media.jpg';
 
 interface BuyerTheCulttMainBannerProps {
     onClickOpenCustomForm: () => void;

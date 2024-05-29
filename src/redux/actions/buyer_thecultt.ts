@@ -1,8 +1,7 @@
 import { Dispatch } from 'redux';
 
-import $api from '../../http/';
-
-import { BuyerTheCulttCategory, BuyerTheCulttProduct } from '../../models/IBuyerTheCultt';
+import $api from 'src/http/';
+import { BuyerTheCulttCategory, BuyerTheCulttProduct } from 'src/models/IBuyerTheCultt';
 
 import { BuyerTheCulttActions, BuyerTheCulttActionTypes } from '../types/IBuyerTheCultt';
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { setFiltersBoutiqueProduct } from '../../../redux/actions/products';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { setFiltersBoutiqueProduct } from 'src/redux/actions/products';
 
 const CatalogFiltersTopBoutique: React.FC = React.memo(() => {
     const dispatch = useDispatch();

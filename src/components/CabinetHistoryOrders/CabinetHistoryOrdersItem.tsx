@@ -1,10 +1,9 @@
 import React from 'react';
 import AnimateHeight from 'react-animate-height';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
-import { Order } from '../../models/IOrder';
-
-import { CabinetHistoryOrdersItemProduct } from '../../components/';
+import { Order } from 'src/models/IOrder';
+import { CabinetHistoryOrdersItemProduct } from 'src/components/';
 
 interface CabinetHistoryOrdersItemProps extends Order {
     statusColor: string;
@@ -41,7 +40,7 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
                         <h3 className="cabinet-history-orders-item-topinfo-block__title">Заказ: #{num}</h3>
 
                         <p className="cabinet-history-orders-item-topinfo-block__date">
-                            от {moment(createdon).format('DD.MM.YYYY')}
+                            от {dayjs(createdon).format('DD.MM.YYYY')}
                         </p>
 
                         <p className="cabinet-history-orders-item-topinfo-block__sum">{cost} ₽</p>

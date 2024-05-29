@@ -1,7 +1,7 @@
 import React from 'react';
 import { NumericFormat } from 'react-number-format';
 
-import { OrderProduct } from '../../../models/IOrder';
+import { OrderProduct } from 'src/models/IOrder';
 
 const OrderStatusProduct: React.FC<OrderProduct> = ({ images, manufacturer, model_name, condition, price }) => {
     return (

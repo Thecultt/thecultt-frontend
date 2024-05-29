@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { sendRecoveryPassword } from '../../../redux/actions/recovery_password';
+import { sendRecoveryPassword } from 'src/redux/actions/recovery_password';
 
 const ReglogOldUserNewPassword: React.FC = () => {
     const dispatch = useDispatch();

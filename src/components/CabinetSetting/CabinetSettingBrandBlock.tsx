@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Select } from '../';
+import { Select } from 'src/components';
 
 const CabinetSettingBrandBlock: React.FC = () => {
     return (

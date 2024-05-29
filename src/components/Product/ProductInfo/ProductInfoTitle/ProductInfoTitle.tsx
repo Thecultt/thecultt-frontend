@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
 import { useDispatch } from 'react-redux';
 
-import { ProductPage } from '../../../../models/IProduct';
-import { CartItem } from '../../../../models/ICartItem';
-
-import { addCartItem, setCartIsVisibleMessage } from '../../../../redux/actions/cart';
-import { sendSaveFavorite, sendRemoveFavorite } from '../../../../redux/actions/favorites';
-
-import { useTypedSelector } from '../../../../hooks/useTypedSelector';
-
-import { ProductInfoTitleBoutique, ProductInfoTitleSplit } from '../../../';
+import { ProductPage } from 'src/models/IProduct';
+import { CartItem } from 'src/models/ICartItem';
+import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
+import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { ProductInfoTitleBoutique, ProductInfoTitleSplit } from 'src/components';
 
 const ProductInfoTitle: React.FC<ProductPage> = ({
     id,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import VisitImage from '../../assets/images/visit.jpg';
+import VisitImage from 'src/assets/images/visit.jpg';
 
 const Visit: React.FC = () => {
     return (

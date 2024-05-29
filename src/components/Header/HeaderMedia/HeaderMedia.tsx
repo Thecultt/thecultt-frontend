@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { HeaderMediaBanner, HeaderMediaLinkTab, Footer } from '../../';
-
-import Logo from '../../../assets/images/logo.svg';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { HeaderMediaLinkTab, Footer } from 'src/components';
+import Logo from 'src/assets/images/logo.svg';
 
 interface HeaderMediaProps {
     setIsOpenSearch: (bool: boolean) => void;

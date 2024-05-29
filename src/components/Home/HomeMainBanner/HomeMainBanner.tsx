@@ -2,13 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 
-import HomeMainBannerImage1 from '../../../assets/images/home/home-main-banner1.jpg';
-import HomeMainBannerImage2 from '../../../assets/images/home/home-main-banner2.jpg';
-import HomeMainBannerImage3 from '../../../assets/images/home/home-main-banner3.jpg';
-
-import HomeMainBannerImageNew from '../../../assets/images/home/home-main-banner-new.jpg';
-import HomeMainBannerImageBoutique from '../../../assets/images/home/home-main-banner-boutique.jpg';
-import HomeMainBannerImageConcierge from '../../../assets/images/home/home-main-banner-concierge.jpg';
+import HomeMainBannerImageNew from 'src/assets/images/home/home-main-banner-new.jpg';
+import HomeMainBannerImageBoutique from 'src/assets/images/home/home-main-banner-boutique.jpg';
+import HomeMainBannerImageConcierge from 'src/assets/images/home/home-main-banner-concierge.jpg';
 
 const HomeMainBanner: React.FC = () => {
     const SliderRef = React.useRef<any>(null);

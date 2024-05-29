@@ -1,4 +1,4 @@
-import { ProductsFiltersCategory } from '../../models/IProductFilters';
+import { ProductsFiltersCategory } from 'src/models/IProductFilters';
 
 export interface ProductsFiltersState {
     isLoaded: boolean;

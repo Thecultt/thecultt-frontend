@@ -1,7 +1,7 @@
 import axios from 'axios';
-import store from '../redux/store';
 
-import { setIsNotificationServerError } from '../redux/actions/notifications_server';
+import store from 'src/redux/store';
+import { setIsNotificationServerError } from 'src/redux/actions/notifications_server';
 
 const $api = axios.create({
     withCredentials: false,

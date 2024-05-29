@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { setCartIsVisibleMessage } from '../../../redux/actions/cart';
-
-import { HeaderCartModal, HeaderCartModalAddMessage } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { setCartIsVisibleMessage } from 'src/redux/actions/cart';
+import { HeaderCartModal, HeaderCartModalAddMessage } from 'src/components';
 
 const HeaderCart: React.FC = () => {
     const dispatch = useDispatch();

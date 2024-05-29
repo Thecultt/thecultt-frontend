@@ -2,13 +2,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { sendConciergeForm, setConciergeIsSend } from '../../redux/actions/concierge';
-
-import { ConciergeFormTop, ConciergeFormBottom, Popup } from '../../components';
-
-import ConciergeMainImage from '../../assets/images/concierge/concierge-main-image.jpg';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { sendConciergeForm, setConciergeIsSend } from 'src/redux/actions/concierge';
+import { ConciergeFormTop, ConciergeFormBottom, Popup } from 'src/components';
+import ConciergeMainImage from 'src/assets/images/concierge/concierge-main-image.jpg';
 
 const Concierge: React.FC = () => {
     const dispatch = useDispatch();

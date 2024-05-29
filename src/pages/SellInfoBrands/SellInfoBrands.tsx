@@ -1,8 +1,6 @@
 import React from 'react';
 import { arrayChunkSplit } from 'array-chunk-split';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
 const SellInfoBrands: React.FC = () => {
     const categories: { [key: string]: string[] } = {
         'Женские сумки': [

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import VisitImage from '../../../assets/images/home/home-visit.jpg';
-import VisitImageMedia from '../../../assets/images/home/home-visit-media.jpg';
+import VisitImage from 'src/assets/images/home/home-visit.jpg';
+import VisitImageMedia from 'src/assets/images/home/home-visit-media.jpg';
 
 const HomeVisit: React.FC = () => {
     return (

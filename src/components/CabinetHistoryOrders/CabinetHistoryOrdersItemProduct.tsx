@@ -2,7 +2,7 @@ import React from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
-import { OrderProduct } from '../../models/IOrder';
+import { OrderProduct } from 'src/models/IOrder';
 
 const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({
     article,
