@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
+import 'dayjs/locale/ru';
+import dayjs from 'dayjs';
+
 import App from './App';
+import store from './redux/store';
 
 import './assets/sass/style.sass';
 
-import store from './redux/store';
+dayjs.locale('ru');
 
 Sentry.init({
     dsn: 'https://d3754429f63408b40cde3aae9c7253b8@o4505233821335552.ingest.sentry.io/4506541159284736',

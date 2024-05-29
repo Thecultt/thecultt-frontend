@@ -3,11 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { compose } from 'redux';
 
-import 'react-dots-loader/index.css';
-
-import 'moment/locale/ru';
-
 import { useTypedSelector } from './hooks/useTypedSelector';
+
+import 'react-dots-loader/index.css';
 
 import {
     NotificationsServer,

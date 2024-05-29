@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { NumericFormat } from 'react-number-format';
 import { formValueSelector } from 'redux-form';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
@@ -41,7 +41,7 @@ const OrderProducts: React.FC = () => {
             event: 'add_shipping_info',
             ecommerce: {
                 timestamp: Math.floor(Date.now() / 1000),
-                shipping_tier: `${currentDelivery.title}|${moment().format('DD.MM.YYYY')}|${currentDelivery.price}`,
+                shipping_tier: `${currentDelivery.title}|${dayjs().format('DD.MM.YYYY')}|${currentDelivery.price}`,
                 items: products.map((item, index) => ({
                     item_name: item.name,
                     item_id: `${item.id}`,
