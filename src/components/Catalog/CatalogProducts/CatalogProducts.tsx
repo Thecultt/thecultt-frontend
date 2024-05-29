@@ -1,16 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { addCartItem, setCartIsVisibleMessage } from '../../../redux/actions/cart';
-
-import { sendSaveFavorite, sendRemoveFavorite } from '../../../redux/actions/favorites';
-
-import { ProductBlock, CatalogProductsPagination, CatalogProductsNull, PageLoader } from '../../';
-
-import { Product } from '../../../models/IProduct';
-import { CartItem } from '../../../models/ICartItem';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
+import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
+import { ProductBlock, CatalogProductsPagination, CatalogProductsNull, PageLoader } from 'src/components';
+import { Product } from 'src/models/IProduct';
+import { CartItem } from 'src/models/ICartItem';
 
 const CatalogProducts: React.FC = () => {
     const dispatch = useDispatch();

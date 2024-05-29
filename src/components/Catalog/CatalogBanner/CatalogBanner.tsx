@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import CatalogBannerImagePriceDrop from '../../../assets/images/catalog/catalog-banner-price-drop.jpg';
-import CatalogBannerImageBoutique from '../../../assets/images/catalog/catalog-banner-boutique.jpg';
-import CatalogBannerImageItbag from '../../../assets/images/catalog/catalog-banner-price-itbag.jpg';
-import CatalogBannerImageInvest from '../../../assets/images/catalog/catalog-banner-invest.jpg';
+import CatalogBannerImagePriceDrop from 'src/assets/images/catalog/catalog-banner-price-drop.jpg';
+import CatalogBannerImageBoutique from 'src/assets/images/catalog/catalog-banner-boutique.jpg';
+import CatalogBannerImageItbag from 'src/assets/images/catalog/catalog-banner-price-itbag.jpg';
+import CatalogBannerImageInvest from 'src/assets/images/catalog/catalog-banner-invest.jpg';
 
 const CatalogBanner: React.FC = React.memo(() => {
     const { search } = useLocation();

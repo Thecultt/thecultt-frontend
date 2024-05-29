@@ -1,19 +1,19 @@
 import React from 'react';
 
-import AboutMainImage from '../../assets/images/about/about-image-1.jpg';
-import AboutCulttImage from '../../assets/images/about/about-image-2.jpg';
+import AboutMainImage from 'src/assets/images/about/about-image-1.jpg';
+import AboutCulttImage from 'src/assets/images/about/about-image-2.jpg';
 
-import ElleLogo from '../../assets/images/about/logos/elle.png';
-import ForbesLogo from '../../assets/images/about/logos/forbes.png';
-import BuroLogo from '../../assets/images/about/logos/buro.png';
-import IncLogo from '../../assets/images/about/logos/inc.png';
-import RbkLogo from '../../assets/images/about/logos/rbk.png';
-import BluepintLogo from '../../assets/images/about/logos/bluepint.png';
+import ElleLogo from 'src/assets/images/about/logos/elle.png';
+import ForbesLogo from 'src/assets/images/about/logos/forbes.png';
+import BuroLogo from 'src/assets/images/about/logos/buro.png';
+import IncLogo from 'src/assets/images/about/logos/inc.png';
+import RbkLogo from 'src/assets/images/about/logos/rbk.png';
+import BluepintLogo from 'src/assets/images/about/logos/bluepint.png';
 
-import Anna from '../../assets/images/about/team/anna.jpg';
-import Daria from '../../assets/images/about/team/daria.jpg';
-import Maria from '../../assets/images/about/team/maria.jpg';
-import Tatiana from '../../assets/images/about/team/tatiana.jpg';
+import Anna from 'src/assets/images/about/team/anna.jpg';
+import Daria from 'src/assets/images/about/team/daria.jpg';
+import Maria from 'src/assets/images/about/team/maria.jpg';
+import Tatiana from 'src/assets/images/about/team/tatiana.jpg';
 
 const About: React.FC = () => {
     return (

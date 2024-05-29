@@ -2,9 +2,8 @@ import React from 'react';
 import AnimateHeight from 'react-animate-height';
 import dayjs from 'dayjs';
 
-import { Order } from '../../models/IOrder';
-
-import { CabinetHistoryOrdersItemProduct } from '../../components/';
+import { Order } from 'src/models/IOrder';
+import { CabinetHistoryOrdersItemProduct } from 'src/components/';
 
 interface CabinetHistoryOrdersItemProps extends Order {
     statusColor: string;

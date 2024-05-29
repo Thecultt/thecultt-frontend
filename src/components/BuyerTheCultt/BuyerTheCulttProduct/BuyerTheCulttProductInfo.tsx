@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BuyerTheCulttProduct } from '../../../models/IBuyerTheCultt';
+import { BuyerTheCulttProduct } from 'src/models/IBuyerTheCultt';
 
 const BuyerTheCulttProductInfo: React.FC<BuyerTheCulttProduct> = ({ image, title, price, description }) => {
     return (

@@ -2,16 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { PageLoader, ProductBlock, CabinetFavoritesNull } from '../../components';
-
-import { CartItem } from '../../models/ICartItem';
-import { Product } from '../../models/IProduct';
-
-import { addCartItem, setCartIsVisibleMessage } from '../../redux/actions/cart';
-
-import { fetchPublicFavorites } from '../../redux/actions/public_favorites';
-import { sendSaveFavorite, sendRemoveFavorite } from '../../redux/actions/favorites';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { PageLoader, ProductBlock, CabinetFavoritesNull } from 'src/components';
+import { CartItem } from 'src/models/ICartItem';
+import { Product } from 'src/models/IProduct';
+import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
+import { fetchPublicFavorites } from 'src/redux/actions/public_favorites';
+import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
 
 const PublicFavorites: React.FC = () => {
     const { userId } = useParams();

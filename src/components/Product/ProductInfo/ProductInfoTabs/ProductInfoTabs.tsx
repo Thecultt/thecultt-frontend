@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProductInfoTabsItem } from '../../../';
+import { ProductInfoTabsItem } from 'src/components';
 
 const ProductInfoTabs: React.FC = () => {
     const tabs = [

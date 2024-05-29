@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { Dispatch } from 'react';
 
-import $api from '../../http';
-
-import { Product } from '../../models/IProduct';
+import $api from 'src/http';
+import { Product } from 'src/models/IProduct';
 
 import { FavoritesActionTypes, FavoritesActions } from '../types/IFavorites';
 

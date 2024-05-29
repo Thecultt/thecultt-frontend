@@ -1,10 +1,9 @@
 import { Dispatch } from 'react';
 
-import $api from '../../http';
+import $api from 'src/http';
+import { WaitingListItem } from 'src/models/IWaitingListItem';
 
 import { WaitingActionTypes, WaitingActions } from '../types/IWaiting';
-
-import { WaitingListItem } from '../../models/IWaitingListItem';
 
 export const fetchWaitingList = () => async (dispatch: Dispatch<WaitingActions>) => {
     const { data } = await $api.get<WaitingListItem[]>(`/waitinglist_requests/`);

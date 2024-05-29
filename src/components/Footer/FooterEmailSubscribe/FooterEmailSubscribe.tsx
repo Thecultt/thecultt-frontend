@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FooterEmailSubscribeForm } from '../../';
+import { FooterEmailSubscribeForm } from 'src/components';
 
 const FooterEmailSubscribe: React.FC = () => {
     const onSubmit = (data: any) => {};

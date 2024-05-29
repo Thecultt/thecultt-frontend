@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { fetchCabinetSellsList } from '../../redux/actions/cabinet_sell';
-
-import { CabinetMenu, CabinetSellsListPaymentInfoMessage, CabinetSellsListItem } from '../../components/';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { fetchCabinetSellsList } from 'src/redux/actions/cabinet_sell';
+import { CabinetMenu, CabinetSellsListPaymentInfoMessage, CabinetSellsListItem } from 'src/components';
 
 const CabinetSellsList: React.FC = () => {
     const dispatch = useDispatch();

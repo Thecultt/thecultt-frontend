@@ -2,19 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import {
-    fetchOrderAddressCountrys,
-    fetchOrderAddressCitys,
-    fetchOrderAddressStreet,
-} from '../../../redux/actions/order';
-
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { RenderInput, RenderInputHints, RenderTextarea } from '../../';
-
-// import { validate } from './validate'
-
-// import {Select, Input, Textarea} from "../../";
+import { fetchOrderAddressCountrys, fetchOrderAddressCitys, fetchOrderAddressStreet } from 'src/redux/actions/order';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { RenderInput, RenderInputHints, RenderTextarea } from 'src/components';
 
 const CabinetSettingAddressBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,

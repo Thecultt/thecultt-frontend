@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { CabinetSellStepKeys, CabinetSellTypes } from '../../redux/types/ICabinetSell';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CabinetSellStepKeys, CabinetSellTypes } from 'src/redux/types/ICabinetSell';
 
 const SellSteps: React.FC = () => {
     const steps: {

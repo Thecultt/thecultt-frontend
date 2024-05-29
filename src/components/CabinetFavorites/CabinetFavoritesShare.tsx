@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { Popup } from '../../components/';
-
-import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { Popup } from 'src/components';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 const CabinetFavoritesShare: React.FC = () => {
     const { user } = useTypedSelector(({ user }) => user);

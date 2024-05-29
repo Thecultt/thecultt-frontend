@@ -1,9 +1,8 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { OrderStatusProduct } from '../../../components/';
-
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { OrderStatusProduct } from 'src/components';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 const OrderStatusSuccess: React.FC = () => {
     const { order } = useTypedSelector(({ order }) => order);

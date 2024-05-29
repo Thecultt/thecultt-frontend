@@ -1,9 +1,8 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { Loader, RenderInput } from '../../';
+import { Loader, RenderInput } from 'src/components';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 import { validate } from './validate';
 

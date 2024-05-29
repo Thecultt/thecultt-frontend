@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ProductPage } from '../../../models/IProduct';
+import { ProductPage } from 'src/models/IProduct';
 
 const ProductInfoDescription: React.FC<ProductPage> = ({ description }) => {
     return (

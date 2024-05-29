@@ -2,9 +2,8 @@ import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { createTextMask } from 'redux-form-input-masks';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { RenderInput, RenderRadioSelect } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { RenderInput, RenderRadioSelect } from 'src/components';
 
 import { validate } from './validate';
 

@@ -1,10 +1,8 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
-import { createTextMask } from 'redux-form-input-masks';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { RenderInput } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { RenderInput } from 'src/components';
 
 const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -18,8 +16,8 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
         isSending,
     } = useTypedSelector(({ user }) => user);
 
-    const [state, setState] = React.useState<boolean>(pasport !== '' || pasport !== null ? true : false);
-    const [isEdit, setIsEdit] = React.useState<boolean>(pasport === '' || pasport === null ? true : false);
+    const [state, setState] = React.useState(pasport !== '' || pasport !== null);
+    const [isEdit, setIsEdit] = React.useState(pasport === '' || pasport === null);
 
     React.useEffect(() => {
         initialize({

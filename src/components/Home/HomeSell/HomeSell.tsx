@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import HomeSellImage from '../../../assets/images/home/home-sell.jpg';
+import HomeSellImage from 'src/assets/images/home/home-sell.jpg';
 
 const HomeSell: React.FC = () => {
     return (

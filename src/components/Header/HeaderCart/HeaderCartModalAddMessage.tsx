@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { removeCartItem } from '../../../redux/actions/cart';
-
-import { HeaderCartModalItem } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { removeCartItem } from 'src/redux/actions/cart';
+import { HeaderCartModalItem } from 'src/components';
 
 interface HeaderCartModalAddMessageProps {
     state: boolean;

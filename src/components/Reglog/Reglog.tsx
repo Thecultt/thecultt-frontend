@@ -2,13 +2,11 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { sendCheckEmail } from '../../redux/actions/check_email';
-import { sendRegister } from '../../redux/actions/register';
-import { sendLogin } from '../../redux/actions/login';
-import { sendRecoveryPassword, sendRecoveryPasswordConfirmed } from '../../redux/actions/recovery_password';
-
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { sendCheckEmail } from 'src/redux/actions/check_email';
+import { sendRegister } from 'src/redux/actions/register';
+import { sendLogin } from 'src/redux/actions/login';
+import { sendRecoveryPassword, sendRecoveryPasswordConfirmed } from 'src/redux/actions/recovery_password';
 import {
     Popup,
     ReglogCheckEmail,
@@ -21,7 +19,7 @@ import {
     ReglogRecoveryPassword,
     ReglogRecoveryPasswordSuccess,
     ReglogRecoveryPasswordConfirmed,
-} from '../../components/';
+} from 'src/components';
 
 export enum ReglogStateTypesNotLogin {
     REGLOG = 'reglog',

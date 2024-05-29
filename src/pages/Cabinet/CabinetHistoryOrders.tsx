@@ -1,17 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { fetchHistoryOrders } from '../../redux/actions/history_orders';
-
-import { CabinetMenu, CabinetHistoryOrdersItem, CabinetHistoryOrdersNull, PageLoader } from '../../components/';
-
-import { CartItem } from '../../models/ICartItem';
-
-import { sendSubmitOrder } from '../../redux/actions/order';
-
-import orderPay from '../../components/Order/orderPay';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { fetchHistoryOrders } from 'src/redux/actions/history_orders';
+import { CabinetMenu, CabinetHistoryOrdersItem, CabinetHistoryOrdersNull, PageLoader } from 'src/components';
+import { sendSubmitOrder } from 'src/redux/actions/order';
+import orderPay from 'src/components/Order/orderPay';
 
 const CabinetHistoryOrders: React.FC = () => {
     const dispatch = useDispatch();

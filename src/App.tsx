@@ -4,12 +4,8 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { compose } from 'redux';
 
 import { useTypedSelector } from './hooks/useTypedSelector';
-
-import 'react-dots-loader/index.css';
-
 import {
     NotificationsServer,
-    MenuMedia,
     Header,
     Reglog,
     Footer,
@@ -17,7 +13,6 @@ import {
     WaitingListCreate,
     WaitingListDelete,
 } from './components';
-
 import {
     NotFound,
     Home,
@@ -39,7 +34,6 @@ import {
     Visit,
     Order,
     Sell,
-    SellAdmin,
     SellInfo,
     SellInfoBrands,
     Concierge,
@@ -51,7 +45,7 @@ import {
     AlyonaDoletskaya,
     BuyerTheCulttMain,
     BuyerTheCulttProduct,
-} from './pages/';
+} from './pages';
 
 import { fetchProductsFilters } from './redux/actions/products_filters';
 import { fetchFirstProductsCatalog } from './redux/actions/products';

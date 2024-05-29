@@ -2,7 +2,7 @@ import React from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
-import { CartItem } from '../../../models/ICartItem';
+import { CartItem } from 'src/models/ICartItem';
 
 interface OrderProductsItemProps extends CartItem {
     disabledDelete: boolean;

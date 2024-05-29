@@ -3,12 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { fetchProductByArticle } from '../../redux/actions/products';
-
-import { NotFound } from '../../pages/';
-
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { fetchProductByArticle } from 'src/redux/actions/products';
 import {
     ProductInfoBreadCrumbs,
     ProductCover,
@@ -16,7 +12,8 @@ import {
     CatalogProductsSection,
     ProductExchange,
     PageLoader,
-} from '../../components/';
+} from 'src/components';
+import { NotFound } from 'src/pages';
 
 const Product: React.FC = () => {
     const dispatch = useDispatch();

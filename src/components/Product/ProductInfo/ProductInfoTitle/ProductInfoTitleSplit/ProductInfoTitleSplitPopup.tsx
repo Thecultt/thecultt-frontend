@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LogoSplit from '../../../../../assets/images/logo-split.svg';
+import LogoSplit from 'src/assets/images/logo-split.svg';
 
 interface ProductInfoTitleSplitPopupProps {
     price: number;

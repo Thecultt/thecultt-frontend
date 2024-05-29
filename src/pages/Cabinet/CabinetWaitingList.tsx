@@ -2,11 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { CabinetMenu, CabinetWaitingListItem, PageLoader } from '../../components/';
-
-import { fetchWaitingList } from '../../redux/actions/waiting';
-
-import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { CabinetMenu, CabinetWaitingListItem, PageLoader } from 'src/components';
+import { fetchWaitingList } from 'src/redux/actions/waiting';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 const CabinetWaitingList: React.FC = () => {
     const dispatch = useDispatch();

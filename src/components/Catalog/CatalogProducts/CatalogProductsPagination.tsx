@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { setProductsTypeFetch, setCurrentPageProduct } from '../../../redux/actions/products';
-
-import { Loader } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { setProductsTypeFetch, setCurrentPageProduct } from 'src/redux/actions/products';
+import { Loader } from 'src/components';
 
 const CatalogProductsPagination: React.FC = () => {
     const dispatch = useDispatch();

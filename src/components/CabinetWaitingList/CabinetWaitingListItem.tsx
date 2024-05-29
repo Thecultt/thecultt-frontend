@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { WaitingListItem } from '../../models/IWaitingListItem';
+import { WaitingListItem } from 'src/models/IWaitingListItem';
 
 const CabinetWaitingListItem: React.FC<WaitingListItem> = ({
     num,

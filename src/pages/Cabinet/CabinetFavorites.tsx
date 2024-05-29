@@ -1,19 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { CartItem } from '../../models/ICartItem';
-
-import { fetchFavorites } from '../../redux/actions/favorites';
-
-import { addCartItem, setCartIsVisibleMessage } from '../../redux/actions/cart';
-
-import { sendSaveFavorite, sendRemoveFavorite } from '../../redux/actions/favorites';
-
-import { CabinetMenu, ProductBlock, CabinetFavoritesShare, CabinetFavoritesNull, PageLoader } from '../../components/';
-
-import { Product } from '../../models/IProduct';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CartItem } from 'src/models/ICartItem';
+import { fetchFavorites } from 'src/redux/actions/favorites';
+import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
+import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
+import { CabinetMenu, ProductBlock, CabinetFavoritesShare, CabinetFavoritesNull, PageLoader } from 'src/components';
+import { Product } from 'src/models/IProduct';
 
 const CabinetFavorites: React.FC = () => {
     const dispatch = useDispatch();

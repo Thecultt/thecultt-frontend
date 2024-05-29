@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
-import { createTextMask } from 'redux-form-input-masks';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { RenderInput, Loader } from '../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { RenderInput, Loader } from 'src/components';
 
 import validate from './validate';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { CabinetMenuMedia } from '../';
+import { CabinetMenuMedia } from 'src/components';
 
 const CabinetMenu: React.FC = () => {
     return (

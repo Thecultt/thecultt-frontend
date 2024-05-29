@@ -2,7 +2,7 @@ import React from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
-import { Product } from '../../models/IProduct';
+import { Product } from 'src/models/IProduct';
 
 interface ProductBlockProps extends Product {
     addClass?: string;

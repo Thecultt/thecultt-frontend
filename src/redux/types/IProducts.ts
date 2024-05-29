@@ -1,4 +1,4 @@
-import { Product, ProductPage } from '../../models/IProduct';
+import { Product, ProductPage } from 'src/models/IProduct';
 
 export interface ProductsStateFilters {
     isParse: boolean;

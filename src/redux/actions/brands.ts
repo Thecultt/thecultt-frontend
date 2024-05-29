@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 
-import $api from '../../http';
+import $api from 'src/http';
 
 import { BrandsActions, BrandsActionTypes } from '../types/IBrands';
 

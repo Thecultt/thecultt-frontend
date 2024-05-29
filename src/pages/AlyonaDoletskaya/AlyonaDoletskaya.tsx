@@ -3,60 +3,55 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Slider from 'react-slick';
 
-import $api from '../../http';
+import $api from 'src/http';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
+import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
+import { ProductBlock } from 'src/components';
+import { Product } from 'src/models/IProduct';
+import { CartItem } from 'src/models/ICartItem';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
+import MainBanner from 'src/assets/images/doletskaya/main-banner.jpg';
+import MainBannerMedia from 'src/assets/images/doletskaya/main-banner-media.jpg';
+import CharityLogo from 'src/assets/images/doletskaya/charity-logo.svg';
 
-import { addCartItem, setCartIsVisibleMessage } from '../../redux/actions/cart';
+import Lot1 from 'src/assets/images/doletskaya/lot1.jpg';
+import Lot1Media from 'src/assets/images/doletskaya/lot1-media.jpg';
 
-import { sendSaveFavorite, sendRemoveFavorite } from '../../redux/actions/favorites';
+import Lot2 from 'src/assets/images/doletskaya/lot2.jpg';
+import Lot2Media from 'src/assets/images/doletskaya/lot2-media.jpg';
+import Lot2MoreImages from 'src/assets/images/doletskaya/lot2-more-images.jpg';
 
-import { ProductBlock } from '../../components/';
+import Deco1Images from 'src/assets/images/doletskaya/deco-images-1.jpg';
+import Deco1ImagesMedia from 'src/assets/images/doletskaya/deco-images-1-media.jpg';
 
-import { Product } from '../../models/IProduct';
-import { CartItem } from '../../models/ICartItem';
+import Lot3 from 'src/assets/images/doletskaya/lot3.jpg';
+import Lot3Media from 'src/assets/images/doletskaya/lot3-media.jpg';
+import Lot3MoreImages from 'src/assets/images/doletskaya/lot3-more-images.jpg';
+import Lot3MoreImagesMedia from 'src/assets/images/doletskaya/lot3-more-images-media.jpg';
 
-import MainBanner from '../../assets/images/doletskaya/main-banner.jpg';
-import MainBannerMedia from '../../assets/images/doletskaya/main-banner-media.jpg';
-import CharityLogo from '../../assets/images/doletskaya/charity-logo.svg';
+import Deco2Images from 'src/assets/images/doletskaya/deco-images-2.jpg';
+import Deco2ImagesMedia from 'src/assets/images/doletskaya/deco-images-2-media.jpg';
 
-import Lot1 from '../../assets/images/doletskaya/lot1.jpg';
-import Lot1Media from '../../assets/images/doletskaya/lot1-media.jpg';
+import Lot4 from 'src/assets/images/doletskaya/lot4.jpg';
+import Lot4Media from 'src/assets/images/doletskaya/lot4-media.jpg';
 
-import Lot2 from '../../assets/images/doletskaya/lot2.jpg';
-import Lot2Media from '../../assets/images/doletskaya/lot2-media.jpg';
-import Lot2MoreImages from '../../assets/images/doletskaya/lot2-more-images.jpg';
+import Lot5 from 'src/assets/images/doletskaya/lot5.jpg';
+import Lot5Media from 'src/assets/images/doletskaya/lot5-media.jpg';
 
-import Deco1Images from '../../assets/images/doletskaya/deco-images-1.jpg';
-import Deco1ImagesMedia from '../../assets/images/doletskaya/deco-images-1-media.jpg';
+import Deco3Images from 'src/assets/images/doletskaya/deco-images-3.jpg';
 
-import Lot3 from '../../assets/images/doletskaya/lot3.jpg';
-import Lot3Media from '../../assets/images/doletskaya/lot3-media.jpg';
-import Lot3MoreImages from '../../assets/images/doletskaya/lot3-more-images.jpg';
-import Lot3MoreImagesMedia from '../../assets/images/doletskaya/lot3-more-images-media.jpg';
+import Lot6 from 'src/assets/images/doletskaya/lot6.jpg';
+import Lot6Media from 'src/assets/images/doletskaya/lot6-media.jpg';
 
-import Deco2Images from '../../assets/images/doletskaya/deco-images-2.jpg';
-import Deco2ImagesMedia from '../../assets/images/doletskaya/deco-images-2-media.jpg';
+import AboutTitle from 'src/assets/images/doletskaya/about-title.svg';
 
-import Lot4 from '../../assets/images/doletskaya/lot4.jpg';
-import Lot4Media from '../../assets/images/doletskaya/lot4-media.jpg';
-
-import Lot5 from '../../assets/images/doletskaya/lot5.jpg';
-import Lot5Media from '../../assets/images/doletskaya/lot5-media.jpg';
-
-import Deco3Images from '../../assets/images/doletskaya/deco-images-3.jpg';
-
-import Lot6 from '../../assets/images/doletskaya/lot6.jpg';
-import Lot6Media from '../../assets/images/doletskaya/lot6-media.jpg';
-
-import AboutTitle from '../../assets/images/doletskaya/about-title.svg';
-
-import AboutImage1 from '../../assets/images/doletskaya/about-image1.jpg';
-import AboutImage2 from '../../assets/images/doletskaya/about-image2.jpg';
-import AboutImage3 from '../../assets/images/doletskaya/about-image3.jpg';
-import AboutImage4 from '../../assets/images/doletskaya/about-image4.jpg';
-import AboutImage5 from '../../assets/images/doletskaya/about-image5.jpg';
-import AboutImage6 from '../../assets/images/doletskaya/about-image6.jpg';
+import AboutImage1 from 'src/assets/images/doletskaya/about-image1.jpg';
+import AboutImage2 from 'src/assets/images/doletskaya/about-image2.jpg';
+import AboutImage3 from 'src/assets/images/doletskaya/about-image3.jpg';
+import AboutImage4 from 'src/assets/images/doletskaya/about-image4.jpg';
+import AboutImage5 from 'src/assets/images/doletskaya/about-image5.jpg';
+import AboutImage6 from 'src/assets/images/doletskaya/about-image6.jpg';
 
 const ProductSection: React.FC = () => {
     const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import NotfoundImage from '../../assets/images/notfound.jpg';
+import NotfoundImage from 'src/assets/images/notfound.jpg';
 
 const NotFound: React.FC = () => {
     return (

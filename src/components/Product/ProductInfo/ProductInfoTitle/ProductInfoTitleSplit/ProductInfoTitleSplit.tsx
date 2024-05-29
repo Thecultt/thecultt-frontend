@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Popup, ProductInfoTitleSplitPopup } from '../../../../';
+import { Popup, ProductInfoTitleSplitPopup } from 'src/components';
 
 interface ProductInfoTitleSplitProps {
     price: number;

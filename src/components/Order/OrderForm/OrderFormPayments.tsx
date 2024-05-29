@@ -1,10 +1,8 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { formValueSelector } from 'redux-form';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { RenderRadioSelect } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { RenderRadioSelect } from 'src/components';
 
 interface OrderFormPaymentsProps {
     paymentValue: string;

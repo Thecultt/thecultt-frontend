@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
-import CatalogBannerImageBoutiqueMedia from '../../../assets/images/catalog/catalog-banner-boutique-media.jpg';
-import CatalogBannerImagePriceDropMedia from '../../../assets/images/catalog/catalog-banner-price-drop-media.jpg';
-import CatalogBannerImageItbagMedia from '../../../assets/images/catalog/catalog-banner-price-itbag-media.jpg';
-import CatalogBannerImageInvestMedia from '../../../assets/images/catalog/catalog-banner-invest-media.jpg';
+import CatalogBannerImageBoutiqueMedia from 'src/assets/images/catalog/catalog-banner-boutique-media.jpg';
+import CatalogBannerImagePriceDropMedia from 'src/assets/images/catalog/catalog-banner-price-drop-media.jpg';
+import CatalogBannerImageItbagMedia from 'src/assets/images/catalog/catalog-banner-price-itbag-media.jpg';
+import CatalogBannerImageInvestMedia from 'src/assets/images/catalog/catalog-banner-invest-media.jpg';
 
 const CatalogBannerMedia: React.FC = () => {
     const { search } = useLocation();

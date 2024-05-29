@@ -1,14 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import {
     fetchBuyerTheCulttCategories,
     sendBuyerTheCulttProductCustomApplication,
     setBuyerTheCulttProductIsSendFormCustomProduct,
-} from '../../redux/actions/buyer_thecultt';
-
+} from 'src/redux/actions/buyer_thecultt';
 import {
     BuyerTheCulttMainBanner,
     BuyerTheCulttMainSteps,
@@ -17,7 +15,7 @@ import {
     PageLoader,
     Popup,
     BuyerTheCulttMainCustomForm,
-} from '../../components/';
+} from 'src/components';
 
 const BuyerTheCulttMain: React.FC = () => {
     const dispatch = useDispatch();

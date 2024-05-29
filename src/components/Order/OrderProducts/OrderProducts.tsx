@@ -5,18 +5,15 @@ import { NumericFormat } from 'react-number-format';
 import { formValueSelector } from 'redux-form';
 import dayjs from 'dayjs';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { CartItem } from '../../../models/ICartItem';
-
-import { changeCheckCartItem, removeCartItem } from '../../../redux/actions/cart';
-import { sendCreateOrder, sendSubmitOrder } from '../../../redux/actions/order';
-import { sendUpdateUser } from '../../../redux/actions/user';
-import { sendOrderApplyPromocode } from '../../../redux/actions/order';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CartItem } from 'src/models/ICartItem';
+import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
+import { sendCreateOrder, sendSubmitOrder } from 'src/redux/actions/order';
+import { sendUpdateUser } from 'src/redux/actions/user';
+import { sendOrderApplyPromocode } from 'src/redux/actions/order';
+import { Loader, OrderProductsItem, OrderProductsPromocode } from 'src/components';
 
 import orderPay from '../orderPay';
-
-import { Loader, OrderProductsItem, OrderProductsPromocode } from '../../';
 
 const OrderProducts: React.FC = () => {
     const dispatch = useDispatch();

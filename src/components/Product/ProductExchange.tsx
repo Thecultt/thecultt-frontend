@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ExchangeMainImage from '../../assets/images/exchange/exchange-main-image.png';
+import ExchangeMainImage from 'src/assets/images/exchange/exchange-main-image.png';
 
 const ProductExchange: React.FC = () => {
     return (

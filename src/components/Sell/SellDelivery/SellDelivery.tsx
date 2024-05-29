@@ -2,15 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { CabinetSellStepKeys } from '../../../redux/types/ICabinetSell';
-
-import { setCabinetSellCurrentStep } from '../../../redux/actions/cabinet_sell';
-
-import { fetchOrderAddressCitys, fetchOrderAddressStreet } from '../../../redux/actions/order';
-
-import { SellBackBtn, SellDeliveryTypes, Loader, RenderInputHints, RenderInput, RenderTextarea } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
+import { setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
+import { fetchOrderAddressCitys, fetchOrderAddressStreet } from 'src/redux/actions/order';
+import { SellBackBtn, SellDeliveryTypes, Loader, RenderInputHints, RenderInput, RenderTextarea } from 'src/components';
 
 import validate from './validate';
 

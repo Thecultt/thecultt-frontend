@@ -1,11 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { setFiltersSelectionsProduct, setFiltersAvailabilityProduct } from '../../../redux/actions/products';
-
-import { CatalogFiltersBlockWrapper, Checkbox } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { setFiltersSelectionsProduct } from 'src/redux/actions/products';
+import { CatalogFiltersBlockWrapper, Checkbox } from 'src/components';
 
 const CatalogFiltersSelections: React.FC = () => {
     const dispatch = useDispatch();

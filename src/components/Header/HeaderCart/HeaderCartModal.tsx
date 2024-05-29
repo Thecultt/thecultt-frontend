@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { NumericFormat } from 'react-number-format';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { changeCheckCartItem, removeCartItem } from '../../../redux/actions/cart';
-
-import { HeaderCartModalItem } from '../../';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
+import { HeaderCartModalItem } from 'src/components';
 
 interface HeaderCartModalProps {
     state: boolean;

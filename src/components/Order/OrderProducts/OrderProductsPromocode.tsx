@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { sendOrderApplyPromocode } from '../../../redux/actions/order';
+import { sendOrderApplyPromocode } from 'src/redux/actions/order';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 interface OrderProductsPromocodeProps {
     disabled?: boolean;

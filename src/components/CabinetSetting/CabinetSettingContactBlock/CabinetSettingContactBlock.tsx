@@ -1,12 +1,8 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
-import { createTextMask } from 'redux-form-input-masks';
 
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { RenderInput } from '../../';
-
-import { validate } from './validate';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { RenderInput } from 'src/components';
 
 const CabinetSettingContactBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,

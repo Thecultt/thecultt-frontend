@@ -1,17 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { formValueSelector } from 'redux-form';
 
 import {
     fetchCabinetSellParameters,
     setCabinetSellCurrentStep,
     sendCreateCabinetSell,
-} from '../../redux/actions/cabinet_sell';
-import { CabinetSellStepKeys } from '../../redux/types/ICabinetSell';
-
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
+} from 'src/redux/actions/cabinet_sell';
+import { CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import {
     Popup,
     SellSteps,
@@ -21,7 +18,7 @@ import {
     SellContact,
     SellDelivery,
     SellProduct,
-} from '../../components/';
+} from 'src/components';
 
 const Sell: React.FC = () => {
     const dispatch = useDispatch();

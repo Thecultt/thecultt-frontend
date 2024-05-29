@@ -1,10 +1,9 @@
 import { Dispatch } from 'redux';
 import axios from 'axios';
 
-import $api from '../../http';
-
-import { ProductPage } from '../../models/IProduct';
-import { CartItem } from '../../models/ICartItem';
+import $api from 'src/http';
+import { ProductPage } from 'src/models/IProduct';
+import { CartItem } from 'src/models/ICartItem';
 
 import { CartActionTypes, CartActions } from '../types/ICart';
 

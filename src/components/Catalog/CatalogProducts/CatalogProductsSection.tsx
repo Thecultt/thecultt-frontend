@@ -1,18 +1,14 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { useDispatch } from 'react-redux';
-
-import { useTypedSelector } from '../../../hooks/useTypedSelector';
-
-import { addCartItem, setCartIsVisibleMessage } from '../../../redux/actions/cart';
-
-import { sendSaveFavorite, sendRemoveFavorite } from '../../../redux/actions/favorites';
-
-import { ProductBlock } from '../../';
-
-import { Product } from '../../../models/IProduct';
-import { CartItem } from '../../../models/ICartItem';
 import { Link } from 'react-router-dom';
+
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
+import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
+import { ProductBlock } from 'src/components';
+import { Product } from 'src/models/IProduct';
+import { CartItem } from 'src/models/ICartItem';
 
 interface CatalogProductsSectionProps {
     title: string;

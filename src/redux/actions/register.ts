@@ -2,7 +2,6 @@ import axios from 'axios';
 import { Dispatch } from 'react';
 
 import { RegisterActions, RegisterActionTypes } from '../types/IRegister';
-import { TRUE } from 'sass';
 
 export const sendRegister = (info: {
     name: string;

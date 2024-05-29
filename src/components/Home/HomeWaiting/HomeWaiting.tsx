@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import HomeWaitingImage from '../../../assets/images/home/home-waiting.jpg';
+import HomeWaitingImage from 'src/assets/images/home/home-waiting.jpg';
 
 const HomeWaiting: React.FC = () => {
     return (

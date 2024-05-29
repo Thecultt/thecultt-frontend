@@ -1,12 +1,10 @@
 import { Dispatch } from 'redux';
 import axios from 'axios';
 
-import $api from '../../http';
-
-import { Order } from '../../models/IOrder';
+import $api from 'src/http';
+import { Order } from 'src/models/IOrder';
 
 import { OrderStateActionTypes, OrderStateActions } from '../types/IOrder';
-
 import { setIsNotificationServerError } from '../actions/notifications_server';
 
 export const sendOrderApplyPromocode =

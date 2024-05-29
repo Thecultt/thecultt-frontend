@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import App from './App';
 import store from './redux/store';
 
+import 'react-dots-loader/index.css';
 import './assets/sass/style.sass';
 
 dayjs.locale('ru');

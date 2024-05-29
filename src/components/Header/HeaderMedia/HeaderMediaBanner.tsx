@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import HeaderMediaMenuBannerConcierge from '../../../assets/images/header-media-menu-banner-concierge.jpg';
+import HeaderMediaMenuBannerConcierge from 'src/assets/images/header-media-menu-banner-concierge.jpg';
 
 const HeaderMediaBanner: React.FC = () => {
     return (

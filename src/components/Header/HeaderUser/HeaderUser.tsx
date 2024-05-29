@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { HeaderUserMenu } from '../../';
+import { HeaderUserMenu } from 'src/components';
 
 const HeaderUser: React.FC = () => {
     const { pathname } = useLocation();

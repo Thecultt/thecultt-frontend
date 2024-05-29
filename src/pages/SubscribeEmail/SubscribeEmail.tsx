@@ -1,13 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { sendSubscribeEmail, setIsSendSubscribeEmail } from '../../redux/actions/subscribe_email';
-
-import SubscribeEmailImage from '../../assets/images/subscribe-email/subscribe-email-image.jpg';
-
-import { Popup, SubscribeEmailForm } from '../../components/';
+import { Popup, SubscribeEmailForm } from 'src/components';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { sendSubscribeEmail, setIsSendSubscribeEmail } from 'src/redux/actions/subscribe_email';
+import SubscribeEmailImage from 'src/assets/images/subscribe-email/subscribe-email-image.jpg';
 
 const SubscribeEmail: React.FC = () => {
     const dispatch = useDispatch();

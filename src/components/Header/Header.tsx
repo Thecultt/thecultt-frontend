@@ -2,22 +2,22 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-
-import { ProductsFiltersCategory } from '../../models/IProductFilters';
-
-import { HeaderTopMessage, HeaderCart, HeaderUser, HeaderHoverMenu, HeaderSearchBox, HeaderMedia } from '../';
-
-import { setHeaderSearchValue, fetchHeaderSearchItems } from '../../redux/actions/header';
-
-import { useDebounce } from './useDebounce';
-
-import Logo from '../../assets/images/logo.svg';
-
-import HeaderHoverImageBag from '../../assets/images/header/header-image-hover-menu-bag.jpg';
-import HeaderHoverImageAccessories from '../../assets/images/header/header-image-hover-menu-accessories.jpg';
-import HeaderHoverImageShoes from '../../assets/images/header/header-image-hover-menu-shoes.jpg';
-import HeaderHoverImageDecoration from '../../assets/images/header/header-image-hover-menu-decoration.jpg';
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import {
+    HeaderTopMessage,
+    HeaderCart,
+    HeaderUser,
+    HeaderHoverMenu,
+    HeaderSearchBox,
+    HeaderMedia,
+} from 'src/components';
+import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/header';
+import Logo from 'src/assets/images/logo.svg';
+import HeaderHoverImageBag from 'src/assets/images/header/header-image-hover-menu-bag.jpg';
+import HeaderHoverImageAccessories from 'src/assets/images/header/header-image-hover-menu-accessories.jpg';
+import HeaderHoverImageShoes from 'src/assets/images/header/header-image-hover-menu-shoes.jpg';
+import HeaderHoverImageDecoration from 'src/assets/images/header/header-image-hover-menu-decoration.jpg';
+import { useDebounce } from 'src/hooks/useDebounce';
 
 export interface HeaderHoverMenuCategory {
     title: string;
