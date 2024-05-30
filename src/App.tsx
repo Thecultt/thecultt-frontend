@@ -130,7 +130,9 @@ const App = () => {
     }, []);
 
     React.useEffect(() => {
-        window.scrollTo(0, 0);
+        if (pathname !== '/catalog') {
+            window.scrollTo(0, 0);
+        }
     }, [pathname]);
 
     React.useEffect(() => {

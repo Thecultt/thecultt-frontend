@@ -161,7 +161,7 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
     React.useEffect(() => {
         if (filters.isParse) {
-            dispatch(setProductsTypeFetch('btn-page'));
+            // dispatch(setProductsTypeFetch('btn-page'));
 
             const oldParamsData: any = {};
 
