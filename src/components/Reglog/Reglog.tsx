@@ -8,137 +8,136 @@ import { sendRegister } from 'src/redux/actions/register';
 import { sendLogin } from 'src/redux/actions/login';
 import { sendRecoveryPassword, sendRecoveryPasswordConfirmed } from 'src/redux/actions/recovery_password';
 import {
-    Popup,
-    ReglogCheckEmail,
-    ReglogLogin,
-    ReglogRegister,
-    ReglogWelcome,
-    ReglogOldUserNewPassword,
-    ReglogWarningBlockedEmailRegister,
-    ReglogWarningBlockedEmailLogin,
-    ReglogRecoveryPassword,
-    ReglogRecoveryPasswordSuccess,
-    ReglogRecoveryPasswordConfirmed,
+	Popup,
+	ReglogCheckEmail,
+	ReglogLogin,
+	ReglogRegister,
+	ReglogWelcome,
+	ReglogOldUserNewPassword,
+	ReglogWarningBlockedEmailRegister,
+	ReglogWarningBlockedEmailLogin,
+	ReglogRecoveryPassword,
+	ReglogRecoveryPasswordSuccess,
+	ReglogRecoveryPasswordConfirmed,
 } from 'src/components';
 
 export enum ReglogStateTypesNotLogin {
-    REGLOG = 'reglog',
+	REGLOG = 'reglog',
 
-    LOGIN = 'login',
-    REGISTER = 'register',
+	LOGIN = 'login',
+	REGISTER = 'register',
 
-    WELCOME = 'welcome',
+	WELCOME = 'welcome',
 
-    OLD_USER_NEW_PASSWORD = 'old_user_new_password',
+	OLD_USER_NEW_PASSWORD = 'old_user_new_password',
 
-    WARNING_BLOCKED_EMAIL_REGISTER = 'warning_blocked_email_register',
-    WARNING_BLOCKED_EMAIL_LOGIN = 'warning_blocked_email_login',
+	WARNING_BLOCKED_EMAIL_REGISTER = 'warning_blocked_email_register',
+	WARNING_BLOCKED_EMAIL_LOGIN = 'warning_blocked_email_login',
 
-    RECOVERY_PASSWORD = 'recovery_password',
-    RECOVERY_PASSWORD_SUCCESS = 'recovery_password_success',
+	RECOVERY_PASSWORD = 'recovery_password',
+	RECOVERY_PASSWORD_SUCCESS = 'recovery_password_success',
 
-    RECOVERY_PASSWORD_CONFIRMED = 'recovery_password_confirmed',
+	RECOVERY_PASSWORD_CONFIRMED = 'recovery_password_confirmed',
 }
 
 const Reglog: React.FC = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-    const { hash, pathname } = useLocation();
+	const { hash, pathname } = useLocation();
 
-    const [type, setType] = React.useState<string>(ReglogStateTypesNotLogin.LOGIN);
-    const [state, setState] = React.useState<boolean>(false);
-    const [isChange, setIsChange] = React.useState<boolean>(false);
+	const [type, setType] = React.useState<ReglogStateTypesNotLogin>(ReglogStateTypesNotLogin.LOGIN);
+	const [state, setState] = React.useState<boolean>(false);
+	const [isChange, setIsChange] = React.useState<boolean>(false);
 
-    React.useEffect(() => {
-        const type_hash: string =
-            hash.split('#')[1] && hash.split('#')[1].split('?') ? hash.split('#')[1].split('?')[0] : hash.split('#')[1];
+	React.useEffect(() => {
+		const type_hash = (hash.split('#')[1] && hash.split('#')[1].split('?') ? hash.split('#')[1].split('?')[0] : hash.split('#')[1]) as ReglogStateTypesNotLogin;
 
-        if (new URLSearchParams(window.location.search).get('redirect')) {
-            localStorage.setItem(
-                'redirect_reglog',
-                new URLSearchParams(window.location.search).get('redirect') as string,
-            );
-        } else {
-            localStorage.removeItem('redirect_reglog');
-        }
+		if (new URLSearchParams(window.location.search).get('redirect')) {
+			localStorage.setItem(
+				'redirect_reglog',
+				new URLSearchParams(window.location.search).get('redirect') as string,
+			);
+		} else {
+			localStorage.removeItem('redirect_reglog');
+		}
 
-        if (Object.values(ReglogStateTypesNotLogin).find((type) => type == type_hash)) {
-            if (state) {
-                // setType(type_hash);
+		if (Object.values(ReglogStateTypesNotLogin).find((type) => type == type_hash)) {
+			if (state) {
+				// setType(type_hash);
 
-                // setIsChange(true);
+				// setIsChange(true);
 
-                // setTimeout(() => {
-                setType(type_hash);
-                // setIsChange(false);
-                // }, 190);
-            } else {
-                setState(true);
-                // setIsChange(false);
-                setType(type_hash);
-            }
-        } else {
-            setState(false);
-        }
-    }, [hash, pathname]);
+				// setTimeout(() => {
+				setType(type_hash);
+				// setIsChange(false);
+				// }, 190);
+			} else {
+				setState(true);
+				// setIsChange(false);
+				setType(type_hash);
+			}
+		} else {
+			setState(false);
+		}
+	}, [hash, pathname]);
 
-    const { email } = useTypedSelector(({ check_email }) => check_email);
+	const { email } = useTypedSelector(({ check_email }) => check_email);
 
-    const closeFunc = () => {
-        setState(false);
+	const closeFunc = () => {
+		setState(false);
 
-        navigate({
-            pathname: window.location.pathname,
-            search: window.location.search,
-            hash: '',
-        });
-    };
+		navigate({
+			pathname: window.location.pathname,
+			search: window.location.search,
+			hash: '',
+		});
+	};
 
-    const onSubmitCheckEmail = (data: any) => {
-        localStorage.setItem('email', data.email);
+	const onSubmitCheckEmail = (data: any) => {
+		localStorage.setItem('email', data.email);
 
-        return dispatch(sendCheckEmail(data.email) as any);
-    };
+		return dispatch(sendCheckEmail(data.email) as any);
+	};
 
-    const onSubmitRegister = (data: any) => {
-        return dispatch(sendRegister(data) as any);
-    };
+	const onSubmitRegister = (data: any) => {
+		return dispatch(sendRegister(data) as any);
+	};
 
-    const onSubmitLogin = (data: any) => {
-        return dispatch(sendLogin({ username: email, password: data.password }) as any);
-    };
+	const onSubmitLogin = (data: any) => {
+		return dispatch(sendLogin({ username: email, password: data.password }) as any);
+	};
 
-    const onSubmitRecoveryPassword = (data: any) => {
-        return dispatch(sendRecoveryPassword(data.email, true) as any);
-    };
+	const onSubmitRecoveryPassword = (data: any) => {
+		return dispatch(sendRecoveryPassword(data.email, true) as any);
+	};
 
-    const onSubmitRecoveryPasswordConfirmed = (data: any) => {
-        const code = new URLSearchParams(window.location.search).get('code') as string;
+	const onSubmitRecoveryPasswordConfirmed = (data: any) => {
+		const code = new URLSearchParams(window.location.search).get('code') as string;
 
-        return dispatch(sendRecoveryPasswordConfirmed(data.password, code) as any);
-    };
+		return dispatch(sendRecoveryPasswordConfirmed(data.password, code) as any);
+	};
 
-    const popups: { [key: string]: React.ReactNode } = {
-        [ReglogStateTypesNotLogin.REGLOG]: <ReglogCheckEmail onSubmit={onSubmitCheckEmail} />,
-        [ReglogStateTypesNotLogin.LOGIN]: <ReglogLogin onSubmit={onSubmitLogin} />,
-        [ReglogStateTypesNotLogin.REGISTER]: <ReglogRegister onSubmit={onSubmitRegister} />,
-        [ReglogStateTypesNotLogin.WELCOME]: <ReglogWelcome />,
-        [ReglogStateTypesNotLogin.OLD_USER_NEW_PASSWORD]: <ReglogOldUserNewPassword />,
-        [ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_REGISTER]: <ReglogWarningBlockedEmailRegister />,
-        [ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_LOGIN]: <ReglogWarningBlockedEmailLogin />,
-        [ReglogStateTypesNotLogin.RECOVERY_PASSWORD]: <ReglogRecoveryPassword onSubmit={onSubmitRecoveryPassword} />,
-        [ReglogStateTypesNotLogin.RECOVERY_PASSWORD_SUCCESS]: <ReglogRecoveryPasswordSuccess />,
-        [ReglogStateTypesNotLogin.RECOVERY_PASSWORD_CONFIRMED]: (
-            <ReglogRecoveryPasswordConfirmed onSubmit={onSubmitRecoveryPasswordConfirmed} />
-        ),
-    };
+	const popups: Record<ReglogStateTypesNotLogin, React.ReactNode> = {
+		[ReglogStateTypesNotLogin.REGLOG]: <ReglogCheckEmail onSubmit={onSubmitCheckEmail} />,
+		[ReglogStateTypesNotLogin.LOGIN]: <ReglogLogin onSubmit={onSubmitLogin} />,
+		[ReglogStateTypesNotLogin.REGISTER]: <ReglogRegister onSubmit={onSubmitRegister} />,
+		[ReglogStateTypesNotLogin.WELCOME]: <ReglogWelcome />,
+		[ReglogStateTypesNotLogin.OLD_USER_NEW_PASSWORD]: <ReglogOldUserNewPassword />,
+		[ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_REGISTER]: <ReglogWarningBlockedEmailRegister />,
+		[ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_LOGIN]: <ReglogWarningBlockedEmailLogin />,
+		[ReglogStateTypesNotLogin.RECOVERY_PASSWORD]: <ReglogRecoveryPassword onSubmit={onSubmitRecoveryPassword} />,
+		[ReglogStateTypesNotLogin.RECOVERY_PASSWORD_SUCCESS]: <ReglogRecoveryPasswordSuccess />,
+		[ReglogStateTypesNotLogin.RECOVERY_PASSWORD_CONFIRMED]: (
+			<ReglogRecoveryPasswordConfirmed onSubmit={onSubmitRecoveryPasswordConfirmed} />
+		),
+	};
 
-    return (
-        <Popup state={state} setState={closeFunc} stateContent={!isChange}>
-            {popups[type]}
-        </Popup>
-    );
+	return (
+		<Popup state={state} setState={closeFunc} stateContent={!isChange}>
+			{popups[type]}
+		</Popup>
+	);
 };
 
 export default Reglog;
