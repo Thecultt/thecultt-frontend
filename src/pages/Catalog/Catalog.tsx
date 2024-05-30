@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { fetchProductsCatalog } from 'src/redux/actions/products';
+import { fetchProductsCatalog, setLastSearchString } from 'src/redux/actions/products';
 import {
     CatalogBanner,
     CatalogBannerMedia,
@@ -15,16 +16,25 @@ import {
 const Catalog: React.FC = () => {
     const dispatch = useDispatch();
 
-    const { filters, currentPage, typeFetch } = useTypedSelector(({ products }) => products);
+    const { search } = useLocation();
 
+    const { filters, currentPage, typeFetch, lastSearchString } = useTypedSelector(({ products }) => products);
     const { isLoaded: isLoadedFilters } = useTypedSelector(({ products_filters }) => products_filters);
 
-    const [isOpenFiltersMedia, setIsOpenFiltersMedia] = React.useState<boolean>(false);
+    const [isFirstRender, setIsFirstRender] = React.useState(true);
+    const [isOpenFiltersMedia, setIsOpenFiltersMedia] = React.useState(false);
 
     React.useEffect(() => {
         if (filters.isParse) {
+            if (isFirstRender && lastSearchString === search) {
+                setIsFirstRender(false);
+                return;
+            }
+
             dispatch(fetchProductsCatalog(filters, currentPage, typeFetch) as any);
         }
+
+        setIsFirstRender(false);
     }, [
         filters.isParse,
         filters.search,
@@ -51,6 +61,13 @@ const Catalog: React.FC = () => {
         currentPage,
         typeFetch,
     ]);
+
+    React.useEffect(
+        () => () => {
+            dispatch(setLastSearchString(search));
+        },
+        [search],
+    );
 
     return (
         <>
