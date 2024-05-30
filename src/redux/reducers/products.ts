@@ -3,7 +3,6 @@ import { ProductsState, ProductTypes, ProductActionTypes } from '../types/IProdu
 const initialState: ProductsState = {
     items: [],
     isLoaded: false,
-
     itemByArticle: {
         id: 0,
         article: '',
@@ -20,11 +19,8 @@ const initialState: ProductsState = {
         color: '',
         subcategory: '',
         is_trial: false,
-
         from_boutique: false,
-
         nuances: '',
-
         external_material: '',
         lining_material: '',
         kit: '',
@@ -51,7 +47,6 @@ const initialState: ProductsState = {
         scarf_composition: '',
         ring_size: '',
         jewelry_material: '',
-
         reference_number_clock: '',
         case_material_clock: '',
         bracelet_material_clock: '',
@@ -64,24 +59,16 @@ const initialState: ProductsState = {
     },
     itemByArticleSimilar: [],
     itemByArticleIsLoaded: false,
-
     isFetchMore: false,
     isFetchPage: false,
-
     typeFetch: 'btn-page',
-
     currentPage: 1,
-
     pageCount: 0,
     itemsCount: 0,
-
     filters: {
         isParse: false,
-
         search: '',
-
         price: { min: 0, max: 0 },
-
         conditions: {},
         categories: {},
         types: {},
@@ -92,14 +79,12 @@ const initialState: ProductsState = {
         availability: {},
         size: {},
         selections: {},
-
         boutique: false,
         price_drop: false,
-
         glass_frame: {},
-
         sort: 'a',
     },
+    lastSearchString: '',
 };
 
 const products = (state = initialState, action: ProductTypes) => {
@@ -205,6 +190,7 @@ const products = (state = initialState, action: ProductTypes) => {
                 ...state.filters,
                 search: action.payload,
             },
+            currentPage: 1,
         };
     }
 
@@ -215,6 +201,7 @@ const products = (state = initialState, action: ProductTypes) => {
                 ...state.filters,
                 price: action.payload,
             },
+            currentPage: 1,
         };
     }
 
@@ -224,6 +211,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -236,6 +224,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -245,6 +234,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -257,6 +247,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -266,6 +257,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -278,6 +270,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -287,6 +280,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -299,6 +293,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -308,6 +303,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -320,6 +316,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -329,6 +326,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -341,6 +339,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -350,6 +349,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -362,6 +362,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -371,6 +372,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -391,6 +393,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -400,6 +403,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -412,6 +416,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -421,6 +426,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -433,6 +439,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -442,6 +449,7 @@ const products = (state = initialState, action: ProductTypes) => {
 
             return {
                 ...state,
+                currentPage: 1,
             };
         }
 
@@ -454,6 +462,7 @@ const products = (state = initialState, action: ProductTypes) => {
                     [action.payload]: action.payload,
                 },
             },
+            currentPage: 1,
         };
     }
 
@@ -465,6 +474,7 @@ const products = (state = initialState, action: ProductTypes) => {
                 boutique: action.payload,
                 conditions: {},
             },
+            currentPage: 1,
         };
     }
 
@@ -476,6 +486,7 @@ const products = (state = initialState, action: ProductTypes) => {
                 price_drop: action.payload,
                 boutique: false,
             },
+            currentPage: 1,
         };
     }
 
@@ -487,6 +498,13 @@ const products = (state = initialState, action: ProductTypes) => {
                 ...state.filters,
                 sort: action.payload,
             },
+        };
+    }
+
+    if (action.type === ProductActionTypes.SET_PRODUCTS_LAST_SEARCH_STRING) {
+        return {
+            ...state,
+            lastSearchString: action.payload,
         };
     }
 

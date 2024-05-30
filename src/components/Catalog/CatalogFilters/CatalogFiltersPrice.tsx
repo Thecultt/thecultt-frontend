@@ -3,17 +3,21 @@ import { useDispatch } from 'react-redux';
 
 import { setFiltersPriceProduct } from 'src/redux/actions/products';
 import { CatalogFiltersBlockWrapper } from 'src/components';
+import { useDebounce } from 'src/hooks/useDebounce';
 
-interface CatalogFiltersPriceProps {
+interface Props {
     defaultMin: number;
     defaultMax: number;
 }
 
-const CatalogFiltersPrice: React.FC<CatalogFiltersPriceProps> = ({ defaultMin, defaultMax }) => {
+const CatalogFiltersPrice: React.FC<Props> = ({ defaultMin, defaultMax }) => {
     const dispatch = useDispatch();
 
-    const [min, setMin] = React.useState<string>('');
-    const [max, setMax] = React.useState<string>('');
+    const [min, setMin] = React.useState('');
+    const [max, setMax] = React.useState('');
+
+    const debouncedMin = useDebounce(min);
+    const debouncedMax = useDebounce(max);
 
     const onChangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[a-zа-яё]/gi, '');
@@ -34,13 +38,16 @@ const CatalogFiltersPrice: React.FC<CatalogFiltersPriceProps> = ({ defaultMin, d
     };
 
     React.useEffect(() => {
+        const newMin = debouncedMin ? parseInt(debouncedMin) || 0 : 0;
+        const newMax = debouncedMax ? parseInt(debouncedMax) || 0 : 0;
+
         dispatch(
             setFiltersPriceProduct({
-                min: parseInt(min) ? parseInt(min) : 0,
-                max: parseInt(max) ? parseInt(max) : 0,
+                min: newMin,
+                max: newMax,
             }),
         );
-    }, [min, max]);
+    }, [debouncedMin, debouncedMax]);
 
     return (
         <CatalogFiltersBlockWrapper title="Цена">
