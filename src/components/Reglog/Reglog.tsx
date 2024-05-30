@@ -65,15 +65,17 @@ const Reglog: React.FC = () => {
 
         if (Object.values(ReglogStateTypesNotLogin).find((type) => type == type_hash)) {
             if (state) {
-                setIsChange(true);
+                // setType(type_hash);
 
-                setTimeout(() => {
-                    setType(type_hash);
-                    setIsChange(false);
-                }, 190);
+                // setIsChange(true);
+
+                // setTimeout(() => {
+                setType(type_hash);
+                // setIsChange(false);
+                // }, 190);
             } else {
                 setState(true);
-                setIsChange(false);
+                // setIsChange(false);
                 setType(type_hash);
             }
         } else {
@@ -117,37 +119,24 @@ const Reglog: React.FC = () => {
         return dispatch(sendRecoveryPasswordConfirmed(data.password, code) as any);
     };
 
+    const popups: { [key: string]: React.ReactNode } = {
+        [ReglogStateTypesNotLogin.REGLOG]: <ReglogCheckEmail onSubmit={onSubmitCheckEmail} />,
+        [ReglogStateTypesNotLogin.LOGIN]: <ReglogLogin onSubmit={onSubmitLogin} />,
+        [ReglogStateTypesNotLogin.REGISTER]: <ReglogRegister onSubmit={onSubmitRegister} />,
+        [ReglogStateTypesNotLogin.WELCOME]: <ReglogWelcome />,
+        [ReglogStateTypesNotLogin.OLD_USER_NEW_PASSWORD]: <ReglogOldUserNewPassword />,
+        [ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_REGISTER]: <ReglogWarningBlockedEmailRegister />,
+        [ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_LOGIN]: <ReglogWarningBlockedEmailLogin />,
+        [ReglogStateTypesNotLogin.RECOVERY_PASSWORD]: <ReglogRecoveryPassword onSubmit={onSubmitRecoveryPassword} />,
+        [ReglogStateTypesNotLogin.RECOVERY_PASSWORD_SUCCESS]: <ReglogRecoveryPasswordSuccess />,
+        [ReglogStateTypesNotLogin.RECOVERY_PASSWORD_CONFIRMED]: (
+            <ReglogRecoveryPasswordConfirmed onSubmit={onSubmitRecoveryPasswordConfirmed} />
+        ),
+    };
+
     return (
         <Popup state={state} setState={closeFunc} stateContent={!isChange}>
-            <>
-                {type === ReglogStateTypesNotLogin.REGLOG ? <ReglogCheckEmail onSubmit={onSubmitCheckEmail} /> : null}
-
-                {type === ReglogStateTypesNotLogin.LOGIN ? <ReglogLogin onSubmit={onSubmitLogin} /> : null}
-
-                {type === ReglogStateTypesNotLogin.REGISTER ? <ReglogRegister onSubmit={onSubmitRegister} /> : null}
-
-                {type === ReglogStateTypesNotLogin.WELCOME ? <ReglogWelcome /> : null}
-
-                {type === ReglogStateTypesNotLogin.OLD_USER_NEW_PASSWORD ? <ReglogOldUserNewPassword /> : null}
-
-                {type === ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_REGISTER ? (
-                    <ReglogWarningBlockedEmailRegister />
-                ) : null}
-
-                {type === ReglogStateTypesNotLogin.WARNING_BLOCKED_EMAIL_LOGIN ? (
-                    <ReglogWarningBlockedEmailLogin />
-                ) : null}
-
-                {type === ReglogStateTypesNotLogin.RECOVERY_PASSWORD ? (
-                    <ReglogRecoveryPassword onSubmit={onSubmitRecoveryPassword} />
-                ) : null}
-
-                {type === ReglogStateTypesNotLogin.RECOVERY_PASSWORD_SUCCESS ? <ReglogRecoveryPasswordSuccess /> : null}
-
-                {type === ReglogStateTypesNotLogin.RECOVERY_PASSWORD_CONFIRMED ? (
-                    <ReglogRecoveryPasswordConfirmed onSubmit={onSubmitRecoveryPasswordConfirmed} />
-                ) : null}
-            </>
+            {popups[type]}
         </Popup>
     );
 };
