@@ -132,7 +132,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                                 </svg>
                             </Link>
                         ) : (
-                            <Link to="#reglog" className="header-media-icon">
+                            <Link to={`${search}#reglog`} className="header-media-icon">
                                 <svg
                                     width="24"
                                     height="24"

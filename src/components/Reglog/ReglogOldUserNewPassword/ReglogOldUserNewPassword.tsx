@@ -9,7 +9,7 @@ const ReglogOldUserNewPassword: React.FC = () => {
     const [isSend, setIsSend] = React.useState<boolean>(false);
     const [seconds, setSeconds] = React.useState<number>(30);
 
-    const send = () => {
+    const onSend = () => {
         // Send
         setIsSend(true);
 
@@ -33,12 +33,16 @@ const ReglogOldUserNewPassword: React.FC = () => {
                 безопасности ваших данных на новом сайте THE CULTT.
             </p>
 
+            {/* 
+				Ваня, пока попросил скрыть этот функционал, из за проблем с доходом писем 
+			*/}
+
             <div className="reglog-content-text-btn">
                 {/* {isSend ? (
 					<p className="reglog-content-text-btn__disabled">Отправить письмо ещё раз через {seconds} сек.</p>
 				) : (
 					<>
-						<button className="btn-regular reglog-content-text-btn__btn" onClick={send}>
+						<button className="btn-regular reglog-content-text-btn__btn" onClick={onSend}>
 							Отправить письмо ещё раз
 						</button>
 
