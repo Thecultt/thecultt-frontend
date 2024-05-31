@@ -14,24 +14,6 @@ const CatalogBannerMedia: React.FC = () => {
 
     return (
         <>
-            {window.location.search ==
-            '?categories=%D0%A1%D1%83%D0%BC%D0%BA%D0%B8&availability=%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%BE&availability=%D0%9D%D0%B0+%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%BA%D0%B5&availability=%D0%9D%D0%B5%D1%82+%D0%B2+%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B8&boutique=false&price_drop=false&page=1&selections=7' ? (
-                <div
-                    className="catalog-banner-media"
-                    style={{
-                        backgroundImage: `url("${CatalogBannerImageAboutMedia}")`,
-                    }}
-                >
-                    <div className="catalog-banner-media-text">
-                        <h3 className="catalog-banner-media-text__title">Выбор THE CULTT</h3>
-
-                        <p className="catalog-banner-media-text__description">
-                            О каких сумках мечтают соосновательницы THE CULTT? <br /> Показываем.
-                        </p>
-                    </div>
-                </div>
-            ) : null}
-
             {query.get('price_drop') == 'true' ? (
                 <>
                     <div
@@ -68,42 +50,8 @@ const CatalogBannerMedia: React.FC = () => {
                         </div>
                     ) : (
                         <>
-                            {
-                                query.getAll('selections').length == 1 ? (
-                                    query.get('selections') == 5 ? (
-                                        <div
-                                            className="catalog-banner-media"
-                                            style={{
-                                                backgroundImage: `url("${CatalogBannerImageItbagMedia}")`,
-                                            }}
-                                        >
-                                            <div className="catalog-banner-media-text">
-                                                <h3 className="catalog-banner-media-text__title">
-                                                    Лучшие it-bags этого года
-                                                </h3>
-                                                <p className="catalog-banner-media-text__description">
-                                                    Самые узнаваемые дизайнерские сумки, которые носят селебрити и
-                                                    инфлюенсеры
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ) : query.get('selections') == 6 ? (
-                                        <div
-                                            className="catalog-banner-media"
-                                            style={{
-                                                backgroundImage: `url("${CatalogBannerImageInvestMedia}")`,
-                                            }}
-                                        >
-                                            <div className="catalog-banner-media-text">
-                                                <h3 className="catalog-banner-media-text__title">Сумки-инвестиции</h3>
-                                                <p className="catalog-banner-media-text__description">
-                                                    Культовые сумки, которые с годами не только сохранят свою стоимость,
-                                                    но и могут увеличить ее
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ) : null
-                                ) : query.getAll('categories').length === 1 && query.get('categories') === 'Сумки' ? (
+                            {query.getAll('selections').length == 1 ? (
+                                query.get('selections') == 5 ? (
                                     <div
                                         className="catalog-banner-media"
                                         style={{
@@ -118,40 +66,61 @@ const CatalogBannerMedia: React.FC = () => {
                                                 Самые узнаваемые дизайнерские сумки, которые носят селебрити и
                                                 инфлюенсеры
                                             </p>
-
-                                            <Link
-                                                to="/catalog?categories=Сумки&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии&boutique=false&price_drop=false&selections=5"
-                                                className="btn-light catalog-banner-media-text__btn"
-                                            >
-                                                Стать разумным инвестором
-                                            </Link>
                                         </div>
                                     </div>
-                                ) : window.location.search ===
-                                  '?boutique=false&categories=%D0%A1%D1%83%D0%BC%D0%BA%D0%B8&categories=%D0%90%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B&categories=%D0%9E%D0%B1%D1%83%D0%B2%D1%8C&categories=%D0%9E%D0%B4%D0%B5%D0%B6%D0%B4%D0%B0&categories=%D0%A3%D0%BA%D1%80%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D1%8F&availability=%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%BE&availability=%D0%9D%D0%B0+%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%BA%D0%B5&availability=%D0%9D%D0%B5%D1%82+%D0%B2+%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B8&price_drop=false&minPrice=700000' ? null : null
-                                // <div
-                                //     className="catalog-banner-media"
-                                //     style={{
-                                //         backgroundImage: `url("${CatalogBannerImageMayPromocodeMedia}")`,
-                                //     }}
-                                // >
-                                //     <div className="catalog-banner-media-text">
-                                //         <h3 className="catalog-banner-media-text__title">О, май!</h3>
+                                ) : query.get('selections') == 6 ? (
+                                    <div
+                                        className="catalog-banner-media"
+                                        style={{
+                                            backgroundImage: `url("${CatalogBannerImageInvestMedia}")`,
+                                        }}
+                                    >
+                                        <div className="catalog-banner-media-text">
+                                            <h3 className="catalog-banner-media-text__title">Сумки-инвестиции</h3>
+                                            <p className="catalog-banner-media-text__description">
+                                                Культовые сумки, которые с годами не только сохранят свою стоимость, но
+                                                и могут увеличить ее
+                                            </p>
+                                        </div>
+                                    </div>
+                                ) : query.get('selections') == 7 ? (
+                                    <div
+                                        className="catalog-banner-media"
+                                        style={{
+                                            backgroundImage: `url("${CatalogBannerImageAboutMedia}")`,
+                                        }}
+                                    >
+                                        <div className="catalog-banner-media-text">
+                                            <h3 className="catalog-banner-media-text__title">Выбор THE CULTT</h3>
 
-                                //         <p className="catalog-banner-media-text__description">
-                                //             Только до 27 мая скидка 27.000₽ <br />
-                                //             на лоты Hermes от 700.000₽ <b>по промокоду MAY27</b>
-                                //         </p>
+                                            <p className="catalog-banner-media-text__description">
+                                                О каких сумках мечтают соосновательницы THE CULTT? <br /> Показываем.
+                                            </p>
+                                        </div>
+                                    </div>
+                                ) : null
+                            ) : query.getAll('categories').length === 1 && query.get('categories') === 'Сумки' ? (
+                                <div
+                                    className="catalog-banner-media"
+                                    style={{
+                                        backgroundImage: `url("${CatalogBannerImageItbagMedia}")`,
+                                    }}
+                                >
+                                    <div className="catalog-banner-media-text">
+                                        <h3 className="catalog-banner-media-text__title">Лучшие it-bags этого года</h3>
+                                        <p className="catalog-banner-media-text__description">
+                                            Самые узнаваемые дизайнерские сумки, которые носят селебрити и инфлюенсеры
+                                        </p>
 
-                                //         <Link
-                                //             to="/catalog?boutique=false&categories=%D0%A1%D1%83%D0%BC%D0%BA%D0%B8&categories=%D0%90%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B&categories=%D0%9E%D0%B1%D1%83%D0%B2%D1%8C&categories=%D0%9E%D0%B4%D0%B5%D0%B6%D0%B4%D0%B0&categories=%D0%A3%D0%BA%D1%80%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D1%8F&availability=%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%BE&availability=%D0%9D%D0%B0+%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%BA%D0%B5&availability=%D0%9D%D0%B5%D1%82+%D0%B2+%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B8&price_drop=false&minPrice=700000"
-                                //             className="btn-regular white catalog-banner-media-text__btn"
-                                //         >
-                                //             Начать покупки
-                                //         </Link>
-                                //     </div>
-                                // </div>
-                            }
+                                        <Link
+                                            to="/catalog?categories=Сумки&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии&boutique=false&price_drop=false&selections=5"
+                                            className="btn-light catalog-banner-media-text__btn"
+                                        >
+                                            Стать разумным инвестором
+                                        </Link>
+                                    </div>
+                                </div>
+                            ) : null}
                         </>
                     )}
                 </>
