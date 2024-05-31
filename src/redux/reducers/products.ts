@@ -422,8 +422,8 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
     }
 
     if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS) {
-        if (state.filters.selections[action.payload]) {
-            delete state.filters.selections[action.payload];
+        if (state.filters.selections[action.payload.selectionId]) {
+            delete state.filters.selections[action.payload.selectionId];
 
             return {
                 ...state,
@@ -437,7 +437,7 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
                 ...state.filters,
                 selections: {
                     ...state.filters.selections,
-                    [action.payload]: action.payload,
+                    [action.payload.selectionId]: action.payload.selection,
                 },
             },
             currentPage: 1,

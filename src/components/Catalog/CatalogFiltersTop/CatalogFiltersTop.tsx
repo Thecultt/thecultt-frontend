@@ -61,13 +61,17 @@ const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, is
                             ) : (
                                 <>
                                     {Object.keys(filters.selections).length ? (
-                                        `${
-                                            checkDeclension(Object.keys(filters.selections).length, [
-                                                'Подборка',
-                                                'Подборки',
-                                                'Подборок',
-                                            ]).title
-                                        }`
+                                        Object.keys(filters.selections).length === 1 ? (
+                                            filters.selections[Object.keys(filters.selections)[0]]
+                                        ) : (
+                                            `${
+                                                checkDeclension(Object.keys(filters.selections).length, [
+                                                    'Подборка',
+                                                    'Подборки',
+                                                    'Подборок',
+                                                ]).title
+                                            }`
+                                        )
                                     ) : (
                                         <>
                                             {query.get('theme')

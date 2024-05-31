@@ -228,7 +228,10 @@ interface setProductsFiltersSize {
 
 interface setProductsFiltersSelections {
     type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS;
-    payload: string;
+    payload: {
+        selectionId: string;
+        selection: string;
+    };
 }
 
 interface setProductsFiltersBoutique {

@@ -41,88 +41,96 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
     const { filters, currentPage } = useTypedSelector(({ products }) => products);
 
-    const { price, conditions, categories, colors, glass_frame, isLoaded } = useTypedSelector(
-        ({ products_filters }) => products_filters,
-    );
+    const {
+        price,
+        conditions,
+        categories,
+        colors,
+        selections,
+        glass_frame,
+        isLoaded: isLoadedProductsFilters,
+    } = useTypedSelector(({ products_filters }) => products_filters);
 
     React.useEffect(() => {
-        const filters: ProductsStateFilters = {
-            isParse: true,
+        if (isLoadedProductsFilters) {
+            const filters: ProductsStateFilters = {
+                isParse: true,
 
-            search: query.get('search') ? (query.get('search') as string) : '',
+                search: query.get('search') ? (query.get('search') as string) : '',
 
-            price: {
-                min: query.get('minPrice') ? parseInt(query.get('minPrice') as string) : 0,
-                max: query.get('maxPrice') ? parseInt(query.get('maxPrice') as string) : 0,
-            },
+                price: {
+                    min: query.get('minPrice') ? parseInt(query.get('minPrice') as string) : 0,
+                    max: query.get('maxPrice') ? parseInt(query.get('maxPrice') as string) : 0,
+                },
 
-            conditions: {},
-            categories: {},
-            types: {},
-            brands: {},
-            models: {},
-            colors: {},
-            sex: {},
-            availability: {},
-            size: {},
-            selections: {},
+                conditions: {},
+                categories: {},
+                types: {},
+                brands: {},
+                models: {},
+                colors: {},
+                sex: {},
+                availability: {},
+                size: {},
+                selections: {},
 
-            boutique: query.get('boutique') === 'true' ? true : false,
-            price_drop: query.get('price_drop') === 'true' ? true : false,
+                boutique: query.get('boutique') === 'true' ? true : false,
+                price_drop: query.get('price_drop') === 'true' ? true : false,
 
-            glass_frame: {},
+                glass_frame: {},
 
-            sort: 'a',
-        };
+                sort: 'a',
+            };
 
-        query.getAll('conditions').map((condition) => {
-            filters.conditions[condition] = condition;
-        });
+            query.getAll('conditions').map((condition) => {
+                filters.conditions[condition] = condition;
+            });
 
-        query.getAll('categories').map((category) => {
-            filters.categories[category] = category;
-        });
+            query.getAll('categories').map((category) => {
+                filters.categories[category] = category;
+            });
 
-        query.getAll('types').map((type) => {
-            filters.types[type] = type;
-        });
+            query.getAll('types').map((type) => {
+                filters.types[type] = type;
+            });
 
-        query.getAll('brands').map((brand) => {
-            filters.brands[brand] = brand;
-        });
+            query.getAll('brands').map((brand) => {
+                filters.brands[brand] = brand;
+            });
 
-        query.getAll('models').map((model) => {
-            filters.models[model] = model;
-        });
+            query.getAll('models').map((model) => {
+                filters.models[model] = model;
+            });
 
-        query.getAll('colors').map((color) => {
-            filters.colors[color] = color;
-        });
+            query.getAll('colors').map((color) => {
+                filters.colors[color] = color;
+            });
 
-        query.getAll('sex').map((sex) => {
-            filters.sex[sex] = sex;
-        });
+            query.getAll('sex').map((sex) => {
+                filters.sex[sex] = sex;
+            });
 
-        query.getAll('availability').map((availability) => {
-            filters.availability[availability] = availability;
-        });
+            query.getAll('availability').map((availability) => {
+                filters.availability[availability] = availability;
+            });
 
-        query.getAll('size').map((size) => {
-            filters.size[size] = size;
-        });
+            query.getAll('size').map((size) => {
+                filters.size[size] = size;
+            });
 
-        query.getAll('selections').map((selection) => {
-            filters.selections[selection] = selection;
-        });
+            query.getAll('selections').map((selection) => {
+                filters.selections[selection] = selections[selection];
+            });
 
-        query.getAll('glass_frame').map((glass_fame) => {
-            filters.glass_frame[glass_fame] = glass_fame;
-        });
+            query.getAll('glass_frame').map((glass_fame) => {
+                filters.glass_frame[glass_fame] = glass_fame;
+            });
 
-        const page = parseInt(query.get('page') || '1');
+            const page = parseInt(query.get('page') || '1');
 
-        dispatch(setCurrentPageProduct(page));
-        dispatch(setFiltersCatalog(filters));
+            dispatch(setCurrentPageProduct(page));
+            dispatch(setFiltersCatalog(filters));
+        }
 
         return () => {
             dispatch(setCurrentPageProduct(1));
@@ -157,7 +165,7 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
                 }),
             );
         };
-    }, [query]);
+    }, [query, isLoadedProductsFilters]);
 
     React.useEffect(() => {
         if (filters.isParse) {
@@ -243,15 +251,15 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
     ]);
 
     React.useEffect(() => {
-        if (isLoaded && filters.isParse) {
+        if (isLoadedProductsFilters && filters.isParse) {
             if (!Object.keys(filters.categories).length) {
                 Object.keys(categories).map((category) => dispatch(setFiltersCategoriesProduct(category)));
             }
         }
-    }, [isLoaded, filters.isParse, Object.keys(filters.categories).length, filters.categories[0]]);
+    }, [isLoadedProductsFilters, filters.isParse, Object.keys(filters.categories).length, filters.categories[0]]);
 
     React.useEffect(() => {
-        if (isLoaded && filters.isParse) {
+        if (isLoadedProductsFilters && filters.isParse) {
             if (!Object.keys(filters.availability).length) {
                 dispatch(setFiltersAvailabilityProduct('Доступно'));
                 dispatch(setFiltersAvailabilityProduct('На примерке'));
@@ -259,7 +267,7 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
             }
         }
     }, [
-        isLoaded,
+        isLoadedProductsFilters,
         filters.isParse,
         filters.search,
         Object.keys(filters.categories).map((category) => category),

@@ -11,11 +11,8 @@ const CatalogFiltersSelections: React.FC = () => {
     const { filters } = useTypedSelector(({ products }) => products);
     const { selections } = useTypedSelector(({ products_filters }) => products_filters);
 
-    const onChangeSetSelection = (selection: string) => {
-        dispatch(setFiltersSelectionsProduct(selection));
-
-        // dispatch(setFiltersAvailabilityProduct("Доступно"));
-        // dispatch(setFiltersAvailabilityProduct("На примерке"));
+    const onChangeSetSelection = (selectionId: string, selection: string) => {
+        dispatch(setFiltersSelectionsProduct(selectionId, selection));
     };
 
     return (
@@ -28,7 +25,7 @@ const CatalogFiltersSelections: React.FC = () => {
                     <Checkbox
                         id={`catalog-filters-block-content-selections-checkbox-${index}`}
                         label={selections[key]}
-                        onChange={() => onChangeSetSelection(key)}
+                        onChange={() => onChangeSetSelection(key, selections[key])}
                         checked={
                             Object.keys(filters.selections).find((filtersSelection) => key === filtersSelection)
                                 ? true

@@ -382,9 +382,9 @@ export const setFiltersSizeProduct = (size: string) => ({
     payload: size,
 });
 
-export const setFiltersSelectionsProduct = (selection: string) => ({
+export const setFiltersSelectionsProduct = (selectionId: string, selection: string) => ({
     type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS,
-    payload: selection,
+    payload: { selectionId, selection },
 });
 
 export const setFiltersBoutiqueProduct = (boutique: boolean) => ({
