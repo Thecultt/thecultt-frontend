@@ -48,6 +48,9 @@ export interface ProductsState {
     itemsCount: number;
 
     filters: ProductsStateFilters;
+
+    lastSearchString: string;
+    catalogScroll: number;
 }
 
 export enum ProductActionTypes {
@@ -84,6 +87,9 @@ export enum ProductActionTypes {
     SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME = 'SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME',
     SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP = 'SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP',
     SET_PRODUCTS_FILTERS_CATALOG_SORT = 'SET_PRODUCTS_FILTERS_CATALOG_SORT',
+
+    SET_PRODUCTS_LAST_SEARCH_STRING = 'SET_PRODUCTS_LAST_SEARCH_STRING',
+    SET_PRODUCTS_SCROLL = 'SET_PRODUCTS_SCROLL',
 }
 
 interface setProductsItems {
@@ -143,6 +149,16 @@ interface setProductsPageCount {
 
 interface setProductsItemsCount {
     type: ProductActionTypes.SET_PRODUCTS_ITEMS_COUNT;
+    payload: number;
+}
+
+interface setProductsLastSearchString {
+    type: ProductActionTypes.SET_PRODUCTS_LAST_SEARCH_STRING;
+    payload: string;
+}
+
+interface setProductsScroll {
+    type: ProductActionTypes.SET_PRODUCTS_SCROLL;
     payload: number;
 }
 
@@ -248,6 +264,8 @@ export type ProductTypes =
     | setProductsPageCurrentPage
     | setProductsPageCount
     | setProductsItemsCount
+    | setProductsLastSearchString
+    | setProductsScroll
     | setProductsFilters
     | setProductsFiltersSearch
     | setProductsFiltersPrice

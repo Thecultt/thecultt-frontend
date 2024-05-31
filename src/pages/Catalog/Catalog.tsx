@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { fetchProductsCatalog } from 'src/redux/actions/products';
+import { fetchProductsCatalog, setLastSearchString, setProductsTypeFetch } from 'src/redux/actions/products';
 import {
     CatalogBanner,
     CatalogBannerMedia,
@@ -12,19 +13,29 @@ import {
     CatalogProducts,
 } from 'src/components';
 
+import { useCatalogScroll } from 'src/hooks/catalog/useCatalogScroll';
+
 const Catalog: React.FC = () => {
     const dispatch = useDispatch();
+    const { search } = useLocation();
 
-    const { filters, currentPage, typeFetch } = useTypedSelector(({ products }) => products);
-
+    const { filters, currentPage, typeFetch, lastSearchString } = useTypedSelector(({ products }) => products);
     const { isLoaded: isLoadedFilters } = useTypedSelector(({ products_filters }) => products_filters);
 
-    const [isOpenFiltersMedia, setIsOpenFiltersMedia] = React.useState<boolean>(false);
+    const [isFirstRender, setIsFirstRender] = React.useState(true);
+    const [isOpenFiltersMedia, setIsOpenFiltersMedia] = React.useState(false);
 
     React.useEffect(() => {
         if (filters.isParse) {
+            if (isFirstRender && lastSearchString === search) {
+                setIsFirstRender(false);
+                return;
+            }
+
             dispatch(fetchProductsCatalog(filters, currentPage, typeFetch) as any);
         }
+
+        setIsFirstRender(false);
     }, [
         filters.isParse,
         filters.search,
@@ -51,6 +62,19 @@ const Catalog: React.FC = () => {
         currentPage,
         typeFetch,
     ]);
+
+    React.useEffect(() => {
+        dispatch(setProductsTypeFetch('btn-page'));
+    }, []);
+
+    React.useEffect(
+        () => () => {
+            dispatch(setLastSearchString(search));
+        },
+        [search],
+    );
+
+    useCatalogScroll();
 
     return (
         <>

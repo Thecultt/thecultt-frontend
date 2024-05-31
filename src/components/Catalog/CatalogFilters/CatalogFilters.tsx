@@ -28,13 +28,18 @@ import {
     CatalogFiltersPriceDrop,
 } from 'src/components';
 
-const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
+interface Props {
+    isOpenFiltersMedia: boolean;
+    setIsOpenFiltersMedia: (value: boolean) => void;
+}
+
+const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
     const dispatch = useDispatch();
 
     const [query] = useSearchParams();
     const navigate = useNavigate();
 
-    const { filters } = useTypedSelector(({ products }) => products);
+    const { filters, currentPage } = useTypedSelector(({ products }) => products);
 
     const { price, conditions, categories, colors, glass_frame, isLoaded } = useTypedSelector(
         ({ products_filters }) => products_filters,
@@ -114,11 +119,13 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
             filters.glass_frame[glass_fame] = glass_fame;
         });
 
+        const page = parseInt(query.get('page') || '1');
+
+        dispatch(setCurrentPageProduct(page));
         dispatch(setFiltersCatalog(filters));
 
         return () => {
             dispatch(setCurrentPageProduct(1));
-
             dispatch(
                 setFiltersCatalog({
                     isParse: false,
@@ -154,7 +161,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
 
     React.useEffect(() => {
         if (filters.isParse) {
-            dispatch(setProductsTypeFetch('btn-page'));
+            // dispatch(setProductsTypeFetch('btn-page'));
 
             const oldParamsData: any = {};
 
@@ -204,6 +211,8 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
                 params['price_drop'] = filters.price_drop;
             }
 
+            params['page'] = currentPage;
+
             navigate({
                 pathname: '/catalog',
                 search: `?${createSearchParams(params)}`,
@@ -230,6 +239,7 @@ const CatalogFilters: React.FC<any> = ({ setIsOpenFiltersMedia, isOpenFiltersMed
         filters.boutique,
         filters.price_drop,
         filters.sort,
+        currentPage,
     ]);
 
     React.useEffect(() => {
