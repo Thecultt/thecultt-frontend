@@ -1,11 +1,13 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 
 interface HeaderUserMenuInterface {
     state: boolean;
 }
 
 const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
+    const { search } = useLocation();
+
     const onClickLogout = () => {
         localStorage.removeItem('accessToken');
 
@@ -60,10 +62,10 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
                     </>
                 ) : (
                     <>
-                        <Link to="#reglog" className="header-block-user-menu-block__link">
+                        <Link to={`${search}#reglog`} className="header-block-user-menu-block__link">
                             Войти
                         </Link>
-                        <Link to="#reglog" className="header-block-user-menu-block__link">
+                        <Link to={`${search}#reglog`} className="header-block-user-menu-block__link">
                             Зарегистрироваться
                         </Link>
                     </>

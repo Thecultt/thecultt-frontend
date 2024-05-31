@@ -12,18 +12,6 @@ const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, i
 
     return (
         <form className="reglog-content-form reglog-content-form-login" onSubmit={handleSubmit}>
-            <Link to="#reglog" className="reglog-content-form-back">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M15 18L9 12L15 6"
-                        stroke="#202020"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                </svg>
-            </Link>
-
             <h3 className="reglog-content-form__title">Вход</h3>
             {/* 
 			<p className="reglog-content-form__message">
