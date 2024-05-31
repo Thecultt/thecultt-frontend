@@ -85,9 +85,10 @@ const initialState: ProductsState = {
         sort: 'a',
     },
     lastSearchString: '',
+    catalogScroll: 0,
 };
 
-const products = (state = initialState, action: ProductTypes) => {
+const products = (state = initialState, action: ProductTypes): ProductsState => {
     if (action.type === ProductActionTypes.SET_PRODUCTS_ITEMS) {
         return {
             ...state,
@@ -505,6 +506,13 @@ const products = (state = initialState, action: ProductTypes) => {
         return {
             ...state,
             lastSearchString: action.payload,
+        };
+    }
+
+    if (action.type === ProductActionTypes.SET_PRODUCTS_SCROLL) {
+        return {
+            ...state,
+            catalogScroll: action.payload,
         };
     }
 

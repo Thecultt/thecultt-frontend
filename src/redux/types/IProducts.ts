@@ -50,6 +50,7 @@ export interface ProductsState {
     filters: ProductsStateFilters;
 
     lastSearchString: string;
+    catalogScroll: number;
 }
 
 export enum ProductActionTypes {
@@ -88,6 +89,7 @@ export enum ProductActionTypes {
     SET_PRODUCTS_FILTERS_CATALOG_SORT = 'SET_PRODUCTS_FILTERS_CATALOG_SORT',
 
     SET_PRODUCTS_LAST_SEARCH_STRING = 'SET_PRODUCTS_LAST_SEARCH_STRING',
+    SET_PRODUCTS_SCROLL = 'SET_PRODUCTS_SCROLL',
 }
 
 interface setProductsItems {
@@ -153,6 +155,11 @@ interface setProductsItemsCount {
 interface setProductsLastSearchString {
     type: ProductActionTypes.SET_PRODUCTS_LAST_SEARCH_STRING;
     payload: string;
+}
+
+interface setProductsScroll {
+    type: ProductActionTypes.SET_PRODUCTS_SCROLL;
+    payload: number;
 }
 
 // filters
@@ -258,6 +265,7 @@ export type ProductTypes =
     | setProductsPageCount
     | setProductsItemsCount
     | setProductsLastSearchString
+    | setProductsScroll
     | setProductsFilters
     | setProductsFiltersSearch
     | setProductsFiltersPrice

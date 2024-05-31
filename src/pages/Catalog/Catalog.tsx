@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { fetchProductsCatalog, setLastSearchString } from 'src/redux/actions/products';
+import { fetchProductsCatalog, setLastSearchString, setProductsTypeFetch } from 'src/redux/actions/products';
 import {
     CatalogBanner,
     CatalogBannerMedia,
@@ -13,9 +13,10 @@ import {
     CatalogProducts,
 } from 'src/components';
 
+import { useCatalogScroll } from './useCatalogScroll';
+
 const Catalog: React.FC = () => {
     const dispatch = useDispatch();
-
     const { search } = useLocation();
 
     const { filters, currentPage, typeFetch, lastSearchString } = useTypedSelector(({ products }) => products);
@@ -62,12 +63,18 @@ const Catalog: React.FC = () => {
         typeFetch,
     ]);
 
+    React.useEffect(() => {
+        dispatch(setProductsTypeFetch('btn-page'));
+    }, []);
+
     React.useEffect(
         () => () => {
             dispatch(setLastSearchString(search));
         },
         [search],
     );
+
+    useCatalogScroll();
 
     return (
         <>
