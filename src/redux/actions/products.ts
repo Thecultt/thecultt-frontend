@@ -322,6 +322,11 @@ export const setLastSearchString = (string: string) => ({
     payload: string,
 });
 
+export const setCatalogScroll = (scrollTop: number) => ({
+    type: ProductActionTypes.SET_PRODUCTS_SCROLL,
+    payload: scrollTop,
+});
+
 export const setFiltersCatalog = (filters: ProductsStateFilters) => ({
     type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG,
     payload: filters,
