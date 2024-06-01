@@ -219,7 +219,7 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 				params['price_drop'] = filters.price_drop;
 			}
 
-			if (filters.sort !== undefined) {
+			if (filters.sort !== undefined && filters.sort !== null) {
 				params['sort'] = filters.sort;
 			}
 
