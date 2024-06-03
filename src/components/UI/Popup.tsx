@@ -54,10 +54,13 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
             ref={PopupRefWrapper}
         >
             <div
-                className={getClassNames('popup-content', {
-                    active: state && !!stateContent,
-                    close: state && !stateContent,
-                })}
+                // className={getClassNames('popup-content', {
+                //     active: state && !!stateContent,
+                //     close: state && !stateContent,
+                // })}
+                className={`popup-content ${
+                    state ? (stateContent !== undefined ? (stateContent ? 'active' : 'close') : 'active') : ''
+                }`}
                 ref={PopupRef}
             >
                 <div className="popup-content-close" onClick={setState}>
