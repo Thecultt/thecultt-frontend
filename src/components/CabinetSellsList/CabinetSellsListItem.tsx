@@ -2,6 +2,8 @@ import React from 'react';
 import AnimateHeight from 'react-animate-height';
 import { Link } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 const CabinetSellsListItem: React.FC<any> = ({
     id,
     time,
@@ -124,7 +126,11 @@ const CabinetSellsListItem: React.FC<any> = ({
                             ) : null}
                         </p>
 
-                        <div className={`cabinet-sells-list-item-topinfo-block-icon ${isOpen ? 'rotate' : ''}`}>
+                        <div
+                            className={getClassNames('cabinet-sells-list-item-topinfo-block-icon', {
+                                rotate: isOpen,
+                            })}
+                        >
                             <svg
                                 width="24"
                                 height="24"

@@ -37,7 +37,7 @@ const CatalogFiltersColors: React.FC<CatalogFiltersColorsProps> = ({ colors }) =
 
                     <label
                         htmlFor={`catalog-filters-block-content-colors-checkbox-${index}`}
-                        className={`catalog-filters-block-content-colors-checkbox__label`}
+                        className="catalog-filters-block-content-colors-checkbox__label"
                     >
                         <div
                             className="catalog-filters-block-content-colors-checkbox__label-circle"

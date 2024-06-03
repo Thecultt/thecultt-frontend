@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { HeaderMediaLinkTab, Footer } from 'src/components';
 import Logo from 'src/assets/images/logo.svg';
@@ -176,7 +177,11 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                 </div>
             </div>
 
-            <div className={`header-media-modal-menu ${state ? 'active' : ''}`}>
+            <div
+                className={getClassNames('header-media-modal-menu', {
+                    active: state,
+                })}
+            >
                 <div className="header-media-modal-menu-wrapper">
                     {/* <HeaderMediaBanner /> */}
 

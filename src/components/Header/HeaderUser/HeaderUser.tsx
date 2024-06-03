@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { HeaderUserMenu } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const HeaderUser: React.FC = () => {
     const { pathname } = useLocation();
@@ -36,7 +37,12 @@ const HeaderUser: React.FC = () => {
 
     return (
         <div className="header-block-user" ref={PopupRef}>
-            <button className={`header-block-user__icon ${state ? 'active' : ''}`} onClick={toggleClickModarUser}>
+            <button
+                className={getClassNames('header-block-user__icon', {
+                    active: state,
+                })}
+                onClick={toggleClickModarUser}
+            >
                 <svg width="38" height="38" viewBox="0 0 189 188" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.487061" y="0.00390625" width="188.026" height="187.885" rx="93.9425" fill="#F7F4F0" />
                     <path

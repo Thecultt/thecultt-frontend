@@ -7,6 +7,7 @@ import { CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
 import { setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import validate from './validate';
 
@@ -368,7 +369,12 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 </div>
             </div>
 
-            <button className={`btn ${submitting ? 'disabled' : ''} sell-block__btn`} disabled={submitting}>
+            <button
+                className={getClassNames('btn sell-block__btn', {
+                    disabled: submitting,
+                })}
+                disabled={submitting}
+            >
                 Продолжить
             </button>
         </form>

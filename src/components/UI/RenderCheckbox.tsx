@@ -2,6 +2,8 @@ import React from 'react';
 import { v4 } from 'uuid';
 import { WrappedFieldProps } from 'redux-form';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 interface CheckboxProps extends WrappedFieldProps {
     label: string;
     small?: boolean;
@@ -16,7 +18,9 @@ const RenderCheckbox: React.FC<CheckboxProps> = ({ label, input, small }) => {
                 {...input}
                 id={id}
                 type="checkbox"
-                className={`checkbox ${small ? 'small' : ''}`}
+                className={getClassNames('checkbox', {
+                    small: !!small,
+                })}
                 defaultChecked={true}
                 // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 //     onChange && onChange(e.target.checked)
@@ -24,7 +28,12 @@ const RenderCheckbox: React.FC<CheckboxProps> = ({ label, input, small }) => {
                 // checked={checked}
             />
 
-            <label htmlFor={id} className={`checkbox__label ${small ? 'small' : ''}`}>
+            <label
+                htmlFor={id}
+                className={getClassNames('checkbox__label', {
+                    small: !!small,
+                })}
+            >
                 <p className="checkbox__label__text" dangerouslySetInnerHTML={{ __html: label }}></p>
             </label>
         </div>

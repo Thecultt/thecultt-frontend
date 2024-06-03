@@ -1,4 +1,5 @@
 import React from 'react';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface SelectProps {
     label: string;
@@ -51,10 +52,16 @@ const Select: React.FC<SelectProps> = ({ label, items }) => {
                 </g>
             </svg>
 
-            <div className={`select-list ${state ? 'active' : ''}`}>
+            <div
+                className={getClassNames('select-list', {
+                    active: state,
+                })}
+            >
                 {items.map((item, index) => (
                     <p
-                        className={`select-list__item ${item === currentItem ? 'active' : ''}`}
+                        className={getClassNames('select-list__item', {
+                            active: item === currentItem,
+                        })}
                         key={`select-list__item-${index}`}
                         onClick={() => toggleCurrentItem(item)}
                     >

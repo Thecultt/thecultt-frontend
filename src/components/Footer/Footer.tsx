@@ -6,6 +6,7 @@ import Logo from 'src/assets/images/logo.svg';
 
 import { FooterMenuBlock } from 'src/components';
 import { MEDIA_SIZES } from 'src/constants/styles';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface FooterProps {
     transparent?: boolean;
@@ -111,7 +112,11 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
         <>
             {/* {window.location.pathname === "/" ? <FooterEmailSubscribe /> : null} */}
 
-            <footer className={`footer ${transparent ? 'transparent' : ''}`}>
+            <footer
+                className={getClassNames('footer', {
+                    transparent: !!transparent,
+                })}
+            >
                 <div className="container">
                     <div className="footer-wrapper">
                         <Link to="/" className="footer-logo">

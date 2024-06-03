@@ -6,6 +6,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput, RenderRadioSelect } from 'src/components';
 
 import { validate } from './validate';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -29,7 +30,12 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     }, [isSending]);
 
     return (
-        <form onSubmit={handleSubmit} className={`cabinet-setting-block ${isEdit ? 'active' : ''}`}>
+        <form
+            onSubmit={handleSubmit}
+            className={getClassNames('cabinet-setting-block', {
+                active: isEdit,
+            })}
+        >
             <div className="cabinet-setting-block-title">
                 <h3 className="cabinet-setting-block-title__title">Основные данные</h3>
 
@@ -37,7 +43,9 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                     <>
                         <button
                             type="submit"
-                            className={`cabinet-setting-block-title__btn ${invalid || pristine || submitting ? 'disabled' : ''}`}
+                            className={getClassNames('cabinet-setting-block-title__btn', {
+                                disabled: invalid || pristine || submitting,
+                            })}
                         >
                             Сохранить
                         </button>
@@ -56,7 +64,11 @@ const CabinetSettingInfoBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 )}
             </div>
 
-            <div className={`cabinet-setting-block-form ${isEdit ? 'active' : ''}`}>
+            <div
+                className={getClassNames('cabinet-setting-block-form', {
+                    active: isEdit,
+                })}
+            >
                 <div className="cabinet-setting-block-form-input-wrapper">
                     <div className="cabinet-setting-block-form-input" style={{ width: '49%' }}>
                         <Field component={RenderInput} label="Имя" name="name" bgWhite />

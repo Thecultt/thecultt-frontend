@@ -1,4 +1,5 @@
 import React from 'react';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface InputProps {
     name: string;
@@ -8,7 +9,11 @@ interface InputProps {
 
 const Textarea: React.FC<InputProps> = ({ name, label, bgWhite }) => {
     return (
-        <div className={`textarea ${bgWhite ? 'bgWhite' : ''}`}>
+        <div
+            className={getClassNames('textarea', {
+                bgWhite: !!bgWhite,
+            })}
+        >
             <textarea className="textarea__field" id={name} placeholder={label} />
         </div>
     );

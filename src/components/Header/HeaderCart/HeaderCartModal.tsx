@@ -6,6 +6,7 @@ import { NumericFormat } from 'react-number-format';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
 import { HeaderCartModalItem } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface HeaderCartModalProps {
     state: boolean;
@@ -54,7 +55,11 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
     }, [state]);
 
     return (
-        <div className={`header-block-cart-modal ${state ? 'active' : ''}`}>
+        <div
+            className={getClassNames('header-block-cart-modal', {
+                active: state,
+            })}
+        >
             <div className="header-block-cart-modal-close" onClick={setState}>
                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -125,7 +130,9 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
                         {isLoadedUser ? (
                             <Link
                                 to="/order"
-                                className={`btn ${Object.keys(items).filter((key) => items[key].checked === true).length ? '' : 'disabled'} header-block-cart-modal-btn__btn`}
+                                className={getClassNames('btn header-block-cart-modal-btn__btn', {
+                                    disabled: !Object.keys(items).filter((key) => items[key].checked).length,
+                                })}
                                 onClick={setState}
                             >
                                 Перейти к заказу
@@ -133,7 +140,9 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
                         ) : (
                             <Link
                                 to="/?redirect=/order#reglog"
-                                className={`btn ${Object.keys(items).filter((key) => items[key].checked === true).length ? '' : 'disabled'} header-block-cart-modal-btn__btn`}
+                                className={getClassNames('btn header-block-cart-modal-btn__btn', {
+                                    disabled: !Object.keys(items).filter((key) => items[key].checked).length,
+                                })}
                             >
                                 Перейти к заказу
                             </Link>

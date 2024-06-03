@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { setProductsTypeFetch, setCurrentPageProduct } from 'src/redux/actions/products';
 import { Loader } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const CatalogProductsPagination: React.FC = () => {
     const dispatch = useDispatch();
@@ -49,7 +50,9 @@ const CatalogProductsPagination: React.FC = () => {
 
             <div className="catalog-product-pagination-pages">
                 <button
-                    className={`catalog-product-pagination-pages__btn ${currentPage === 1 ? 'disabled' : ''}`}
+                    className={getClassNames('catalog-product-pagination-pages__btn', {
+                        disabled: currentPage === 1,
+                    })}
                     onClick={() => onClickFetchProductsPage(1)}
                 >
                     Первая
@@ -58,14 +61,14 @@ const CatalogProductsPagination: React.FC = () => {
                 {currentPage > 2 ? (
                     <>
                         <div
-                            className={`catalog-product-pagination-pages-item`}
+                            className="catalog-product-pagination-pages-item"
                             onClick={() => onClickFetchProductsPage(currentPage - 2)}
                         >
                             {currentPage - 2}
                         </div>
 
                         <div
-                            className={`catalog-product-pagination-pages-item`}
+                            className="catalog-product-pagination-pages-item"
                             onClick={() => onClickFetchProductsPage(currentPage - 1)}
                         >
                             {currentPage - 1}
@@ -75,7 +78,7 @@ const CatalogProductsPagination: React.FC = () => {
                     <>
                         {currentPage > 1 ? (
                             <div
-                                className={`catalog-product-pagination-pages-item`}
+                                className="catalog-product-pagination-pages-item"
                                 onClick={() => onClickFetchProductsPage(1)}
                             >
                                 {1}
@@ -84,7 +87,7 @@ const CatalogProductsPagination: React.FC = () => {
 
                         {currentPage > 2 ? (
                             <div
-                                className={`catalog-product-pagination-pages-item`}
+                                className="catalog-product-pagination-pages-item"
                                 onClick={() => onClickFetchProductsPage(2)}
                             >
                                 {2}
@@ -97,7 +100,9 @@ const CatalogProductsPagination: React.FC = () => {
                     .slice(currentPage - 1, currentPage > 2 ? currentPage + 2 : currentPage + 4)
                     .map((page, index) => (
                         <div
-                            className={`catalog-product-pagination-pages-item ${page === currentPage ? 'active' : ''}`}
+                            className={getClassNames('catalog-product-pagination-pages-item', {
+                                active: page === currentPage,
+                            })}
                             key={`catalog-product-pagination-pages-item-${index}`}
                             onClick={() => onClickFetchProductsPage(page)}
                         >
@@ -106,7 +111,9 @@ const CatalogProductsPagination: React.FC = () => {
                     ))}
 
                 <button
-                    className={`catalog-product-pagination-pages__btn ${currentPage === pageCount ? 'disabled' : ''}`}
+                    className={getClassNames('catalog-product-pagination-pages__btn', {
+                        disabled: currentPage === pageCount,
+                    })}
                     onClick={() => onClickFetchProductsPage(pageCount)}
                 >
                     Последняя

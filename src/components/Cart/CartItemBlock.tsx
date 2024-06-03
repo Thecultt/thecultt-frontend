@@ -1,6 +1,7 @@
 import React from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import { CartItem } from 'src/models/ICartItem';
 
@@ -25,7 +26,10 @@ const CartItemBlock: React.FC<CartItemBlockProps> = ({
 }) => {
     return (
         <div
-            className={`cart-item ${checked ? '' : 'disabled'} ${availability ? (is_trial ? 'notAvailability' : '') : 'notAvailability'}`}
+            className={getClassNames('cart-item', {
+                disabled: !checked,
+                notAvailability: !availability || (!!availability && is_trial),
+            })}
         >
             <div className="cart-item-content">
                 {hiddenCheck ? null : (

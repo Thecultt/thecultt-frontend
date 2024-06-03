@@ -3,6 +3,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -40,7 +41,12 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     }, [isSending]);
 
     return (
-        <form onSubmit={handleSubmit} className={`cabinet-setting-block ${state ? 'active' : ''}`}>
+        <form
+            onSubmit={handleSubmit}
+            className={getClassNames('cabinet-setting-block', {
+                active: state,
+            })}
+        >
             <div className="cabinet-setting-block-title">
                 <h3 className="cabinet-setting-block-title__title">Реквизиты для выплат</h3>
 
@@ -49,7 +55,9 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         <>
                             <button
                                 type="submit"
-                                className={`cabinet-setting-block-title__btn ${invalid || pristine || submitting ? 'disabled' : ''}`}
+                                className={getClassNames('cabinet-setting-block-title__btn', {
+                                    disabled: invalid || pristine || submitting,
+                                })}
                             >
                                 Сохранить
                             </button>
@@ -75,7 +83,11 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             </div>
 
             {state ? (
-                <div className={`cabinet-setting-block-form ${isEdit ? 'active' : ''}`}>
+                <div
+                    className={getClassNames('cabinet-setting-block-form', {
+                        active: isEdit,
+                    })}
+                >
                     <div className="cabinet-setting-block-form-input-wrapper">
                         <div className="cabinet-setting-block-form-input" style={{ width: '100%' }}>
                             <Field component={RenderInput} name="pasport" label="Серия и номер паспорта" bgWhite />

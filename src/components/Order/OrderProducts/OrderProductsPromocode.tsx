@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { sendOrderApplyPromocode } from 'src/redux/actions/order';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface OrderProductsPromocodeProps {
     disabled?: boolean;
@@ -27,14 +28,16 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
         <>
             {isActive ? (
                 <div
-                    className={`order-products-promocode ${isActive && disabled ? 'error_disabled' : disabled ? 'disabled' : ''}`}
+                    className={getClassNames('order-products-promocode', {
+                        error_disabled: !!disabled,
+                    })}
                 >
                     <div className="order-products-promocode-input">
                         <input
                             type="text"
                             name="promocode"
                             placeholder="Промокод"
-                            className={`order-products-promocode-input__field active`}
+                            className="order-products-promocode-input__field active"
                             value={currentPromocode}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                 setCurrentPromocode(e.target.value.replace(' ', '').toUpperCase())
@@ -49,19 +52,27 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
                     </div>
 
                     {isActive && disabled ? null : (
-                        <button className={`order-products-promocode__btn edit`} onClick={sendApplyPromocode}>
+                        <button className="order-products-promocode__btn edit" onClick={sendApplyPromocode}>
                             Изменить
                         </button>
                     )}
                 </div>
             ) : (
-                <div className={`order-products-promocode ${disabled ? 'disabled' : ''} ${isError ? 'error' : ''}`}>
+                <div
+                    className={getClassNames('order-products-promocode', {
+                        disabled: !!disabled,
+                        error: isError,
+                    })}
+                >
                     <div className="order-products-promocode-input">
                         <input
                             type="text"
                             name="promocode"
                             placeholder="Промокод"
-                            className={`order-products-promocode-input__field ${currentPromocode === '' ? 'disabled' : isError ? 'error' : ''}`}
+                            className={getClassNames('order-products-promocode-input__field', {
+                                disabled: !currentPromocode,
+                                error: !!currentPromocode && isError,
+                            })}
                             value={currentPromocode}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                 setCurrentPromocode(e.target.value.replace(' ', '').toUpperCase())
@@ -72,7 +83,9 @@ const OrderProductsPromocode: React.FC<OrderProductsPromocodeProps> = ({ disable
                     </div>
 
                     <button
-                        className={`order-products-promocode__btn ${currentPromocode === '' ? 'disabled' : ''}`}
+                        className={getClassNames('order-products-promocode__btn', {
+                            disabled: !currentPromocode,
+                        })}
                         onClick={sendApplyPromocode}
                     >
                         Применить

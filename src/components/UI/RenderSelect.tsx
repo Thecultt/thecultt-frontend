@@ -1,5 +1,6 @@
 import React from 'react';
 import { WrappedFieldProps, change } from 'redux-form';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface RenderSelectProps extends WrappedFieldProps {
     label: string;
@@ -64,9 +65,12 @@ const RenderSelect: React.FC<RenderSelectProps> = ({
     }, [currentItem]);
 
     return (
-        <div className={`select-wrapper`} ref={SelectRef}>
+        <div className="select-wrapper" ref={SelectRef}>
             <div
-                className={`select ${disabled ? 'disabled' : ''} ${state ? 'active' : ''}`}
+                className={getClassNames('select', {
+                    disabled: !!disabled,
+                    active: state,
+                })}
                 onClick={() => setState(!state)}
             >
                 <p className="select__label">{currentItem !== '' ? currentItem : <span>{label}</span>}</p>
@@ -84,11 +88,17 @@ const RenderSelect: React.FC<RenderSelectProps> = ({
                 </svg>
             </div>
 
-            <div className={`select-list ${state ? 'active' : ''}`}>
+            <div
+                className={getClassNames('select-list', {
+                    active: state,
+                })}
+            >
                 <div className="select-list-items-wrapper">
                     {items.map((item, index) => (
                         <p
-                            className={`select-list__item ${item === currentItem ? 'active' : ''}`}
+                            className={getClassNames('select-list__item', {
+                                active: item === currentItem,
+                            })}
                             key={`select-list__item-${index}`}
                             onClick={() => toggleCurrentItem(item)}
                         >

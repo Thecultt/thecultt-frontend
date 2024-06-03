@@ -2,6 +2,7 @@ import React from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
 import { Product } from 'src/models/IProduct';
 
 interface ProductBlockProps extends Product {
@@ -86,7 +87,12 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     };
 
     return (
-        <div className={`product-block ${addClass ? addClass : ''}`} onClick={onClickProduct}>
+        <div
+            className={getClassNames('product-block', {
+                addClass: !!addClass,
+            })}
+            onClick={onClickProduct}
+        >
             <div className="product-block-cover">
                 {from_boutique ? <span className="product-block-cover__boutique">Из бутика</span> : null}
 
@@ -105,7 +111,9 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                 </div>
 
                 <div
-                    className={`product-block-cover-favorite ${isFavorite ? 'active' : ''}`}
+                    className={getClassNames('product-block-cover-favorite', {
+                        active: isFavorite,
+                    })}
                     onClick={() => {
                         if (isFavorite) {
                             removeFavorite();
@@ -138,9 +146,9 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                         .fill(0)
                         .map((_, index) => (
                             <div
-                                className={`product-block-cover-dots-item ${
-                                    currentIndexImage === index ? 'active' : ''
-                                }`}
+                                className={getClassNames('product-block-cover-dots-item', {
+                                    active: currentIndexImage === index,
+                                })}
                                 key={`product-block-cover-dots-item${article}-${index}`}
                                 onClick={() => setCurrentIndexImage(index)}
                             ></div>

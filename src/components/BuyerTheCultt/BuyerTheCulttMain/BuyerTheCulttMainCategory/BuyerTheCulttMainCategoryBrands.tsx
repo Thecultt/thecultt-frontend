@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 interface BuyerTheCulttMainCategoryBrandsProps {
     brands: string[];
     currentFilterBrand: string;
@@ -15,9 +17,11 @@ const BuyerTheCulttMainCategoryBrands: React.FC<BuyerTheCulttMainCategoryBrandsP
         <div className="buyer-thecultt-category-brands">
             {brands.map((brand, index) => (
                 <button
-                    onClick={() => setCurrentFilterBrand(brand)}
-                    className={`buyer-thecultt-category-brands__brand ${currentFilterBrand === brand ? 'active' : ''}`}
                     key={`buyer-thecultt-category-brands__brand-${brand}-${index}`}
+                    className={getClassNames('buyer-thecultt-category-brands__brand', {
+                        active: currentFilterBrand === brand,
+                    })}
+                    onClick={() => setCurrentFilterBrand(brand)}
                 >
                     {brand}
                 </button>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 const MenuMedia: React.FC = () => {
     const [state, setState] = React.useState<boolean>(true);
 
@@ -23,7 +25,11 @@ const MenuMedia: React.FC = () => {
     }, [currentScrollPos]);
 
     return (
-        <div className={`menu-media ${state ? 'active' : ''}`}>
+        <div
+            className={getClassNames('menu-media', {
+                active: state,
+            })}
+        >
             <button className="menu-media__btn active">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

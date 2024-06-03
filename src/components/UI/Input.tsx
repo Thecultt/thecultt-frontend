@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 interface InputProps {
     type: string;
     name: string;
@@ -9,7 +11,11 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({ type, name, label, bgWhite }) => {
     return (
-        <div className={`input ${bgWhite ? 'bgWhite' : ''}`}>
+        <div
+            className={getClassNames('input', {
+                bgWhite: !!bgWhite,
+            })}
+        >
             <input type={type} className="input__field" id={name} placeholder={label} />
         </div>
     );

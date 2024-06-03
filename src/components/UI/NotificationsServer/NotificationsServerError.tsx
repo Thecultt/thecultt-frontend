@@ -1,4 +1,5 @@
 import React from 'react';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface NotificationsServerErrorProps {
     active: boolean;
@@ -8,7 +9,11 @@ interface NotificationsServerErrorProps {
 
 const NotificationsServerError: React.FC<NotificationsServerErrorProps> = ({ active, text, onClickClose }) => {
     return (
-        <div className={`notifications-server-item ${active ? 'active' : ''}`}>
+        <div
+            className={getClassNames('notifications-server-item', {
+                active: active,
+            })}
+        >
             <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="20" y="20.5" width="20" height="20" rx="10" transform="rotate(-180 20 20.5)" fill="#9A1A1A" />
                 <path

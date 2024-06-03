@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput, RenderCheckbox, Loader } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import { validate } from './validate';
 
@@ -99,7 +99,9 @@ const ReglogRegister: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         </button>
                     ) : (
                         <button
-                            className={`btn ${invalid || submitting || pristine ? 'disabled' : ''} reglog-content-form-btn__btn`}
+                            className={getClassNames('btn reglog-content-form-btn__btn', {
+                                disabled: invalid || submitting || pristine,
+                            })}
                             disabled={invalid || submitting || pristine}
                         >
                             Согласиться и продолжить
