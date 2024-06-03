@@ -1,9 +1,14 @@
 import React from 'react';
+import { useMediaQuery } from 'usehooks-ts';
+
+import { MEDIA_SIZES } from 'src/constants/styles';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { CabinetSellStepKeys, CabinetSellTypes } from 'src/redux/types/ICabinetSell';
 
 const SellSteps: React.FC = () => {
+	const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tabletExtra})`);
+
 	const steps: {
 		title: string;
 		key: CabinetSellStepKeys;
@@ -74,15 +79,15 @@ const SellSteps: React.FC = () => {
 	return (
 		<div className="sell-steps">
 			{steps
-				.filter((step) => (
-					step.types.find((type) => {
+				.filter((step) => {
+					return step.types.find((type) => {
 						if (type === currentType) {
 							return step;
 						}
-					})
-				))
+					});
+				})
 				.map((step, index) =>
-					window.innerWidth > 1250 ? (
+					!isMobile ? (
 						<div
 							className={`sell-steps-item ${index + 1 === currentIndex ? 'active' : index + 1 < currentIndex ? 'success' : ''
 								} `}

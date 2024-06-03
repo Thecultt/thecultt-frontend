@@ -1,5 +1,8 @@
 import React from 'react';
 import AnimateHeight from 'react-animate-height';
+import { useMediaQuery } from 'usehooks-ts';
+
+import { MEDIA_SIZES } from 'src/constants/styles';
 
 interface FooterMenuBlockProps {
     title: string;
@@ -7,11 +10,12 @@ interface FooterMenuBlockProps {
 }
 
 const FooterMenuBlock: React.FC<FooterMenuBlockProps> = ({ title, children }) => {
-    const [isOpenMediaTab, setIsOpenMediaTab] = React.useState<boolean>(false);
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+    const [isOpenMediaTab, setIsOpenMediaTab] = React.useState(false);
 
     return (
         <>
-            {window.innerWidth > 1200 ? (
+            {!isMobile ? (
                 <div className="footer-block-menu-block">
                     <h5 className="footer-block-menu-block__title">{title}</h5>
 

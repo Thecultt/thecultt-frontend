@@ -1,4 +1,7 @@
 import React from 'react';
+import { useMediaQuery } from 'usehooks-ts';
+
+import { MEDIA_SIZES } from 'src/constants/styles';
 
 import BuyerTheculttMainImage from 'src/assets/images/buyer-thecultt/buyer-thecultt-main.jpg';
 import BuyerTheculttMainImageMedia from 'src/assets/images/buyer-thecultt/buyer-thecultt-main-media.jpg';
@@ -8,11 +11,13 @@ interface BuyerTheCulttMainBannerProps {
 }
 
 const BuyerTheCulttMainBanner: React.FC<BuyerTheCulttMainBannerProps> = ({ onClickOpenCustomForm }) => {
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     return (
         <div
             className="buyer-thecultt-main"
             style={{
-                backgroundImage: `url("${window.innerWidth > 1200 ? '' : BuyerTheculttMainImageMedia}")`,
+                backgroundImage: `url("${isMobile ? BuyerTheculttMainImageMedia : ''}")`,
             }}
         >
             <div className="buyer-thecultt-main-text">
@@ -22,7 +27,7 @@ const BuyerTheCulttMainBanner: React.FC<BuyerTheCulttMainBannerProps> = ({ onCli
                     часовых брендов. К заказу доступны все позиции с официальных сайтов.
                 </p>
                 <button
-                    className={`${window.innerWidth > 1200 ? 'btn' : 'btn-light'} buyer-thecultt-main-text__btn`}
+                    className={`${!isMobile ? 'btn' : 'btn-light'} buyer-thecultt-main-text__btn`}
                     onClick={onClickOpenCustomForm}
                 >
                     Отправить заявку
@@ -32,7 +37,7 @@ const BuyerTheCulttMainBanner: React.FC<BuyerTheCulttMainBannerProps> = ({ onCli
             <div
                 className="buyer-thecultt-main-image"
                 style={{
-                    backgroundImage: `url("${window.innerWidth > 1200 ? BuyerTheculttMainImage : ''}")`,
+                    backgroundImage: `url("${!isMobile ? BuyerTheculttMainImage : ''}")`,
                 }}
             ></div>
         </div>
