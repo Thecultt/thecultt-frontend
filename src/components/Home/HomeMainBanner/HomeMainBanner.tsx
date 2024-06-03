@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 import HomeMainBannerImageNew from 'src/assets/images/home/home-main-banner-new.jpg';
 import HomeMainBannerImageBoutique from 'src/assets/images/home/home-main-banner-boutique.jpg';
 import HomeMainBannerImageConcierge from 'src/assets/images/home/home-main-banner-concierge.jpg';
@@ -212,7 +214,9 @@ const HomeMainBanner: React.FC = () => {
                             .fill(0)
                             .map((_, index) => (
                                 <button
-                                    className={`home-main-banner-nav-btn ${currentSlide === index ? 'active' : ''}`}
+                                    className={getClassNames('home-main-banner-nav-btn', {
+                                        active: currentSlide === index,
+                                    })}
                                     key={`home-main-banner-nav-btn-${index}`}
                                     onClick={() => onClickGoToSlide(index)}
                                 ></button>

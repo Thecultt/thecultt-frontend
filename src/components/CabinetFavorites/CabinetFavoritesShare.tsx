@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Popup } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 const CabinetFavoritesShare: React.FC = () => {
@@ -31,7 +32,10 @@ const CabinetFavoritesShare: React.FC = () => {
                     <p className="cabinet-favorites-share-popup__link">{url}</p>
 
                     <button
-                        className={`${statePopupCopy ? 'btn-regular' : 'btn'} cabinet-favorites-share-popup__btn`}
+                        className={getClassNames('cabinet-favorites-share-popup__btn', {
+                            btn: !statePopupCopy,
+                            'btn-regular': statePopupCopy,
+                        })}
                         onClick={onClickCopyUrl}
                     >
                         {statePopupCopy ? 'Скопировано' : 'Скопировать ссылку'}

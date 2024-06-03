@@ -1,4 +1,5 @@
 import React from 'react';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const RenderInput: React.FC<any> = ({ label, type, input, meta: { touched, error }, bgWhite, disabled }) => {
     const [isVisible, setIsVisible] = React.useState<boolean>(false);
@@ -8,9 +9,17 @@ const RenderInput: React.FC<any> = ({ label, type, input, meta: { touched, error
     };
 
     return (
-        <div className={`input-wrapper ${disabled ? 'disabled' : ''}`}>
+        <div
+            className={getClassNames('input-wrapper', {
+                disabled: !!disabled,
+            })}
+        >
             <div
-                className={`input ${touched && error ? 'error' : ''} ${type === 'password' ? 'password' : ''} ${bgWhite ? 'bgWhite' : ''}`}
+                className={getClassNames('input', {
+                    password: type === 'password',
+                    error: !!touched && !!error,
+                    bgWhite: !!bgWhite,
+                })}
             >
                 <input
                     {...input}

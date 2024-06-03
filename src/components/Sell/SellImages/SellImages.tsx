@@ -45,6 +45,7 @@ import SellImagesImageHand1 from 'src/assets/images/sell/sell-images-image-hand-
 import SellImagesImageHand2 from 'src/assets/images/sell/sell-images-image-hand-2.jpg';
 import SellImagesImageHand3 from 'src/assets/images/sell/sell-images-image-hand-3.jpg';
 import SellImagesImageHand4 from 'src/assets/images/sell/sell-images-image-hand-4.jpg';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const SellImages: React.FC = () => {
     const dispatch = useDispatch();
@@ -376,6 +377,8 @@ const SellImages: React.FC = () => {
             return Object.keys(imageBlocksValue).length >= imageBlocksClock.filter((image) => !image.isMore).length;
         if (category === 'Платки и шарфы')
             return Object.keys(imageBlocksValue).length >= imageBlocksHand.filter((image) => !image.isMore).length;
+
+        return false;
     };
 
     const onSubmit = () => {
@@ -412,7 +415,7 @@ const SellImages: React.FC = () => {
                               key={`sell-block-images-block-${index}`}
                               value={imageBlocksValue[index]}
                               onChangeCustom={(result: any) => onChangeCustom(result, index)}
-                              disabled={block.isMore ? (isValid() ? false : true) : false}
+                              disabled={block.isMore ? !isValid() : false}
                           />
                       ))
                     : null}
@@ -425,7 +428,7 @@ const SellImages: React.FC = () => {
                               key={`sell-block-images-block-${index}`}
                               value={imageBlocksValue[index]}
                               onChangeCustom={(result: any) => onChangeCustom(result, index)}
-                              disabled={block.isMore ? (isValid() ? false : true) : false}
+                              disabled={block.isMore ? !isValid() : false}
                           />
                       ))
                     : null}
@@ -438,7 +441,7 @@ const SellImages: React.FC = () => {
                               key={`sell-block-images-block-${index}`}
                               value={imageBlocksValue[index]}
                               onChangeCustom={(result: any) => onChangeCustom(result, index)}
-                              disabled={block.isMore ? (isValid() ? false : true) : false}
+                              disabled={block.isMore ? !isValid() : false}
                           />
                       ))
                     : null}
@@ -451,7 +454,7 @@ const SellImages: React.FC = () => {
                               key={`sell-block-images-block-${index}`}
                               value={imageBlocksValue[index]}
                               onChangeCustom={(result: any) => onChangeCustom(result, index)}
-                              disabled={block.isMore ? (isValid() ? false : true) : false}
+                              disabled={block.isMore ? !isValid() : false}
                           />
                       ))
                     : null}
@@ -464,7 +467,7 @@ const SellImages: React.FC = () => {
                               key={`sell-block-images-block-${index}`}
                               value={imageBlocksValue[index]}
                               onChangeCustom={(result: any) => onChangeCustom(result, index)}
-                              disabled={block.isMore ? (isValid() ? false : true) : false}
+                              disabled={block.isMore ? !isValid() : false}
                           />
                       ))
                     : null}
@@ -477,7 +480,7 @@ const SellImages: React.FC = () => {
                               key={`sell-block-images-block-${index}`}
                               value={imageBlocksValue[index]}
                               onChangeCustom={(result: any) => onChangeCustom(result, index)}
-                              disabled={block.isMore ? (isValid() ? false : true) : false}
+                              disabled={block.isMore ? !isValid() : false}
                           />
                       ))
                     : null}
@@ -490,7 +493,7 @@ const SellImages: React.FC = () => {
                               key={`sell-block-images-block-${index}`}
                               value={imageBlocksValue[index]}
                               onChangeCustom={(result: any) => onChangeCustom(result, index)}
-                              disabled={block.isMore ? (isValid() ? false : true) : false}
+                              disabled={block.isMore ? !isValid() : false}
                           />
                       ))
                     : null}
@@ -503,14 +506,16 @@ const SellImages: React.FC = () => {
                               key={`sell-block-images-block-${index}`}
                               value={imageBlocksValue[index]}
                               onChangeCustom={(result: any) => onChangeCustom(result, index)}
-                              disabled={block.isMore ? (isValid() ? false : true) : false}
+                              disabled={block.isMore ? !isValid() : false}
                           />
                       ))
                     : null}
 
                 <button
-                    className={`btn ${isValid() ? '' : 'disabled'} sell-block__btn`}
-                    disabled={isValid() ? false : true}
+                    className={getClassNames('btn sell-block__btn', {
+                        disabled: !isValid(),
+                    })}
+                    disabled={!isValid()}
                     onClick={onSubmit}
                 >
                     Продолжить

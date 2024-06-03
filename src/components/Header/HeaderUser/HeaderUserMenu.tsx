@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 interface HeaderUserMenuInterface {
     state: boolean;
 }
@@ -15,14 +17,20 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
     };
 
     return (
-        <div className={`header-block-user-menu ${state ? 'active' : ''}`}>
+        <div
+            className={getClassNames('header-block-user-menu', {
+                active: state,
+            })}
+        >
             <div className="header-block-user-menu-block">
                 {localStorage.getItem('accessToken') ? (
                     <>
                         <NavLink
                             to="/cabinet/history"
                             className={({ isActive }) =>
-                                `header-block-user-menu-block__link ${isActive ? 'active' : ''}`
+                                getClassNames('header-block-user-menu-block__link', {
+                                    active: isActive,
+                                })
                             }
                         >
                             История заказов
@@ -30,7 +38,9 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
                         <NavLink
                             to="/cabinet/sells"
                             className={({ isActive }) =>
-                                `header-block-user-menu-block__link ${isActive ? 'active' : ''}`
+                                getClassNames('header-block-user-menu-block__link', {
+                                    active: isActive,
+                                })
                             }
                         >
                             Мои продажи
@@ -38,7 +48,9 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
                         <NavLink
                             to="/cabinet/favorites"
                             className={({ isActive }) =>
-                                `header-block-user-menu-block__link ${isActive ? 'active' : ''}`
+                                getClassNames('header-block-user-menu-block__link', {
+                                    active: isActive,
+                                })
                             }
                         >
                             Избранное
@@ -46,7 +58,9 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
                         <NavLink
                             to="/cabinet/waiting"
                             className={({ isActive }) =>
-                                `header-block-user-menu-block__link ${isActive ? 'active' : ''}`
+                                getClassNames('header-block-user-menu-block__link', {
+                                    active: isActive,
+                                })
                             }
                         >
                             Лист ожидания
@@ -54,7 +68,9 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
                         <NavLink
                             to="/cabinet/setting"
                             className={({ isActive }) =>
-                                `header-block-user-menu-block__link ${isActive ? 'active' : ''}`
+                                getClassNames('header-block-user-menu-block__link', {
+                                    active: isActive,
+                                })
                             }
                         >
                             Профиль
@@ -75,17 +91,19 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
             <div className="header-block-user-menu-block">
                 <NavLink
                     to="/help/all"
-                    className={({ isActive }) => `header-block-user-menu-block__link ${isActive ? 'active' : ''}`}
+                    className={({ isActive }) =>
+                        getClassNames('header-block-user-menu-block__link', {
+                            active: isActive,
+                        })
+                    }
                 >
                     Вопросы и ответы
                 </NavLink>
 
                 {localStorage.getItem('accessToken') ? (
-                    <>
-                        <span className="header-block-user-menu-block__link" onClick={onClickLogout}>
-                            Выйти
-                        </span>
-                    </>
+                    <span className="header-block-user-menu-block__link" onClick={onClickLogout}>
+                        Выйти
+                    </span>
                 ) : null}
             </div>
         </div>

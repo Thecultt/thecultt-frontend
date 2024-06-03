@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { removeCartItem } from 'src/redux/actions/cart';
 import { HeaderCartModalItem } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface HeaderCartModalAddMessageProps {
     state: boolean;
@@ -23,7 +24,11 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
     };
 
     return (
-        <div className={`header-block-cart-modal ${state ? 'active' : ''}`}>
+        <div
+            className={getClassNames('header-block-cart-modal', {
+                active: state,
+            })}
+        >
             <div className="header-block-cart-modal-close" onClick={setState}>
                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

@@ -46,7 +46,7 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					// onChange={onChange}
 					/> */}
 
-                    <label htmlFor={'footer-email-form-input-buyer'} className={`footer-email-form-radio-item__label`}>
+                    <label htmlFor={'footer-email-form-input-buyer'} className="footer-email-form-radio-item__label">
                         <p className="footer-email-form-radio-item__label__text">Продавец</p>
                     </label>
                 </div>
@@ -70,7 +70,7 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					// onChange={onChange}
 					/> */}
 
-                    <label htmlFor={'footer-email-form-input-seller'} className={`footer-email-form-radio-item__label`}>
+                    <label htmlFor={'footer-email-form-input-seller'} className="footer-email-form-radio-item__label">
                         <p className="footer-email-form-radio-item__label__text">Покупатель</p>
                     </label>
                 </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface NotificationsServerSuccessProps {
     active: boolean;
@@ -8,7 +9,11 @@ interface NotificationsServerSuccessProps {
 
 const NotificationsServerSuccess: React.FC<NotificationsServerSuccessProps> = ({ active, text, onClickClose }) => {
     return (
-        <div className={`notifications-server-item ${active ? 'active' : ''}`}>
+        <div
+            className={getClassNames('notifications-server-item', {
+                active: active,
+            })}
+        >
             <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0.5" width="20" height="20" rx="10" fill="#0E402C" />
                 <path

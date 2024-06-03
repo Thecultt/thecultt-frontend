@@ -2,6 +2,7 @@ import React from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
 import { CartItem } from 'src/models/ICartItem';
 
 interface HeaderCartModalItemProps extends CartItem {
@@ -26,9 +27,10 @@ const HeaderCartModalItem: React.FC<HeaderCartModalItemProps> = ({
 }) => {
     return (
         <div
-            className={`header-block-cart-modal-item ${
-                checked ? '' : 'disabled'
-            } ${availability ? (is_trial ? 'notAvailability' : '') : 'notAvailability'}`}
+            className={getClassNames('header-block-cart-modal-item', {
+                disabled: !checked,
+                notAvailability: !availability || (!!availability && is_trial),
+            })}
         >
             <div className="header-block-cart-modal-item-content">
                 {hiddenCheck ? null : (

@@ -4,6 +4,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput, Loader } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import validate from './validate';
 
@@ -51,7 +52,9 @@ const ConciergeFormBottom: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                     </button>
                 ) : (
                     <button
-                        className={`btn ${invalid || submitting || pristine ? 'disabled' : ''} concierge-form-content__btn`}
+                        className={getClassNames('btn concierge-form-content__btn', {
+                            disabled: invalid || submitting || pristine,
+                        })}
                         disabled={invalid || submitting || pristine}
                     >
                         Отправить заявку

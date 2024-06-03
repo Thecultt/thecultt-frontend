@@ -4,6 +4,7 @@ import { createTextMask } from 'redux-form-input-masks';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { Loader, RenderCheckbox, RenderInput } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import { validate } from './validate';
 
@@ -135,7 +136,10 @@ const CabinetSellsListPaymentInfoPopupForm: React.FC<{} & InjectedFormProps<{}, 
                 </div>
 
                 <button
-                    className={`btn ${invalid || pristine || submitting ? 'disabled' : ''} ${isSending ? 'loader' : ''} cabinet-sells-list-payment-info-popup-btn__btn`}
+                    className={getClassNames('btn cabinet-sells-list-payment-info-popup-btn__btn', {
+                        disabled: invalid || pristine || submitting,
+                        loader: isSending,
+                    })}
                     disabled={invalid || pristine || submitting}
                 >
                     {isSending ? <Loader /> : 'Сохранить данные'}

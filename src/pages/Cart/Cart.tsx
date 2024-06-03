@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
 import { CartItemBlock } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const Cart: React.FC = () => {
     const dispatch = useDispatch();
@@ -83,14 +84,18 @@ const Cart: React.FC = () => {
                                 {isLoadedUser ? (
                                     <Link
                                         to="/order"
-                                        className={`btn ${Object.keys(items).filter((key) => items[key].checked === true).length ? '' : 'disabled'} cart-btn__btn`}
+                                        className={getClassNames('btn cart-btn__btn', {
+                                            disabled: !Object.keys(items).filter((key) => items[key].checked).length,
+                                        })}
                                     >
                                         Перейти к заказу
                                     </Link>
                                 ) : (
                                     <Link
                                         to="/?redirect=/order#reglog"
-                                        className={`btn ${Object.keys(items).filter((key) => items[key].checked === true).length ? '' : 'disabled'} cart-btn__btn`}
+                                        className={getClassNames('btn cart-btn__btn', {
+                                            disabled: !Object.keys(items).filter((key) => items[key].checked).length,
+                                        })}
                                     >
                                         Перейти к заказу
                                     </Link>

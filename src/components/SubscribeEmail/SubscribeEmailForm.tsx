@@ -4,6 +4,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { Loader, RenderInput, RenderRadioSelect } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import validate from './validate';
 
@@ -28,12 +29,14 @@ const SubscribeEmailForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 </div>
 
                 {isSending ? (
-                    <button className={`btn subscribe-email-text-form-input__btn`} disabled>
+                    <button className="btn subscribe-email-text-form-input__btn" disabled>
                         <Loader />
                     </button>
                 ) : (
                     <button
-                        className={`btn ${invalid || pristine || submitting ? 'disabled' : ''} subscribe-email-text-form-input__btn`}
+                        className={getClassNames('btn subscribe-email-text-form-input__btn', {
+                            disabled: invalid || pristine || submitting,
+                        })}
                         disabled={invalid || pristine || submitting}
                     >
                         Получить гайд

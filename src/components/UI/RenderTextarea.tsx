@@ -1,5 +1,6 @@
 import React from 'react';
 import { WrappedFieldProps } from 'redux-form';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface RenderTextareaProps extends WrappedFieldProps {
     name: string;
@@ -9,7 +10,11 @@ interface RenderTextareaProps extends WrappedFieldProps {
 
 const RenderTextarea: React.FC<RenderTextareaProps> = ({ label, input, meta: { touched, error }, bgWhite }) => {
     return (
-        <div className={`textarea ${bgWhite ? 'bgWhite' : ''}`}>
+        <div
+            className={getClassNames('textarea', {
+                bgWhite: !!bgWhite,
+            })}
+        >
             <textarea {...input} className="textarea__field" placeholder={label} />
         </div>
     );

@@ -22,7 +22,7 @@ const RadioSelect: React.FC<RadioSelectProps> = ({ label, name }) => {
                 // checked={checked}
             />
 
-            <label htmlFor={id} className={`radio__label`}>
+            <label htmlFor={id} className="radio__label">
                 <p className="radio__label__text">{label}</p>
             </label>
         </div>

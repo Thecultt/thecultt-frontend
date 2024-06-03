@@ -7,6 +7,7 @@ import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorite
 import { ProductBlock, CatalogProductsPagination, CatalogProductsNull, PageLoader } from 'src/components';
 import { Product } from 'src/models/IProduct';
 import { CartItem } from 'src/models/ICartItem';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const CatalogProducts: React.FC = () => {
     const dispatch = useDispatch();
@@ -65,7 +66,9 @@ const CatalogProducts: React.FC = () => {
                 items.length ? (
                     <>
                         <div
-                            className={`catalog-product-blocks-wrapper ${isFetchMore || isFetchPage ? 'isFetch' : ''}`}
+                            className={getClassNames('catalog-product-blocks-wrapper', {
+                                isFetch: isFetchMore || isFetchPage,
+                            })}
                         >
                             {items.map((item, index) => (
                                 <ProductBlock

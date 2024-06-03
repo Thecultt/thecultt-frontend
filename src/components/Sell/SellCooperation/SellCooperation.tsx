@@ -6,6 +6,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { CabinetSellTypes, CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
 import { setCabinetSellCurrentType, setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
 import SellBlockCooperationConciergeImage from 'src/assets/images/sell/sell-block-cooperation-concierge-service.jpg';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const SellCooperation: React.FC = () => {
     const dispatch = useDispatch();
@@ -49,7 +50,9 @@ const SellCooperation: React.FC = () => {
                 <div className="sell-block-cooperation-type-block-wrapper">
                     {types.map((type, index) => (
                         <button
-                            className={`sell-block-cooperation-type-block ${type.type === currentType ? 'active' : ''}`}
+                            className={getClassNames('sell-block-cooperation-type-block', {
+                                active: type.type === currentType,
+                            })}
                             key={`sell-block-cooperation-type-block-${index}`}
                             onClick={() => dispatch(setCabinetSellCurrentType(type.type))}
                         >

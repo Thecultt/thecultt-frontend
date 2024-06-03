@@ -2,6 +2,7 @@ import React from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from 'src/constants/styles';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import BuyerTheculttMainImage from 'src/assets/images/buyer-thecultt/buyer-thecultt-main.jpg';
 import BuyerTheculttMainImageMedia from 'src/assets/images/buyer-thecultt/buyer-thecultt-main-media.jpg';
@@ -27,7 +28,10 @@ const BuyerTheCulttMainBanner: React.FC<BuyerTheCulttMainBannerProps> = ({ onCli
                     часовых брендов. К заказу доступны все позиции с официальных сайтов.
                 </p>
                 <button
-                    className={`${!isMobile ? 'btn' : 'btn-light'} buyer-thecultt-main-text__btn`}
+                    className={getClassNames('buyer-thecultt-main-text__btn', {
+                        btn: !isMobile,
+                        'btn-light': isMobile,
+                    })}
                     onClick={onClickOpenCustomForm}
                 >
                     Отправить заявку

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { setCartIsVisibleMessage } from 'src/redux/actions/cart';
 import { HeaderCartModal, HeaderCartModalAddMessage } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const HeaderCart: React.FC = () => {
     const dispatch = useDispatch();
@@ -43,7 +44,11 @@ const HeaderCart: React.FC = () => {
     return (
         <div className="header-block-cart-wrapper" ref={PopupRef}>
             <div className="header-block-cart" onClick={toggleClickModarCart}>
-                <button className={`header-block-cart__icon ${state ? 'active' : ''}`}>
+                <button
+                    className={getClassNames('header-block-cart__icon', {
+                        active: state,
+                    })}
+                >
                     <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="38" height="37.7778" rx="18.8889" fill="#F7F4F0" />
 

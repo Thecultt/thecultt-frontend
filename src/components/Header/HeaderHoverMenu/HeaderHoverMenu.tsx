@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 import { HeaderHoverMenuCategory } from '../Header';
 
 interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
@@ -21,13 +23,19 @@ const HeaderHoverMenu: React.FC<HeaderHoverMenuProps> = ({
     onClose,
 }) => {
     return (
-        <div className={`header-hover-menu-wrapper-wrapper ${isOpenHoverMenu ? 'active' : ''}`}>
+        <div
+            className={getClassNames('header-hover-menu-wrapper-wrapper', {
+                active: isOpenHoverMenu,
+            })}
+        >
             <div
-                className={`header-hover-menu-wrapper ${isOpenHoverMenu ? 'active' : ''}`}
+                className={getClassNames('header-hover-menu-wrapper', {
+                    active: isOpenHoverMenu,
+                })}
                 onMouseOver={() => onOpen()}
                 onMouseOut={() => onClose()}
             >
-                <nav className={`header-hover-menu`}>
+                <nav className="header-hover-menu">
                     <div className="header-hover-menu-list-wrapper">
                         <div className="header-hover-menu-list type">
                             <h3 className="header-hover-menu-list__title">Тип</h3>

@@ -4,6 +4,7 @@ import { Field, reduxForm, InjectedFormProps, formValueSelector } from 'redux-fo
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput, RenderSelect, RenderInputHints } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import { validate } from './validate';
 
@@ -233,7 +234,11 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 </div>
             ) : null}
 
-            <div className={`cabinet-waiting-list-form-content ${!isLoaded ? 'disabled' : ''}`}>
+            <div
+                className={getClassNames('cabinet-waiting-list-form-content', {
+                    disabled: !isLoaded,
+                })}
+            >
                 <div className="cabinet-waiting-list-form-content-input" style={{ width: '100%' }}>
                     <Field component={RenderInput} label="Почта для уведомлений" name="email" disabled={isLoaded} />
                 </div>
@@ -351,7 +356,9 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 ) : null}
 
                 <button
-                    className={`btn ${invalid || submitting ? 'disabled' : ''} cabinet-waiting-list-form-content__btn`}
+                    className={getClassNames('btn cabinet-waiting-list-form-content__btn', {
+                        disabled: invalid || submitting,
+                    })}
                     disabled={invalid || submitting}
                 >
                     Отправить заявку

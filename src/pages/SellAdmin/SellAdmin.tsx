@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { CabinetSellTypes } from 'src/redux/types/ICabinetSell';
 import { setCabinetSellCurrentType } from 'src/redux/actions/cabinet_sell';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const SellAdmin: React.FC = () => {
     const dispatch = useDispatch();
@@ -107,7 +108,9 @@ const SellAdmin: React.FC = () => {
                         <div className="sell-block-cooperation-type-block-wrapper">
                             {types.map((type, index) => (
                                 <button
-                                    className={`sell-block-cooperation-type-block ${type.type === currentType ? 'active' : ''}`}
+                                    className={getClassNames('sell-block-cooperation-type-block', {
+                                        active: type.type === currentType,
+                                    })}
                                     key={`sell-block-cooperation-type-block-${index}`}
                                     onClick={() => dispatch(setCabinetSellCurrentType(type.type))}
                                 >

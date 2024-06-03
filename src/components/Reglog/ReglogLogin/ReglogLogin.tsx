@@ -4,6 +4,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { Loader, RenderInput } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import validate from './validate';
 
@@ -37,7 +38,9 @@ const ReglogLogin: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, i
                     </button>
                 ) : (
                     <button
-                        className={`btn ${invalid || submitting || pristine ? 'disabled' : ''} reglog-content-form-btn__btn`}
+                        className={getClassNames('btn reglog-content-form-btn__btn', {
+                            disabled: invalid || submitting || pristine,
+                        })}
                         disabled={invalid || submitting || pristine}
                     >
                         Продолжить

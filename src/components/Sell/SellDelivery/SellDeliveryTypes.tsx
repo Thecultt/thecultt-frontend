@@ -1,10 +1,14 @@
 import React from 'react';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 interface SellDeliveryTypesProps {
     currentCity: string;
     currentTypeDelivery: string;
     setCurrentTypeDelivery: (value: string) => void;
 }
+
+// TODO вынести delivery types в enum/const
 
 const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
     currentCity,
@@ -16,7 +20,9 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
             {currentCity.toLocaleLowerCase().indexOf('москва') !== -1 ? (
                 <>
                     <div
-                        className={`sell-block-delivery-types-block ${currentTypeDelivery === 'Курьер' ? 'active' : ''}`}
+                        className={getClassNames('sell-block-delivery-types-block', {
+                            active: currentTypeDelivery === 'Курьер',
+                        })}
                         onClick={() => setCurrentTypeDelivery('Курьер')}
                     >
                         <svg width="40" height="24" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +40,9 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
                     </div>
 
                     <div
-                        className={`sell-block-delivery-types-block ${currentTypeDelivery === 'Лично в офис' ? 'active' : ''}`}
+                        className={getClassNames('sell-block-delivery-types-block', {
+                            active: currentTypeDelivery === 'Лично в офис',
+                        })}
                         onClick={() => setCurrentTypeDelivery('Лично в офис')}
                     >
                         <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +69,9 @@ const SellDeliveryTypes: React.FC<SellDeliveryTypesProps> = ({
                 </>
             ) : (
                 <div
-                    className={`sell-block-delivery-types-block full ${currentTypeDelivery === 'CDEK' ? 'active' : ''}`}
+                    className={getClassNames('sell-block-delivery-types-block full', {
+                        active: currentTypeDelivery === 'CDEK',
+                    })}
                     onClick={() => setCurrentTypeDelivery('CDEK')}
                 >
                     <svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">

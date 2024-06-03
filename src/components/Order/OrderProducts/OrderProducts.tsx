@@ -12,6 +12,7 @@ import { sendCreateOrder, sendSubmitOrder } from 'src/redux/actions/order';
 import { sendUpdateUser } from 'src/redux/actions/user';
 import { sendOrderApplyPromocode } from 'src/redux/actions/order';
 import { Loader, OrderProductsItem, OrderProductsPromocode } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import orderPay from '../orderPay';
 
@@ -111,7 +112,7 @@ const OrderProducts: React.FC = () => {
             if (items[key].checked && !items[key].is_trial) checkedArr.push(true);
         });
 
-        return checkedArr.length;
+        return !!checkedArr.length;
     };
 
     const checkedAllItems = () => {
@@ -640,9 +641,10 @@ const OrderProducts: React.FC = () => {
                 </p>
 
                 <button
-                    className={`btn ${isDisableSendBtn ? 'loader' : ''} ${
-                        isCheckNull() && isValid ? '' : 'disabled'
-                    } order-products__btn`}
+                    className={getClassNames('btn order-products__btn', {
+                        loader: isDisableSendBtn,
+                        disabled: !isCheckNull() || !isValid,
+                    })}
                     onClick={onClickSendCreateOrder}
                     disabled={isDisableSendBtn}
                 >

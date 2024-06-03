@@ -1,12 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 const CabinetMenuMedia: React.FC = () => {
     return (
         <div className="cabinet-menu-media">
             <NavLink
                 to="/cabinet/setting"
-                className={({ isActive }) => `cabinet-menu-media-item ${isActive && 'active'}`}
+                className={({ isActive }) => getClassNames('cabinet-menu-media-item', { active: isActive })}
             >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="24" height="24" rx="12" fill="white" />
@@ -24,7 +26,7 @@ const CabinetMenuMedia: React.FC = () => {
 
             <NavLink
                 to="/cabinet/history"
-                className={({ isActive }) => `cabinet-menu-media-item ${isActive && 'active'}`}
+                className={({ isActive }) => getClassNames('cabinet-menu-media-item', { active: isActive })}
             >
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.599609" width="24" height="24" rx="12" fill="white" />
@@ -49,7 +51,7 @@ const CabinetMenuMedia: React.FC = () => {
 
             <NavLink
                 to="/cabinet/sells"
-                className={({ isActive }) => `cabinet-menu-media-item ${isActive && 'active'}`}
+                className={({ isActive }) => getClassNames('cabinet-menu-media-item', { active: isActive })}
             >
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.200195" width="24" height="24" rx="12" fill="white" />
@@ -67,7 +69,7 @@ const CabinetMenuMedia: React.FC = () => {
 
             <NavLink
                 to="/cabinet/favorites"
-                className={({ isActive }) => `cabinet-menu-media-item ${isActive && 'active'}`}
+                className={({ isActive }) => getClassNames('cabinet-menu-media-item', { active: isActive })}
             >
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.799805" width="24" height="24" rx="12" fill="white" />
@@ -82,7 +84,7 @@ const CabinetMenuMedia: React.FC = () => {
 
             <NavLink
                 to="/cabinet/waiting"
-                className={({ isActive }) => `cabinet-menu-media-item ${isActive && 'active'}`}
+                className={({ isActive }) => getClassNames('cabinet-menu-media-item', { active: isActive })}
             >
                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.400391" width="24" height="24" rx="12" fill="white" />

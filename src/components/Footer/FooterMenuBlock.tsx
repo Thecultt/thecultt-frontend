@@ -3,6 +3,7 @@ import AnimateHeight from 'react-animate-height';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { MEDIA_SIZES } from 'src/constants/styles';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface FooterMenuBlockProps {
     title: string;
@@ -29,7 +30,11 @@ const FooterMenuBlock: React.FC<FooterMenuBlockProps> = ({ title, children }) =>
                     >
                         <h5 className="footer-block-menu-block-media-top__title">{title}</h5>
 
-                        <div className={`footer-block-menu-block-media-top-icon ${isOpenMediaTab ? 'open' : ''}`}>
+                        <div
+                            className={getClassNames('footer-block-menu-block-media-top-icon', {
+                                open: isOpenMediaTab,
+                            })}
+                        >
                             <svg
                                 width="24"
                                 height="24"

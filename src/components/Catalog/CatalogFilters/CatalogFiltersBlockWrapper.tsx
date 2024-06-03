@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 interface CatalogFiltersBlockWrapperProps {
     title: string;
     children: React.ReactNode;
@@ -26,7 +28,12 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
     }, [disabled]);
 
     return (
-        <div className={`catalog-filters-block ${disabled ? 'disabled' : ''}`} ref={ObjectsFiltersBlockWrapperRef}>
+        <div
+            className={getClassNames('catalog-filters-block', {
+                disabled: !!disabled,
+            })}
+            ref={ObjectsFiltersBlockWrapperRef}
+        >
             <div className="catalog-filters-block-top" onClick={toggleIsAllVisibleOnClick}>
                 <p className="catalog-filters-block-top__title">
                     {title}
