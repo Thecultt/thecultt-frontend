@@ -189,7 +189,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
                     <div className="header-media-modal-menu-links">
                         <Link
-                            to="/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии"
+                            to="/catalog?boutique=false&categories=%D0%A1%D1%83%D0%BC%D0%BA%D0%B8&categories=%D0%90%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B&categories=%D0%9E%D0%B1%D1%83%D0%B2%D1%8C&categories=%D0%A3%D0%BA%D1%80%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D1%8F&availability=%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%BE&availability=%D0%9D%D0%B0+%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%BA%D0%B5&availability=%D0%9D%D0%B5%D1%82+%D0%B2+%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B8&price_drop=false&page=1&sort=a"
                             className="header-media-modal-menu-links-link"
                             onClick={toggleState}
                         >

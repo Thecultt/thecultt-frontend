@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import {
-    HeaderTopMessage,
-    HeaderCart,
-    HeaderUser,
-    HeaderHoverMenu,
-    HeaderSearchBox,
-    HeaderMedia,
+	HeaderTopMessage,
+	HeaderCart,
+	HeaderUser,
+	HeaderHoverMenu,
+	HeaderSearchBox,
+	HeaderMedia,
 } from 'src/components';
 import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/header';
 import Logo from 'src/assets/images/logo.svg';
@@ -20,274 +20,274 @@ import HeaderHoverImageDecoration from 'src/assets/images/header/header-image-ho
 import { useDebounce } from 'src/hooks/useDebounce';
 
 export interface HeaderHoverMenuCategory {
-    title: string;
-    types: string[];
-    brands: string[];
-    fullTextView: string;
-    image: string;
+	title: string;
+	types: string[];
+	brands: string[];
+	fullTextView: string;
+	image: string;
 }
 
 const categories: {
-    title: string;
-    types: string[];
-    brands: string[];
-    fullTextView: string;
-    image: string;
+	title: string;
+	types: string[];
+	brands: string[];
+	fullTextView: string;
+	image: string;
 }[] = [
-    {
-        title: 'Сумки',
-        types: [
-            'Дорожная сумка',
-            'Клатч',
-            'Поясная сумка',
-            'Рюкзак',
-            'Сумка кроссбоди',
-            'Сумка на плечо',
-            'Сумка с ручками',
-        ],
-        brands: [
-            'Acne Studios',
-            'Balenciaga',
-            'Bottega Veneta',
-            'Burberry',
-            'Celine',
-            'Chanel',
-            'Chloe',
-            'Christian Dior',
-            'Fendi',
-            'Gucci',
-            'Hermes',
-            'Jil Sander',
-            'Loewe',
-            'Louis Vuitton',
-            'Prada',
-            'Saint Laurent',
-            'Wandler',
-        ],
-        fullTextView: 'Все сумки',
-        image: HeaderHoverImageBag,
-    },
-    {
-        title: 'Аксессуары',
-        types: [
-            'Аксессуары для сумок',
-            'Головные уборы',
-            'Аксессуары для волос',
-            'Кошельки',
-            'Косметички',
-            'Очки',
-            'Платки и шарфы',
-            'Ремни',
-            'Обложки и футляры',
-        ],
-        brands: [
-            'Balenciaga',
-            'Bottega Veneta',
-            'Brunello Cucinelli',
-            'Loro Piana',
-            'Celine',
-            'Chanel',
-            'Christian Dior',
-            'Fendi',
-            'Gucci',
-            'Hermes',
-            'Jil Sander',
-            'Louis Vuitton',
-            'Marni',
-            'Miu Miu',
-            'Prada',
-        ],
-        fullTextView: 'Все аксессуары',
-        image: HeaderHoverImageAccessories,
-    },
-    {
-        title: 'Обувь',
-        types: [
-            'Балетки',
-            'Ботильоны',
-            'Ботинки',
-            'Босоножки',
-            'Кеды и кроссовки',
-            'Лоферы',
-            'Мюли',
-            'Сандали',
-            'Сапоги',
-            'Туфли',
-        ],
-        brands: [
-            'Acne Studios',
-            'Alaia',
-            'Alexander Wang',
-            'Bottega Veneta',
-            'Celine',
-            'Chanel',
-            'Chloe',
-            'Ganni',
-            'Gia Borghini',
-            'Hereu',
-            'Hermes',
-            'Isabel Marant',
-            'JW Anderson',
-            'Mach & Mach',
-            'Maison Margiela',
-            'Manolo Blahnik',
-            'Proenza Schouler',
-        ],
-        fullTextView: 'Вся обувь',
-        image: HeaderHoverImageShoes,
-    },
-    {
-        title: 'Украшения',
-        types: ['Браслеты', 'Колье и подвески', 'Кольца', 'Часы', 'Броши'],
-        brands: [
-            'Balenciaga',
-            'Bottega Veneta',
-            'Bulgari',
-            'Cartier',
-            'Celine',
-            'Chanel',
-            'Christian Dior',
-            'Gucci',
-            'Hermes',
-            'Jil Sander',
-            'Louis Vuitton',
-            'Miu Miu',
-            'Prada',
-            'Tiffani',
-            'Van Cleef & Arpels',
-        ],
-        fullTextView: 'Все украшения',
-        image: HeaderHoverImageDecoration,
-    },
-];
+		{
+			title: 'Сумки',
+			types: [
+				'Дорожная сумка',
+				'Клатч',
+				'Поясная сумка',
+				'Рюкзак',
+				'Сумка кроссбоди',
+				'Сумка на плечо',
+				'Сумка с ручками',
+			],
+			brands: [
+				'Acne Studios',
+				'Balenciaga',
+				'Bottega Veneta',
+				'Burberry',
+				'Celine',
+				'Chanel',
+				'Chloe',
+				'Christian Dior',
+				'Fendi',
+				'Gucci',
+				'Hermes',
+				'Jil Sander',
+				'Loewe',
+				'Louis Vuitton',
+				'Prada',
+				'Saint Laurent',
+				'Wandler',
+			],
+			fullTextView: 'Все сумки',
+			image: HeaderHoverImageBag,
+		},
+		{
+			title: 'Аксессуары',
+			types: [
+				'Аксессуары для сумок',
+				'Головные уборы',
+				'Аксессуары для волос',
+				'Кошельки',
+				'Косметички',
+				'Очки',
+				'Платки и шарфы',
+				'Ремни',
+				'Обложки и футляры',
+			],
+			brands: [
+				'Balenciaga',
+				'Bottega Veneta',
+				'Brunello Cucinelli',
+				'Loro Piana',
+				'Celine',
+				'Chanel',
+				'Christian Dior',
+				'Fendi',
+				'Gucci',
+				'Hermes',
+				'Jil Sander',
+				'Louis Vuitton',
+				'Marni',
+				'Miu Miu',
+				'Prada',
+			],
+			fullTextView: 'Все аксессуары',
+			image: HeaderHoverImageAccessories,
+		},
+		{
+			title: 'Обувь',
+			types: [
+				'Балетки',
+				'Ботильоны',
+				'Ботинки',
+				'Босоножки',
+				'Кеды и кроссовки',
+				'Лоферы',
+				'Мюли',
+				'Сандали',
+				'Сапоги',
+				'Туфли',
+			],
+			brands: [
+				'Acne Studios',
+				'Alaia',
+				'Alexander Wang',
+				'Bottega Veneta',
+				'Celine',
+				'Chanel',
+				'Chloe',
+				'Ganni',
+				'Gia Borghini',
+				'Hereu',
+				'Hermes',
+				'Isabel Marant',
+				'JW Anderson',
+				'Mach & Mach',
+				'Maison Margiela',
+				'Manolo Blahnik',
+				'Proenza Schouler',
+			],
+			fullTextView: 'Вся обувь',
+			image: HeaderHoverImageShoes,
+		},
+		{
+			title: 'Украшения',
+			types: ['Браслеты', 'Колье и подвески', 'Кольца', 'Часы', 'Броши'],
+			brands: [
+				'Balenciaga',
+				'Bottega Veneta',
+				'Bulgari',
+				'Cartier',
+				'Celine',
+				'Chanel',
+				'Christian Dior',
+				'Gucci',
+				'Hermes',
+				'Jil Sander',
+				'Louis Vuitton',
+				'Miu Miu',
+				'Prada',
+				'Tiffani',
+				'Van Cleef & Arpels',
+			],
+			fullTextView: 'Все украшения',
+			image: HeaderHoverImageDecoration,
+		},
+	];
 
 const Header: React.FC = () => {
-    const { pathname } = useLocation();
+	const { pathname } = useLocation();
 
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-    const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState<number>(0);
-    const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState<boolean>(false);
+	const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState<number>(0);
+	const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState<boolean>(false);
 
-    const [isOpenSearch, setIsOpenSearch] = React.useState<boolean>(false);
+	const [isOpenSearch, setIsOpenSearch] = React.useState<boolean>(false);
 
-    const { search } = useTypedSelector(({ header }) => header);
+	const { search } = useTypedSelector(({ header }) => header);
 
-    const debouncedValue = useDebounce(search.value);
+	const debouncedValue = useDebounce(search.value);
 
-    const openHoverMenu = (index: number) => {
-        if (!isOpenSearch) {
-            setCurrentCategoryHoverMenuIndex(index);
+	const openHoverMenu = (index: number) => {
+		if (!isOpenSearch) {
+			setCurrentCategoryHoverMenuIndex(index);
 
-            setIsOpenHoverMenu(true);
-        }
-    };
+			setIsOpenHoverMenu(true);
+		}
+	};
 
-    const closeHoverMenu = () => {
-        setIsOpenHoverMenu(false);
-    };
+	const closeHoverMenu = () => {
+		setIsOpenHoverMenu(false);
+	};
 
-    const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setHeaderSearchValue(e.target.value) as any);
-        setIsOpenSearch(true);
-    };
+	const onChangeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		dispatch(setHeaderSearchValue(e.target.value) as any);
+		setIsOpenSearch(true);
+	};
 
-    React.useEffect(() => {
-        if (debouncedValue !== '') dispatch(fetchHeaderSearchItems(search.value) as any);
-    }, [debouncedValue]);
+	React.useEffect(() => {
+		if (debouncedValue !== '') dispatch(fetchHeaderSearchItems(search.value) as any);
+	}, [debouncedValue]);
 
-    React.useEffect(() => {
-        setIsOpenHoverMenu(false);
-        setIsOpenSearch(false);
-    }, [pathname]);
+	React.useEffect(() => {
+		setIsOpenHoverMenu(false);
+		setIsOpenSearch(false);
+	}, [pathname]);
 
-    return (
-        <div className="header-global-wrapper">
-            {localStorage.getItem('header-message-visit-22.10.2023-isClose') ? null : <HeaderTopMessage />}
+	return (
+		<div className="header-global-wrapper">
+			{localStorage.getItem('header-message-visit-22.10.2023-isClose') ? null : <HeaderTopMessage />}
 
-            <div className="header-container">
-                <header className="header">
-                    <div className="container">
-                        <div className="header-wrapper">
-                            <div className="header-wrapper-block">
-                                <div className="header-block">
-                                    <Link to="/" className="header-block-logo">
-                                        <img src={Logo} alt="THECULTT" className="header-block-logo__image" />
-                                    </Link>
+			<div className="header-container">
+				<header className="header">
+					<div className="container">
+						<div className="header-wrapper">
+							<div className="header-wrapper-block">
+								<div className="header-block">
+									<Link to="/" className="header-block-logo">
+										<img src={Logo} alt="THECULTT" className="header-block-logo__image" />
+									</Link>
 
-                                    <div className="input-light" onClick={() => setIsOpenSearch(true)}>
-                                        <svg
-                                            width="20"
-                                            height="21"
-                                            viewBox="0 0 20 21"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
-                                                stroke="#838383"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                            <path
-                                                d="M17.5 17.9844L13.875 14.3594"
-                                                stroke="#838383"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
+									<div className="input-light" onClick={() => setIsOpenSearch(true)}>
+										<svg
+											width="20"
+											height="21"
+											viewBox="0 0 20 21"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
+												stroke="#838383"
+												strokeWidth="1.5"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											/>
+											<path
+												d="M17.5 17.9844L13.875 14.3594"
+												stroke="#838383"
+												strokeWidth="1.5"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											/>
+										</svg>
 
-                                        <input
-                                            type="text"
-                                            className="input-light__field"
-                                            placeholder="Поиск"
-                                            onChange={onChangeSearchInput}
-                                            value={search.value}
-                                        />
-                                    </div>
-                                </div>
+										<input
+											type="text"
+											className="input-light__field"
+											placeholder="Поиск"
+											onChange={onChangeSearchInput}
+											value={search.value}
+										/>
+									</div>
+								</div>
 
-                                <div className="header-block">
-                                    <div className="header-block-btn">
-                                        <Link
-                                            to={localStorage.getItem('accessToken') ? '/cabinet/sell' : 'sell'}
-                                            className="header-block-btn__btn"
-                                            onClick={() => {
-                                                window.dataLayer.push({
-                                                    ecommerce: null,
-                                                }); // Clear the previous ecommerce object.
-                                                window.dataLayer.push({
-                                                    event: 'sell_click',
-                                                    ecommerce: {
-                                                        timestamp: Math.floor(Date.now() / 1000),
-                                                    },
-                                                });
-                                            }}
-                                        >
-                                            Продать
-                                        </Link>
-                                        <Link
-                                            to="/exchange"
-                                            className="header-block-btn__btn regular"
-                                            onClick={() => {
-                                                window.dataLayer.push({
-                                                    ecommerce: null,
-                                                }); // Clear the previous ecommerce object.
-                                                window.dataLayer.push({
-                                                    event: 'swap_click',
-                                                    ecommerce: {
-                                                        timestamp: Math.floor(Date.now() / 1000),
-                                                    },
-                                                });
-                                            }}
-                                        >
-                                            Обменять
-                                        </Link>
-                                    </div>
+								<div className="header-block">
+									<div className="header-block-btn">
+										<Link
+											to={localStorage.getItem('accessToken') ? '/cabinet/sell' : 'sell'}
+											className="header-block-btn__btn"
+											onClick={() => {
+												window.dataLayer.push({
+													ecommerce: null,
+												}); // Clear the previous ecommerce object.
+												window.dataLayer.push({
+													event: 'sell_click',
+													ecommerce: {
+														timestamp: Math.floor(Date.now() / 1000),
+													},
+												});
+											}}
+										>
+											Продать
+										</Link>
+										<Link
+											to="/exchange"
+											className="header-block-btn__btn regular"
+											onClick={() => {
+												window.dataLayer.push({
+													ecommerce: null,
+												}); // Clear the previous ecommerce object.
+												window.dataLayer.push({
+													event: 'swap_click',
+													ecommerce: {
+														timestamp: Math.floor(Date.now() / 1000),
+													},
+												});
+											}}
+										>
+											Обменять
+										</Link>
+									</div>
 
-                                    {/* <button className="header-block__language">
+									{/* <button className="header-block__language">
 									<svg
 										width="22"
 										height="22"
@@ -312,69 +312,69 @@ const Header: React.FC = () => {
 									</svg>
 								</button> */}
 
-                                    <HeaderUser />
+									<HeaderUser />
 
-                                    <HeaderCart />
-                                </div>
-                            </div>
+									<HeaderCart />
+								</div>
+							</div>
 
-                            <nav className="header-menu">
-                                <Link
-                                    to="/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии"
-                                    className="header-menu__link"
-                                >
-                                    Новинки
-                                </Link>
+							<nav className="header-menu">
+								<Link
+									to="/catalog?boutique=false&categories=%D0%A1%D1%83%D0%BC%D0%BA%D0%B8&categories=%D0%90%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B&categories=%D0%9E%D0%B1%D1%83%D0%B2%D1%8C&categories=%D0%A3%D0%BA%D1%80%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D1%8F&availability=%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%BE&availability=%D0%9D%D0%B0+%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%BA%D0%B5&availability=%D0%9D%D0%B5%D1%82+%D0%B2+%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B8&price_drop=false&page=1&sort=a"
+									className="header-menu__link"
+								>
+									Новинки
+								</Link>
 
-                                {categories.map((category, index) => (
-                                    <Link
-                                        to={`/catalog?categories=${category.title}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
-                                        className="header-menu__link"
-                                        key={`header-menu__link-${index}`}
-                                        onMouseOver={() => openHoverMenu(index)}
-                                        onMouseOut={closeHoverMenu}
-                                        onClick={closeHoverMenu}
-                                    >
-                                        {category.title}
-                                    </Link>
-                                ))}
+								{categories.map((category, index) => (
+									<Link
+										to={`/catalog?categories=${category.title}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
+										className="header-menu__link"
+										key={`header-menu__link-${index}`}
+										onMouseOver={() => openHoverMenu(index)}
+										onMouseOut={closeHoverMenu}
+										onClick={closeHoverMenu}
+									>
+										{category.title}
+									</Link>
+								))}
 
-                                <Link to="/brands" className="header-menu__link">
-                                    Бренды
-                                </Link>
+								<Link to="/brands" className="header-menu__link">
+									Бренды
+								</Link>
 
-                                <Link to="/auth" className="header-menu__link">
-                                    Подлинность
-                                </Link>
-                                {/* 
+								<Link to="/auth" className="header-menu__link">
+									Подлинность
+								</Link>
+								{/* 
 								<a href="/catalog?categories=Сумки&categories=Обувь&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-menu__link">
 									Архив Алены Долецкой
 								</a> */}
 
-                                <Link
-                                    to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии"
-                                    className="header-menu__link"
-                                >
-                                    <b>THE CULTT SALE</b>
-                                </Link>
-                            </nav>
-                        </div>
-                    </div>
-                </header>
+								<Link
+									to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии"
+									className="header-menu__link"
+								>
+									<b>THE CULTT SALE</b>
+								</Link>
+							</nav>
+						</div>
+					</div>
+				</header>
 
-                <HeaderHoverMenu
-                    {...categories[currentCategoryHoverMenuIndex]}
-                    isOpenHoverMenu={isOpenHoverMenu}
-                    onOpen={() => setIsOpenHoverMenu(true)}
-                    onClose={() => setIsOpenHoverMenu(false)}
-                />
+				<HeaderHoverMenu
+					{...categories[currentCategoryHoverMenuIndex]}
+					isOpenHoverMenu={isOpenHoverMenu}
+					onOpen={() => setIsOpenHoverMenu(true)}
+					onClose={() => setIsOpenHoverMenu(false)}
+				/>
 
-                <HeaderSearchBox state={isOpenSearch} onClose={() => setIsOpenSearch(false)} />
+				<HeaderSearchBox state={isOpenSearch} onClose={() => setIsOpenSearch(false)} />
 
-                <HeaderMedia setIsOpenSearch={setIsOpenSearch} />
-            </div>
-        </div>
-    );
+				<HeaderMedia setIsOpenSearch={setIsOpenSearch} />
+			</div>
+		</div>
+	);
 };
 
 export default Header;
