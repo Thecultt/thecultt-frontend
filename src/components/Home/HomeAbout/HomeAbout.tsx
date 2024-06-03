@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'usehooks-ts';
+
+import { MEDIA_SIZES } from 'src/constants/styles';
 
 import HomeAboutImage from 'src/assets/images/home/home-about.jpg';
 import HomeAboutImageMedia from 'src/assets/images/home/home-about-media.jpg';
 
 const HomeAbout: React.FC = () => {
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     return (
         <>
-            {window.innerWidth > 1200 ? (
+            {!isMobile ? (
                 <div className="home-about hover-scale">
                     <div
                         className="home-about-image"

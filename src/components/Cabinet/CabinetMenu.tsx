@@ -1,12 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { CabinetMenuMedia } from 'src/components';
+import { MEDIA_SIZES } from 'src/constants/styles';
 
 const CabinetMenu: React.FC = () => {
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
+
     return (
         <>
-            {window.innerWidth > 1200 ? (
+            {!isMobile ? (
                 <div className="cabinet-menu">
                     <NavLink
                         to="/cabinet/history"
