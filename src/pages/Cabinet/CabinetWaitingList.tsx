@@ -1,13 +1,17 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { CabinetMenu, CabinetWaitingListItem, PageLoader } from 'src/components';
+import { MEDIA_SIZES } from 'src/constants/styles';
+
 import { fetchWaitingList } from 'src/redux/actions/waiting';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 
 const CabinetWaitingList: React.FC = () => {
     const dispatch = useDispatch();
+    const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
     const { isLoaded, items } = useTypedSelector(({ waiting }) => waiting);
 
@@ -23,7 +27,7 @@ const CabinetWaitingList: React.FC = () => {
 
                     {isLoaded ? (
                         <div className="cabinet-content cabinet-waiting-list">
-                            {window.innerWidth > 1200 ? (
+                            {!isMobile ? (
                                 <Link to="#create_waiting" className="btn cabinet-waiting-list__add">
                                     Подать новую заявку
                                     <svg
