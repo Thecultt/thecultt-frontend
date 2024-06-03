@@ -10,7 +10,12 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     return (
         <form onSubmit={handleSubmit} className="footer-email-form">
             <div className="footer-email-form-input">
-                <input className="footer-email-form-input__field" placeholder="Ваша почта" />
+                <Field
+                    component={'input'}
+                    className="footer-email-form-input__field"
+                    placeholder="Ваша почта"
+                    name="email"
+                />
 
                 <button className="footer-email-form-input__btn">
                     <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">

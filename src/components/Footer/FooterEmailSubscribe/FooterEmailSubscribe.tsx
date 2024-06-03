@@ -1,29 +1,78 @@
 import React from 'react';
+import axios from 'axios';
 
 import { FooterEmailSubscribeForm } from 'src/components';
 
 const FooterEmailSubscribe: React.FC = () => {
-	const onSubmit = (data: any) => {
+    const [isSubmit, setIsSubmit] = React.useState(false);
 
-	};
+    const onSubmit = async (data: any) => {
+        try {
+            if (localStorage.getItem('mindboxDeviceUUID')) {
+                await axios.post(
+                    `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeVFooter&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
+                    {
+                        customer: {
+                            email: data.email,
+                            customFields: {
+                                tipKlienta: data.type,
+                            },
+                            subscriptions: [
+                                {
+                                    pointOfContact: 'Email',
+                                    isSubscribed: true,
+                                },
+                            ],
+                        },
+                        executionDateTimeUtc: new Date(),
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json; charset=utf-8',
+                            Accept: 'application/json',
+                            Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
+                        },
+                    },
+                );
 
-	return (
-		<div className="footer-email">
-			<div className="container">
-				<div className="footer-email-wrapper">
-					<div className="footer-email-text">
-						<h4 className="footer-email-text__title">Дарим бонус 2000₽ за подписку на email рассылки</h4>
-						<p className="footer-email-text__subtitle">
-							Подпишитесь на рассылку THE CULTT и получайте полезные письма и предложения для покупателей
-							и продавцов.
-						</p>
-					</div>
+                setIsSubmit(true);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
-					<FooterEmailSubscribeForm onSubmit={onSubmit} />
-				</div>
-			</div>
-		</div>
-	);
+    return (
+        <div className="footer-email">
+            <div className="container">
+                {isSubmit ? (
+                    <div className="footer-email-wrapper">
+                        <div className="footer-email-text">
+                            <h4 className="footer-email-text__title">Подписка оформлена!</h4>
+                            <p className="footer-email-text__subtitle">
+                                Промокод на 2000р уже отправлен на вашу почту. Ожидайте полезные письма и предложения
+                                для покупателей и продавцов.
+                            </p>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="footer-email-wrapper">
+                        <div className="footer-email-text">
+                            <h4 className="footer-email-text__title">
+                                Дарим бонус 2000₽ за подписку на email рассылки
+                            </h4>
+                            <p className="footer-email-text__subtitle">
+                                Подпишитесь на рассылку THE CULTT и получайте полезные письма и предложения для
+                                покупателей и продавцов.
+                            </p>
+                        </div>
+
+                        <FooterEmailSubscribeForm onSubmit={onSubmit} />
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default FooterEmailSubscribe;

@@ -4,7 +4,7 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import Logo from 'src/assets/images/logo.svg';
 
-import { FooterMenuBlock } from 'src/components';
+import { FooterMenuBlock, FooterEmailSubscribe } from 'src/components';
 import { MEDIA_SIZES } from 'src/constants/styles';
 import { getClassNames } from 'src/functions/getClassNames';
 
@@ -110,7 +110,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
 
     return (
         <>
-            {/* {window.location.pathname === "/" ? <FooterEmailSubscribe /> : null} */}
+            {window.location.pathname === '/' ? <FooterEmailSubscribe /> : null}
 
             <footer
                 className={getClassNames('footer', {
