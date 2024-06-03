@@ -13,11 +13,14 @@ import {
 	Popup,
 	SellSteps,
 	SellCooperation,
-	SellInfo,
+	SellChoiceCategory,
 	SellImages,
+	SellChoiceModel,
+	SellInfo,
 	SellContact,
 	SellDelivery,
 	SellProduct,
+	PageLoader,
 } from 'src/components';
 
 const Sell: React.FC = () => {
@@ -31,8 +34,8 @@ const Sell: React.FC = () => {
 	const initStep = new URLSearchParams(window.location.search).get('step');
 
 	React.useEffect(() => {
-		if (initStep === 'info') {
-			dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.INFO));
+		if (initStep === 'choice_category') {
+			dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.CHOICE_CATEGORY));
 		}
 	}, [initStep]);
 
@@ -150,8 +153,13 @@ const Sell: React.FC = () => {
 		window.scrollTo(0, 0);
 	}, [currentStep]);
 
-	const onSubmitInfo = (data: any) => {
+	const onSubmitChoiceCategory = (data: any) => {
 		localStorage.setItem('sell-info-global-category', data.category);
+
+		dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.IMAGES));
+	};
+
+	const onSubmitInfo = (data: any) => {
 		localStorage.setItem('sell-info-form', JSON.stringify(data));
 
 		window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
@@ -240,33 +248,24 @@ const Sell: React.FC = () => {
 		dispatch(sendCreateCabinetSell(sell) as any);
 	};
 
+	const stepsBlock: Record<CabinetSellStepKeys, React.ReactNode> = {
+		[CabinetSellStepKeys.COOPERATION]: <SellCooperation />,
+		[CabinetSellStepKeys.CHOICE_CATEGORY]: <SellChoiceCategory onSubmit={onSubmitChoiceCategory} />,
+		[CabinetSellStepKeys.IMAGES]: <SellImages />,
+		[CabinetSellStepKeys.CHOICE_MODEL]: <SellChoiceModel />,
+		[CabinetSellStepKeys.INFO]: <SellInfo onSubmit={onSubmitInfo} />,
+		[CabinetSellStepKeys.PRODUCT]: <SellProduct onSubmit={onSubmitProduct} />,
+		[CabinetSellStepKeys.CONTACT]: <SellContact onSubmit={onSubmitContact} />,
+		[CabinetSellStepKeys.DELIVERY]: <SellDelivery onSubmit={onSubmitDelivery} />
+	}
+
 	return (
 		<section className="sell">
 			<div className="container">
 				<div className="sell-wrapper">
 					<SellSteps />
 
-					{currentStep === CabinetSellStepKeys.COOPERATION ? <SellCooperation /> : null}
-
-					{isLoadedParameters ? (
-						<>
-							{currentStep === CabinetSellStepKeys.INFO ? <SellInfo onSubmit={onSubmitInfo} /> : null}
-
-							{currentStep === CabinetSellStepKeys.IMAGES ? <SellImages /> : null}
-
-							{currentStep === CabinetSellStepKeys.PRODUCT ? (
-								<SellProduct onSubmit={onSubmitProduct} />
-							) : null}
-
-							{currentStep === CabinetSellStepKeys.CONTACT ? (
-								<SellContact onSubmit={onSubmitContact} />
-							) : null}
-
-							{currentStep === CabinetSellStepKeys.DELIVERY ? (
-								<SellDelivery onSubmit={onSubmitDelivery} />
-							) : null}
-						</>
-					) : null}
+					{isLoadedParameters ? stepsBlock[currentStep] : <PageLoader />}
 
 					{localStorage.getItem('sell-info-global-type-delivery') === 'Лично в офис' ? (
 						<Popup state={isSend} setState={() => (window.location.href = '/cabinet/sells')}>

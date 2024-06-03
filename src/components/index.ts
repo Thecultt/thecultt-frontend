@@ -224,11 +224,15 @@ export { default as SellBackBtn } from './Sell/SellBackBtn';
 export { default as SellSteps } from './Sell/SellSteps';
 // SellCooperation
 export { default as SellCooperation } from './Sell/SellCooperation/SellCooperation';
-// SellInfo
-export { default as SellInfo } from './Sell/SellInfo/SellInfo';
+// SellChoiceCategory
+export { default as SellChoiceCategory } from './Sell/SellChoiceCategory/SellChoiceCategory';
 // SellImages
 export { default as SellImages } from './Sell/SellImages/SellImages';
 export { default as SellImagesBlock } from './Sell/SellImages/SellImagesBlock';
+// SellChoiceModel
+export { default as SellChoiceModel } from './Sell/SellChoiceModel/SellChoiceModel';
+// SellInfo
+export { default as SellInfo } from './Sell/SellInfo/SellInfo';
 // SellProduct
 export { default as SellProduct } from './Sell/SellProduct/SellProduct';
 // SellContact
