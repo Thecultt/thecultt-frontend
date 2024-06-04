@@ -1,6 +1,8 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
+import validate from './validate';
+
 const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
     // initialize,
@@ -94,5 +96,5 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 export default reduxForm<{}, {}>({
     form: 'footer-email-form',
-    // validate,
+    validate,
 })(FooterEmailSubscribeForm);

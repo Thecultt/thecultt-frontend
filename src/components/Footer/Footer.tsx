@@ -110,7 +110,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
 
     return (
         <>
-            {window.location.pathname === '/' ? <FooterEmailSubscribe /> : null}
+            <FooterEmailSubscribe />
 
             <footer
                 className={getClassNames('footer', {
