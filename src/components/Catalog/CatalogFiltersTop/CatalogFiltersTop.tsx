@@ -90,7 +90,9 @@ const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, is
                                                             (category, index) =>
                                                                 `${category}${Object.keys(filters.categories).length === index + 1 ? '' : ', '}`,
                                                         )
-                                                      : 'Новинки'}
+                                                      : filters.sort === 'popular'
+                                                        ? 'Популярное'
+                                                        : 'Новинки'}
                                         </>
                                     )}
                                 </>
