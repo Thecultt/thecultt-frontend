@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 import { getClassNames } from 'src/functions/getClassNames';
+import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { HeaderMediaLinkTab, Footer } from 'src/components';
+
 import Logo from 'src/assets/images/logo.svg';
 
 interface HeaderMediaProps {
@@ -20,6 +22,12 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
     const { categories } = useTypedSelector(({ products_filters }) => products_filters);
     const { items } = useTypedSelector(({ cart }) => cart);
+
+    const categoryAllTitles: Record<string, string> = {
+        Обувь: 'Вся обувь',
+        Сумки: 'Все сумки',
+        Аксессуары: 'Все аксессуары',
+    };
 
     React.useEffect(() => {
         document.addEventListener('mousedown', hiddeModal);
@@ -189,22 +197,55 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
                     <div className="header-media-modal-menu-links">
                         <Link
-                            to="/catalog?boutique=false&categories=%D0%A1%D1%83%D0%BC%D0%BA%D0%B8&categories=%D0%90%D0%BA%D1%81%D0%B5%D1%81%D1%81%D1%83%D0%B0%D1%80%D1%8B&categories=%D0%9E%D0%B1%D1%83%D0%B2%D1%8C&categories=%D0%A3%D0%BA%D1%80%D0%B0%D1%88%D0%B5%D0%BD%D0%B8%D1%8F&availability=%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%BE&availability=%D0%9D%D0%B0+%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D0%BA%D0%B5&availability=%D0%9D%D0%B5%D1%82+%D0%B2+%D0%BD%D0%B0%D0%BB%D0%B8%D1%87%D0%B8%D0%B8&price_drop=false&page=1&sort=a"
+                            to={getCatalogFiltersUrl({
+                                boutique: false,
+                                categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+                                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                price_drop: false,
+                                page: 1,
+                                sort: 'a',
+                            })}
                             className="header-media-modal-menu-links-link"
                             onClick={toggleState}
                         >
                             Новинки
                         </Link>
 
+                        <Link
+                            to={getCatalogFiltersUrl({
+                                boutique: false,
+                                categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+                                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                price_drop: false,
+                                page: 1,
+                                sort: 'popular',
+                            })}
+                            className="header-media-modal-menu-links-link"
+                            onClick={toggleState}
+                        >
+                            Популярное
+                        </Link>
+
                         {Object.keys(categories).map((category, index) => (
                             <HeaderMediaLinkTab
                                 title={category}
-                                linkTitle={`/catalog?categories=${category}`}
+                                linkTitle={getCatalogFiltersUrl({
+                                    categories: [category],
+                                    availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                    page: 1,
+                                    sort: 'a',
+                                })}
                                 key={`header-media-modal-menu-links-tab${index}`}
                             >
                                 {Object.keys(categories[category].subsubcategories).map((subsubcategory, subindex) => (
                                     <Link
-                                        to={`/catalog?categories=${category}&types=${subsubcategory}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
+                                        to={getCatalogFiltersUrl({
+                                            categories: [category],
+                                            types: [subsubcategory],
+                                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                            page: 1,
+                                            sort: 'a',
+                                        })}
                                         className="header-media-modal-menu-links__link"
                                         key={`header-media-modal-menu-links__link-${category}-${subsubcategory}-${subindex}`}
                                         onClick={toggleState}
@@ -213,39 +254,29 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                                     </Link>
                                 ))}
 
-                                {category === 'Обувь' ? (
+                                {['Обувь', 'Сумки', 'Аксессуары'].includes(category) ? (
                                     <Link
-                                        onClick={toggleState}
-                                        to={`/catalog?categories=${category}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
+                                        to={getCatalogFiltersUrl({
+                                            categories: [category],
+                                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                            page: 1,
+                                            sort: 'a',
+                                        })}
                                         className="header-media-modal-menu-links__link"
-                                    >
-                                        Вся обувь
-                                    </Link>
-                                ) : null}
-
-                                {category === 'Сумки' ? (
-                                    <Link
                                         onClick={toggleState}
-                                        to={`/catalog?categories=${category}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
-                                        className="header-media-modal-menu-links__link"
                                     >
-                                        Все сумки
-                                    </Link>
-                                ) : null}
-
-                                {category === 'Аксессуары' ? (
-                                    <Link
-                                        onClick={toggleState}
-                                        to={`/catalog?categories=${category}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
-                                        className="header-media-modal-menu-links__link"
-                                    >
-                                        Все аксессуары
+                                        {categoryAllTitles[category]}
                                     </Link>
                                 ) : null}
 
                                 <Link
                                     onClick={toggleState}
-                                    to={`/catalog?categories=${category}&boutique=true`}
+                                    to={getCatalogFiltersUrl({
+                                        boutique: true,
+                                        categories: [category],
+                                        page: 1,
+                                        sort: 'a',
+                                    })}
                                     className="header-media-modal-menu-links-boutique"
                                 >
                                     <span className="header-media-modal-menu-links-boutique__badge">Из бутика</span>
@@ -270,7 +301,14 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 						</a> */}
 
                         <Link
-                            to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии"
+                            to={getCatalogFiltersUrl({
+                                boutique: false,
+                                price_drop: true,
+                                categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+                                availability: ['Доступно', 'На примерке'],
+                                page: 1,
+                                sort: 'popular',
+                            })}
                             className="header-media-modal-menu-links-link"
                             onClick={toggleState}
                         >
