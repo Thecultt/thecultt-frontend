@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { compose } from 'redux';
 
-import { useTypedSelector } from './hooks/useTypedSelector';
 import {
     NotificationsServer,
     Header,
@@ -47,6 +46,8 @@ import {
     BuyerTheCulttProduct,
 } from './pages';
 
+import { useTypedSelector } from './hooks/useTypedSelector';
+import { useAppUtm } from './hooks/useAppUtm';
 import { fetchProductsFilters } from './redux/actions/products_filters';
 import { fetchFirstProductsCatalog } from './redux/actions/products';
 import { fetchFavorites } from './redux/actions/favorites';
@@ -75,7 +76,7 @@ const App = () => {
     const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
     const { user } = useTypedSelector(({ user }) => user);
 
-    const { pathname, search } = useLocation();
+    const { pathname } = useLocation();
 
     const isLogin = localStorage.getItem('accessToken');
 
@@ -100,32 +101,10 @@ const App = () => {
 
         dispatch(checkAvailabilityCartItems(cartItems) as any);
 
-        const query: any = new URLSearchParams(search);
-
         if (localStorage.getItem('accessToken') && !localStorage.getItem('accessToken_is_remove')) {
             localStorage.removeItem('accessToken');
             localStorage.setItem('accessToken_is_remove', 'true');
             window.location.reload();
-        }
-
-        if (query.get('utm_source')) {
-            localStorage.setItem('utm_source', query.get('utm_source'));
-        }
-
-        if (query.get('utm_medium')) {
-            localStorage.setItem('utm_medium', query.get('utm_medium'));
-        }
-
-        if (query.get('utm_campaign')) {
-            localStorage.setItem('utm_campaign', query.get('utm_campaign'));
-        }
-
-        if (query.get('utm_content')) {
-            localStorage.setItem('utm_content', query.get('utm_content'));
-        }
-
-        if (query.get('utm_term')) {
-            localStorage.setItem('utm_term', query.get('utm_term'));
         }
     }, []);
 
@@ -139,6 +118,8 @@ const App = () => {
             window.dataLayer.push({ user_id: `${user.user_id}` });
         }
     }, [isLoadedUser]);
+
+    useAppUtm();
 
     return (
         <div className="wrapper" id="wrapper">
