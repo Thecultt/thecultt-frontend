@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { getClassNames } from 'src/functions/getClassNames';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { ProductPage } from 'src/models/IProduct';
 
@@ -45,7 +46,9 @@ const ProductInfoState: React.FC<ProductPage> = ({ condition, nuances }) => {
                 <div className="product-content-info-state-bar">
                     {['Хорошее', 'Отличное', 'Новое'].map((conditionItem, index) => (
                         <div
-                            className={`product-content-info-state-bar-item ${condition.toLocaleLowerCase() === conditionItem.toLocaleLowerCase() ? 'active' : ''}`}
+                            className={getClassNames('product-content-info-state-bar-item', {
+                                active: condition.toLocaleLowerCase() === conditionItem.toLocaleLowerCase(),
+                            })}
                             key={`product-content-info-state-bar-item-${index}`}
                         >
                             <div className="product-content-info-state-bar-item-circle"></div>

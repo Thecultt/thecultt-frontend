@@ -1,6 +1,7 @@
 import React from 'react';
 import imageCompression from 'browser-image-compression';
 import heic2any from 'heic2any';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface SellImagesBlockProps {
     number: number;
@@ -83,13 +84,18 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
 
     return (
         <label
-            className={`sell-block-images-block ${disabled ? 'disabled' : ''} ${isSending ? 'loading' : ''}`}
+            className={getClassNames('sell-block-images-block', {
+                disabled: !!disabled,
+                loading: isSending,
+            })}
             style={{ width: image ? '100%' : 'calc(50% - 7.5px)' }}
         >
             <input type="file" className="file" accept=".png, .jpg, .jpeg, .heic" onChange={(e) => onChange(e)} />
 
             <div
-                className={`sell-block-images-block-text ${value ? 'fill' : ''}`}
+                className={getClassNames('sell-block-images-block-text', {
+                    fill: !!value,
+                })}
                 style={{
                     width: image ? 'calc(50% - 5px)' : '100%',
                     backgroundImage: `url("${value}")`,

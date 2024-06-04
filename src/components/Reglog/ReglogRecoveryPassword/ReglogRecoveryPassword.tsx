@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { Loader, RenderInput } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -42,7 +42,9 @@ const ReglogRecoveryPassword: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                     </button>
                 ) : (
                     <button
-                        className={`btn ${invalid || submitting ? 'disabled' : ''} reglog-content-form-btn__btn`}
+                        className={getClassNames('btn reglog-content-form-btn__btn', {
+                            disabled: invalid || submitting,
+                        })}
                         disabled={invalid || submitting}
                     >
                         Отправить ссылку для сброса

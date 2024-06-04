@@ -3,6 +3,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { Loader, RenderInput } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import { validate } from './validate';
 
@@ -44,7 +45,9 @@ const BuyerTheCulttProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             </div>
 
             <button
-                className={`btn ${isSendFormProductPage ? 'loader' : ''} buyer-thecultt-product-form__btn`}
+                className={getClassNames('btn buyer-thecultt-product-form__btn', {
+                    loader: isSendFormProductPage,
+                })}
                 disabled={isSendFormProductPage || invalid || pristine || submitting}
             >
                 {isSendFormProductPage ? <Loader /> : 'Отправить заявку'}

@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
+    "start:dev": "env-cmd -f .dev.env react-scripts start",
     "build": "react-scripts build",
+    "build:dev": "env-cmd -f .dev.env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
@@ -37,6 +39,7 @@
     "browser-image-compression": "^2.0.2",
     "dayjs": "^1.11.11",
     "heic2any": "^0.0.4",
+    "qs": "^6.12.1",
     "react": "^18.1.0",
     "react-animate-height": "^3.1.1",
     "react-dom": "^18.1.0",
@@ -60,6 +63,7 @@
   },
   "devDependencies": {
     "@types/node": "^16.11.38",
+    "@types/qs": "^6.9.15",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "@types/react-helmet": "^6.1.5",
@@ -68,6 +72,7 @@
     "@types/redux-form": "^8.3.5",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/parser": "^5.62.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-react-app": "^7.0.1",

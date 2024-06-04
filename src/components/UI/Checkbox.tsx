@@ -21,7 +21,7 @@ const Checkbox: React.FC<CheckboxProps> = ({ id, label, checked, onChange }) => 
                 onChange={onChange}
             />
 
-            <label htmlFor={id} className={`checkbox__label`}>
+            <label htmlFor={id} className="checkbox__label">
                 <p className="checkbox__label__text">{label}</p>
             </label>
         </div>

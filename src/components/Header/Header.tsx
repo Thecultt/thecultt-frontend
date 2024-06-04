@@ -12,12 +12,14 @@ import {
     HeaderMedia,
 } from 'src/components';
 import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/header';
+import { useDebounce } from 'src/hooks/useDebounce';
+import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
+
 import Logo from 'src/assets/images/logo.svg';
 import HeaderHoverImageBag from 'src/assets/images/header/header-image-hover-menu-bag.jpg';
 import HeaderHoverImageAccessories from 'src/assets/images/header/header-image-hover-menu-accessories.jpg';
 import HeaderHoverImageShoes from 'src/assets/images/header/header-image-hover-menu-shoes.jpg';
 import HeaderHoverImageDecoration from 'src/assets/images/header/header-image-hover-menu-decoration.jpg';
-import { useDebounce } from 'src/hooks/useDebounce';
 
 export interface HeaderHoverMenuCategory {
     title: string;
@@ -320,15 +322,41 @@ const Header: React.FC = () => {
 
                             <nav className="header-menu">
                                 <Link
-                                    to="/catalog?boutique=false&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии"
+                                    to={getCatalogFiltersUrl({
+                                        boutique: false,
+                                        categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+                                        availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                        price_drop: false,
+                                        page: 1,
+                                        sort: 'a',
+                                    })}
                                     className="header-menu__link"
                                 >
                                     Новинки
                                 </Link>
 
+                                <Link
+                                    to={getCatalogFiltersUrl({
+                                        boutique: false,
+                                        categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+                                        availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                        price_drop: false,
+                                        page: 1,
+                                        sort: 'popular',
+                                    })}
+                                    className="header-menu__link"
+                                >
+                                    Популярное
+                                </Link>
+
                                 {categories.map((category, index) => (
                                     <Link
-                                        to={`/catalog?categories=${category.title}&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии`}
+                                        to={getCatalogFiltersUrl({
+                                            categories: [category.title],
+                                            availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                                            page: 1,
+                                            sort: 'a',
+                                        })}
                                         className="header-menu__link"
                                         key={`header-menu__link-${index}`}
                                         onMouseOver={() => openHoverMenu(index)}
@@ -352,7 +380,14 @@ const Header: React.FC = () => {
 								</a> */}
 
                                 <Link
-                                    to="/catalog?boutique=false&price_drop=true&categories=Сумки&categories=Аксессуары&categories=Обувь&categories=Украшения&availability=Доступно&availability=На+примерке&availability=Нет+в+наличии"
+                                    to={getCatalogFiltersUrl({
+                                        boutique: false,
+                                        price_drop: true,
+                                        categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+                                        availability: ['Доступно', 'На примерке'],
+                                        page: 1,
+                                        sort: 'popular',
+                                    })}
                                     className="header-menu__link"
                                 >
                                     <b>THE CULTT SALE</b>

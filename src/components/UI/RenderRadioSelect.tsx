@@ -12,7 +12,7 @@ const RenderRadioSelect: React.FC<RenderRadioSelectProps> = ({ input, meta, labe
             <div className="radio">
                 <input {...input} id={`${input.name}-${label}`} className="radio__field" type="radio" />
 
-                <label htmlFor={`${input.name}-${label}`} className={`radio__label`}>
+                <label htmlFor={`${input.name}-${label}`} className="radio__label">
                     <p className="radio__label__text">{label}</p>
                 </label>
             </div>

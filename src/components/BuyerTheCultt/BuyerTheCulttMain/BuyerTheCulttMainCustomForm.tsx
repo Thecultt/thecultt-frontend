@@ -3,6 +3,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { Loader, RenderInput } from 'src/components';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import { validate } from './validate';
 
@@ -63,7 +64,9 @@ const BuyerTheCulttMainCustomForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             </div>
 
             <button
-                className={`btn ${isSendFormCustomProduct ? 'loader' : ''} buyer-thecultt-custom-form__btn`}
+                className={getClassNames('btn buyer-thecultt-custom-form__btn', {
+                    loader: isSendFormCustomProduct,
+                })}
                 disabled={isSendFormCustomProduct || invalid || pristine || submitting}
             >
                 {isSendFormCustomProduct ? <Loader /> : 'Отправить заявку'}

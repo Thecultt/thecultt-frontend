@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import { getClassNames } from 'src/functions/getClassNames';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { setBrandsLetter, setBrandsSearch } from 'src/redux/actions/brands';
 
@@ -22,7 +23,7 @@ const BrandsSearch: React.FC = () => {
             <div className="brands-search-alphabet">
                 {Object.keys(allBrands).map((item, index) => (
                     <button
-                        className={`brands-search-alphabet__btn ${item === letter ? 'active' : ''}`}
+                        className={getClassNames('brands-search-alphabet__btn', { active: item === letter })}
                         key={`brands-search-alphabet__btn-${index}`}
                         onClick={() => onClickLetter(item)}
                     >

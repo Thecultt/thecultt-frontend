@@ -10,6 +10,7 @@ import { Product } from 'src/models/IProduct';
 import { CartItem } from 'src/models/ICartItem';
 import { ProductBlock } from 'src/components';
 import { checkDeclension } from 'src/functions/checkDeclension';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface HeaderSearchBoxProps {
     state: boolean;
@@ -98,10 +99,23 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
     };
 
     return (
-        <div className={`header-search-box-wrapper ${state ? 'active' : ''}`}>
-            <div className={`header-search-box ${state ? 'active' : ''}`} ref={PopupRef}>
+        <div
+            className={getClassNames('header-search-box-wrapper', {
+                active: state,
+            })}
+        >
+            <div
+                className={getClassNames('header-search-box', {
+                    active: state,
+                })}
+                ref={PopupRef}
+            >
                 <div className="header-search-box-media-input-wrapper">
-                    <div className={`input-light header-search-box-media-input ${search.value !== '' ? 'active' : ''}`}>
+                    <div
+                        className={getClassNames('input-light header-search-box-media-input', {
+                            active: !!search.value,
+                        })}
+                    >
                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
@@ -207,7 +221,11 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
 				</div> */}
                 </div>
 
-                <div className={`header-search-box-products ${search.isFetch ? 'fetch' : ''}`}>
+                <div
+                    className={getClassNames('header-search-box-products', {
+                        fetch: search.isFetch,
+                    })}
+                >
                     <h3 className="header-search-box-products__title">
                         {search.value !== ''
                             ? `${checkDeclension(search.totalCount, ['Найден', 'Найдено', 'Найдено']).text}: ${checkDeclension(search.totalCount, ['товар', 'товара', 'товаров']).title}`

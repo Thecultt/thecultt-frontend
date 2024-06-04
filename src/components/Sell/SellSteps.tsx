@@ -5,6 +5,7 @@ import { MEDIA_SIZES } from 'src/constants/styles';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { CabinetSellStepKeys, CabinetSellTypes } from 'src/redux/types/ICabinetSell';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const SellSteps: React.FC = () => {
 	const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tabletExtra})`);
@@ -89,8 +90,10 @@ const SellSteps: React.FC = () => {
 				.map((step, index) =>
 					!isMobile ? (
 						<div
-							className={`sell-steps-item ${index + 1 === currentIndex ? 'active' : index + 1 < currentIndex ? 'success' : ''
-								} `}
+							className={getClassNames('sell-steps-item', {
+								active: index + 1 === currentIndex,
+								success: index + 1 < currentIndex,
+							})}
 							key={`sell-steps-item-${index}`}
 						>
 							<div className="sell-steps-item-circle">
@@ -120,7 +123,9 @@ const SellSteps: React.FC = () => {
 						</div>
 					) : (
 						<div
-							className={`sell-steps-item-media ${index + 1 === currentIndex ? 'active' : ''}`}
+							className={getClassNames('sell-steps-item-media', {
+								active: index + 1 === currentIndex,
+							})}
 							key={`sell-steps-item-media-${index}`}
 						>
 							<span className="sell-steps-item-media__title">{index + 1}</span>

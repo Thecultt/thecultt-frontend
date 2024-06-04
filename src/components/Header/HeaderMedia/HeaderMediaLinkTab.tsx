@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 interface HeaderMediaLinkTabProps {
     title: string;
     linkTitle?: string;
@@ -8,10 +10,15 @@ interface HeaderMediaLinkTabProps {
 }
 
 const HeaderMediaLinkTab: React.FC<HeaderMediaLinkTabProps> = ({ title, linkTitle, children }) => {
-    const [state, setState] = React.useState<boolean>(false);
+    const [state, setState] = React.useState(false);
 
     return (
-        <div className={`header-media-modal-menu-links-tab ${state ? 'active' : ''}`} onClick={() => setState(!state)}>
+        <div
+            className={getClassNames('header-media-modal-menu-links-tab', {
+                active: state,
+            })}
+            onClick={() => setState(!state)}
+        >
             <div className="header-media-modal-menu-links-tab-top">
                 {linkTitle ? (
                     <Link

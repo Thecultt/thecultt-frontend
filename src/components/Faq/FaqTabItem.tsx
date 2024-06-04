@@ -1,4 +1,5 @@
 import React from 'react';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface FaqTabItemProps {
     title: string;
@@ -13,7 +14,11 @@ const FaqTabItem: React.FC<FaqTabItemProps> = ({ title, description }) => {
             <div className="faq-main-content-tab-top" onClick={() => setState(!state)}>
                 <h4 className="faq-main-content-tab-top__title">{title}</h4>
 
-                <div className={`faq-main-content-tab-top-icon ${state ? 'rotate' : ''}`}>
+                <div
+                    className={getClassNames('faq-main-content-tab-top-icon', {
+                        rotate: state,
+                    })}
+                >
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M6 9.47656L12 15.4766L18 9.47656"

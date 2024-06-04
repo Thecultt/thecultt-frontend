@@ -2,6 +2,7 @@ import React from 'react';
 import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
 import { CartItem } from 'src/models/ICartItem';
 
 interface OrderProductsItemProps extends CartItem {
@@ -28,7 +29,10 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
 }) => {
     return (
         <div
-            className={`order-products-item ${checked ? '' : 'disabled'} ${availability ? (is_trial ? 'notAvailability' : '') : 'notAvailability'}`}
+            className={getClassNames('order-products-item', {
+                disabled: !checked,
+                notAvailability: !availability || (!!availability && is_trial),
+            })}
         >
             <div className="order-products-item-content">
                 {hiddenCheck ? null : (
@@ -104,7 +108,12 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
                 </Link>
             </div>
 
-            <div className={`order-products-item-remove ${disabledDelete ? 'disabled' : ''}`} onClick={removeItem}>
+            <div
+                className={getClassNames('order-products-item-remove', {
+                    disabled: disabledDelete,
+                })}
+                onClick={removeItem}
+            >
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M3 5.2H4.6M4.6 5.2H17.4M4.6 5.2V16.4C4.6 16.8243 4.76857 17.2313 5.06863 17.5314C5.36869 17.8314 5.77565 18 6.2 18H14.2C14.6243 18 15.0313 17.8314 15.3314 17.5314C15.6314 17.2313 15.8 16.8243 15.8 16.4V5.2M7 5.2V3.6C7 3.17565 7.16857 2.76869 7.46863 2.46863C7.76869 2.16857 8.17565 2 8.6 2H11.8C12.2243 2 12.6313 2.16857 12.9314 2.46863C13.2314 2.76869 13.4 3.17565 13.4 3.6V5.2"

@@ -8,6 +8,8 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+import { getClassNames } from 'src/functions/getClassNames';
+
 interface ProductCoverProps {
     images: string[];
 }
@@ -148,9 +150,9 @@ const ProductCover: React.FC<ProductCoverProps> = ({ images }) => {
                         {images.map((image, index) => (
                             <SwiperSlide key={`product-content-cover-list-item-${index}`}>
                                 <div
-                                    className={`product-content-cover-list-item ${
-                                        currentIndexImage === index ? 'active' : ''
-                                    }`}
+                                    className={getClassNames('product-content-cover-list-item', {
+                                        active: currentIndexImage === index,
+                                    })}
                                     style={{
                                         backgroundImage: `url("${image}")`,
                                     }}

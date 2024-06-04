@@ -1,4 +1,5 @@
 import React from 'react';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface PopupProps {
     state: boolean;
@@ -46,8 +47,17 @@ const Popup: React.FC<PopupProps> = ({ state, setState, stateContent, children }
     };
 
     return (
-        <div className={`popup ${state ? 'active' : ''}`} ref={PopupRefWrapper}>
+        <div
+            className={getClassNames('popup', {
+                active: state,
+            })}
+            ref={PopupRefWrapper}
+        >
             <div
+                // className={getClassNames('popup-content', {
+                //     active: state && !!stateContent,
+                //     close: state && !stateContent,
+                // })}
                 className={`popup-content ${
                     state ? (stateContent !== undefined ? (stateContent ? 'active' : 'close') : 'active') : ''
                 }`}

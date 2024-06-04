@@ -527,7 +527,7 @@ const SellInfoBrands: React.FC = () => {
             <div className="container">
                 <div className="sell-info-brands-wrapper">
                     {Object.keys(categories).map((category) => (
-                        <div className={`sell-info-brands-block`} key={`sell-info-brands-block-${category}`}>
+                        <div className="sell-info-brands-block" key={`sell-info-brands-block-${category}`}>
                             <h3 className="sell-info-brands-block__title">{category}</h3>
 
                             <div className="sell-info-brands-block-subblock-item-wrapper">
@@ -538,7 +538,7 @@ const SellInfoBrands: React.FC = () => {
                                     >
                                         {col.map((brand) => (
                                             <p
-                                                className={`sell-info-brands-block-subblock-item-col__item`}
+                                                className="sell-info-brands-block-subblock-item-col__item"
                                                 key={`sell-info-brands-block-subblock-${category}-col__item-${brand}`}
                                             >
                                                 {brand}

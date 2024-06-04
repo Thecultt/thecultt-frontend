@@ -1,6 +1,8 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
+import validate from './validate';
+
 const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
     // initialize,
@@ -10,7 +12,12 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     return (
         <form onSubmit={handleSubmit} className="footer-email-form">
             <div className="footer-email-form-input">
-                <input className="footer-email-form-input__field" placeholder="Ваша почта" />
+                <Field
+                    component={'input'}
+                    className="footer-email-form-input__field"
+                    placeholder="Ваша почта"
+                    name="email"
+                />
 
                 <button className="footer-email-form-input__btn">
                     <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +53,7 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					// onChange={onChange}
 					/> */}
 
-                    <label htmlFor={'footer-email-form-input-buyer'} className={`footer-email-form-radio-item__label`}>
+                    <label htmlFor={'footer-email-form-input-buyer'} className="footer-email-form-radio-item__label">
                         <p className="footer-email-form-radio-item__label__text">Продавец</p>
                     </label>
                 </div>
@@ -70,7 +77,7 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 					// onChange={onChange}
 					/> */}
 
-                    <label htmlFor={'footer-email-form-input-seller'} className={`footer-email-form-radio-item__label`}>
+                    <label htmlFor={'footer-email-form-input-seller'} className="footer-email-form-radio-item__label">
                         <p className="footer-email-form-radio-item__label__text">Покупатель</p>
                     </label>
                 </div>
@@ -89,5 +96,5 @@ const FooterEmailSubscribeForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
 export default reduxForm<{}, {}>({
     form: 'footer-email-form',
-    // validate,
+    validate,
 })(FooterEmailSubscribeForm);

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { setIsNotificationServerSuccess, setIsNotificationServerError } from 'src/redux/actions/notifications_server';
 import { NotificationsServerError, NotificationsServerSuccess } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 const NotificationsServer: React.FC = () => {
     const dispatch = useDispatch();
@@ -25,7 +26,9 @@ const NotificationsServer: React.FC = () => {
 
     return (
         <div
-            className={`notifications-server ${isNotificationServerError || isNotificationServerSuccess ? 'active' : ''}`}
+            className={getClassNames('notifications-server', {
+                active: isNotificationServerError || isNotificationServerSuccess,
+            })}
         >
             <NotificationsServerSuccess
                 active={isNotificationServerSuccess}

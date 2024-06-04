@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 
 import { Order } from 'src/models/IOrder';
 import { CabinetHistoryOrdersItemProduct } from 'src/components/';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface CabinetHistoryOrdersItemProps extends Order {
     statusColor: string;
@@ -107,7 +108,11 @@ const CabinetHistoryOrdersItem: React.FC<CabinetHistoryOrdersItemProps> = ({
 								</svg>
 							</p> */}
 
-                        <div className={`cabinet-history-orders-item-topinfo-block-icon ${isOpen ? 'rotate' : ''}`}>
+                        <div
+                            className={getClassNames('cabinet-history-orders-item-topinfo-block-icon', {
+                                rotate: isOpen,
+                            })}
+                        >
                             <svg
                                 width="24"
                                 height="24"

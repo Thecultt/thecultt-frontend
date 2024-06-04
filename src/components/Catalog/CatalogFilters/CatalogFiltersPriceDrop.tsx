@@ -11,7 +11,6 @@ const CatalogFiltersPriceDrop: React.FC = () => {
     const { filters } = useTypedSelector(({ products }) => products);
 
     const onClickSetPriceDrop = (price_drop: boolean) => {
-        console.log(price_drop);
         dispatch(setFiltersPriceDropProduct(price_drop));
     };
 

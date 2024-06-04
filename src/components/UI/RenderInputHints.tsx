@@ -1,5 +1,6 @@
 import React from 'react';
 import { WrappedFieldProps, change } from 'redux-form';
+import { getClassNames } from 'src/functions/getClassNames';
 
 interface RenderInputHintsProps extends WrappedFieldProps {
     label: string;
@@ -91,9 +92,17 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
     }, [input.value]);
 
     return (
-        <div className={`input-wrapper ${disabled ? 'disabled' : ''}`} ref={SelectRef}>
+        <div
+            className={getClassNames('input-wrapper', {
+                disabled: !!disabled,
+            })}
+            ref={SelectRef}
+        >
             <div
-                className={`input ${!state && touched && error ? 'error' : ''} ${bgWhite ? 'bgWhite' : ''}`}
+                className={getClassNames('input', {
+                    error: !state && !!touched && !!error,
+                    bgWhite: !!bgWhite,
+                })}
                 onClick={() => setState(true)}
                 onBlur={() => dispatch(change(form, input.name, value.title))}
             >
@@ -107,7 +116,11 @@ const RenderInputHints: React.FC<RenderInputHintsProps> = ({
                 />
             </div>
 
-            <div className={`input-list ${hints.length && state ? 'active' : ''}`}>
+            <div
+                className={getClassNames('input-list', {
+                    active: !!hints.length && state,
+                })}
+            >
                 <div className="input-list-items-wrapper">
                     {hints.map((item, index) => (
                         <p

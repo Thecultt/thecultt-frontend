@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { setFiltersSelectionsProduct } from 'src/redux/actions/products';
+import { setFiltersSelectionsProduct, setFiltersSortProduct } from 'src/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from 'src/components';
 
 const CatalogFiltersSelections: React.FC = () => {
@@ -13,6 +13,7 @@ const CatalogFiltersSelections: React.FC = () => {
 
     const onChangeSetSelection = (selectionId: string, selection: string) => {
         dispatch(setFiltersSelectionsProduct(selectionId, selection));
+        dispatch(setFiltersSortProduct('popular'));
     };
 
     return (

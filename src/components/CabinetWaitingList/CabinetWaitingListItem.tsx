@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { getClassNames } from 'src/functions/getClassNames';
 import { WaitingListItem } from 'src/models/IWaitingListItem';
 
 const CabinetWaitingListItem: React.FC<WaitingListItem> = ({
@@ -39,7 +40,9 @@ const CabinetWaitingListItem: React.FC<WaitingListItem> = ({
 
                     <Link
                         to={`/catalog?${paramsString}`}
-                        className={`cabinet-waiting-list-item-title__subtitle ${num_products ? '' : 'disabled'}`}
+                        className={getClassNames('cabinet-waiting-list-item-title__subtitle', {
+                            disabled: !num_products,
+                        })}
                     >
                         Доступно товаров на сайте {num_products} шт.
                     </Link>
