@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import $api from 'src/http';
 import { Order } from 'src/models/IOrder';
+import { UTM_KEYS, YM_KEYS } from 'src/constants/keys';
 
 import { OrderStateActionTypes, OrderStateActions } from '../types/IOrder';
 import { setIsNotificationServerError } from '../actions/notifications_server';
@@ -281,28 +282,35 @@ export const sendCreateOrder =
     async (dispatch: Dispatch<OrderStateActions>) => {
         const newData: any = data;
 
-        if (localStorage.getItem('_ym_uid')) {
-            newData['_ym_uid'] = JSON.parse(localStorage.getItem('_ym_uid') as string);
+        const ymUid = localStorage.getItem(YM_KEYS.uid);
+        const utmSource = localStorage.getItem(UTM_KEYS.source);
+        const utmMedium = localStorage.getItem(UTM_KEYS.medium);
+        const utmCampaign = localStorage.getItem(UTM_KEYS.campaign);
+        const utmContent = localStorage.getItem(UTM_KEYS.content);
+        const utmTerm = localStorage.getItem(UTM_KEYS.term);
+
+        if (ymUid) {
+            newData['_ym_uid'] = JSON.parse(ymUid);
         }
 
-        if (localStorage.getItem('utm_source')) {
-            newData['utm_source'] = localStorage.getItem('utm_source');
+        if (utmSource) {
+            newData['utm_source'] = utmSource;
         }
 
-        if (localStorage.getItem('utm_medium')) {
-            newData['utm_medium'] = localStorage.getItem('utm_medium');
+        if (utmMedium) {
+            newData['utm_medium'] = utmMedium;
         }
 
-        if (localStorage.getItem('utm_campaign')) {
-            newData['utm_campaign'] = localStorage.getItem('utm_campaign');
+        if (utmCampaign) {
+            newData['utm_campaign'] = utmCampaign;
         }
 
-        if (localStorage.getItem('utm_content')) {
-            newData['utm_content'] = localStorage.getItem('utm_content');
+        if (utmContent) {
+            newData['utm_content'] = utmContent;
         }
 
-        if (localStorage.getItem('utm_term')) {
-            newData['utm_term'] = localStorage.getItem('utm_term');
+        if (utmTerm) {
+            newData['utm_term'] = utmTerm;
         }
 
         $api.post(`create_order/`, newData)
