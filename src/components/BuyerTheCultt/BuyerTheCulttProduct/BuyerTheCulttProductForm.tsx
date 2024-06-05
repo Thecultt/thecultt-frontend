@@ -11,7 +11,6 @@ const BuyerTheCulttProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
     initialize,
     invalid,
-    pristine,
     submitting,
 }) => {
     const { isSendFormProductPage } = useTypedSelector(({ buyer_thecultt }) => buyer_thecultt);
@@ -48,7 +47,7 @@ const BuyerTheCulttProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                 className={getClassNames('btn buyer-thecultt-product-form__btn', {
                     loader: isSendFormProductPage,
                 })}
-                disabled={isSendFormProductPage || invalid || pristine || submitting}
+                disabled={isSendFormProductPage || invalid || submitting}
             >
                 {isSendFormProductPage ? <Loader /> : 'Отправить заявку'}
             </button>
