@@ -139,9 +139,11 @@ export const sendRegister = (info: {
 
             if (localStorage.getItem('redirect_reglog')) {
                 window.location.href = localStorage.getItem('redirect_reglog') as string;
+                window.location.hash = 'welcome';
+            } else {
+                window.location.hash = 'welcome';
+                window.location.reload();
             }
-
-            window.location.hash = 'welcome';
 
             dispatch({
                 type: RegisterActionTypes.SET_REGISTER_IS_SEND,

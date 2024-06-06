@@ -127,7 +127,7 @@ const App = () => {
 
             <React.Suspense fallback={<></>}>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route index path="/" element={<Home />} />
 
                     <Route path="/catalog" element={<Catalog />} />
 
