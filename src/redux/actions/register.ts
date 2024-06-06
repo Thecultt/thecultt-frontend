@@ -18,6 +18,7 @@ export const sendRegister = (info: {
 
         axios.post(`${process.env.REACT_APP_API_DOMEN}/register/`, info).then(({ data }) => {
             localStorage.setItem('accessToken', data.access);
+            localStorage.setItem('accessToken_is_remove', 'true');
 
             window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
             window.dataLayer.push({
@@ -137,9 +138,11 @@ export const sendRegister = (info: {
 
             if (localStorage.getItem('redirect_reglog')) {
                 window.location.href = localStorage.getItem('redirect_reglog') as string;
+                window.location.hash = 'welcome';
+            } else {
+                window.location.hash = 'welcome';
+                window.location.reload();
             }
-
-            window.location.hash = 'welcome';
 
             dispatch({
                 type: RegisterActionTypes.SET_REGISTER_IS_SEND,

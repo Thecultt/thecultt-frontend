@@ -136,7 +136,7 @@ const App = () => {
 
             <React.Suspense fallback={<></>}>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route index path="/" element={<Home />} />
 
                     <Route path="/catalog" element={<Catalog />} />
 
@@ -191,7 +191,7 @@ const App = () => {
 						element={<SellAdmin />}
 					/> */}
 
-                    <Route path="/order" element={<Order />} />
+                    <Route path="/order" element={isLogin ? <Order /> : <Navigate to="/?redirect=/order#reglog" />} />
 
                     <Route path="/order/:id" element={<OrderStatus />} />
 
@@ -215,8 +215,8 @@ const App = () => {
 
                     <Route path="/AlionaDoletskaya" element={<AlyonaDoletskaya />} />
 
-                    {/* <Route path="/concierge" element={<BuyerTheCulttMain />} />
-					<Route path="/concierge/product/:id" element={<BuyerTheCulttProduct />} /> */}
+                    <Route path="/concierge" element={<BuyerTheCulttMain />} />
+                    <Route path="/concierge/product/:id" element={<BuyerTheCulttProduct />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
