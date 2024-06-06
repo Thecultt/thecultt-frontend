@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import { CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
 import { setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
 import { fetchOrderAddressCitys, fetchOrderAddressStreet } from 'src/redux/actions/order';
@@ -20,7 +21,9 @@ const SellDelivery: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, 
     }>({ title: '', value: '' });
     const [currentTypeDelivery, setCurrentTypeDelivery] = React.useState<string>('Курьер');
 
-    const { user } = useTypedSelector(({ user }) => user);
+    // const { user } = useTypedSelector(({ user }) => user);
+    const { user } = useAuthUser();
+
     const { globalCitys, globalStreets } = useTypedSelector(({ order }) => order);
     const { isSending } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
 

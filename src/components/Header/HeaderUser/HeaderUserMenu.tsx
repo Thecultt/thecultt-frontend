@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 interface HeaderUserMenuInterface {
     state: boolean;
@@ -10,11 +11,7 @@ interface HeaderUserMenuInterface {
 const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
     const { search } = useLocation();
 
-    const onClickLogout = () => {
-        localStorage.removeItem('accessToken');
-
-        window.location.reload();
-    };
+    const { isLoggedIn, logout } = useAuthUser();
 
     return (
         <div
@@ -23,7 +20,7 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
             })}
         >
             <div className="header-block-user-menu-block">
-                {localStorage.getItem('accessToken') ? (
+                {isLoggedIn ? (
                     <>
                         <NavLink
                             to="/cabinet/history"
@@ -100,8 +97,8 @@ const HeaderUserMenu: React.FC<HeaderUserMenuInterface> = ({ state }) => {
                     Вопросы и ответы
                 </NavLink>
 
-                {localStorage.getItem('accessToken') ? (
-                    <span className="header-block-user-menu-block__link" onClick={onClickLogout}>
+                {isLoggedIn ? (
+                    <span className="header-block-user-menu-block__link" onClick={logout}>
                         Выйти
                     </span>
                 ) : null}

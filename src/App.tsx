@@ -53,6 +53,7 @@ import { fetchFirstProductsCatalog } from './redux/actions/products';
 import { fetchFavorites } from './redux/actions/favorites';
 import { fetchUser } from './redux/actions/user';
 import { checkAvailabilityCartItems } from './redux/actions/cart';
+import { useAuthUser } from './hooks/useAuthUser';
 
 declare global {
     interface Window {
@@ -66,19 +67,20 @@ declare global {
 
 const App = () => {
     const dispatch = useDispatch();
-
-    const isLoadedFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
-
-    const isLoadedProducts = useTypedSelector(({ products }) => products.isLoaded);
-
-    const cartItems = useTypedSelector(({ cart }) => cart.items);
-
-    const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
-    const { user } = useTypedSelector(({ user }) => user);
-
     const { pathname } = useLocation();
 
-    const isLogin = localStorage.getItem('accessToken');
+    const isLoadedFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
+    const isLoadedProducts = useTypedSelector(({ products }) => products.isLoaded);
+    const cartItems = useTypedSelector(({ cart }) => cart.items);
+
+    const { isLoggedIn, isLoaded: isLoadedUser, user } = useAuthUser();
+
+    React.useEffect(() => {
+        if (isLoggedIn) {
+            dispatch(fetchFavorites() as any);
+            dispatch(fetchUser() as any);
+        }
+    }, [isLoggedIn]);
 
     React.useEffect(() => {
         const cords: any = ['scrollX', 'scrollY'];
@@ -94,18 +96,7 @@ const App = () => {
             dispatch(fetchFirstProductsCatalog() as any);
         }
 
-        if (isLogin) {
-            dispatch(fetchFavorites() as any);
-            dispatch(fetchUser() as any);
-        }
-
         dispatch(checkAvailabilityCartItems(cartItems) as any);
-
-        if (localStorage.getItem('accessToken') && !localStorage.getItem('accessToken_is_remove')) {
-            localStorage.removeItem('accessToken');
-            localStorage.setItem('accessToken_is_remove', 'true');
-            window.location.reload();
-        }
     }, []);
 
     React.useEffect(() => {
@@ -161,27 +152,27 @@ const App = () => {
 
                     <Route
                         path="/cabinet/history"
-                        element={isLogin ? <CabinetHistoryOrders /> : <Navigate to="/#reglog" />}
+                        element={isLoggedIn ? <CabinetHistoryOrders /> : <Navigate to="/#reglog" />}
                     />
 
                     <Route
                         path="/cabinet/favorites"
-                        element={isLogin ? <CabinetFavorites /> : <Navigate to="/#reglog" />}
+                        element={isLoggedIn ? <CabinetFavorites /> : <Navigate to="/#reglog" />}
                     />
 
                     <Route
                         path="/cabinet/waiting"
-                        element={isLogin ? <CabinetWaitingList /> : <Navigate to="/#reglog" />}
+                        element={isLoggedIn ? <CabinetWaitingList /> : <Navigate to="/#reglog" />}
                     />
 
                     <Route
                         path="/cabinet/setting"
-                        element={isLogin ? <CabinetSetting /> : <Navigate to="/#reglog" />}
+                        element={isLoggedIn ? <CabinetSetting /> : <Navigate to="/#reglog" />}
                     />
 
                     <Route
                         path="/cabinet/sells"
-                        element={isLogin ? <CabinetSellsList /> : <Navigate to="/#reglog" />}
+                        element={isLoggedIn ? <CabinetSellsList /> : <Navigate to="/#reglog" />}
                     />
 
                     <Route path="/cabinet/sell" element={<Sell />} />
@@ -191,7 +182,10 @@ const App = () => {
 						element={<SellAdmin />}
 					/> */}
 
-                    <Route path="/order" element={<Order />} />
+                    <Route
+                        path="/order"
+                        element={isLoggedIn ? <Order /> : <Navigate to="/?redirect=/order#reglog" />}
+                    />
 
                     <Route path="/order/:id" element={<OrderStatus />} />
 
@@ -215,8 +209,8 @@ const App = () => {
 
                     <Route path="/AlionaDoletskaya" element={<AlyonaDoletskaya />} />
 
-                    {/* <Route path="/concierge" element={<BuyerTheCulttMain />} />
-					<Route path="/concierge/product/:id" element={<BuyerTheCulttProduct />} /> */}
+                    <Route path="/concierge" element={<BuyerTheCulttMain />} />
+                    <Route path="/concierge/product/:id" element={<BuyerTheCulttProduct />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>

@@ -3,13 +3,15 @@ import { Dispatch } from 'react';
 
 import $api from 'src/http';
 import { Product } from 'src/models/IProduct';
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
 
 import { FavoritesActionTypes, FavoritesActions } from '../types/IFavorites';
 
 export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>) => {
     const {
         data: { items },
-    } = await $api.get<{ items: Product[] }>(`/favorite-products`);
+    } = await $api.get<{ items: Product[] }>(`/favorite-products/`);
 
     window.mindbox('async', {
         operation: 'Website.SetWishList',
@@ -33,7 +35,7 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
 };
 
 export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<FavoritesActions>) => {
-    if (localStorage.getItem('accessToken')) {
+    if (localStorageService.getItem<string>(LS_KEYS.accessToken)) {
         await $api.post(`/add-favorite-product/${item.id}/`);
 
         window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.

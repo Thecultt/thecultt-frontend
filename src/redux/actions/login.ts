@@ -2,6 +2,9 @@ import axios from 'axios';
 import { SubmissionError } from 'redux-form';
 import { Dispatch } from 'react';
 
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
+
 import { LoginActions, LoginActionTypes } from '../types/ILogin';
 
 export const sendLogin = (data: { username: string | null; password: string }, onChangeSuccess?: () => void) => {
@@ -14,8 +17,7 @@ export const sendLogin = (data: { username: string | null; password: string }, o
         return axios
             .post(`${process.env.REACT_APP_API_DOMEN}/login/`, data)
             .then(({ data }) => {
-                localStorage.setItem('accessToken', data.access);
-                localStorage.setItem('accessToken_is_remove', 'true');
+                localStorageService.setItem(LS_KEYS.accessToken, data.access as string, { value: 1, unit: 'month' });
 
                 window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
                 window.dataLayer.push({

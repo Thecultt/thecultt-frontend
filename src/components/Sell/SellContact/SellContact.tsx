@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, Field } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import { CabinetSellTypes, CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
 import { setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
 import { SellBackBtn, RenderInput } from 'src/components';
@@ -14,9 +15,13 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, i
     const dispatch = useDispatch();
 
     const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
+
+    // const {
+    //     user: { name, lastname, email, phone },
+    // } = useTypedSelector(({ user }) => user);
     const {
         user: { name, lastname, email, phone },
-    } = useTypedSelector(({ user }) => user);
+    } = useAuthUser();
 
     React.useEffect(() => {
         initialize({

@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import { Loader, RenderInput } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
 
@@ -15,7 +16,9 @@ const BuyerTheCulttProductForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     submitting,
 }) => {
     const { isSendFormProductPage } = useTypedSelector(({ buyer_thecultt }) => buyer_thecultt);
-    const { user, isLoaded } = useTypedSelector(({ user }) => user);
+
+    // const { user, isLoaded } = useTypedSelector(({ user }) => user);
+    const { isLoaded, user } = useAuthUser();
 
     React.useEffect(() => {
         if (isLoaded) {

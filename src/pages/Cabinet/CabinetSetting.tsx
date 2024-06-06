@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { sendUpdateUser } from 'src/redux/actions/user';
 import {
     CabinetMenu,
@@ -11,11 +10,12 @@ import {
     CabinetSettingAddressBlock,
     CabinetSettingPaymentBlock,
 } from 'src/components';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 const CabinetSetting: React.FC = () => {
     const dispatch = useDispatch();
 
-    const { isLoaded } = useTypedSelector(({ user }) => user);
+    const { isLoaded, logout } = useAuthUser();
 
     const onSubmit = (data: any) => {
         if (data.gender && data.gender === 'Женский') {
@@ -27,12 +27,6 @@ const CabinetSetting: React.FC = () => {
         }
 
         dispatch(sendUpdateUser(data) as any);
-    };
-
-    const onClickLogout = () => {
-        localStorage.removeItem('accessToken');
-
-        window.location.reload();
     };
 
     return (
@@ -51,7 +45,7 @@ const CabinetSetting: React.FC = () => {
                                 <CabinetSettingAddressBlock onSubmit={onSubmit} />
                                 <CabinetSettingPaymentBlock onSubmit={onSubmit} />
 
-                                <button className="btn-regular cabinet-setting__logout" onClick={onClickLogout}>
+                                <button className="btn-regular cabinet-setting__logout" onClick={logout}>
                                     Выйти из профиля
                                 </button>
                             </div>
@@ -59,7 +53,7 @@ const CabinetSetting: React.FC = () => {
                     ) : (
                         <>
                             <div className="cabinet-content cabinet-setting">
-                                <button className="btn-regular cabinet-setting__logout" onClick={onClickLogout}>
+                                <button className="btn-regular cabinet-setting__logout" onClick={logout}>
                                     Выйти из профиля
                                 </button>
 

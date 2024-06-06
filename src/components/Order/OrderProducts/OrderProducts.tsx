@@ -6,6 +6,7 @@ import { formValueSelector } from 'redux-form';
 import dayjs from 'dayjs';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import { CartItem } from 'src/models/ICartItem';
 import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
 import { sendCreateOrder, sendSubmitOrder } from 'src/redux/actions/order';
@@ -21,7 +22,9 @@ const OrderProducts: React.FC = () => {
 
     const [isDisableSendBtn, setIsDisableSendBtn] = React.useState<boolean>(false);
 
-    const { user } = useTypedSelector(({ user }) => user);
+    // const { user } = useTypedSelector(({ user }) => user);
+    const { user } = useAuthUser();
+
     const { items } = useTypedSelector(({ cart }) => cart);
     const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order);
 

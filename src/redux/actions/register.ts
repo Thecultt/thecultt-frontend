@@ -2,6 +2,8 @@ import axios from 'axios';
 import { Dispatch } from 'react';
 
 import { RegisterActions, RegisterActionTypes } from '../types/IRegister';
+import { LS_KEYS } from 'src/constants/keys';
+import { localStorageService } from 'src/services/storage';
 
 export const sendRegister = (info: {
     name: string;
@@ -17,7 +19,7 @@ export const sendRegister = (info: {
         });
 
         axios.post(`${process.env.REACT_APP_API_DOMEN}/register/`, info).then(({ data }) => {
-            localStorage.setItem('accessToken', data.access);
+            localStorageService.setItem(LS_KEYS.accessToken, data.access as string, { value: 1, unit: 'month' });
 
             window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
             window.dataLayer.push({

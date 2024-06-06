@@ -7,11 +7,14 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
 import { CartItemBlock } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 const Cart: React.FC = () => {
     const dispatch = useDispatch();
 
-    const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    // const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    const { isLoaded: isLoadedUser } = useAuthUser();
+
     const { items } = useTypedSelector(({ cart }) => cart);
 
     const changeCheck = (article: string, status: boolean) => {

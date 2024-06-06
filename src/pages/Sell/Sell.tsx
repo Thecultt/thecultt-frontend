@@ -9,6 +9,7 @@ import {
 } from 'src/redux/actions/cabinet_sell';
 import { CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import {
     Popup,
     SellSteps,
@@ -26,7 +27,9 @@ const Sell: React.FC = () => {
     const { isLoadedParameters, isSend, currentStep, currentType } = useTypedSelector(
         ({ cabinet_sell }) => cabinet_sell,
     );
-    const { user } = useTypedSelector(({ user }) => user);
+
+    // const { user } = useTypedSelector(({ user }) => user);
+    const { user } = useAuthUser();
 
     const initStep = new URLSearchParams(window.location.search).get('step');
 

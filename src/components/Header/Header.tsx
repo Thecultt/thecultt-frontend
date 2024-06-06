@@ -20,6 +20,7 @@ import HeaderHoverImageBag from 'src/assets/images/header/header-image-hover-men
 import HeaderHoverImageAccessories from 'src/assets/images/header/header-image-hover-menu-accessories.jpg';
 import HeaderHoverImageShoes from 'src/assets/images/header/header-image-hover-menu-shoes.jpg';
 import HeaderHoverImageDecoration from 'src/assets/images/header/header-image-hover-menu-decoration.jpg';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 export interface HeaderHoverMenuCategory {
     title: string;
@@ -168,14 +169,14 @@ const Header: React.FC = () => {
 
     const dispatch = useDispatch();
 
-    const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState<number>(0);
-    const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState<boolean>(false);
-
-    const [isOpenSearch, setIsOpenSearch] = React.useState<boolean>(false);
+    const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState(0);
+    const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState(false);
+    const [isOpenSearch, setIsOpenSearch] = React.useState(false);
 
     const { search } = useTypedSelector(({ header }) => header);
-
     const debouncedValue = useDebounce(search.value);
+
+    const { isLoggedIn } = useAuthUser();
 
     const openHoverMenu = (index: number) => {
         if (!isOpenSearch) {
@@ -254,7 +255,7 @@ const Header: React.FC = () => {
                                 <div className="header-block">
                                     <div className="header-block-btn">
                                         <Link
-                                            to={localStorage.getItem('accessToken') ? '/cabinet/sell' : 'sell'}
+                                            to={isLoggedIn ? '/cabinet/sell' : 'sell'}
                                             className="header-block-btn__btn"
                                             onClick={() => {
                                                 window.dataLayer.push({

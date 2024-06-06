@@ -2,6 +2,8 @@ import axios from 'axios';
 
 import store from 'src/redux/store';
 import { setIsNotificationServerError } from 'src/redux/actions/notifications_server';
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
 
 const $api = axios.create({
     withCredentials: false,
@@ -9,7 +11,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config: any) => {
-    config.headers.Authorization = `${localStorage.getItem('accessToken')}`;
+    config.headers.Authorization = `${localStorageService.getItem<string>(LS_KEYS.accessToken, '')}`;
 
     return config;
 });
@@ -35,16 +37,13 @@ $api.interceptors.response.use(
                     // 	{},
                     // 	{ withCredentials: true }
                     // );
-
                     // localStorage.setItem(
                     // 	"accessToken",
                     // 	response.data.accessToken
                     // );
-
                     // return $api.request(originalRequest);
 
-                    localStorage.removeItem('accessToken');
-
+                    localStorageService.removeItem(LS_KEYS.accessToken);
                     window.location.reload();
                 } catch (e) {
                     // if (localStorage.getItem("accessToken")) {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Field, reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import { RenderInput, RenderSelect, RenderInputHints } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
 
@@ -33,7 +34,9 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     const [brands, setBrands] = React.useState<{ title: string; value: string }[]>([]);
     const [models, setModels] = React.useState<{ title: string; value: string }[]>([]);
 
-    const { isLoaded, user } = useTypedSelector(({ user }) => user);
+    // const { isLoaded, user } = useTypedSelector(({ user }) => user);
+    const { isLoaded, user } = useAuthUser();
+
     const { categories } = useTypedSelector(({ products_filters }) => products_filters);
     const isLoadedProductsFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
 

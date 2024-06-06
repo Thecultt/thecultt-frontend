@@ -7,6 +7,7 @@ import { CabinetSellTypes, CabinetSellStepKeys } from 'src/redux/types/ICabinetS
 import { setCabinetSellCurrentType, setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
 import SellBlockCooperationConciergeImage from 'src/assets/images/sell/sell-block-cooperation-concierge-service.jpg';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 const SellCooperation: React.FC = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const SellCooperation: React.FC = () => {
     const initType = new URLSearchParams(window.location.search).get('type');
 
     const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
+    const { isLoggedIn } = useAuthUser();
 
     const types = [
         {
@@ -62,7 +64,7 @@ const SellCooperation: React.FC = () => {
                     ))}
                 </div>
 
-                {localStorage.getItem('accessToken') ? (
+                {isLoggedIn ? (
                     <button
                         className="btn sell-block__btn"
                         onClick={() => {
