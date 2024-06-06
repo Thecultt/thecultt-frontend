@@ -1,7 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { UTM_KEYS } from 'src/constants/keys';
+import { UTM_KEYS, UTM_LS_KEY } from 'src/constants/keys';
+import { localStorageService } from 'src/services/storage';
 
 export const useAppUtm = () => {
     const { search } = useLocation();
@@ -14,24 +15,12 @@ export const useAppUtm = () => {
         const utmContent = query.get(UTM_KEYS.content);
         const utmTerm = query.get(UTM_KEYS.term);
 
-        if (utmSource) {
-            localStorage.setItem(UTM_KEYS.source, utmSource);
-        }
-
-        if (utmMedium) {
-            localStorage.setItem(UTM_KEYS.medium, utmMedium);
-        }
-
-        if (utmCampaign) {
-            localStorage.setItem(UTM_KEYS.campaign, utmCampaign);
-        }
-
-        if (utmContent) {
-            localStorage.setItem(UTM_KEYS.content, utmContent);
-        }
-
-        if (utmTerm) {
-            localStorage.setItem(UTM_KEYS.term, utmTerm);
-        }
+        localStorageService.setItem(UTM_LS_KEY, {
+            [UTM_KEYS.source]: utmSource || '',
+            [UTM_KEYS.medium]: utmMedium || '',
+            [UTM_KEYS.campaign]: utmCampaign || '',
+            [UTM_KEYS.content]: utmContent || '',
+            [UTM_KEYS.term]: utmTerm || '',
+        });
     }, []);
 };
