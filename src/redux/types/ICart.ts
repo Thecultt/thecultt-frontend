@@ -1,8 +1,11 @@
 import { CartItem } from 'src/models/ICartItem';
 
-export interface CartState {
-    items: { [key: string]: CartItem };
+export interface ICartItemsState {
+    [key: string]: CartItem;
+}
 
+export interface CartState {
+    items: ICartItemsState;
     isVisibleMessage: boolean;
 }
 
@@ -19,7 +22,7 @@ export enum CartActionTypes {
 
 interface setCartItems {
     type: CartActionTypes.SET_CART_ITEMS;
-    payload: { [key: string]: CartItem };
+    payload: ICartItemsState;
 }
 
 interface addCartItems {

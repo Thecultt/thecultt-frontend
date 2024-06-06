@@ -1,18 +1,33 @@
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
+
 import { CartState, CartActions, CartActionTypes } from '../types/ICart';
 
 const initialState: CartState = {
-    items: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') as any) : {},
-
+    items: localStorageService.getItem<any>(LS_KEYS.cart, {}),
     isVisibleMessage: false,
 };
 
 const cart = (state = initialState, action: CartActions) => {
+    if (action.type === CartActionTypes.SET_CART_ITEMS) {
+        const newItems = action.payload;
+
+        // localStorage.setItem('cart', JSON.stringify(newItems));
+        localStorageService.setItem(LS_KEYS.cart, newItems);
+
+        return {
+            ...state,
+            items: newItems,
+        };
+    }
+
     if (action.type === CartActionTypes.ADD_CART_ITEMS) {
         const newItems = state.items;
 
         newItems[action.payload.article] = action.payload;
 
-        localStorage.setItem('cart', JSON.stringify(newItems));
+        // localStorage.setItem('cart', JSON.stringify(newItems));
+        localStorageService.setItem(LS_KEYS.cart, newItems);
 
         return {
             ...state,
@@ -25,7 +40,8 @@ const cart = (state = initialState, action: CartActions) => {
 
         newItems[action.payload.article] = action.payload.data;
 
-        localStorage.setItem('cart', JSON.stringify(newItems));
+        // localStorage.setItem('cart', JSON.stringify(newItems));
+        localStorageService.setItem(LS_KEYS.cart, newItems);
 
         return {
             ...state,
@@ -41,7 +57,8 @@ const cart = (state = initialState, action: CartActions) => {
             checked: action.payload.status,
         };
 
-        localStorage.setItem('cart', JSON.stringify(newItems));
+        // localStorage.setItem('cart', JSON.stringify(newItems));
+        localStorageService.setItem(LS_KEYS.cart, newItems);
 
         return {
             ...state,
@@ -54,7 +71,8 @@ const cart = (state = initialState, action: CartActions) => {
 
         delete newItems[action.payload];
 
-        localStorage.setItem('cart', JSON.stringify(newItems));
+        // localStorage.setItem('cart', JSON.stringify(newItems));
+        localStorageService.setItem(LS_KEYS.cart, newItems);
 
         return {
             ...state,

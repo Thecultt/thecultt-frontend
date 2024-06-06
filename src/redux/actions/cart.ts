@@ -5,38 +5,37 @@ import $api from 'src/http';
 import { ProductPage } from 'src/models/IProduct';
 import { CartItem } from 'src/models/ICartItem';
 
-import { CartActionTypes, CartActions } from '../types/ICart';
+import { CartActionTypes, CartActions, ICartItemsState } from '../types/ICart';
 
-export const checkAvailabilityCartItems =
-    (items: { [key: string]: CartItem }) => async (dispatch: Dispatch<CartActions>) => {
-        await Promise.all(
-            Object.keys(items).map(async (article) => {
-                const {
-                    data: { id, images, manufacturer, category, subcategory, name, price, availability, is_trial },
-                } = await $api.get<ProductPage>(`/product/${article}`);
+export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dispatch: Dispatch<CartActions>) => {
+    await Promise.all(
+        Object.keys(items).map(async (article) => {
+            const {
+                data: { id, images, manufacturer, category, subcategory, name, price, availability, is_trial },
+            } = await $api.get<ProductPage>(`/product/${article}`);
 
-                dispatch({
-                    type: CartActionTypes.CHANGE_CART_ITEMS,
-                    payload: {
+            dispatch({
+                type: CartActionTypes.CHANGE_CART_ITEMS,
+                payload: {
+                    article,
+                    data: {
+                        id,
+                        checked: items[article].checked,
                         article,
-                        data: {
-                            id,
-                            checked: items[article].checked,
-                            article,
-                            category,
-                            subcategory,
-                            image: images[0],
-                            manufacturer,
-                            name,
-                            price,
-                            availability,
-                            is_trial,
-                        },
+                        category,
+                        subcategory,
+                        image: images[0],
+                        manufacturer,
+                        name,
+                        price,
+                        availability,
+                        is_trial,
                     },
-                });
-            }),
-        );
-    };
+                },
+            });
+        }),
+    );
+};
 
 export const addCartItem = (item: CartItem) => {
     window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
@@ -260,4 +259,9 @@ export const removeCartItem = (id: string, item: CartItem) => {
 export const setCartIsVisibleMessage = (status: boolean) => ({
     type: CartActionTypes.SET_CART_IS_VISIBLE_MESSAGE,
     payload: status,
+});
+
+export const setCartItems = (cart: ICartItemsState) => ({
+    type: CartActionTypes.SET_CART_ITEMS,
+    payload: cart,
 });

@@ -12,4 +12,5 @@ export const YM_KEYS = {
 
 export const LS_KEYS = {
     accessToken: 'access_token',
+    cart: 'cart',
 };

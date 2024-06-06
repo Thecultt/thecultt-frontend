@@ -45,7 +45,6 @@ import {
     BuyerTheCulttMain,
     BuyerTheCulttProduct,
 } from './pages';
-
 import { useTypedSelector } from './hooks/useTypedSelector';
 import { useAppUtm } from './hooks/useAppUtm';
 import { fetchProductsFilters } from './redux/actions/products_filters';
@@ -54,6 +53,7 @@ import { fetchFavorites } from './redux/actions/favorites';
 import { fetchUser } from './redux/actions/user';
 import { checkAvailabilityCartItems } from './redux/actions/cart';
 import { useAuthUser } from './hooks/useAuthUser';
+import { useReplaceLS } from './hooks/useReplaceLS';
 
 declare global {
     interface Window {
@@ -111,6 +111,7 @@ const App = () => {
     }, [isLoadedUser]);
 
     useAppUtm();
+    useReplaceLS();
 
     return (
         <div className="wrapper" id="wrapper">

@@ -8,7 +8,8 @@ import dayjs from 'dayjs';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { useAuthUser } from 'src/hooks/useAuthUser';
 import { CartItem } from 'src/models/ICartItem';
-import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
+import { changeCheckCartItem, removeCartItem, setCartItems } from 'src/redux/actions/cart';
+import { ICartItemsState } from 'src/redux/types/ICart';
 import { sendCreateOrder, sendSubmitOrder } from 'src/redux/actions/order';
 import { sendUpdateUser } from 'src/redux/actions/user';
 import { sendOrderApplyPromocode } from 'src/redux/actions/order';
@@ -291,13 +292,13 @@ const OrderProducts: React.FC = () => {
     };
 
     const successPayment = (orderId: number) => {
-        const newCart: { [key: string]: CartItem } = {};
+        const newCart: ICartItemsState = {};
 
         Object.keys(items).map((article) => {
             if (!items[article].checked) newCart[article] = { ...items[article], checked: true };
         });
 
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        dispatch(setCartItems(newCart) as any);
 
         const products: CartItem[] = [];
 
