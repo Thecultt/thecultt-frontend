@@ -9,7 +9,7 @@ import { FavoritesActionTypes, FavoritesActions } from '../types/IFavorites';
 export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>) => {
     const {
         data: { items },
-    } = await $api.get<{ items: Product[] }>(`/favorite-products`);
+    } = await $api.get<{ items: Product[] }>(`/favorite-products/`);
 
     window.mindbox('async', {
         operation: 'Website.SetWishList',
