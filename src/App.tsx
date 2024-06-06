@@ -102,9 +102,9 @@ const App = () => {
         dispatch(checkAvailabilityCartItems(cartItems) as any);
 
         if (localStorage.getItem('accessToken') && !localStorage.getItem('accessToken_is_remove')) {
-            localStorage.removeItem('accessToken');
-            localStorage.setItem('accessToken_is_remove', 'true');
-            window.location.reload();
+            // localStorage.removeItem('accessToken');
+            // localStorage.setItem('accessToken_is_remove', 'true');
+            // window.location.reload();
         }
     }, []);
 

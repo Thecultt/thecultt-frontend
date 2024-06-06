@@ -1,4 +1,6 @@
-import { CabinetSellOption } from 'src/models/ICabinetSellOption';
+import { CabinetSellOption } from 'src/models/ICabinetSell';
+
+import { CabinetSellAutoDetectedModel } from 'src/models/ICabinetSell';
 
 export enum CabinetSellStepKeys {
 	COOPERATION = 'cooperation',
@@ -26,11 +28,10 @@ export interface CabinetSellState {
 	isLoadedParameters: boolean;
 	parameters: { [key: string]: CabinetSellOption };
 
-	autoDetectedModels: {
-		brand: string
-		model: string
-		image: string
-	}[]
+	autoDetected: {
+		models: CabinetSellAutoDetectedModel[],
+		selectedIndex: number | null
+	},
 
 	isLoadedSellsList: boolean;
 	sellsList: any[];
@@ -46,6 +47,7 @@ export enum CabinetSellActionTypes {
 	SET_CABINET_SELL_PARAMETERS = 'SET_CABINET_SELL_PARAMETERS',
 
 	SET_CABINET_SELL_AUTO_DETECTED_MODELS = 'SET_CABINET_SELL_AUTO_DETECTED_MODELS',
+	SET_CABINET_SELL_AUTO_DETECTED_SELECTED_INDEX = 'SET_CABINET_SELL_AUTO_DETECTED_SELECTED_INDEX',
 
 	SET_CABINET_SELL_IS_LOADED_SELLS_LIST = 'SET_CABINET_SELL_IS_LOADED_SELLS_LIST',
 	SET_CABINET_SELL_SELLS_LIST = 'SET_CABINET_SELL_SELLS_LIST',
@@ -78,11 +80,13 @@ interface setCabinetSellParameters {
 
 interface setCabinetSellAutoDetectedModels {
 	type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_MODELS;
-	payload: {
-		brand: string
-		model: string
-		image: string
-	}[];
+	payload: CabinetSellAutoDetectedModel[];
+}
+
+
+interface setCabinetSellAutoDetectedIndex {
+	type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_SELECTED_INDEX;
+	payload: number | null;
 }
 
 interface setCabinetSellIsLoadedSellsList {
@@ -102,5 +106,6 @@ export type CabinetSellActions =
 	| setCabinetSellType
 	| setCabinetSellParameters
 	| setCabinetSellAutoDetectedModels
+	| setCabinetSellAutoDetectedIndex
 	| setCabinetSellIsLoadedSellsList
 	| setCabinetSellSellsList;

@@ -45,14 +45,13 @@ import SellImagesImageHand1 from 'src/assets/images/sell/sell-images-image-hand-
 import SellImagesImageHand2 from 'src/assets/images/sell/sell-images-image-hand-2.jpg';
 import SellImagesImageHand3 from 'src/assets/images/sell/sell-images-image-hand-3.jpg';
 import SellImagesImageHand4 from 'src/assets/images/sell/sell-images-image-hand-4.jpg';
-import { getClassNames } from 'src/functions/getClassNames';
 
 const SellImages: React.FC = () => {
 	const dispatch = useDispatch();
 
 	const category = localStorage.getItem('sell-info-global-category');
 
-	const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
+	const { currentType, autoDetected } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
 
 	const [imageBlocksValue, setImageBlocksValue] = React.useState<{
 		[key: string]: string;
@@ -70,29 +69,29 @@ const SellImages: React.FC = () => {
 				imageDescription: 'Сфотографируйте сумку спереди при дневном свете',
 			},
 
-			{
-				image: SellImagesImageBag2,
-				imageTitle: 'Внутри',
-				imageDescription: 'Сфотографируйте внутреннее пространство сумки',
-			},
+			// {
+			//     image: SellImagesImageBag2,
+			//     imageTitle: 'Внутри',
+			//     imageDescription: 'Сфотографируйте внутреннее пространство сумки',
+			// },
 
-			{
-				image: SellImagesImageBag3,
-				imageTitle: 'Нюансы',
-				imageDescription: 'Сфотографируйте наиболее ярко выраженные нюансы',
-			},
+			// {
+			//     image: SellImagesImageBag3,
+			//     imageTitle: 'Нюансы',
+			//     imageDescription: 'Сфотографируйте наиболее ярко выраженные нюансы',
+			// },
 
-			{
-				image: SellImagesImageBag4,
-				imageTitle: 'Размер',
-				imageDescription: 'Cфотографируйте сумку на себе, чтобы был понятен размер',
-			},
-			{
-				isMore: true,
-			},
-			{
-				isMore: true,
-			},
+			// {
+			//     image: SellImagesImageBag4,
+			//     imageTitle: 'Размер',
+			//     imageDescription: 'Cфотографируйте сумку на себе, чтобы был понятен размер',
+			// },
+			// {
+			//     isMore: true,
+			// },
+			// {
+			//     isMore: true,
+			// },
 		];
 
 	const imageBlocksShoes: {
@@ -354,8 +353,8 @@ const SellImages: React.FC = () => {
 			},
 		];
 
-	const onChangeCustom = async (result: any, index: number) => {
-		const image = await sendCreateCabinetSellImage(result);
+	const onChangeCustom = async (result: any, index: number, file: any, isAutoDetected?: boolean) => {
+		const image = await dispatch(sendCreateCabinetSellImage(result, index, file, isAutoDetected) as any);
 
 		setImageBlocksValue({ ...imageBlocksValue, [index]: image });
 	};
@@ -392,11 +391,17 @@ const SellImages: React.FC = () => {
 			},
 		});
 
-		dispatch(
-			setCabinetSellCurrentStep(
-				currentType === CabinetSellTypes.EXCHANGE ? CabinetSellStepKeys.PRODUCT : CabinetSellStepKeys.CONTACT,
-			),
-		);
+		if (autoDetected.models.length) {
+			dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.CHOICE_MODEL));
+		} else {
+			dispatch(
+				setCabinetSellCurrentStep(
+					currentType === CabinetSellTypes.EXCHANGE
+						? CabinetSellStepKeys.PRODUCT
+						: CabinetSellStepKeys.INFO,
+				),
+			);
+		}
 	};
 
 	return (
@@ -414,7 +419,7 @@ const SellImages: React.FC = () => {
 							number={index + 1}
 							key={`sell-block-images-block-${index}`}
 							value={imageBlocksValue[index]}
-							onChangeCustom={(result: any) => onChangeCustom(result, index)}
+							onChangeCustom={(result: any, file: any) => onChangeCustom(result, index, file, true)}
 							disabled={block.isMore ? !isValid() : false}
 						/>
 					))
@@ -427,7 +432,7 @@ const SellImages: React.FC = () => {
 							number={index + 1}
 							key={`sell-block-images-block-${index}`}
 							value={imageBlocksValue[index]}
-							onChangeCustom={(result: any) => onChangeCustom(result, index)}
+							onChangeCustom={(result: any, file: any) => onChangeCustom(result, index, file)}
 							disabled={block.isMore ? !isValid() : false}
 						/>
 					))
@@ -440,7 +445,7 @@ const SellImages: React.FC = () => {
 							number={index + 1}
 							key={`sell-block-images-block-${index}`}
 							value={imageBlocksValue[index]}
-							onChangeCustom={(result: any) => onChangeCustom(result, index)}
+							onChangeCustom={(result: any, file: any) => onChangeCustom(result, index, file)}
 							disabled={block.isMore ? !isValid() : false}
 						/>
 					))
@@ -453,7 +458,7 @@ const SellImages: React.FC = () => {
 							number={index + 1}
 							key={`sell-block-images-block-${index}`}
 							value={imageBlocksValue[index]}
-							onChangeCustom={(result: any) => onChangeCustom(result, index)}
+							onChangeCustom={(result: any, file: any) => onChangeCustom(result, index, file)}
 							disabled={block.isMore ? !isValid() : false}
 						/>
 					))
@@ -466,7 +471,7 @@ const SellImages: React.FC = () => {
 							number={index + 1}
 							key={`sell-block-images-block-${index}`}
 							value={imageBlocksValue[index]}
-							onChangeCustom={(result: any) => onChangeCustom(result, index)}
+							onChangeCustom={(result: any, file: any) => onChangeCustom(result, index, file)}
 							disabled={block.isMore ? !isValid() : false}
 						/>
 					))
@@ -479,7 +484,7 @@ const SellImages: React.FC = () => {
 							number={index + 1}
 							key={`sell-block-images-block-${index}`}
 							value={imageBlocksValue[index]}
-							onChangeCustom={(result: any) => onChangeCustom(result, index)}
+							onChangeCustom={(result: any, file: any) => onChangeCustom(result, index, file)}
 							disabled={block.isMore ? !isValid() : false}
 						/>
 					))
@@ -492,7 +497,7 @@ const SellImages: React.FC = () => {
 							number={index + 1}
 							key={`sell-block-images-block-${index}`}
 							value={imageBlocksValue[index]}
-							onChangeCustom={(result: any) => onChangeCustom(result, index)}
+							onChangeCustom={(result: any, file: any) => onChangeCustom(result, index, file)}
 							disabled={block.isMore ? !isValid() : false}
 						/>
 					))
@@ -505,17 +510,18 @@ const SellImages: React.FC = () => {
 							number={index + 1}
 							key={`sell-block-images-block-${index}`}
 							value={imageBlocksValue[index]}
-							onChangeCustom={(result: any) => onChangeCustom(result, index)}
+							onChangeCustom={(result: any, file: any) => onChangeCustom(result, index, file)}
 							disabled={block.isMore ? !isValid() : false}
 						/>
 					))
 					: null}
 
 				<button
-					className={getClassNames('btn sell-block__btn', {
-						disabled: !isValid(),
-					})}
-					disabled={!isValid()}
+					className={'btn sell-block__btn'}
+					// className={getClassNames('btn sell-block__btn', {
+					// 	disabled: !isValid(),
+					// })}
+					// disabled={!isValid()}
 					onClick={onSubmit}
 				>
 					Продолжить

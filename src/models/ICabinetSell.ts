@@ -11,3 +11,9 @@ export interface CabinetSellOption {
     kits: { name: string }[];
     sizes: { name: string }[];
 }
+
+export interface CabinetSellAutoDetectedModel {
+    brand: string;
+    model: string;
+    image: string;
+}

@@ -1,19 +1,19 @@
 export interface validateInfoValues {
-	category: string;
+    category: string;
 }
 
 interface validateInfoErrors {
-	category?: string;
+    category?: string;
 }
 
 const validate = (values: validateInfoValues) => {
-	const errors: validateInfoErrors = {};
+    const errors: validateInfoErrors = {};
 
-	if (!values.category) {
-		errors.category = 'Поле не может быть пустым';
-	}
+    if (!values.category) {
+        errors.category = 'Поле не может быть пустым';
+    }
 
-	return errors;
+    return errors;
 };
 
 export default validate;

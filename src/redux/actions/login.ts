@@ -97,7 +97,7 @@ export const sendLogin = (data: { username: string | null; password: string }, o
                     window.location.href = localStorage.getItem('redirect_reglog') as string;
                 } else {
                     window.location.hash = '';
-                    window.location.reload();
+                    // window.location.reload();В
                 }
 
                 // if (onChangeSuccess) {

@@ -10,13 +10,16 @@ const initialState: CabinetSellState = {
 	isSend: false,
 	isSending: false,
 
-	currentStep: CabinetSellStepKeys.CHOICE_MODEL,
+	currentStep: CabinetSellStepKeys.COOPERATION,
 	currentType: CabinetSellTypes.SELL,
 
 	isLoadedParameters: false,
 	parameters: {},
 
-	autoDetectedModels: [],
+	autoDetected: {
+		models: [],
+		selectedIndex: null
+	},
 
 	isLoadedSellsList: false,
 	sellsList: [],
@@ -62,7 +65,20 @@ const cabinet_sell = (state = initialState, action: CabinetSellActions) => {
 	if (action.type === CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_MODELS) {
 		return {
 			...state,
-			autoDetectedModels: action.payload,
+			autoDetected: {
+				...state.autoDetected,
+				models: action.payload
+			},
+		};
+	}
+
+	if (action.type === CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_SELECTED_INDEX) {
+		return {
+			...state,
+			autoDetected: {
+				...state.autoDetected,
+				selectedIndex: action.payload
+			},
 		};
 	}
 

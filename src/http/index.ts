@@ -35,17 +35,13 @@ $api.interceptors.response.use(
                     // 	{},
                     // 	{ withCredentials: true }
                     // );
-
                     // localStorage.setItem(
                     // 	"accessToken",
                     // 	response.data.accessToken
                     // );
-
                     // return $api.request(originalRequest);
-
-                    localStorage.removeItem('accessToken');
-
-                    window.location.reload();
+                    // localStorage.removeItem('accessToken');
+                    // window.location.reload();
                 } catch (e) {
                     // if (localStorage.getItem("accessToken")) {
                     // 	await $api.post("/users/revoke")

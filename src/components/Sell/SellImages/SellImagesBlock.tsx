@@ -12,7 +12,7 @@ interface SellImagesBlockProps {
     value?: string;
     disabled?: boolean;
 
-    onChangeCustom: (result: any) => void;
+    onChangeCustom: (result: any, file: any) => void;
 }
 
 const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
@@ -27,8 +27,6 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
     const [isSending, setIsSending] = React.useState<boolean>(false);
 
     const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.files);
-
         if (e.target.files?.length) {
             setIsSending(true);
 
@@ -50,7 +48,7 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
                 });
 
                 reader.onload = async () => {
-                    await onChangeCustom(reader.result);
+                    await onChangeCustom(reader.result, file);
 
                     setIsSending(false);
                 };
@@ -69,7 +67,7 @@ const SellImagesBlock: React.FC<SellImagesBlockProps> = ({
                     const compressedFile = await imageCompression(file, options);
 
                     reader.onload = async () => {
-                        await onChangeCustom(reader.result);
+                        await onChangeCustom(reader.result, file);
 
                         setIsSending(false);
                     };
