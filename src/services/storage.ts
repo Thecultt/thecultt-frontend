@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+import { isUndefined } from 'src/functions/isUndefined';
+
 interface IStorageItem<T> {
     value: T;
     expired: string | null;
@@ -26,6 +28,8 @@ class StorageService {
         return JSON.stringify(storageItem);
     }
 
+    deserializer<T>(raw: string, key: string): T | null;
+    deserializer<T>(raw: string, key: string, otherwise: T): T;
     deserializer<T>(raw: string, key: string, otherwise?: T): T | null {
         try {
             const { value, expired }: IStorageItem<T> = JSON.parse(raw);
@@ -64,7 +68,9 @@ class StorageService {
             const data = this.storage.getItem(this.addPrefix(key));
 
             if (data) {
-                return this.deserializer<T>(data, key, otherwise);
+                return !isUndefined(otherwise)
+                    ? this.deserializer<T>(data, key, otherwise)
+                    : this.deserializer<T>(data, key);
             }
 
             return otherwise ?? null;

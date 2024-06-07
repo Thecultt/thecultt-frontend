@@ -12,8 +12,14 @@ const cart = (state = initialState, action: CartActions) => {
     if (action.type === CartActionTypes.SET_CART_ITEMS) {
         const newItems = action.payload;
 
-        // localStorage.setItem('cart', JSON.stringify(newItems));
-        localStorageService.setItem(LS_KEYS.cart, newItems);
+        const hasItems = Object.keys(newItems).length > 0;
+
+        if (hasItems) {
+            // localStorage.setItem('cart', JSON.stringify(newItems));
+            localStorageService.setItem(LS_KEYS.cart, newItems);
+        } else {
+            localStorageService.removeItem(LS_KEYS.cart);
+        }
 
         return {
             ...state,

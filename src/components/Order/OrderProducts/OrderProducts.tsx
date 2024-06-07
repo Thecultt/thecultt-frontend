@@ -295,7 +295,9 @@ const OrderProducts: React.FC = () => {
         const newCart: ICartItemsState = {};
 
         Object.keys(items).map((article) => {
-            if (!items[article].checked) newCart[article] = { ...items[article], checked: true };
+            if (!items[article].checked) {
+                newCart[article] = { ...items[article], checked: true };
+            }
         });
 
         dispatch(setCartItems(newCart) as any);
@@ -489,8 +491,6 @@ const OrderProducts: React.FC = () => {
                 orderNum,
                 onSuccessCallback: () => successPayment(orderId),
             });
-
-            localStorage.removeItem('cart');
         }
     };
 

@@ -14,13 +14,15 @@ import {
 import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/header';
 import { useDebounce } from 'src/hooks/useDebounce';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
+import { useAuthUser } from 'src/hooks/useAuthUser';
+import { useLS } from 'src/hooks/useLS';
+import { LS_KEYS } from 'src/constants/keys';
 
 import Logo from 'src/assets/images/logo.svg';
 import HeaderHoverImageBag from 'src/assets/images/header/header-image-hover-menu-bag.jpg';
 import HeaderHoverImageAccessories from 'src/assets/images/header/header-image-hover-menu-accessories.jpg';
 import HeaderHoverImageShoes from 'src/assets/images/header/header-image-hover-menu-shoes.jpg';
 import HeaderHoverImageDecoration from 'src/assets/images/header/header-image-hover-menu-decoration.jpg';
-import { useAuthUser } from 'src/hooks/useAuthUser';
 
 export interface HeaderHoverMenuCategory {
     title: string;
@@ -173,6 +175,8 @@ const Header: React.FC = () => {
     const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState(false);
     const [isOpenSearch, setIsOpenSearch] = React.useState(false);
 
+    const [headerVisitMessageClosed] = useLS(LS_KEYS.headerVisitMessage, false);
+
     const { search } = useTypedSelector(({ header }) => header);
     const debouncedValue = useDebounce(search.value);
 
@@ -206,7 +210,7 @@ const Header: React.FC = () => {
 
     return (
         <div className="header-global-wrapper">
-            {localStorage.getItem('header-message-visit-22.10.2023-isClose') ? null : <HeaderTopMessage />}
+            {!headerVisitMessageClosed ? <HeaderTopMessage /> : null}
 
             <div className="header-container">
                 <header className="header">

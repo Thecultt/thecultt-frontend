@@ -1,5 +1,3 @@
-export const UTM_LS_KEY = 'utm';
-
 export const UTM_KEYS = {
     source: 'utm_source',
     medium: 'utm_medium',
@@ -15,4 +13,6 @@ export const YM_KEYS = {
 export const LS_KEYS = {
     accessToken: 'access_token',
     cart: 'cart',
+    utm: 'utm',
+    headerVisitMessage: 'header_visit_message',
 };
