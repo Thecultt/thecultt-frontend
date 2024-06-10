@@ -18,6 +18,7 @@ export { default as Textarea } from './UI/Textarea';
 export { default as NotificationsServer } from './UI/NotificationsServer/NotificationsServer';
 export { default as NotificationsServerError } from './UI/NotificationsServer/NotificationsServerError';
 export { default as NotificationsServerSuccess } from './UI/NotificationsServer/NotificationsServerSuccess';
+export { Spinner } from './UI/Spinner';
 
 // MenuMedia
 export { default as MenuMedia } from './MenuMedia/MenuMedia';

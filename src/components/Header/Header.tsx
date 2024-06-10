@@ -21,6 +21,8 @@ import HeaderHoverImageAccessories from 'src/assets/images/header/header-image-h
 import HeaderHoverImageShoes from 'src/assets/images/header/header-image-hover-menu-shoes.jpg';
 import HeaderHoverImageDecoration from 'src/assets/images/header/header-image-hover-menu-decoration.jpg';
 
+import { HeaderSelectionsHoverMenu } from './HeaderSelectionsHoverMenu';
+
 export interface HeaderHoverMenuCategory {
     title: string;
     types: string[];
@@ -165,17 +167,17 @@ const categories: {
 
 const Header: React.FC = () => {
     const { pathname } = useLocation();
-
     const dispatch = useDispatch();
 
-    const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState<number>(0);
-    const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState<boolean>(false);
-
-    const [isOpenSearch, setIsOpenSearch] = React.useState<boolean>(false);
+    const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState(0);
+    const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState(false);
+    const [isOpenSearch, setIsOpenSearch] = React.useState(false);
+    const [isSelectionsMenuVisible, setIsSelectionsMenuVisible] = React.useState(false);
 
     const { search } = useTypedSelector(({ header }) => header);
-
     const debouncedValue = useDebounce(search.value);
+
+    const { items: selections } = useTypedSelector(({ selections }) => selections);
 
     const openHoverMenu = (index: number) => {
         if (!isOpenSearch) {
@@ -349,6 +351,19 @@ const Header: React.FC = () => {
                                     Популярное
                                 </Link>
 
+                                <Link
+                                    to={getCatalogFiltersUrl({
+                                        selections: selections.map((item) => item.id),
+                                        sort: 'popular',
+                                    })}
+                                    className="header-menu__link"
+                                    onMouseOver={() => setIsSelectionsMenuVisible(true)}
+                                    onMouseOut={() => setIsSelectionsMenuVisible(false)}
+                                    onClick={() => setIsSelectionsMenuVisible(false)}
+                                >
+                                    Подборки
+                                </Link>
+
                                 {categories.map((category, index) => (
                                     <Link
                                         to={getCatalogFiltersUrl({
@@ -402,6 +417,12 @@ const Header: React.FC = () => {
                     isOpenHoverMenu={isOpenHoverMenu}
                     onOpen={() => setIsOpenHoverMenu(true)}
                     onClose={() => setIsOpenHoverMenu(false)}
+                />
+
+                <HeaderSelectionsHoverMenu
+                    isVisible={isSelectionsMenuVisible}
+                    onOpen={() => setIsSelectionsMenuVisible(true)}
+                    onClose={() => setIsSelectionsMenuVisible(false)}
                 />
 
                 <HeaderSearchBox state={isOpenSearch} onClose={() => setIsOpenSearch(false)} />
