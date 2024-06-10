@@ -277,7 +277,7 @@ const Sell: React.FC = () => {
                                     выбрать дату и время посещения.
                                 </p>
                                 <a
-                                    href="https://calendly.com/thecultt/visit"
+                                    href="https://calendly.com/thecultt/visitsellers"
                                     target="_blank"
                                     className="btn sell-success__link"
                                     rel="noreferrer"

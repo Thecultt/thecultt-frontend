@@ -314,6 +314,10 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                             </HeaderMediaLinkTab>
                         ))}
 
+                        <Link to="/concierge" className="header-media-modal-menu-links-link" onClick={toggleState}>
+                            Консьерж
+                        </Link>
+
                         <Link to="/brands" className="header-media-modal-menu-links-link" onClick={toggleState}>
                             Бренды
                         </Link>

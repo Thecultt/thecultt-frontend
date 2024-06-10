@@ -21,7 +21,7 @@ const Visit: React.FC = () => {
 
             <div className="visit-main-wrapper">
                 <div className="container">
-                    <div className="visit-main hover-scale">
+                    <div className="visit-main">
                         <div
                             className="visit-main-image"
                             style={{
@@ -42,9 +42,21 @@ const Visit: React.FC = () => {
                                 обстановке. Наш менеджер проконсультирует вас и ответит на любые вопросы.
                             </p>
 
-                            <a href="https://calendly.com/thecultt/visit" className="btn visit-main-text__btn">
-                                Выбрать время
-                            </a>
+                            <div className="visit-main-text-btn">
+                                <a
+                                    href="https://calendly.com/thecultt/visit?month=2024-06"
+                                    className="btn visit-main-text-btn__btn"
+                                >
+                                    Хочу купить
+                                </a>
+
+                                <a
+                                    href="https://calendly.com/thecultt/visitsellers"
+                                    className="btn-regular visit-main-text-btn__btn"
+                                >
+                                    Хочу продать
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +65,7 @@ const Visit: React.FC = () => {
             <div className="container">
                 <div className="visit-wrapper">
                     <div className="visit-service">
-                        <div className="visit-service-block hover-scale">
+                        <div className="visit-service-block">
                             <h2 className="visit-service-block__title">Для покупателя</h2>
                             <p className="visit-service-block__subtitle">
                                 Если вы покупатель - примерьте сумки и аксессуары лучших дизайнеров из коллекции THE
@@ -64,7 +76,7 @@ const Visit: React.FC = () => {
                             </p>
                         </div>
 
-                        <div className="visit-service-block hover-scale">
+                        <div className="visit-service-block">
                             <h2 className="visit-service-block__title">Для продавца</h2>
 
                             <p className="visit-service-block__subtitle">
@@ -117,16 +129,29 @@ const Visit: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="visit-office hover-scale">
+                    <div className="visit-office">
                         <div className="visit-office-block">
                             <h2 className="visit-office-block__title">Адрес офиса</h2>
                             <p className="visit-office-block__subtitle">
                                 Мы находимся по адресу Трубная 25с3 (3 этаж, офис THE CULTT) ежедневно с 11:00 до 21:00.
                                 Для посещения необходима регистрация!
                             </p>
-                            <a href="https://calendly.com/thecultt/visit" className="btn visit-office-block__btn">
-                                Выбрать время
-                            </a>
+
+                            <div className="visit-office-block-btn">
+                                <a
+                                    href="https://calendly.com/thecultt/visit?month=2024-06"
+                                    className="btn visit-office-block-btn__btn"
+                                >
+                                    Хочу купить
+                                </a>
+
+                                <a
+                                    href="https://calendly.com/thecultt/visitsellers"
+                                    className="btn-regular visit-office-block-btn__btn"
+                                >
+                                    Хочу продать
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

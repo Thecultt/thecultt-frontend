@@ -382,6 +382,10 @@ const Header: React.FC = () => {
                                     </Link>
                                 ))}
 
+                                <Link to="/concierge" className="header-menu__link">
+                                    Консьерж
+                                </Link>
+
                                 <Link to="/brands" className="header-menu__link">
                                     Бренды
                                 </Link>
