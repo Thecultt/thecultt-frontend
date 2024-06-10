@@ -7,7 +7,6 @@ import { HeaderHoverMenuCategory } from '../Header';
 
 interface HeaderHoverMenuProps extends HeaderHoverMenuCategory {
     isOpenHoverMenu: boolean;
-
     onOpen: () => void;
     onClose: () => void;
 }

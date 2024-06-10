@@ -53,6 +53,7 @@ import { fetchFirstProductsCatalog } from './redux/actions/products';
 import { fetchFavorites } from './redux/actions/favorites';
 import { fetchUser } from './redux/actions/user';
 import { checkAvailabilityCartItems } from './redux/actions/cart';
+import { fetchSelections } from './redux/actions/selections';
 
 declare global {
     interface Window {
@@ -68,8 +69,8 @@ const App = () => {
     const dispatch = useDispatch();
 
     const isLoadedFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
-
     const isLoadedProducts = useTypedSelector(({ products }) => products.isLoaded);
+    const isLoadedSelections = useTypedSelector(({ selections }) => selections.isLoaded);
 
     const cartItems = useTypedSelector(({ cart }) => cart.items);
 
@@ -92,6 +93,10 @@ const App = () => {
 
         if (!isLoadedProducts && pathname !== '/catalog') {
             dispatch(fetchFirstProductsCatalog() as any);
+        }
+
+        if (!isLoadedSelections) {
+            dispatch(fetchSelections() as any);
         }
 
         if (isLogin) {
