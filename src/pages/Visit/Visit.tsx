@@ -51,7 +51,7 @@ const Visit: React.FC = () => {
                                 </a>
 
                                 <a
-                                    href="https://calendly.com/thecultt/visitsellers"
+                                    href="https://calendly.com/thecultt_2023/visitsellers"
                                     className="btn-regular visit-main-text-btn__btn"
                                 >
                                     Хочу продать
@@ -146,7 +146,7 @@ const Visit: React.FC = () => {
                                 </a>
 
                                 <a
-                                    href="https://calendly.com/thecultt/visitsellers"
+                                    href="https://calendly.com/thecultt_2023/visitsellers"
                                     className="btn-regular visit-office-block-btn__btn"
                                 >
                                     Хочу продать
