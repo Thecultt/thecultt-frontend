@@ -45,16 +45,16 @@
 		visibility: visible
 
 .header-hover-menu
-	padding: 25px 60px
-
-	background-color: $backgroundColor
-
 	width: 100%
-
+	padding: 25px 60px
+	background-color: $backgroundColor
 	border-radius: 16px
 
 	display: flex
 	justify-content: space-between
+
+	max-height: 60vh
+	overflow-y: auto
 
 	&-list-wrapper
 		display: flex
@@ -88,6 +88,7 @@
 
 		&-coll
 			&__item
+				width: fit-content
 				display: block
 
 				font-size: 16px
