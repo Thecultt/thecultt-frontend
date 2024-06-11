@@ -12,12 +12,16 @@ import { ProductBlock } from 'src/components';
 import { checkDeclension } from 'src/functions/checkDeclension';
 import { getClassNames } from 'src/functions/getClassNames';
 
+import { HeaderSearchInput } from '../HeaderSearchInput';
+
 interface HeaderSearchBoxProps {
     state: boolean;
     onClose: () => void;
+    goToCatalog: (withSearchValue?: boolean) => void;
+    onInputKeyDown: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
-const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => {
+const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose, goToCatalog, onInputKeyDown }) => {
     const dispatch = useDispatch();
 
     const { pathname } = useLocation();
@@ -29,16 +33,6 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
     const { search } = useTypedSelector(({ header }) => header);
 
     const PopupRef = React.useRef<HTMLDivElement>(null);
-
-    React.useEffect(() => {
-        document.addEventListener('mousedown', togglePopup);
-        document.addEventListener('touchstart', togglePopup);
-
-        return () => {
-            document.removeEventListener('mousedown', togglePopup);
-            document.removeEventListener('touchstart', togglePopup);
-        };
-    }, [PopupRef]);
 
     const addCart = (item: CartItem) => {
         dispatch(setCartIsVisibleMessage(true));
@@ -69,8 +63,20 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
     };
 
     React.useEffect(() => {
-        if (search.value !== '') dispatch(setHeaderSearchValue(''));
+        if (search.value) {
+            dispatch(setHeaderSearchValue(''));
+        }
     }, [pathname]);
+
+    React.useEffect(() => {
+        document.addEventListener('mousedown', togglePopup);
+        document.addEventListener('touchstart', togglePopup);
+
+        return () => {
+            document.removeEventListener('mousedown', togglePopup);
+            document.removeEventListener('touchstart', togglePopup);
+        };
+    }, [PopupRef]);
 
     const onClickProduct = (item: any, index: number) => {
         window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
@@ -111,61 +117,17 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
                 ref={PopupRef}
             >
                 <div className="header-search-box-media-input-wrapper">
-                    <div
-                        className={getClassNames('input-light header-search-box-media-input', {
+                    <HeaderSearchInput
+                        className={getClassNames('header-search-box-media-input', {
                             active: !!search.value,
                         })}
-                    >
-                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
-                                stroke="#838383"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                            <path
-                                d="M17.5 17.9844L13.875 14.3594"
-                                stroke="#838383"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        value={search.value}
+                        onChange={onChangeSearchInput}
+                        onClear={() => dispatch(setHeaderSearchValue('') as any)}
+                        onKeyDown={onInputKeyDown}
+                    />
 
-                        <input
-                            type="text"
-                            className="input-light__field"
-                            placeholder="Поиск"
-                            onChange={onChangeSearchInput}
-                            value={search.value}
-                        />
-
-                        {search.value !== '' ? (
-                            <span
-                                className="header-search-box-media-input__clear"
-                                onClick={() => dispatch(setHeaderSearchValue('') as any)}
-                            >
-                                <svg
-                                    width="18"
-                                    height="18"
-                                    viewBox="0 0 18 18"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M13.5 4.5L4.5 13.5M4.5 4.5L13.5 13.5"
-                                        stroke="#202020"
-                                        strokeWidth="1.5"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </span>
-                        ) : null}
-                    </div>
-
-                    <button className="header-search-box-media-input__close" onClick={onClose}>
+                    <button type="button" className="header-search-box-media-input__close" onClick={onClose}>
                         Закрыть
                     </button>
                 </div>
@@ -226,28 +188,32 @@ const HeaderSearchBox: React.FC<HeaderSearchBoxProps> = ({ state, onClose }) => 
                         fetch: search.isFetch,
                     })}
                 >
-                    <h3 className="header-search-box-products__title">
-                        {search.value !== ''
-                            ? `${checkDeclension(search.totalCount, ['Найден', 'Найдено', 'Найдено']).text}: ${checkDeclension(search.totalCount, ['товар', 'товара', 'товаров']).title}`
-                            : 'Новинки'}
+                    <div className="header-search-box-products__head">
+                        <h3 className="header-search-box-products__title">
+                            {search.value
+                                ? `${checkDeclension(search.totalCount, ['Найден', 'Найдено', 'Найдено']).text}: ${checkDeclension(search.totalCount, ['товар', 'товара', 'товаров']).title}`
+                                : 'Новинки'}
+                        </h3>
 
-                        {search.value !== '' && !search.items.length ? (
-                            <a href={`/catalog`} onClick={onClose}>
+                        {search.value && !search.items.length ? (
+                            <button className="header-search-box-products__nav" onClick={() => goToCatalog(false)}>
                                 Перейти в каталог
-                            </a>
+                            </button>
                         ) : (
-                            <a href={`/catalog?search=${search.value}`} onClick={onClose}>
+                            <button
+                                type="button"
+                                className="header-search-box-products__nav"
+                                onClick={() => goToCatalog()}
+                            >
                                 Смотреть все
-                            </a>
+                            </button>
                         )}
-                    </h3>
+                    </div>
 
-                    {search.value !== '' ? (
-                        <p className="header-search-box-products-media__subtitle">Результаты поиска</p>
-                    ) : null}
+                    {!!search.value && <p className="header-search-box-products-media__subtitle">Результаты поиска</p>}
 
                     <div className="header-search-box-products-blocks-wrapper">
-                        {search.value !== '' ? (
+                        {search.value ? (
                             search.items.length ? (
                                 search.items.map((item, index) => (
                                     <div
