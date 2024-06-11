@@ -2,10 +2,10 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 
 import $api from 'src/http';
+import { Product, ProductPage } from 'src/models/IProduct';
+import { SORT } from 'src/constants/catalog';
 
 import { ProductActionTypes, ProductTypes, ProductsStateFilters } from '../types/IProducts';
-
-import { Product, ProductPage } from 'src/models/IProduct';
 
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {
@@ -15,7 +15,7 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
         current_page: number;
         total_items: number;
         items: Product[];
-    }>(`/catalog?availability=1&sort_by=a`);
+    }>(`/catalog?availability=1&sort_by=${SORT.a}`);
 
     // Measure product views / impressions
     window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
@@ -153,7 +153,7 @@ export const fetchProductsCatalog =
         if (filters.boutique) params.append('from_boutique', String(filters.boutique));
         if (filters.price_drop) params.append('price_drop', String(filters.price_drop));
 
-        params.append('sort_by', filters.sort);
+        params.append('sort_by', filters.sort ?? SORT.a);
 
         params.append('page', String(page));
 

@@ -28,6 +28,7 @@ import {
     CatalogFiltersPriceDrop,
 } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { SORT } from 'src/constants/catalog';
 
 interface Props {
     isOpenFiltersMedia: boolean;
@@ -80,7 +81,7 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
                 glass_frame: {},
 
-                sort: query.get('sort') as string,
+                sort: query.get('sort') ?? SORT.a,
             };
 
             query.getAll('conditions').map((condition) => {
@@ -162,7 +163,7 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
                     glass_frame: {},
 
-                    sort: 'a',
+                    sort: SORT.a,
                 }),
             );
         };

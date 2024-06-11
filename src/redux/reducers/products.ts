@@ -1,3 +1,4 @@
+import { SORT } from 'src/constants/catalog';
 import { ProductsState, ProductTypes, ProductActionTypes } from '../types/IProducts';
 
 const initialState: ProductsState = {
@@ -82,7 +83,7 @@ const initialState: ProductsState = {
         boutique: false,
         price_drop: false,
         glass_frame: {},
-        sort: 'a',
+        sort: SORT.a,
     },
     lastSearchString: '',
     catalogScroll: 0,
