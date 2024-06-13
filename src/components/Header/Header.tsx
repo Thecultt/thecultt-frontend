@@ -251,6 +251,7 @@ const Header: React.FC = () => {
                                     </Link>
 
                                     <HeaderSearchInput
+                                        ref={inputRef}
                                         value={search.value}
                                         onFocus={() => setIsOpenSearch(true)}
                                         onChange={onChangeSearchInput}
