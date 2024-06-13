@@ -8,7 +8,6 @@ import {
     setFiltersCatalog,
     setFiltersCategoriesProduct,
     setFiltersAvailabilityProduct,
-    setProductsTypeFetch,
     setCurrentPageProduct,
 } from 'src/redux/actions/products';
 import {
@@ -171,8 +170,6 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
     React.useEffect(() => {
         if (filters.isParse) {
-            // dispatch(setProductsTypeFetch('btn-page'));
-
             const oldParamsData: any = {};
 
             const oldParams: any = new URLSearchParams(window.location.search);

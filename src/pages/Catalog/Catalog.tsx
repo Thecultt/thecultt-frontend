@@ -63,12 +63,7 @@ const Catalog: React.FC = () => {
         filters.price_drop,
         filters.sort,
         currentPage,
-        typeFetch,
     ]);
-
-    React.useEffect(() => {
-        dispatch(setProductsTypeFetch('btn-page'));
-    }, []);
 
     React.useEffect(
         () => () => {

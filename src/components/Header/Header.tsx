@@ -11,7 +11,6 @@ import {
     HeaderSearchBox,
     HeaderMedia,
 } from 'src/components';
-import { setProductsTypeFetch } from 'src/redux/actions/products';
 import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/header';
 import { useDebounce } from 'src/hooks/useDebounce';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
@@ -210,7 +209,6 @@ const Header: React.FC = () => {
     const goToCatalog = (withSearchValue = true) => {
         handleSearchClose();
         inputRef.current?.blur();
-        dispatch(setProductsTypeFetch('btn-page'));
         navigate(
             withSearchValue
                 ? getCatalogFiltersUrl({
