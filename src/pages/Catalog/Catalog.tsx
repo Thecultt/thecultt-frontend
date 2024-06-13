@@ -75,35 +75,33 @@ const Catalog: React.FC = () => {
     useCatalogScroll();
 
     return (
-        <>
-            <section className="catalog">
-                <div className="container">
-                    <div className="catalog-wrapper">
-                        {!isMobile ? <CatalogBanner /> : <CatalogBannerMedia />}
+        <section className="catalog">
+            <div className="container">
+                <div className="catalog-wrapper">
+                    {!isMobile ? <CatalogBanner /> : <CatalogBannerMedia />}
 
-                        {isLoadedFilters ? (
-                            <>
-                                <CatalogFiltersTop
+                    {isLoadedFilters ? (
+                        <>
+                            <CatalogFiltersTop
+                                setIsOpenFiltersMedia={setIsOpenFiltersMedia}
+                                isOpenFiltersMedia={isOpenFiltersMedia}
+                            />
+
+                            <div className="catalog-blocks-and-filters-wrapper">
+                                <CatalogFilters
                                     setIsOpenFiltersMedia={setIsOpenFiltersMedia}
                                     isOpenFiltersMedia={isOpenFiltersMedia}
                                 />
 
-                                <div className="catalog-blocks-and-filters-wrapper">
-                                    <CatalogFilters
-                                        setIsOpenFiltersMedia={setIsOpenFiltersMedia}
-                                        isOpenFiltersMedia={isOpenFiltersMedia}
-                                    />
-
-                                    <CatalogProducts />
-                                </div>
-                            </>
-                        ) : (
-                            <PageLoader />
-                        )}
-                    </div>
+                                <CatalogProducts />
+                            </div>
+                        </>
+                    ) : (
+                        <PageLoader />
+                    )}
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 };
 
