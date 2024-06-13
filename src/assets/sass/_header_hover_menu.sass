@@ -45,19 +45,29 @@
 		visibility: visible
 
 .header-hover-menu
-	padding: 25px 60px
-
-	background-color: $backgroundColor
-
 	width: 100%
-
+	padding: 25px 60px
+	background-color: $backgroundColor
 	border-radius: 16px
 
 	display: flex
 	justify-content: space-between
 
+	max-height: 60vh
+	overflow-y: auto
+
 	&-list-wrapper
 		display: flex
+
+	&-list-grid
+		flex: 1
+		display: grid
+		grid-template-columns: repeat(2, 1fr)
+
+		&-item
+			width: 100%
+			display: flex
+			flex-direction: column
 
 	&-list
 		margin-right: 80px
@@ -78,12 +88,13 @@
 
 		&-coll
 			&__item
+				width: fit-content
 				display: block
 
 				font-size: 16px
 
 				margin-right: 50px
-				margin-bottom: 15px
+				margin-bottom: 16px
 
 				+transition
 
