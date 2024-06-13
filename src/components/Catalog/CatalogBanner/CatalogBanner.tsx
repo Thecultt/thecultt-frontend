@@ -1,9 +1,13 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
+import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
+import { SELECTIONS_IDS } from 'src/constants/catalog';
 
 import CatalogBannerImagePriceDrop from 'src/assets/images/catalog/catalog-banner-price-drop.jpg';
 import CatalogBannerImageBoutique from 'src/assets/images/catalog/catalog-banner-boutique.jpg';
-import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import CatalogBannerImageItbag from 'src/assets/images/catalog/catalog-banner-price-itbag.jpg';
 
 const CatalogBanner: React.FC = React.memo(() => {
     const { search } = useLocation();
@@ -58,6 +62,30 @@ const CatalogBanner: React.FC = React.memo(() => {
             <div className="catalog-banner-text">
                 <h3 className="catalog-banner-text__title">{currentSelection.title}</h3>
                 <p className="catalog-banner-text__description">{currentSelection.description}</p>
+            </div>
+        </div>
+    ) : !querySelections.length && query.getAll('categories').length === 1 && query.get('categories') === 'Сумки' ? (
+        <div className="catalog-banner">
+            <div
+                className="catalog-banner-image"
+                style={{
+                    backgroundImage: `url("${CatalogBannerImageItbag}")`,
+                }}
+            />
+            <div className="catalog-banner-text">
+                <h3 className="catalog-banner-text__title">Лучшие it-bags этого года</h3>
+                <p className="catalog-banner-text__description">
+                    Самые узнаваемые дизайнерские сумки, которые носят селебрити и инфлюенсеры
+                </p>
+                <Link
+                    to={getCatalogFiltersUrl({
+                        selections: [SELECTIONS_IDS.itBags],
+                        sort: 'popular',
+                    })}
+                    className="btn catalog-banner-text__btn"
+                >
+                    Выбрать it-bag
+                </Link>
             </div>
         </div>
     ) : null;
