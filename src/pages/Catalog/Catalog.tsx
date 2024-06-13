@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { fetchProductsCatalog, setLastSearchString, setProductsTypeFetch } from 'src/redux/actions/products';
+import { fetchProductsCatalog, setLastSearchString } from 'src/redux/actions/products';
 import {
     CatalogBanner,
     CatalogBannerMedia,
