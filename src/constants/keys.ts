@@ -9,3 +9,7 @@ export const UTM_KEYS = {
 export const YM_KEYS = {
     uid: '_ym_uid',
 };
+
+export const KEYBOARD = {
+    enter: 'Enter',
+};

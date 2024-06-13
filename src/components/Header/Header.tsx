@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
@@ -11,9 +11,12 @@ import {
     HeaderSearchBox,
     HeaderMedia,
 } from 'src/components';
+import { setProductsTypeFetch } from 'src/redux/actions/products';
 import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/header';
 import { useDebounce } from 'src/hooks/useDebounce';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
+import { KEYBOARD } from 'src/constants/keys';
+import { SORT } from 'src/constants/catalog';
 
 import Logo from 'src/assets/images/logo.svg';
 import HeaderHoverImageBag from 'src/assets/images/header/header-image-hover-menu-bag.jpg';
@@ -22,6 +25,7 @@ import HeaderHoverImageShoes from 'src/assets/images/header/header-image-hover-m
 import HeaderHoverImageDecoration from 'src/assets/images/header/header-image-hover-menu-decoration.jpg';
 
 import { HeaderSelectionsHoverMenu } from './HeaderSelectionsHoverMenu';
+import { HeaderSearchInput } from './HeaderSearchInput';
 
 export interface HeaderHoverMenuCategory {
     title: string;
@@ -168,6 +172,9 @@ const categories: {
 const Header: React.FC = () => {
     const { pathname } = useLocation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
     const [currentCategoryHoverMenuIndex, setCurrentCategoryHoverMenuIndex] = React.useState(0);
     const [isOpenHoverMenu, setIsOpenHoverMenu] = React.useState(false);
@@ -196,6 +203,31 @@ const Header: React.FC = () => {
         setIsOpenSearch(true);
     };
 
+    const handleSearchClose = () => {
+        setIsOpenSearch(false);
+    };
+
+    const goToCatalog = (withSearchValue = true) => {
+        handleSearchClose();
+        inputRef.current?.blur();
+        dispatch(setProductsTypeFetch('btn-page'));
+        navigate(
+            withSearchValue
+                ? getCatalogFiltersUrl({
+                      search: search.value,
+                      sort: SORT.a,
+                  })
+                : '/catalog',
+        );
+    };
+
+    const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === KEYBOARD.enter) {
+            e.preventDefault();
+            goToCatalog();
+        }
+    };
+
     React.useEffect(() => {
         if (debouncedValue !== '') dispatch(fetchHeaderSearchItems(search.value) as any);
     }, [debouncedValue]);
@@ -219,38 +251,13 @@ const Header: React.FC = () => {
                                         <img src={Logo} alt="THECULTT" className="header-block-logo__image" />
                                     </Link>
 
-                                    <div className="input-light" onClick={() => setIsOpenSearch(true)}>
-                                        <svg
-                                            width="20"
-                                            height="21"
-                                            viewBox="0 0 20 21"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M9.16667 16.3177C12.8486 16.3177 15.8333 13.3329 15.8333 9.65104C15.8333 5.96914 12.8486 2.98438 9.16667 2.98438C5.48477 2.98438 2.5 5.96914 2.5 9.65104C2.5 13.3329 5.48477 16.3177 9.16667 16.3177Z"
-                                                stroke="#838383"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                            <path
-                                                d="M17.5 17.9844L13.875 14.3594"
-                                                stroke="#838383"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-
-                                        <input
-                                            type="text"
-                                            className="input-light__field"
-                                            placeholder="Поиск"
-                                            onChange={onChangeSearchInput}
-                                            value={search.value}
-                                        />
-                                    </div>
+                                    <HeaderSearchInput
+                                        ref={inputRef}
+                                        value={search.value}
+                                        onFocus={() => setIsOpenSearch(true)}
+                                        onChange={onChangeSearchInput}
+                                        onKeyDown={handleInputKeyDown}
+                                    />
                                 </div>
 
                                 <div className="header-block">
@@ -429,7 +436,12 @@ const Header: React.FC = () => {
                     onClose={() => setIsSelectionsMenuVisible(false)}
                 />
 
-                <HeaderSearchBox state={isOpenSearch} onClose={() => setIsOpenSearch(false)} />
+                <HeaderSearchBox
+                    state={isOpenSearch}
+                    onClose={handleSearchClose}
+                    goToCatalog={goToCatalog}
+                    onInputKeyDown={handleInputKeyDown}
+                />
 
                 <HeaderMedia setIsOpenSearch={setIsOpenSearch} />
             </div>
