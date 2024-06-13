@@ -136,6 +136,9 @@ export { default as ProductInfoTitle } from './Product/ProductInfo/ProductInfoTi
 // ProductInfoTitleBoutique
 export { default as ProductInfoTitleBoutique } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleBoutique/ProductInfoTitleBoutique';
 export { default as ProductInfoTitleBoutiquePopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleBoutique/ProductInfoTitleBoutiquePopup';
+// ProductInfoTitlePartner
+export { default as ProductInfoTitlePartner } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitlePartner/ProductInfoTitlePartner';
+export { default as ProductInfoTitlePartnerPopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitlePartner/ProductInfoTitlePartnerPopup';
 // ProductInfoTitleSplit
 export { default as ProductInfoTitleSplit } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplit';
 export { default as ProductInfoTitleSplitPopup } from './Product/ProductInfo/ProductInfoTitle/ProductInfoTitleSplit/ProductInfoTitleSplitPopup';
