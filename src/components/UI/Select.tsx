@@ -4,9 +4,11 @@ import { getClassNames } from 'src/functions/getClassNames';
 interface SelectProps {
     label: string;
     items: string[];
+
+    onChange?: (value: string) => void;
 }
 
-const Select: React.FC<SelectProps> = ({ label, items }) => {
+const Select: React.FC<SelectProps> = ({ label, items, onChange }) => {
     const [state, setState] = React.useState<boolean>(false);
     const [currentItem, setCurrentItem] = React.useState<string>('');
 
@@ -30,6 +32,8 @@ const Select: React.FC<SelectProps> = ({ label, items }) => {
 
     const toggleCurrentItem = (item: string) => {
         setCurrentItem(item);
+
+        if (onChange) onChange(item);
 
         setTimeout(() => {
             setState(false);
