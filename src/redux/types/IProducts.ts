@@ -2,6 +2,11 @@ import { Product, ProductPage } from 'src/models/IProduct';
 
 export type SortType = 'a' | 'price' | '-price' | 'popular';
 
+export enum CatalogFetchType {
+    Page,
+    More,
+}
+
 export interface ProductsStateFilters {
     isParse: boolean;
 
@@ -42,7 +47,7 @@ export interface ProductsState {
     isFetchMore: boolean;
     isFetchPage: boolean;
 
-    typeFetch: 'btn-more' | 'btn-page';
+    typeFetch: CatalogFetchType;
 
     currentPage: number;
 
@@ -136,7 +141,7 @@ interface setProductsIsFetchPage {
 
 interface setProductsTypeFetch {
     type: ProductActionTypes.SET_PRODUCTS_TYPE_FETCH;
-    payload: 'btn-more' | 'btn-page';
+    payload: CatalogFetchType;
 }
 
 interface setProductsPageCurrentPage {

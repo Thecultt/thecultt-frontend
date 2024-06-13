@@ -1,5 +1,5 @@
 import { SORT } from 'src/constants/catalog';
-import { ProductsState, ProductTypes, ProductActionTypes } from '../types/IProducts';
+import { ProductsState, ProductTypes, ProductActionTypes, CatalogFetchType } from '../types/IProducts';
 
 const initialState: ProductsState = {
     items: [],
@@ -62,7 +62,7 @@ const initialState: ProductsState = {
     itemByArticleIsLoaded: false,
     isFetchMore: false,
     isFetchPage: false,
-    typeFetch: 'btn-page',
+    typeFetch: CatalogFetchType.Page,
     currentPage: 1,
     pageCount: 0,
     itemsCount: 0,
