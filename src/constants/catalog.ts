@@ -8,3 +8,7 @@ export const SORT: Record<SortType, SortType> = {
     '-price': '-price',
     popular: 'popular',
 };
+
+export const SELECTIONS_IDS = {
+    itBags: 5,
+} as const;
