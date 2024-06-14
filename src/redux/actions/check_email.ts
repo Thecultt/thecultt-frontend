@@ -25,6 +25,10 @@ export const sendCheckEmail =
 
         let nextPopupType = ReglogStateTypesNotLogin.LOGIN;
 
+        const ym = window.ym || (window.ym = []);
+
+        ym(68184745, 'reachGoal', 'login_email');
+
         await axios
             .post(`${process.env.REACT_APP_API_DOMEN}/email_check/`, { email })
             .then(() => {
