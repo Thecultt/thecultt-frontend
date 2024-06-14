@@ -223,6 +223,18 @@ export { default as OrderStatusError } from './Order/OrderStatus/OrderStatusErro
 export { default as OrderStatusProduct } from './Order/OrderStatus/OrderStatusProduct';
 export { default as OrderStatusSuccess } from './Order/OrderStatus/OrderStatusSuccess';
 
+// SellInfo
+export { default as SellInfoMain } from './SellInfo/SellInfoMain';
+export { default as SellInfoSteps } from './SellInfo/SellInfoSteps';
+export { default as SellInfoCooperation } from './SellInfo/SellInfoCooperation';
+export { default as SellInfoVipService } from './SellInfo/SellInfoVipService';
+export { default as SellInfoService } from './SellInfo/SellInfoService';
+export { default as SellInfoCategories } from './SellInfo/SellInfoCategories';
+export { default as SellInfoProcess } from './SellInfo/SellInfoProcess';
+export { default as SellInfoCommission } from './SellInfo/SellInfoCommission';
+export { default as SellInfoCommissionService } from './SellInfo/SellInfoCommissionService';
+export { default as SellInfoLots } from './SellInfo/SellInfoLots';
+
 // Sell
 export { default as SellBackBtn } from './Sell/SellBackBtn';
 export { default as SellSteps } from './Sell/SellSteps';
