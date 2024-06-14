@@ -75,12 +75,12 @@ export const fetchProductsCatalog =
             sex: { [key: string]: string };
             availability: { [key: string]: string };
             size: { [key: string]: string };
-            selections: { [key: string]: string };
+            glass_frame: { [key: string]: string };
+
+            selection: string | null;
 
             boutique: boolean;
             price_drop: boolean;
-
-            glass_frame: { [key: string]: string };
 
             sort: string;
         },
@@ -107,7 +107,6 @@ export const fetchProductsCatalog =
         const sexArray = Object.keys(filters.sex).map((key) => key);
         const availabilityArray = Object.keys(filters.availability).map((key) => key);
         const sizeArray = Object.keys(filters.size).map((key) => key);
-        const selectionsArray = Object.keys(filters.selections).map((key) => key);
         const glassFrameArray = Object.keys(filters.glass_frame).map((key) => key);
 
         params.append('search', filters.search);
@@ -148,10 +147,16 @@ export const fetchProductsCatalog =
         // }
 
         sizeArray.map((size) => params.append('size', size));
-        selectionsArray.map((selection) => params.append('selections', selection));
 
-        if (filters.boutique) params.append('from_boutique', String(filters.boutique));
-        if (filters.price_drop) params.append('price_drop', String(filters.price_drop));
+        if (filters.boutique) {
+            params.append('from_boutique', String(filters.boutique));
+        }
+        if (filters.price_drop) {
+            params.append('price_drop', String(filters.price_drop));
+        }
+        if (filters.selection) {
+            params.append('selections', filters.selection);
+        }
 
         params.append('sort_by', filters.sort ?? SORT.a);
 
@@ -389,9 +394,9 @@ export const setFiltersSizeProduct = (size: string) => ({
     payload: size,
 });
 
-export const setFiltersSelectionsProduct = (selectionId: string, selection: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS,
-    payload: { selectionId, selection },
+export const setFiltersSelectionProduct = (selectionId: string) => ({
+    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTION,
+    payload: selectionId,
 });
 
 export const setFiltersBoutiqueProduct = (boutique: boolean) => ({
@@ -412,4 +417,9 @@ export const setFiltersPriceDropProduct = (price_drop: boolean) => ({
 export const setFiltersSortProduct = (sort: string) => ({
     type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT,
     payload: sort,
+});
+
+export const clearProductsFilters = () => ({
+    type: ProductActionTypes.CLEAR_PRODUCTS_FILTERS,
+    payload: undefined,
 });

@@ -14,7 +14,7 @@ interface IUrlFilters {
     sex?: string[];
     availability?: string[];
     size?: string[];
-    selections?: number[];
+    selection?: number;
     glass_frame?: string[];
     page?: number;
     boutique?: boolean;

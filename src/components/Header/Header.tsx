@@ -15,7 +15,7 @@ import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/
 import { useDebounce } from 'src/hooks/useDebounce';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
 import { KEYBOARD } from 'src/constants/keys';
-import { SORT } from 'src/constants/catalog';
+import { SELECTIONS_IDS, SORT } from 'src/constants/catalog';
 
 import Logo from 'src/assets/images/logo.svg';
 import HeaderHoverImageBag from 'src/assets/images/header/header-image-hover-menu-bag.jpg';
@@ -358,7 +358,7 @@ const Header: React.FC = () => {
 
                                 <Link
                                     to={getCatalogFiltersUrl({
-                                        selections: selections.map((item) => item.id),
+                                        selection: SELECTIONS_IDS.summerBags,
                                         sort: 'popular',
                                     })}
                                     className="header-menu__link"

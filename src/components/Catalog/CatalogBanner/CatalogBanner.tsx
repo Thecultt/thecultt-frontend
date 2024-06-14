@@ -79,7 +79,7 @@ const CatalogBanner: React.FC = React.memo(() => {
                 </p>
                 <Link
                     to={getCatalogFiltersUrl({
-                        selections: [SELECTIONS_IDS.itBags],
+                        selection: SELECTIONS_IDS.itBags,
                         sort: 'popular',
                     })}
                     className="btn catalog-banner-text__btn"

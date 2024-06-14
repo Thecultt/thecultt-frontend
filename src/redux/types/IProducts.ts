@@ -26,7 +26,8 @@ export interface ProductsStateFilters {
     sex: { [key: string]: string };
     availability: { [key: string]: string };
     size: { [key: string]: string };
-    selections: { [key: string]: string };
+
+    selection: string | null;
 
     boutique: boolean;
     price_drop: boolean;
@@ -89,11 +90,13 @@ export enum ProductActionTypes {
     SET_PRODUCTS_FILTERS_CATALOG_SEX = 'SET_PRODUCTS_FILTERS_CATALOG_SEX',
     SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY = 'SET_PRODUCTS_FILTERS_CATALOG_AVAILABILITY',
     SET_PRODUCTS_FILTERS_CATALOG_SIZE = 'SET_PRODUCTS_FILTERS_CATALOG_SIZE',
-    SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS = 'SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS',
+    SET_PRODUCTS_FILTERS_CATALOG_SELECTION = 'SET_PRODUCTS_FILTERS_CATALOG_SELECTION',
     SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE = 'SET_PRODUCTS_FILTERS_CATALOG_BOUTIQUE',
     SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME = 'SET_PRODUCTS_FILTERS_CATALOG_GLASS_FRAME',
     SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP = 'SET_PRODUCTS_FILTERS_CATALOG_PRICE_DROP',
     SET_PRODUCTS_FILTERS_CATALOG_SORT = 'SET_PRODUCTS_FILTERS_CATALOG_SORT',
+
+    CLEAR_PRODUCTS_FILTERS = 'CLEAR_PRODUCTS_FILTERS',
 
     SET_PRODUCTS_LAST_SEARCH_STRING = 'SET_PRODUCTS_LAST_SEARCH_STRING',
     SET_PRODUCTS_SCROLL = 'SET_PRODUCTS_SCROLL',
@@ -233,12 +236,9 @@ interface setProductsFiltersSize {
     payload: string;
 }
 
-interface setProductsFiltersSelections {
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS;
-    payload: {
-        selectionId: string;
-        selection: string;
-    };
+interface setProductsFiltersSelection {
+    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTION;
+    payload: string;
 }
 
 interface setProductsFiltersBoutique {
@@ -259,6 +259,11 @@ interface setProductsFiltersPriceDrop {
 interface setProductsFiltersSort {
     type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT;
     payload: string;
+}
+
+interface clearProductsFilters {
+    type: ProductActionTypes.CLEAR_PRODUCTS_FILTERS;
+    payload: undefined;
 }
 
 export type ProductTypes =
@@ -288,8 +293,9 @@ export type ProductTypes =
     | setProductsFiltersSex
     | setProductsFiltersAvailability
     | setProductsFiltersSize
-    | setProductsFiltersSelections
+    | setProductsFiltersSelection
     | setProductsFiltersBoutique
     | setProductsFiltersGlassFrame
     | setProductsFiltersPriceDrop
-    | setProductsFiltersSort;
+    | setProductsFiltersSort
+    | clearProductsFilters;

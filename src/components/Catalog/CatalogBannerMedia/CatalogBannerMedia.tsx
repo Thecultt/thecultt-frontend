@@ -75,7 +75,7 @@ const CatalogBannerMedia: React.FC = () => {
                 </p>
                 <Link
                     to={getCatalogFiltersUrl({
-                        selections: [SELECTIONS_IDS.itBags],
+                        selection: SELECTIONS_IDS.itBags,
                         sort: 'popular',
                     })}
                     className="btn-light catalog-banner-media-text__btn"

@@ -238,7 +238,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                                 {selections.map((item) => (
                                     <Link
                                         to={getCatalogFiltersUrl({
-                                            selections: [item.id],
+                                            selection: item.id,
                                             sort: 'popular',
                                         })}
                                         className="header-media-modal-menu-links__link"

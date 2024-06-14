@@ -80,7 +80,7 @@ const initialState: ProductsState = {
         sex: {},
         availability: {},
         size: {},
-        selections: {},
+        selection: null,
         boutique: false,
         price_drop: false,
         glass_frame: {},
@@ -423,24 +423,12 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
         };
     }
 
-    if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS) {
-        if (state.filters.selections[action.payload.selectionId]) {
-            delete state.filters.selections[action.payload.selectionId];
-
-            return {
-                ...state,
-                currentPage: 1,
-            };
-        }
-
+    if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTION) {
         return {
             ...state,
             filters: {
                 ...state.filters,
-                selections: {
-                    ...state.filters.selections,
-                    [action.payload.selectionId]: action.payload.selection,
-                },
+                selection: action.payload === state.filters.selection ? null : action.payload,
             },
             currentPage: 1,
         };
@@ -501,6 +489,32 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
                 ...state.filters,
                 sort: action.payload,
             },
+        };
+    }
+
+    if (action.type === ProductActionTypes.CLEAR_PRODUCTS_FILTERS) {
+        return {
+            ...state,
+            filters: {
+                isParse: true,
+                search: '',
+                price: { min: 0, max: 0 },
+                conditions: {},
+                categories: {},
+                types: {},
+                brands: {},
+                models: {},
+                colors: {},
+                sex: {},
+                availability: {},
+                size: {},
+                selection: null,
+                boutique: false,
+                price_drop: false,
+                glass_frame: {},
+                sort: SORT.a,
+            },
+            currentPage: 1,
         };
     }
 
