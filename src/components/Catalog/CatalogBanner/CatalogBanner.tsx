@@ -13,12 +13,11 @@ const CatalogBanner: React.FC = React.memo(() => {
     const { search } = useLocation();
 
     const query = new URLSearchParams(search);
-    const querySelections = query.getAll('selections');
+    const querySelection = query.getAll('selection');
 
     const { items: selections } = useTypedSelector(({ selections }) => selections);
 
-    const currentSelection =
-        querySelections.length === 1 ? selections.find(({ id }) => id === +querySelections[0]) || null : null;
+    const currentSelection = querySelection ? selections.find(({ id }) => id === +querySelection) || null : null;
 
     return query.get('price_drop') == 'true' ? (
         <div className="catalog-banner">
@@ -64,7 +63,7 @@ const CatalogBanner: React.FC = React.memo(() => {
                 <p className="catalog-banner-text__description">{currentSelection.description}</p>
             </div>
         </div>
-    ) : !querySelections.length && query.getAll('categories').length === 1 && query.get('categories') === 'Сумки' ? (
+    ) : query.getAll('categories').length === 1 && query.get('categories') === 'Сумки' ? (
         <div className="catalog-banner">
             <div
                 className="catalog-banner-image"
