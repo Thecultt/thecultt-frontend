@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
+
 interface ProductInfoBreadCrumbsProps {
     category: string;
     brand: string;
@@ -58,7 +60,13 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
                 <path d="M0.75 0.5L4.75 4.5L0.75 8.5" stroke="#202020" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
 
-            <Link to={`/catalog?categories=${category}`} className="product-content-info-bread-crumbs__item">
+            <Link
+                to={getCatalogFiltersUrl({
+                    categories: [category],
+                    sort: 'a',
+                })}
+                className="product-content-info-bread-crumbs__item"
+            >
                 {category}
             </Link>
 
@@ -67,7 +75,11 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
             </svg>
 
             <Link
-                to={`/catalog?categories=${category}&brands=${brand}`}
+                to={getCatalogFiltersUrl({
+                    categories: [category],
+                    brands: [brand],
+                    sort: 'a',
+                })}
                 className="product-content-info-bread-crumbs__item"
             >
                 {brand}
@@ -78,7 +90,12 @@ const ProductInfoBreadCrumbs: React.FC<ProductInfoBreadCrumbsProps> = ({ categor
             </svg>
 
             <Link
-                to={`/catalog?categories=${category}&brands=${brand}&models=${model}`}
+                to={getCatalogFiltersUrl({
+                    categories: [category],
+                    brands: [brand],
+                    models: [model],
+                    sort: 'a',
+                })}
                 className="product-content-info-bread-crumbs__item"
             >
                 {model}

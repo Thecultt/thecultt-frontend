@@ -62,6 +62,7 @@ declare global {
         dataLayer: any;
         YaPay: any;
         mindbox: any;
+        ym: any;
     }
 }
 

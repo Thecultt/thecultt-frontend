@@ -23,6 +23,9 @@ interface IUrlFilters {
 }
 
 export const getCatalogFiltersUrl = (filters: IUrlFilters) => {
-    const url = qs.stringify(filters, { arrayFormat: 'repeat', skipNulls: true });
+    const url = qs.stringify(filters, {
+        arrayFormat: 'repeat',
+        skipNulls: true,
+    });
     return `/catalog?${url}`;
 };
