@@ -52,7 +52,7 @@ const CatalogFiltersModels: React.FC = () => {
 
             setModels(newModels);
         }
-    }, [Object.keys(filters.categories).length, Object.keys(filters.brands).length]);
+    }, [filters.categories, filters.brands]);
 
     const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value: string = e.target.value.toLowerCase();
