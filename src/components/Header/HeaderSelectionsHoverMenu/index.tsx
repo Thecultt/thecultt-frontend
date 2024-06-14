@@ -62,7 +62,7 @@ export const HeaderSelectionsHoverMenu: React.FC<Props> = ({ onOpen, onClose, is
                                             key={id}
                                             className="header-hover-menu-list-coll__item"
                                             to={getCatalogFiltersUrl({
-                                                selections: [id],
+                                                selection: id,
                                                 sort: 'popular',
                                             })}
                                             onClick={onClose}
@@ -79,7 +79,7 @@ export const HeaderSelectionsHoverMenu: React.FC<Props> = ({ onOpen, onClose, is
                                             key={id}
                                             className="header-hover-menu-list-coll__item"
                                             to={getCatalogFiltersUrl({
-                                                selections: [id],
+                                                selection: id,
                                                 sort: 'popular',
                                             })}
                                             onClick={onClose}
