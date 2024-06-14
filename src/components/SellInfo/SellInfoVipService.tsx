@@ -25,7 +25,7 @@ const SellInfoVipService: React.FC = () => {
                 style={{
                     backgroundImage: `url("${SellInfoVipServiceImage}")`,
                 }}
-            ></div>
+            />
         </div>
     );
 };

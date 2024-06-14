@@ -11,7 +11,7 @@ const SellInfoProcess: React.FC = () => {
                 style={{
                     backgroundImage: `url("${SellInfoProcessImage}")`,
                 }}
-            ></div>
+            />
 
             <div className="sell-info-process-text">
                 <h2 className="sell-info-process-text__title">Узнайте подробнее о процессах</h2>

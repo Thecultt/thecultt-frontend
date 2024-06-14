@@ -10,25 +10,26 @@ import { CategoriesItem } from 'src/components/Home/HomeCategories/HomeCategorie
 
 import { HomeCategoriesItem } from 'src/components';
 
+const categories: CategoriesItem[] = [
+    {
+        image: HomeCategoriesBagImage,
+        title: 'Сумки',
+    },
+    {
+        image: HomeCategoriesShoesImage,
+        title: 'Обувь',
+    },
+    {
+        image: HomeCategoriesDecorationImage,
+        title: 'Украшения',
+    },
+    {
+        image: SellInfoCategoriesAccessoriesImage,
+        title: 'Аксессуары',
+    },
+];
+
 const SellInfoCategories: React.FC = () => {
-    const categories: CategoriesItem[] = [
-        {
-            image: HomeCategoriesBagImage,
-            title: 'Сумки',
-        },
-        {
-            image: HomeCategoriesShoesImage,
-            title: 'Обувь',
-        },
-        {
-            image: HomeCategoriesDecorationImage,
-            title: 'Украшения',
-        },
-        {
-            image: SellInfoCategoriesAccessoriesImage,
-            title: 'Аксессуары',
-        },
-    ];
     return (
         <div className="sell-info-categories">
             <h2 className="sell-info__title">Какие категории мы принимаем для продажи</h2>

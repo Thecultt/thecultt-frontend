@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { pushDataLayer } from 'src/functions/pushDataLayer';
+
 const SellInfoCooperation: React.FC = () => {
     return (
         <div className="sell-info-cooperation">
@@ -22,18 +24,9 @@ const SellInfoCooperation: React.FC = () => {
 
                     <a
                         href="https://t.me/thecultt_bot"
-                        onClick={() => {
-                            window.dataLayer.push({
-                                ecommerce: null,
-                            }); // Clear the previous ecommerce object.
-                            window.dataLayer.push({
-                                event: 'send_application_click',
-                                ecommerce: {
-                                    timestamp: Math.floor(Date.now() / 1000),
-                                    application_method_type: 'TelegramBot',
-                                },
-                            });
-                        }}
+                        onClick={() =>
+                            pushDataLayer('send_application_click', { application_method_type: 'TelegramBot' })
+                        }
                         className="sell-info-cooperation-types-block__btn"
                     >
                         Оформить заявку
@@ -92,18 +85,7 @@ const SellInfoCooperation: React.FC = () => {
 
                     <Link
                         to="/cabinet/sell"
-                        onClick={() => {
-                            window.dataLayer.push({
-                                ecommerce: null,
-                            }); // Clear the previous ecommerce object.
-                            window.dataLayer.push({
-                                event: 'send_application_click',
-                                ecommerce: {
-                                    timestamp: Math.floor(Date.now() / 1000),
-                                    application_method_type: 'Site',
-                                },
-                            });
-                        }}
+                        onClick={() => pushDataLayer('send_application_click', { application_method_type: 'Site' })}
                         className="sell-info-cooperation-types-block__btn"
                     >
                         Оформить заявку
@@ -133,18 +115,7 @@ const SellInfoCooperation: React.FC = () => {
 
                     <a
                         href="https://calendly.com/thecultt_2023/visitsellers"
-                        onClick={() => {
-                            window.dataLayer.push({
-                                ecommerce: null,
-                            }); // Clear the previous ecommerce object.
-                            window.dataLayer.push({
-                                event: 'send_application_click',
-                                ecommerce: {
-                                    timestamp: Math.floor(Date.now() / 1000),
-                                    application_method_type: 'Office',
-                                },
-                            });
-                        }}
+                        onClick={() => pushDataLayer('send_application_click', { application_method_type: 'Office' })}
                         className="sell-info-cooperation-types-block__btn"
                     >
                         Выбрать дату и время

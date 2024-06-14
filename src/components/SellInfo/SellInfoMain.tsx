@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CountUp from 'react-countup';
 import { useMediaQuery } from 'usehooks-ts';
 
@@ -6,39 +7,43 @@ import { MEDIA_SIZES } from 'src/constants/styles';
 
 import { Select } from 'src/components';
 
+import { conditions } from 'src/constants/catalog';
+
 import SellInfoMainImage from 'src/assets/images/sell-info/sell-info-main.jpg';
 import Logo from 'src/assets/images/logo.svg';
-import { Link } from 'react-router-dom';
+
+const models: {
+    [key: string]: {
+        title: string;
+        image: string;
+        prices: Record<conditions, number>;
+    };
+} = {
+    hermesKelly: {
+        title: 'Hermes Kelly',
+        image: 'https://storage.yandexcloud.net/prod-thecultt/22870/0db4859d192bd57bbd11362584092b07df5cc547.png',
+        prices: {
+            Новое: 2601000,
+            Отличное: 1530000,
+            Хорошее: 1105000,
+        },
+    },
+    celineClassic: {
+        title: 'Celine Classic',
+        image: 'https://storage.yandexcloud.net/prod-thecultt/72929/2Mf1Ct33hSuPXo3WdwpboPMMdGHbkmHytRRDVdJ8.jpg',
+        prices: {
+            Новое: 165000,
+            Отличное: 150000,
+            Хорошее: 120000,
+        },
+    },
+};
 
 const SellInfoMain: React.FC = () => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
-    const [currentModel, setCurrentModel] = React.useState<string>('Hermes Kelly');
-    const [currentCondition, setCurrentCondition] = React.useState<string>('Новое');
-
-    const models: {
-        [key: string]: {
-            image: string;
-            prices: { [key: string]: number };
-        };
-    } = {
-        'Hermes Kelly': {
-            image: '',
-            prices: {
-                Новое: 2601000,
-                Отличное: 1530000,
-                Хорошее: 1105000,
-            },
-        },
-        'Celine Classic': {
-            image: '',
-            prices: {
-                Новое: 165000,
-                Отличное: 150000,
-                Хорошее: 120000,
-            },
-        },
-    };
+    const [currentModel, setCurrentModel] = React.useState('hermesKelly');
+    const [currentCondition, setCurrentCondition] = React.useState<conditions>('Новое');
 
     return (
         <div className="sell-info-main">
@@ -73,8 +78,15 @@ const SellInfoMain: React.FC = () => {
 
                             <Select
                                 label="Модель"
-                                items={Object.keys(models)}
-                                onChange={(value) => setCurrentModel(value)}
+                                items={Object.keys(models).map((key) => ({
+                                    title: models[key].title,
+                                    image: models[key].image,
+                                }))}
+                                onChange={(value) =>
+                                    Object.keys(models).map(
+                                        (key) => models[key].title === value.title && setCurrentModel(key),
+                                    )
+                                }
                             />
                         </div>
 
@@ -83,8 +95,8 @@ const SellInfoMain: React.FC = () => {
 
                             <Select
                                 label="Состояние"
-                                items={['Новое', 'Отличное', 'Хорошее']}
-                                onChange={(value) => setCurrentCondition(value)}
+                                items={[{ title: 'Новое' }, { title: 'Отличное' }, { title: 'Хорошее' }]}
+                                onChange={(value) => setCurrentCondition(value.title as conditions)}
                             />
                         </div>
                     </div>

@@ -2,6 +2,8 @@ import { SortType } from 'src/redux/types/IProducts';
 
 export const categories = ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'];
 
+export type conditions = 'Новое' | 'Отличное' | 'Хорошее';
+
 export const SORT: Record<SortType, SortType> = {
     a: 'a',
     price: 'price',

@@ -527,7 +527,6 @@ button
 
 	&.disabled
 		pointer-events: none
-		// opacity: 0.5
 
 		& > svg
 			opacity: 0
@@ -536,11 +535,33 @@ button
 		& > svg
 			transform: rotate(180deg)
 
-	&__label
-		+ManropeMedium
+	&-current-item
+		width: 100%
 
-		& > span
-			color: $gray
+		display: flex
+		align-items: center
+		justify-content: space-between
+
+		&-info
+			display: flex
+			align-items: center
+
+			&__text
+				+ManropeMedium
+
+				& > span
+					color: $gray
+
+			&-image
+				margin-left: 12px
+
+				width: 32px
+				height: 32px
+				border-radius: 50%
+
+				background-size: cover
+				background-position: bottom center
+				background-repeat: no-repeat
 
 	&-list
 		top: calc( 100% + 5px )
@@ -587,16 +608,12 @@ button
 				background-color: $gray
 				border-radius: 100px
 
-		&__item
+		&-item
 			cursor: pointer
 
 			display: flex
 			justify-content: space-between
 			align-items: center
-
-			user-select: none
-
-			font-size: 16px
 
 			margin-bottom: 15px
 
@@ -604,9 +621,8 @@ button
 
 			+transition
 
-			& > svg
-				opacity: 0
-				+transition
+			&:last-child
+				margin-bottom: 0
 
 			&.active
 				color: $mainColor
@@ -615,8 +631,28 @@ button
 				& > svg
 					opacity: 1
 
-			&:last-child
-				margin-bottom: 0
+			&-info
+				display: flex
+				align-items: center
+
+				&__text
+					user-select: none
+					font-size: 16px
+
+				&-image
+					margin-left: 12px
+
+					width: 32px
+					height: 32px
+					border-radius: 50%
+
+					background-size: cover
+					background-position: bottom center
+					background-repeat: no-repeat
+
+			& > svg
+				opacity: 0
+				+transition
 
 // popup
 .popup
