@@ -8,8 +8,6 @@ import SellInfoCategoriesAccessoriesImage from 'src/assets/images/sell-info/sell
 
 import { CategoriesItem } from 'src/components/Home/HomeCategories/HomeCategories';
 
-import { HomeCategoriesItem } from 'src/components';
-
 const categories: CategoriesItem[] = [
     {
         image: HomeCategoriesBagImage,
@@ -41,7 +39,14 @@ const SellInfoCategories: React.FC = () => {
                         className="sell-info-categories-blocks-block"
                         key={`sell-info-categories-blocks-block-${index}`}
                     >
-                        <HomeCategoriesItem {...category} />
+                        <div className="home-categories-item">
+                            <div
+                                className="home-categories-item-image"
+                                style={{ backgroundImage: `url("${category.image}")` }}
+                            ></div>
+
+                            <h2 className="home-categories-item__title">{category.title}</h2>
+                        </div>
                     </Link>
                 ))}
             </div>
