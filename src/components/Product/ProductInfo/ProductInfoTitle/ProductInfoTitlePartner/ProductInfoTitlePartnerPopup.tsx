@@ -9,8 +9,8 @@ const ProductInfoTitlePartnerPopup: React.FC = () => {
 
             <p className="product-content-info-title-boutique-popup__description">
                 Мы&nbsp;сотрудничаем с&nbsp;избранными бутиками-партнерами, которые помогают нам находить желанные лоты
-                для THE&nbsp;CULTT. Каждый лот проходит дополнительную аутентификацию. Сейчас лот находится
-                у&nbsp;партнера&nbsp;&mdash; мы&nbsp;сможем доставить его вам в&nbsp;срок до&nbsp;5&nbsp;дней.
+                для THE&nbsp;CULTT. Изделие новое, в&nbsp;полном комплекте. Каждый лот проходит дополнительную
+                аутентификацию. Опция примерки для таких лотов недоступна.
             </p>
         </div>
     );
