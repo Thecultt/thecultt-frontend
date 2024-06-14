@@ -9,6 +9,8 @@ export interface OrderState {
 
         id: number;
 
+        fromSum: number;
+
         name: string;
         saleSum: number;
 
@@ -65,6 +67,7 @@ export enum OrderStateActionTypes {
     SET_ORDER_PROMOCODE_IS_ACTIVE = 'SET_ORDER_PROMOCODE_IS_ACTIVE',
     SET_ORDER_PROMOCODE_IS_ERROR = 'SET_ORDER_PROMOCODE_IS_ERROR',
     SET_ORDER_PROMOCODE_ID = 'SET_ORDER_PROMOCODE_ID',
+    SET_ORDER_PROMOCODE_FROM_SUM = 'SET_ORDER_PROMOCODE_FROM_SUM',
     SET_ORDER_PROMOCODE_NAME = 'SET_ORDER_PROMOCODE_NAME',
     SET_ORDER_PROMOCODE_SALE_SUM = 'SET_ORDER_PROMOCODE_SALE_SUM',
     SET_ORDER_PROMOCODE_ERROR_MESSAGE = 'SET_ORDER_PROMOCODE_ERROR_MESSAGE',
@@ -107,6 +110,11 @@ interface setOrderPromocodeIsError {
 
 interface setOrderPromocodeId {
     type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ID;
+    payload: number;
+}
+
+interface setOrderPromocodeFromSum {
+    type: OrderStateActionTypes.SET_ORDER_PROMOCODE_FROM_SUM;
     payload: number;
 }
 
@@ -211,6 +219,7 @@ export type OrderStateActions =
     | setOrderPromocodeIsSend
     | setOrderPromocodeIsActive
     | setOrderPromocodeIsError
+    | setOrderPromocodeFromSum
     | setOrderPromocodeName
     | setOrderPromocodeId
     | setOrderPromocodeSaleSum
