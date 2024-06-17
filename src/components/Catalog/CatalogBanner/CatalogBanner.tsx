@@ -8,6 +8,7 @@ import { SELECTIONS_IDS } from 'src/constants/catalog';
 import CatalogBannerImagePriceDrop from 'src/assets/images/catalog/catalog-banner-price-drop.jpg';
 import CatalogBannerImageBoutique from 'src/assets/images/catalog/catalog-banner-boutique.jpg';
 import CatalogBannerImageItbag from 'src/assets/images/catalog/catalog-banner-price-itbag.jpg';
+import CatalogBannerImagePopular from 'src/assets/images/catalog/catalog-banner-popular.jpg';
 
 const CatalogBanner: React.FC = React.memo(() => {
     const { search } = useLocation();
@@ -15,6 +16,9 @@ const CatalogBanner: React.FC = React.memo(() => {
     const query = new URLSearchParams(search);
     const querySelection = query.getAll('selection');
 
+    const {
+        filters: { sort },
+    } = useTypedSelector(({ products }) => products);
     const { items: selections } = useTypedSelector(({ selections }) => selections);
 
     const currentSelection = querySelection ? selections.find(({ id }) => id === +querySelection) || null : null;
@@ -85,6 +89,21 @@ const CatalogBanner: React.FC = React.memo(() => {
                 >
                     Выбрать it-bag
                 </Link>
+            </div>
+        </div>
+    ) : sort === 'popular' ? (
+        <div className="catalog-banner">
+            <div
+                className="catalog-banner-image"
+                style={{
+                    backgroundImage: `url("${CatalogBannerImagePopular}")`,
+                }}
+            />
+            <div className="catalog-banner-text">
+                <h3 className="catalog-banner-text__title">Горячие лоты</h3>
+                <p className="catalog-banner-text__description">
+                    Успейте заказать: лоты в единственном экземпляре и с максимумом «сердечек»
+                </p>
             </div>
         </div>
     ) : null;
