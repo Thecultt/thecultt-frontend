@@ -8,6 +8,7 @@ import { SELECTIONS_IDS } from 'src/constants/catalog';
 import CatalogBannerImageBoutiqueMedia from 'src/assets/images/catalog/catalog-banner-boutique-media.jpg';
 import CatalogBannerImagePriceDropMedia from 'src/assets/images/catalog/catalog-banner-price-drop-media.jpg';
 import CatalogBannerImageItbagMedia from 'src/assets/images/catalog/catalog-banner-price-itbag-media.jpg';
+import CatalogBannerImagePopularMedia from 'src/assets/images/catalog/catalog-banner-popular-media.jpg';
 
 const CatalogBannerMedia: React.FC = () => {
     const { search } = useLocation();
@@ -15,6 +16,9 @@ const CatalogBannerMedia: React.FC = () => {
     const query = new URLSearchParams(search);
     const querySelection = query.get('selection');
 
+    const {
+        filters: { sort },
+    } = useTypedSelector(({ products }) => products);
     const { items: selections } = useTypedSelector(({ selections }) => selections);
 
     const currentSelection = querySelection ? selections.find(({ id }) => id === +querySelection) || null : null;
@@ -81,6 +85,20 @@ const CatalogBannerMedia: React.FC = () => {
                 >
                     Выбрать it-bag
                 </Link>
+            </div>
+        </div>
+    ) : sort === 'popular' ? (
+        <div
+            className="catalog-banner-media"
+            style={{
+                backgroundImage: `url("${CatalogBannerImagePopularMedia}")`,
+            }}
+        >
+            <div className="catalog-banner-media-text">
+                <h3 className="catalog-banner-media-text__title">Горячие лоты</h3>
+                <p className="catalog-banner-media-text__description">
+                    Успейте заказать: лоты в единственном экземпляре и с максимумом «сердечек»
+                </p>
             </div>
         </div>
     ) : null;
