@@ -10,6 +10,9 @@ import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorite
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { ProductInfoTitleBoutique, ProductInfoTitlePartner, ProductInfoTitleSplit } from 'src/components';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
+import { CATEGORY_NAMES } from 'src/constants/catalog';
+import { useWaitingData } from 'src/hooks/catalog/useWaitingData';
+import { WaitingPopupType } from 'src/types/waiting';
 
 const ProductInfoTitle: React.FC<ProductPage> = ({
     id,
@@ -36,6 +39,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 
     const [isCartLocal, setIsCartLocal] = React.useState<boolean>(cartItems[article] ? true : false);
     const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(favoritesItems[id] ? true : false);
+
+    const { setWaitingData } = useWaitingData();
 
     const addCart = (item: CartItem) => {
         dispatch(setCartIsVisibleMessage(true));
@@ -100,31 +105,15 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
     };
 
     const subscribeGood = () => {
-        if (category === 'Сумки') {
-            localStorage.setItem(
-                'waiting_init',
-                JSON.stringify({
-                    category,
-                    brand: manufacturer,
-                    model: name,
-                    type: '',
-                    size: size || shoe_size,
-                }),
-            );
-        } else {
-            localStorage.setItem(
-                'waiting_init',
-                JSON.stringify({
-                    category,
-                    brand: manufacturer,
-                    model: name,
-                    type: subcategory,
-                    size: size || shoe_size,
-                }),
-            );
-        }
+        setWaitingData({
+            category,
+            brand: manufacturer,
+            model: name,
+            type: category !== CATEGORY_NAMES.bags ? subcategory : '',
+            size: size || shoe_size,
+        });
 
-        window.location.hash = 'create_waiting';
+        window.location.hash = WaitingPopupType.Form;
     };
 
     return (

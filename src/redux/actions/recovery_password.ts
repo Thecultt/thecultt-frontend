@@ -18,8 +18,9 @@ export const sendRecoveryPassword = (email: string, isRedirect?: boolean) => {
                 email,
             })
             .then(({ data }) => {
-                if (localStorage.getItem('redirect_reglog')) {
-                    window.location.href = localStorage.getItem('redirect_reglog') as string;
+                const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
+                if (redirectReglog) {
+                    window.location.href = redirectReglog;
                 }
 
                 if (isRedirect) window.location.hash = 'recovery_password_success';

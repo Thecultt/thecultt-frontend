@@ -72,7 +72,7 @@ export const sendLogin = (data: { username: string | null; password: string }, o
                             // 		"externalId": "<Внешний идентификатор зоны>"
                             // 	}
                             // },
-                            email: `${localStorage.getItem('email')}`,
+                            email: `${localStorageService.getItem<string>(LS_KEYS.email)}`,
                             // "mobilePhone": "<Мобильный телефон>",
                             // "customFields": {
                             // 	"tipKlienta": "<Тип клиента>",
@@ -88,8 +88,9 @@ export const sendLogin = (data: { username: string | null; password: string }, o
                     console.log(e);
                 }
 
-                if (localStorage.getItem('redirect_reglog')) {
-                    window.location.href = localStorage.getItem('redirect_reglog') as string;
+                const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
+                if (redirectReglog) {
+                    window.location.href = redirectReglog;
                 } else {
                     window.location.hash = '';
                     window.location.reload();

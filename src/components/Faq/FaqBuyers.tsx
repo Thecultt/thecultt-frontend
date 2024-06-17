@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { FaqTabItem } from 'src/components';
+import { WaitingPopupType } from 'src/types/waiting';
 
 const FaqBuyers: React.FC = () => {
     const tabs: { title: string; description: string }[] = [
@@ -149,7 +150,7 @@ const FaqBuyers: React.FC = () => {
         },
         {
             title: 'Не могу найти нужный аксессуар, что делать?',
-            description: `Если товара, который вы ищете, не оказалось в нашей подборке, просто оставьте заявку в <a href="https://thecultt.com/#create_waiting">листе ожидания</a>, и мы сообщим вам, как только лот появится в наличии на сайте — до публикации в социальных сетях!`,
+            description: `Если товара, который вы ищете, не оказалось в нашей подборке, просто оставьте заявку в <a href="https://thecultt.com/#${WaitingPopupType.Form}">листе ожидания</a>, и мы сообщим вам, как только лот появится в наличии на сайте — до публикации в социальных сетях!`,
         },
     ];
 

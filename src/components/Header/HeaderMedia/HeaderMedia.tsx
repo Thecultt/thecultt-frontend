@@ -6,7 +6,8 @@ import { getClassNames } from 'src/functions/getClassNames';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { HeaderMediaLinkTab, Footer } from 'src/components';
-import { categories } from 'src/constants/catalog';
+import { CATEGORIES } from 'src/constants/catalog';
+
 import Logo from 'src/assets/images/logo.svg';
 import { useAuthUser } from 'src/hooks/useAuthUser';
 
@@ -29,7 +30,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
     const { items } = useTypedSelector(({ cart }) => cart);
     const { items: selections } = useTypedSelector(({ selections }) => selections);
 
-    const mappedCategories = categories.map((item) => ({ title: item, ...filtersCategories[item] }));
+    const mappedCategories = CATEGORIES.map((item) => ({ title: item, ...filtersCategories[item] }));
 
     const { isLoggedIn } = useAuthUser();
 

@@ -30,10 +30,6 @@ const SellContact: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, i
             email,
             phone,
         });
-
-        // const data: any = localStorage.getItem("sell-contact-form")
-
-        // initialize(JSON.parse(data))
     }, []);
 
     return (

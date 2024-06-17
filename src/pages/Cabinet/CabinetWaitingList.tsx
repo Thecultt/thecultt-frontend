@@ -5,9 +5,9 @@ import { useMediaQuery } from 'usehooks-ts';
 
 import { CabinetMenu, CabinetWaitingListItem, PageLoader } from 'src/components';
 import { MEDIA_SIZES } from 'src/constants/styles';
-
 import { fetchWaitingList } from 'src/redux/actions/waiting';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { WaitingPopupType } from 'src/types/waiting';
 
 const CabinetWaitingList: React.FC = () => {
     const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const CabinetWaitingList: React.FC = () => {
                     {isLoaded ? (
                         <div className="cabinet-content cabinet-waiting-list">
                             {!isMobile ? (
-                                <Link to="#create_waiting" className="btn cabinet-waiting-list__add">
+                                <Link to={`#${WaitingPopupType.Form}`} className="btn cabinet-waiting-list__add">
                                     Подать новую заявку
                                     <svg
                                         width="22"
@@ -47,7 +47,10 @@ const CabinetWaitingList: React.FC = () => {
                                     </svg>
                                 </Link>
                             ) : (
-                                <Link to="#create_waiting" className="btn-regular cabinet-waiting-list__add">
+                                <Link
+                                    to={`#${WaitingPopupType.Form}`}
+                                    className="btn-regular cabinet-waiting-list__add"
+                                >
                                     Подать новую заявку
                                     <svg
                                         width="24"

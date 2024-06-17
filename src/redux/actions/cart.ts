@@ -4,6 +4,8 @@ import $api from 'src/http';
 import { ProductPage } from 'src/models/IProduct';
 import { CartItem } from 'src/models/ICartItem';
 import { sendMindbox } from 'src/functions/mindbox';
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
 
 import { CartActionTypes, CartActions, ICartItemsState } from '../types/ICart';
 
@@ -99,7 +101,7 @@ export const addCartItem = (item: CartItem) => {
             pricePerItem: item.price,
         },
         customer: {
-            email: `${localStorage.getItem('email')}`,
+            email: `${localStorageService.getItem<string>(LS_KEYS.email, '')}`,
         },
     });
 
@@ -189,7 +191,7 @@ export const removeCartItem = (id: string, item: CartItem) => {
 
     sendMindbox('Website.ClearCart', {
         customer: {
-            email: `${localStorage.getItem('email')}`,
+            email: `${localStorageService.getItem<string>(LS_KEYS.email)}`,
         },
         removeProductFromList: {
             product: {

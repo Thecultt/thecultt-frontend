@@ -19,6 +19,9 @@ export const LS_KEYS = {
     cart: 'cart',
     utm: 'utm',
     headerVisitMessage: 'header_visit_message',
+    email: 'email',
+    waiting: 'waiting',
+    redirectReglog: 'redirect_reglog',
 };
 
 export const KEYBOARD = {

@@ -32,10 +32,12 @@ export const sendRegister = (info: {
 
             if (info.promoCheckbox) {
                 try {
+                    const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
                     const mindboxOperation =
-                        localStorage.getItem('redirect_reglog') === '/order'
+                        redirectReglog === '/order'
                             ? 'KlientImportPriPodpiskeVZakaze'
                             : 'KlientImportPriPodpiskeRegaLK';
+
                     sendMindbox(mindboxOperation, {
                         customer: {
                             ids: {
@@ -79,8 +81,9 @@ export const sendRegister = (info: {
                 }
             }
 
-            if (localStorage.getItem('redirect_reglog')) {
-                window.location.href = localStorage.getItem('redirect_reglog') as string;
+            const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
+            if (redirectReglog) {
+                window.location.href = redirectReglog;
                 window.location.hash = 'welcome';
             } else {
                 window.location.hash = 'welcome';
