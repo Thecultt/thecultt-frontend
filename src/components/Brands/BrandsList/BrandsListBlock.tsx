@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
+
 interface BrandsListBlockProps {
     letter: string;
     brands: string[];
@@ -14,7 +16,10 @@ const BrandsListBlock: React.FC<BrandsListBlockProps> = ({ letter, brands }) => 
             <div className="brands-list-block-items-wrapper">
                 {brands.map((brand, index) => (
                     <Link
-                        to={`/catalog?brands=${brand.replace('&', '%26')}`}
+                        to={getCatalogFiltersUrl({
+                            brands: [brand],
+                            sort: 'a',
+                        })}
                         className="brands-list-block__item"
                         key={`brands-list-block__item-${index}`}
                     >

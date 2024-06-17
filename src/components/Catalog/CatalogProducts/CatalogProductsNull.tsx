@@ -1,44 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setFiltersCatalog } from 'src/redux/actions/products';
+import { clearProductsFilters } from 'src/redux/actions/products';
 
 const CatalogProductsNull: React.FC = () => {
     const dispatch = useDispatch();
 
     const onClickClearFilters = () => {
         window.scrollTo(0, 0);
-
-        dispatch(
-            setFiltersCatalog({
-                isParse: true,
-
-                search: '',
-
-                price: {
-                    min: 0,
-                    max: 0,
-                },
-
-                conditions: {},
-                categories: {},
-                types: {},
-                brands: {},
-                models: {},
-                colors: {},
-                sex: {},
-                availability: {},
-                size: {},
-                selections: {},
-
-                boutique: false,
-                price_drop: false,
-
-                glass_frame: {},
-
-                sort: 'a',
-            }),
-        );
+        dispatch(clearProductsFilters());
     };
 
     return (

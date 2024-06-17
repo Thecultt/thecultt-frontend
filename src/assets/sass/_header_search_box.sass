@@ -165,17 +165,26 @@
 			pointer-events: none
 			opacity: 0.5
 
+		&__head
+			display: flex
+			align-items: baseline
+
 		&__title
 			font-size: 17px
 			margin-bottom: 15px
 
-			& > a
-				padding-left: 12px
+		&__nav
+			+buttonReset
 
-				text-decoration: underline
-				color: $mainColor
+			width: fit-content
+			margin-left: 12px
 
-				+ManropeRegular
+			text-decoration: underline
+			white-space: nowrap
+			color: $mainColor
+
+			+ManropeRegular
+			font-size: 17px
 
 		&-media__subtitle
 			display: none

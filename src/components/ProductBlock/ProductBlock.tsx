@@ -40,6 +40,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     shoe_size,
     size,
     from_boutique,
+    from_parnter,
     price_drop,
 }) => {
     const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart);
@@ -94,6 +95,8 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
         >
             <div className="product-block-cover">
                 {from_boutique ? <span className="product-block-cover__boutique">Из бутика</span> : null}
+
+                {from_parnter ? <span className="product-block-cover__boutique">От партнеров</span> : null}
 
                 {price_drop ? <span className="product-block-cover__boutique green">Цена снизилась</span> : null}
 

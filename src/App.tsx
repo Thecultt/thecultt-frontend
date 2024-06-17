@@ -54,6 +54,7 @@ import { fetchUser } from './redux/actions/user';
 import { checkAvailabilityCartItems } from './redux/actions/cart';
 import { useAuthUser } from './hooks/useAuthUser';
 import { useReplaceLS } from './hooks/useReplaceLS';
+import { fetchSelections } from './redux/actions/selections';
 
 declare global {
     interface Window {
@@ -62,6 +63,7 @@ declare global {
         dataLayer: any;
         YaPay: any;
         mindbox: any;
+        ym: any;
     }
 }
 
@@ -71,6 +73,7 @@ const App = () => {
 
     const isLoadedFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
     const isLoadedProducts = useTypedSelector(({ products }) => products.isLoaded);
+    const isLoadedSelections = useTypedSelector(({ selections }) => selections.isLoaded);
     const cartItems = useTypedSelector(({ cart }) => cart.items);
 
     const { isLoggedIn, isLoaded: isLoadedUser, user } = useAuthUser();
@@ -94,6 +97,10 @@ const App = () => {
 
         if (!isLoadedProducts && pathname !== '/catalog') {
             dispatch(fetchFirstProductsCatalog() as any);
+        }
+
+        if (!isLoadedSelections) {
+            dispatch(fetchSelections() as any);
         }
 
         dispatch(checkAvailabilityCartItems(cartItems) as any);

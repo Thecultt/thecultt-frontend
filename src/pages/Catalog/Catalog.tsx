@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'usehooks-ts';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { fetchProductsCatalog, setLastSearchString, setProductsTypeFetch } from 'src/redux/actions/products';
+import { fetchProductsCatalog, setLastSearchString } from 'src/redux/actions/products';
 import {
     CatalogBanner,
     CatalogBannerMedia,
@@ -57,18 +57,13 @@ const Catalog: React.FC = () => {
         // Object.keys(filters.availability)[0],
         Object.keys(filters.availability).length,
         Object.keys(filters.size).length,
-        Object.keys(filters.selections).length,
         Object.keys(filters.glass_frame).length,
+        filters.selection,
         filters.boutique,
         filters.price_drop,
         filters.sort,
         currentPage,
-        typeFetch,
     ]);
-
-    React.useEffect(() => {
-        dispatch(setProductsTypeFetch('btn-page'));
-    }, []);
 
     React.useEffect(
         () => () => {
@@ -80,35 +75,33 @@ const Catalog: React.FC = () => {
     useCatalogScroll();
 
     return (
-        <>
-            <section className="catalog">
-                <div className="container">
-                    <div className="catalog-wrapper">
-                        {!isMobile ? <CatalogBanner /> : <CatalogBannerMedia />}
+        <section className="catalog">
+            <div className="container">
+                <div className="catalog-wrapper">
+                    {!isMobile ? <CatalogBanner /> : <CatalogBannerMedia />}
 
-                        {isLoadedFilters ? (
-                            <>
-                                <CatalogFiltersTop
+                    {isLoadedFilters ? (
+                        <>
+                            <CatalogFiltersTop
+                                setIsOpenFiltersMedia={setIsOpenFiltersMedia}
+                                isOpenFiltersMedia={isOpenFiltersMedia}
+                            />
+
+                            <div className="catalog-blocks-and-filters-wrapper">
+                                <CatalogFilters
                                     setIsOpenFiltersMedia={setIsOpenFiltersMedia}
                                     isOpenFiltersMedia={isOpenFiltersMedia}
                                 />
 
-                                <div className="catalog-blocks-and-filters-wrapper">
-                                    <CatalogFilters
-                                        setIsOpenFiltersMedia={setIsOpenFiltersMedia}
-                                        isOpenFiltersMedia={isOpenFiltersMedia}
-                                    />
-
-                                    <CatalogProducts />
-                                </div>
-                            </>
-                        ) : (
-                            <PageLoader />
-                        )}
-                    </div>
+                                <CatalogProducts />
+                            </div>
+                        </>
+                    ) : (
+                        <PageLoader />
+                    )}
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     );
 };
 

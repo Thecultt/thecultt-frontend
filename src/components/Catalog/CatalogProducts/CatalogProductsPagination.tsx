@@ -2,9 +2,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { setProductsTypeFetch, setCurrentPageProduct } from 'src/redux/actions/products';
+import { setCurrentPageProduct, setProductsTypeFetch } from 'src/redux/actions/products';
 import { Loader } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { CatalogFetchType } from 'src/redux/types/IProducts';
 
 const CatalogProductsPagination: React.FC = () => {
     const dispatch = useDispatch();
@@ -16,8 +17,8 @@ const CatalogProductsPagination: React.FC = () => {
         .map((_, index) => index + 1);
 
     const onClickFetchProductsMore = (page: number) => {
-        if (page >= 1 && page <= pageCount) {
-            dispatch(setProductsTypeFetch('btn-more'));
+        if (!isFetchMore && page >= 1 && page <= pageCount) {
+            dispatch(setProductsTypeFetch(CatalogFetchType.More));
             dispatch(setCurrentPageProduct(page));
         }
     };
@@ -25,8 +26,6 @@ const CatalogProductsPagination: React.FC = () => {
     const onClickFetchProductsPage = (page: number) => {
         if (page >= 1 && page <= pageCount) {
             window?.scrollTo(0, 350);
-
-            dispatch(setProductsTypeFetch('btn-page'));
             dispatch(setCurrentPageProduct(page));
         }
     };
@@ -34,18 +33,15 @@ const CatalogProductsPagination: React.FC = () => {
     return (
         <div className="catalog-product-pagination">
             {currentPage !== pageCount ? (
-                isFetchMore ? (
-                    <button className="btn loader catalog-product-pagination__btn">
-                        <Loader />
-                    </button>
-                ) : (
-                    <button
-                        className="btn catalog-product-pagination__btn"
-                        onClick={() => onClickFetchProductsMore(currentPage + 1)}
-                    >
-                        Показать ещё
-                    </button>
-                )
+                <button
+                    type="button"
+                    className={getClassNames('btn catalog-product-pagination__btn', {
+                        loader: isFetchMore,
+                    })}
+                    onClick={() => onClickFetchProductsMore(currentPage + 1)}
+                >
+                    {isFetchMore ? <Loader /> : 'Показать ещё'}
+                </button>
             ) : null}
 
             <div className="catalog-product-pagination-pages">

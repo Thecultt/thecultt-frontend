@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { setFiltersSelectionsProduct, setFiltersSortProduct } from 'src/redux/actions/products';
+import { setFiltersSelectionProduct, setFiltersSortProduct } from 'src/redux/actions/products';
 import { CatalogFiltersBlockWrapper, Checkbox } from 'src/components';
 
 const CatalogFiltersSelections: React.FC = () => {
@@ -11,13 +11,13 @@ const CatalogFiltersSelections: React.FC = () => {
     const { filters } = useTypedSelector(({ products }) => products);
     const { selections } = useTypedSelector(({ products_filters }) => products_filters);
 
-    const onChangeSetSelection = (selectionId: string, selection: string) => {
-        dispatch(setFiltersSelectionsProduct(selectionId, selection));
+    const onChangeSetSelection = (selectionId: string) => {
+        dispatch(setFiltersSelectionProduct(selectionId));
         dispatch(setFiltersSortProduct('popular'));
     };
 
     return (
-        <CatalogFiltersBlockWrapper title="Подборки">
+        <CatalogFiltersBlockWrapper title="Подборки" defaultVisible={!!filters.selection}>
             {Object.keys(selections).map((key, index) => (
                 <div
                     className="catalog-filters-block-content-checkbox"
@@ -26,12 +26,8 @@ const CatalogFiltersSelections: React.FC = () => {
                     <Checkbox
                         id={`catalog-filters-block-content-selections-checkbox-${index}`}
                         label={selections[key]}
-                        onChange={() => onChangeSetSelection(key, selections[key])}
-                        checked={
-                            Object.keys(filters.selections).find((filtersSelection) => key === filtersSelection)
-                                ? true
-                                : false
-                        }
+                        onChange={() => onChangeSetSelection(key)}
+                        checked={key === filters.selection}
                     />
                 </div>
             ))}

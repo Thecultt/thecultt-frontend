@@ -15,6 +15,7 @@ export interface Product {
     size: string;
     is_trial: boolean;
     from_boutique: boolean;
+    from_parnter: boolean;
     price_drop: boolean;
 }
 
@@ -35,6 +36,7 @@ export interface ProductPage {
     subcategory: string;
     is_trial: boolean;
     from_boutique: boolean;
+    from_parnter: boolean;
     // price_drop: boolean;
 
     nuances: string;

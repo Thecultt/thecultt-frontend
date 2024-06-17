@@ -8,7 +8,8 @@ import { CartItem } from 'src/models/ICartItem';
 import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
 import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { ProductInfoTitleBoutique, ProductInfoTitleSplit } from 'src/components';
+import { ProductInfoTitleBoutique, ProductInfoTitlePartner, ProductInfoTitleSplit } from 'src/components';
+import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
 
 const ProductInfoTitle: React.FC<ProductPage> = ({
     id,
@@ -26,6 +27,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
     store_price,
     condition,
     from_boutique,
+    from_parnter,
 }) => {
     const dispatch = useDispatch();
 
@@ -66,6 +68,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 size,
                 is_trial,
                 from_boutique,
+                from_parnter,
                 price_drop: false,
             }) as any,
         );
@@ -90,6 +93,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 size,
                 is_trial,
                 from_boutique,
+                from_parnter,
                 price_drop: false,
             }) as any,
         );
@@ -131,13 +135,19 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 <h2 className="product-content-info-title__model">{name}</h2>
 
                 <Link
-                    to={`/catalog?categories=${category}&brands=${manufacturer}`}
+                    to={getCatalogFiltersUrl({
+                        categories: [category],
+                        brands: [manufacturer],
+                        sort: 'a',
+                    })}
                     className="product-content-info-title__brand"
                 >
                     {manufacturer}
                 </Link>
 
                 {from_boutique ? <ProductInfoTitleBoutique /> : null}
+
+                {from_parnter ? <ProductInfoTitlePartner /> : null}
 
                 <div className="product-content-info-title-price">
                     <h3 className="product-content-info-title-price__price">

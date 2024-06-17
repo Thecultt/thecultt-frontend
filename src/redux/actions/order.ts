@@ -23,25 +23,10 @@ export const sendOrderApplyPromocode =
                     payload: false,
                 });
 
-                if (totalPrice < 25000 && promocode == 'BYEAPRIL') {
+                if (totalPrice < data.card_sum_from) {
                     dispatch({
                         type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE,
-                        payload: 'Промокод не действителен на корзину менее 25 000₽',
-                    });
-
-                    dispatch({
-                        type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ACTIVE,
-                        payload: false,
-                    });
-
-                    dispatch({
-                        type: OrderStateActionTypes.SET_ORDER_PROMOCODE_IS_ERROR,
-                        payload: true,
-                    });
-                } else if (totalPrice < 700000 && promocode == 'MAY27') {
-                    dispatch({
-                        type: OrderStateActionTypes.SET_ORDER_PROMOCODE_ERROR_MESSAGE,
-                        payload: 'Промокод не действителен на корзину менее 700 000₽',
+                        payload: `Промокод не действителен на корзину менее ${data.card_sum_from}₽`,
                     });
 
                     dispatch({

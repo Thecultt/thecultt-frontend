@@ -2,10 +2,10 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 
 import $api from 'src/http';
-
-import { ProductActionTypes, ProductTypes, ProductsStateFilters } from '../types/IProducts';
-
 import { Product, ProductPage } from 'src/models/IProduct';
+import { SORT } from 'src/constants/catalog';
+
+import { CatalogFetchType, ProductActionTypes, ProductTypes, ProductsStateFilters } from '../types/IProducts';
 
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {
@@ -15,7 +15,7 @@ export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<Product
         current_page: number;
         total_items: number;
         items: Product[];
-    }>(`/catalog?availability=1&sort_by=a`);
+    }>(`/catalog?availability=1&sort_by=${SORT.a}`);
 
     // Measure product views / impressions
     window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
@@ -75,22 +75,22 @@ export const fetchProductsCatalog =
             sex: { [key: string]: string };
             availability: { [key: string]: string };
             size: { [key: string]: string };
-            selections: { [key: string]: string };
+            glass_frame: { [key: string]: string };
+
+            selection: string | null;
 
             boutique: boolean;
             price_drop: boolean;
 
-            glass_frame: { [key: string]: string };
-
             sort: string;
         },
         page: number,
-        typeFetch: 'btn-more' | 'btn-page',
+        typeFetch: CatalogFetchType,
     ) =>
     async (dispatch: Dispatch<ProductTypes>) => {
         dispatch({
             type:
-                typeFetch === 'btn-more'
+                typeFetch === CatalogFetchType.More
                     ? ProductActionTypes.SET_PRODUCTS_IS_FETCH_MORE
                     : ProductActionTypes.SET_PRODUCTS_IS_FETCH_PAGE,
             payload: true,
@@ -98,17 +98,16 @@ export const fetchProductsCatalog =
 
         const params = new URLSearchParams();
 
-        const conditionsArrray = Object.keys(filters.conditions).map((key) => key);
-        const categoriesArrray = Object.keys(filters.categories).map((key) => key);
-        const typesArrray = Object.keys(filters.types).map((key) => key);
-        const brandsArrray = Object.keys(filters.brands).map((key) => key);
-        const modelsArrray = Object.keys(filters.models).map((key) => key);
-        const colorsArrray = Object.keys(filters.colors).map((key) => key);
-        const sexArrray = Object.keys(filters.sex).map((key) => key);
-        const availabilityArrray = Object.keys(filters.availability).map((key) => key);
-        const sizeArrray = Object.keys(filters.size).map((key) => key);
-        const selectionsArrray = Object.keys(filters.selections).map((key) => key);
-        const glassFrameArrray = Object.keys(filters.glass_frame).map((key) => key);
+        const conditionsArray = Object.keys(filters.conditions).map((key) => key);
+        const categoriesArray = Object.keys(filters.categories).map((key) => key);
+        const typesArray = Object.keys(filters.types).map((key) => key);
+        const brandsArray = Object.keys(filters.brands).map((key) => key);
+        const modelsArray = Object.keys(filters.models).map((key) => key);
+        const colorsArray = Object.keys(filters.colors).map((key) => key);
+        const sexArray = Object.keys(filters.sex).map((key) => key);
+        const availabilityArray = Object.keys(filters.availability).map((key) => key);
+        const sizeArray = Object.keys(filters.size).map((key) => key);
+        const glassFrameArray = Object.keys(filters.glass_frame).map((key) => key);
 
         params.append('search', filters.search);
 
@@ -121,19 +120,19 @@ export const fetchProductsCatalog =
             params.append('price_from', String(filters.price.min));
         }
 
-        conditionsArrray.map((condition) => params.append('conditions', condition));
-        categoriesArrray.map((categories) => params.append('category', categories));
-        typesArrray.map((type) => params.append('subcategories', type));
-        brandsArrray.map((brand) => params.append('manufacturer', brand));
-        modelsArrray.map((model) => params.append('model_names', model));
-        colorsArrray.map((color) => params.append('color', color));
-        sexArrray.map((sex) => params.append('genders', sex));
+        conditionsArray.map((condition) => params.append('conditions', condition));
+        categoriesArray.map((categories) => params.append('category', categories));
+        typesArray.map((type) => params.append('subcategories', type));
+        brandsArray.map((brand) => params.append('manufacturer', brand));
+        modelsArray.map((model) => params.append('model_names', model));
+        colorsArray.map((color) => params.append('color', color));
+        sexArray.map((sex) => params.append('genders', sex));
 
-        glassFrameArrray.map((glass_frame) => params.append('glass_frame', glass_frame));
+        glassFrameArray.map((glass_frame) => params.append('glass_frame', glass_frame));
 
-        if (availabilityArrray.length) {
+        if (availabilityArray.length) {
             // availabilityArrray.map((availability) => availability == "Доступно" ? params.append("availability", "1") : params.append("availability", "0"))
-            availabilityArrray.map((availability) => {
+            availabilityArray.map((availability) => {
                 if (availability == 'Доступно') {
                     params.append('availability', '1');
                 } else if (availability == 'На примерке') {
@@ -147,13 +146,19 @@ export const fetchProductsCatalog =
         // 	params.append("availability", "1")
         // }
 
-        sizeArrray.map((size) => params.append('size', size));
-        selectionsArrray.map((selection) => params.append('selections', selection));
+        sizeArray.map((size) => params.append('size', size));
 
-        if (filters.boutique) params.append('from_boutique', String(filters.boutique));
-        if (filters.price_drop) params.append('price_drop', String(filters.price_drop));
+        if (filters.boutique) {
+            params.append('from_boutique', String(filters.boutique));
+        }
+        if (filters.price_drop) {
+            params.append('price_drop', String(filters.price_drop));
+        }
+        if (filters.selection) {
+            params.append('selections', filters.selection);
+        }
 
-        params.append('sort_by', filters.sort);
+        params.append('sort_by', filters.sort ?? SORT.a);
 
         params.append('page', String(page));
 
@@ -206,7 +211,7 @@ export const fetchProductsCatalog =
 
         dispatch({
             type:
-                typeFetch === 'btn-more'
+                typeFetch === CatalogFetchType.More
                     ? ProductActionTypes.SET_PRODUCTS_ITEMS_MORE
                     : ProductActionTypes.SET_PRODUCTS_ITEMS_PAGE,
             payload: items,
@@ -214,11 +219,18 @@ export const fetchProductsCatalog =
 
         dispatch({
             type:
-                typeFetch === 'btn-more'
+                typeFetch === CatalogFetchType.More
                     ? ProductActionTypes.SET_PRODUCTS_IS_FETCH_MORE
                     : ProductActionTypes.SET_PRODUCTS_IS_FETCH_PAGE,
             payload: false,
         });
+
+        if (typeFetch === CatalogFetchType.More) {
+            dispatch({
+                type: ProductActionTypes.SET_PRODUCTS_TYPE_FETCH,
+                payload: CatalogFetchType.Page,
+            });
+        }
     };
 
 export const fetchProductByArticle = (article: string) => async (dispatch: Dispatch<ProductTypes>) => {
@@ -307,7 +319,7 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
         });
 };
 
-export const setProductsTypeFetch = (type: 'btn-more' | 'btn-page') => ({
+export const setProductsTypeFetch = (type: CatalogFetchType) => ({
     type: ProductActionTypes.SET_PRODUCTS_TYPE_FETCH,
     payload: type,
 });
@@ -382,9 +394,9 @@ export const setFiltersSizeProduct = (size: string) => ({
     payload: size,
 });
 
-export const setFiltersSelectionsProduct = (selectionId: string, selection: string) => ({
-    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS,
-    payload: { selectionId, selection },
+export const setFiltersSelectionProduct = (selectionId: string) => ({
+    type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTION,
+    payload: selectionId,
 });
 
 export const setFiltersBoutiqueProduct = (boutique: boolean) => ({
@@ -405,4 +417,9 @@ export const setFiltersPriceDropProduct = (price_drop: boolean) => ({
 export const setFiltersSortProduct = (sort: string) => ({
     type: ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SORT,
     payload: sort,
+});
+
+export const clearProductsFilters = () => ({
+    type: ProductActionTypes.CLEAR_PRODUCTS_FILTERS,
+    payload: undefined,
 });

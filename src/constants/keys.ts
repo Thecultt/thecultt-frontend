@@ -16,3 +16,7 @@ export const LS_KEYS = {
     utm: 'utm',
     headerVisitMessage: 'header_visit_message',
 };
+
+export const KEYBOARD = {
+    enter: 'Enter',
+};

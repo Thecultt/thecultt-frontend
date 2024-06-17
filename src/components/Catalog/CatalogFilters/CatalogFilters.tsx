@@ -8,8 +8,8 @@ import {
     setFiltersCatalog,
     setFiltersCategoriesProduct,
     setFiltersAvailabilityProduct,
-    setProductsTypeFetch,
     setCurrentPageProduct,
+    clearProductsFilters,
 } from 'src/redux/actions/products';
 import {
     CatalogFiltersBoutiqueMedia,
@@ -28,6 +28,7 @@ import {
     CatalogFiltersPriceDrop,
 } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { SORT } from 'src/constants/catalog';
 
 interface Props {
     isOpenFiltersMedia: boolean;
@@ -47,7 +48,6 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
         conditions,
         categories,
         colors,
-        selections,
         glass_frame,
         isLoaded: isLoadedProductsFilters,
     } = useTypedSelector(({ products_filters }) => products_filters);
@@ -73,14 +73,14 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
                 sex: {},
                 availability: {},
                 size: {},
-                selections: {},
+                selection: query.get('selection') ?? null,
 
                 boutique: query.get('boutique') === 'true' ? true : false,
                 price_drop: query.get('price_drop') === 'true' ? true : false,
 
                 glass_frame: {},
 
-                sort: query.get('sort') as string,
+                sort: query.get('sort') ?? SORT.a,
             };
 
             query.getAll('conditions').map((condition) => {
@@ -119,10 +119,6 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
                 filters.size[size] = size;
             });
 
-            query.getAll('selections').map((selection) => {
-                filters.selections[selection] = selections[selection];
-            });
-
             query.getAll('glass_frame').map((glass_fame) => {
                 filters.glass_frame[glass_fame] = glass_fame;
             });
@@ -155,14 +151,14 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
                     sex: {},
                     availability: {},
                     size: {},
-                    selections: {},
+                    selection: null,
 
                     boutique: false,
                     price_drop: false,
 
                     glass_frame: {},
 
-                    sort: 'a',
+                    sort: SORT.a,
                 }),
             );
         };
@@ -170,8 +166,6 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
     React.useEffect(() => {
         if (filters.isParse) {
-            // dispatch(setProductsTypeFetch('btn-page'));
-
             const oldParamsData: any = {};
 
             const oldParams: any = new URLSearchParams(window.location.search);
@@ -195,7 +189,6 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
                 availability: Object.keys(filters.availability),
                 size: Object.keys(filters.size),
                 conditions: Object.keys(filters.conditions),
-                selections: Object.keys(filters.selections),
                 glass_frame: Object.keys(filters.glass_frame),
             };
 
@@ -224,6 +217,12 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
                 params['sort'] = filters.sort;
             }
 
+            if (filters.selection) {
+                params['selection'] = filters.selection;
+            } else {
+                delete params['selection'];
+            }
+
             params['page'] = currentPage;
 
             navigate({
@@ -247,8 +246,8 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
         // Object.keys(filters.availability)[0],
         Object.keys(filters.availability).length,
         Object.keys(filters.size).length,
-        Object.keys(filters.selections).length,
         Object.keys(filters.glass_frame).length,
+        filters.selection,
         filters.boutique,
         filters.price_drop,
         filters.sort,
@@ -282,41 +281,8 @@ const CatalogFilters: React.FC<Props> = ({ setIsOpenFiltersMedia, isOpenFiltersM
 
     const onClickClearFilters = () => {
         window.scrollTo(0, 0);
-
         setIsOpenFiltersMedia(false);
-
-        dispatch(setCurrentPageProduct(1));
-
-        dispatch(
-            setFiltersCatalog({
-                isParse: true,
-
-                search: '',
-
-                price: {
-                    min: 0,
-                    max: 0,
-                },
-
-                conditions: {},
-                categories: {},
-                types: {},
-                brands: {},
-                models: {},
-                colors: {},
-                sex: {},
-                availability: {},
-                size: {},
-                selections: {},
-
-                boutique: false,
-                price_drop: false,
-
-                glass_frame: {},
-
-                sort: 'a',
-            }),
-        );
+        dispatch(clearProductsFilters());
     };
 
     return (

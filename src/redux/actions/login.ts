@@ -27,6 +27,10 @@ export const sendLogin = (data: { username: string | null; password: string }, o
                     },
                 });
 
+                const ym = window.ym || (window.ym = []);
+
+                ym(68184745, 'reachGoal', 'login_password');
+
                 try {
                     if (localStorage.getItem('mindboxDeviceUUID')) {
                         axios.post(
@@ -114,17 +118,15 @@ export const sendLogin = (data: { username: string | null; password: string }, o
                     payload: false,
                 });
             })
-            .catch(({ response }) => {
+            .catch(() => {
                 dispatch({
                     type: LoginActionTypes.SET_LOGIN_IS_SEND,
                     payload: false,
                 });
 
-                if (response) {
-                    throw new SubmissionError({
-                        password: 'Неверный пароль',
-                    });
-                }
+                throw new SubmissionError({
+                    password: 'Неверный пароль',
+                });
             });
     };
 };

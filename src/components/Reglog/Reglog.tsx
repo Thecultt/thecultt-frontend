@@ -114,21 +114,21 @@ const Reglog: React.FC = () => {
     };
 
     const onSubmitRegister = (data: any) => {
-        dispatch(sendRegister(data) as any);
+        return dispatch(sendRegister(data) as any);
     };
 
     const onSubmitLogin = (data: any) => {
-        dispatch(sendLogin({ username: email, password: data.password }) as any);
+        return dispatch(sendLogin({ username: email, password: data.password }) as any);
     };
 
     const onSubmitRecoveryPassword = (data: any) => {
-        dispatch(sendRecoveryPassword(data.email, true) as any);
+        return dispatch(sendRecoveryPassword(data.email, true) as any);
     };
 
     const onSubmitRecoveryPasswordConfirmed = (data: any) => {
         const code = new URLSearchParams(window.location.search).get('code') as string;
 
-        dispatch(sendRecoveryPasswordConfirmed(data.password, code) as any);
+        return dispatch(sendRecoveryPasswordConfirmed(data.password, code) as any);
     };
 
     const popups: Record<ReglogStateTypesNotLogin, React.ReactNode> = {
