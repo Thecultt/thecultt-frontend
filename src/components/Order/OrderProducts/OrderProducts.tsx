@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { NumericFormat } from 'react-number-format';
 import { formValueSelector } from 'redux-form';
@@ -15,6 +14,7 @@ import { sendUpdateUser } from 'src/redux/actions/user';
 import { sendOrderApplyPromocode } from 'src/redux/actions/order';
 import { Loader, OrderProductsItem, OrderProductsPromocode } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { sendMindbox } from 'src/functions/mindbox';
 
 import orderPay from '../orderPay';
 
@@ -333,131 +333,109 @@ const OrderProducts: React.FC = () => {
         });
 
         try {
-            if (localStorage.getItem('mindboxDeviceUUID')) {
-                axios.post(
-                    `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.CreateAuthorizedOrder&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                    {
-                        customer: {
-                            ids: {
-                                websiteID: `${user.user_id}`,
-                            },
-                            discountCard: {
-                                ids: {
-                                    number: '',
-                                },
-                            },
-                            // "birthDate": "<Дата рождения>",
-                            // "sex": "<Пол>",
-                            // "timeZone": "<Часовой пояс>",
-                            lastName: `${user.middlename}`,
-                            firstName: `${user.name}`,
-                            // "middleName": "<Отчество>",
-                            // "fullName": "<ФИО>",
-                            // "area": {
-                            // 	"ids": {
-                            // 		"externalId": "<Внешний идентификатор зоны>"
-                            // 	}
-                            // },
-                            email: `${user.email}`,
-                            mobilePhone: `${phoneValue}`,
-                            customFields: {
-                                tipKlienta: 'Pokupatel',
-                                gorod: `${cityValue}`,
-                                // "istochnikPodpiski": "<Источник подписки>"
-                            },
-                            // "subscriptions": []
+            sendMindbox('Website.CreateAuthorizedOrder', {
+                customer: {
+                    ids: {
+                        websiteID: `${user.user_id}`,
+                    },
+                    discountCard: {
+                        ids: {
+                            number: '',
                         },
-                        order: {
-                            ids: {
-                                // "mindboxId": "<Идентификатор заказа в Mindbox>",
-                                websiteID: `${orderId}`,
-                            },
-                            // "cashdesk": {
-                            // 	"ids": {
-                            // 		"externalId": "<Идентификатор кассы>"
-                            // 	}
-                            // },
-                            deliveryCost: `${currentDelivery.price}`,
-                            customFields: {
-                                deliveryType: `${currentDelivery.title}`,
-                            },
-                            // "area": {
-                            // 	"ids": {
-                            // 		"externalId": "<Внешний идентификатор зоны>"
-                            // 	}
-                            // },
-                            // "totalPrice": "<Итоговая сумма, полученная от клиента. Должна учитывать возвраты и отмены. Используется для подсчета среднего чека.>",
+                    },
+                    // "birthDate": "<Дата рождения>",
+                    // "sex": "<Пол>",
+                    // "timeZone": "<Часовой пояс>",
+                    lastName: `${user.middlename}`,
+                    firstName: `${user.name}`,
+                    // "middleName": "<Отчество>",
+                    // "fullName": "<ФИО>",
+                    // "area": {
+                    // 	"ids": {
+                    // 		"externalId": "<Внешний идентификатор зоны>"
+                    // 	}
+                    // },
+                    email: `${user.email}`,
+                    mobilePhone: `${phoneValue}`,
+                    customFields: {
+                        tipKlienta: 'Pokupatel',
+                        gorod: `${cityValue}`,
+                        // "istochnikPodpiski": "<Источник подписки>"
+                    },
+                    // "subscriptions": []
+                },
+                order: {
+                    ids: {
+                        // "mindboxId": "<Идентификатор заказа в Mindbox>",
+                        websiteID: `${orderId}`,
+                    },
+                    // "cashdesk": {
+                    // 	"ids": {
+                    // 		"externalId": "<Идентификатор кассы>"
+                    // 	}
+                    // },
+                    deliveryCost: `${currentDelivery.price}`,
+                    customFields: {
+                        deliveryType: `${currentDelivery.title}`,
+                    },
+                    // "area": {
+                    // 	"ids": {
+                    // 		"externalId": "<Внешний идентификатор зоны>"
+                    // 	}
+                    // },
+                    // "totalPrice": "<Итоговая сумма, полученная от клиента. Должна учитывать возвраты и отмены. Используется для подсчета среднего чека.>",
+                    discounts: promocode.isActive
+                        ? [
+                              {
+                                  type: 'Промокод',
+                                  promoCode: {
+                                      ids: {
+                                          code: promocode.name,
+                                      },
+                                  },
+                                  amount: promocode.saleSum,
+                              },
+                          ]
+                        : [],
+                    lines: products.map((product) => {
+                        return {
+                            minPricePerItem: `${product.price}`,
+                            // "costPricePerItem": "<Себестоимость за единицу продукта>",
+                            basePricePerItem: `${product.price}`,
+                            quantity: '1',
+                            quantityType: 'int',
+                            discountedPricePerLine: `${totalPrice}`,
+                            // "lineNumber": "<Порядковый номер позиции заказа>",
+                            lineId: `${product.id}`,
                             discounts: promocode.isActive
                                 ? [
                                       {
                                           type: 'Промокод',
-                                          promoCode: {
+                                          externalPromoAction: {
                                               ids: {
-                                                  code: promocode.name,
+                                                  externalId: `${promocode.name}`,
                                               },
                                           },
-                                          amount: promocode.saleSum,
+                                          amount: `${promocode.saleSum}`,
                                       },
                                   ]
                                 : [],
-                            lines: products.map((product) => {
-                                return {
-                                    minPricePerItem: `${product.price}`,
-                                    // "costPricePerItem": "<Себестоимость за единицу продукта>",
-                                    basePricePerItem: `${product.price}`,
-                                    quantity: '1',
-                                    quantityType: 'int',
-                                    discountedPricePerLine: `${totalPrice}`,
-                                    // "lineNumber": "<Порядковый номер позиции заказа>",
-                                    lineId: `${product.id}`,
-                                    discounts: promocode.isActive
-                                        ? [
-                                              {
-                                                  type: 'Промокод',
-                                                  externalPromoAction: {
-                                                      ids: {
-                                                          externalId: `${promocode.name}`,
-                                                      },
-                                                  },
-                                                  amount: `${promocode.saleSum}`,
-                                              },
-                                          ]
-                                        : [],
-                                    product: {
-                                        ids: {
-                                            website: `${product.id}`,
-                                        },
-                                    },
-                                };
-                            }),
-                            email: `${user.email}`,
-                            mobilePhone: `${phoneValue.replace(/[^0-9]/g, '')}`,
-                        },
-                        executionDateTimeUtc: new Date(),
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json; charset=utf-8',
-                            Accept: 'application/json',
-                            Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                        },
-                    },
-                );
+                            product: {
+                                ids: {
+                                    website: `${product.id}`,
+                                },
+                            },
+                        };
+                    }),
+                    email: `${user.email}`,
+                    mobilePhone: `${phoneValue.replace(/[^0-9]/g, '')}`,
+                },
+                executionDateTimeUtc: new Date(),
+            });
 
-                axios.post(
-                    `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ClearCart&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                    {
-                        executionDateTimeUtc: new Date(),
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json; charset=utf-8',
-                            Accept: 'application/json',
-                            Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                        },
-                    },
-                );
-            }
+            sendMindbox('Website.ClearCart', {
+                executionDateTimeUtc: new Date(),
+            });
         } catch (e) {
             console.log(e);
         }

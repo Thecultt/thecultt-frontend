@@ -10,6 +10,10 @@ export const YM_KEYS = {
     uid: '_ym_uid',
 };
 
+export const MINDBOX_KEYS = {
+    deviceUUID: 'mindboxDeviceUUID',
+};
+
 export const LS_KEYS = {
     accessToken: 'access_token',
     cart: 'cart',

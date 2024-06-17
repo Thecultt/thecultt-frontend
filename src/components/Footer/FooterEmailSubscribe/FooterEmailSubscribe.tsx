@@ -1,42 +1,30 @@
 import React from 'react';
-import axios from 'axios';
 
 import { FooterEmailSubscribeForm } from 'src/components';
+import { sendMindbox } from 'src/functions/mindbox';
 
 const FooterEmailSubscribe: React.FC = () => {
     const [isSubmit, setIsSubmit] = React.useState(false);
 
     const onSubmit = async (data: any) => {
         try {
-            if (localStorage.getItem('mindboxDeviceUUID')) {
-                await axios.post(
-                    `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeVFooter&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                    {
-                        customer: {
-                            email: data.email,
-                            customFields: {
-                                tipKlienta: data.type,
-                            },
-                            subscriptions: [
-                                {
-                                    pointOfContact: 'Email',
-                                    isSubscribed: true,
-                                },
-                            ],
-                        },
-                        executionDateTimeUtc: new Date(),
+            await sendMindbox('KlientImportPriPodpiskeVFooter', {
+                customer: {
+                    email: data.email,
+                    customFields: {
+                        tipKlienta: data.type,
                     },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json; charset=utf-8',
-                            Accept: 'application/json',
-                            Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
+                    subscriptions: [
+                        {
+                            pointOfContact: 'Email',
+                            isSubscribed: true,
                         },
-                    },
-                );
+                    ],
+                },
+                executionDateTimeUtc: new Date(),
+            });
 
-                setIsSubmit(true);
-            }
+            setIsSubmit(true);
         } catch (e) {
             console.log(e);
         }

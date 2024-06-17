@@ -3,5 +3,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[sass]": {
     "editor.defaultFormatter": "syler.sass-indented"
-  }
+  },
+  "cSpell.words": ["mindbox"]
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 
 import {
     fetchCabinetSellParameters,
@@ -20,6 +19,7 @@ import {
     SellDelivery,
     SellProduct,
 } from 'src/components';
+import { sendMindbox } from 'src/functions/mindbox';
 
 const Sell: React.FC = () => {
     const dispatch = useDispatch();
@@ -83,53 +83,43 @@ const Sell: React.FC = () => {
                     };
                 }
 
-                if (user.email && localStorage.getItem('mindboxDeviceUUID')) {
-                    axios.post(
-                        `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=VizitNaStranicuProdat&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                        {
-                            customerAction: {
-                                customFields: data,
-                            },
-                            customer: {
-                                email: `${user.email}`,
-                                // "discountCard": {
-                                // 	"ids": {
-                                // 		"number": "<Номер дисконтной карты>"
-                                // 	}
-                                // },
-                                // "birthDate": "<Дата рождения>",
-                                // "sex": "<Пол>",
-                                // "timeZone": "<Часовой пояс>",
-                                // "lastName": "<Фамилия>",
-                                // "firstName": "<Имя>",
-                                // "middleName": "<Отчество>",
-                                // "fullName": "<ФИО>",
-                                // "area": {
-                                // 	"ids": {
-                                // 		"externalId": "<Внешний идентификатор зоны>"
-                                // 	}
-                                // },
-                                // "mobilePhone": "<Мобильный телефон>",
-                                ids: {
-                                    websiteID: `${user.id}`,
-                                },
-                                customFields: {
-                                    tipKlienta: 'Prodavec',
-                                    // "gorod": "<Город>",
-                                    // "istochnikPodpiski": "<Источник подписки>"
-                                },
-                                subscriptions: [],
-                            },
-                            executionDateTimeUtc: new Date(),
+                if (user.email) {
+                    sendMindbox('VizitNaStranicuProdat', {
+                        customerAction: {
+                            customFields: data,
                         },
-                        {
-                            headers: {
-                                'Content-Type': 'application/json; charset=utf-8',
-                                Accept: 'application/json',
-                                Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
+                        customer: {
+                            email: `${user.email}`,
+                            // "discountCard": {
+                            // 	"ids": {
+                            // 		"number": "<Номер дисконтной карты>"
+                            // 	}
+                            // },
+                            // "birthDate": "<Дата рождения>",
+                            // "sex": "<Пол>",
+                            // "timeZone": "<Часовой пояс>",
+                            // "lastName": "<Фамилия>",
+                            // "firstName": "<Имя>",
+                            // "middleName": "<Отчество>",
+                            // "fullName": "<ФИО>",
+                            // "area": {
+                            // 	"ids": {
+                            // 		"externalId": "<Внешний идентификатор зоны>"
+                            // 	}
+                            // },
+                            // "mobilePhone": "<Мобильный телефон>",
+                            ids: {
+                                websiteID: `${user.id}`,
                             },
+                            customFields: {
+                                tipKlienta: 'Prodavec',
+                                // "gorod": "<Город>",
+                                // "istochnikPodpiski": "<Источник подписки>"
+                            },
+                            subscriptions: [],
                         },
-                    );
+                        executionDateTimeUtc: new Date(),
+                    });
                 }
             } catch (e) {
                 console.log(e);

@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
-import axios from 'axios';
 
 import $api from 'src/http';
 import { ProductPage } from 'src/models/IProduct';
 import { CartItem } from 'src/models/ICartItem';
+import { sendMindbox } from 'src/functions/mindbox';
 
 import { CartActionTypes, CartActions, ICartItemsState } from '../types/ICart';
 
@@ -84,34 +84,24 @@ export const addCartItem = (item: CartItem) => {
     // 	}
     // });
 
-    axios.post(
-        `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.SetCart&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-        {
-            addProductToList: {
-                product: {
-                    ids: {
-                        website: item.id,
-                    },
+    sendMindbox('Website.SetCart', {
+        addProductToList: {
+            product: {
+                ids: {
+                    website: item.id,
                 },
-                // productGroup: {
-                // 	ids: {
-                // 		website: item.id
-                // 	}
-                // },
-                pricePerItem: item.price,
             },
-            customer: {
-                email: `${localStorage.getItem('email')}`,
-            },
+            // productGroup: {
+            // 	ids: {
+            // 		website: item.id
+            // 	}
+            // },
+            pricePerItem: item.price,
         },
-        {
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                Accept: 'application/json',
-                Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-            },
+        customer: {
+            email: `${localStorage.getItem('email')}`,
         },
-    );
+    });
 
     // const cart = JSON.parse(localStorage.getItem("cart") as string);
 
@@ -197,35 +187,25 @@ export const removeCartItem = (id: string, item: CartItem) => {
         },
     });
 
-    axios.post(
-        `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ClearCart&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-        {
-            customer: {
-                email: `${localStorage.getItem('email')}`,
-            },
-            removeProductFromList: {
-                product: {
-                    ids: {
-                        website: item.id,
-                    },
+    sendMindbox('Website.ClearCart', {
+        customer: {
+            email: `${localStorage.getItem('email')}`,
+        },
+        removeProductFromList: {
+            product: {
+                ids: {
+                    website: item.id,
                 },
-                // productGroup: {
-                // 	ids: {
-                // 		website: item.id
-                // 	}
-                // },
-                pricePerItem: item.price,
             },
-            executionDateTimeUtc: new Date(),
+            // productGroup: {
+            // 	ids: {
+            // 		website: item.id
+            // 	}
+            // },
+            pricePerItem: item.price,
         },
-        {
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                Accept: 'application/json',
-                Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-            },
-        },
-    );
+        executionDateTimeUtc: new Date(),
+    });
 
     // window.mindbox("async", {
     // 	operation: "Website.ClearCart",

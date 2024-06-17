@@ -4,6 +4,7 @@ import { Dispatch } from 'react';
 import { RegisterActions, RegisterActionTypes } from '../types/IRegister';
 import { LS_KEYS } from 'src/constants/keys';
 import { localStorageService } from 'src/services/storage';
+import { sendMindbox } from 'src/functions/mindbox';
 
 export const sendRegister = (info: {
     name: string;
@@ -31,107 +32,48 @@ export const sendRegister = (info: {
 
             if (info.promoCheckbox) {
                 try {
-                    if (localStorage.getItem('mindboxDeviceUUID')) {
-                        if (localStorage.getItem('redirect_reglog') === '/order') {
-                            axios.post(
-                                `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeVZakaze&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                                {
-                                    customer: {
-                                        ids: {
-                                            websiteID: data.id,
-                                        },
-                                        discountCard: {
-                                            ids: {
-                                                number: '',
-                                            },
-                                        },
-                                        birthDate: '',
-                                        sex: '',
-                                        timeZone: '',
-                                        lastName: '',
-                                        firstName: info.name,
-                                        middleName: info.lastname,
-                                        fullName: '',
-                                        area: {
-                                            ids: {
-                                                externalId: '',
-                                            },
-                                        },
-                                        customFields: {
-                                            tipKlienta: '',
-                                            gorod: '',
-                                            istochnikPodpiski: 'PriRegistraciiLK',
-                                        },
-                                        email: info.email,
-                                        mobilePhone: '',
-                                        subscriptions: [
-                                            {
-                                                pointOfContact: 'Email',
-                                                isSubscribed: true,
-                                            },
-                                        ],
-                                    },
-                                    executionDateTimeUtc: new Date(),
+                    const mindboxOperation =
+                        localStorage.getItem('redirect_reglog') === '/order'
+                            ? 'KlientImportPriPodpiskeVZakaze'
+                            : 'KlientImportPriPodpiskeRegaLK';
+                    sendMindbox(mindboxOperation, {
+                        customer: {
+                            ids: {
+                                websiteID: data.id,
+                            },
+                            discountCard: {
+                                ids: {
+                                    number: '',
                                 },
-                                {
-                                    headers: {
-                                        'Content-Type': 'application/json; charset=utf-8',
-                                        Accept: 'application/json',
-                                        Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                                    },
+                            },
+                            birthDate: '',
+                            sex: '',
+                            timeZone: '',
+                            lastName: '',
+                            firstName: info.name,
+                            middleName: info.lastname,
+                            fullName: '',
+                            area: {
+                                ids: {
+                                    externalId: '',
                                 },
-                            );
-                        } else {
-                            axios.post(
-                                `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeRegaLK&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
+                            },
+                            customFields: {
+                                tipKlienta: '',
+                                gorod: '',
+                                istochnikPodpiski: 'PriRegistraciiLK',
+                            },
+                            email: info.email,
+                            mobilePhone: '',
+                            subscriptions: [
                                 {
-                                    customer: {
-                                        ids: {
-                                            websiteID: data.id,
-                                        },
-                                        discountCard: {
-                                            ids: {
-                                                number: '',
-                                            },
-                                        },
-                                        birthDate: '',
-                                        sex: '',
-                                        timeZone: '',
-                                        lastName: '',
-                                        firstName: info.name,
-                                        middleName: info.lastname,
-                                        fullName: '',
-                                        area: {
-                                            ids: {
-                                                externalId: '',
-                                            },
-                                        },
-                                        customFields: {
-                                            tipKlienta: '',
-                                            gorod: '',
-                                            istochnikPodpiski: 'PriRegistraciiLK',
-                                        },
-                                        email: info.email,
-                                        mobilePhone: '',
-                                        subscriptions: [
-                                            {
-                                                pointOfContact: 'Email',
-                                                isSubscribed: true,
-                                            },
-                                        ],
-                                    },
-                                    executionDateTimeUtc: new Date(),
+                                    pointOfContact: 'Email',
+                                    isSubscribed: true,
                                 },
-                                {
-                                    headers: {
-                                        'Content-Type': 'application/json; charset=utf-8',
-                                        Accept: 'application/json',
-                                        Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                                    },
-                                },
-                            );
-                        }
-                    }
+                            ],
+                        },
+                        executionDateTimeUtc: new Date(),
+                    });
                 } catch (e) {
                     console.log(e);
                 }
