@@ -33,6 +33,6 @@ export const sendUpdateUser = (body: any, onSubmitSuccess?: () => void) => async
             payload: false,
         });
 
-        dispatch(setIsNotificationServerSuccess(true, 'Изминения созранены успешно') as any);
+        dispatch(setIsNotificationServerSuccess(true, 'Изменения сохранены успешно') as any);
     });
 };
