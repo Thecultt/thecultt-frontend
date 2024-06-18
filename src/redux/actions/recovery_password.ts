@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { Dispatch } from 'react';
 
+import { LS_KEYS } from 'src/constants/keys';
+import { localStorageService } from 'src/services/storage';
+
 import { RecoveryPasswordActions, RecoveryPasswordActionTypes } from '../types/IRecoveryPassword';
 
 export const sendRecoveryPassword = (email: string, isRedirect?: boolean) => {
@@ -15,8 +18,9 @@ export const sendRecoveryPassword = (email: string, isRedirect?: boolean) => {
                 email,
             })
             .then(({ data }) => {
-                if (localStorage.getItem('redirect_reglog')) {
-                    window.location.href = localStorage.getItem('redirect_reglog') as string;
+                const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
+                if (redirectReglog) {
+                    window.location.href = redirectReglog;
                 }
 
                 if (isRedirect) window.location.hash = 'recovery_password_success';
@@ -51,7 +55,7 @@ export const sendRecoveryPasswordConfirmed = (password: string, code: string) =>
         return axios
             .post(`${process.env.REACT_APP_API_DOMEN}/reset_password_confirm/`, { password, code })
             .then(({ data }) => {
-                localStorage.setItem('accessToken', data.access);
+                localStorageService.setItem(LS_KEYS.accessToken, data.access as string, { value: 1, unit: 'month' });
 
                 window.location.hash = '';
                 window.location.reload();

@@ -1,20 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
-import { sendRecoveryPassword } from 'src/redux/actions/recovery_password';
 
 const ReglogOldUserNewPassword: React.FC = () => {
-    const dispatch = useDispatch();
-
     const [isSend, setIsSend] = React.useState<boolean>(false);
     const [seconds, setSeconds] = React.useState<number>(30);
 
-    const onSend = () => {
-        // Send
-        setIsSend(true);
-
-        dispatch(sendRecoveryPassword(localStorage.getItem('email') as any) as any);
-    };
+    // const onSend = () => {
+    //     setIsSend(true);
+    //     dispatch(sendRecoveryPassword(localStorage.getItem('email') as any) as any);
+    // };
 
     React.useEffect(() => {
         if (seconds > 0 && isSend) {

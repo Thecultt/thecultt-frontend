@@ -5,6 +5,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { CabinetSellTypes, CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
 import { setCabinetSellCurrentStep, sendCreateCabinetSellImage } from 'src/redux/actions/cabinet_sell';
 import { SellBackBtn, SellImagesBlock } from 'src/components';
+import { getClassNames } from 'src/functions/getClassNames';
 
 import SellImagesImageBag1 from 'src/assets/images/sell/sell-images-image-bag-1.jpg';
 import SellImagesImageBag2 from 'src/assets/images/sell/sell-images-image-bag-2.jpg';
@@ -45,7 +46,6 @@ import SellImagesImageHand1 from 'src/assets/images/sell/sell-images-image-hand-
 import SellImagesImageHand2 from 'src/assets/images/sell/sell-images-image-hand-2.jpg';
 import SellImagesImageHand3 from 'src/assets/images/sell/sell-images-image-hand-3.jpg';
 import SellImagesImageHand4 from 'src/assets/images/sell/sell-images-image-hand-4.jpg';
-import { getClassNames } from 'src/functions/getClassNames';
 
 const SellImages: React.FC = () => {
     const dispatch = useDispatch();

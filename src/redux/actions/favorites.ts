@@ -1,8 +1,10 @@
-import axios from 'axios';
 import { Dispatch } from 'react';
 
 import $api from 'src/http';
 import { Product } from 'src/models/IProduct';
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
+import { sendMindbox } from 'src/functions/mindbox';
 
 import { FavoritesActionTypes, FavoritesActions } from '../types/IFavorites';
 
@@ -11,19 +13,16 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
         data: { items },
     } = await $api.get<{ items: Product[] }>(`/favorite-products/`);
 
-    window.mindbox('async', {
-        operation: 'Website.SetWishList',
-        data: {
-            productList: items.map((product) => ({
-                product: {
-                    ids: {
-                        website: `${product.id}`,
-                    },
+    sendMindbox('Website.SetWishList', {
+        productList: items.map((product) => ({
+            product: {
+                ids: {
+                    website: `${product.id}`,
                 },
-                count: 1,
-                pricePerItem: product.price,
-            })),
-        },
+            },
+            count: 1,
+            pricePerItem: product.price,
+        })),
     });
 
     dispatch({
@@ -33,7 +32,7 @@ export const fetchFavorites = () => async (dispatch: Dispatch<FavoritesActions>)
 };
 
 export const sendSaveFavorite = (item: Product) => async (dispatch: Dispatch<FavoritesActions>) => {
-    if (localStorage.getItem('accessToken')) {
+    if (localStorageService.getItem<string>(LS_KEYS.accessToken)) {
         await $api.post(`/add-favorite-product/${item.id}/`);
 
         window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
@@ -72,28 +71,16 @@ export const sendRemoveFavorite = (item: Product) => async (dispatch: Dispatch<F
     await $api.delete(`/remove-favorite-product/${item.id}/`);
 
     try {
-        if (localStorage.getItem('mindboxDeviceUUID')) {
-            axios.post(
-                `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.RemoveFromWishList&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                {
-                    removeProductFromList: {
-                        product: {
-                            ids: {
-                                website: `${item.id}`,
-                            },
-                        },
-                        pricePerItem: item.price,
+        sendMindbox('Website.RemoveFromWishList', {
+            removeProductFromList: {
+                product: {
+                    ids: {
+                        website: `${item.id}`,
                     },
                 },
-                {
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8',
-                        Accept: 'application/json',
-                        Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                    },
-                },
-            );
-        }
+                pricePerItem: item.price,
+            },
+        });
     } catch (e) {
         console.log(e);
     }

@@ -7,6 +7,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
 import { HeaderCartModalItem } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 interface HeaderCartModalProps {
     state: boolean;
@@ -16,7 +17,9 @@ interface HeaderCartModalProps {
 const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) => {
     const dispatch = useDispatch();
 
-    const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    // const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    const { isLoaded: isLoadedUser } = useAuthUser();
+
     const { items } = useTypedSelector(({ cart }) => cart);
 
     const changeCheck = (article: string, status: boolean) => {

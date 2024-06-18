@@ -4,6 +4,7 @@ import { reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { setOrderIsValid } from 'src/redux/actions/order';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import {
     OrderFormContact,
     OrderFormCountry,
@@ -25,7 +26,9 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
     const [indexForm, setIndexForm] = React.useState<number>(0);
 
-    const { isLoaded, user } = useTypedSelector(({ user }) => user);
+    // const { isLoaded, user } = useTypedSelector(({ user }) => user);
+    const { isLoaded, user } = useAuthUser();
+
     const {
         address: { country, city, street },
     } = useTypedSelector(({ order }) => order);

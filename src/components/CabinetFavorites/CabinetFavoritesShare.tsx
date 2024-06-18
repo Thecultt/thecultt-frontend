@@ -2,10 +2,11 @@ import React from 'react';
 
 import { Popup } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
-import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 const CabinetFavoritesShare: React.FC = () => {
-    const { user } = useTypedSelector(({ user }) => user);
+    // const { user } = useTypedSelector(({ user }) => user);
+    const { user } = useAuthUser();
 
     const [statePopup, setStatePopup] = React.useState<boolean>(false);
     const [statePopupCopy, setStatePopupCopy] = React.useState<boolean>(false);

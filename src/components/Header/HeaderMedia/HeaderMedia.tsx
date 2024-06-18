@@ -6,8 +6,10 @@ import { getClassNames } from 'src/functions/getClassNames';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { HeaderMediaLinkTab, Footer } from 'src/components';
-import { categories } from 'src/constants/catalog';
+import { CATEGORIES } from 'src/constants/catalog';
+
 import Logo from 'src/assets/images/logo.svg';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 import { HeaderMediaSelectionsBanner } from './HeaderMediaSelectionsBanner';
 
@@ -28,7 +30,9 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
     const { items } = useTypedSelector(({ cart }) => cart);
     const { items: selections } = useTypedSelector(({ selections }) => selections);
 
-    const mappedCategories = categories.map((item) => ({ title: item, ...filtersCategories[item] }));
+    const mappedCategories = CATEGORIES.map((item) => ({ title: item, ...filtersCategories[item] }));
+
+    const { isLoggedIn } = useAuthUser();
 
     const categoryAllTitles: Record<string, string> = {
         Обувь: 'Вся обувь',
@@ -129,43 +133,23 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                     </Link>
 
                     <div className="header-media-icon-group">
-                        {localStorage.getItem('accessToken') ? (
-                            <Link to="/cabinet/setting" className="header-media-icon">
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
-                                        stroke="#202020"
-                                        strokeWidth="1.5"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </Link>
-                        ) : (
-                            <Link to={`${search}#reglog`} className="header-media-icon">
-                                <svg
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
-                                        stroke="#202020"
-                                        strokeWidth="1.5"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </Link>
-                        )}
+                        <Link to={isLoggedIn ? '/cabinet/setting' : `${search}#reglog`} className="header-media-icon">
+                            <svg
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M20 21C20 19.6044 20 18.9067 19.8278 18.3389C19.44 17.0605 18.4395 16.06 17.1611 15.6722C16.5933 15.5 15.8956 15.5 14.5 15.5H9.5C8.10444 15.5 7.40665 15.5 6.83886 15.6722C5.56045 16.06 4.56004 17.0605 4.17224 18.3389C4 18.9067 4 19.6044 4 21M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
+                                    stroke="#202020"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        </Link>
 
                         <Link to="/cart" className="header-media-icon">
                             {Object.keys(items).length ? (
@@ -354,7 +338,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
                                 Профиль
                             </Link>
                             <Link
-                                to={localStorage.getItem('accessToken') ? '/cabinet/sell' : 'sell'}
+                                to={isLoggedIn ? '/cabinet/sell' : 'sell'}
                                 className="header-media-modal-menu-links__link"
                                 onClick={toggleState}
                             >
@@ -402,7 +386,7 @@ const HeaderMedia: React.FC<HeaderMediaProps> = ({ setIsOpenSearch }) => {
 
                     <div className="header-media-modal-menu-btn">
                         <Link
-                            to={localStorage.getItem('accessToken') ? '/cabinet/sell' : 'sell'}
+                            to={isLoggedIn ? '/cabinet/sell' : 'sell'}
                             className="btn header-media-modal-menu-btn__btn"
                             onClick={() => {
                                 window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.

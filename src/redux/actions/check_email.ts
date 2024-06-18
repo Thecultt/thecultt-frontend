@@ -3,9 +3,10 @@ import { Dispatch } from 'react';
 
 import { ReglogStateTypesNotLogin } from 'src/components/Reglog/Reglog';
 import { checkWarningEmail } from 'src/functions/checkWarningEmail';
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
 
 import { CheckEmailActionTypes, CheckEmailActions } from '../types/ICheckEmail';
-
 import { sendRecoveryPassword } from './recovery_password';
 
 export const sendCheckEmail =
@@ -21,7 +22,7 @@ export const sendCheckEmail =
             payload: true,
         });
 
-        sessionStorage.setItem('email', email);
+        localStorageService.setItem(LS_KEYS.email, email);
 
         let nextPopupType = ReglogStateTypesNotLogin.LOGIN;
 

@@ -2,9 +2,9 @@ import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { createTextMask } from 'redux-form-input-masks';
 
-import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { Loader, RenderCheckbox, RenderInput } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 import { validate } from './validate';
 
@@ -15,10 +15,13 @@ const CabinetSellsListPaymentInfoPopupForm: React.FC<{} & InjectedFormProps<{}, 
     submitting,
     initialize,
 }) => {
-    const { user, isLoaded, isSending } = useTypedSelector(({ user }) => user);
+    // const { user, isLoaded, isSending } = useTypedSelector(({ user }) => user);
+    const { isLoaded, isSending, user } = useAuthUser();
 
     React.useEffect(() => {
-        if (isLoaded) initialize({ email: user.email, confirm: true });
+        if (isLoaded) {
+            initialize({ email: user.email, confirm: true });
+        }
     }, [isLoaded]);
 
     return (

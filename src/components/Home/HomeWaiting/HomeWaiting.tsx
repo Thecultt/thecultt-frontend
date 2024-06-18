@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import HomeWaitingImage from 'src/assets/images/home/home-waiting.jpg';
+import { WaitingPopupType } from 'src/types/waiting';
 
 const HomeWaiting: React.FC = () => {
     return (
@@ -13,7 +14,7 @@ const HomeWaiting: React.FC = () => {
                     Подпишитесь на товар, и мы уведомим вас, когда он будет в наличии.
                 </p>
 
-                <Link to="#create_waiting" className="btn home-waiting-text__btn">
+                <Link to={`#${WaitingPopupType.Form}`} className="btn home-waiting-text__btn">
                     Оставить заявку
                 </Link>
             </div>

@@ -2,6 +2,9 @@ import axios from 'axios';
 import { Dispatch } from 'react';
 
 import { RegisterActions, RegisterActionTypes } from '../types/IRegister';
+import { LS_KEYS } from 'src/constants/keys';
+import { localStorageService } from 'src/services/storage';
+import { sendMindbox } from 'src/functions/mindbox';
 
 export const sendRegister = (info: {
     name: string;
@@ -17,8 +20,7 @@ export const sendRegister = (info: {
         });
 
         axios.post(`${process.env.REACT_APP_API_DOMEN}/register/`, info).then(({ data }) => {
-            localStorage.setItem('accessToken', data.access);
-            localStorage.setItem('accessToken_is_remove', 'true');
+            localStorageService.setItem(LS_KEYS.accessToken, data.access as string, { value: 1, unit: 'month' });
 
             window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
             window.dataLayer.push({
@@ -30,114 +32,58 @@ export const sendRegister = (info: {
 
             if (info.promoCheckbox) {
                 try {
-                    if (localStorage.getItem('mindboxDeviceUUID')) {
-                        if (localStorage.getItem('redirect_reglog') === '/order') {
-                            axios.post(
-                                `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeVZakaze&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                                {
-                                    customer: {
-                                        ids: {
-                                            websiteID: data.id,
-                                        },
-                                        discountCard: {
-                                            ids: {
-                                                number: '',
-                                            },
-                                        },
-                                        birthDate: '',
-                                        sex: '',
-                                        timeZone: '',
-                                        lastName: '',
-                                        firstName: info.name,
-                                        middleName: info.lastname,
-                                        fullName: '',
-                                        area: {
-                                            ids: {
-                                                externalId: '',
-                                            },
-                                        },
-                                        customFields: {
-                                            tipKlienta: '',
-                                            gorod: '',
-                                            istochnikPodpiski: 'PriRegistraciiLK',
-                                        },
-                                        email: info.email,
-                                        mobilePhone: '',
-                                        subscriptions: [
-                                            {
-                                                pointOfContact: 'Email',
-                                                isSubscribed: true,
-                                            },
-                                        ],
-                                    },
-                                    executionDateTimeUtc: new Date(),
+                    const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
+                    const mindboxOperation =
+                        redirectReglog === '/order'
+                            ? 'KlientImportPriPodpiskeVZakaze'
+                            : 'KlientImportPriPodpiskeRegaLK';
+
+                    sendMindbox(mindboxOperation, {
+                        customer: {
+                            ids: {
+                                websiteID: data.id,
+                            },
+                            discountCard: {
+                                ids: {
+                                    number: '',
                                 },
-                                {
-                                    headers: {
-                                        'Content-Type': 'application/json; charset=utf-8',
-                                        Accept: 'application/json',
-                                        Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                                    },
+                            },
+                            birthDate: '',
+                            sex: '',
+                            timeZone: '',
+                            lastName: '',
+                            firstName: info.name,
+                            middleName: info.lastname,
+                            fullName: '',
+                            area: {
+                                ids: {
+                                    externalId: '',
                                 },
-                            );
-                        } else {
-                            axios.post(
-                                `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeRegaLK&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
+                            },
+                            customFields: {
+                                tipKlienta: '',
+                                gorod: '',
+                                istochnikPodpiski: 'PriRegistraciiLK',
+                            },
+                            email: info.email,
+                            mobilePhone: '',
+                            subscriptions: [
                                 {
-                                    customer: {
-                                        ids: {
-                                            websiteID: data.id,
-                                        },
-                                        discountCard: {
-                                            ids: {
-                                                number: '',
-                                            },
-                                        },
-                                        birthDate: '',
-                                        sex: '',
-                                        timeZone: '',
-                                        lastName: '',
-                                        firstName: info.name,
-                                        middleName: info.lastname,
-                                        fullName: '',
-                                        area: {
-                                            ids: {
-                                                externalId: '',
-                                            },
-                                        },
-                                        customFields: {
-                                            tipKlienta: '',
-                                            gorod: '',
-                                            istochnikPodpiski: 'PriRegistraciiLK',
-                                        },
-                                        email: info.email,
-                                        mobilePhone: '',
-                                        subscriptions: [
-                                            {
-                                                pointOfContact: 'Email',
-                                                isSubscribed: true,
-                                            },
-                                        ],
-                                    },
-                                    executionDateTimeUtc: new Date(),
+                                    pointOfContact: 'Email',
+                                    isSubscribed: true,
                                 },
-                                {
-                                    headers: {
-                                        'Content-Type': 'application/json; charset=utf-8',
-                                        Accept: 'application/json',
-                                        Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                                    },
-                                },
-                            );
-                        }
-                    }
+                            ],
+                        },
+                        executionDateTimeUtc: new Date(),
+                    });
                 } catch (e) {
                     console.log(e);
                 }
             }
 
-            if (localStorage.getItem('redirect_reglog')) {
-                window.location.href = localStorage.getItem('redirect_reglog') as string;
+            const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
+            if (redirectReglog) {
+                window.location.href = redirectReglog;
                 window.location.hash = 'welcome';
             } else {
                 window.location.hash = 'welcome';

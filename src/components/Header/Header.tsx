@@ -14,7 +14,9 @@ import {
 import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/header';
 import { useDebounce } from 'src/hooks/useDebounce';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
-import { KEYBOARD } from 'src/constants/keys';
+import { useAuthUser } from 'src/hooks/useAuthUser';
+import { useLS } from 'src/hooks/useLS';
+import { LS_KEYS, KEYBOARD } from 'src/constants/keys';
 import { SELECTIONS_IDS, SORT } from 'src/constants/catalog';
 
 import Logo from 'src/assets/images/logo.svg';
@@ -180,10 +182,12 @@ const Header: React.FC = () => {
     const [isOpenSearch, setIsOpenSearch] = React.useState(false);
     const [isSelectionsMenuVisible, setIsSelectionsMenuVisible] = React.useState(false);
 
+    const [headerVisitMessageClosed] = useLS(LS_KEYS.headerVisitMessage, false);
+
     const { search } = useTypedSelector(({ header }) => header);
     const debouncedValue = useDebounce(search.value);
 
-    const { items: selections } = useTypedSelector(({ selections }) => selections);
+    const { isLoggedIn } = useAuthUser();
 
     const openHoverMenu = (index: number) => {
         if (!isOpenSearch) {
@@ -237,7 +241,7 @@ const Header: React.FC = () => {
 
     return (
         <div className="header-global-wrapper">
-            {localStorage.getItem('header-message-visit-22.10.2023-isClose') ? null : <HeaderTopMessage />}
+            {!headerVisitMessageClosed ? <HeaderTopMessage /> : null}
 
             <div className="header-container">
                 <header className="header">
@@ -261,7 +265,7 @@ const Header: React.FC = () => {
                                 <div className="header-block">
                                     <div className="header-block-btn">
                                         <Link
-                                            to={localStorage.getItem('accessToken') ? '/cabinet/sell' : 'sell'}
+                                            to={isLoggedIn ? '/cabinet/sell' : 'sell'}
                                             className="header-block-btn__btn"
                                             onClick={() => {
                                                 window.dataLayer.push({
@@ -398,7 +402,7 @@ const Header: React.FC = () => {
                                 <Link to="/auth" className="header-menu__link">
                                     Подлинность
                                 </Link>
-                                {/* 
+                                {/*
 								<a href="/catalog?categories=Сумки&categories=Обувь&categories=Аксессуары&availability=Доступно&availability=На+примерке&selections=1&utm_source=website&utm_medium=header&utm_campaign=selection_Doletskaya" className="header-menu__link">
 									Архив Алены Долецкой
 								</a> */}
