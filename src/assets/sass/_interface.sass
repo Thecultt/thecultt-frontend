@@ -546,14 +546,8 @@ button
 			display: flex
 			align-items: center
 
-			&__text
-				+ManropeMedium
-
-				& > span
-					color: $gray
-
 			&-image
-				margin-left: 12px
+				margin-right: 12px
 
 				width: 32px
 				height: 32px
@@ -562,6 +556,12 @@ button
 				background-size: cover
 				background-position: bottom center
 				background-repeat: no-repeat
+
+			&__text
+				+ManropeMedium
+
+				& > span
+					color: $gray
 
 	&-list
 		top: calc( 100% + 5px )
@@ -635,12 +635,8 @@ button
 				display: flex
 				align-items: center
 
-				&__text
-					user-select: none
-					font-size: 16px
-
 				&-image
-					margin-left: 12px
+					margin-right: 12px
 
 					width: 32px
 					height: 32px
@@ -649,6 +645,10 @@ button
 					background-size: cover
 					background-position: bottom center
 					background-repeat: no-repeat
+
+				&__text
+					user-select: none
+					font-size: 16px
 
 			& > svg
 				opacity: 0

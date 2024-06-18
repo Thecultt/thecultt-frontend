@@ -49,16 +49,16 @@ const Select: React.FC<Props> = ({ label, items, onChange }) => {
         <div className="select" ref={SelectRef} onClick={() => setState(true)}>
             <div className="select-current-item">
                 <div className="select-current-item-info">
-                    <p className="select-current-item-info__text">
-                        {currentItem.title !== '' ? currentItem.title : <span>{label}</span>}
-                    </p>
-
                     {currentItem.image && (
                         <div
                             className="select-current-item-info-image"
                             style={{ backgroundImage: `url('${currentItem.image}')` }}
                         />
                     )}
+
+                    <p className="select-current-item-info__text">
+                        {currentItem.title !== '' ? currentItem.title : <span>{label}</span>}
+                    </p>
                 </div>
 
                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,14 +89,14 @@ const Select: React.FC<Props> = ({ label, items, onChange }) => {
                             onClick={() => toggleCurrentItem(item)}
                         >
                             <div className="select-list-item-info">
-                                <p className="select-list-item-info__text">{item.title}</p>
-
                                 {item.image && (
                                     <div
                                         className="select-list-item-info-image"
                                         style={{ backgroundImage: `url('${item.image}')` }}
                                     />
                                 )}
+
+                                <p className="select-list-item-info__text">{item.title}</p>
                             </div>
 
                             <svg
