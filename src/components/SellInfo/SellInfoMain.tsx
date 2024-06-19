@@ -12,6 +12,16 @@ import { Conditions } from 'src/types/product';
 import SellInfoMainImage from 'src/assets/images/sell-info/sell-info-main.jpg';
 import Logo from 'src/assets/images/logo.svg';
 
+import HermesKellyImage from 'src/assets/images/sell-info/products/hermesKelly.jpg';
+import CelineClassicImage from 'src/assets/images/sell-info/products/celineClassic.jpg';
+import PradaReNylonImage from 'src/assets/images/sell-info/products/pradaReNylon.jpg';
+import HermesShoesImage from 'src/assets/images/sell-info/products/hermesShoes.jpg';
+import ChanelShoesImage from 'src/assets/images/sell-info/products/chanelShoes.jpg';
+import LouisVuittonWalletImage from 'src/assets/images/sell-info/products/louisVuittonWallet.jpg';
+import GucciBeltImage from 'src/assets/images/sell-info/products/gucciBelt.jpg';
+import CelineKnotBraceletImage from 'src/assets/images/sell-info/products/celineKnotBracelet.jpg';
+import CartierPanthereImage from 'src/assets/images/sell-info/products/cartierPanthere.jpg';
+
 const models: {
     [key: string]: {
         title: string;
@@ -21,7 +31,7 @@ const models: {
 } = {
     hermesKelly: {
         title: 'Hermes Kelly',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/22870/0db4859d192bd57bbd11362584092b07df5cc547.png',
+        image: HermesKellyImage,
         prices: {
             Новое: 2601000,
             Отличное: 1530000,
@@ -30,7 +40,7 @@ const models: {
     },
     celineClassic: {
         title: 'Celine Classic',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/72929/2Mf1Ct33hSuPXo3WdwpboPMMdGHbkmHytRRDVdJ8.jpg',
+        image: CelineClassicImage,
         prices: {
             Новое: 165000,
             Отличное: 150000,
@@ -39,7 +49,7 @@ const models: {
     },
     pradaReNylon: {
         title: 'Prada Re-Nylon',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/4033/a4da8d9068ca97e498142245ec1a286762663949.jpg',
+        image: PradaReNylonImage,
         prices: {
             Новое: 112500,
             Отличное: 63000,
@@ -48,7 +58,7 @@ const models: {
     },
     hermesShoes: {
         title: 'Hermes сандалии',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/23919/3493ac5ff6dad9b77ef8f9f15ebb5bb4a259fed5.jpg',
+        image: HermesShoesImage,
         prices: {
             Новое: 82500,
             Отличное: 78750,
@@ -57,7 +67,7 @@ const models: {
     },
     chanelShoes: {
         title: 'Chanel лоферы',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/74023/rik7N7MCWKZ3p4DZe4kaRcML1LdB7bHr0Ni5T3fO.jpg',
+        image: ChanelShoesImage,
         prices: {
             Новое: 127500,
             Отличное: 105000,
@@ -66,7 +76,7 @@ const models: {
     },
     louisVuittonWallet: {
         title: 'Louis Vuitton Wallet',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/5560/ff465c10d19e543dca4843518716e31828993819.jpg',
+        image: LouisVuittonWalletImage,
         prices: {
             Новое: 38500,
             Отличное: 26000,
@@ -75,7 +85,7 @@ const models: {
     },
     gucciBelt: {
         title: 'Gucci Belt',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/4327/48e29de16d51817d3c286e74cd4302ddcb35d52f.jpg',
+        image: GucciBeltImage,
         prices: {
             Новое: 26000,
             Отличное: 22750,
@@ -84,17 +94,16 @@ const models: {
     },
     celineKnotBracelet: {
         title: 'Celine Knot Bracelet',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/73491/T30E4vpsJvvSAuHYlIu2u2ZBBvKqNIHA8vtkUmGn.jpg',
+        image: CelineKnotBraceletImage,
         prices: {
             Новое: 32200,
             Отличное: 26000,
             Хорошее: 18300,
         },
     },
-
     cartierPanthere: {
         title: 'Cartier Panthère',
-        image: 'https://storage.yandexcloud.net/prod-thecultt/73092/cJcOuOdLUuCdw6GaWsHcXKn2HXOMTwQ0cx2ofVd2.jpg',
+        image: CartierPanthereImage,
         prices: {
             Новое: 440000,
             Отличное: 345000,

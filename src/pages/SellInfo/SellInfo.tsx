@@ -30,7 +30,7 @@ const SellInfo: React.FC = () => {
 
                     <SellInfoCategories />
 
-                    <SellInfoProcess />
+                    {/* <SellInfoProcess /> */}
 
                     <SellInfoCommission />
 

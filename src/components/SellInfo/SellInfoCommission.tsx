@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SellInfoCommission: React.FC = () => {
     return (
@@ -12,25 +13,33 @@ const SellInfoCommission: React.FC = () => {
             <div className="sell-info-commission-blocks">
                 <div className="sell-info-commission-blocks-col">
                     <div className="sell-info-commission-blocks-col-block">
-                        <h3 className="sell-info-commission-blocks-col-block__title">Выкуп</h3>
+                        <div className="sell-info-commission-blocks-col-block-text">
+                            <h3 className="sell-info-commission-blocks-col-block-text__title">Выкуп</h3>
 
-                        <p className="sell-info-commission-blocks-col-block__description">
-                            Мы&nbsp;направим вам выплату сразу после того, как удостоверимся в&nbsp;подлинности лота.
-                            Аутентификация в&nbsp;нашем офисе обычно занимает 3-4 рабочих дня.
-                        </p>
+                            <p className="sell-info-commission-blocks-col-block-text__description">
+                                Мы&nbsp;направим вам выплату сразу после того, как удостоверимся в&nbsp;подлинности
+                                лота. Аутентификация в&nbsp;нашем офисе обычно занимает 3-4 рабочих дня.
+                            </p>
+                        </div>
                     </div>
 
                     <div className="sell-info-commission-blocks-col-block">
-                        <h3 className="sell-info-commission-blocks-col-block__title">Трейд-ин</h3>
+                        <div className="sell-info-commission-blocks-col-block-text">
+                            <h3 className="sell-info-commission-blocks-col-block-text__title">Трейд-ин</h3>
 
-                        <p className="sell-info-commission-blocks-col-block__description">
-                            Мы&nbsp;предложим депозит, соответствующий стоимости вашего лота. Вы&nbsp;сможете сразу
-                            потратить его на&nbsp;покупку любой другой вещи с&nbsp;сайта THE CULTT.
-                            <br />
-                            <br />
-                            При обмене сумки, купленной у&nbsp;нас, для вас будут действовать особые выгодные условия
-                            депозита. Подробнее о&nbsp;Круговороте
-                        </p>
+                            <p className="sell-info-commission-blocks-col-block-text__description">
+                                Мы&nbsp;предложим депозит, соответствующий стоимости вашего лота. Вы&nbsp;сможете сразу
+                                потратить его на&nbsp;покупку любой другой вещи с&nbsp;сайта THE CULTT.
+                                <br />
+                                <br />
+                                При обмене сумки, купленной у&nbsp;нас, для вас будут действовать особые выгодные
+                                условия депозита.
+                            </p>
+                        </div>
+
+                        <Link to="/exchange" className="sell-info-commission-blocks-col-block__link">
+                            Подробнее о Круговороте
+                        </Link>
                     </div>
                 </div>
 

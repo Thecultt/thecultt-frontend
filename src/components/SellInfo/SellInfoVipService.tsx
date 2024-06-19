@@ -12,8 +12,7 @@ const SellInfoVipService: React.FC = () => {
                 </h2>
                 <p className="sell-info-vip-service-text__description">
                     Не&nbsp;нужно тратить время на&nbsp;заполнение заявок на&nbsp;каждый лот и&nbsp;поиск покупателей.
-                    Просто отправьте общую фотографию всех товаров, и&nbsp;наш консьерж заберет ваши вещи. Подробнее
-                    о&nbsp;нашем VIP-сервисе.
+                    Просто отправьте общую фотографию всех товаров, и&nbsp;наш консьерж заберет ваши вещи.
                 </p>
 
                 <Link to="/vipservice" className="btn sell-info-vip-service-text__btn">
