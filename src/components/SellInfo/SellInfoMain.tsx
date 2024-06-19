@@ -174,6 +174,8 @@ const SellInfoMain: React.FC = () => {
                         </div>
                     </div>
 
+                    <span className="sell-info-main-text-form__and">или</span>
+
                     <Link to="/cabinet/sell" className="btn sell-info-main-text-form__btn">
                         Узнать стоимость своего товара
                     </Link>
