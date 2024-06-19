@@ -1,8 +1,11 @@
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
+
 import { CheckEmailState, CheckEmailActions, CheckEmailActionTypes } from '../types/ICheckEmail';
 
 const initialState: CheckEmailState = {
     isSend: false,
-    email: sessionStorage.getItem('email') ? sessionStorage.getItem('email') : '',
+    email: localStorageService.getItem<string>(LS_KEYS.email, ''),
     isExisting: false,
 };
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -12,10 +12,14 @@ const CabinetSettingPaymentBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     pristine,
     submitting,
 }) => {
+    // const {
+    //     user: { pasport, inn, bik, fullname, rs },
+    //     isSending,
+    // } = useTypedSelector(({ user }) => user);
     const {
-        user: { pasport, inn, bik, fullname, rs },
         isSending,
-    } = useTypedSelector(({ user }) => user);
+        user: { pasport, inn, bik, fullname, rs },
+    } = useAuthUser();
 
     const [state, setState] = React.useState(pasport !== '' || pasport !== null);
     const [isEdit, setIsEdit] = React.useState(pasport === '' || pasport === null);

@@ -7,6 +7,7 @@ import Logo from 'src/assets/images/logo.svg';
 import { FooterMenuBlock, FooterEmailSubscribe } from 'src/components';
 import { MEDIA_SIZES } from 'src/constants/styles';
 import { getClassNames } from 'src/functions/getClassNames';
+import { WaitingPopupType } from 'src/types/waiting';
 
 interface FooterProps {
     transparent?: boolean;
@@ -32,7 +33,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
                     <Link to={'/help-delivery'} className="footer-block-menu-block__link">
                         Доставка и оплата
                     </Link>
-                    <Link to={'#create_waiting'} className="footer-block-menu-block__link">
+                    <Link to={`#${WaitingPopupType.Form}`} className="footer-block-menu-block__link">
                         Лист ожидания
                     </Link>
                     <Link to={'/brands'} className="footer-block-menu-block__link">

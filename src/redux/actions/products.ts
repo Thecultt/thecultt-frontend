@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Dispatch } from 'redux';
 
 import $api from 'src/http';
@@ -6,6 +5,7 @@ import { Product, ProductPage } from 'src/models/IProduct';
 import { SORT } from 'src/constants/catalog';
 
 import { CatalogFetchType, ProductActionTypes, ProductTypes, ProductsStateFilters } from '../types/IProducts';
+import { sendMindbox } from 'src/functions/mindbox';
 
 export const fetchFirstProductsCatalog = () => async (dispatch: Dispatch<ProductTypes>) => {
     const {
@@ -271,37 +271,25 @@ export const fetchProductByArticle = (article: string) => async (dispatch: Dispa
             });
 
             try {
-                if (localStorage.getItem('mindboxDeviceUUID')) {
-                    axios.post(
-                        `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ViewProduct&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                        {
-                            viewProduct: {
-                                product: {
-                                    ids: {
-                                        website: `${data.id}`,
-                                    },
-                                },
-                                price: `${data.price}`,
-                                customerAction: {
-                                    customFields: {
-                                        brand: `${data.manufacturer}`,
-                                        coctoyanie: `${data.condition}`,
-                                        defecti: `${data.nuances}`,
-                                        kategoria: `${data.category}`,
-                                        model: `${data.name}`,
-                                    },
-                                },
+                sendMindbox('Website.ViewProduct', {
+                    viewProduct: {
+                        product: {
+                            ids: {
+                                website: `${data.id}`,
                             },
                         },
-                        {
-                            headers: {
-                                'Content-Type': 'application/json; charset=utf-8',
-                                Accept: 'application/json',
-                                Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
+                        price: `${data.price}`,
+                        customerAction: {
+                            customFields: {
+                                brand: `${data.manufacturer}`,
+                                coctoyanie: `${data.condition}`,
+                                defecti: `${data.nuances}`,
+                                kategoria: `${data.category}`,
+                                model: `${data.name}`,
                             },
                         },
-                    );
-                }
+                    },
+                });
             } catch (e) {
                 console.log(e);
             }

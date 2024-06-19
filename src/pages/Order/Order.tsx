@@ -1,10 +1,13 @@
 import React from 'react';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import { PageLoader, OrderForm, OrderProducts } from 'src/components';
 
 const Order: React.FC = () => {
-    const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    // const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    const { isLoaded: isLoadedUser } = useAuthUser();
+
     const { items } = useTypedSelector(({ cart }) => cart);
 
     React.useEffect(() => {

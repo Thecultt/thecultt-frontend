@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { LS_KEYS } from 'src/constants/keys';
+import { useLS } from 'src/hooks/useLS';
+
 const HeaderTopMessage: React.FC = () => {
+    const [_headerVisitMessage, setHeaderVisitMessage] = useLS(LS_KEYS.headerVisitMessage, false);
+
     const onClose = () => {
-        localStorage.setItem('header-message-visit-22.10.2023-isClose', JSON.stringify(true));
+        setHeaderVisitMessage(true);
     };
 
     return (

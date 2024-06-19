@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Field, reduxForm, InjectedFormProps, formValueSelector } from 'redux-form';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import { RenderInput, RenderSelect, RenderInputHints } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useWaitingData } from 'src/hooks/catalog/useWaitingData';
+import { CATEGORY_NAMES } from 'src/constants/catalog';
 
 import { validate } from './validate';
 
@@ -16,6 +19,13 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 }) => {
     const selector = formValueSelector('waiting-list-form');
 
+    const { waitingData: initData } = useWaitingData();
+
+    const [_isInit, setIsInit] = React.useState<boolean>(false);
+
+    const [brands, setBrands] = React.useState<{ title: string; value: string }[]>([]);
+    const [models, setModels] = React.useState<{ title: string; value: string }[]>([]);
+
     const { currentCategory, currentType, currentBrand } = useTypedSelector((state) => {
         const { category, type, brand } = selector(state, 'category', 'type', 'brand');
         return {
@@ -25,21 +35,11 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
         };
     });
 
-    const initDataLocal = localStorage.getItem('waiting_init');
+    // const { isLoaded, user } = useTypedSelector(({ user }) => user);
+    const { isLoaded, user } = useAuthUser();
 
-    const [initData, setInitData] = React.useState<any>(null);
-    const [isInit, setIsInit] = React.useState<boolean>(false);
-
-    const [brands, setBrands] = React.useState<{ title: string; value: string }[]>([]);
-    const [models, setModels] = React.useState<{ title: string; value: string }[]>([]);
-
-    const { isLoaded, user } = useTypedSelector(({ user }) => user);
     const { categories } = useTypedSelector(({ products_filters }) => products_filters);
     const isLoadedProductsFilters = useTypedSelector(({ products_filters }) => products_filters.isLoaded);
-
-    React.useEffect(() => {
-        setInitData(JSON.parse(localStorage.getItem('waiting_init') as string));
-    }, [initDataLocal]);
 
     React.useEffect(() => {
         if (isLoaded) {
@@ -251,7 +251,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                     />
                 </div>
 
-                {currentCategory === 'Сумки' || !currentCategory ? (
+                {currentCategory === CATEGORY_NAMES.bags || !currentCategory ? (
                     <>
                         <div className="cabinet-waiting-list-form-content-select" style={{ width: '49%' }}>
                             <Field
@@ -281,7 +281,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                     </>
                 ) : null}
 
-                {currentCategory === 'Аксессуары' ? (
+                {currentCategory === CATEGORY_NAMES.accessories ? (
                     <>
                         <div className="cabinet-waiting-list-form-content-select" style={{ width: '49%' }}>
                             <Field
@@ -312,7 +312,7 @@ const WaitingListCreateForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                     </>
                 ) : null}
 
-                {currentCategory === 'Обувь' ? (
+                {currentCategory === CATEGORY_NAMES.shoes ? (
                     <>
                         <div className="cabinet-waiting-list-form-content-select" style={{ width: '100%' }}>
                             <Field

@@ -3,7 +3,8 @@ import axios from 'axios';
 
 import $api from 'src/http';
 import { Order } from 'src/models/IOrder';
-import { UTM_KEYS, YM_KEYS } from 'src/constants/keys';
+import { YM_KEYS } from 'src/constants/keys';
+import { getUtm } from 'src/functions/getUtm';
 
 import { OrderStateActionTypes, OrderStateActions } from '../types/IOrder';
 import { setIsNotificationServerError } from '../actions/notifications_server';
@@ -265,40 +266,18 @@ export const sendCreateOrder =
         onComplete: (orderId: number, orderNum: string) => void,
     ) =>
     async (dispatch: Dispatch<OrderStateActions>) => {
-        const newData: any = data;
+        const ymUidRow = localStorage.getItem(YM_KEYS.uid);
+        const ymUid = ymUidRow ? JSON.parse(ymUidRow) || '' : '';
 
-        const ymUid = localStorage.getItem(YM_KEYS.uid);
-        const utmSource = localStorage.getItem(UTM_KEYS.source);
-        const utmMedium = localStorage.getItem(UTM_KEYS.medium);
-        const utmCampaign = localStorage.getItem(UTM_KEYS.campaign);
-        const utmContent = localStorage.getItem(UTM_KEYS.content);
-        const utmTerm = localStorage.getItem(UTM_KEYS.term);
+        const utm = getUtm();
 
-        if (ymUid) {
-            newData['_ym_uid'] = JSON.parse(ymUid);
-        }
+        const requestData = {
+            ...data,
+            ...utm,
+            [YM_KEYS.uid]: ymUid,
+        };
 
-        if (utmSource) {
-            newData['utm_source'] = utmSource;
-        }
-
-        if (utmMedium) {
-            newData['utm_medium'] = utmMedium;
-        }
-
-        if (utmCampaign) {
-            newData['utm_campaign'] = utmCampaign;
-        }
-
-        if (utmContent) {
-            newData['utm_content'] = utmContent;
-        }
-
-        if (utmTerm) {
-            newData['utm_term'] = utmTerm;
-        }
-
-        $api.post(`create_order/`, newData)
+        $api.post(`create_order/`, requestData)
             .then((res) => {
                 if (res.data.link) {
                     window.location.href = res.data.link;

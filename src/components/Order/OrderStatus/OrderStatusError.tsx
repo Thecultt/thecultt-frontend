@@ -5,6 +5,8 @@ import { OrderStatusProduct } from 'src/components';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { CartItem } from 'src/models/ICartItem';
 import { sendSubmitOrder } from 'src/redux/actions/order';
+import { setCartItems } from 'src/redux/actions/cart';
+import { ICartItemsState } from 'src/redux/types/ICart';
 
 import orderPay from '../orderPay';
 
@@ -30,13 +32,13 @@ const OrderStatusError: React.FC = () => {
     } = useTypedSelector(({ order }) => order);
 
     const successPayment = (orderId: number) => {
-        const newCart: { [key: string]: CartItem } = {};
+        const newCart: ICartItemsState = {};
 
         Object.keys(items).map((article) => {
             if (!items[article].checked) newCart[article] = { ...items[article], checked: true };
         });
 
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        dispatch(setCartItems(newCart) as any);
 
         const products: CartItem[] = [];
 

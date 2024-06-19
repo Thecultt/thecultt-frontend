@@ -3,7 +3,11 @@ import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
 import { getClassNames } from 'src/functions/getClassNames';
+import { useWaitingData } from 'src/hooks/catalog/useWaitingData';
 import { Product } from 'src/models/IProduct';
+import { WaitingPopupType } from 'src/types/waiting';
+
+const totalImageLength = 5;
 
 interface ProductBlockProps extends Product {
     addClass?: string;
@@ -45,10 +49,9 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 }) => {
     const [isCartLocal, setIsCartLocal] = React.useState<boolean>(isCart);
     const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(false);
-
-    const totalImageLength = 5;
-
     const [currentIndexImage, setCurrentIndexImage] = React.useState<number>(0);
+
+    const { setWaitingData } = useWaitingData();
 
     React.useEffect(() => {
         setCurrentIndexImage(0);
@@ -71,18 +74,15 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     };
 
     const subscribeGood = () => {
-        localStorage.setItem(
-            'waiting_init',
-            JSON.stringify({
-                category,
-                brand: manufacturer,
-                model: name,
-                type: subcategory,
-                size: size || shoe_size,
-            }),
-        );
+        setWaitingData({
+            category,
+            brand: manufacturer,
+            model: name,
+            type: subcategory,
+            size: size || shoe_size,
+        });
 
-        window.location.hash = 'create_waiting';
+        window.location.hash = WaitingPopupType.Form;
     };
 
     return (

@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { sendNewWaitingListItem } from 'src/redux/actions/waiting';
 import { Popup, WaitingListCreateForm, WaitingListCreateSuccess } from 'src/components';
+import { useWaitingData } from 'src/hooks/catalog/useWaitingData';
+import { WaitingPopupType } from 'src/types/waiting';
 
 const WaitingListCreate: React.FC = () => {
     const dispatch = useDispatch();
@@ -11,14 +13,16 @@ const WaitingListCreate: React.FC = () => {
     const { hash, pathname } = useLocation();
     const navigate = useNavigate();
 
-    const [state, setState] = React.useState<boolean>(false);
-    const [type, setType] = React.useState<string>('create_waiting');
-    const [isChange, setIsChange] = React.useState<boolean>(false);
+    const [state, setState] = React.useState(false);
+    const [type, setType] = React.useState(WaitingPopupType.Form);
+    const [isChange, setIsChange] = React.useState(false);
+
+    const { removeWaitingData } = useWaitingData();
 
     React.useEffect(() => {
         const type_hash: string = hash.split('#')[1];
 
-        if (type_hash === 'create_waiting' || type_hash === 'create_waiting_success') {
+        if (type_hash === WaitingPopupType.Form || type_hash === WaitingPopupType.Success) {
             if (state) {
                 setIsChange(true);
 
@@ -50,9 +54,7 @@ const WaitingListCreate: React.FC = () => {
 
     const closeFunc = () => {
         setState(false);
-
-        localStorage.removeItem('waiting_init');
-
+        removeWaitingData();
         navigate({
             pathname: window.location.pathname,
             hash: '',
@@ -60,11 +62,14 @@ const WaitingListCreate: React.FC = () => {
         });
     };
 
+    const content: Record<WaitingPopupType, React.ReactNode> = {
+        [WaitingPopupType.Form]: <WaitingListCreateForm onSubmit={onSubmit} />,
+        [WaitingPopupType.Success]: <WaitingListCreateSuccess />,
+    };
+
     return (
         <Popup state={state} setState={closeFunc} stateContent={!isChange}>
-            {type === 'create_waiting' ? <WaitingListCreateForm onSubmit={onSubmit} /> : null}
-
-            {type === 'create_waiting_success' ? <WaitingListCreateSuccess /> : null}
+            {content[type]}
         </Popup>
     );
 };

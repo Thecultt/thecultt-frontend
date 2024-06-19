@@ -1,6 +1,5 @@
 export interface CheckEmailState {
     isSend: boolean;
-
     email: string | null;
     isExisting: boolean;
 }
