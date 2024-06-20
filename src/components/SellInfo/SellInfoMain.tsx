@@ -57,7 +57,7 @@ const models: {
         },
     },
     hermesShoes: {
-        title: 'Hermes сандалии',
+        title: 'Hermes Shoes',
         image: HermesShoesImage,
         prices: {
             Новое: 82500,
@@ -66,7 +66,7 @@ const models: {
         },
     },
     chanelShoes: {
-        title: 'Chanel лоферы',
+        title: 'Chanel Shoes',
         image: ChanelShoesImage,
         prices: {
             Новое: 127500,
@@ -102,7 +102,7 @@ const models: {
         },
     },
     cartierPanthere: {
-        title: 'Cartier Panthère',
+        title: 'Panthère de Cartier',
         image: CartierPanthereImage,
         prices: {
             Новое: 440000,
