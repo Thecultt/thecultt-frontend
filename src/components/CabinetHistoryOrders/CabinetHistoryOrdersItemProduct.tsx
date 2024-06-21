@@ -1,5 +1,4 @@
 import React from 'react';
-import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
 import { OrderProduct } from 'src/models/IOrder';
@@ -58,19 +57,7 @@ const CabinetHistoryOrdersItemProduct: React.FC<OrderProduct> = ({
                 </div>
 
                 <p className="cabinet-history-orders-item-info-product-text-state__price">
-                    <NumericFormat
-                        value={price}
-                        displayType={'text'}
-                        thousandSeparator={' '}
-                        renderText={(formattedValue: string) => (
-                            <>
-                                {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                    ? formattedValue
-                                    : parseInt(formattedValue.split(' ').join(''))}
-                            </>
-                        )}
-                    />{' '}
-                    ₽
+                    {price.toLocaleString('ru-RU')}₽
                 </p>
             </div>
         </Link>

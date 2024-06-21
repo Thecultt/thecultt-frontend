@@ -1,5 +1,4 @@
 import React from 'react';
-import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
 import { getClassNames } from 'src/functions/getClassNames';
@@ -86,19 +85,7 @@ const OrderProductsItem: React.FC<OrderProductsItemProps> = ({
                                 <p className="order-products-item-content-text__availability">На примерке</p>
                             ) : (
                                 <p className="order-products-item-content-text__sum">
-                                    <NumericFormat
-                                        value={price}
-                                        displayType={'text'}
-                                        thousandSeparator={' '}
-                                        renderText={(formattedValue: string) => (
-                                            <>
-                                                {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                                    ? formattedValue
-                                                    : parseInt(formattedValue.split(' ').join(''))}
-                                            </>
-                                        )}
-                                    />{' '}
-                                    ₽
+                                    {price.toLocaleString('ru-RU')}₽
                                 </p>
                             )
                         ) : (
