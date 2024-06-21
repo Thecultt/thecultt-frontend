@@ -277,6 +277,9 @@ export { default as BuyerTheCulttMainCategoryProduct } from './BuyerTheCultt/Buy
 export { default as BuyerTheCulttProductForm } from './BuyerTheCultt/BuyerTheCulttProduct/BuyerTheCulttProductForm';
 export { default as BuyerTheCulttProductInfo } from './BuyerTheCultt/BuyerTheCulttProduct/BuyerTheCulttProductInfo';
 
+// Selections
+export { SelectionsSlider } from './Selections/SelectionsSlider/SelectionsSlider';
+
 // Footer
 // FooterEmailSubscribe
 export { default as Footer } from './Footer/Footer';

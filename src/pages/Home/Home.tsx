@@ -10,6 +10,7 @@ import {
     HomeSellPartners,
     HomeAbout,
     HomeWaiting,
+    SelectionsSlider,
 } from 'src/components';
 
 const Home: React.FC = () => {
@@ -23,6 +24,8 @@ const Home: React.FC = () => {
                 <div className="container">
                     <div className="home-wrapper">
                         <HomeCategories />
+
+                        <SelectionsSlider />
 
                         <CatalogProductsSection title="Новинки" />
 
