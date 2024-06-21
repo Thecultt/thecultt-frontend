@@ -1,5 +1,4 @@
 import React from 'react';
-import { NumericFormat } from 'react-number-format';
 import { Link } from 'react-router-dom';
 
 import { getClassNames } from 'src/functions/getClassNames';
@@ -201,56 +200,13 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                             </div>
 
                             <div className="product-block-text-price">
-                                <h3 className="product-block-text-price__price">
-                                    <NumericFormat
-                                        value={price}
-                                        displayType={'text'}
-                                        thousandSeparator={' '}
-                                        renderText={(formattedValue: string) => (
-                                            <>
-                                                {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                                    ? formattedValue
-                                                    : parseInt(formattedValue.split(' ').join(''))}
-                                            </>
-                                        )}
-                                    />{' '}
-                                    ₽
-                                </h3>
+                                <h3 className="product-block-text-price__price">{price.toLocaleString('ru-RU')}₽</h3>
 
-                                <p className="product-block-text-price__oldprice">
-                                    <NumericFormat
-                                        value={24451}
-                                        displayType={'text'}
-                                        thousandSeparator={' '}
-                                        renderText={(formattedValue: string) => (
-                                            <>
-                                                {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                                    ? formattedValue
-                                                    : parseInt(formattedValue.split(' ').join(''))}
-                                            </>
-                                        )}
-                                    />{' '}
-                                    ₽
-                                </p>
-
-                                {/* 
-								{old_price ? (
-									<p className="product-block-text-price__oldprice">
-										<NumericFormat
-											value={old_price}
-											displayType={'text'}
-											thousandSeparator={' '}
-											renderText={(formattedValue: string) => (
-												<>
-													{parseInt(formattedValue.split(' ').join('')) >= 10000
-														? formattedValue
-														: parseInt(formattedValue.split(' ').join(''))}
-												</>
-											)}
-										/>{' '}
-										₽
-									</p>
-								) : null} */}
+                                {old_price ? (
+                                    <p className="product-block-text-price__oldprice">
+                                        {old_price.toLocaleString('ru-RU')}₽
+                                    </p>
+                                ) : null}
                             </div>
 
                             <div className="product-block-text-yandex-split">

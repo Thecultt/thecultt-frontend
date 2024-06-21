@@ -10,6 +10,7 @@ const initialState: ProductsState = {
         price: 0,
         old_price: 0,
         store_price: 0,
+        price_drop: false,
         condition: '',
         manufacturer: '',
         name: '',

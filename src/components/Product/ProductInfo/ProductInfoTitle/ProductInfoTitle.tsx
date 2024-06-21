@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NumericFormat } from 'react-number-format';
 import { useDispatch } from 'react-redux';
 
 import { ProductPage } from 'src/models/IProduct';
@@ -8,7 +7,12 @@ import { CartItem } from 'src/models/ICartItem';
 import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
 import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { ProductInfoTitleBoutique, ProductInfoTitlePartner, ProductInfoTitleSplit } from 'src/components';
+import {
+    ProductInfoTitleBoutique,
+    ProductInfoTitlePartner,
+    ProductInfoTitleSale,
+    ProductInfoTitleSplit,
+} from 'src/components';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
 import { CATEGORY_NAMES } from 'src/constants/catalog';
 import { useWaitingData } from 'src/hooks/catalog/useWaitingData';
@@ -22,6 +26,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
     name,
     price,
     old_price,
+    price_drop,
     availability,
     subcategory,
     shoe_size,
@@ -76,7 +81,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 is_trial,
                 from_boutique,
                 from_parnter,
-                price_drop: false,
+                price_drop,
             }) as any,
         );
     };
@@ -102,7 +107,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 is_trial,
                 from_boutique,
                 from_parnter,
-                price_drop: false,
+                price_drop,
             }) as any,
         );
     };
@@ -137,42 +142,20 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                     {manufacturer}
                 </Link>
 
-                {from_boutique ? <ProductInfoTitleBoutique /> : null}
+                <div className="product-content-info-title-badges">
+                    {from_boutique ? <ProductInfoTitleBoutique /> : null}
 
-                {from_parnter ? <ProductInfoTitlePartner /> : null}
+                    {from_parnter ? <ProductInfoTitlePartner /> : null}
+
+                    {price_drop ? <ProductInfoTitleSale /> : null}
+                </div>
 
                 <div className="product-content-info-title-price">
-                    <h3 className="product-content-info-title-price__price">
-                        <NumericFormat
-                            value={price}
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
-                        ₽
-                    </h3>
+                    <h3 className="product-content-info-title-price__price">{price.toLocaleString('ru-RU')}₽</h3>
 
                     {old_price ? (
                         <p className="product-content-info-title-price__oldprice">
-                            <NumericFormat
-                                value={old_price}
-                                displayType={'text'}
-                                thousandSeparator={' '}
-                                renderText={(formattedValue: string) => (
-                                    <>
-                                        {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                            ? formattedValue
-                                            : parseInt(formattedValue.split(' ').join(''))}
-                                    </>
-                                )}
-                            />{' '}
-                            ₽
+                            {old_price.toLocaleString('ru-RU')}₽
                         </p>
                     ) : null}
                 </div>

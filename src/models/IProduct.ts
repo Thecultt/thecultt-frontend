@@ -39,7 +39,7 @@ export interface ProductPage {
     is_trial: boolean;
     from_boutique: boolean;
     from_parnter: boolean;
-    // price_drop: boolean;
+    price_drop: boolean;
 
     nuances: string;
 

@@ -197,6 +197,12 @@ const Header: React.FC = () => {
         }
     };
 
+    const openHoverMenuSelections = () => {
+        if (!isOpenSearch) {
+            setIsSelectionsMenuVisible(true);
+        }
+    };
+
     const closeHoverMenu = () => {
         setIsOpenHoverMenu(false);
     };
@@ -213,6 +219,7 @@ const Header: React.FC = () => {
     const goToCatalog = (withSearchValue = true) => {
         handleSearchClose();
         inputRef.current?.blur();
+
         navigate(
             withSearchValue
                 ? getCatalogFiltersUrl({
@@ -366,7 +373,7 @@ const Header: React.FC = () => {
                                         sort: 'popular',
                                     })}
                                     className="header-menu__link"
-                                    onMouseOver={() => setIsSelectionsMenuVisible(true)}
+                                    onMouseOver={openHoverMenuSelections}
                                     onMouseOut={() => setIsSelectionsMenuVisible(false)}
                                     onClick={() => setIsSelectionsMenuVisible(false)}
                                 >
