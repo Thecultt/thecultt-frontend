@@ -8,6 +8,7 @@ const initialState: ProductsState = {
         id: 0,
         article: '',
         price: 0,
+        old_price: 0,
         store_price: 0,
         condition: '',
         manufacturer: '',

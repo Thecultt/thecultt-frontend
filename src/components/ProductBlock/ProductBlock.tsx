@@ -30,6 +30,7 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
     condition,
     name,
     price,
+    old_price,
     addClass,
     addCart,
     isCart,
@@ -169,8 +170,6 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
 
             <div className="product-block-text">
                 <Link to={`/product/${article}`}>
-                    <p className="product-block-text__brand">{manufacturer}</p>
-
                     <h3 className="product-block-text__model">{name}</h3>
                 </Link>
 
@@ -201,21 +200,58 @@ const ProductBlock: React.FC<ProductBlockProps> = ({
                                 </span>
                             </div>
 
-                            <h3 className="product-block-text__price">
-                                <NumericFormat
-                                    value={price}
-                                    displayType={'text'}
-                                    thousandSeparator={' '}
-                                    renderText={(formattedValue: string) => (
-                                        <>
-                                            {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                                ? formattedValue
-                                                : parseInt(formattedValue.split(' ').join(''))}
-                                        </>
-                                    )}
-                                />{' '}
-                                ₽
-                            </h3>
+                            <div className="product-block-text-price">
+                                <h3 className="product-block-text-price__price">
+                                    <NumericFormat
+                                        value={price}
+                                        displayType={'text'}
+                                        thousandSeparator={' '}
+                                        renderText={(formattedValue: string) => (
+                                            <>
+                                                {parseInt(formattedValue.split(' ').join('')) >= 10000
+                                                    ? formattedValue
+                                                    : parseInt(formattedValue.split(' ').join(''))}
+                                            </>
+                                        )}
+                                    />{' '}
+                                    ₽
+                                </h3>
+
+                                <p className="product-block-text-price__oldprice">
+                                    <NumericFormat
+                                        value={24451}
+                                        displayType={'text'}
+                                        thousandSeparator={' '}
+                                        renderText={(formattedValue: string) => (
+                                            <>
+                                                {parseInt(formattedValue.split(' ').join('')) >= 10000
+                                                    ? formattedValue
+                                                    : parseInt(formattedValue.split(' ').join(''))}
+                                            </>
+                                        )}
+                                    />{' '}
+                                    ₽
+                                </p>
+
+                                {/* 
+								{old_price ? (
+									<p className="product-block-text-price__oldprice">
+										<NumericFormat
+											value={old_price}
+											displayType={'text'}
+											thousandSeparator={' '}
+											renderText={(formattedValue: string) => (
+												<>
+													{parseInt(formattedValue.split(' ').join('')) >= 10000
+														? formattedValue
+														: parseInt(formattedValue.split(' ').join(''))}
+												</>
+											)}
+										/>{' '}
+										₽
+									</p>
+								) : null} */}
+                            </div>
 
                             <div className="product-block-text-yandex-split">
                                 {/* @ts-ignore */}

@@ -21,6 +21,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
     category,
     name,
     price,
+    old_price,
     availability,
     subcategory,
     shoe_size,
@@ -60,6 +61,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 id,
                 article,
                 price,
+                old_price,
                 store_price,
                 condition,
                 manufacturer,
@@ -85,6 +87,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 id,
                 article,
                 price,
+                old_price,
                 store_price,
                 condition,
                 manufacturer,
@@ -155,8 +158,26 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                         ₽
                     </h3>
 
-                    {price < 150000 ? <ProductInfoTitleSplit price={price} /> : null}
+                    {old_price ? (
+                        <p className="product-content-info-title-price__oldprice">
+                            <NumericFormat
+                                value={old_price}
+                                displayType={'text'}
+                                thousandSeparator={' '}
+                                renderText={(formattedValue: string) => (
+                                    <>
+                                        {parseInt(formattedValue.split(' ').join('')) >= 10000
+                                            ? formattedValue
+                                            : parseInt(formattedValue.split(' ').join(''))}
+                                    </>
+                                )}
+                            />{' '}
+                            ₽
+                        </p>
+                    ) : null}
                 </div>
+
+                {price < 150000 ? <ProductInfoTitleSplit price={price} /> : null}
 
                 {is_trial ? (
                     <p className="product-content-info-title__notavailable">На примерке</p>
