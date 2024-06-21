@@ -6,6 +6,7 @@ import { useLS } from './useLS';
 export const useReplaceLS = () => {
     const [_cart, setCartLS] = useLS<any>(LS_KEYS.cart, {});
     const [_token, setTokenLS] = useLS<string>(LS_KEYS.accessToken, '');
+    const [_email, setEmailLS] = useLS<string>(LS_KEYS.email, '');
 
     React.useEffect(() => {
         const oldCartLS = localStorage.getItem('cart');
@@ -18,6 +19,12 @@ export const useReplaceLS = () => {
         if (oldAccessTokenLS) {
             setTokenLS(oldAccessTokenLS);
             localStorage.removeItem('accessToken');
+        }
+
+        const oldEmailLS = localStorage.getItem('email');
+        if (oldEmailLS) {
+            setEmailLS(oldEmailLS);
+            localStorage.removeItem('email');
         }
     }, []);
 };
