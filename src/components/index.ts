@@ -279,6 +279,7 @@ export { default as BuyerTheCulttProductInfo } from './BuyerTheCultt/BuyerTheCul
 
 // Selections
 export { SelectionsSlider } from './Selections/SelectionsSlider/SelectionsSlider';
+export { SelectionsBanners } from './Selections/SelectionsBanners/SelectionsBanners';
 
 // Footer
 // FooterEmailSubscribe

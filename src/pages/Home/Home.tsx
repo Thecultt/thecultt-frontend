@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 
 import {
     HomeMainBanner,
@@ -11,32 +10,24 @@ import {
     HomeAbout,
     HomeWaiting,
     SelectionsSlider,
+    SelectionsBanners,
 } from 'src/components';
 
 const Home: React.FC = () => {
     return (
         <>
-            <Helmet>{/* <script src="//code.jivo.ru/widget/zAUiclp1Hy" async></script> */}</Helmet>
-
             <HomeMainBanner />
-
             <section className="home">
                 <div className="container">
                     <div className="home-wrapper">
                         <HomeCategories />
-
                         <SelectionsSlider />
-
                         <CatalogProductsSection title="Новинки" />
-
+                        <SelectionsBanners />
                         <HomeVisit />
-
                         <HomeSell />
-
                         <HomeSellPartners />
-
                         <HomeAbout />
-
                         <HomeWaiting />
                     </div>
                 </div>

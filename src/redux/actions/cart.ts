@@ -86,24 +86,27 @@ export const addCartItem = (item: CartItem) => {
     // 	}
     // });
 
-    sendMindbox('Website.SetCart', {
-        addProductToList: {
-            product: {
-                ids: {
-                    website: item.id,
+    const email = localStorageService.getItem<string | null>(LS_KEYS.email);
+    if (email) {
+        sendMindbox('Website.SetCart', {
+            addProductToList: {
+                product: {
+                    ids: {
+                        website: item.id,
+                    },
                 },
+                // productGroup: {
+                // 	ids: {
+                // 		website: item.id
+                // 	}
+                // },
+                pricePerItem: item.price,
             },
-            // productGroup: {
-            // 	ids: {
-            // 		website: item.id
-            // 	}
-            // },
-            pricePerItem: item.price,
-        },
-        customer: {
-            email: `${localStorageService.getItem<string>(LS_KEYS.email, '')}`,
-        },
-    });
+            customer: {
+                email,
+            },
+        });
+    }
 
     // const cart = JSON.parse(localStorage.getItem("cart") as string);
 
@@ -189,25 +192,28 @@ export const removeCartItem = (id: string, item: CartItem) => {
         },
     });
 
-    sendMindbox('Website.ClearCart', {
-        customer: {
-            email: `${localStorageService.getItem<string>(LS_KEYS.email)}`,
-        },
-        removeProductFromList: {
-            product: {
-                ids: {
-                    website: item.id,
-                },
+    const email = localStorageService.getItem<string | null>(LS_KEYS.email);
+    if (email) {
+        sendMindbox('Website.ClearCart', {
+            customer: {
+                email,
             },
-            // productGroup: {
-            // 	ids: {
-            // 		website: item.id
-            // 	}
-            // },
-            pricePerItem: item.price,
-        },
-        executionDateTimeUtc: new Date(),
-    });
+            removeProductFromList: {
+                product: {
+                    ids: {
+                        website: item.id,
+                    },
+                },
+                // productGroup: {
+                // 	ids: {
+                // 		website: item.id
+                // 	}
+                // },
+                pricePerItem: item.price,
+            },
+            executionDateTimeUtc: new Date(),
+        });
+    }
 
     // window.mindbox("async", {
     // 	operation: "Website.ClearCart",
