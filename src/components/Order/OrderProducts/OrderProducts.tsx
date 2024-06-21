@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { NumericFormat } from 'react-number-format';
 import { formValueSelector } from 'redux-form';
 import dayjs from 'dayjs';
 
@@ -532,84 +531,30 @@ const OrderProducts: React.FC = () => {
                         }{' '}
                         шт
                     </p>
-                    <p className="order-products-total-item__value">
-                        <NumericFormat
-                            value={totalPrice}
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
-                        ₽
-                    </p>
+                    <p className="order-products-total-item__value">{totalPrice.toLocaleString('ru-RU')}₽</p>
                 </div>
 
                 {isPromocode() ? (
                     <div className="order-products-total-item promocode">
                         <p className="order-products-total-item__title">Скидка в корзине</p>
                         <p className="order-products-total-item__value">
-                            -{' '}
-                            <NumericFormat
-                                value={promocode.saleSum}
-                                displayType={'text'}
-                                thousandSeparator={' '}
-                                renderText={(formattedValue: string) => (
-                                    <>
-                                        {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                            ? formattedValue
-                                            : parseInt(formattedValue.split(' ').join(''))}
-                                    </>
-                                )}
-                            />{' '}
-                            ₽
+                            - {promocode.saleSum.toLocaleString('ru-RU')}₽
                         </p>
                     </div>
                 ) : null}
 
                 <div className="order-products-total-item">
                     <p className="order-products-total-item__title">Доставка</p>
-                    <p className="order-products-total-item__value">
-                        <NumericFormat
-                            value={currentDelivery.price}
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
-                        ₽
-                    </p>
+                    <p className="order-products-total-item__value">{currentDelivery.price.toLocaleString('ru-RU')}₽</p>
                 </div>
                 <div className="order-products-total-item">
                     <p className="order-products-total-item__title">Итого:</p>
                     <p className="order-products-total-item__value">
-                        <NumericFormat
-                            value={
-                                totalPrice > 0
-                                    ? isPromocode()
-                                        ? totalPrice + currentDelivery.price - promocode.saleSum
-                                        : totalPrice + currentDelivery.price
-                                    : 0
-                            }
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
+                        {totalPrice > 0
+                            ? isPromocode()
+                                ? (totalPrice + currentDelivery.price - promocode.saleSum).toLocaleString('ru-RU')
+                                : (totalPrice + currentDelivery.price).toLocaleString('ru-RU')
+                            : 0}
                         ₽
                     </p>
                 </div>
