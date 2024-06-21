@@ -2,6 +2,7 @@ export interface Product {
     id: number;
     article: string;
     price: number;
+    old_price: number;
     store_price: number;
     condition: string;
     manufacturer: string;
@@ -23,6 +24,7 @@ export interface ProductPage {
     id: number;
     article: string;
     price: number;
+    old_price: number;
     store_price: number;
     condition: string;
     manufacturer: string;
