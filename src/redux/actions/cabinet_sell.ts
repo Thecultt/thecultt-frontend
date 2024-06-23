@@ -6,130 +6,133 @@ import { YM_KEYS } from 'src/constants/keys';
 import { getUtm } from 'src/functions/getUtm';
 
 import {
-	CabinetSellActionTypes,
-	CabinetSellActions,
-	CabinetSellTypes,
-	CabinetSellStepKeys,
+    CabinetSellActionTypes,
+    CabinetSellActions,
+    CabinetSellTypes,
+    CabinetSellStepKeys,
 } from 'src/redux/types/ICabinetSell';
 
 import { CabinetSellAutoDetectedModel } from 'src/models/ICabinetSell';
 
 export const setCabinetSellCurrentStep = (step: CabinetSellStepKeys) => ({
-	type: CabinetSellActionTypes.SET_CABINET_SELL_CURRENT_STEP,
-	payload: step,
+    type: CabinetSellActionTypes.SET_CABINET_SELL_CURRENT_STEP,
+    payload: step,
 });
 
 export const setCabinetSellCurrentType = (type: CabinetSellTypes) => ({
-	type: CabinetSellActionTypes.SET_CABINET_SELL_CURRENT_TYPE,
-	payload: type,
+    type: CabinetSellActionTypes.SET_CABINET_SELL_CURRENT_TYPE,
+    payload: type,
 });
 
 export const sendCreateCabinetSell = (data: any) => (dispatch: Dispatch<CabinetSellActions>) => {
-	dispatch({
-		type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SENDING,
-		payload: true,
-	});
+    dispatch({
+        type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SENDING,
+        payload: true,
+    });
 
-	const ymUidRow = localStorage.getItem(YM_KEYS.uid);
-	const ymUid = ymUidRow ? JSON.parse(ymUidRow) || '' : '';
+    const ymUidRow = localStorage.getItem(YM_KEYS.uid);
+    const ymUid = ymUidRow ? JSON.parse(ymUidRow) || '' : '';
 
-	const utm = getUtm();
+    const utm = getUtm();
 
-	const requestData = {
-		...data,
-		...utm,
-		[YM_KEYS.uid]: ymUid,
-	};
+    const requestData = {
+        ...data,
+        ...utm,
+        [YM_KEYS.uid]: ymUid,
+    };
 
-	$api.post('/create_sell/', requestData).then(({ data }) => {
-		window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
-		window.dataLayer.push({
-			event: 'application_sent',
-			ecommerce: {
-				applacation_id: data.id,
-				timestamp: Math.floor(Date.now() / 1000),
-			},
-		});
+    $api.post('/create_sell/', requestData).then(({ data }) => {
+        window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
+        window.dataLayer.push({
+            event: 'application_sent',
+            ecommerce: {
+                applacation_id: data.id,
+                timestamp: Math.floor(Date.now() / 1000),
+            },
+        });
 
-		dispatch({
-			type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SEND,
-			payload: true,
-		});
+        dispatch({
+            type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SEND,
+            payload: true,
+        });
 
-		dispatch({
-			type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SENDING,
-			payload: false,
-		});
+        dispatch({
+            type: CabinetSellActionTypes.SET_CABINET_SELL_IS_SENDING,
+            payload: false,
+        });
 
-		localStorage.removeItem('sell-info-form');
-		localStorage.removeItem('sell-images-form');
-		localStorage.removeItem('sell-contact-form');
-	});
+        localStorage.removeItem('sell-info-form');
+        localStorage.removeItem('sell-images-form');
+        localStorage.removeItem('sell-contact-form');
+    });
 };
 
 export const sendCreateCabinetSellImage =
-	(image: any, index: number, file: any, isAutoDetected?: boolean) =>
-		async (dispatch: Dispatch<CabinetSellActions>) => {
-			const { images } = await $api
-				.post<{ images: string[] }>(`/upload_images/`, { images: [image] })
-				.then(({ data }) => data);
+    (image: any, index: number, file: any, isAutoDetected?: boolean) =>
+    async (dispatch: Dispatch<CabinetSellActions>) => {
+        const { images } = await $api
+            .post<{ images: string[] }>(`/upload_images/`, { images: [image] })
+            .then(({ data }) => data);
 
-			if (index === 0 && isAutoDetected) {
-				// const formData = new FormData();
+        if (index === 0 && isAutoDetected) {
+            // const formData = new FormData();
 
-				// formData.append('file', file);
+            // formData.append('file', file);
 
-				const { response } = await $api
-					.post<{ response: CabinetSellAutoDetectedModel[]; status: string }>(`/get_brand_prediction/`, { file: image })
-					.then(({ data }) => data);
+            const { response } = await $api
+                .post<{
+                    response: CabinetSellAutoDetectedModel[];
+                    status: string;
+                }>(`/get_brand_prediction/`, { file: image })
+                .then(({ data }) => data);
 
-				if (response.length) {
-					dispatch({
-						type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_MODELS,
-						payload: response,
-					});
-				}
-			}
+            if (response.length) {
+                dispatch({
+                    type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_MODELS,
+                    payload: response,
+                });
+            }
+        }
 
-			return images[0];
-		};
+        return images[0];
+    };
 
 export const fetchCabinetSellParameters = () => async (dispatch: Dispatch<CabinetSellActions>) => {
-	const { data } = await $api.get<CabinetSellOption[]>(`/sell_options/`);
+    const { data } = await $api.get<CabinetSellOption[]>(`/sell_options/`);
 
-	const newObj: { [key: string]: CabinetSellOption } = {};
+    const newObj: { [key: string]: CabinetSellOption } = {};
 
-	data.map((item) => {
-		newObj[item.name] = item;
-	});
+    data.map((item) => {
+        newObj[item.name] = item;
+    });
 
-	dispatch({
-		type: CabinetSellActionTypes.SET_CABINET_SELL_PARAMETERS,
-		payload: newObj,
-	});
+    dispatch({
+        type: CabinetSellActionTypes.SET_CABINET_SELL_PARAMETERS,
+        payload: newObj,
+    });
 };
 
 export const fetchCabinetSellsList = () => async (dispatch: Dispatch<CabinetSellActions>) => {
-	const { data } = await $api.get(`/sells/`);
+    const { data } = await $api.get(`/sells/`);
 
-	dispatch({
-		type: CabinetSellActionTypes.SET_CABINET_SELL_SELLS_LIST,
-		payload: data,
-	});
+    dispatch({
+        type: CabinetSellActionTypes.SET_CABINET_SELL_SELLS_LIST,
+        payload: data,
+    });
 
-	// const newObj: { [key: string]: CabinetSellOption } = {}
+    // const newObj: { [key: string]: CabinetSellOption } = {}
 
-	// data.map((item) => {
-	// 	newObj[item.name] = item
-	// })
+    // data.map((item) => {
+    // 	newObj[item.name] = item
+    // })
 
-	// dispatch({
-	// 	type: CabinetSellActionTypes.SET_CABINET_SELL_PARAMETERS,
-	// 	payload: newObj
-	// })
+    // dispatch({
+    // 	type: CabinetSellActionTypes.SET_CABINET_SELL_PARAMETERS,
+    // 	payload: newObj
+    // })
 };
 
 export const setCabinetSellAutoDetectedIndex = (index: number | null) => ({
-	type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_SELECTED_INDEX,
-	payload: index
-})
+    type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_SELECTED_INDEX,
+    payload: index,
+});
