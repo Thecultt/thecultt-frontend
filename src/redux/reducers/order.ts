@@ -9,6 +9,8 @@ const initialState: OrderState = {
 
         id: 0,
 
+        fromSum: 0,
+
         name: '',
         saleSum: 0,
 
@@ -61,6 +63,7 @@ const initialState: OrderState = {
         status_description: '',
         success_status: false,
     },
+
     isLoadedOrder: false,
 
     isValid: false,
@@ -103,6 +106,16 @@ const order = (state = initialState, action: OrderStateActions) => {
             promocode: {
                 ...state.promocode,
                 id: action.payload,
+            },
+        };
+    }
+
+    if (action.type === OrderStateActionTypes.SET_ORDER_PROMOCODE_FROM_SUM) {
+        return {
+            ...state,
+            promocode: {
+                ...state.promocode,
+                fromSum: action.payload,
             },
         };
     }

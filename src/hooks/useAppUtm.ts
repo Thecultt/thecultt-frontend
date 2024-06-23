@@ -1,37 +1,27 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import omitBy from 'lodash.omitby';
 
-import { UTM_KEYS } from 'src/constants/keys';
+import { UTM_KEYS, LS_KEYS } from 'src/constants/keys';
+import { localStorageService } from 'src/services/storage';
 
 export const useAppUtm = () => {
     const { search } = useLocation();
     const query = new URLSearchParams(search);
 
     React.useEffect(() => {
-        const utmSource = query.get(UTM_KEYS.source);
-        const utmMedium = query.get(UTM_KEYS.medium);
-        const utmCampaign = query.get(UTM_KEYS.campaign);
-        const utmContent = query.get(UTM_KEYS.content);
-        const utmTerm = query.get(UTM_KEYS.term);
+        const utmFromQuery = {
+            [UTM_KEYS.source]: query.get(UTM_KEYS.source),
+            [UTM_KEYS.medium]: query.get(UTM_KEYS.medium),
+            [UTM_KEYS.campaign]: query.get(UTM_KEYS.campaign),
+            [UTM_KEYS.content]: query.get(UTM_KEYS.content),
+            [UTM_KEYS.term]: query.get(UTM_KEYS.term),
+        };
 
-        if (utmSource) {
-            localStorage.setItem(UTM_KEYS.source, utmSource);
-        }
+        const result = omitBy(utmFromQuery, (item) => !item);
 
-        if (utmMedium) {
-            localStorage.setItem(UTM_KEYS.medium, utmMedium);
-        }
-
-        if (utmCampaign) {
-            localStorage.setItem(UTM_KEYS.campaign, utmCampaign);
-        }
-
-        if (utmContent) {
-            localStorage.setItem(UTM_KEYS.content, utmContent);
-        }
-
-        if (utmTerm) {
-            localStorage.setItem(UTM_KEYS.term, utmTerm);
+        if (Object.keys(result).length > 0) {
+            localStorageService.setItem(LS_KEYS.utm, result);
         }
     }, []);
 };

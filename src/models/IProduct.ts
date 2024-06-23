@@ -2,6 +2,7 @@ export interface Product {
     id: number;
     article: string;
     price: number;
+    old_price: number;
     store_price: number;
     condition: string;
     manufacturer: string;
@@ -15,6 +16,7 @@ export interface Product {
     size: string;
     is_trial: boolean;
     from_boutique: boolean;
+    from_parnter: boolean;
     price_drop: boolean;
 }
 
@@ -22,6 +24,7 @@ export interface ProductPage {
     id: number;
     article: string;
     price: number;
+    old_price: number;
     store_price: number;
     condition: string;
     manufacturer: string;
@@ -35,7 +38,8 @@ export interface ProductPage {
     subcategory: string;
     is_trial: boolean;
     from_boutique: boolean;
-    // price_drop: boolean;
+    from_parnter: boolean;
+    price_drop: boolean;
 
     nuances: string;
 

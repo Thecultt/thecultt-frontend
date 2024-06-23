@@ -1,9 +1,9 @@
 import React from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 const CabinetSettingContactBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -14,7 +14,8 @@ const CabinetSettingContactBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 }) => {
     const [isEdit, setIsEdit] = React.useState<boolean>(false);
 
-    const { user, isSending } = useTypedSelector(({ user }) => user);
+    // const { user, isSending } = useTypedSelector(({ user }) => user);
+    const { isSending, user } = useAuthUser();
 
     React.useEffect(() => {
         initialize(user);

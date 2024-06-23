@@ -1,18 +1,19 @@
 import React from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { NumericFormat } from 'react-number-format';
 import { formValueSelector } from 'redux-form';
 import dayjs from 'dayjs';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 import { CartItem } from 'src/models/ICartItem';
-import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
+import { changeCheckCartItem, removeCartItem, setCartItems } from 'src/redux/actions/cart';
+import { ICartItemsState } from 'src/redux/types/ICart';
 import { sendCreateOrder, sendSubmitOrder } from 'src/redux/actions/order';
 import { sendUpdateUser } from 'src/redux/actions/user';
 import { sendOrderApplyPromocode } from 'src/redux/actions/order';
 import { Loader, OrderProductsItem, OrderProductsPromocode } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { sendMindbox } from 'src/functions/mindbox';
 
 import orderPay from '../orderPay';
 
@@ -21,7 +22,9 @@ const OrderProducts: React.FC = () => {
 
     const [isDisableSendBtn, setIsDisableSendBtn] = React.useState<boolean>(false);
 
-    const { user } = useTypedSelector(({ user }) => user);
+    // const { user } = useTypedSelector(({ user }) => user);
+    const { user } = useAuthUser();
+
     const { items } = useTypedSelector(({ cart }) => cart);
     const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order);
 
@@ -288,13 +291,15 @@ const OrderProducts: React.FC = () => {
     };
 
     const successPayment = (orderId: number) => {
-        const newCart: { [key: string]: CartItem } = {};
+        const newCart: ICartItemsState = {};
 
         Object.keys(items).map((article) => {
-            if (!items[article].checked) newCart[article] = { ...items[article], checked: true };
+            if (!items[article].checked) {
+                newCart[article] = { ...items[article], checked: true };
+            }
         });
 
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        dispatch(setCartItems(newCart) as any);
 
         const products: CartItem[] = [];
 
@@ -327,131 +332,109 @@ const OrderProducts: React.FC = () => {
         });
 
         try {
-            if (localStorage.getItem('mindboxDeviceUUID')) {
-                axios.post(
-                    `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.CreateAuthorizedOrder&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                    {
-                        customer: {
-                            ids: {
-                                websiteID: `${user.user_id}`,
-                            },
-                            discountCard: {
-                                ids: {
-                                    number: '',
-                                },
-                            },
-                            // "birthDate": "<Дата рождения>",
-                            // "sex": "<Пол>",
-                            // "timeZone": "<Часовой пояс>",
-                            lastName: `${user.middlename}`,
-                            firstName: `${user.name}`,
-                            // "middleName": "<Отчество>",
-                            // "fullName": "<ФИО>",
-                            // "area": {
-                            // 	"ids": {
-                            // 		"externalId": "<Внешний идентификатор зоны>"
-                            // 	}
-                            // },
-                            email: `${user.email}`,
-                            mobilePhone: `${phoneValue}`,
-                            customFields: {
-                                tipKlienta: 'Pokupatel',
-                                gorod: `${cityValue}`,
-                                // "istochnikPodpiski": "<Источник подписки>"
-                            },
-                            // "subscriptions": []
+            sendMindbox('Website.CreateAuthorizedOrder', {
+                customer: {
+                    ids: {
+                        websiteID: `${user.user_id}`,
+                    },
+                    discountCard: {
+                        ids: {
+                            number: '',
                         },
-                        order: {
-                            ids: {
-                                // "mindboxId": "<Идентификатор заказа в Mindbox>",
-                                websiteID: `${orderId}`,
-                            },
-                            // "cashdesk": {
-                            // 	"ids": {
-                            // 		"externalId": "<Идентификатор кассы>"
-                            // 	}
-                            // },
-                            deliveryCost: `${currentDelivery.price}`,
-                            customFields: {
-                                deliveryType: `${currentDelivery.title}`,
-                            },
-                            // "area": {
-                            // 	"ids": {
-                            // 		"externalId": "<Внешний идентификатор зоны>"
-                            // 	}
-                            // },
-                            // "totalPrice": "<Итоговая сумма, полученная от клиента. Должна учитывать возвраты и отмены. Используется для подсчета среднего чека.>",
+                    },
+                    // "birthDate": "<Дата рождения>",
+                    // "sex": "<Пол>",
+                    // "timeZone": "<Часовой пояс>",
+                    lastName: `${user.middlename}`,
+                    firstName: `${user.name}`,
+                    // "middleName": "<Отчество>",
+                    // "fullName": "<ФИО>",
+                    // "area": {
+                    // 	"ids": {
+                    // 		"externalId": "<Внешний идентификатор зоны>"
+                    // 	}
+                    // },
+                    email: `${user.email}`,
+                    mobilePhone: `${phoneValue}`,
+                    customFields: {
+                        tipKlienta: 'Pokupatel',
+                        gorod: `${cityValue}`,
+                        // "istochnikPodpiski": "<Источник подписки>"
+                    },
+                    // "subscriptions": []
+                },
+                order: {
+                    ids: {
+                        // "mindboxId": "<Идентификатор заказа в Mindbox>",
+                        websiteID: `${orderId}`,
+                    },
+                    // "cashdesk": {
+                    // 	"ids": {
+                    // 		"externalId": "<Идентификатор кассы>"
+                    // 	}
+                    // },
+                    deliveryCost: `${currentDelivery.price}`,
+                    customFields: {
+                        deliveryType: `${currentDelivery.title}`,
+                    },
+                    // "area": {
+                    // 	"ids": {
+                    // 		"externalId": "<Внешний идентификатор зоны>"
+                    // 	}
+                    // },
+                    // "totalPrice": "<Итоговая сумма, полученная от клиента. Должна учитывать возвраты и отмены. Используется для подсчета среднего чека.>",
+                    discounts: promocode.isActive
+                        ? [
+                              {
+                                  type: 'Промокод',
+                                  promoCode: {
+                                      ids: {
+                                          code: promocode.name,
+                                      },
+                                  },
+                                  amount: promocode.saleSum,
+                              },
+                          ]
+                        : [],
+                    lines: products.map((product) => {
+                        return {
+                            minPricePerItem: `${product.price}`,
+                            // "costPricePerItem": "<Себестоимость за единицу продукта>",
+                            basePricePerItem: `${product.price}`,
+                            quantity: '1',
+                            quantityType: 'int',
+                            discountedPricePerLine: `${totalPrice}`,
+                            // "lineNumber": "<Порядковый номер позиции заказа>",
+                            lineId: `${product.id}`,
                             discounts: promocode.isActive
                                 ? [
                                       {
                                           type: 'Промокод',
-                                          promoCode: {
+                                          externalPromoAction: {
                                               ids: {
-                                                  code: promocode.name,
+                                                  externalId: `${promocode.name}`,
                                               },
                                           },
-                                          amount: promocode.saleSum,
+                                          amount: `${promocode.saleSum}`,
                                       },
                                   ]
                                 : [],
-                            lines: products.map((product) => {
-                                return {
-                                    minPricePerItem: `${product.price}`,
-                                    // "costPricePerItem": "<Себестоимость за единицу продукта>",
-                                    basePricePerItem: `${product.price}`,
-                                    quantity: '1',
-                                    quantityType: 'int',
-                                    discountedPricePerLine: `${totalPrice}`,
-                                    // "lineNumber": "<Порядковый номер позиции заказа>",
-                                    lineId: `${product.id}`,
-                                    discounts: promocode.isActive
-                                        ? [
-                                              {
-                                                  type: 'Промокод',
-                                                  externalPromoAction: {
-                                                      ids: {
-                                                          externalId: `${promocode.name}`,
-                                                      },
-                                                  },
-                                                  amount: `${promocode.saleSum}`,
-                                              },
-                                          ]
-                                        : [],
-                                    product: {
-                                        ids: {
-                                            website: `${product.id}`,
-                                        },
-                                    },
-                                };
-                            }),
-                            email: `${user.email}`,
-                            mobilePhone: `${phoneValue.replace(/[^0-9]/g, '')}`,
-                        },
-                        executionDateTimeUtc: new Date(),
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json; charset=utf-8',
-                            Accept: 'application/json',
-                            Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                        },
-                    },
-                );
+                            product: {
+                                ids: {
+                                    website: `${product.id}`,
+                                },
+                            },
+                        };
+                    }),
+                    email: `${user.email}`,
+                    mobilePhone: `${phoneValue.replace(/[^0-9]/g, '')}`,
+                },
+                executionDateTimeUtc: new Date(),
+            });
 
-                axios.post(
-                    `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ClearCart&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                    {
-                        executionDateTimeUtc: new Date(),
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json; charset=utf-8',
-                            Accept: 'application/json',
-                            Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-                        },
-                    },
-                );
-            }
+            sendMindbox('Website.ClearCart', {
+                executionDateTimeUtc: new Date(),
+            });
         } catch (e) {
             console.log(e);
         }
@@ -485,8 +468,6 @@ const OrderProducts: React.FC = () => {
                 orderNum,
                 onSuccessCallback: () => successPayment(orderId),
             });
-
-            localStorage.removeItem('cart');
         }
     };
 
@@ -550,84 +531,30 @@ const OrderProducts: React.FC = () => {
                         }{' '}
                         шт
                     </p>
-                    <p className="order-products-total-item__value">
-                        <NumericFormat
-                            value={totalPrice}
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
-                        ₽
-                    </p>
+                    <p className="order-products-total-item__value">{totalPrice.toLocaleString('ru-RU')}₽</p>
                 </div>
 
                 {isPromocode() ? (
                     <div className="order-products-total-item promocode">
                         <p className="order-products-total-item__title">Скидка в корзине</p>
                         <p className="order-products-total-item__value">
-                            -{' '}
-                            <NumericFormat
-                                value={promocode.saleSum}
-                                displayType={'text'}
-                                thousandSeparator={' '}
-                                renderText={(formattedValue: string) => (
-                                    <>
-                                        {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                            ? formattedValue
-                                            : parseInt(formattedValue.split(' ').join(''))}
-                                    </>
-                                )}
-                            />{' '}
-                            ₽
+                            - {promocode.saleSum.toLocaleString('ru-RU')}₽
                         </p>
                     </div>
                 ) : null}
 
                 <div className="order-products-total-item">
                     <p className="order-products-total-item__title">Доставка</p>
-                    <p className="order-products-total-item__value">
-                        <NumericFormat
-                            value={currentDelivery.price}
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
-                        ₽
-                    </p>
+                    <p className="order-products-total-item__value">{currentDelivery.price.toLocaleString('ru-RU')}₽</p>
                 </div>
                 <div className="order-products-total-item">
                     <p className="order-products-total-item__title">Итого:</p>
                     <p className="order-products-total-item__value">
-                        <NumericFormat
-                            value={
-                                totalPrice > 0
-                                    ? isPromocode()
-                                        ? totalPrice + currentDelivery.price - promocode.saleSum
-                                        : totalPrice + currentDelivery.price
-                                    : 0
-                            }
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
+                        {totalPrice > 0
+                            ? isPromocode()
+                                ? (totalPrice + currentDelivery.price - promocode.saleSum).toLocaleString('ru-RU')
+                                : (totalPrice + currentDelivery.price).toLocaleString('ru-RU')
+                            : 0}
                         ₽
                     </p>
                 </div>

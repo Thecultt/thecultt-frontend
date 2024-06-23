@@ -7,6 +7,7 @@ interface CatalogFiltersBlockWrapperProps {
     children: React.ReactNode;
     disabled?: boolean;
     infoMessage?: string;
+    defaultVisible?: boolean;
 }
 
 const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
@@ -14,6 +15,7 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
     children,
     disabled,
     infoMessage,
+    defaultVisible = false,
 }) => {
     const [isAllVisible, setIsAllVisible] = React.useState<boolean>(false);
 
@@ -26,6 +28,12 @@ const CatalogFiltersBlockWrapper: React.FC<CatalogFiltersBlockWrapperProps> = ({
     React.useEffect(() => {
         if (disabled) setIsAllVisible(false);
     }, [disabled]);
+
+    React.useEffect(() => {
+        if (defaultVisible) {
+            setIsAllVisible(true);
+        }
+    }, [defaultVisible]);
 
     return (
         <div

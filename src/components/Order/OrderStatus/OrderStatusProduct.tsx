@@ -1,5 +1,4 @@
 import React from 'react';
-import { NumericFormat } from 'react-number-format';
 
 import { OrderProduct } from 'src/models/IOrder';
 
@@ -38,21 +37,7 @@ const OrderStatusProduct: React.FC<OrderProduct> = ({ images, manufacturer, mode
                         {condition}
                     </span>
                 </div>
-                <p className="order-status-content-good-text__price">
-                    <NumericFormat
-                        value={price}
-                        displayType={'text'}
-                        thousandSeparator={' '}
-                        renderText={(formattedValue: string) => (
-                            <>
-                                {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                    ? formattedValue
-                                    : parseInt(formattedValue.split(' ').join(''))}
-                            </>
-                        )}
-                    />{' '}
-                    ₽
-                </p>
+                <p className="order-status-content-good-text__price">{price.toLocaleString('ru-RU')}₽</p>
             </div>
         </div>
     );

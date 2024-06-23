@@ -6,6 +6,7 @@ import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { removeCartItem } from 'src/redux/actions/cart';
 import { HeaderCartModalItem } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 interface HeaderCartModalAddMessageProps {
     state: boolean;
@@ -16,7 +17,9 @@ interface HeaderCartModalAddMessageProps {
 const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ state, setState, openCart }) => {
     const dispatch = useDispatch();
 
-    const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    // const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    const { isLoaded: isLoadedUser } = useAuthUser();
+
     const { items } = useTypedSelector(({ cart }) => cart);
 
     const removeItem = (article: string) => {

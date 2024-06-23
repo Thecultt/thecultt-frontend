@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { Dispatch } from 'react';
 
 import { SubscribeEmailActions, SubscribeEmailActionTypes } from '../types/ISubscribeEmail';
+import { sendMindbox } from 'src/functions/mindbox';
 
 export const sendSubscribeEmail = (data: { email: string; type: string }) => {
     return async (dispatch: Dispatch<SubscribeEmailActions>) => {
@@ -11,66 +11,54 @@ export const sendSubscribeEmail = (data: { email: string; type: string }) => {
         });
 
         try {
-            if (localStorage.getItem('mindboxDeviceUUID')) {
-                await axios.post(
-                    `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=KlientImportPriPodpiskeZaGuide&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-                    {
-                        customer: {
-                            // "discountCard": {
-                            // 	"ids": {
-                            // 		"number": "<Номер дисконтной карты>"
-                            // 	}
-                            // },
-                            // "birthDate": "<Дата рождения>",
-                            // "sex": "<Пол>",
-                            // "timeZone": "<Часовой пояс>",
-                            // "lastName": "<Фамилия>",
-                            // "firstName": "<Имя>",
-                            // "middleName": "<Отчество>",
-                            // "fullName": "<ФИО>",
-                            // "area": {
-                            // 	"ids": {
-                            // 		"externalId": "<Внешний идентификатор зоны>"
-                            // 	}
-                            // },
-                            email: data.email,
-                            // "mobilePhone": "<Мобильный телефон>",
-                            // "ids": {
-                            // 	"websiteID": "<Идентификатор на сайте>"
-                            // },
-                            customFields: {
-                                tipKlienta: data.type,
-                                // "gorod": "<Город>",
-                                istochnikPodpiski: 'FormaSGaidom',
-                            },
-                            subscriptions: [
-                                {
-                                    pointOfContact: 'Email',
-                                    isSubscribed: true,
-                                },
-                            ],
-                        },
-                        executionDateTimeUtc: new Date(),
+            await sendMindbox('KlientImportPriPodpiskeZaGuide', {
+                customer: {
+                    // "discountCard": {
+                    // 	"ids": {
+                    // 		"number": "<Номер дисконтной карты>"
+                    // 	}
+                    // },
+                    // "birthDate": "<Дата рождения>",
+                    // "sex": "<Пол>",
+                    // "timeZone": "<Часовой пояс>",
+                    // "lastName": "<Фамилия>",
+                    // "firstName": "<Имя>",
+                    // "middleName": "<Отчество>",
+                    // "fullName": "<ФИО>",
+                    // "area": {
+                    // 	"ids": {
+                    // 		"externalId": "<Внешний идентификатор зоны>"
+                    // 	}
+                    // },
+                    email: data.email,
+                    // "mobilePhone": "<Мобильный телефон>",
+                    // "ids": {
+                    // 	"websiteID": "<Идентификатор на сайте>"
+                    // },
+                    customFields: {
+                        tipKlienta: data.type,
+                        // "gorod": "<Город>",
+                        istochnikPodpiski: 'FormaSGaidom',
                     },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json; charset=utf-8',
-                            Accept: 'application/json',
-                            Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
+                    subscriptions: [
+                        {
+                            pointOfContact: 'Email',
+                            isSubscribed: true,
                         },
-                    },
-                );
+                    ],
+                },
+                executionDateTimeUtc: new Date(),
+            });
 
-                dispatch({
-                    type: SubscribeEmailActionTypes.SET_SUBSCRIBE_EMAIL_IS_SEND,
-                    payload: true,
-                });
+            dispatch({
+                type: SubscribeEmailActionTypes.SET_SUBSCRIBE_EMAIL_IS_SEND,
+                payload: true,
+            });
 
-                dispatch({
-                    type: SubscribeEmailActionTypes.SET_SUBSCRIBE_EMAIL_IS_SENDING,
-                    payload: false,
-                });
-            }
+            dispatch({
+                type: SubscribeEmailActionTypes.SET_SUBSCRIBE_EMAIL_IS_SENDING,
+                payload: false,
+            });
         } catch (e) {
             console.log(e);
         }

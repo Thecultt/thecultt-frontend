@@ -6,6 +6,7 @@ import { fetchOrderAddressCountrys, fetchOrderAddressCitys, fetchOrderAddressStr
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { RenderInput, RenderInputHints, RenderTextarea } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 const CabinetSettingAddressBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     handleSubmit,
@@ -17,10 +18,15 @@ const CabinetSettingAddressBlock: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     const dispatch = useDispatch();
 
     const { globalCountrys, globalCitys, globalStreets } = useTypedSelector(({ order }) => order);
+
+    // const {
+    //     user: { country, city, street, house, flat, comment },
+    //     isSending,
+    // } = useTypedSelector(({ user }) => user);
     const {
-        user: { country, city, street, house, flat, comment },
         isSending,
-    } = useTypedSelector(({ user }) => user);
+        user: { country, city, street, house, flat, comment },
+    } = useAuthUser();
 
     const [state, setState] = React.useState<boolean>(country !== '' || country !== null ? true : false);
     const [isEdit, setIsEdit] = React.useState<boolean>(country === '' || country === null ? true : false);

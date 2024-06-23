@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import { useLS } from 'src/hooks/useLS';
+import { LS_KEYS } from 'src/constants/keys';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { sendCheckEmail } from 'src/redux/actions/check_email';
 import { sendRegister } from 'src/redux/actions/register';
@@ -50,18 +52,22 @@ const Reglog: React.FC = () => {
     const [state, setState] = React.useState(false);
     const [isChange, setIsChange] = React.useState(false);
 
+    const [_lsEmail, setLsEmail] = useLS(LS_KEYS.email, '');
+    const [_lsRedirectReglog, setLsRedirectReglog, removeLsRedirectReglog] = useLS(LS_KEYS.redirectReglog, '');
+
+    const { email } = useTypedSelector(({ check_email }) => check_email);
+
     React.useEffect(() => {
         const hashType = (
             hash.split('#')[1] && hash.split('#')[1].split('?') ? hash.split('#')[1].split('?')[0] : hash.split('#')[1]
         ) as ReglogStateTypesNotLogin;
 
-        if (new URLSearchParams(window.location.search).get('redirect')) {
-            localStorage.setItem(
-                'redirect_reglog',
-                new URLSearchParams(window.location.search).get('redirect') as string,
-            );
+        const redirectParam = new URLSearchParams(window.location.search).get('redirect');
+
+        if (redirectParam) {
+            setLsRedirectReglog(redirectParam);
         } else {
-            localStorage.removeItem('redirect_reglog');
+            removeLsRedirectReglog();
         }
 
         if (Object.values(ReglogStateTypesNotLogin).includes(hashType)) {
@@ -81,8 +87,6 @@ const Reglog: React.FC = () => {
             setState(false);
         }
     }, [hash, pathname]);
-
-    const { email } = useTypedSelector(({ check_email }) => check_email);
 
     const closeFunc = () => {
         setState(false);
@@ -108,27 +112,26 @@ const Reglog: React.FC = () => {
     };
 
     const onSubmitCheckEmail = (data: any) => {
-        localStorage.setItem('email', data.email);
-
+        setLsEmail(data.email as string);
         dispatch(sendCheckEmail(data.email, checkEmailNavigate) as any);
     };
 
     const onSubmitRegister = (data: any) => {
-        dispatch(sendRegister(data) as any);
+        return dispatch(sendRegister(data) as any);
     };
 
     const onSubmitLogin = (data: any) => {
-        dispatch(sendLogin({ username: email, password: data.password }) as any);
+        return dispatch(sendLogin({ username: email, password: data.password }) as any);
     };
 
     const onSubmitRecoveryPassword = (data: any) => {
-        dispatch(sendRecoveryPassword(data.email, true) as any);
+        return dispatch(sendRecoveryPassword(data.email, true) as any);
     };
 
     const onSubmitRecoveryPasswordConfirmed = (data: any) => {
         const code = new URLSearchParams(window.location.search).get('code') as string;
 
-        dispatch(sendRecoveryPasswordConfirmed(data.password, code) as any);
+        return dispatch(sendRecoveryPasswordConfirmed(data.password, code) as any);
     };
 
     const popups: Record<ReglogStateTypesNotLogin, React.ReactNode> = {

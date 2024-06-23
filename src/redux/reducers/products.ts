@@ -1,4 +1,5 @@
-import { ProductsState, ProductTypes, ProductActionTypes } from '../types/IProducts';
+import { SORT } from 'src/constants/catalog';
+import { ProductsState, ProductTypes, ProductActionTypes, CatalogFetchType } from '../types/IProducts';
 
 const initialState: ProductsState = {
     items: [],
@@ -7,7 +8,9 @@ const initialState: ProductsState = {
         id: 0,
         article: '',
         price: 0,
+        old_price: 0,
         store_price: 0,
+        price_drop: false,
         condition: '',
         manufacturer: '',
         name: '',
@@ -20,6 +23,7 @@ const initialState: ProductsState = {
         subcategory: '',
         is_trial: false,
         from_boutique: false,
+        from_parnter: false,
         nuances: '',
         external_material: '',
         lining_material: '',
@@ -61,7 +65,7 @@ const initialState: ProductsState = {
     itemByArticleIsLoaded: false,
     isFetchMore: false,
     isFetchPage: false,
-    typeFetch: 'btn-page',
+    typeFetch: CatalogFetchType.Page,
     currentPage: 1,
     pageCount: 0,
     itemsCount: 0,
@@ -78,11 +82,11 @@ const initialState: ProductsState = {
         sex: {},
         availability: {},
         size: {},
-        selections: {},
+        selection: null,
         boutique: false,
         price_drop: false,
         glass_frame: {},
-        sort: 'a',
+        sort: SORT.a,
     },
     lastSearchString: '',
     catalogScroll: 0,
@@ -421,24 +425,12 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
         };
     }
 
-    if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTIONS) {
-        if (state.filters.selections[action.payload.selectionId]) {
-            delete state.filters.selections[action.payload.selectionId];
-
-            return {
-                ...state,
-                currentPage: 1,
-            };
-        }
-
+    if (action.type === ProductActionTypes.SET_PRODUCTS_FILTERS_CATALOG_SELECTION) {
         return {
             ...state,
             filters: {
                 ...state.filters,
-                selections: {
-                    ...state.filters.selections,
-                    [action.payload.selectionId]: action.payload.selection,
-                },
+                selection: action.payload === state.filters.selection ? null : action.payload,
             },
             currentPage: 1,
         };
@@ -499,6 +491,32 @@ const products = (state = initialState, action: ProductTypes): ProductsState => 
                 ...state.filters,
                 sort: action.payload,
             },
+        };
+    }
+
+    if (action.type === ProductActionTypes.CLEAR_PRODUCTS_FILTERS) {
+        return {
+            ...state,
+            filters: {
+                isParse: true,
+                search: '',
+                price: { min: 0, max: 0 },
+                conditions: {},
+                categories: {},
+                types: {},
+                brands: {},
+                models: {},
+                colors: {},
+                sex: {},
+                availability: {},
+                size: {},
+                selection: null,
+                boutique: false,
+                price_drop: false,
+                glass_frame: {},
+                sort: SORT.a,
+            },
+            currentPage: 1,
         };
     }
 

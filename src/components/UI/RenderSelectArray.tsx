@@ -102,27 +102,31 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({
                 })}
                 onClick={() => setState(!state)}
             >
-                <p className="select__label">
-                    {Object.keys(currentItems).length ? (
-                        Object.keys(currentItems)
-                            .map((title) => title)
-                            .join(', ')
-                    ) : (
-                        <span>{label}</span>
-                    )}
-                </p>
+                <div className="select-current-item">
+                    <div className="select-current-item-info">
+                        <p className="select-current-item-info__text">
+                            {Object.keys(currentItems).length ? (
+                                Object.keys(currentItems)
+                                    .map((title) => title)
+                                    .join(', ')
+                            ) : (
+                                <span>{label}</span>
+                            )}
+                        </p>
+                    </div>
 
-                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="Icons">
-                        <path
-                            id="Vector"
-                            d="M3 6L10 13L17 6"
-                            stroke="#202020"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </g>
-                </svg>
+                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Icons">
+                            <path
+                                id="Vector"
+                                d="M3 6L10 13L17 6"
+                                stroke="#202020"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </g>
+                    </svg>
+                </div>
             </div>
 
             <div
@@ -132,14 +136,16 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({
             >
                 <div className="select-list-items-wrapper">
                     {items.map((item, index) => (
-                        <p
-                            className={getClassNames('select-list__item', {
+                        <div
+                            className={getClassNames('select-list-item', {
                                 active: !!currentItems[item],
                             })}
-                            key={`select-list__item-${item}-${index}`}
+                            key={`select-list__item-${index}`}
                             onClick={() => toggleCurrentItem(item)}
                         >
-                            {item}
+                            <div className="select-list-item-info">
+                                <p className="select-list-item-info__text">{item}</p>
+                            </div>
 
                             <svg
                                 width="24"
@@ -159,7 +165,7 @@ const RenderSelectArray: React.FC<RenderSelectArrayProps> = ({
                                     />
                                 </g>
                             </svg>
-                        </p>
+                        </div>
                     ))}
                 </div>
             </div>

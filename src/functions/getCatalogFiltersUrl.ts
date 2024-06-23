@@ -14,7 +14,7 @@ interface IUrlFilters {
     sex?: string[];
     availability?: string[];
     size?: string[];
-    selections?: string[];
+    selection?: number;
     glass_frame?: string[];
     page?: number;
     boutique?: boolean;
@@ -23,6 +23,9 @@ interface IUrlFilters {
 }
 
 export const getCatalogFiltersUrl = (filters: IUrlFilters) => {
-    const url = qs.stringify(filters, { arrayFormat: 'repeat', skipNulls: true });
+    const url = qs.stringify(filters, {
+        arrayFormat: 'repeat',
+        skipNulls: true,
+    });
     return `/catalog?${url}`;
 };

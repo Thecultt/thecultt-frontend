@@ -7,6 +7,7 @@
 	+ManropeMedium
 
 body
+	position: relative
 	font-size: 16px
 	background-color: $backgroundColor
 	color: $black
@@ -516,6 +517,8 @@ button
 
 	background-color: $lightBackgroundColor
 
+	position: relative
+
 	+borderRadius
 
 	+transition
@@ -525,7 +528,6 @@ button
 
 	&.disabled
 		pointer-events: none
-		// opacity: 0.5
 
 		& > svg
 			opacity: 0
@@ -534,11 +536,33 @@ button
 		& > svg
 			transform: rotate(180deg)
 
-	&__label
-		+ManropeMedium
+	&-current-item
+		width: 100%
 
-		& > span
-			color: $gray
+		display: flex
+		align-items: center
+		justify-content: space-between
+
+		&-info
+			display: flex
+			align-items: center
+
+			&-image
+				margin-right: 12px
+
+				width: 32px
+				height: 32px
+				border-radius: 50%
+
+				background-size: cover
+				background-position: bottom center
+				background-repeat: no-repeat
+
+			&__text
+				+ManropeMedium
+
+				& > span
+					color: $gray
 
 	&-list
 		top: calc( 100% + 5px )
@@ -585,16 +609,12 @@ button
 				background-color: $gray
 				border-radius: 100px
 
-		&__item
+		&-item
 			cursor: pointer
 
 			display: flex
 			justify-content: space-between
 			align-items: center
-
-			user-select: none
-
-			font-size: 16px
 
 			margin-bottom: 15px
 
@@ -602,9 +622,8 @@ button
 
 			+transition
 
-			& > svg
-				opacity: 0
-				+transition
+			&:last-child
+				margin-bottom: 0
 
 			&.active
 				color: $mainColor
@@ -613,8 +632,28 @@ button
 				& > svg
 					opacity: 1
 
-			&:last-child
-				margin-bottom: 0
+			&-info
+				display: flex
+				align-items: center
+
+				&-image
+					margin-right: 12px
+
+					width: 32px
+					height: 32px
+					border-radius: 50%
+
+					background-size: cover
+					background-position: bottom center
+					background-repeat: no-repeat
+
+				&__text
+					user-select: none
+					font-size: 16px
+
+			& > svg
+				opacity: 0
+				+transition
 
 // popup
 .popup
@@ -623,7 +662,7 @@ button
 	top: 0
 	left: 0
 
-	z-index: 33000
+	z-index: 999999999
 
 	width: 100%
 	height: 100%
@@ -784,6 +823,22 @@ button
 .page-loader
 	margin-left: 10px
 
+	width: 40px
+	height: 40px
+	border: 3px solid $mainColor
+	border-bottom-color: transparent
+	border-radius: 50%
+	display: inline-block
+	box-sizing: border-box
+	animation: rotation 1s linear infinite
+
+.spinner-wrapper
+	width: 100%
+	display: flex
+	justify-content: center
+	align-items: center
+
+.spinner
 	width: 40px
 	height: 40px
 	border: 3px solid $mainColor

@@ -2,7 +2,8 @@ import { Dispatch } from 'react';
 
 import $api from 'src/http';
 import { CabinetSellOption } from 'src/models/ICabinetSell';
-import { UTM_KEYS, YM_KEYS } from 'src/constants/keys';
+import { YM_KEYS } from 'src/constants/keys';
+import { getUtm } from 'src/functions/getUtm';
 
 import {
 	CabinetSellActionTypes,
@@ -29,40 +30,18 @@ export const sendCreateCabinetSell = (data: any) => (dispatch: Dispatch<CabinetS
 		payload: true,
 	});
 
-	const newData: any = data;
+	const ymUidRow = localStorage.getItem(YM_KEYS.uid);
+	const ymUid = ymUidRow ? JSON.parse(ymUidRow) || '' : '';
 
-	const ymUid = localStorage.getItem(YM_KEYS.uid);
-	const utmSource = localStorage.getItem(UTM_KEYS.source);
-	const utmMedium = localStorage.getItem(UTM_KEYS.medium);
-	const utmCampaign = localStorage.getItem(UTM_KEYS.campaign);
-	const utmContent = localStorage.getItem(UTM_KEYS.content);
-	const utmTerm = localStorage.getItem(UTM_KEYS.term);
+	const utm = getUtm();
 
-	if (ymUid) {
-		newData['_ym_uid'] = JSON.parse(ymUid);
-	}
+	const requestData = {
+		...data,
+		...utm,
+		[YM_KEYS.uid]: ymUid,
+	};
 
-	if (utmSource) {
-		newData['utm_source'] = utmSource;
-	}
-
-	if (utmMedium) {
-		newData['utm_medium'] = utmMedium;
-	}
-
-	if (utmCampaign) {
-		newData['utm_campaign'] = utmCampaign;
-	}
-
-	if (utmContent) {
-		newData['utm_content'] = utmContent;
-	}
-
-	if (utmTerm) {
-		newData['utm_term'] = utmTerm;
-	}
-
-	$api.post('/create_sell/', newData).then(({ data }) => {
+	$api.post('/create_sell/', requestData).then(({ data }) => {
 		window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
 		window.dataLayer.push({
 			event: 'application_sent',

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NumericFormat } from 'react-number-format';
 import { useDispatch } from 'react-redux';
 
 import { ProductPage } from 'src/models/IProduct';
@@ -8,7 +7,16 @@ import { CartItem } from 'src/models/ICartItem';
 import { addCartItem, setCartIsVisibleMessage } from 'src/redux/actions/cart';
 import { sendSaveFavorite, sendRemoveFavorite } from 'src/redux/actions/favorites';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { ProductInfoTitleBoutique, ProductInfoTitleSplit } from 'src/components';
+import {
+    ProductInfoTitleBoutique,
+    ProductInfoTitlePartner,
+    ProductInfoTitleSale,
+    ProductInfoTitleSplit,
+} from 'src/components';
+import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
+import { CATEGORY_NAMES } from 'src/constants/catalog';
+import { useWaitingData } from 'src/hooks/catalog/useWaitingData';
+import { WaitingPopupType } from 'src/types/waiting';
 
 const ProductInfoTitle: React.FC<ProductPage> = ({
     id,
@@ -17,6 +25,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
     category,
     name,
     price,
+    old_price,
+    price_drop,
     availability,
     subcategory,
     shoe_size,
@@ -26,6 +36,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
     store_price,
     condition,
     from_boutique,
+    from_parnter,
 }) => {
     const dispatch = useDispatch();
 
@@ -34,6 +45,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
 
     const [isCartLocal, setIsCartLocal] = React.useState<boolean>(cartItems[article] ? true : false);
     const [isFavoriteLocal, setIsFavoriteLocal] = React.useState<boolean>(favoritesItems[id] ? true : false);
+
+    const { setWaitingData } = useWaitingData();
 
     const addCart = (item: CartItem) => {
         dispatch(setCartIsVisibleMessage(true));
@@ -53,6 +66,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 id,
                 article,
                 price,
+                old_price,
                 store_price,
                 condition,
                 manufacturer,
@@ -66,7 +80,8 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 size,
                 is_trial,
                 from_boutique,
-                price_drop: false,
+                from_parnter,
+                price_drop,
             }) as any,
         );
     };
@@ -77,6 +92,7 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 id,
                 article,
                 price,
+                old_price,
                 store_price,
                 condition,
                 manufacturer,
@@ -90,37 +106,22 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 size,
                 is_trial,
                 from_boutique,
-                price_drop: false,
+                from_parnter,
+                price_drop,
             }) as any,
         );
     };
 
     const subscribeGood = () => {
-        if (category === 'Сумки') {
-            localStorage.setItem(
-                'waiting_init',
-                JSON.stringify({
-                    category,
-                    brand: manufacturer,
-                    model: name,
-                    type: '',
-                    size: size || shoe_size,
-                }),
-            );
-        } else {
-            localStorage.setItem(
-                'waiting_init',
-                JSON.stringify({
-                    category,
-                    brand: manufacturer,
-                    model: name,
-                    type: subcategory,
-                    size: size || shoe_size,
-                }),
-            );
-        }
+        setWaitingData({
+            category,
+            brand: manufacturer,
+            model: name,
+            type: category !== CATEGORY_NAMES.bags ? subcategory : '',
+            size: size || shoe_size,
+        });
 
-        window.location.hash = 'create_waiting';
+        window.location.hash = WaitingPopupType.Form;
     };
 
     return (
@@ -131,33 +132,35 @@ const ProductInfoTitle: React.FC<ProductPage> = ({
                 <h2 className="product-content-info-title__model">{name}</h2>
 
                 <Link
-                    to={`/catalog?categories=${category}&brands=${manufacturer}`}
+                    to={getCatalogFiltersUrl({
+                        categories: [category],
+                        brands: [manufacturer],
+                        sort: 'a',
+                    })}
                     className="product-content-info-title__brand"
                 >
                     {manufacturer}
                 </Link>
 
-                {from_boutique ? <ProductInfoTitleBoutique /> : null}
+                <div className="product-content-info-title-badges">
+                    {from_boutique ? <ProductInfoTitleBoutique /> : null}
+
+                    {from_parnter ? <ProductInfoTitlePartner /> : null}
+
+                    {price_drop ? <ProductInfoTitleSale /> : null}
+                </div>
 
                 <div className="product-content-info-title-price">
-                    <h3 className="product-content-info-title-price__price">
-                        <NumericFormat
-                            value={price}
-                            displayType={'text'}
-                            thousandSeparator={' '}
-                            renderText={(formattedValue: string) => (
-                                <>
-                                    {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                        ? formattedValue
-                                        : parseInt(formattedValue.split(' ').join(''))}
-                                </>
-                            )}
-                        />{' '}
-                        ₽
-                    </h3>
+                    <h3 className="product-content-info-title-price__price">{price.toLocaleString('ru-RU')}₽</h3>
 
-                    {price < 150000 ? <ProductInfoTitleSplit price={price} /> : null}
+                    {old_price ? (
+                        <p className="product-content-info-title-price__oldprice">
+                            {old_price.toLocaleString('ru-RU')}₽
+                        </p>
+                    ) : null}
                 </div>
+
+                {price < 150000 ? <ProductInfoTitleSplit price={price} /> : null}
 
                 {is_trial ? (
                     <p className="product-content-info-title__notavailable">На примерке</p>

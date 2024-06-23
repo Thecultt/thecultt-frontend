@@ -3,9 +3,10 @@ import { Dispatch } from 'react';
 
 import { ReglogStateTypesNotLogin } from 'src/components/Reglog/Reglog';
 import { checkWarningEmail } from 'src/functions/checkWarningEmail';
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
 
 import { CheckEmailActionTypes, CheckEmailActions } from '../types/ICheckEmail';
-
 import { sendRecoveryPassword } from './recovery_password';
 
 export const sendCheckEmail =
@@ -21,9 +22,13 @@ export const sendCheckEmail =
             payload: true,
         });
 
-        sessionStorage.setItem('email', email);
+        localStorageService.setItem(LS_KEYS.email, email);
 
         let nextPopupType = ReglogStateTypesNotLogin.LOGIN;
+
+        const ym = window.ym || (window.ym = []);
+
+        ym(68184745, 'reachGoal', 'login_email');
 
         await axios
             .post(`${process.env.REACT_APP_API_DOMEN}/email_check/`, { email })

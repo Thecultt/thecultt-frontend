@@ -21,6 +21,7 @@ import subscribe_email from './subscribe_email';
 import public_favorites from './public_favorites';
 import notifications_server from './notifications_server';
 import buyer_thecultt from './buyer_thecultt';
+import selections from './selections';
 
 export const rootReducer = combineReducers({
     form: formReducer,
@@ -44,6 +45,7 @@ export const rootReducer = combineReducers({
     public_favorites,
     notifications_server,
     buyer_thecultt,
+    selections,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

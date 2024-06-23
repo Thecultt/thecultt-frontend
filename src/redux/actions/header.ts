@@ -2,6 +2,7 @@ import { Dispatch } from 'react';
 
 import $api from 'src/http';
 import { Product } from 'src/models/IProduct';
+import { SORT } from 'src/constants/catalog';
 
 import { HeaderActions, HeaderActionTypes } from '../types/IHeader';
 
@@ -13,7 +14,9 @@ export const fetchHeaderSearchItems = (value: string) => async (dispatch: Dispat
 
     const {
         data: { total_items, items },
-    } = await $api.get<{ total_items: number; items: Product[] }>('/catalog', { params: { search: value } });
+    } = await $api.get<{ total_items: number; items: Product[] }>('/catalog', {
+        params: { search: value, sort_by: SORT.a },
+    });
 
     dispatch({
         type: HeaderActionTypes.SET_HEADER_SEARCH_IS_FETCH,

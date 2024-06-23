@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { NumericFormat } from 'react-number-format';
 
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { changeCheckCartItem, removeCartItem } from 'src/redux/actions/cart';
 import { HeaderCartModalItem } from 'src/components';
 import { getClassNames } from 'src/functions/getClassNames';
+import { useAuthUser } from 'src/hooks/useAuthUser';
 
 interface HeaderCartModalProps {
     state: boolean;
@@ -16,7 +16,9 @@ interface HeaderCartModalProps {
 const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) => {
     const dispatch = useDispatch();
 
-    const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    // const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
+    const { isLoaded: isLoadedUser } = useAuthUser();
+
     const { items } = useTypedSelector(({ cart }) => cart);
 
     const changeCheck = (article: string, status: boolean) => {
@@ -100,29 +102,17 @@ const HeaderCartModal: React.FC<HeaderCartModalProps> = ({ state, setState }) =>
                             </p>
 
                             <p className="header-block-cart-modal-btn-title__sum">
-                                <NumericFormat
-                                    value={
-                                        Object.keys(items)
-                                            .map((article) => items[article])
-                                            .filter((item) => item.availability && item.checked)
-                                            .map((item) => item.price).length
-                                            ? Object.keys(items)
-                                                  .map((article) => items[article])
-                                                  .filter((item) => item.availability && item.checked)
-                                                  .map((item) => item.price)
-                                                  .reduce((a: number, b: number) => a + b)
-                                            : 0
-                                    }
-                                    displayType={'text'}
-                                    thousandSeparator={' '}
-                                    renderText={(formattedValue: string) => (
-                                        <>
-                                            {parseInt(formattedValue.split(' ').join('')) >= 10000
-                                                ? formattedValue
-                                                : parseInt(formattedValue.split(' ').join(''))}
-                                        </>
-                                    )}
-                                />{' '}
+                                {Object.keys(items)
+                                    .map((article) => items[article])
+                                    .filter((item) => item.availability && item.checked)
+                                    .map((item) => item.price).length
+                                    ? Object.keys(items)
+                                          .map((article) => items[article])
+                                          .filter((item) => item.availability && item.checked)
+                                          .map((item) => item.price)
+                                          .reduce((a: number, b: number) => a + b)
+                                          .toLocaleString('ru-RU')
+                                    : 0}
                                 ₽
                             </p>
                         </div>

@@ -7,7 +7,7 @@ import { CatalogFiltersTopBoutique, CatalogFiltersTopSort, CatalogFiltersTopSort
 
 const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, isOpenFiltersMedia }) => {
     const { filters, itemsCount } = useTypedSelector(({ products }) => products);
-    const { categories } = useTypedSelector(({ products_filters }) => products_filters);
+    const { categories, selections } = useTypedSelector(({ products_filters }) => products_filters);
 
     const [query] = useSearchParams();
 
@@ -60,18 +60,8 @@ const CatalogFiltersTop: React.FC<any> = React.memo(({ setIsOpenFiltersMedia, is
                                 'THE CULTT SALE'
                             ) : (
                                 <>
-                                    {Object.keys(filters.selections).length ? (
-                                        Object.keys(filters.selections).length === 1 ? (
-                                            filters.selections[Object.keys(filters.selections)[0]]
-                                        ) : (
-                                            `${
-                                                checkDeclension(Object.keys(filters.selections).length, [
-                                                    'Подборка',
-                                                    'Подборки',
-                                                    'Подборок',
-                                                ]).title
-                                            }`
-                                        )
+                                    {filters.selection ? (
+                                        selections[filters.selection]
                                     ) : (
                                         <>
                                             {query.get('theme')

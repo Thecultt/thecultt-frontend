@@ -2,6 +2,9 @@ import { Dispatch } from 'react';
 
 import $api from 'src/http';
 import { WaitingListItem } from 'src/models/IWaitingListItem';
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
+import { WaitingPopupType } from 'src/types/waiting';
 
 import { WaitingActionTypes, WaitingActions } from '../types/IWaiting';
 
@@ -31,15 +34,13 @@ export const sendNewWaitingListItem =
             },
         });
 
-        localStorage.removeItem('waiting_init');
-
-        window.location.hash = 'create_waiting_success';
+        localStorageService.removeItem(LS_KEYS.waiting);
+        window.location.hash = WaitingPopupType.Success;
     };
 
 export const sendDeleteWaitingListItem = (id: string) => async (dispatch: Dispatch<any>) => {
     await $api.delete(`/delete_waitinglist_request/${id}`);
 
     dispatch(fetchWaitingList());
-
     window.location.hash = '';
 };

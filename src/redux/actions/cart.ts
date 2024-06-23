@@ -1,42 +1,43 @@
 import { Dispatch } from 'redux';
-import axios from 'axios';
 
 import $api from 'src/http';
 import { ProductPage } from 'src/models/IProduct';
 import { CartItem } from 'src/models/ICartItem';
+import { sendMindbox } from 'src/functions/mindbox';
+import { localStorageService } from 'src/services/storage';
+import { LS_KEYS } from 'src/constants/keys';
 
-import { CartActionTypes, CartActions } from '../types/ICart';
+import { CartActionTypes, CartActions, ICartItemsState } from '../types/ICart';
 
-export const checkAvailabilityCartItems =
-    (items: { [key: string]: CartItem }) => async (dispatch: Dispatch<CartActions>) => {
-        await Promise.all(
-            Object.keys(items).map(async (article) => {
-                const {
-                    data: { id, images, manufacturer, category, subcategory, name, price, availability, is_trial },
-                } = await $api.get<ProductPage>(`/product/${article}`);
+export const checkAvailabilityCartItems = (items: ICartItemsState) => async (dispatch: Dispatch<CartActions>) => {
+    await Promise.all(
+        Object.keys(items).map(async (article) => {
+            const {
+                data: { id, images, manufacturer, category, subcategory, name, price, availability, is_trial },
+            } = await $api.get<ProductPage>(`/product/${article}`);
 
-                dispatch({
-                    type: CartActionTypes.CHANGE_CART_ITEMS,
-                    payload: {
+            dispatch({
+                type: CartActionTypes.CHANGE_CART_ITEMS,
+                payload: {
+                    article,
+                    data: {
+                        id,
+                        checked: items[article].checked,
                         article,
-                        data: {
-                            id,
-                            checked: items[article].checked,
-                            article,
-                            category,
-                            subcategory,
-                            image: images[0],
-                            manufacturer,
-                            name,
-                            price,
-                            availability,
-                            is_trial,
-                        },
+                        category,
+                        subcategory,
+                        image: images[0],
+                        manufacturer,
+                        name,
+                        price,
+                        availability,
+                        is_trial,
                     },
-                });
-            }),
-        );
-    };
+                },
+            });
+        }),
+    );
+};
 
 export const addCartItem = (item: CartItem) => {
     window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
@@ -85,34 +86,24 @@ export const addCartItem = (item: CartItem) => {
     // 	}
     // });
 
-    axios.post(
-        `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.SetCart&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-        {
-            addProductToList: {
-                product: {
-                    ids: {
-                        website: item.id,
-                    },
+    sendMindbox('Website.SetCart', {
+        addProductToList: {
+            product: {
+                ids: {
+                    website: item.id,
                 },
-                // productGroup: {
-                // 	ids: {
-                // 		website: item.id
-                // 	}
-                // },
-                pricePerItem: item.price,
             },
-            customer: {
-                email: `${localStorage.getItem('email')}`,
-            },
+            // productGroup: {
+            // 	ids: {
+            // 		website: item.id
+            // 	}
+            // },
+            pricePerItem: item.price,
         },
-        {
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                Accept: 'application/json',
-                Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-            },
+        customer: {
+            email: `${localStorageService.getItem<string>(LS_KEYS.email, '')}`,
         },
-    );
+    });
 
     // const cart = JSON.parse(localStorage.getItem("cart") as string);
 
@@ -198,35 +189,25 @@ export const removeCartItem = (id: string, item: CartItem) => {
         },
     });
 
-    axios.post(
-        `https://api.mindbox.ru/v3/operations/async?endpointId=thecultt.Website&operation=Website.ClearCart&deviceUUID=${localStorage.getItem('mindboxDeviceUUID')}`,
-        {
-            customer: {
-                email: `${localStorage.getItem('email')}`,
-            },
-            removeProductFromList: {
-                product: {
-                    ids: {
-                        website: item.id,
-                    },
+    sendMindbox('Website.ClearCart', {
+        customer: {
+            email: `${localStorageService.getItem<string>(LS_KEYS.email)}`,
+        },
+        removeProductFromList: {
+            product: {
+                ids: {
+                    website: item.id,
                 },
-                // productGroup: {
-                // 	ids: {
-                // 		website: item.id
-                // 	}
-                // },
-                pricePerItem: item.price,
             },
-            executionDateTimeUtc: new Date(),
+            // productGroup: {
+            // 	ids: {
+            // 		website: item.id
+            // 	}
+            // },
+            pricePerItem: item.price,
         },
-        {
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                Accept: 'application/json',
-                Authorization: 'Mindbox secretKey="Lyv5BiL99IxxpHRgOFX0N875s6buFjii"',
-            },
-        },
-    );
+        executionDateTimeUtc: new Date(),
+    });
 
     // window.mindbox("async", {
     // 	operation: "Website.ClearCart",
@@ -260,4 +241,9 @@ export const removeCartItem = (id: string, item: CartItem) => {
 export const setCartIsVisibleMessage = (status: boolean) => ({
     type: CartActionTypes.SET_CART_IS_VISIBLE_MESSAGE,
     payload: status,
+});
+
+export const setCartItems = (cart: ICartItemsState) => ({
+    type: CartActionTypes.SET_CART_ITEMS,
+    payload: cart,
 });
