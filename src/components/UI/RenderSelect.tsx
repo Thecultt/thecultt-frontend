@@ -17,8 +17,8 @@ const RenderSelect: React.FC<RenderSelectProps> = ({
     meta: { form, dispatch, initial },
     onChangeCutsom,
 }) => {
-    const [state, setState] = React.useState<boolean>(false);
-    const [currentItem, setCurrentItem] = React.useState<string>('');
+    const [state, setState] = React.useState(false);
+    const [currentItem, setCurrentItem] = React.useState('');
 
     const SelectRef = React.useRef<HTMLDivElement>(null);
 

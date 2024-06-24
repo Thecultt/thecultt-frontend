@@ -9,76 +9,11 @@ import { RenderSelect, SellBackBtn } from 'src/components';
 
 import validate from './validate';
 
-const SellChoiceCategory: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, submitting, initialize }) => {
+const SellChoiceCategory: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSubmit, submitting }) => {
     const dispatch = useDispatch();
 
-    const initCategory: any = localStorage.getItem('sell-info-global-category');
-
-    const [currentCategory, setCurrentCategory] = React.useState<string>('');
-
     const { parameters } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
-    const selector = formValueSelector('sell-info-form');
 
-    const { brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, isBuyTheCulttValue } =
-        useTypedSelector((state) => {
-            const { brand, condition, defects, category, model, price, isBuyTheCultt } = selector(
-                state,
-                'brand',
-                'condition',
-                'defects',
-                'category',
-                'model',
-                'price',
-                'isBuyTheCultt',
-            );
-            return {
-                brandValue: brand,
-                conditionValue: condition,
-                defectsValue: defects,
-                categoryValue: category,
-                modelValue: model,
-                priceValue: price,
-                isBuyTheCulttValue: isBuyTheCultt,
-            };
-        });
-
-    React.useEffect(() => {
-        if (initCategory) {
-            setCurrentCategory(initCategory);
-            initialize({ category: initCategory });
-        }
-    }, []);
-
-    React.useEffect(() => {
-        localStorage.setItem(
-            'sell-info-form',
-            JSON.stringify({
-                brand: brandValue,
-                condition: conditionValue,
-                defects: defectsValue,
-                category: categoryValue,
-                model: modelValue,
-                price: priceValue,
-                isBuyTheCultt: isBuyTheCulttValue,
-            }),
-        );
-    }, [brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, isBuyTheCulttValue]);
-
-    const onChangeCategory = (value: string) => {
-        if (currentCategory === '') {
-            setCurrentCategory(value);
-        } else if (value !== currentCategory) {
-            setCurrentCategory(value);
-
-            initialize({
-                category: value,
-            });
-
-            localStorage.removeItem('sell-images-form');
-        } else {
-            setCurrentCategory(value);
-        }
-    };
     const onClickBack = () => {
         dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.COOPERATION));
     };
@@ -95,13 +30,7 @@ const SellChoiceCategory: React.FC<{} & InjectedFormProps<{}, {}>> = ({ handleSu
                 <div className="sell-block-select">
                     <h4 className="sell-block-select__title">Категория</h4>
 
-                    <Field
-                        component={RenderSelect}
-                        name="category"
-                        label="Категория"
-                        items={Object.keys(parameters)}
-                        onChangeCutsom={onChangeCategory}
-                    />
+                    <Field component={RenderSelect} name="category" label="Категория" items={Object.keys(parameters)} />
                 </div>
             </div>
 

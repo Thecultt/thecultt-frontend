@@ -6,6 +6,7 @@ import { YM_KEYS } from 'src/constants/keys';
 import { getUtm } from 'src/functions/getUtm';
 
 import {
+    CabinetSellStateFormValuesInfo,
     CabinetSellActionTypes,
     CabinetSellActions,
     CabinetSellTypes,
@@ -67,7 +68,7 @@ export const sendCreateCabinetSell = (data: any) => (dispatch: Dispatch<CabinetS
     });
 };
 
-export const sendCreateCabinetSellImage =
+export const sendUploadCabinetSellImage =
     (image: any, index: number, file: any, isAutoDetected?: boolean) =>
     async (dispatch: Dispatch<CabinetSellActions>) => {
         const { images } = await $api
@@ -131,6 +132,21 @@ export const fetchCabinetSellsList = () => async (dispatch: Dispatch<CabinetSell
     // 	payload: newObj
     // })
 };
+
+export const setCabinetSellFormValuesCategory = (category: string) => ({
+    type: CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_CATEGORY,
+    payload: category,
+});
+
+export const setCabinetSellFormValuesImages = (images: Record<number, string>) => ({
+    type: CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_IMAGES,
+    payload: images,
+});
+
+export const setCabinetSellFormValuesInfo = (info: CabinetSellStateFormValuesInfo) => ({
+    type: CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_INFO,
+    payload: info,
+});
 
 export const setCabinetSellAutoDetectedIndex = (index: number | null) => ({
     type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_SELECTED_INDEX,

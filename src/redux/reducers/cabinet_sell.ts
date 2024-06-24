@@ -1,3 +1,4 @@
+import { formValues } from 'redux-form';
 import {
     CabinetSellState,
     CabinetSellActions,
@@ -10,11 +11,26 @@ const initialState: CabinetSellState = {
     isSend: false,
     isSending: false,
 
+    isLoadedParameters: false,
+    parameters: {},
+
     currentStep: CabinetSellStepKeys.COOPERATION,
     currentType: CabinetSellTypes.SELL,
 
-    isLoadedParameters: false,
-    parameters: {},
+    formValues: {
+        category: '',
+        images: {},
+        info: {
+            brand: '',
+            model: '',
+            condition: '',
+            defects: '',
+            size: '',
+            kit: '',
+            price: '',
+            isBuyTheCultt: '',
+        },
+    },
 
     autoDetected: {
         models: [],
@@ -40,6 +56,14 @@ const cabinet_sell = (state = initialState, action: CabinetSellActions) => {
         };
     }
 
+    if (action.type === CabinetSellActionTypes.SET_CABINET_SELL_PARAMETERS) {
+        return {
+            ...state,
+            isLoadedParameters: true,
+            parameters: action.payload,
+        };
+    }
+
     if (action.type === CabinetSellActionTypes.SET_CABINET_SELL_CURRENT_STEP) {
         return {
             ...state,
@@ -54,11 +78,43 @@ const cabinet_sell = (state = initialState, action: CabinetSellActions) => {
         };
     }
 
-    if (action.type === CabinetSellActionTypes.SET_CABINET_SELL_PARAMETERS) {
+    if (action.type === CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_CATEGORY) {
         return {
             ...state,
-            isLoadedParameters: true,
-            parameters: action.payload,
+            formValues: {
+                category: action.payload,
+                images: {},
+                info: {
+                    brand: '',
+                    model: '',
+                    condition: '',
+                    defects: '',
+                    size: '',
+                    kit: '',
+                    price: '',
+                    isBuyTheCultt: '',
+                },
+            },
+        };
+    }
+
+    if (action.type === CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_IMAGES) {
+        return {
+            ...state,
+            formValues: {
+                ...state.formValues,
+                images: action.payload,
+            },
+        };
+    }
+
+    if (action.type === CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_INFO) {
+        return {
+            ...state,
+            formValues: {
+                ...state.formValues,
+                info: action.payload,
+            },
         };
     }
 

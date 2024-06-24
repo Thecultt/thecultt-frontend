@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reduxForm, InjectedFormProps, formValueSelector, Field } from 'redux-form';
 
-import { CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
-import { setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
-import { RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from 'src/components';
+import { CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
+import { setCabinetSellCurrentStep, setCabinetSellFormValuesInfo } from 'src/redux/actions/cabinet_sell';
 import { getClassNames } from 'src/functions/getClassNames';
+
+import { RenderInput, RenderInputHints, RenderSelect, RenderSelectArray, SellBackBtn } from 'src/components';
 
 import validate from './validate';
 
@@ -20,132 +21,140 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 }) => {
     const dispatch = useDispatch();
 
-    const data: any = JSON.parse(localStorage.getItem('sell-info-form') as any);
-
-    const [currentCategory, setCurrentCategory] = React.useState<string>('');
-    const [currentBrand, setCurrentBrand] = React.useState<string>('');
-
     const [brands, setBrands] = React.useState<{ title: string; value: string }[]>([]);
     const [models, setModels] = React.useState<{ title: string; value: string }[]>([]);
 
-    const { parameters } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
+    const {
+        parameters,
+        formValues: { category },
+    } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
+
     const selector = formValueSelector('sell-info-form');
 
-    const { brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, isBuyTheCulttValue } =
-        useTypedSelector((state) => {
-            const { brand, condition, defects, category, model, price, isBuyTheCultt } = selector(
-                state,
-                'brand',
-                'condition',
-                'defects',
-                'category',
-                'model',
-                'price',
-                'isBuyTheCultt',
-            );
-            return {
-                brandValue: brand,
-                conditionValue: condition,
-                defectsValue: defects,
-                categoryValue: category,
-                modelValue: model,
-                priceValue: price,
-                isBuyTheCulttValue: isBuyTheCultt,
-            };
-        });
+    const {
+        brandValue,
+        modelValue,
+        conditionValue,
+        defectsValue,
+        sizeValue,
+        kitValue,
+        priceValue,
+        isBuyTheCulttValue,
+    } = useTypedSelector((state) => {
+        const { brand, model, condition, defects, size, kit, price, isBuyTheCultt } = selector(
+            state,
+            'brand',
+            'model',
+            'condition',
+            'defects',
+            'size',
+            'kit',
+            'price',
+            'isBuyTheCultt',
+        );
+        return {
+            brandValue: brand,
+            modelValue: model,
+            conditionValue: condition,
+            defectsValue: defects,
+            sizeValue: size,
+            kitValue: kit,
+            priceValue: price,
+            isBuyTheCulttValue: isBuyTheCultt,
+        };
+    });
+
+    // React.useEffect(() => {
+    // 	if (data) {
+    // 		if (data.category) {
+    // 			setCurrentCategory(data.category);
+    // 		}
+
+    // 		if (data.brand) {
+    // 			setCurrentBrand(data.brand);
+    // 		}
+
+    // 		initialize(data);
+    // 	}
+    // }, []);
 
     React.useEffect(() => {
-        if (data) {
-            if (data.category) {
-                setCurrentCategory(data.category);
-            }
-
-            if (data.brand) {
-                setCurrentBrand(data.brand);
-            }
-
-            initialize(data);
-        }
-    }, []);
-
-    React.useEffect(() => {
-        localStorage.setItem(
-            'sell-info-form',
-            JSON.stringify({
+        dispatch(
+            setCabinetSellFormValuesInfo({
                 brand: brandValue,
+                model: modelValue,
                 condition: conditionValue,
                 defects: defectsValue,
-                category: categoryValue,
-                model: modelValue,
+                size: sizeValue,
+                kit: kitValue,
                 price: priceValue,
                 isBuyTheCultt: isBuyTheCulttValue,
             }),
         );
-    }, [brandValue, conditionValue, defectsValue, categoryValue, modelValue, priceValue, isBuyTheCulttValue]);
+    }, [brandValue, conditionValue, defectsValue, modelValue, priceValue, isBuyTheCulttValue]);
 
-    React.useEffect(() => {
-        if (parameters[currentCategory]) {
-            parameters[currentCategory].brands.map((brand) => {
-                if (brand.name === currentBrand) {
-                    setModels(
-                        brand.models.map((model) => ({
-                            title: model.name,
-                            value: model.name,
-                        })),
-                    );
-                }
-            });
+    // React.useEffect(() => {
+    // 	if (parameters[currentCategory]) {
+    // 		parameters[currentCategory].brands.map((brand) => {
+    // 			if (brand.name === currentBrand) {
+    // 				setModels(
+    // 					brand.models.map((model) => ({
+    // 						title: model.name,
+    // 						value: model.name,
+    // 					})),
+    // 				);
+    // 			}
+    // 		});
 
-            setBrands(
-                parameters[currentCategory].brands.map((brand) => ({
-                    title: brand.name,
-                    value: brand.name,
-                })),
-            );
-        }
-    }, [currentCategory]);
+    // 		setBrands(
+    // 			parameters[currentCategory].brands.map((brand) => ({
+    // 				title: brand.name,
+    // 				value: brand.name,
+    // 			})),
+    // 		);
+    // 	}
+    // }, [currentCategory]);
 
-    const onChangeCategory = (value: string) => {
-        if (currentCategory === '') {
-            setCurrentCategory(value);
-        } else if (value !== currentCategory) {
-            setCurrentCategory(value);
+    // const onChangeCategory = (value: string) => {
+    // 	if (currentCategory === '') {
+    // 		setCurrentCategory(value);
+    // 	} else if (value !== currentCategory) {
+    // 		setCurrentCategory(value);
 
-            initialize({
-                category: value,
-                brand: '',
-                models: '',
-                condition: '',
-                defects: '',
-                size: '',
-                set: '',
-                price: '',
-                isBuyTheCultt: '',
-            });
+    // 		initialize({
+    // 			brand: '',
+    // 			models: '',
+    // 			condition: '',
+    // 			defects: '',
+    // 			size: '',
+    // 			set: '',
+    // 			price: '',
+    // 			isBuyTheCultt: '',
+    // 		});
 
-            localStorage.removeItem('sell-images-form');
+    // 		localStorage.removeItem('sell-images-form');
 
-            setCurrentBrand('');
-        } else {
-            setCurrentCategory(value);
-        }
-    };
+    // 		setCurrentBrand('');
+    // 	} else {
+    // 		setCurrentCategory(value);
+    // 	}
+    // };
 
     const onChangeInputBrand = (value: string) => {
         const newBrands: { title: string; value: string }[] = [];
 
-        parameters[currentCategory].brands.map((brand) => {
+        parameters[category].brands.map((brand) => {
             if (brand.name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
                 newBrands.push({ title: brand.name, value: brand.name });
             }
         });
 
-        setCurrentBrand(value);
+        // setCurrentBrand(value);
         setBrands(newBrands);
 
         const newModels: { title: string; value: string }[] = [];
 
-        parameters[currentCategory].brands.map((brand) => {
+        parameters[category].brands.map((brand) => {
             if (brand.name === value) {
                 brand.models.map((model) => {
                     newModels.push({ title: model.name, value: model.name });
@@ -159,8 +168,8 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     const onChangeInputModel = (value: string) => {
         const newModels: { title: string; value: string }[] = [];
 
-        parameters[currentCategory].brands.map((brand) => {
-            if (brand.name === currentBrand) {
+        parameters[category].brands.map((brand) => {
+            if (brand.name === brandValue) {
                 brand.models.map((model) => {
                     if (model.name.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
                         newModels.push({
@@ -178,7 +187,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     const onClickBack = () => {
         dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.COOPERATION));
 
-        localStorage.removeItem('sell-images-form');
+        // localStorage.removeItem('sell-images-form');
     };
 
     return (
@@ -191,18 +200,6 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
             <div className="sell-block-input-wrapper-wrapper">
                 <div className="sell-block-select">
-                    <h4 className="sell-block-select__title">Категория товара</h4>
-
-                    <Field
-                        component={RenderSelect}
-                        name="category"
-                        label="Категория товара"
-                        items={Object.keys(parameters)}
-                        onChangeCutsom={onChangeCategory}
-                    />
-                </div>
-
-                <div className="sell-block-select">
                     <h4 className="sell-block-select__title">Бренд товара</h4>
 
                     <Field
@@ -210,14 +207,13 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         name="brand"
                         label="Бренд товара"
                         hints={brands}
-                        disabled={parameters[currentCategory] ? false : true}
                         onChangeCustom={(value: string) => onChangeInputBrand(value)}
                         bgWhite
                         ifFreeField
                     />
                 </div>
 
-                {currentCategory === 'Мужские сумки' || currentCategory === 'Женские сумки' ? (
+                {category === 'Мужские сумки' || category === 'Женские сумки' ? (
                     <div className="sell-block-select">
                         <h4 className="sell-block-select__title">Модель товара</h4>
 
@@ -226,7 +222,7 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                             name="model"
                             label="Модель товара"
                             hints={models}
-                            disabled={currentBrand !== '' ? false : true}
+                            disabled={brandValue !== '' || !models.length ? false : true}
                             onChangeCustom={(value: string) => onChangeInputModel(value)}
                             bgWhite
                             ifFreeField
@@ -274,11 +270,11 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         name="condition"
                         label="Состояние товара"
                         items={
-                            parameters[currentCategory]
-                                ? parameters[currentCategory].conditions.map((condition) => condition.name)
+                            parameters[category]
+                                ? parameters[category].conditions.map((condition) => condition.name)
                                 : []
                         }
-                        disabled={parameters[currentCategory] ? false : true}
+                        // disabled={parameters[category] ? false : true}
                     />
                 </div>
 
@@ -289,16 +285,12 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
                         component={RenderSelectArray}
                         name="defects"
                         label="Наличие дефектов"
-                        items={
-                            parameters[currentCategory]
-                                ? parameters[currentCategory].defects.map((defect) => defect.name)
-                                : []
-                        }
-                        disabled={parameters[currentCategory] ? false : true}
+                        items={parameters[category] ? parameters[category].defects.map((defect) => defect.name) : []}
+                        // disabled={parameters[currentCategory] ? false : true}
                     />
                 </div>
 
-                {currentCategory === 'Обувь' ? (
+                {category === 'Обувь' ? (
                     <div className="sell-block-select">
                         <h4 className="sell-block-select__title">Размер</h4>
 
@@ -311,12 +303,10 @@ const SellInfo: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
                     <Field
                         component={RenderSelectArray}
-                        name="set"
+                        name="kit"
                         label="Комплект"
-                        items={
-                            parameters[currentCategory] ? parameters[currentCategory].kits.map((kit) => kit.name) : []
-                        }
-                        disabled={parameters[currentCategory] ? false : true}
+                        items={parameters[category] ? parameters[category].kits.map((kit) => kit.name) : []}
+                        // disabled={parameters[currentCategory] ? false : true}
                     />
                 </div>
 
