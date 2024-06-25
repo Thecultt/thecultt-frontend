@@ -18,7 +18,12 @@ export const sendRecoveryPassword = (email: string, isRedirect?: boolean) => {
                 email,
             })
             .then(({ data }) => {
+                const ym = window.ym || (window.ym = []);
+
+                ym(68184745, 'reachGoal', 'forgot_password');
+
                 const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
+
                 if (redirectReglog) {
                     window.location.href = redirectReglog;
                 }
