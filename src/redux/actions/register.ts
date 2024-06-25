@@ -30,55 +30,51 @@ export const sendRegister = (info: {
                 },
             });
 
-            if (info.promoCheckbox) {
-                try {
-                    const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
-                    const mindboxOperation =
-                        redirectReglog === '/order'
-                            ? 'KlientImportPriPodpiskeVZakaze'
-                            : 'KlientImportPriPodpiskeRegaLK';
+            try {
+                const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');
+                const mindboxOperation =
+                    redirectReglog === '/order' ? 'KlientImportPriPodpiskeVZakaze' : 'KlientImportPriPodpiskeRegaLK';
 
-                    sendMindbox(mindboxOperation, {
-                        customer: {
-                            ids: {
-                                websiteID: data.id,
-                            },
-                            discountCard: {
-                                ids: {
-                                    number: '',
-                                },
-                            },
-                            birthDate: '',
-                            sex: '',
-                            timeZone: '',
-                            lastName: '',
-                            firstName: info.name,
-                            middleName: info.lastname,
-                            fullName: '',
-                            area: {
-                                ids: {
-                                    externalId: '',
-                                },
-                            },
-                            customFields: {
-                                tipKlienta: '',
-                                gorod: '',
-                                istochnikPodpiski: 'PriRegistraciiLK',
-                            },
-                            email: info.email,
-                            mobilePhone: '',
-                            subscriptions: [
-                                {
-                                    pointOfContact: 'Email',
-                                    isSubscribed: true,
-                                },
-                            ],
+                sendMindbox(mindboxOperation, {
+                    customer: {
+                        ids: {
+                            websiteID: data.id,
                         },
-                        executionDateTimeUtc: new Date(),
-                    });
-                } catch (e) {
-                    console.log(e);
-                }
+                        discountCard: {
+                            ids: {
+                                number: '',
+                            },
+                        },
+                        birthDate: '',
+                        sex: '',
+                        timeZone: '',
+                        lastName: '',
+                        firstName: info.name,
+                        middleName: info.lastname,
+                        fullName: '',
+                        area: {
+                            ids: {
+                                externalId: '',
+                            },
+                        },
+                        customFields: {
+                            tipKlienta: '',
+                            gorod: '',
+                            istochnikPodpiski: 'PriRegistraciiLK',
+                        },
+                        email: info.email,
+                        mobilePhone: '',
+                        subscriptions: [
+                            {
+                                pointOfContact: 'Email',
+                                isSubscribed: info.promoCheckbox,
+                            },
+                        ],
+                    },
+                    executionDateTimeUtc: new Date(),
+                });
+            } catch (e) {
+                console.log(e);
             }
 
             const redirectReglog = localStorageService.getItem<string>(LS_KEYS.redirectReglog, '');

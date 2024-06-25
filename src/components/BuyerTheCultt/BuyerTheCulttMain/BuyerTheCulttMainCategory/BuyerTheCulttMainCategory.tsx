@@ -16,7 +16,7 @@ const BuyerTheCulttMainCategory: React.FC<BuyerTheCulttMainCategoryProps> = ({
 }) => {
     const [isViewAllProducts, setIsViewAllProducts] = React.useState<boolean>(false);
 
-    const [currentFilterBrand, setCurrentFilterBrand] = React.useState<string>('');
+    const [currentFilterBrand, setCurrentFilterBrand] = React.useState<string>(brands[0]);
 
     const onClickCurrentFilterBrand = (brand: string) => {
         if (currentFilterBrand === brand) {
