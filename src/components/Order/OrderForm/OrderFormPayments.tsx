@@ -86,7 +86,7 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
 
             <div className="order-form-block-checkboxs-wrapper">
                 {paymentItems.map((item, index) =>
-                    totalPrice >= 150000 && item.title === 'Яндекс Сплит' ? null : (
+                    totalPrice > 150000 && item.title === 'Яндекс Сплит' ? null : (
                         <div className="order-form-block-checkbox" key={`order-form-block-checkbox-${index}`}>
                             <Field
                                 component={RenderRadioSelect}
@@ -101,7 +101,7 @@ const OrderFormPayments: React.FC<OrderFormPaymentsProps> = ({ paymentValue }) =
                 )}
             </div>
 
-            {paymentValue === 'Яндекс Сплит' && totalPrice < 150000 ? (
+            {paymentValue === 'Яндекс Сплит' && totalPrice <= 150000 ? (
                 <div
                     className="order-form-block-payments-split-widget"
                     id="order-form-block-payments-split-widget"
