@@ -49,13 +49,8 @@ export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
     },
     {
         title: 'Консьерж-сервис',
-        description: (
-            <>
-                Доставим для вас из Европы украшения Cartier, Bvlgari, Messika,
-                <br />
-                Van Cleef & Arpels и часы главных часовых брендов.
-            </>
-        ),
+        description:
+            'Доставим для вас из Европы украшения Cartier, Bvlgari, Messika, Van Cleef & Arpels и часы главных часовых брендов.',
         image: {
             desktop: homeMainBannerImageConcierge,
             mobile: homeMainBannerImageConciergeMobile,
