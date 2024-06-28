@@ -21,13 +21,23 @@ const SellSteps: React.FC = () => {
             types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
         },
         {
-            title: 'Информация о товаре',
-            key: CabinetSellStepKeys.INFO,
+            title: 'Выбор категории',
+            key: CabinetSellStepKeys.CHOICE_CATEGORY,
             types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
         },
         {
             title: 'Фотографии',
             key: CabinetSellStepKeys.IMAGES,
+            types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
+        },
+        {
+            title: 'Выбор модели',
+            key: CabinetSellStepKeys.CHOICE_MODEL,
+            types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
+        },
+        {
+            title: 'Информация о товаре',
+            key: CabinetSellStepKeys.INFO,
             types: [CabinetSellTypes.SELL, CabinetSellTypes.EXCHANGE],
         },
         {

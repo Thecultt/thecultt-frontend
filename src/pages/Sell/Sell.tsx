@@ -1,8 +1,10 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import {
     fetchCabinetSellParameters,
+    setCabinetSellFormValuesCategory,
     setCabinetSellCurrentStep,
     sendCreateCabinetSell,
 } from 'src/redux/actions/cabinet_sell';
@@ -13,29 +15,34 @@ import {
     Popup,
     SellSteps,
     SellCooperation,
-    SellInfo,
+    SellChoiceCategory,
     SellImages,
+    SellChoiceModel,
+    SellInfo,
     SellContact,
     SellDelivery,
     SellProduct,
+    PageLoader,
 } from 'src/components';
 import { sendMindbox } from 'src/functions/mindbox';
+import { pushDataLayer } from 'src/functions/pushDataLayer';
 
 const Sell: React.FC = () => {
     const dispatch = useDispatch();
+
+    const [searchParams] = useSearchParams();
 
     const { isLoadedParameters, isSend, currentStep, currentType } = useTypedSelector(
         ({ cabinet_sell }) => cabinet_sell,
     );
 
-    // const { user } = useTypedSelector(({ user }) => user);
     const { user } = useAuthUser();
 
-    const initStep = new URLSearchParams(window.location.search).get('step');
+    const initStep = searchParams.get('step');
 
     React.useEffect(() => {
-        if (initStep === 'info') {
-            dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.INFO));
+        if (initStep === 'choice_category') {
+            dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.CHOICE_CATEGORY));
         }
     }, [initStep]);
 
@@ -46,8 +53,6 @@ const Sell: React.FC = () => {
             try {
                 const info = JSON.parse(localStorage.getItem('sell-info-form') as string);
                 const images = JSON.parse(localStorage.getItem('sell-images-form') as string);
-
-                console.log(info);
 
                 let data: any = {
                     otpravilAnketyNaProdazy: 'Нет',
@@ -90,31 +95,11 @@ const Sell: React.FC = () => {
                         },
                         customer: {
                             email: `${user.email}`,
-                            // "discountCard": {
-                            // 	"ids": {
-                            // 		"number": "<Номер дисконтной карты>"
-                            // 	}
-                            // },
-                            // "birthDate": "<Дата рождения>",
-                            // "sex": "<Пол>",
-                            // "timeZone": "<Часовой пояс>",
-                            // "lastName": "<Фамилия>",
-                            // "firstName": "<Имя>",
-                            // "middleName": "<Отчество>",
-                            // "fullName": "<ФИО>",
-                            // "area": {
-                            // 	"ids": {
-                            // 		"externalId": "<Внешний идентификатор зоны>"
-                            // 	}
-                            // },
-                            // "mobilePhone": "<Мобильный телефон>",
                             ids: {
                                 websiteID: `${user.id}`,
                             },
                             customFields: {
                                 tipKlienta: 'Prodavec',
-                                // "gorod": "<Город>",
-                                // "istochnikPodpiski": "<Источник подписки>"
                             },
                             subscriptions: [],
                         },
@@ -143,17 +128,16 @@ const Sell: React.FC = () => {
         window.scrollTo(0, 0);
     }, [currentStep]);
 
+    const onSubmitChoiceCategory = (data: any) => {
+        dispatch(setCabinetSellFormValuesCategory(data.category));
+
+        dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.IMAGES));
+    };
+
     const onSubmitInfo = (data: any) => {
-        localStorage.setItem('sell-info-global-category', data.category);
         localStorage.setItem('sell-info-form', JSON.stringify(data));
 
-        window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window.dataLayer.push({
-            event: 'product_information_complete',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-            },
-        });
+        pushDataLayer('product_information_complete');
 
         dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.IMAGES));
     };
@@ -161,13 +145,7 @@ const Sell: React.FC = () => {
     const onSubmitContact = (data: any) => {
         localStorage.setItem('sell-contact-form', JSON.stringify(data));
 
-        window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window.dataLayer.push({
-            event: 'contact_information_complete',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-            },
-        });
+        pushDataLayer('contact_information_complete');
 
         dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.DELIVERY));
     };
@@ -175,13 +153,7 @@ const Sell: React.FC = () => {
     const onSubmitProduct = (data: any) => {
         localStorage.setItem('sell-product-form', JSON.stringify(data));
 
-        window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window.dataLayer.push({
-            event: 'exchange_item_complete',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-            },
-        });
+        pushDataLayer('exchange_item_complete');
 
         dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.CONTACT));
     };
@@ -222,15 +194,20 @@ const Sell: React.FC = () => {
             client_comment: delivery.comment ? delivery.comment : '',
         };
 
-        window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
-        window.dataLayer.push({
-            event: 'shipping_method_complete',
-            ecommerce: {
-                timestamp: Math.floor(Date.now() / 1000),
-            },
-        });
+        pushDataLayer('shipping_method_complete');
 
         dispatch(sendCreateCabinetSell(sell) as any);
+    };
+
+    const stepsBlock: Record<CabinetSellStepKeys, React.ReactNode> = {
+        [CabinetSellStepKeys.COOPERATION]: <SellCooperation />,
+        [CabinetSellStepKeys.CHOICE_CATEGORY]: <SellChoiceCategory onSubmit={onSubmitChoiceCategory} />,
+        [CabinetSellStepKeys.IMAGES]: <SellImages />,
+        [CabinetSellStepKeys.CHOICE_MODEL]: <SellChoiceModel />,
+        [CabinetSellStepKeys.INFO]: <SellInfo onSubmit={onSubmitInfo} />,
+        [CabinetSellStepKeys.PRODUCT]: <SellProduct onSubmit={onSubmitProduct} />,
+        [CabinetSellStepKeys.CONTACT]: <SellContact onSubmit={onSubmitContact} />,
+        [CabinetSellStepKeys.DELIVERY]: <SellDelivery onSubmit={onSubmitDelivery} />,
     };
 
     return (
@@ -239,27 +216,7 @@ const Sell: React.FC = () => {
                 <div className="sell-wrapper">
                     <SellSteps />
 
-                    {currentStep === CabinetSellStepKeys.COOPERATION ? <SellCooperation /> : null}
-
-                    {isLoadedParameters ? (
-                        <>
-                            {currentStep === CabinetSellStepKeys.INFO ? <SellInfo onSubmit={onSubmitInfo} /> : null}
-
-                            {currentStep === CabinetSellStepKeys.IMAGES ? <SellImages /> : null}
-
-                            {currentStep === CabinetSellStepKeys.PRODUCT ? (
-                                <SellProduct onSubmit={onSubmitProduct} />
-                            ) : null}
-
-                            {currentStep === CabinetSellStepKeys.CONTACT ? (
-                                <SellContact onSubmit={onSubmitContact} />
-                            ) : null}
-
-                            {currentStep === CabinetSellStepKeys.DELIVERY ? (
-                                <SellDelivery onSubmit={onSubmitDelivery} />
-                            ) : null}
-                        </>
-                    ) : null}
+                    {isLoadedParameters ? stepsBlock[currentStep] : <PageLoader />}
 
                     {localStorage.getItem('sell-info-global-type-delivery') === 'Лично в офис' ? (
                         <Popup state={isSend} setState={() => (window.location.href = '/cabinet/sells')}>

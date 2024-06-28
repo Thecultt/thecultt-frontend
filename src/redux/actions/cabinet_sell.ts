@@ -1,16 +1,19 @@
 import { Dispatch } from 'react';
 
 import $api from 'src/http';
-import { CabinetSellOption } from 'src/models/ICabinetSellOption';
+import { CabinetSellOption } from 'src/models/ICabinetSell';
 import { YM_KEYS } from 'src/constants/keys';
 import { getUtm } from 'src/functions/getUtm';
 
 import {
+    CabinetSellStateFormValuesInfo,
     CabinetSellActionTypes,
     CabinetSellActions,
     CabinetSellTypes,
     CabinetSellStepKeys,
-} from '../types/ICabinetSell';
+} from 'src/redux/types/ICabinetSell';
+
+import { CabinetSellAutoDetectedModel } from 'src/models/ICabinetSell';
 
 export const setCabinetSellCurrentStep = (step: CabinetSellStepKeys) => ({
     type: CabinetSellActionTypes.SET_CABINET_SELL_CURRENT_STEP,
@@ -65,13 +68,35 @@ export const sendCreateCabinetSell = (data: any) => (dispatch: Dispatch<CabinetS
     });
 };
 
-export const sendCreateCabinetSellImage = async (image: any) => {
-    const { images } = await $api
-        .post<{ images: string[] }>(`/upload_images/`, { images: [image] })
-        .then(({ data }) => data);
+export const sendUploadCabinetSellImage =
+    (image: any, index: number, file: any, isAutoDetected?: boolean) =>
+    async (dispatch: Dispatch<CabinetSellActions>) => {
+        const { images } = await $api
+            .post<{ images: string[] }>(`/upload_images/`, { images: [image] })
+            .then(({ data }) => data);
 
-    return images[0];
-};
+        if (index === 0 && isAutoDetected) {
+            // const formData = new FormData();
+
+            // formData.append('file', file);
+
+            const { response } = await $api
+                .post<{
+                    response: CabinetSellAutoDetectedModel[];
+                    status: string;
+                }>(`/get_brand_prediction/`, { file: image })
+                .then(({ data }) => data);
+
+            if (response.length) {
+                dispatch({
+                    type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_MODELS,
+                    payload: response,
+                });
+            }
+        }
+
+        return images[0];
+    };
 
 export const fetchCabinetSellParameters = () => async (dispatch: Dispatch<CabinetSellActions>) => {
     const { data } = await $api.get<CabinetSellOption[]>(`/sell_options/`);
@@ -107,3 +132,23 @@ export const fetchCabinetSellsList = () => async (dispatch: Dispatch<CabinetSell
     // 	payload: newObj
     // })
 };
+
+export const setCabinetSellFormValuesCategory = (category: string) => ({
+    type: CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_CATEGORY,
+    payload: category,
+});
+
+export const setCabinetSellFormValuesImages = (images: Record<number, string>) => ({
+    type: CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_IMAGES,
+    payload: images,
+});
+
+export const setCabinetSellFormValuesInfo = (info: CabinetSellStateFormValuesInfo) => ({
+    type: CabinetSellActionTypes.SET_CABINET_SELL_FORM_VALUES_INFO,
+    payload: info,
+});
+
+export const setCabinetSellAutoDetectedIndex = (index: number | null) => ({
+    type: CabinetSellActionTypes.SET_CABINET_SELL_AUTO_DETECTED_SELECTED_INDEX,
+    payload: index,
+});

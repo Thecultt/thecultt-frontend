@@ -5,9 +5,29 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
 import { CabinetSellTypes, CabinetSellStepKeys } from 'src/redux/types/ICabinetSell';
 import { setCabinetSellCurrentType, setCabinetSellCurrentStep } from 'src/redux/actions/cabinet_sell';
-import SellBlockCooperationConciergeImage from 'src/assets/images/sell/sell-block-cooperation-concierge-service.jpg';
 import { getClassNames } from 'src/functions/getClassNames';
 import { useAuthUser } from 'src/hooks/useAuthUser';
+
+import { pushDataLayer } from 'src/functions/pushDataLayer';
+
+import SellBlockCooperationConciergeImage from 'src/assets/images/sell/sell-block-cooperation-concierge-service.jpg';
+
+const types = [
+    {
+        title: 'Продажа',
+        description: `Вы получаете выплату за аксессуар сразу после
+			согласования условий и проверки на подлинность или
+			после продажи товара за комиссию.`,
+        type: CabinetSellTypes.SELL,
+    },
+
+    {
+        title: 'Обмен',
+        description: `Мы оценим ваш лот и предложим депозит в размере его
+			стоимости на покупку нового лота на нашем сайте.`,
+        type: CabinetSellTypes.EXCHANGE,
+    },
+];
 
 const SellCooperation: React.FC = () => {
     const dispatch = useDispatch();
@@ -17,23 +37,6 @@ const SellCooperation: React.FC = () => {
     const { currentType } = useTypedSelector(({ cabinet_sell }) => cabinet_sell);
     const { isLoggedIn } = useAuthUser();
 
-    const types = [
-        {
-            title: 'Продажа',
-            description: `Вы получаете выплату за аксессуар сразу после
-			согласования условий и проверки на подлинность или
-			после продажи товара за комиссию.`,
-            type: CabinetSellTypes.SELL,
-        },
-
-        {
-            title: 'Обмен',
-            description: `Мы оценим ваш лот и предложим депозит в размере его
-			стоимости на покупку нового лота на нашем сайте.`,
-            type: CabinetSellTypes.EXCHANGE,
-        },
-    ];
-
     React.useEffect(() => {
         if (initType === 'exchange') {
             dispatch(setCabinetSellCurrentType(CabinetSellTypes.EXCHANGE));
@@ -41,8 +44,8 @@ const SellCooperation: React.FC = () => {
     }, [initType]);
 
     return (
-        <div className="sell-block-cooperation-wrapper">
-            <div className="sell-block sell-block-cooperation">
+        <div className="sell-block sell-block-cooperation-wrapper">
+            <div className="sell-block-cooperation">
                 <h3 className="sell-block__title">Вариант сотрудничества</h3>
                 <p className="sell-block__subtitle">
                     Выберите вариант сотрудничества, который вам интересен.{' '}
@@ -68,22 +71,20 @@ const SellCooperation: React.FC = () => {
                     <button
                         className="btn sell-block__btn"
                         onClick={() => {
-                            dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.INFO));
+                            dispatch(setCabinetSellCurrentStep(CabinetSellStepKeys.CHOICE_CATEGORY));
 
-                            window.dataLayer.push({ ecommerce: null }); // Clear the previous ecommerce object.
-                            window.dataLayer.push({
-                                event: 'cooperation_type_complete',
-                                ecommerce: {
-                                    timestamp: Math.floor(Date.now() / 1000),
-                                    cooperation_type: currentType === 'sell' ? 'sell' : 'swap',
-                                },
+                            pushDataLayer('cooperation_type_complete', {
+                                cooperation_type: currentType === 'sell' ? 'sell' : 'swap',
                             });
                         }}
                     >
                         Продолжить
                     </button>
                 ) : (
-                    <Link to="/cabinet/sell/?redirect=/cabinet/sell?step=info#reglog" className="btn sell-block__btn">
+                    <Link
+                        to="/cabinet/sell/?redirect=/cabinet/sell?step=choice_category#reglog"
+                        className="btn sell-block__btn"
+                    >
                         Продолжить
                     </Link>
                 )}

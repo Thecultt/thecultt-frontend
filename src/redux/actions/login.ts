@@ -93,7 +93,7 @@ export const sendLogin = (data: { username: string | null; password: string }, o
                     window.location.href = redirectReglog;
                 } else {
                     window.location.hash = '';
-                    window.location.reload();
+                    // window.location.reload();В
                 }
 
                 // if (onChangeSuccess) {

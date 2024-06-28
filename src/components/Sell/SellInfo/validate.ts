@@ -1,5 +1,4 @@
 export interface validateInfoValues {
-    category: string;
     brand: string;
     model: string;
     condition: string;
@@ -11,7 +10,6 @@ export interface validateInfoValues {
 }
 
 interface validateInfoErrors {
-    category?: string;
     brand?: string;
     model?: string;
     condition?: string;
@@ -27,10 +25,6 @@ const validate = (values: validateInfoValues) => {
 
     const defaultMin = 2;
     const defaultMax = 256;
-
-    if (!values.category) {
-        errors.category = 'Поле не может быть пустым';
-    }
 
     if (!values.brand) {
         errors.brand = 'Поле не может быть пустым';
