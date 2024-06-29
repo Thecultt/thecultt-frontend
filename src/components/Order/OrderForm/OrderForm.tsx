@@ -26,8 +26,7 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
     const [indexForm, setIndexForm] = React.useState<number>(0);
 
-    // const { isLoaded, user } = useTypedSelector(({ user }) => user);
-    const { isLoaded, user } = useAuthUser();
+    const { isLoggedIn, isLoaded, user } = useAuthUser();
 
     const {
         address: { country, city, street },
@@ -35,9 +34,10 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
 
     const selector = formValueSelector('order-form');
 
-    const { nameValue, phoneValue, deliveryValue, houseValue, paymentValue } = useTypedSelector((state) => {
-        const { name, phone, delivery, house, payment } = selector(
+    const { emailValue, nameValue, phoneValue, deliveryValue, houseValue, paymentValue } = useTypedSelector((state) => {
+        const { email, name, phone, delivery, house, payment } = selector(
             state,
+            'email',
             'name',
             'phone',
             'delivery',
@@ -45,6 +45,7 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
             'payment',
         );
         return {
+            emailValue: email,
             nameValue: name,
             phoneValue: phone,
             deliveryValue: delivery,
@@ -82,17 +83,21 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     }, [invalid, pristine, submitting]);
 
     React.useEffect(() => {
-        if (isLoaded) {
+        if (isLoggedIn && isLoaded) {
             initialize({
                 name: `${user.lastname ? `${user.lastname} ` : ''}${user.name ? `${user.name} ` : ''}${user.middlename ? `${user.middlename} ` : ''}`,
                 phone: user.phone,
             });
         }
-    }, [isLoaded]);
+
+        initialize({
+            promo: true,
+        });
+    }, [isLoggedIn, isLoaded]);
 
     return (
         <form className="order-form" onSubmit={handleSubmit}>
-            <OrderFormContact email={user.email} />
+            <OrderFormContact emailValue={emailValue} />
 
             {indexForm >= 1 ? <OrderFormCountry /> : null}
 
