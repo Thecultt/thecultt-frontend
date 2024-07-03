@@ -72,26 +72,9 @@ const HeaderCartModalAddMessage: React.FC<HeaderCartModalAddMessageProps> = ({ s
                     Посмотреть всё
                 </button>
 
-                {isLoadedUser ? (
-                    <Link to="/order" className="btn header-block-cart-modal-btn-more__btn" onClick={setState}>
-                        Оформить
-                    </Link>
-                ) : (
-                    <Link
-                        to="/?redirect=/order#reglog"
-                        className="btn header-block-cart-modal-btn-more__btn"
-                        onClick={setState}
-                    >
-                        Оформить
-                    </Link>
-                )}
-                {/* <Link
-					to="/order"
-					className="btn header-block-cart-modal-btn-more__btn"
-					onClick={setState}
-				>
-					Оформить
-				</Link> */}
+                <Link to="/order" className="btn header-block-cart-modal-btn-more__btn" onClick={setState}>
+                    Оформить
+                </Link>
             </div>
         </div>
     );

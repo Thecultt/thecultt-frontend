@@ -15,15 +15,15 @@ interface validateInfoErrors {
 const validate = (values: validateInfoValues) => {
     const errors: validateInfoErrors = {};
 
-    const defaultMin = 2;
-    const defaultMax = 256;
+    const REACT_APP_MIN_INPUT_SYMBOLS = 2;
+    const REACT_APP_MAX_INPUT_SYMBOLS = 256;
 
     if (!values.city) {
         errors.city = 'Поле не может быть пустым';
-    } else if (values.city.length > defaultMax) {
-        errors.city = `Не более ${defaultMax} символов`;
-    } else if (values.city.length < defaultMin) {
-        errors.city = `Не менее ${defaultMin} символов`;
+    } else if (values.city.length > REACT_APP_MAX_INPUT_SYMBOLS) {
+        errors.city = `Не более ${REACT_APP_MAX_INPUT_SYMBOLS} символов`;
+    } else if (values.city.length < REACT_APP_MIN_INPUT_SYMBOLS) {
+        errors.city = `Не менее ${REACT_APP_MIN_INPUT_SYMBOLS} символов`;
     }
 
     if (!values.street) {

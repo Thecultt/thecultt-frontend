@@ -1,27 +1,26 @@
-export interface validateValues {
+export interface Values {
     password: string;
     password_repeat: string;
 }
 
-interface validateErrors {
+interface Errors {
     password?: string;
     password_repeat?: string;
 }
 
-export const validate = (values: validateValues) => {
-    const errors: validateErrors = {};
+const { REACT_APP_MIN_INPUT_SYMBOLS, REACT_APP_MAX_INPUT_SYMBOLS } = process.env;
 
-    const defaultMin = 2;
-    const defaultMax = 100;
+export const validate = (values: Values) => {
+    const errors: Errors = {};
 
     if (!values.password) {
         errors.password = 'Поле не может быть пустым';
     } else if (/[А-Яа-яЁё]/i.test(values.password)) {
         errors.password = 'Пароль не может содержать кириллицу';
-    } else if (values.password.length > defaultMax) {
-        errors.password = `Не более ${defaultMax} символов`;
-    } else if (values.password.length < defaultMin) {
-        errors.password = `Не менее ${defaultMin} символов`;
+    } else if (values.password.length > REACT_APP_MAX_INPUT_SYMBOLS) {
+        errors.password = `Не более ${REACT_APP_MAX_INPUT_SYMBOLS} символов`;
+    } else if (values.password.length < REACT_APP_MIN_INPUT_SYMBOLS) {
+        errors.password = `Не менее ${REACT_APP_MIN_INPUT_SYMBOLS} символов`;
     }
 
     if (!values.password_repeat) {

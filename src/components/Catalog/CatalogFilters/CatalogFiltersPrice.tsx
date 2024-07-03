@@ -6,11 +6,11 @@ import { CatalogFiltersBlockWrapper } from 'src/components';
 import { useDebounce } from 'src/hooks/useDebounce';
 
 interface Props {
-    defaultMin: number;
-    defaultMax: number;
+    REACT_APP_MIN_INPUT_SYMBOLS: number;
+    REACT_APP_MAX_INPUT_SYMBOLS: number;
 }
 
-const CatalogFiltersPrice: React.FC<Props> = ({ defaultMin, defaultMax }) => {
+const CatalogFiltersPrice: React.FC<Props> = ({ REACT_APP_MIN_INPUT_SYMBOLS, REACT_APP_MAX_INPUT_SYMBOLS }) => {
     const dispatch = useDispatch();
 
     const [min, setMin] = React.useState('');
@@ -22,7 +22,7 @@ const CatalogFiltersPrice: React.FC<Props> = ({ defaultMin, defaultMax }) => {
     const onChangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[a-zа-яё]/gi, '');
 
-        if (parseInt(value) - 1 < defaultMax) {
+        if (parseInt(value) - 1 < REACT_APP_MAX_INPUT_SYMBOLS) {
             setMin(value);
         }
     };
@@ -30,10 +30,10 @@ const CatalogFiltersPrice: React.FC<Props> = ({ defaultMin, defaultMax }) => {
     const onChangeMax = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[a-zа-яё]/gi, '');
 
-        if (parseInt(value) <= defaultMax) {
+        if (parseInt(value) <= REACT_APP_MAX_INPUT_SYMBOLS) {
             setMax(value);
         } else {
-            setMax(String(defaultMax));
+            setMax(String(REACT_APP_MAX_INPUT_SYMBOLS));
         }
     };
 
@@ -59,7 +59,7 @@ const CatalogFiltersPrice: React.FC<Props> = ({ defaultMin, defaultMax }) => {
                             name="min"
                             type="text"
                             className="catalog-filters-block-content-price-input-field__input"
-                            placeholder={String(defaultMin)}
+                            placeholder={String(REACT_APP_MIN_INPUT_SYMBOLS)}
                             onChange={(e) => onChangeMin(e)}
                             value={min}
                         />
@@ -73,7 +73,7 @@ const CatalogFiltersPrice: React.FC<Props> = ({ defaultMin, defaultMax }) => {
                             name="max"
                             type="number"
                             className="catalog-filters-block-content-price-input-field__input"
-                            placeholder={String(defaultMax)}
+                            placeholder={String(REACT_APP_MAX_INPUT_SYMBOLS)}
                             onChange={(e) => onChangeMax(e)}
                             value={max}
                         />
