@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 
 import { setOrderCurrentDelivery } from 'src/redux/actions/order';
+
 import { useTypedSelector } from 'src/hooks/useTypedSelector';
+import { useAuthUser } from 'src/hooks/useAuthUser';
+
+import { getClassNames } from 'src/functions/getClassNames';
+
 import { RenderRadioSelect } from 'src/components';
 
 const deliveryItemsRussiaMoscow: {
@@ -113,6 +118,8 @@ const deliveryItemsGlobal: {
 const OrderFormDelivery: React.FC = () => {
     const dispatch = useDispatch();
 
+    const { isLoggedIn } = useAuthUser();
+
     const {
         address: { country, city },
     } = useTypedSelector(({ order }) => order);
@@ -137,7 +144,9 @@ const OrderFormDelivery: React.FC = () => {
                 {currentCountry_lowerCase === 'россия' && currentCity_lowerCase.indexOf('москва') !== -1
                     ? deliveryItemsRussiaMoscow.map((item, index) => (
                           <div
-                              className="order-form-block-checkbox"
+                              className={getClassNames('order-form-block-checkbox', {
+                                  hidden: !isLoggedIn && item.title === 'Доставка с примеркой (по Москве)',
+                              })}
                               key={`order-form-block-checkbox-${currentCountry_lowerCase}-${index}`}
                               onClick={() =>
                                   onClickSetCurrentDelivery({

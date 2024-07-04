@@ -190,10 +190,7 @@ const App = () => {
 						element={<SellAdmin />}
 					/> */}
 
-                    <Route
-                        path="/order"
-                        element={isLoggedIn ? <Order /> : <Navigate to="/?redirect=/order#reglog" />}
-                    />
+                    <Route path="/order" element={<Order />} />
 
                     <Route path="/order/:id" element={<OrderStatus />} />
 

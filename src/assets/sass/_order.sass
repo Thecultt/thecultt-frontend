@@ -63,8 +63,57 @@
 				&__title
 					font-weight: 500
 
+			&-notloggedin
+				+open
+
+				&__text
+					font-size: 12px
+					color: $gray
+					margin-bottom: 12px
+
+				&-checkbox
+					margin-bottom: 15px
+
+			&-loggedin
+				display: flex
+				align-items: center
+
+				padding: 8px 16px
+				border: 1px solid $gray
+				border-radius: 12px
+
+				margin-bottom: 15px
+
+				+open
+
+				& > svg
+					min-width: 38px
+					width: 38px
+					height: 38px
+
+				&-text
+					margin-left: 15px
+
+					&__title
+						font-weight: 400
+						font-size: 14px
+						color: $mainColor
+						margin-bottom: 5px
+
+						& > a
+							color: $mainColor
+							text-decoration: underline
+
+					&__subtitle
+						width: 75%
+						font-size: 12px
+						color: $gray
+
 			&-checkbox
 				margin-bottom: 15px
+
+				&.hidden
+					display: none
 
 				&:last-child
 					margin-bottom: 0

@@ -71,25 +71,14 @@ const Cart: React.FC = () => {
                                     </p>
                                 </div>
 
-                                {isLoadedUser ? (
-                                    <Link
-                                        to="/order"
-                                        className={getClassNames('btn cart-btn__btn', {
-                                            disabled: !Object.keys(items).filter((key) => items[key].checked).length,
-                                        })}
-                                    >
-                                        Перейти к заказу
-                                    </Link>
-                                ) : (
-                                    <Link
-                                        to="/?redirect=/order#reglog"
-                                        className={getClassNames('btn cart-btn__btn', {
-                                            disabled: !Object.keys(items).filter((key) => items[key].checked).length,
-                                        })}
-                                    >
-                                        Перейти к заказу
-                                    </Link>
-                                )}
+                                <Link
+                                    to="/order"
+                                    className={getClassNames('btn cart-btn__btn', {
+                                        disabled: !Object.keys(items).filter((key) => items[key].checked).length,
+                                    })}
+                                >
+                                    Перейти к заказу
+                                </Link>
                             </div>
                         </>
                     ) : (
