@@ -25,8 +25,8 @@ interface validateInfoErrors {
 const validate = (values: validateInfoValues) => {
     const errors: validateInfoErrors = {};
 
-    const REACT_APP_MIN_INPUT_SYMBOLS = 2;
-    const REACT_APP_MAX_INPUT_SYMBOLS = 256;
+    const MIN_INPUT_SYMBOLS = 2;
+    const MAX_INPUT_SYMBOLS = 256;
 
     if (!values.category) {
         errors.category = 'Поле не может быть пустым';
@@ -50,18 +50,18 @@ const validate = (values: validateInfoValues) => {
 
     // if (!values.size) {
     // 	errors.size = "Поле не может быть пустым";
-    // } else if (values.size.length > REACT_APP_MAX_INPUT_SYMBOLS) {
-    // 	errors.size = `Не более ${REACT_APP_MAX_INPUT_SYMBOLS} символов`;
-    // } else if (values.size.length < REACT_APP_MIN_INPUT_SYMBOLS) {
-    // 	errors.size = `Не менее ${REACT_APP_MIN_INPUT_SYMBOLS} символов`;
+    // } else if (values.size.length > MAX_INPUT_SYMBOLS) {
+    // 	errors.size = `Не более ${MAX_INPUT_SYMBOLS} символов`;
+    // } else if (values.size.length < MIN_INPUT_SYMBOLS) {
+    // 	errors.size = `Не менее ${MIN_INPUT_SYMBOLS} символов`;
     // }
 
     if (!values.price) {
         errors.price = 'Поле не может быть пустым';
-    } else if (values.price.length > REACT_APP_MAX_INPUT_SYMBOLS) {
-        errors.price = `Не более ${REACT_APP_MAX_INPUT_SYMBOLS} символов`;
-    } else if (values.price.length < REACT_APP_MIN_INPUT_SYMBOLS) {
-        errors.price = `Не менее ${REACT_APP_MIN_INPUT_SYMBOLS} символов`;
+    } else if (values.price.length > MAX_INPUT_SYMBOLS) {
+        errors.price = `Не более ${MAX_INPUT_SYMBOLS} символов`;
+    } else if (values.price.length < MIN_INPUT_SYMBOLS) {
+        errors.price = `Не менее ${MIN_INPUT_SYMBOLS} символов`;
     }
 
     if (!values.isBuyTheCultt) {
