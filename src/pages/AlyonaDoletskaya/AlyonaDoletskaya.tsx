@@ -167,8 +167,8 @@ const ProductSection: React.FC = () => {
                         {items.map((item, index) =>
                             item.availability && !item.is_trial && item.images.length && item.price ? (
                                 <ProductBlock
-                                    addClass="catalog-product-block"
-                                    key={`catalog-product-block-${index}`}
+                                    addClass="catalog-slider-product-block"
+                                    key={`catalog-slider-product-block-${index}`}
                                     addCart={() =>
                                         addCart({
                                             id: item.id,
