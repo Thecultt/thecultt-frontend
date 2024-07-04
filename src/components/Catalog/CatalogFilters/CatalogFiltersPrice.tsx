@@ -6,11 +6,11 @@ import { CatalogFiltersBlockWrapper } from 'src/components';
 import { useDebounce } from 'src/hooks/useDebounce';
 
 interface Props {
-    MIN_INPUT_SYMBOLS: number;
-    MAX_INPUT_SYMBOLS: number;
+    defaultMin: number;
+    defaultMax: number;
 }
 
-const CatalogFiltersPrice: React.FC<Props> = ({ MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS }) => {
+const CatalogFiltersPrice: React.FC<Props> = ({ defaultMin, defaultMax }) => {
     const dispatch = useDispatch();
 
     const [min, setMin] = React.useState('');
@@ -22,7 +22,7 @@ const CatalogFiltersPrice: React.FC<Props> = ({ MIN_INPUT_SYMBOLS, MAX_INPUT_SYM
     const onChangeMin = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[a-zа-яё]/gi, '');
 
-        if (parseInt(value) - 1 < MAX_INPUT_SYMBOLS) {
+        if (parseInt(value) - 1 < defaultMax) {
             setMin(value);
         }
     };
@@ -30,10 +30,10 @@ const CatalogFiltersPrice: React.FC<Props> = ({ MIN_INPUT_SYMBOLS, MAX_INPUT_SYM
     const onChangeMax = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[a-zа-яё]/gi, '');
 
-        if (parseInt(value) <= MAX_INPUT_SYMBOLS) {
+        if (parseInt(value) <= defaultMax) {
             setMax(value);
         } else {
-            setMax(String(MAX_INPUT_SYMBOLS));
+            setMax(String(defaultMax));
         }
     };
 
@@ -59,7 +59,7 @@ const CatalogFiltersPrice: React.FC<Props> = ({ MIN_INPUT_SYMBOLS, MAX_INPUT_SYM
                             name="min"
                             type="text"
                             className="catalog-filters-block-content-price-input-field__input"
-                            placeholder={String(MIN_INPUT_SYMBOLS)}
+                            placeholder={String(defaultMin)}
                             onChange={(e) => onChangeMin(e)}
                             value={min}
                         />
@@ -73,7 +73,7 @@ const CatalogFiltersPrice: React.FC<Props> = ({ MIN_INPUT_SYMBOLS, MAX_INPUT_SYM
                             name="max"
                             type="number"
                             className="catalog-filters-block-content-price-input-field__input"
-                            placeholder={String(MAX_INPUT_SYMBOLS)}
+                            placeholder={String(defaultMax)}
                             onChange={(e) => onChangeMax(e)}
                             value={max}
                         />
