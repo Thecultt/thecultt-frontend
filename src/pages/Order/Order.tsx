@@ -5,8 +5,7 @@ import { useAuthUser } from 'src/hooks/useAuthUser';
 import { PageLoader, OrderForm, OrderProducts } from 'src/components';
 
 const Order: React.FC = () => {
-    // const isLoadedUser = useTypedSelector(({ user }) => user.isLoaded);
-    const { isLoaded: isLoadedUser } = useAuthUser();
+    const { isLoggedIn, isLoaded: isLoadedUser } = useAuthUser();
 
     const { items } = useTypedSelector(({ cart }) => cart);
 
@@ -42,12 +41,12 @@ const Order: React.FC = () => {
         <section className="order">
             <div className="container">
                 <div className="order-wrapper">
-                    {isLoadedUser ? (
-                        <OrderForm onSubmit={onSubmit} />
-                    ) : (
+                    {isLoggedIn && !isLoadedUser ? (
                         <div className="order-loader">
                             <PageLoader />
                         </div>
+                    ) : (
+                        <OrderForm onSubmit={onSubmit} />
                     )}
 
                     <OrderProducts />

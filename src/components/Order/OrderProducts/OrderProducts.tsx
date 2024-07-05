@@ -22,8 +22,7 @@ const OrderProducts: React.FC = () => {
 
     const [isDisableSendBtn, setIsDisableSendBtn] = React.useState<boolean>(false);
 
-    // const { user } = useTypedSelector(({ user }) => user);
-    const { user } = useAuthUser();
+    const { isLoggedIn, user } = useAuthUser();
 
     const { items } = useTypedSelector(({ cart }) => cart);
     const { promocode, currentDelivery, isValid } = useTypedSelector(({ order }) => order);
@@ -145,9 +144,9 @@ const OrderProducts: React.FC = () => {
         flatValue,
         commentValue,
     } = useTypedSelector((state) => {
-        const { emailThecultt, name, phone, country, city, delivery, payment, street, house, flat, comment } = selector(
+        const { email, name, phone, country, city, delivery, payment, street, house, flat, comment } = selector(
             state,
-            'emailThecultt',
+            'email',
             'name',
             'phone',
             'country',
@@ -160,7 +159,7 @@ const OrderProducts: React.FC = () => {
             'comment',
         );
         return {
-            emailValue: emailThecultt,
+            emailValue: email,
             nameValue: name,
             phoneValue: phone,
 
@@ -267,7 +266,9 @@ const OrderProducts: React.FC = () => {
         dispatch(
             sendCreateOrder(
                 {
-                    mail: emailValue,
+                    isLoggedIn,
+
+                    email: emailValue,
                     name: nameValue,
                     phone: phoneValue,
 
@@ -342,47 +343,23 @@ const OrderProducts: React.FC = () => {
                             number: '',
                         },
                     },
-                    // "birthDate": "<Дата рождения>",
-                    // "sex": "<Пол>",
-                    // "timeZone": "<Часовой пояс>",
                     lastName: `${user.middlename}`,
                     firstName: `${user.name}`,
-                    // "middleName": "<Отчество>",
-                    // "fullName": "<ФИО>",
-                    // "area": {
-                    // 	"ids": {
-                    // 		"externalId": "<Внешний идентификатор зоны>"
-                    // 	}
-                    // },
                     email: `${user.email}`,
                     mobilePhone: `${phoneValue}`,
                     customFields: {
                         tipKlienta: 'Pokupatel',
                         gorod: `${cityValue}`,
-                        // "istochnikPodpiski": "<Источник подписки>"
                     },
-                    // "subscriptions": []
                 },
                 order: {
                     ids: {
-                        // "mindboxId": "<Идентификатор заказа в Mindbox>",
                         websiteID: `${orderId}`,
                     },
-                    // "cashdesk": {
-                    // 	"ids": {
-                    // 		"externalId": "<Идентификатор кассы>"
-                    // 	}
-                    // },
                     deliveryCost: `${currentDelivery.price}`,
                     customFields: {
                         deliveryType: `${currentDelivery.title}`,
                     },
-                    // "area": {
-                    // 	"ids": {
-                    // 		"externalId": "<Внешний идентификатор зоны>"
-                    // 	}
-                    // },
-                    // "totalPrice": "<Итоговая сумма, полученная от клиента. Должна учитывать возвраты и отмены. Используется для подсчета среднего чека.>",
                     discounts: promocode.isActive
                         ? [
                               {
@@ -399,12 +376,10 @@ const OrderProducts: React.FC = () => {
                     lines: products.map((product) => {
                         return {
                             minPricePerItem: `${product.price}`,
-                            // "costPricePerItem": "<Себестоимость за единицу продукта>",
                             basePricePerItem: `${product.price}`,
                             quantity: '1',
                             quantityType: 'int',
                             discountedPricePerLine: `${totalPrice}`,
-                            // "lineNumber": "<Порядковый номер позиции заказа>",
                             lineId: `${product.id}`,
                             discounts: promocode.isActive
                                 ? [

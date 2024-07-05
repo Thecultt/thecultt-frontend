@@ -25,8 +25,8 @@ interface validateInfoErrors {
 const validate = (values: validateInfoValues) => {
     const errors: validateInfoErrors = {};
 
-    const defaultMin = 2;
-    const defaultMax = 256;
+    const MIN_INPUT_SYMBOLS = 2;
+    const MAX_INPUT_SYMBOLS = 256;
 
     if (!values.category) {
         errors.category = 'Поле не может быть пустым';
@@ -50,18 +50,18 @@ const validate = (values: validateInfoValues) => {
 
     // if (!values.size) {
     // 	errors.size = "Поле не может быть пустым";
-    // } else if (values.size.length > defaultMax) {
-    // 	errors.size = `Не более ${defaultMax} символов`;
-    // } else if (values.size.length < defaultMin) {
-    // 	errors.size = `Не менее ${defaultMin} символов`;
+    // } else if (values.size.length > MAX_INPUT_SYMBOLS) {
+    // 	errors.size = `Не более ${MAX_INPUT_SYMBOLS} символов`;
+    // } else if (values.size.length < MIN_INPUT_SYMBOLS) {
+    // 	errors.size = `Не менее ${MIN_INPUT_SYMBOLS} символов`;
     // }
 
     if (!values.price) {
         errors.price = 'Поле не может быть пустым';
-    } else if (values.price.length > defaultMax) {
-        errors.price = `Не более ${defaultMax} символов`;
-    } else if (values.price.length < defaultMin) {
-        errors.price = `Не менее ${defaultMin} символов`;
+    } else if (values.price.length > MAX_INPUT_SYMBOLS) {
+        errors.price = `Не более ${MAX_INPUT_SYMBOLS} символов`;
+    } else if (values.price.length < MIN_INPUT_SYMBOLS) {
+        errors.price = `Не менее ${MIN_INPUT_SYMBOLS} символов`;
     }
 
     if (!values.isBuyTheCultt) {
