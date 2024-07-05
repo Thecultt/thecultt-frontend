@@ -7,6 +7,8 @@ import { SELECTIONS_IDS } from 'src/constants/catalog';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
 import { MEDIA_SIZES } from 'src/constants/styles';
 
+import summerBagsImage from 'src/assets/images/selections/summer-bags-selection.jpg';
+
 import './styles.sass';
 
 export const SelectionsBanners: React.FC = () => {
@@ -70,15 +72,12 @@ export const SelectionsBanners: React.FC = () => {
             <div className="selections-banners-bestsellers">
                 {summerBagsSelection && (
                     <div className="selections-banners-bestsellers-main-item hover-scale">
-                        <div className="selections-banners-bestsellers-main-item__cover">
-                            {!!summerBagsSelection.background_image && !!summerBagsSelection.title && (
-                                <img
-                                    src={summerBagsSelection.background_image}
-                                    className="selections-banners-bestsellers-main-item__image"
-                                    alt={summerBagsSelection.title}
-                                />
-                            )}
-                        </div>
+                        <div
+                            className="selections-banners-bestsellers-main-item__cover"
+                            style={{
+                                backgroundImage: `url("${summerBagsImage}")`,
+                            }}
+                        />
                         <div className="selections-banners-bestsellers-main-item__content">
                             <h3 className="selections-banners-bestsellers-main-item__title">
                                 {summerBagsSelection.title}
@@ -101,15 +100,12 @@ export const SelectionsBanners: React.FC = () => {
                 <div className="selections-banners-bestsellers__items">
                     {investmentsBagsSelection && (
                         <div className="selections-banners-bestsellers-item hover-scale">
-                            <div className="selections-banners-bestsellers-item__cover">
-                                {!!investmentsBagsSelection.background_image && !!investmentsBagsSelection.title && (
-                                    <img
-                                        src={investmentsBagsSelection.background_image}
-                                        className="selections-banners-bestsellers-item__image"
-                                        alt={investmentsBagsSelection.title}
-                                    />
-                                )}
-                            </div>
+                            <div
+                                className="selections-banners-bestsellers-item__cover"
+                                style={{
+                                    backgroundImage: `url("${investmentsBagsSelection.background_image}")`,
+                                }}
+                            />
                             <div className="selections-banners-bestsellers-item__content">
                                 <h3 className="selections-banners-bestsellers-item__title">
                                     {investmentsBagsSelection.title}
@@ -133,16 +129,13 @@ export const SelectionsBanners: React.FC = () => {
                     )}
 
                     {iiBagsSelection && (
-                        <div className="selections-banners-bestsellers-item hover-scale">
-                            <div className="selections-banners-bestsellers-item__cover">
-                                {!!iiBagsSelection.background_image && !!iiBagsSelection.title && (
-                                    <img
-                                        src={iiBagsSelection.background_image}
-                                        className="selections-banners-bestsellers-item__image"
-                                        alt={iiBagsSelection.title}
-                                    />
-                                )}
-                            </div>
+                        <div className="selections-banners-bestsellers-item selection-it-bags-banner hover-scale">
+                            <div
+                                className="selections-banners-bestsellers-item__cover selection-it-bags-banner__cover"
+                                style={{
+                                    backgroundImage: `url("${iiBagsSelection.background_image}")`,
+                                }}
+                            />
                             <div className="selections-banners-bestsellers-item__content">
                                 <h3 className="selections-banners-bestsellers-item__title">{iiBagsSelection.title}</h3>
                                 <p className="selections-banners-bestsellers-item__description">
