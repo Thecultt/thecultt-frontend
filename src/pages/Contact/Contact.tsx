@@ -149,7 +149,7 @@ const Contact: React.FC = () => {
                         </a>
 
                         <a
-                            href="https://api.whatsapp.com/send/?phone=79955026591&text&type=phone_number&app_absent=0"
+                            href="https://api.whatsapp.com/send/?phone=79957884650&text&type=phone_number&app_absent=0"
                             className="contact-block hover-scale"
                         >
                             <div className="contact-block-content">
