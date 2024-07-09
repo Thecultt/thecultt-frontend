@@ -1,18 +1,17 @@
-export interface validateInfoValues {
+import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS } from 'src/constants/validation';
+
+export interface Values {
     phone: string;
     name: string;
 }
 
-interface validateInfoErrors {
+interface Errors {
     phone?: string;
     name?: string;
 }
 
-const validate = (values: validateInfoValues) => {
-    const errors: validateInfoErrors = {};
-
-    const MIN_INPUT_SYMBOLS = 2;
-    const MAX_INPUT_SYMBOLS = 100;
+const validate = (values: Values) => {
+    const errors: Errors = {};
 
     if (!values.name) {
         errors.name = 'Поле не может быть пустым';

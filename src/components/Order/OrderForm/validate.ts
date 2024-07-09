@@ -1,4 +1,6 @@
-export interface validateInfoValues {
+import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS } from 'src/constants/validation';
+
+export interface Values {
     email: string;
     name: string;
     phone: string;
@@ -11,7 +13,7 @@ export interface validateInfoValues {
     payment: string;
 }
 
-interface validateInfoErrors {
+interface Errors {
     email?: string;
     name?: string;
     phone?: string;
@@ -24,11 +26,8 @@ interface validateInfoErrors {
     payment?: string;
 }
 
-const validate = (values: validateInfoValues) => {
-    const errors: validateInfoErrors = {};
-
-    const MIN_INPUT_SYMBOLS = 2;
-    const MAX_INPUT_SYMBOLS = 256;
+const validate = (values: Values) => {
+    const errors: Errors = {};
 
     if (!values.email) {
         errors.email = 'Поле не может быть пустым';
@@ -66,6 +65,10 @@ const validate = (values: validateInfoValues) => {
 
     if (!values.city) {
         errors.city = 'Поле не может быть пустым';
+    } else if (values.city.length > MAX_INPUT_SYMBOLS) {
+        errors.city = `Не более ${MAX_INPUT_SYMBOLS} символов`;
+    } else if (values.city.length < MIN_INPUT_SYMBOLS) {
+        errors.city = `Не менее ${MIN_INPUT_SYMBOLS} символов`;
     }
 
     if (!values.delivery) {

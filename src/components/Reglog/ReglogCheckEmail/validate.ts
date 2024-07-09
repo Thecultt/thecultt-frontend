@@ -1,3 +1,5 @@
+import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS } from 'src/constants/validation';
+
 export interface Values {
     email: string;
 }
@@ -8,9 +10,6 @@ interface Errors {
 
 const validate = (values: Values) => {
     const errors: Errors = {};
-
-    const MIN_INPUT_SYMBOLS = 2;
-    const MAX_INPUT_SYMBOLS = 100;
 
     if (!values.email) {
         errors.email = 'Поле не может быть пустым';

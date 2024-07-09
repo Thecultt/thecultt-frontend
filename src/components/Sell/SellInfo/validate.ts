@@ -1,4 +1,6 @@
-export interface validateInfoValues {
+import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS } from 'src/constants/validation';
+
+export interface Values {
     category: string;
     brand: string;
     model: string;
@@ -10,7 +12,7 @@ export interface validateInfoValues {
     isBuyTheCultt: string;
 }
 
-interface validateInfoErrors {
+interface Errors {
     category?: string;
     brand?: string;
     model?: string;
@@ -22,11 +24,8 @@ interface validateInfoErrors {
     isBuyTheCultt?: string;
 }
 
-const validate = (values: validateInfoValues) => {
-    const errors: validateInfoErrors = {};
-
-    const MIN_INPUT_SYMBOLS = 2;
-    const MAX_INPUT_SYMBOLS = 256;
+const validate = (values: Values) => {
+    const errors: Errors = {};
 
     if (!values.category) {
         errors.category = 'Поле не может быть пустым';
