@@ -1,22 +1,21 @@
-export interface validateInfoValues {
+import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS } from 'src/constants/validation';
+
+export interface Values {
     city: string;
     street: string;
     dom: string;
     flat: string;
 }
 
-interface validateInfoErrors {
+interface Errors {
     city?: string;
     street?: string;
     dom?: string;
     flat?: string;
 }
 
-const validate = (values: validateInfoValues) => {
-    const errors: validateInfoErrors = {};
-
-    const MIN_INPUT_SYMBOLS = 2;
-    const MAX_INPUT_SYMBOLS = 256;
+const validate = (values: Values) => {
+    const errors: Errors = {};
 
     if (!values.city) {
         errors.city = 'Поле не может быть пустым';

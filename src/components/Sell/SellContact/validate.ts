@@ -1,4 +1,6 @@
-export interface validateInfoValues {
+import { MIN_INPUT_SYMBOLS, MAX_INPUT_SYMBOLS } from 'src/constants/validation';
+
+export interface Values {
     name: string;
     surname: string;
     email: string;
@@ -6,7 +8,7 @@ export interface validateInfoValues {
     telegram: string;
 }
 
-interface validateInfoErrors {
+interface Errors {
     name?: string;
     surname?: string;
     email?: string;
@@ -14,11 +16,8 @@ interface validateInfoErrors {
     telegram?: string;
 }
 
-const validate = (values: validateInfoValues) => {
-    const errors: validateInfoErrors = {};
-
-    const MIN_INPUT_SYMBOLS = 2;
-    const MAX_INPUT_SYMBOLS = 256;
+const validate = (values: Values) => {
+    const errors: Errors = {};
 
     if (!values.name) {
         errors.name = 'Поле не может быть пустым';
