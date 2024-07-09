@@ -221,7 +221,7 @@ const App = () => {
                 </Routes>
             </React.Suspense>
 
-            <Footer />
+            <Footer subscribeBlockId="footer-email" />
         </div>
     );
 };

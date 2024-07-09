@@ -15,8 +15,7 @@ import { setHeaderSearchValue, fetchHeaderSearchItems } from 'src/redux/actions/
 import { useDebounce } from 'src/hooks/useDebounce';
 import { getCatalogFiltersUrl } from 'src/functions/getCatalogFiltersUrl';
 import { useAuthUser } from 'src/hooks/useAuthUser';
-import { useLS } from 'src/hooks/useLS';
-import { LS_KEYS, KEYBOARD } from 'src/constants/keys';
+import { KEYBOARD } from 'src/constants/keys';
 import { SELECTIONS_IDS, SORT } from 'src/constants/catalog';
 
 import Logo from 'src/assets/images/logo.svg';
@@ -181,8 +180,6 @@ const Header: React.FC = () => {
     const [isOpenSearch, setIsOpenSearch] = React.useState(false);
     const [isSelectionsMenuVisible, setIsSelectionsMenuVisible] = React.useState(false);
 
-    const [headerVisitMessageClosed] = useLS(LS_KEYS.headerVisitMessage, false);
-
     const { search } = useTypedSelector(({ header }) => header);
     const debouncedValue = useDebounce(search.value);
 
@@ -247,7 +244,7 @@ const Header: React.FC = () => {
 
     return (
         <div className="header-global-wrapper">
-            {!headerVisitMessageClosed ? <HeaderTopMessage /> : null}
+            <HeaderTopMessage />
 
             <div className="header-container">
                 <header className="header">

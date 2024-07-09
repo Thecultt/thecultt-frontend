@@ -11,9 +11,10 @@ import { WaitingPopupType } from 'src/types/waiting';
 
 interface FooterProps {
     transparent?: boolean;
+    subscribeBlockId?: string;
 }
 
-const Footer: React.FC<FooterProps> = ({ transparent }) => {
+const Footer: React.FC<FooterProps> = ({ transparent, subscribeBlockId }) => {
     const isMobile = useMediaQuery(`(max-width: ${MEDIA_SIZES.tablet})`);
 
     const blocks: {
@@ -111,7 +112,7 @@ const Footer: React.FC<FooterProps> = ({ transparent }) => {
 
     return (
         <>
-            <FooterEmailSubscribe />
+            <FooterEmailSubscribe id={subscribeBlockId} />
 
             <footer
                 className={getClassNames('footer', {
