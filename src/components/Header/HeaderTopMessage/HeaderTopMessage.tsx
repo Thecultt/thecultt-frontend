@@ -1,61 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
+import { VISIT_AVAILABLE } from 'src/constants/app';
 import { LS_KEYS } from 'src/constants/keys';
 import { useLS } from 'src/hooks/useLS';
 
+import { HeaderTopMessageVisit } from './HeaderTopMessageVisit';
+import { HeaderTopMessageSubscribe } from './HeaderTopMessageSubscribe';
+
 const HeaderTopMessage: React.FC = () => {
-    const [_headerVisitMessage, setHeaderVisitMessage] = useLS(LS_KEYS.headerVisitMessage, false);
+    const [headerVisitMessageClosed, setHeaderVisitMessage] = useLS(LS_KEYS.headerVisitMessage, false);
+    const [headerSubscribeMessageClosed, setHeaderSubscribeMessage] = useLS(LS_KEYS.headerSubscribeMessage, false);
 
-    const onClose = () => {
-        setHeaderVisitMessage(true);
-    };
+    if (VISIT_AVAILABLE && !headerVisitMessageClosed) {
+        return <HeaderTopMessageVisit onClose={() => setHeaderVisitMessage(true)} />;
+    }
 
-    return (
-        <div className="header-top-message">
-            <Link to="/visit" className="header-top-message-link" onClick={onClose}>
-                <div className="container">
-                    <div className="header-top-message-link-wrapper">
-                        <p className="header-top-message-link__text">Визит в THE CULTT</p>
-                    </div>
-                </div>
-            </Link>
+    if (!headerSubscribeMessageClosed) {
+        return <HeaderTopMessageSubscribe onClose={() => setHeaderSubscribeMessage(true)} />;
+    }
 
-            {/* <div className='header-top-message-link'>
-				<div className="container">
-					<div className="header-top-message-link-wrapper">
-						<p className="header-top-message-link__text">
-							Технические работы. Мы правда недолго!
-						</p>
-					</div>
-				</div>
-			</div> */}
-
-            <Link to={window.location.pathname} className="header-top-message-close">
-                <div className="container">
-                    <div className="header-top-message-close-wrapper">
-                        <div className="header-top-message-close__close" onClick={onClose}>
-                            <svg
-                                width="18"
-                                height="18"
-                                viewBox="0 0 18 18"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M13.5 4.5L4.5 13.5M4.5 4.5L13.5 13.5"
-                                    stroke="white"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </Link>
-        </div>
-    );
+    return null;
 };
 
 export default HeaderTopMessage;
