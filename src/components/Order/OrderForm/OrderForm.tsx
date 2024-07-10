@@ -85,14 +85,15 @@ const OrderForm: React.FC<{} & InjectedFormProps<{}, {}>> = ({
     React.useEffect(() => {
         if (isLoggedIn && isLoaded) {
             initialize({
+                email: user.email || '',
                 name: `${user.lastname ? `${user.lastname} ` : ''}${user.name ? `${user.name} ` : ''}${user.middlename ? `${user.middlename} ` : ''}`,
                 phone: user.phone,
             });
+        } else {
+            initialize({
+                promo: true,
+            });
         }
-
-        initialize({
-            promo: true,
-        });
     }, [isLoggedIn, isLoaded]);
 
     return (
