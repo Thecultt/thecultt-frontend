@@ -154,7 +154,7 @@ const Visit: React.FC = () => {
                             <div className="visit-office-block">
                                 <h2 className="visit-office-block__title">Адрес офиса</h2>
                                 <p className="visit-office-block__subtitle">
-                                    Мы находимся по адресу Трубная 25с3 (3 этаж, офис THE CULTT) ежедневно с 10:00 до
+                                    Мы находимся по адресу Трубная 23с2 (3 этаж, офис THE CULTT) ежедневно с 10:00 до
                                     21:00. Для посещения необходима регистрация!
                                 </p>
 
