@@ -33,19 +33,20 @@ $api.interceptors.response.use(
 
                 try {
                     // const response = await axios.post(
-                    // 	`${process.env.REACT_APP_API_DOMEN}/users/token/refresh`,
+                    // 	`${process.env.REACT_APP_API_DOMEN}/api/token/refresh/`,
                     // 	{},
                     // 	{ withCredentials: true }
                     // );
-                    // localStorage.setItem(
+                    // localStorageService.setItem(
                     // 	"accessToken",
                     // 	response.data.accessToken
                     // );
                     // return $api.request(originalRequest);
-
+                    // localStorageService.removeItem(LS_KEYS.accessToken);
+                    // window.location.reload();
+                } catch (e) {
                     localStorageService.removeItem(LS_KEYS.accessToken);
                     window.location.reload();
-                } catch (e) {
                     // if (localStorage.getItem("accessToken")) {
                     // 	await $api.post("/users/revoke")
                     // 	localStorage.removeItem("accessToken");

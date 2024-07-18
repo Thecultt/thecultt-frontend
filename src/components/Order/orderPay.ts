@@ -90,7 +90,7 @@ const orderPay = ({
         // tinkoff.methods.on(tinkoff.constants.REJECT, onMessage);
         // tinkoff.methods.on(tinkoff.constants.CANCEL, onMessage);
 
-        return true;
+        return;
     }
 
     const widget = new window.cp.CloudPayments();
@@ -115,6 +115,11 @@ const orderPay = ({
             },
         },
     );
+
+    // Закрываем окно через 15 минут
+    setTimeout(() => {
+        window.location.href = `/order/${orderId}`;
+    }, 900000);
 };
 
 export default orderPay;

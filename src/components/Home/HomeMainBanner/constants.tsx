@@ -9,6 +9,9 @@ import homeMainBannerImageConciergeMobile from 'src/assets/images/home/home-main
 import homeMainBannerImageBoutique from 'src/assets/images/home/home-main-banner-boutique.jpg';
 import homeMainBannerImageVip from 'src/assets/images/home/home-main-banner-vip.jpg';
 
+import homeMainBannerImagePopular from 'src/assets/images/home/home-main-banner-popular.jpg';
+import homeMainBannerImagePopularMedia from 'src/assets/images/home/home-main-banner-popular-media.jpg';
+
 interface IMainBannerSlide {
     title: string;
     description: React.ReactNode;
@@ -44,6 +47,28 @@ export const MAIN_BANNER_SLIDES: IMainBannerSlide[] = [
                 boutique: false,
                 page: 1,
                 sort: SORT.a,
+            }),
+        },
+    },
+    {
+        title: 'Популярное',
+        description: (
+            <>
+                Горячие лоты в&nbsp;единственном экземпляре <br /> и&nbsp;с&nbsp;максимумом сердечек
+            </>
+        ),
+        image: {
+            desktop: homeMainBannerImagePopular,
+        },
+        link: {
+            title: 'Смотреть',
+            href: getCatalogFiltersUrl({
+                boutique: false,
+                categories: ['Сумки', 'Аксессуары', 'Обувь', 'Украшения'],
+                availability: ['Доступно', 'На примерке', 'Нет в наличии'],
+                price_drop: false,
+                page: 1,
+                sort: SORT.popular,
             }),
         },
     },
